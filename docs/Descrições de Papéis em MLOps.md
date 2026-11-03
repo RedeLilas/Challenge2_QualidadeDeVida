@@ -19,6 +19,6 @@ O Engenheiro de ML / MLOps integra habilidades de várias disciplinas, combinand
 * **Arquiteto de Soluções:** Desenha a arquitetura geral do sistema e define as tecnologias a serem utilizadas após uma avaliação minuciosa.  
 * **Engenheiro de Software:** Aplica padrões de projeto de software, diretrizes de código aceitas e melhores práticas para transformar o problema bruto de *Machine Learning* em um produto de engenharia bem estruturado e funcional, prestando suporte na criação de códigos de treinamento e de *serving*.
 
-## 4\. Business Stakeholder / Product Owner (Scrum) - Ana
+## 5. Business Stakeholder / Product Owner (Scrum) - Ana
 
 O Business Stakeholder (papéis semelhantes: Product Owner, Gerente de Projeto) define o objetivo de negócio a ser alcançado com o Machine Learning e cuida da comunicação do lado do negócio, como apresentar o retorno sobre o investimento (ROI) gerado por um produto de ML. No contexto ágil e de Scrum, o Product Owner direciona a priorização e o valor de negócio entregue.
