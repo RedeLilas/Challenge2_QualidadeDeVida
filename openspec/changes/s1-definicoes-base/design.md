@@ -2,7 +2,7 @@
 
 ## Context
 
-Esta mudança só converte documentação: não há código. A fonte é `Challenge 2 - Definições do Projeto Semana 1.md` (29/10/2026). Depois dela, foram decididos: escopo DF, ausência de entrevistas, stack (Python + PWA, LLM local e DeepSeek) e deploy desde a S2.
+Esta mudança só converte documentação: não há código. A fonte é `docs/Challenge 2 - Definições do Projeto Semana 1.md` (29/10/2026). Depois dela, foram decididos: escopo DF, ausência de entrevistas, stack (Python + PWA, LLM local e DeepSeek) e deploy desde a S2.
 
 ## Goals / Non-Goals
 

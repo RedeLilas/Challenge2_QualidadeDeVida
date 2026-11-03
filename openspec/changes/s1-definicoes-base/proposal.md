@@ -2,7 +2,7 @@
 
 ## Why
 
-As definições da Semana 1 (`Challenge 2 - Definições do Projeto Semana 1.md`) descrevem requisitos, métricas e riscos em texto livre. Para guiar o desenvolvimento das semanas 2 a 7 com o OpenSpec, esses requisitos precisam virar specs verificáveis (requisitos com cenários WHEN/THEN) que a equipe e o assistente de IA consultem em toda mudança.
+As definições da Semana 1 (`docs/Challenge 2 - Definições do Projeto Semana 1.md`) descrevem requisitos, métricas e riscos em texto livre. Para guiar o desenvolvimento das semanas 2 a 7 com o OpenSpec, esses requisitos precisam virar specs verificáveis (requisitos com cenários WHEN/THEN) que a equipe e o assistente de IA consultem em toda mudança.
 
 Esta mudança também incorpora três decisões tomadas depois da Semana 1:
 

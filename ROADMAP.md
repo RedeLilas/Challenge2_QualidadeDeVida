@@ -52,7 +52,7 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 
 | Mudança | Status |
 | :--- | :--- |
-| Definições do projeto (`Challenge 2 - Definições do Projeto Semana 1.md`) | Entregue |
+| Definições do projeto (`docs/Challenge 2 - Definições do Projeto Semana 1.md`) | Entregue |
 | `s1-definicoes-base`: definições convertidas em 9 specs | Aguardando revisão da equipe |
 
 ### S2: Base de conhecimento e recuperação (ter 03, qui 05, sex 06/11)
