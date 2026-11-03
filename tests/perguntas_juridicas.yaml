@@ -1,0 +1,25 @@
+# Teste rápido do RAG jurídico (s2-rag-juridico, tarefa 1.4).
+# Perguntas fictícias no estilo das personas Juliana e Camila.
+# "artigos": qualquer um deles entre os 5 trechos recuperados conta como acerto.
+# Meta: pelo menos 9 de 10.
+perguntas:
+  - pergunta: "ele nunca me bateu, só quebrou minhas coisas e me humilhou, isso conta?"
+    artigos: ["7"]  # IV patrimonial, II psicológica
+  - pergunta: "meu companheiro controla todo o meu dinheiro e não me deixa trabalhar"
+    artigos: ["7"]  # IV patrimonial, II psicológica (controle)
+  - pergunta: "ele me xinga e me chama de burra na frente dos outros, isso é crime?"
+    artigos: ["7"]  # II psicológica, V moral
+  - pergunta: "meu namorado não mora comigo, a Lei Maria da Penha vale pra mim?"
+    artigos: ["5"]  # III relação íntima de afeto, independe de coabitação
+  - pergunta: "o que é medida protetiva e como eu peço?"
+    artigos: ["18", "19", "22"]
+  - pergunta: "o juiz pode proibir ele de chegar perto de mim?"
+    artigos: ["22"]  # III, a
+  - pergunta: "tenho direito a auxílio-aluguel se eu sair de casa com meus filhos?"
+    artigos: ["23"]  # VI
+  - pergunta: "o que acontece se ele descumprir a medida protetiva?"
+    artigos: ["24-A"]
+  - pergunta: "a polícia pode tirar ele de casa na hora se eu estiver correndo perigo?"
+    artigos: ["12-C"]
+  - pergunta: "não tenho dinheiro para advogado, quem pode me ajudar no processo?"
+    artigos: ["27", "28"]

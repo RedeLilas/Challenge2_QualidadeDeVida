@@ -2,10 +2,10 @@
 
 ## 1. Ingestão e índice (quinta, 05/11)
 
-- [ ] 1.1 Escrever o script de ingestão: baixa a Lei 11.340/2006 do Planalto, remove trechos revogados (`<strike>`) e divide por artigo; verificação: teste que confere o número de artigos e a ausência de texto revogado
-- [ ] 1.2 Gerar `dados/leis/lei_11340.jsonl` com metadados (lei, artigo, inciso, url, data de acesso); verificação: todos os registros têm url e data
-- [ ] 1.3 Implementar o índice de embeddings com `multilingual-e5-small`; verificação: teste que busca "violência patrimonial" e recupera o art. 7º
-- [ ] 1.4 Escrever `tests/perguntas_juridicas.yaml` com 10 perguntas no estilo das personas e os artigos esperados; verificação: o artigo esperado aparece no top 5 em pelo menos 9 das 10
+- [x] 1.1 Escrever o script de ingestão: baixa a Lei 11.340/2006 do Planalto, remove trechos revogados (`<strike>`) e divide por artigo; verificação: teste que confere o número de artigos e a ausência de texto revogado
+- [x] 1.2 Gerar `dados/leis/lei_11340.jsonl` com metadados (lei, artigo, inciso, url, data de acesso); verificação: todos os registros têm url e data
+- [x] 1.3 Implementar o índice de embeddings com `multilingual-e5-base` (trocado do `e5-small`, ver design); verificação: teste que busca "violência patrimonial" e recupera o art. 7º
+- [x] 1.4 Escrever `tests/perguntas_juridicas.yaml` com 10 perguntas no estilo das personas e os artigos esperados; verificação: o artigo esperado aparece no top 5 em pelo menos 9 das 10
 
 ## 2. Resposta com citação (sexta, 06/11)
 

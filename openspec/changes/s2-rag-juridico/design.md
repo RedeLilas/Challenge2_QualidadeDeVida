@@ -25,7 +25,9 @@ A Lei 11.340/2006 tem poucas dezenas de artigos, então a base é pequena. O Dee
 - Saída versionada em `dados/leis/lei_11340.jsonl`, para que mudanças no texto apareçam no diff.
 
 ### Embeddings e índice
-- Modelo: `intfloat/multilingual-e5-small` (multilíngue, pequeno). Usa os prefixos `query:` e `passage:`.
+- Modelo: `intfloat/multilingual-e5-base` (multilíngue). Usa os prefixos `query:` e `passage:`.
+- Alternativa descartada: `intfloat/multilingual-e5-small`, a escolha inicial. No teste rápido da tarefa 1.4 (03/11), com os mesmos 109 trechos, o `e5-small` trouxe o artigo esperado no top 5 em 7 de 10 perguntas, abaixo da meta de 9. O `e5-base` acertou 10 de 10. O `e5-small` errou perguntas em linguagem leiga: "me xinga e me chama de burra" (art. 7º), "namorado não mora comigo" (art. 5º) e "proibir ele de chegar perto" (art. 22). Custo da troca: cerca de 1,1 GB em disco e memória, contra cerca de 470 MB, a considerar na plataforma de deploy (`s2-plataforma-base`).
+- Divisão testada junto: limites menores por trecho (600 caracteres ou um trecho por dispositivo) não melhoraram o `e5-small` e pioraram o `e5-base`. Mantido o limite de 1500 caracteres, com a citação e o capítulo no texto do embedding.
 - Índice em memória (matriz de vetores + similaridade de cosseno), gerado na inicialização ou carregado de um arquivo pré-calculado.
 - Alternativa considerada: um banco vetorial (Chroma). Descartado por ser desnecessário para algumas dezenas de trechos.
 
@@ -43,6 +45,7 @@ Se a maior similaridade ficar abaixo de um limite, o sistema recusa sem chamar o
 
 ## Risks / Trade-offs
 
-- **Modelo de embeddings pesa na memória do deploy**: considerado na escolha da plataforma (`s2-plataforma-base`).
+- **Modelo de embeddings pesa na memória do deploy**: o `e5-base` usa cerca de 1,1 GB; considerado na escolha da plataforma (`s2-plataforma-base`).
+- **Teste rápido pequeno**: 10 perguntas escritas pela equipe podem favorecer um modelo por acaso. A comparação será refeita com as 50 perguntas da S3.
 - **Limite de similaridade mal calibrado**: alto demais gera recusas desnecessárias; baixo demais deixa passar respostas fracas. Será recalibrado com as 50 perguntas da S3.
 - **Mudanças no HTML do Planalto quebram a ingestão**: o texto processado fica versionado em `dados/leis/` e só é regenerado na revisão mensal.
