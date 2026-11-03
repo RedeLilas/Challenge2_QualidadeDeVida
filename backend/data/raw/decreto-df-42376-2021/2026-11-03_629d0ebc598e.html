@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+    <html>
+
+    <head id="Head1"><meta content="IE=Edge" http-equiv="X-UA-Compatible"/><meta content="pt-br" http-equiv="Content-Language"/><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/><title>
+	
+            Decreto 42376 de 10/08/2021
+        
+</title><meta name="keywords" content="Decreto 42376 de 10/08/2021,sinj,distrito,federal,df"/><meta name="description" content="Regulamenta a Lei nº 6.938, de 10 de agosto de 2021, que institui o Programa Cartão Gás como medida de enfrentamento das consequências sociais e econômicas decorrentes da pandemia da Covid-19 e seus efeitos."/><meta content="index,follow" name="robots"/><meta content="index,follow" name="googlebot"/><script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js"></script>
+
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_norma.js?4.4.00134"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/adapters/jquery.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.form.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.cookie.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/on_error.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktrace.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.ajaxLight.js?3.2.00001"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.autocompleteLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jMenu.jquery.min.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.modalLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/login.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_sinj.js?3.2.00001"
+            charset="utf-8"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/sessao_sinj.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktable.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/tooltip.js"></script>
+
+        <script type="text/javascript" language="javascript">
+            function Print() {
+                $('div.control').hide();
+                window.print();
+                $('div.control').show();
+            }
+            function exibirAlteracoes(el) {
+                if (el.getAttribute('refresh')) {
+                    location.reload();
+                }
+                else {
+
+                    // NOTE: Essa funcionalidade faz com o que o texto alterado "se transforme" 
+                    // em compilado (basicamente remove informações de vide), mas define 
+                    // um comportamento diferenciado para para os parágrafos que contiverem 
+                    // vides com os seguintes textos no link "revogado pelo(a)" ou 
+                    // "declarado(a) inconstitucional pelo(a)". By Questor
+                    
+                    var regex = undefined;
+                    regex = new RegExp(/Revogado.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Revogado")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    regex = new RegExp(/Inconstitucional.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Inconstitucional")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    $('p[replaced_by]').remove();
+                    $(el).attr('refresh', '1');
+                    $(el).text('Exibir Alterações');
+                }
+            }
+
+            //Verifica os links de LECO, ordena e insere o link 'exibir mais...' e 'exibir menos...' caso exista mais de 3 links de LECO
+            function verificarLinks() {
+                var aP = $('#div_texto > p');
+                var i = 0;
+                var length = aP.length;
+                var pAfter = null;
+                var aOrder = [];
+                for (; i < length; i++) {
+                    if ($('a[href]', aP[i]).length == 1 && $('a[href]', aP[i]).text().toLowerCase().indexOf('legislação correlata') == 0) {
+                        $('a[href]', aP[i]).attr('show', '1').attr('leco', 'leco');
+                        aOrder.push({ 'text': $('a[href]', aP[i]).text(), 'href': $('a[href]', aP[i]).attr('href') });
+                        if (i >= 3) {
+                            $('a[href]', aP[i]).attr('show', '0');
+                            pAfter = aP[i];
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                }
+                aOrder.sort(function (a1, a2) {
+                    return a1.text > a2.text ? 1 : a1.text < a2.text ? -1 : 0;
+                });
+                $('#div_texto a[leco="leco"]').each(function (i, o) {
+                    o.innerText = aOrder[i].text;
+                    o.href = aOrder[i].href;
+                });
+                if (pAfter != null && $('a[show="0"]').length > 3) {
+                    $('a[show="0"]').closest('p').hide();
+                    $('<p id="p_show"><a href="javascript:void(0);" onclick="exibirLinks()">Exibir mais...</a></p>').insertAfter($(pAfter));
+                    $('<p id="p_hide" style="display:none"><a href="javascript:void(0);" onclick="esconderLinks()">Exibir menos...</a></p>').insertAfter($(pAfter));
+                }
+            }
+            function exibirLinks() {
+                $('a[show="0"]').closest('p').show();
+                $('#p_hide').show();
+                $('#p_show').hide();
+            }
+            function esconderLinks() {
+                $('a[show="0"]').closest('p').hide();
+                $('#p_hide').hide();
+                $('#p_show').show();
+            }
+
+            function generateDescriptionToParagraph(text) {
+                var ds = '';
+                text = $.trim(text);
+                if (text != "") {
+                    var palavras = text.split(' ');
+                    if (palavras[0] == 'ANEXO' || palavras[0] == 'TÍTULO' || palavras[0] == 'CAPÍTULO' || palavras[0] == 'Art.' || (palavras[0] == 'Parágrafo' && palavras[1] == 'Único') || palavras[0] == '§') {
+                        ds = palavras[0] + ' ' + palavras[1];
+                    }
+                    else if (ehInciso(palavras[0]) || ehAlinea(palavras[0]) || ehNum(palavras[0])) {
+                        ds = palavras[0];
+                    }
+                    else {
+                        ds = "...";
+                    }
+                }
+                return ds;
+            }
+
+            function ehInciso(termo) {
+                var lastIndex = termo.indexOf("-");
+                if (lastIndex > 0) {
+                    termo = termo.substring(0, lastIndex);
+                }
+                return termo.match(/^[IVXLCDM]+$/i);
+            }
+
+            function ehAlinea(termo) {
+                var lastIndex = termo.indexOf(")");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return termo.match(/[a-z]/i);
+                }
+                return false;
+            }
+
+            function ehNum(termo) {
+                var lastIndex = termo.indexOf(".");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return isInt(termo);
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+
+                var urlPath = window.location.pathname;
+                var urlSplited = urlPath.split("/");
+                var numeroNorma = urlSplited[3];
+
+                //Pegar o texto do h1
+                var elementoh1 = $('#div_texto > h1')[0].textContent;
+                //Adicionar a tag 'a'
+                $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                //Adicionar o link
+                $("#div_texto h1 a").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                //--------------------------------------------------------------------------------------
+
+
+
+
+                // var paragrafo = $('p');
+                // for (var i = 0; i < paragrafo.length; i++) {
+                //     if (paragrafo[i].innerText.match(/Os anexos constam no DODF/g)) {
+    
+                //         var spanParagrafo = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+    
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span>" + spanParagrafo + "<span>" + "</a></form>";
+    
+                //     }
+
+                //     if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //         var span = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var arraySpan = $("p > span");
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                //     }
+                // }
+                // if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //     $('#paginaEColuna').hide();
+                // }
+                //--------------------------------------------------------------------------------------
+
+
+
+                if ($('#div_erro').length > 0) {
+                    $('#div_norma').hide();
+                }
+                else {
+                    if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                        $('.compilado').hide();
+                    }
+                    verificarLinks();
+                }
+            });
+
+
+            var normaOVEmFunction = new normaOVEmFunction();
+            
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+            if (normaOVEmFunction != true) {
+
+                    var urlPath = window.location.pathname;
+                    var urlSplited = urlPath.split("/");
+                    var numeroNorma = urlSplited[3];
+
+                    //Pegar o texto do h1
+                    var elementoh1 = $('#div_texto > h1')[0].textContent;
+                    //Adicionar a tag 'a'
+                    $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                    //Adicionar o link
+                    $("#div_texto h1").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                    //--------------------------------------------------------------------------------------
+
+                //consultarDiarioAspErro
+                    var paragrafo = $('p');
+
+                    for (var i = 0; i < paragrafo.length; i++) {
+
+                        if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                            var span = paragrafo[i].textContent;
+                            var form_consultar_diario = "\"form_consultar_diario\"";
+                            var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                            var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioAspErro(" + form_consultar_diario + ")\'>";
+                            var arraySpan = $("p > span");
+                            $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                        }
+                    }
+                    if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                        $('#paginaEColuna').hide();
+                    }
+                    //--------------------------------------------------------------------------------------
+
+                    if ($('#div_erro').length > 0) {
+                        $('#div_norma').hide();
+                    }
+                    else {
+                        if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                            $('.compilado').hide();
+                        }
+                        verificarLinks();
+                    }
+             }
+        </script>
+        <style type="text/css">
+            .control {
+                width: 100%;
+                float: left;
+            }
+
+            .print {
+                float: right;
+            }
+
+            .compilado {
+                float: left;
+            }
+
+            div.strike {
+                text-decoration: line-through;
+            }
+
+            body,
+            p,
+            h1 {
+                font-family: Tahoma;
+                font-size: 14px;
+            }
+
+            p[nota=nota] {
+                font-size: 12px;
+                border: 1px solid #777;
+                padding: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="div_norma">
+            <!-- A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378-->
+            
+            <!-- corpo dela epigrafe-->
+
+            <a href="/sinj/ ~/" title="Visitar o SINJ-DF - Sistema Integrado de Normas Jurídicas do
+                DF"><img src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/logo_sinj.png" alt="SINJ-DF" /></a>
+
+            <div class="control">
+                <div class="compilado">
+                    <a href="javascript:void(0)" onclick="javascript:exibirAlteracoes(this);">
+                        Texto Compilado
+                    </a>
+                </div>
+                <div class="print">
+                    <a href="javascript:void(0);" onclick="javascript:Print();" title="Imprimir">
+                        <img alt="print" src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/ico_print_p.png" />
+                    </a>
+                </div>
+            </div>
+            <div id="div_texto"><p ch_norma_info="c747b597352a4c8aaf01e25a5934ac1c"><a href="/sinj/Norma/c747b597352a4c8aaf01e25a5934ac1c/seec_prt_211_2021.html#txt_5d34642e63cf4e5e2754f11511317c28">Legislação Correlata - Portaria 211 de 10/08/2021</a><p ch_norma_info="ec06f898479f46168dce07c49a1c6e38"><a href="/sinj/Norma/ec06f898479f46168dce07c49a1c6e38/sedes_prt_33_2021.html#txt_bef5229c3bb842a76d0ff94c1e57e587">Legislação Correlata - Portaria 33 de 21/09/2021</a><p ch_norma_info="7a0755129d53463ba4c703de6208b829"><a href="/sinj/Norma/7a0755129d53463ba4c703de6208b829/sedes_prt_35_2021.html#art1">Legislação Correlata - Portaria 35 de 24/09/2021</a><p ch_norma_info="51aa99fa9f6c4110b14ade48ae7857cf" class="adicionado"><a href="/sinj/Norma/51aa99fa9f6c4110b14ade48ae7857cf/sedes_prt_08_2024.html#txt_2e5049d42703429cfe8cd95815b223a1">Legislação Correlata - Portaria 8 de 23/04/2024</a><h1 epigrafe="epigrafe" noindex="" nota="" style="font-weight:bold; text-align:center">DECRETO Nº 42.376, DE 10 DE AGOSTO DE 2021</h1><p linkname="txt_06b63fec10ba43b874c453f6afccec57" style="margin-left:50%; text-align:justify"><a class="linkname" id="txt_06b63fec10ba43b874c453f6afccec57" name="txt_06b63fec10ba43b874c453f6afccec57"></a>Regulamenta a Lei nº 6.938, de 10 de agosto de 2021, que institui o Programa Cartão Gás como medida de enfrentamento das consequências sociais e econômicas decorrentes da pandemia da Covid-19 e seus efeitos.<p linkname="txt_80216572f98a46eddab9c0a96c374e7a" style="text-align:justify"><a class="linkname" id="txt_80216572f98a46eddab9c0a96c374e7a" name="txt_80216572f98a46eddab9c0a96c374e7a"></a>O GOVERNADOR DO DISTRITO FEDERAL, no uso das atribuições que lhe são conferidas pelo inciso VII do art. 100 da Lei Orgânica do Distrito Federal, DECRETA:<p linkname="capI" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="capI" name="capI"></a>CAPÍTULO I<p linkname="txt_f8ff5e5ac242403b91b7ae37b26b2f6a" style="font-weight:bold; margin-top:0px; text-align:center"><a class="linkname" id="txt_f8ff5e5ac242403b91b7ae37b26b2f6a" name="txt_f8ff5e5ac242403b91b7ae37b26b2f6a"></a>DA DEFINIÇÃO<p linkname="capI_art1_replaced" style="text-align: justify; display: block;" replaced_by="a54ea0b216df438baaea8b707a959cb9" class=""><s><a class="linkname" id="capI_art1" name="capI_art1_replaced"></a>Art. 1º Fica regulamentado, nos termos deste Decreto, o Programa Cartão Gás, de caráter emergencial, instituído pela <a href="/sinj/Norma/73a4d82907db4ab98fbce2982adcf5a8/Lei_6938_2021.html">Lei nº 6.938, de 10 de agosto de 2021</a>, destinado a assegurar às famílias com renda per capita de até meio salário mínimo o acesso ao gás liquefeito de petróleo (GLP 13 kg) para uso doméstico, como medida de enfrentamento das consequências sociais e econômicas decorrentes da pandemia da Covid-19 e seus efeitos.</s><p style="text-align:justify" linkname="capI_art1" class=""><a name="capI_art1"></a>Art. 1º Fica regulamentado, nos termos deste Decreto, o Programa Cartão Gás, instituído pela Lei nº 6.938, de 10 de agosto de 2021, alterado pela Lei nº 7.010, de 17 de dezembro de 2021, e destinado a assegurar às famílias com renda per capita de até meio salário mínimo o acesso ao gás liquefeito de petróleo (GLP 13 kg) para uso doméstico.&nbsp;<a href="/sinj/Norma/a54ea0b216df438baaea8b707a959cb9/exec_dec_43963_2022.html#art1">(Artigo Alterado(a) pelo(a) Decreto 43963 de 22/11/2022)</a><p linkname="capI_art2" style="text-align:justify"><a class="linkname" id="capI_art2" name="capI_art2"></a>Art. 2º O Programa Cartão Gás consiste na concessão de auxílio financeiro, em parcelas sucessivas bimestrais, no valor de R$ 100,00 (cem reais), para aquisição do GLP 13kg.<p linkname="capI_art2_par" style="text-align:justify"><a class="linkname" id="capI_art2_par" name="capI_art2_par"></a>Parágrafo único. Os valores creditados pelo Programa Cartão Gás somente poderão ser utilizados em estabelecimentos comerciais de revenda de gás liquefeito de petróleo (GLP 13 kg) cadastrados pela Secretaria de Estado de Economia do Distrito Federal.<p linkname="capII" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="capII" name="capII"></a>CAPÍTULO II<p linkname="txt_8c768b85b9b8459f8e404c60529015dd" style="font-weight:bold; margin-top:0px; text-align:center"><a class="linkname" id="txt_8c768b85b9b8459f8e404c60529015dd" name="txt_8c768b85b9b8459f8e404c60529015dd"></a>DOS CRITÉRIOS<p linkname="capII_art3" style="text-align:justify"><a class="linkname" id="capII_art3" name="capII_art3"></a>Art. 3º A concessão e manutenção do auxílio financeiro do Programa Cartão Gás ficam condicionadas à validação dos dados autodeclarados pelas famílias perante o Cadastro Único para Programas Sociais do Governo Federal – Cadastro Único.<p linkname="capII_art4" style="text-align:justify"><a class="linkname" id="capII_art4" name="capII_art4"></a>Art. 4º São critérios para concessão do Programa Cartão Gás:<p linkname="capII_art4_incI" style="text-align:justify"><a class="linkname" id="capII_art4_incI" name="capII_art4_incI"></a>I - estar inscrito no Cadastro Único para Programas Sociais do Governo Federal, regulamentado pelo Decreto Federal nº 6.135, de 26 de junho de 2007;<p linkname="capII_art4_incII" style="text-align:justify"><a class="linkname" id="capII_art4_incII" name="capII_art4_incII"></a>II - possuir renda familiar per capita de até meio salário mínimo;<p linkname="capII_art4_incIII" style="text-align:justify"><a class="linkname" id="capII_art4_incIII" name="capII_art4_incIII"></a>III - ter declarado comprometimento de renda com aquisição de gás liquefeito de petróleo (GLP), no respectivo registro do Cadastro Único para Programas Sociais do Governo Federal;<p linkname="capII_art4_incIV" style="text-align:justify"><a class="linkname" id="capII_art4_incIV" name="capII_art4_incIV"></a>IV - residir no Distrito Federal;<p linkname="capII_art4_incV" style="text-align:justify"><a class="linkname" id="capII_art4_incV" name="capII_art4_incV"></a>V - não se encontrar em situação de rua ou acolhimento institucional coletivo; e<p linkname="capII_art4_incVI" style="text-align:justify"><a class="linkname" id="capII_art4_incVI" name="capII_art4_incVI"></a>VI - responsável familiar possuir idade igual ou superior a dezesseis anos.<p linkname="capII_art4_par1_replaced" style="text-align: justify; display: block;" replaced_by="bad07bceec75403f8787777cd945d4e8" class=""><s><a class="linkname" id="capII_art4_par1" name="capII_art4_par1_replaced"></a>§ 1º Para fins de verificação inicial do critério de que trata o inciso I, serão considerados os registros lançados na Base Nacional do Cadastro Único até o dia 17 de julho de 2021.</s><p style="text-align:justify" linkname="capII_art4_par1" class=""><a name="capII_art4_par1"></a>§ 1º Para fins de verificação inicial do critério de que trata o inciso I, será considerada a Base do Cadastro Único mais recente, conforme disponibilização pelo órgão gestor e a vigência do pagamento, observada a limitação orçamentária.&nbsp;<a href="/sinj/Norma/bad07bceec75403f8787777cd945d4e8/exec_dec_45192_2023.html#art1">(Parágrafo Alterado(a) pelo(a) Decreto 45192 de 22/11/2023)</a><p linkname="capII_art4_par2" style="text-align:justify"><a class="linkname" id="capII_art4_par2" name="capII_art4_par2"></a>§ 2º O programa Cartão Gás não será concedido às famílias cujo responsável familiar não tenha informado o CPF junto ao Cadastro Único.<p linkname="capII_art5" style="text-align:justify"><a class="linkname" id="capII_art5" name="capII_art5"></a>Art. 5º Havendo necessidade de priorização em razão de limitação orçamentária, ficam estabelecidos os critérios para pagamento do benefício, na seguinte ordem:<p linkname="capII_art5_incI" style="text-align:justify"><a class="linkname" id="capII_art5_incI" name="capII_art5_incI"></a>I - famílias monoparentais chefiadas por mulheres com crianças de 0 a 6 anos;<p linkname="capII_art5_incII" style="text-align:justify"><a class="linkname" id="capII_art5_incII" name="capII_art5_incII"></a>II - famílias com crianças de 0 a 6 anos;<p linkname="capII_art5_incIII" style="text-align:justify"><a class="linkname" id="capII_art5_incIII" name="capII_art5_incIII"></a>III - famílias com pessoas com deficiência;<p linkname="capII_art5_incIV" style="text-align:justify"><a class="linkname" id="capII_art5_incIV" name="capII_art5_incIV"></a>IV - famílias com pessoas idosas.<p linkname="capII_art5_par" style="text-align:justify"><a class="linkname" id="capII_art5_par" name="capII_art5_par"></a>Parágrafo único. A ordem de classificação dentro de cada grupo, descrito nos incisos acima, observará o critério de maior idade do responsável familiar.<p linkname="capIII" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="capIII" name="capIII"></a>CAPÍTULO III<p linkname="txt_811c96b47dc94b14c75ae1d35d2006ca" style="font-weight:bold; margin-top:0px; text-align:center"><a class="linkname" id="txt_811c96b47dc94b14c75ae1d35d2006ca" name="txt_811c96b47dc94b14c75ae1d35d2006ca"></a>DA FORMA DE CONCESSÃO<p linkname="capIII_art6" style="text-align:justify"><a class="linkname" id="capIII_art6" name="capIII_art6"></a>Art. 6° O benefício decorrente do Programa Cartão Gás será concedido mediante repasse pecuniário bimestral, creditado em nome do responsável familiar registrado no Cadastro Único.<p linkname="capIII_art6_par" style="text-align:justify"><a class="linkname" id="capIII_art6_par" name="capIII_art6_par"></a>Parágrafo único. A fruição do benefício se dará exclusivamente por meio de cartão pré-pago personalizado emitido e carregado pelo Banco de Brasília S.A.- BRB, vedado o saque.<p linkname="capIII_art7_replaced" style="text-align:justify" class="" replaced_by="bad07bceec75403f8787777cd945d4e8"><s><a class="linkname" id="capIII_art7" name="capIII_art7_replaced"></a>Art. 7º Atendidos os critérios estabelecidos no art. 4º, o benefício deverá ser solicitado por meio do site <a href="https://gdfsocial.brb.com.br/#/home" onclick="window.open(this.href, '', 'resizable=no,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=no,dependent=no,width=800,height=600'); return false;">https://gdfsocial.brb.com.br/</a>.</s>&nbsp;<a class="link_vide" href="/sinj/Norma/bad07bceec75403f8787777cd945d4e8/exec_dec_45192_2023.html#art2">(Artigo Revogado(a) pelo(a) Decreto 45192 de 22/11/2023)</a><p linkname="capIV" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="capIV" name="capIV"></a>CAPÍTULO IV<p linkname="txt_3a2862ac5b834dde4c874f4317c6aa49" style="font-weight:bold; margin-top:0px; text-align:center"><a class="linkname" id="txt_3a2862ac5b834dde4c874f4317c6aa49" name="txt_3a2862ac5b834dde4c874f4317c6aa49"></a>DO BENEFÍCIO<p linkname="capIV_art8" style="text-align:justify"><a class="linkname" id="capIV_art8" name="capIV_art8"></a>Art. 8º O benefício decorrente do Programa Cartão Gás será no valor de R$ 100,00 (cem reais), a cada bimestre, por família.<p linkname="capIV_art9" style="text-align:justify"><a class="linkname" id="capIV_art9" name="capIV_art9"></a>Art. 9º O beneficiário que não retirar o cartão no prazo de cento e vinte dias após a disponibilização no local de entrega terá o benefício cancelado, valores estornados e restituídos ao erário.<p linkname="capIV_art9_par1" style="text-align:justify"><a class="linkname" id="capIV_art9_par1" name="capIV_art9_par1"></a>§ 1º Os cartões não retirados serão descartados pelo agente financeiro.<p linkname="capIV_art9_par2_replaced" style="text-align: justify; display: block;" replaced_by="a54ea0b216df438baaea8b707a959cb9" class=""><s><a class="linkname" id="capIV_art9_par2" name="capIV_art9_par2_replaced"></a>§ 2º Ao final do programa os recursos creditados ficarão disponíveis para uso pelo prazo limite de sessenta dias e após o decurso do prazo o agente financeiro bloqueará o saldo e fará o estorno ao erário.</s><p style="text-align:justify" linkname="capIV_art9_par2" class=""><a name="capIV_art9_par2"></a>§ 2º Em caso de cancelamento, os recursos remanescentes serão bloqueados, devendo o agente financeiro realizar o estorno ao erário.&nbsp;<a href="/sinj/Norma/a54ea0b216df438baaea8b707a959cb9/exec_dec_43963_2022.html#art1">(Parágrafo Alterado(a) pelo(a) Decreto 43963 de 22/11/2022)</a><p linkname="capV" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="capV" name="capV"></a>CAPÍTULO V<p linkname="txt_6c46b79c4ba44ce8adc58291a9a511a5" style="font-weight:bold; margin-top:0px; text-align:center"><a class="linkname" id="txt_6c46b79c4ba44ce8adc58291a9a511a5" name="txt_6c46b79c4ba44ce8adc58291a9a511a5"></a>DAS COMPETÊNCIAS<p linkname="capV_art10" style="text-align:justify"><a class="linkname" id="capV_art10" name="capV_art10"></a>Art. 10. A operacionalização do Programa Cartão Gás será realizada pela Secretaria de Desenvolvimento Social do Distrito Federal e pelo Banco de Brasília S.A. - BRB.<p linkname="capV_art11" style="text-align:justify"><a class="linkname" id="capV_art11" name="capV_art11"></a>Art. 11. O cadastro e o monitoramento dos estabelecimentos comerciais interessados em participar do Programa Cartão Gás serão realizados pela Secretaria de Estado de Economia do Distrito Federal.<p linkname="capV_art12" style="text-align:justify"><a class="linkname" id="capV_art12" name="capV_art12"></a>Art. 12. Compete à Secretaria de Estado de Economia do Distrito Federal disponibilizar à Secretaria de Estado de Desenvolvimento Social do Distrito Federal a relação dos estabelecimentos comerciais cadastrados.<p linkname="capV_art13" style="text-align:justify"><a class="linkname" id="capV_art13" name="capV_art13"></a>Art. 13. A Secretaria de Estado de Economia do Distrito Federal disponibilizará os serviços da Central 156 como ferramenta de suporte ao Programa.<p linkname="capV_art14" style="text-align:justify"><a class="linkname" id="capV_art14" name="capV_art14"></a>Art. 14. O Banco de Brasília S.A. - BRB será a instituição financeira responsável por:<p linkname="capV_art14_incI" style="text-align:justify"><a class="linkname" id="capV_art14_incI" name="capV_art14_incI"></a>I - disponibilizar plataforma digital ao público elegível para solicitação do benefício e consulta do local e data de retirada dos cartões;<p linkname="capV_art14_incII" style="text-align:justify"><a class="linkname" id="capV_art14_incII" name="capV_art14_incII"></a>II - confeccionar, creditar os valores e realizar a entrega dos cartões, conforme solicitação da Secretaria de Estado de Desenvolvimento Social do Distrito Federal;<p linkname="capV_art14_incIII" style="text-align:justify"><a class="linkname" id="capV_art14_incIII" name="capV_art14_incIII"></a>III - restringir a utilização do crédito aos estabelecimentos cadastrados e voltados à comercialização de gás liquefeito de petróleo (GLP 13KG) indicados pela Secretaria de Estado de Economia do Distrito Federal;<p linkname="capV_art14_incIV" style="text-align:justify"><a class="linkname" id="capV_art14_incIV" name="capV_art14_incIV"></a>IV - disponibilizar relatórios consolidados e analíticos relativos aos benefícios do Programa com informações detalhadas sobre as operações vinculadas, mediante solicitação da Secretaria de Estado de Desenvolvimento Social do Distrito Federal;<p linkname="capV_art14_incV" style="text-align:justify"><a class="linkname" id="capV_art14_incV" name="capV_art14_incV"></a>V - efetuar o bloqueio do cartão e a restituição do saldo ao erário no encerramento do programa ou a qualquer tempo a pedido da Secretaria de Estado de Desenvolvimento Social do Distrito Federal;<p linkname="capV_art14_incVI" style="text-align:justify"><a class="linkname" id="capV_art14_incVI" name="capV_art14_incVI"></a>VI - descartar os cartões não retirados; e<p linkname="capV_art14_incVII" style="text-align:justify"><a class="linkname" id="capV_art14_incVII" name="capV_art14_incVII"></a>VII - disponibilizar a base de dados do Programa Cartão Gás para a Secretaria de Estado de Desenvolvimento Social do Distrito Federal e para a Secretaria de Estado de Economia do Distrito Federal.<p linkname="capVI" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="capVI" name="capVI"></a>CAPÍTULO VI<p linkname="txt_f47dbf8d39a142b431acd052da5fe0e9" style="font-weight:bold; margin-top:0px; text-align:center"><a class="linkname" id="txt_f47dbf8d39a142b431acd052da5fe0e9" name="txt_f47dbf8d39a142b431acd052da5fe0e9"></a>DA RESPONSABILIDADE DOS BENEFICIÁRIOS<p linkname="capVI_art15" style="text-align:justify"><a class="linkname" id="capVI_art15" name="capVI_art15"></a>Art. 15. A eventual emissão de 2° via do cartão será a custo do beneficiário.<p linkname="capVI_art16" style="text-align:justify"><a class="linkname" id="capVI_art16" name="capVI_art16"></a>Art. 16. O benefício do Programa Cartão Gás é intransferível.<p linkname="capVI_art17" style="text-align:justify"><a class="linkname" id="capVI_art17" name="capVI_art17"></a>Art. 17. A família beneficiária que dolosamente prestar informações falsas ou utilizar qualquer outro meio ilícito para ingressar ou se manter indevidamente como beneficiária do Programa Cartão Gás será obrigada a efetuar o ressarcimento dos valores recebidos, sem prejuízo das sanções legais.<p linkname="capVI_art18" style="text-align:justify"><a class="linkname" id="capVI_art18" name="capVI_art18"></a>Art. 18. Retirar o cartão no prazo de até cento e vinte dias após a disponibilização no local de entrega.<p linkname="capVII" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="capVII" name="capVII"></a>CAPÍTULO VII<p linkname="txt_1781784b6992495bfbbd4561129c96de" style="font-weight:bold; margin-top:0px; text-align:center"><a class="linkname" id="txt_1781784b6992495bfbbd4561129c96de" name="txt_1781784b6992495bfbbd4561129c96de"></a>DAS DISPOSIÇÕES GERAIS<p linkname="capVII_art19_replaced" style="text-align:justify" class="" replaced_by="a54ea0b216df438baaea8b707a959cb9"><s><a class="linkname" id="capVII_art19" name="capVII_art19_replaced"></a>Art. 19. Em caso de implementação de programa semelhante pelo governo federal, é vedado o recebimento cumulativo do benefício, a partir do recebimento da lista de beneficiários do auxílio federal pelos órgãos competentes.</s>&nbsp;<a class="link_vide" href="/sinj/Norma/a54ea0b216df438baaea8b707a959cb9/exec_dec_43963_2022.html#art1">(Artigo Revogado(a) pelo(a) Decreto 43963 de 22/11/2022)</a><p linkname="capVII_art20" style="text-align:justify"><a class="linkname" id="capVII_art20" name="capVII_art20"></a>Art. 20. Os agentes envolvidos disponibilizarão à Secretaria de Estado de Economia do Distrito Federal as bases de dados do Programa Cartão Gás para fins de planejamento e gestão orçamentária, financeira e tecnológica.<p linkname="capVII_art21" style="text-align:justify"><a class="linkname" id="capVII_art21" name="capVII_art21"></a>Art. 21. A Secretaria de Estado de Desenvolvimento Social do Distrito Federal e a Secretaria de Estado de Economia do Distrito Federal, no âmbito de suas competências, editarão os atos complementares necessários ao cumprimento do disposto neste Decreto.<p linkname="capVII_art22" style="text-align:justify"><a class="linkname" id="capVII_art22" name="capVII_art22"></a>Art. 22. Este Decreto entra em vigor na data de sua publicação.<p linkname="txt_bb7d0b5f10544e2d5327a63da9aa70c5" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="txt_bb7d0b5f10544e2d5327a63da9aa70c5" name="txt_bb7d0b5f10544e2d5327a63da9aa70c5"></a>Brasília, 10 de agosto de 2021<p linkname="txt_d6a971d9f9bb4207a62d4c692972962e" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="txt_d6a971d9f9bb4207a62d4c692972962e" name="txt_d6a971d9f9bb4207a62d4c692972962e"></a>132º da República e 62º de Brasília<p linkname="txt_1b1cec6afe2946db5ce2b7b1e83ed809" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="txt_1b1cec6afe2946db5ce2b7b1e83ed809" name="txt_1b1cec6afe2946db5ce2b7b1e83ed809"></a>IBANEIS ROCHA<p linkname="txt_675967e5e2a84cd8ec8eff7f550f9466" style="text-align:right"><a class="linkname" id="txt_675967e5e2a84cd8ec8eff7f550f9466" name="txt_675967e5e2a84cd8ec8eff7f550f9466"></a><span style="color:#ff0000">Este texto não substitui o publicado no DODF nº 67 A, Edição Extra de 10/08/2021<p style="text-align:right"><span style="color:#FF0000"><a href=http://www.sinj.df.gov.br/sinj/BaixarArquivoDiario.aspx?id_file=455a4667-ed3a-329d-a5be-8c9cd0ac6043 target='_blank'>Este texto não substitui o publicado no DODF nº 67 A, Edição Extra, seção 1 de 10/08/2021<span id='paginaEColuna'> p. 1, col. 2<a/></span></div>
+        </div>
+
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-20776101-1', 'auto');
+            ga('create', 'UA-90051523-1', 'auto', 'brlightTracker');
+            ga('send', 'pageview');
+            ga('brlightTracker.send', 'pageview');
+        </script>
+    </body>
+
+    </html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+    <html>
+
+    <head id="Head1"><meta content="IE=Edge" http-equiv="X-UA-Compatible"/><meta content="pt-br" http-equiv="Content-Language"/><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/><title>
+	
+            Lei 6938 de 10/08/2021
+        
+</title><meta name="keywords" content="Lei 6938 de 10/08/2021,sinj,distrito,federal,df"/><meta name="description" content="Institui o Programa Cartão Gás como medida de enfrentamento das consequências sociais e econômicas decorrentes da pandemia da Covid-19 e seus efeitos."/><meta content="index,follow" name="robots"/><meta content="index,follow" name="googlebot"/><script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js"></script>
+
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_norma.js?4.4.00134"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/adapters/jquery.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.form.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.cookie.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/on_error.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktrace.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.ajaxLight.js?3.2.00001"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.autocompleteLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jMenu.jquery.min.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.modalLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/login.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_sinj.js?3.2.00001"
+            charset="utf-8"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/sessao_sinj.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktable.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/tooltip.js"></script>
+
+        <script type="text/javascript" language="javascript">
+            function Print() {
+                $('div.control').hide();
+                window.print();
+                $('div.control').show();
+            }
+            function exibirAlteracoes(el) {
+                if (el.getAttribute('refresh')) {
+                    location.reload();
+                }
+                else {
+
+                    // NOTE: Essa funcionalidade faz com o que o texto alterado "se transforme" 
+                    // em compilado (basicamente remove informações de vide), mas define 
+                    // um comportamento diferenciado para para os parágrafos que contiverem 
+                    // vides com os seguintes textos no link "revogado pelo(a)" ou 
+                    // "declarado(a) inconstitucional pelo(a)". By Questor
+                    
+                    var regex = undefined;
+                    regex = new RegExp(/Revogado.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Revogado")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    regex = new RegExp(/Inconstitucional.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Inconstitucional")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    $('p[replaced_by]').remove();
+                    $(el).attr('refresh', '1');
+                    $(el).text('Exibir Alterações');
+                }
+            }
+
+            //Verifica os links de LECO, ordena e insere o link 'exibir mais...' e 'exibir menos...' caso exista mais de 3 links de LECO
+            function verificarLinks() {
+                var aP = $('#div_texto > p');
+                var i = 0;
+                var length = aP.length;
+                var pAfter = null;
+                var aOrder = [];
+                for (; i < length; i++) {
+                    if ($('a[href]', aP[i]).length == 1 && $('a[href]', aP[i]).text().toLowerCase().indexOf('legislação correlata') == 0) {
+                        $('a[href]', aP[i]).attr('show', '1').attr('leco', 'leco');
+                        aOrder.push({ 'text': $('a[href]', aP[i]).text(), 'href': $('a[href]', aP[i]).attr('href') });
+                        if (i >= 3) {
+                            $('a[href]', aP[i]).attr('show', '0');
+                            pAfter = aP[i];
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                }
+                aOrder.sort(function (a1, a2) {
+                    return a1.text > a2.text ? 1 : a1.text < a2.text ? -1 : 0;
+                });
+                $('#div_texto a[leco="leco"]').each(function (i, o) {
+                    o.innerText = aOrder[i].text;
+                    o.href = aOrder[i].href;
+                });
+                if (pAfter != null && $('a[show="0"]').length > 3) {
+                    $('a[show="0"]').closest('p').hide();
+                    $('<p id="p_show"><a href="javascript:void(0);" onclick="exibirLinks()">Exibir mais...</a></p>').insertAfter($(pAfter));
+                    $('<p id="p_hide" style="display:none"><a href="javascript:void(0);" onclick="esconderLinks()">Exibir menos...</a></p>').insertAfter($(pAfter));
+                }
+            }
+            function exibirLinks() {
+                $('a[show="0"]').closest('p').show();
+                $('#p_hide').show();
+                $('#p_show').hide();
+            }
+            function esconderLinks() {
+                $('a[show="0"]').closest('p').hide();
+                $('#p_hide').hide();
+                $('#p_show').show();
+            }
+
+            function generateDescriptionToParagraph(text) {
+                var ds = '';
+                text = $.trim(text);
+                if (text != "") {
+                    var palavras = text.split(' ');
+                    if (palavras[0] == 'ANEXO' || palavras[0] == 'TÍTULO' || palavras[0] == 'CAPÍTULO' || palavras[0] == 'Art.' || (palavras[0] == 'Parágrafo' && palavras[1] == 'Único') || palavras[0] == '§') {
+                        ds = palavras[0] + ' ' + palavras[1];
+                    }
+                    else if (ehInciso(palavras[0]) || ehAlinea(palavras[0]) || ehNum(palavras[0])) {
+                        ds = palavras[0];
+                    }
+                    else {
+                        ds = "...";
+                    }
+                }
+                return ds;
+            }
+
+            function ehInciso(termo) {
+                var lastIndex = termo.indexOf("-");
+                if (lastIndex > 0) {
+                    termo = termo.substring(0, lastIndex);
+                }
+                return termo.match(/^[IVXLCDM]+$/i);
+            }
+
+            function ehAlinea(termo) {
+                var lastIndex = termo.indexOf(")");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return termo.match(/[a-z]/i);
+                }
+                return false;
+            }
+
+            function ehNum(termo) {
+                var lastIndex = termo.indexOf(".");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return isInt(termo);
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+
+                var urlPath = window.location.pathname;
+                var urlSplited = urlPath.split("/");
+                var numeroNorma = urlSplited[3];
+
+                //Pegar o texto do h1
+                var elementoh1 = $('#div_texto > h1')[0].textContent;
+                //Adicionar a tag 'a'
+                $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                //Adicionar o link
+                $("#div_texto h1 a").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                //--------------------------------------------------------------------------------------
+
+
+
+
+                // var paragrafo = $('p');
+                // for (var i = 0; i < paragrafo.length; i++) {
+                //     if (paragrafo[i].innerText.match(/Os anexos constam no DODF/g)) {
+    
+                //         var spanParagrafo = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+    
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span>" + spanParagrafo + "<span>" + "</a></form>";
+    
+                //     }
+
+                //     if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //         var span = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var arraySpan = $("p > span");
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                //     }
+                // }
+                // if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //     $('#paginaEColuna').hide();
+                // }
+                //--------------------------------------------------------------------------------------
+
+
+
+                if ($('#div_erro').length > 0) {
+                    $('#div_norma').hide();
+                }
+                else {
+                    if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                        $('.compilado').hide();
+                    }
+                    verificarLinks();
+                }
+            });
+
+
+            var normaOVEmFunction = new normaOVEmFunction();
+            
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+            if (normaOVEmFunction != true) {
+
+                    var urlPath = window.location.pathname;
+                    var urlSplited = urlPath.split("/");
+                    var numeroNorma = urlSplited[3];
+
+                    //Pegar o texto do h1
+                    var elementoh1 = $('#div_texto > h1')[0].textContent;
+                    //Adicionar a tag 'a'
+                    $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                    //Adicionar o link
+                    $("#div_texto h1").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                    //--------------------------------------------------------------------------------------
+
+                //consultarDiarioAspErro
+                    var paragrafo = $('p');
+
+                    for (var i = 0; i < paragrafo.length; i++) {
+
+                        if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                            var span = paragrafo[i].textContent;
+                            var form_consultar_diario = "\"form_consultar_diario\"";
+                            var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                            var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioAspErro(" + form_consultar_diario + ")\'>";
+                            var arraySpan = $("p > span");
+                            $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                        }
+                    }
+                    if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                        $('#paginaEColuna').hide();
+                    }
+                    //--------------------------------------------------------------------------------------
+
+                    if ($('#div_erro').length > 0) {
+                        $('#div_norma').hide();
+                    }
+                    else {
+                        if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                            $('.compilado').hide();
+                        }
+                        verificarLinks();
+                    }
+             }
+        </script>
+        <style type="text/css">
+            .control {
+                width: 100%;
+                float: left;
+            }
+
+            .print {
+                float: right;
+            }
+
+            .compilado {
+                float: left;
+            }
+
+            div.strike {
+                text-decoration: line-through;
+            }
+
+            body,
+            p,
+            h1 {
+                font-family: Tahoma;
+                font-size: 14px;
+            }
+
+            p[nota=nota] {
+                font-size: 12px;
+                border: 1px solid #777;
+                padding: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="div_norma">
+            <!-- A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378-->
+            
+            <!-- corpo dela epigrafe-->
+
+            <a href="/sinj/ ~/" title="Visitar o SINJ-DF - Sistema Integrado de Normas Jurídicas do
+                DF"><img src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/logo_sinj.png" alt="SINJ-DF" /></a>
+
+            <div class="control">
+                <div class="compilado">
+                    <a href="javascript:void(0)" onclick="javascript:exibirAlteracoes(this);">
+                        Texto Compilado
+                    </a>
+                </div>
+                <div class="print">
+                    <a href="javascript:void(0);" onclick="javascript:Print();" title="Imprimir">
+                        <img alt="print" src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/ico_print_p.png" />
+                    </a>
+                </div>
+            </div>
+            <div id="div_texto"><p ch_norma_info="c747b597352a4c8aaf01e25a5934ac1c" class="adicionado"><a href="/sinj/Norma/c747b597352a4c8aaf01e25a5934ac1c/seec_prt_211_2021.html#txt_5d34642e63cf4e5e2754f11511317c28">Legislação Correlata - Portaria 211 de 10/08/2021</a><p ch_norma_info="ec06f898479f46168dce07c49a1c6e38" class="adicionado"><a href="/sinj/Norma/ec06f898479f46168dce07c49a1c6e38/sedes_prt_33_2021.html#txt_bef5229c3bb842a76d0ff94c1e57e587">Legislação Correlata - Portaria 33 de 21/09/2021</a><p ch_norma_info="7a0755129d53463ba4c703de6208b829" class="adicionado"><a href="/sinj/Norma/7a0755129d53463ba4c703de6208b829/sedes_prt_35_2021.html#art1">Legislação Correlata - Portaria 35 de 24/09/2021</a><p ch_norma_info="a54ea0b216df438baaea8b707a959cb9" class="adicionado"><a href="/sinj/Norma/a54ea0b216df438baaea8b707a959cb9/exec_dec_43963_2022.html#txt_62eb1830e3fc44f473e7536d9fa9c10b">Legislação Correlata - Decreto 43963 de 22/11/2022</a><p ch_norma_info="51aa99fa9f6c4110b14ade48ae7857cf" class="adicionado"><a href="/sinj/Norma/51aa99fa9f6c4110b14ade48ae7857cf/sedes_prt_08_2024.html#txt_2e5049d42703429cfe8cd95815b223a1">Legislação Correlata - Portaria 8 de 23/04/2024</a><h1 epigrafe="epigrafe" noindex="" nota="" style="font-weight:bold; text-align:center">LEI Nº 6.938, DE 10 DE AGOSTO DE 2021</h1><p ch_norma_info="e9129c13d17449089ad01203b731f2be" style="text-align:center"><a href="/sinj/Norma/e9129c13d17449089ad01203b731f2be/exec_dec_42376_2021.html#capI_art1">(Regulamentado(a) pelo(a) Decreto 42376 de 10/08/2021</a><p linkname="txt_512f7f366e7540af6b786a789bf6339f" style="margin-top:1px; text-align:center"><a class="linkname" id="txt_512f7f366e7540af6b786a789bf6339f" name="txt_512f7f366e7540af6b786a789bf6339f"></a>(Autoria do Projeto: Poder Executivo)<p linkname="txt_dfc9d919caf040879317586b34a0a051" style="margin-left:50%; text-align:justify"><a class="linkname" id="txt_dfc9d919caf040879317586b34a0a051" name="txt_dfc9d919caf040879317586b34a0a051"></a>Institui o Programa Cartão Gás como medida de enfrentamento das consequências sociais e econômicas decorrentes da pandemia da Covid-19 e seus efeitos.<p linkname="txt_892273248cad45f65be51b91c56e578b" style="text-align:justify"><a class="linkname" id="txt_892273248cad45f65be51b91c56e578b" name="txt_892273248cad45f65be51b91c56e578b"></a>O GOVERNADOR DO DISTRITO FEDERAL, FAÇO SABER QUE A CÂMARA LEGISLATIVA DO DISTRITO FEDERAL DECRETA E EU SANCIONO A SEGUINTE LEI:<p linkname="art1_replaced" style="text-align: justify; display: block;" replaced_by="2be5b15edf27420dad8d94b9777f68a5" class=""><s><a class="linkname" id="art1" name="art1_replaced"></a>Art. 1º Fica instituído o Programa Cartão Gás, de caráter emergencial, destinado a assegurar às famílias com renda per capita de até meio salário mínimo o acesso ao gás liquefeito de petróleo (GLP 13 kg) para uso doméstico.</s><p style="text-align:justify" linkname="art1" class=""><a name="art1"></a>Art. 1º Fica instituído o Programa Cartão Gás, destinado a assegurar às famílias com renda per capita de até meio salário mínimo o acesso ao gás liquefeito de petróleo (GLP 13 kg) para uso doméstico.&nbsp;<a href="/sinj/Norma/2be5b15edf27420dad8d94b9777f68a5/Lei_7010_2021.html#art1">(Artigo Alterado(a) pelo(a) Lei 7010 de 17/12/2021)</a><p linkname="art2" style="text-align:justify"><a class="linkname" id="art2" name="art2"></a>Art. 2º O Programa Cartão Gás consiste em concessão de auxílio financeiro, em parcelas sucessivas bimestrais no valor de R$ 100,00, para aquisição do GLP 13kg.<p linkname="art2_par" style="text-align:justify"><a class="linkname" id="art2_par" name="art2_par"></a>Parágrafo único. O valor do auxílio financeiro pode ser alterado por ato do Poder Executivo, em razão da dinâmica socioeconômica do País ou do Distrito Federal.<p linkname="art3" style="text-align:justify"><a class="linkname" id="art3" name="art3"></a>Art. 3º São condições para fazer jus ao auxílio de que trata esta Lei:<p linkname="art3_incI" style="text-align:justify"><a class="linkname" id="art3_incI" name="art3_incI"></a>I – estar inscrito no Cadastro Único para Programas Sociais do Governo Federal, regulamentado pelo <a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6135.htm" onclick="window.open(this.href, '', 'resizable=no,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=no,dependent=no,width=800,height=600'); return false;">Decreto federal nº 6.135, de 26 de junho de 2007</a>;<p linkname="art3_incII" style="text-align:justify"><a class="linkname" id="art3_incII" name="art3_incII"></a>II – possuir renda familiar per capita de até meio salário mínimo;<p linkname="art3_incIII" style="text-align:justify"><a class="linkname" id="art3_incIII" name="art3_incIII"></a>III – ter declarado comprometimento de renda com aquisição de gás liquefeito de petróleo – GLP no respectivo registro do Cadastro Único para Programas Sociais do Governo Federal;<p linkname="art3_incIV" style="text-align:justify"><a class="linkname" id="art3_incIV" name="art3_incIV"></a>IV – residir no Distrito Federal;<p linkname="art3_incV" style="text-align:justify"><a class="linkname" id="art3_incV" name="art3_incV"></a>V – não se encontrar em situação de rua ou em acolhimento institucional coletivo;<p linkname="art3_incVI" style="text-align:justify"><a class="linkname" id="art3_incVI" name="art3_incVI"></a>VI – o responsável familiar ter idade igual ou superior a 16 anos.<p linkname="art3_par1" style="text-align:justify"><a class="linkname" id="art3_par1" name="art3_par1"></a>§ 1º É passível de penalidade cível e penal o recebimento do benefício de que trata o art. 2º por diferentes membros integrantes de uma mesma família que vivem na mesma residência.<p linkname="art3_par2" style="text-align:justify"><a class="linkname" id="art3_par2" name="art3_par2"></a>§ 2º O Poder Executivo, com base na disponibilidade orçamentária, estabelece critérios de priorização para pagamento do benefício.<p linkname="art4" style="text-align:justify"><a class="linkname" id="art4" name="art4"></a>Art. 4º Cabe à Secretaria de Estado de Desenvolvimento Social do Distrito Federal – Sedes, além de outras atribuições que lhe sejam conferidas, a coordenação, gestão e operacionalização do Programa Cartão Gás, ficando autorizada a promover parcerias com outros órgãos e entidades da administração pública, visando à consecução de ações para concessão do auxílio previsto nesta Lei.<p linkname="art5" style="text-align:justify"><a class="linkname" id="art5" name="art5"></a>Art. 5º (VETADO)<p linkname="art6_replaced" style="text-align: justify; display: block;" replaced_by="2be5b15edf27420dad8d94b9777f68a5" class=""><s><a class="linkname" id="art6" name="art6_replaced"></a>Art. 6º O caráter emergencial do Programa Cartão Gás descaracteriza despesa continuada e tem duração de 18 meses.</s><p style="text-align:justify" linkname="art6" class=""><a name="art6"></a>Art. 6º O Programa Cartão Gás caracteriza despesa continuada e depende de disponibilidade orçamentária específica.&nbsp;<a href="/sinj/Norma/2be5b15edf27420dad8d94b9777f68a5/Lei_7010_2021.html#art1">(Artigo Alterado(a) pelo(a) Lei 7010 de 17/12/2021)</a><p linkname="art7_replaced" style="text-align: justify; display: block;" replaced_by="81b62ce4cddd4fe190cb3fc9ec39a834" class=""><s><a class="linkname" id="art7" name="art7_replaced"></a>Art. 7º O cadastro e a fiscalização dos estabelecimentos comerciais interessados em participar do Programa Cartão Gás são realizados pela Secretaria de Estado de Economia do Distrito Federal.</s><p style="text-align:justify" linkname="art7" class=""><a name="art7"></a>Art. 7º O cadastro e a verificação da aptidão e da capacidade dos estabelecimentos comerciais interessados em participar do Programa Cartão Gás são realizados pela Secretaria de Estado de Desenvolvimento Social do Distrito Federal.&nbsp;<a href="/sinj/Norma/81b62ce4cddd4fe190cb3fc9ec39a834/Lei_7475_2024.html#art1">(Artigo Alterado(a) pelo(a) Lei 7475 de 29/02/2024)</a>&nbsp;<a href="/sinj/Norma/f7ad3a3972f04111aad62926157e6283/sedes_prt_07_2024.html#txt_3d521a66ea954088879667b89c097e54">(Regulamentado(a) pelo(a) Portaria 7 de 16/04/2024)</a><p linkname="art7_par_replaced" style="text-align: justify; display: block;" replaced_by="81b62ce4cddd4fe190cb3fc9ec39a834" class=""><s><a class="linkname" id="art7_par" name="art7_par_replaced"></a>Parágrafo único. A Secretaria de Estado de Economia do Distrito Federal edita os atos complementares necessários ao fiel cumprimento do disposto no caput.</s><p style="text-align:justify" linkname="art7_par" class=""><a name="art7_par"></a>Parágrafo único. Compete à Secretaria de Estado de Desenvolvimento Social do Distrito Federal editar os atos complementares necessários ao fiel cumprimento do disposto no caput.&nbsp;<a href="/sinj/Norma/81b62ce4cddd4fe190cb3fc9ec39a834/Lei_7475_2024.html#art1">(Parágrafo Alterado(a) pelo(a) Lei 7475 de 29/02/2024)</a>&nbsp;<a href="/sinj/Norma/f7ad3a3972f04111aad62926157e6283/sedes_prt_07_2024.html#txt_3d521a66ea954088879667b89c097e54">(Regulamentado(a) pelo(a) Portaria 7 de 16/04/2024)</a><p linkname="art8" style="text-align:justify"><a class="linkname" id="art8" name="art8"></a>Art. 8º O Programa Cartão Gás é financiado com recursos do Tesouro do Distrito Federal e depende de disponibilidade orçamentária específica.<p linkname="art9" style="text-align:justify"><a class="linkname" id="art9" name="art9"></a>Art. 9º Fica estabelecido o Banco de Brasília S.A. – BRB como o agente financeiro do Programa Cartão Gás.<p linkname="art10" style="text-align:justify"><a class="linkname" id="art10" name="art10"></a>Art. 10. O Poder Executivo promoverá ampla divulgação, inclusive no Portal da Transparência do Governo do Distrito Federal, dos benefícios, dos beneficiários, das ações, dos recursos oferecidos pelo poder público e dos critérios para sua concessão.<p linkname="art11_replaced" style="text-align:justify" class="" replaced_by="2be5b15edf27420dad8d94b9777f68a5"><s><a class="linkname" id="art11" name="art11_replaced"></a>Art. 11. Em caso de implementação de programa semelhante pelo governo federal, é vedado o recebimento cumulativo do benefício, a partir do recebimento da lista de beneficiários do auxílio federal pelos órgãos competentes.</s>&nbsp;<a class="link_vide" href="/sinj/Norma/2be5b15edf27420dad8d94b9777f68a5/Lei_7010_2021.html#art6_incIV">(Artigo Revogado(a) pelo(a) Lei 7010 de 17/12/2021)</a><p linkname="art12" style="text-align:justify"><a class="linkname" id="art12" name="art12"></a>Art. 12. Ato do Poder Executivo regulamentará o disposto nesta Lei.<p linkname="art13" style="text-align:justify"><a class="linkname" id="art13" name="art13"></a>Art. 13. Esta Lei entra em vigor na data de sua publicação.<p linkname="txt_b627eadabe3c4a19670e511198dc9ee1" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="txt_b627eadabe3c4a19670e511198dc9ee1" name="txt_b627eadabe3c4a19670e511198dc9ee1"></a>Brasília, 10 de agosto de 2021<p linkname="txt_75d98916b20447d099e06547febeb4a4" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="txt_75d98916b20447d099e06547febeb4a4" name="txt_75d98916b20447d099e06547febeb4a4"></a>132º da República e 62º de Brasília<p linkname="txt_b6b5a342a2714e6dd9299ab0400900e5" style="font-weight:bold; margin-bottom:0px; text-align:center"><a class="linkname" id="txt_b6b5a342a2714e6dd9299ab0400900e5" name="txt_b6b5a342a2714e6dd9299ab0400900e5"></a>IBANEIS ROCHA<p style="text-align:right"><span style="color:#FF0000"><a href=http://www.sinj.df.gov.br/sinj/BaixarArquivoDiario.aspx?id_file=455a4667-ed3a-329d-a5be-8c9cd0ac6043 target='_blank'>Este texto não substitui o publicado no DODF nº 67 A, Edição Extra, seção 1 de 10/08/2021<span id='paginaEColuna'> p. 1, col. 1<a/></span></div>
+        </div>
+
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-20776101-1', 'auto');
+            ga('create', 'UA-90051523-1', 'auto', 'brlightTracker');
+            ga('send', 'pageview');
+            ga('brlightTracker.send', 'pageview');
+        </script>
+    </body>
+
+    </html>

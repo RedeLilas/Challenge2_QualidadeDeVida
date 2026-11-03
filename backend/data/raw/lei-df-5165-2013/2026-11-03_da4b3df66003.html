@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+    <html>
+
+    <head id="Head1"><meta content="IE=Edge" http-equiv="X-UA-Compatible"/><meta content="pt-br" http-equiv="Content-Language"/><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/><title>
+	
+            Lei 5165 de 04/09/2013
+        
+</title><meta name="keywords" content="Lei 5165 de 04/09/2013,sinj,distrito,federal,df"/><meta name="description" content="Dispõe sobre os benefícios eventuais da Política de Assistência Social do Distrito Federal e dá outras providências."/><meta content="index,follow" name="robots"/><meta content="index,follow" name="googlebot"/><script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js"></script>
+
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_norma.js?4.4.00134"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/adapters/jquery.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.form.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.cookie.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/on_error.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktrace.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.ajaxLight.js?3.2.00001"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.autocompleteLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jMenu.jquery.min.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.modalLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/login.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_sinj.js?3.2.00001"
+            charset="utf-8"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/sessao_sinj.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktable.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/tooltip.js"></script>
+
+        <script type="text/javascript" language="javascript">
+            function Print() {
+                $('div.control').hide();
+                window.print();
+                $('div.control').show();
+            }
+            function exibirAlteracoes(el) {
+                if (el.getAttribute('refresh')) {
+                    location.reload();
+                }
+                else {
+
+                    // NOTE: Essa funcionalidade faz com o que o texto alterado "se transforme" 
+                    // em compilado (basicamente remove informações de vide), mas define 
+                    // um comportamento diferenciado para para os parágrafos que contiverem 
+                    // vides com os seguintes textos no link "revogado pelo(a)" ou 
+                    // "declarado(a) inconstitucional pelo(a)". By Questor
+                    
+                    var regex = undefined;
+                    regex = new RegExp(/Revogado.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Revogado")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    regex = new RegExp(/Inconstitucional.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Inconstitucional")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    $('p[replaced_by]').remove();
+                    $(el).attr('refresh', '1');
+                    $(el).text('Exibir Alterações');
+                }
+            }
+
+            //Verifica os links de LECO, ordena e insere o link 'exibir mais...' e 'exibir menos...' caso exista mais de 3 links de LECO
+            function verificarLinks() {
+                var aP = $('#div_texto > p');
+                var i = 0;
+                var length = aP.length;
+                var pAfter = null;
+                var aOrder = [];
+                for (; i < length; i++) {
+                    if ($('a[href]', aP[i]).length == 1 && $('a[href]', aP[i]).text().toLowerCase().indexOf('legislação correlata') == 0) {
+                        $('a[href]', aP[i]).attr('show', '1').attr('leco', 'leco');
+                        aOrder.push({ 'text': $('a[href]', aP[i]).text(), 'href': $('a[href]', aP[i]).attr('href') });
+                        if (i >= 3) {
+                            $('a[href]', aP[i]).attr('show', '0');
+                            pAfter = aP[i];
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                }
+                aOrder.sort(function (a1, a2) {
+                    return a1.text > a2.text ? 1 : a1.text < a2.text ? -1 : 0;
+                });
+                $('#div_texto a[leco="leco"]').each(function (i, o) {
+                    o.innerText = aOrder[i].text;
+                    o.href = aOrder[i].href;
+                });
+                if (pAfter != null && $('a[show="0"]').length > 3) {
+                    $('a[show="0"]').closest('p').hide();
+                    $('<p id="p_show"><a href="javascript:void(0);" onclick="exibirLinks()">Exibir mais...</a></p>').insertAfter($(pAfter));
+                    $('<p id="p_hide" style="display:none"><a href="javascript:void(0);" onclick="esconderLinks()">Exibir menos...</a></p>').insertAfter($(pAfter));
+                }
+            }
+            function exibirLinks() {
+                $('a[show="0"]').closest('p').show();
+                $('#p_hide').show();
+                $('#p_show').hide();
+            }
+            function esconderLinks() {
+                $('a[show="0"]').closest('p').hide();
+                $('#p_hide').hide();
+                $('#p_show').show();
+            }
+
+            function generateDescriptionToParagraph(text) {
+                var ds = '';
+                text = $.trim(text);
+                if (text != "") {
+                    var palavras = text.split(' ');
+                    if (palavras[0] == 'ANEXO' || palavras[0] == 'TÍTULO' || palavras[0] == 'CAPÍTULO' || palavras[0] == 'Art.' || (palavras[0] == 'Parágrafo' && palavras[1] == 'Único') || palavras[0] == '§') {
+                        ds = palavras[0] + ' ' + palavras[1];
+                    }
+                    else if (ehInciso(palavras[0]) || ehAlinea(palavras[0]) || ehNum(palavras[0])) {
+                        ds = palavras[0];
+                    }
+                    else {
+                        ds = "...";
+                    }
+                }
+                return ds;
+            }
+
+            function ehInciso(termo) {
+                var lastIndex = termo.indexOf("-");
+                if (lastIndex > 0) {
+                    termo = termo.substring(0, lastIndex);
+                }
+                return termo.match(/^[IVXLCDM]+$/i);
+            }
+
+            function ehAlinea(termo) {
+                var lastIndex = termo.indexOf(")");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return termo.match(/[a-z]/i);
+                }
+                return false;
+            }
+
+            function ehNum(termo) {
+                var lastIndex = termo.indexOf(".");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return isInt(termo);
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+
+                var urlPath = window.location.pathname;
+                var urlSplited = urlPath.split("/");
+                var numeroNorma = urlSplited[3];
+
+                //Pegar o texto do h1
+                var elementoh1 = $('#div_texto > h1')[0].textContent;
+                //Adicionar a tag 'a'
+                $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                //Adicionar o link
+                $("#div_texto h1 a").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                //--------------------------------------------------------------------------------------
+
+
+
+
+                // var paragrafo = $('p');
+                // for (var i = 0; i < paragrafo.length; i++) {
+                //     if (paragrafo[i].innerText.match(/Os anexos constam no DODF/g)) {
+    
+                //         var spanParagrafo = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+    
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span>" + spanParagrafo + "<span>" + "</a></form>";
+    
+                //     }
+
+                //     if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //         var span = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var arraySpan = $("p > span");
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                //     }
+                // }
+                // if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //     $('#paginaEColuna').hide();
+                // }
+                //--------------------------------------------------------------------------------------
+
+
+
+                if ($('#div_erro').length > 0) {
+                    $('#div_norma').hide();
+                }
+                else {
+                    if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                        $('.compilado').hide();
+                    }
+                    verificarLinks();
+                }
+            });
+
+
+            var normaOVEmFunction = new normaOVEmFunction();
+            
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+            if (normaOVEmFunction != true) {
+
+                    var urlPath = window.location.pathname;
+                    var urlSplited = urlPath.split("/");
+                    var numeroNorma = urlSplited[3];
+
+                    //Pegar o texto do h1
+                    var elementoh1 = $('#div_texto > h1')[0].textContent;
+                    //Adicionar a tag 'a'
+                    $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                    //Adicionar o link
+                    $("#div_texto h1").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                    //--------------------------------------------------------------------------------------
+
+                //consultarDiarioAspErro
+                    var paragrafo = $('p');
+
+                    for (var i = 0; i < paragrafo.length; i++) {
+
+                        if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                            var span = paragrafo[i].textContent;
+                            var form_consultar_diario = "\"form_consultar_diario\"";
+                            var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                            var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioAspErro(" + form_consultar_diario + ")\'>";
+                            var arraySpan = $("p > span");
+                            $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                        }
+                    }
+                    if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                        $('#paginaEColuna').hide();
+                    }
+                    //--------------------------------------------------------------------------------------
+
+                    if ($('#div_erro').length > 0) {
+                        $('#div_norma').hide();
+                    }
+                    else {
+                        if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                            $('.compilado').hide();
+                        }
+                        verificarLinks();
+                    }
+             }
+        </script>
+        <style type="text/css">
+            .control {
+                width: 100%;
+                float: left;
+            }
+
+            .print {
+                float: right;
+            }
+
+            .compilado {
+                float: left;
+            }
+
+            div.strike {
+                text-decoration: line-through;
+            }
+
+            body,
+            p,
+            h1 {
+                font-family: Tahoma;
+                font-size: 14px;
+            }
+
+            p[nota=nota] {
+                font-size: 12px;
+                border: 1px solid #777;
+                padding: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="div_norma">
+            <!-- A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378-->
+            
+            <!-- corpo dela epigrafe-->
+
+            <a href="/sinj/ ~/" title="Visitar o SINJ-DF - Sistema Integrado de Normas Jurídicas do
+                DF"><img src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/logo_sinj.png" alt="SINJ-DF" /></a>
+
+            <div class="control">
+                <div class="compilado">
+                    <a href="javascript:void(0)" onclick="javascript:exibirAlteracoes(this);">
+                        Texto Compilado
+                    </a>
+                </div>
+                <div class="print">
+                    <a href="javascript:void(0);" onclick="javascript:Print();" title="Imprimir">
+                        <img alt="print" src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/ico_print_p.png" />
+                    </a>
+                </div>
+            </div>
+            <div id="div_texto"><p ch_norma_info="f984953697c642d2a839c4d21cfc148e" class="adicionado"><a href="/sinj/Norma/f984953697c642d2a839c4d21cfc148e/Lei_6678_2020.html#art1_par1">Legislação Correlata - Lei 6678 de 22/09/2020</a><p ch_norma_info="3dec6301f78e4b64a83ff591de6ffa75" class="adicionado"><a href="/sinj/Norma/3dec6301f78e4b64a83ff591de6ffa75/sedes_ses_poc_4_2020.html#art1">Legislação Correlata - Portaria Conjunta 4 de 23/09/2020</a><p ch_norma_info="54e5bc6f703346519ff1037bf89a4d8c" class="adicionado"><a href="/sinj/Norma/54e5bc6f703346519ff1037bf89a4d8c/sedes_seeds_osv_23_2024.html#capIII_art3">Legislação Correlata - Ordem de Serviço 23 de 26/06/2024</a><p ch_norma_info="96a7771b88b14ba9822c4b0dba458f02" class="adicionado"><a href="/sinj/Norma/96a7771b88b14ba9822c4b0dba458f02/codhab_ins_416_2025.html#art5_incI">Legislação Correlata - Instrução 416 de 13/10/2025</a><h1 epigrafe="epigrafe" noindex="" nota="" style="font-weight:bold; text-align:center">LEI Nº 5.165, DE 04 DE SETEMBRO DE 2013</h1><p ch_norma_info="76276" style="text-align:center;" class="adicionado"><a href="/sinj/Norma/76276/exec_dec_35191_2014.html#txt_c35cd4720ec645e97d08ef91cc8cf81f">(Regulamentado(a) pelo(a) Decreto 35191 de 21/02/2014</a><p style="margin-top:1px; text-align:center" linkname="txt_c8862b43af1c49721050cf5469796a62"><a id="txt_c8862b43af1c49721050cf5469796a62" name="txt_c8862b43af1c49721050cf5469796a62" class="linkname"></a>(Autoria do Projeto: Poder Executivo)<p style="margin-left:50%; text-align:justify" linkname="txt_d8af0ada374f4e99f88d86b5c556b388"><a id="txt_d8af0ada374f4e99f88d86b5c556b388" name="txt_d8af0ada374f4e99f88d86b5c556b388" class="linkname"></a>Dispõe sobre os benefícios eventuais da Política de Assistência Social do Distrito Federal e dá outras providências.<p style="text-align:justify" linkname="txt_745042805a9544e3b45937c99c47b180"><a id="txt_745042805a9544e3b45937c99c47b180" name="txt_745042805a9544e3b45937c99c47b180" class="linkname"></a>O GOVERNADOR DO DISTRITO FEDERAL, FAÇO SABER QUE A CÂMARA LEGISLATIVA DO DISTRITO FEDERAL DECRETA E EU SANCIONO A SEGUINTE LEI:<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="capI"><a id="capI" name="capI" class="linkname"></a>CAPÍTULO I<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_adc0aede032045fa55b0921f880f16f1"><a id="txt_adc0aede032045fa55b0921f880f16f1" name="txt_adc0aede032045fa55b0921f880f16f1" class="linkname"></a>DAS DISPOSIÇÕES GERAIS<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_8a2a83f6a7154399573c9c13fe6001bd"><a id="txt_8a2a83f6a7154399573c9c13fe6001bd" name="txt_8a2a83f6a7154399573c9c13fe6001bd" class="linkname"></a>Seção I<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_ff4f991ee50a4fa1a26a014e926b11df"><a id="txt_ff4f991ee50a4fa1a26a014e926b11df" name="txt_ff4f991ee50a4fa1a26a014e926b11df" class="linkname"></a>Da Definição e dos Princípios<p style="text-align:justify" linkname="capI_art1"><a id="capI_art1" name="capI_art1" class="linkname"></a>Art. 1º Benefícios eventuais são provisões suplementares e provisórias prestadas aos indivíduos e às famílias em virtude de nascimento, morte, situações de vulnerabilidade temporária e calamidade pública, na forma prevista na Lei federal nº 8.742, de 7 de dezembro de 1993.<p style="text-align:justify" linkname="capI_art1_par1"><a id="capI_art1_par1" name="capI_art1_par1" class="linkname"></a>§ 1º Os benefícios eventuais integram organicamente as garantias do Sistema Único de Assistência Social – SUAS, com fundamentação nos princípios da cidadania e dos direitos sociais humanos.<p style="text-align:justify" linkname="capI_art1_par2"><a id="capI_art1_par2" name="capI_art1_par2" class="linkname"></a>§ 2º Não se incluem na modalidade de benefícios eventuais da assistência social as provisões relativas a programas, projetos, serviços e benefícios vinculados ao campo da saúde, da educação, da integração nacional e das demais políticas públicas setoriais.<p style="text-align:justify" linkname="capI_art2"><a id="capI_art2" name="capI_art2" class="linkname"></a>Art. 2º Os benefícios eventuais previstos nesta Lei devem atender aos princípios da:<p style="text-align:justify" linkname="capI_art2_incI"><a id="capI_art2_incI" name="capI_art2_incI" class="linkname"></a>I – não subordinação a contribuições prévias e de vinculação a quaisquer contrapartidas;<p style="text-align:justify" linkname="capI_art2_incII"><a id="capI_art2_incII" name="capI_art2_incII" class="linkname"></a>II – adoção de critérios de elegibilidade em consonância com as demais normativas do SUAS;<p style="text-align:justify" linkname="capI_art2_incIII"><a id="capI_art2_incIII" name="capI_art2_incIII" class="linkname"></a>III – garantia de qualidade e prontidão na concessão dos benefícios;<p style="text-align:justify" linkname="capI_art2_incIV"><a id="capI_art2_incIV" name="capI_art2_incIV" class="linkname"></a>IV – garantia de igualdade de condições no acesso às informações e à fruição dos benefícios eventuais;<p style="text-align:justify" linkname="capI_art2_incV"><a id="capI_art2_incV" name="capI_art2_incV" class="linkname"></a>V – afirmação dos benefícios eventuais como direito socioassistencial reclamável;<p style="text-align:justify" linkname="capI_art2_incVI"><a id="capI_art2_incVI" name="capI_art2_incVI" class="linkname"></a>VI – ampla divulgação dos critérios para a sua concessão;<p style="text-align:justify" linkname="capI_art2_incVII"><a id="capI_art2_incVII" name="capI_art2_incVII" class="linkname"></a>VII – desvinculação de comprovações complexas e vexatórias, que estigmatizam os beneficiários.<p style="text-align:justify" linkname="capI_art2_par"><a id="capI_art2_par" name="capI_art2_par" class="linkname"></a>Parágrafo único. (VETADO).<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_bb970b6b395747c82ad74a8a800e70e4"><a id="txt_bb970b6b395747c82ad74a8a800e70e4" name="txt_bb970b6b395747c82ad74a8a800e70e4" class="linkname"></a>Seção II<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_5ba6b05f331846a5ff7909da7ca39745"><a id="txt_5ba6b05f331846a5ff7909da7ca39745" name="txt_5ba6b05f331846a5ff7909da7ca39745" class="linkname"></a>Dos Critérios<p style="text-align:justify" linkname="capI_art3"><a id="capI_art3" name="capI_art3" class="linkname"></a>Art. 3º Os benefícios eventuais são concedidos a quem possua renda familiar per capita igual ou inferior a meio salário-mínimo nacional, com observância das contingências de riscos, perdas e danos.<p style="text-align:justify" linkname="capI_art3_par1"><a id="capI_art3_par1" name="capI_art3_par1" class="linkname"></a>§ 1º Para fins de concessão de benefício, considera-se família o núcleo básico, vinculado por laços consanguíneos, de aliança ou afinidade circunscrito a obrigações recíprocas e mútuas, que vivam sob o mesmo teto, bem como o núcleo social unipessoal.<p style="text-align:justify" linkname="capI_art3_par2"><a id="capI_art3_par2" name="capI_art3_par2" class="linkname"></a>§ 2º Caso o beneficiário não esteja no Cadastro Único, a inclusão deve ser providenciada logo após a concessão dos benefícios eventuais.<p style="text-align:justify" linkname="capI_art3_par3"><a id="capI_art3_par3" name="capI_art3_par3" class="linkname"></a>§ 3º A ausência de documentação pessoal não é motivo de impedimento para a concessão do benefício, devendo ser adotadas medidas que viabilizem o acesso do beneficiário à documentação civil.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_3f7c19ca32074b8122947a8ba0752c49"><a id="txt_3f7c19ca32074b8122947a8ba0752c49" name="txt_3f7c19ca32074b8122947a8ba0752c49" class="linkname"></a>Seção III<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_b94ede4c7aa24425fb48d433a8bceae9"><a id="txt_b94ede4c7aa24425fb48d433a8bceae9" name="txt_b94ede4c7aa24425fb48d433a8bceae9" class="linkname"></a>Da Forma de Concessão dos Benefícios Eventuais<p style="text-align:justify" linkname="capI_art4"><a id="capI_art4" name="capI_art4" class="linkname"></a>Art. 4º Os benefícios eventuais podem ser concedidos na forma de:<p style="text-align:justify" linkname="capI_art4_incI"><a id="capI_art4_incI" name="capI_art4_incI" class="linkname"></a>I – pecúnia;<p style="text-align:justify" linkname="capI_art4_incII"><a id="capI_art4_incII" name="capI_art4_incII" class="linkname"></a>II – bens de consumo;<p style="text-align:justify" linkname="capI_art4_incIII"><a id="capI_art4_incIII" name="capI_art4_incIII" class="linkname"></a>III – passagem intraurbana e interestadual.<p style="text-align:justify" linkname="capI_art4_par"><a id="capI_art4_par" name="capI_art4_par" class="linkname"></a>Parágrafo único. As formas de concessão dos benefícios eventuais previstas neste artigo podem ser cumuladas entre si.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="capII"><a id="capII" name="capII" class="linkname"></a>CAPÍTULO II<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_2af7c085cfdd40fb55a7d5b39b9887ad"><a id="txt_2af7c085cfdd40fb55a7d5b39b9887ad" name="txt_2af7c085cfdd40fb55a7d5b39b9887ad" class="linkname"></a>DAS MODALIDADES DE BENEFÍCIOS EVENTUAIS<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_fdc57b998d154f67ef9fcf0475eace9e"><a id="txt_fdc57b998d154f67ef9fcf0475eace9e" name="txt_fdc57b998d154f67ef9fcf0475eace9e" class="linkname"></a>Seção I<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_472f273557bc4ea6c28a8c8ca070967f"><a id="txt_472f273557bc4ea6c28a8c8ca070967f" name="txt_472f273557bc4ea6c28a8c8ca070967f" class="linkname"></a>Da Classificação<p style="text-align:justify" linkname="capII_art5"><a id="capII_art5" name="capII_art5" class="linkname"></a>Art. 5º No Distrito Federal, os benefícios eventuais classificam-se nas seguintes modalidades:<p style="text-align:justify" linkname="capII_art5_incI"><a id="capII_art5_incI" name="capII_art5_incI" class="linkname"></a>I – auxílio-natalidade;<p style="text-align:justify" linkname="capII_art5_incII"><a id="capII_art5_incII" name="capII_art5_incII" class="linkname"></a>II – auxílio por morte;<p style="text-align:justify" linkname="capII_art5_incIII"><a id="capII_art5_incIII" name="capII_art5_incIII" class="linkname"></a>III – auxílio em situações de vulnerabilidade temporária;<p style="text-align:justify" linkname="capII_art5_incIV"><a id="capII_art5_incIV" name="capII_art5_incIV" class="linkname"></a>IV – auxílio em situações de desastre e calamidade pública.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_6ea935ffca984e64fc153cdf0e9370fc"><a id="txt_6ea935ffca984e64fc153cdf0e9370fc" name="txt_6ea935ffca984e64fc153cdf0e9370fc" class="linkname"></a>Seção II<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_b0bda10a081843a3648a9646e76491c7"><a id="txt_b0bda10a081843a3648a9646e76491c7" name="txt_b0bda10a081843a3648a9646e76491c7" class="linkname"></a>Do Auxílio-Natalidade<p style="text-align:justify" linkname="capII_art6"><a id="capII_art6" name="capII_art6" class="linkname"></a>Art. 6º O auxílio-natalidade é concedido em pecúnia ou em bens de consumo e é constituído de prestação temporária da assistência social destinada a auxiliar nas despesas decorrentes do nascimento de criança em situação de vulnerabilidade social.<p style="text-align:justify" linkname="capII_art6_par"><a id="capII_art6_par" name="capII_art6_par" class="linkname"></a>Parágrafo único. O auxílio-natalidade pode ser concedido cumulativamente nas formas de pecúnia e de bens de consumo, inclusive na hipótese do art. 11.<p style="text-align:justify" linkname="capII_art7"><a id="capII_art7" name="capII_art7" class="linkname"></a>Art. 7º O auxílio-natalidade é destinado à genitora e tem como objetivo:<p style="text-align:justify" linkname="capII_art7_incI"><a id="capII_art7_incI" name="capII_art7_incI" class="linkname"></a>I – atender às necessidades básicas do nascituro;<p style="text-align:justify" linkname="capII_art7_incII"><a id="capII_art7_incII" name="capII_art7_incII" class="linkname"></a>II – apoiar a mãe nos casos de natimorto e morte do recém-nascido.<p style="text-align:justify" linkname="capII_art8"><a id="capII_art8" name="capII_art8" class="linkname"></a>Art. 8º O auxílio-natalidade em pecúnia é concedido:<p style="text-align:justify" linkname="capII_art8_incI"><a id="capII_art8_incI" name="capII_art8_incI" class="linkname"></a>I – à genitora que comprove residir no Distrito Federal há pelo menos seis meses;<p style="text-align:justify" linkname="capII_art8_incII"><a id="capII_art8_incII" name="capII_art8_incII" class="linkname"></a>II – em prestação única, no valor de R$ 200,00 (duzentos reais) por nascimento.<p style="text-align:justify" linkname="capII_art9"><a id="capII_art9" name="capII_art9" class="linkname"></a>Art. 9º O auxílio-natalidade em bens de consumo é concedido à genitora que:<p style="text-align:justify" linkname="capII_art9_incI"><a id="capII_art9_incI" name="capII_art9_incI" class="linkname"></a>I – comprove residir no Distrito Federal há pelo menos seis meses;<p style="text-align:justify" linkname="capII_art9_incII"><a id="capII_art9_incII" name="capII_art9_incII" class="linkname"></a>II – se encontre em situação de rua;<p style="text-align:justify" linkname="capII_art9_incIII"><a id="capII_art9_incIII" name="capII_art9_incIII" class="linkname"></a>III – esteja em trânsito no Distrito Federal, seja usuária da assistência social e esteja atendida ou acolhida em unidade de referência do SUAS.<p style="text-align:justify" linkname="capII_art9_par"><a id="capII_art9_par" name="capII_art9_par" class="linkname"></a>Parágrafo único. Os critérios deste artigo não são necessariamente cumulativos.<p style="text-align:justify" linkname="capII_art10"><a id="capII_art10" name="capII_art10" class="linkname"></a>Art. 10. O auxílio-natalidade na forma de bens de consumo consiste no enxoval do recém-nascido, incluindo itens de vestuário e utensílios de higiene.<p style="text-align:justify" linkname="capII_art10_par"><a id="capII_art10_par" name="capII_art10_par" class="linkname"></a>Parágrafo único. O enxoval de que trata este artigo é concedido em número igual ao da ocorrência de nascimento.<p style="text-align:justify" linkname="capII_art11"><a id="capII_art11" name="capII_art11" class="linkname"></a>Art. 11. Na ocorrência de morte da mãe, a família tem direito de receber o auxílio-natalidade em bens de consumo ou em pecúnia.<p style="text-align:justify" linkname="capII_art11_par"><a id="capII_art11_par" name="capII_art11_par" class="linkname"></a>Parágrafo único. O auxílio-natalidade é concedido ao pai, a um parente até o segundo grau ou a quem detiver a guarda da criança, desde que atendidos os critérios previstos no art. 3º desta Lei.<p style="text-align:justify" linkname="capII_art12"><a id="capII_art12" name="capII_art12" class="linkname"></a>Art. 12. No caso de natimorto, a família tem direito de receber o auxílio-natalidade apenas em pecúnia, podendo receber cumulativamente o auxílio por morte em bens de consumo.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_001f7279099747191d2039ca5508b4ee"><a id="txt_001f7279099747191d2039ca5508b4ee" name="txt_001f7279099747191d2039ca5508b4ee" class="linkname"></a>Seção III<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_f791688a0cd249ccde4d5660588b752c"><a id="txt_f791688a0cd249ccde4d5660588b752c" name="txt_f791688a0cd249ccde4d5660588b752c" class="linkname"></a>Do Auxílio por Morte<p style="text-align:justify" linkname="capII_art13"><a id="capII_art13" name="capII_art13" class="linkname"></a>Art. 13. O auxílio por morte é constituído de prestação temporária em pecúnia ou em bens de consumo e é concedido em parcela única, com o objetivo de reduzir vulnerabilidades provocadas por morte de membro da família.<p style="text-align:justify" linkname="capII_art13_par"><a id="capII_art13_par" name="capII_art13_par" class="linkname"></a>Parágrafo único. O auxílio por morte pode ser concedido cumulativamente nas formas de pecúnia e de bens de consumo.<p style="text-align:justify" linkname="capII_art14"><a id="capII_art14" name="capII_art14" class="linkname"></a>Art. 14. O auxílio previsto no art. 13 tem como objetivo atender, prioritariamente:<p style="text-align:justify" linkname="capII_art14_incI"><a id="capII_art14_incI" name="capII_art14_incI" class="linkname"></a>I – às despesas de urna funerária, velório e sepultamento;<p style="text-align:justify" linkname="capII_art14_incII"><a id="capII_art14_incII" name="capII_art14_incII" class="linkname"></a>II – às necessidades urgentes da família para enfrentar vulnerabilidades advindas da morte de um de seus provedores ou membros.<p style="text-align:justify" linkname="capII_art15"><a id="capII_art15" name="capII_art15" class="linkname"></a>Art. 15. O auxílio por morte é concedido nas seguintes hipóteses:<p style="text-align:justify" linkname="capII_art15_incI"><a id="capII_art15_incI" name="capII_art15_incI" class="linkname"></a>I – falecimento de pessoa com residência comprovada no Distrito Federal;<p style="text-align:justify" linkname="capII_art15_incII"><a id="capII_art15_incII" name="capII_art15_incII" class="linkname"></a>II – falecimento de membro de família residente no Distrito Federal;<p style="text-align:justify" linkname="capII_art15_incIII"><a id="capII_art15_incIII" name="capII_art15_incIII" class="linkname"></a>III – falecimento de pessoa que venha a óbito no Distrito Federal, ainda que a família resida em outra unidade da Federação;<p style="text-align:justify" linkname="capII_art15_incIV"><a id="capII_art15_incIV" name="capII_art15_incIV" class="linkname"></a>IV – falecimento de pessoa que se encontre em situação de rua;<p style="text-align:justify" linkname="capII_art15_incV"><a id="capII_art15_incV" name="capII_art15_incV" class="linkname"></a>V – falecimento de pessoa atendida ou acolhida em unidade de referência do SUAS do Distrito Federal.<p style="text-align:justify" linkname="capII_art16"><a id="capII_art16" name="capII_art16" class="linkname"></a>Art. 16. O auxílio por morte, em pecúnia, é concedido em parcela única no valor de R$ 415,00 (quatrocentos e quinze reais).<p style="text-align:justify" linkname="capII_art17"><a id="capII_art17" name="capII_art17" class="linkname"></a>Art. 17. O auxílio por morte, sob a forma de bens de consumo, consiste na concessão de urna funerária, velório e sepultamento, incluindo transporte funerário, utilização de capela, pagamento de taxas e colocação de placa de identificação, entre outros serviços inerentes que garantam dignidade e respeito à família beneficiária, observado o seguinte:<p style="text-align:justify" linkname="capII_art17_incI"><a id="capII_art17_incI" name="capII_art17_incI" class="linkname"></a>I – é concedido ao requerente em caráter suplementar e provisório, em número igual ao da ocorrência de óbito;<p style="text-align:justify" linkname="capII_art17_incII"><a id="capII_art17_incII" name="capII_art17_incII" class="linkname"></a>II – é de pronto atendimento, cabendo ressarcimento das despesas caso não seja disponibilizado pela Administração Pública, ficando o valor limitado à importância de R$ 415,00 (quatrocentos e quinze reais).<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_0fcb300b6fa44009b7ff65993d0ea821"><a id="txt_0fcb300b6fa44009b7ff65993d0ea821" name="txt_0fcb300b6fa44009b7ff65993d0ea821" class="linkname"></a>Seção IV<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_14daa2b6a27140993558f942c7bd9f65"><a id="txt_14daa2b6a27140993558f942c7bd9f65" name="txt_14daa2b6a27140993558f942c7bd9f65" class="linkname"></a>Do Auxílio em Situação de Vulnerabilidade Temporária<p style="text-align:justify" linkname="capII_art18"><a id="capII_art18" name="capII_art18" class="linkname"></a>Art. 18. O auxílio em situação de vulnerabilidade temporária é constituído de prestação destinada a auxiliar a família ou o indivíduo, visando minimizar situações de riscos, perdas e danos e decorrentes de contingências sociais, e deve integrar-se a serviços buscando o fortalecimento dos vínculos familiares e a inserção comunitária.<p style="text-align:justify" linkname="capII_art19"><a id="capII_art19" name="capII_art19" class="linkname"></a>Art. 19. O auxílio previsto no art. 18 é concedido na forma de pecúnia ou em bens de consumo, em caráter provisório, sendo seu valor fixado de acordo com o grau de complexidade da situação de vulnerabilidade e risco pessoal das famílias e indivíduos.<p style="text-align:justify" linkname="capII_art19_par"><a id="capII_art19_par" name="capII_art19_par" class="linkname"></a>Parágrafo único. O auxílio em situação de vulnerabilidade temporária pode ser concedido cumulativamente nas formas de pecúnia e de bens de consumo, sendo que o valor em pecúnia é de até R$ 408,00 (quatrocentos e oito reais).<p style="text-align:justify" linkname="capII_art20"><a id="capII_art20" name="capII_art20" class="linkname"></a>Art. 20. A situação de vulnerabilidade temporária caracteriza-se pelo advento de riscos, perdas e danos à integridade pessoal e familiar, assim entendidos:<p style="text-align:justify" linkname="capII_art20_incI"><a id="capII_art20_incI" name="capII_art20_incI" class="linkname"></a>I – riscos: ameaça de sérios padecimentos;<p style="text-align:justify" linkname="capII_art20_incII"><a id="capII_art20_incII" name="capII_art20_incII" class="linkname"></a>II – perdas: privação de bens e de segurança material;<p style="text-align:justify" linkname="capII_art20_incIII"><a id="capII_art20_incIII" name="capII_art20_incIII" class="linkname"></a>III – danos: agravos sociais e ofensa.<p style="text-align:justify" linkname="capII_art20_par"><a id="capII_art20_par" name="capII_art20_par" class="linkname"></a>Parágrafo único. Os riscos, perdas e danos podem decorrer de:<p style="text-align:justify" linkname="capII_art20_par_incI"><a id="capII_art20_par_incI" name="capII_art20_par_incI" class="linkname"></a>I – ausência de documentação;<p style="text-align:justify" linkname="capII_art20_par_incII"><a id="capII_art20_par_incII" name="capII_art20_par_incII" class="linkname"></a>II – necessidade de mobilidade intraurbana para garantia de acesso aos serviços socioassistenciais;<p style="text-align:justify" linkname="capII_art20_par_incIII"><a id="capII_art20_par_incIII" name="capII_art20_par_incIII" class="linkname"></a>III – necessidade de passagem para outra unidade da Federação, com vistas a garantir a convivência familiar e comunitária;<p style="text-align:justify" linkname="capII_art20_par_incIV"><a id="capII_art20_par_incIV" name="capII_art20_par_incIV" class="linkname"></a>IV – ocorrência de violência física ou psicológica no âmbito familiar ou ofensa à integridade física do indivíduo;<p style="text-align:justify" linkname="capII_art20_par_incV"><a id="capII_art20_par_incV" name="capII_art20_par_incV" class="linkname"></a>V – (VETADO).<p style="text-align:justify" linkname="capII_art20_par_incVI"><a id="capII_art20_par_incVI" name="capII_art20_par_incVI" class="linkname"></a>VI – perda circunstancial ocasionada pela ruptura de vínculos familiares e comunitários;<p style="text-align:justify" linkname="capII_art20_par_incVII"><a id="capII_art20_par_incVII" name="capII_art20_par_incVII" class="linkname"></a>VII – processo de reintegração familiar e comunitária de crianças, adolescentes e famílias que se encontram em cumprimento de medida protetiva;<p style="text-align:justify" linkname="capII_art20_par_incVIII"><a id="capII_art20_par_incVIII" name="capII_art20_par_incVIII" class="linkname"></a>VIII – ausência ou limitação de autonomia, de capacidade, de condições ou de meios próprios da família para prover as necessidades alimentares de seus membros;<p style="text-align:justify" linkname="capII_art20_par_incIX"><a id="capII_art20_par_incIX" name="capII_art20_par_incIX" class="linkname"></a>IX – outras situações sociais que comprometam a sobrevivência familiar e comunitária.<p style="text-align:justify" linkname="capII_art21"><a id="capII_art21" name="capII_art21" class="linkname"></a>Art. 21. O auxílio é concedido em até seis parcelas por ano, considerado o caráter temporário e eventual do benefício, devendo ser verificada a permanência da situação de vulnerabilidade.<p style="text-align:justify" linkname="capII_art22"><a id="capII_art22" name="capII_art22" class="linkname"></a>Art. 22. Na seleção de famílias e indivíduos, para fins de concessão deste auxílio, devem ser observados os seguintes fatores:<p style="text-align:justify" linkname="capII_art22_incI"><a id="capII_art22_incI" name="capII_art22_incI" class="linkname"></a>I – indicativos de violência contra criança, adolescente, jovem, adulto ou idoso, como trabalho infantil, conflito com a lei, abuso e exploração sexual, negligência, isolamento, maus-tratos; violência por questões de gênero; e discriminação racial e sexual;<p style="text-align:justify" linkname="capII_art22_incII"><a id="capII_art22_incII" name="capII_art22_incII" class="linkname"></a>II – (VETADO).<p style="text-align:justify" linkname="capII_art22_incIII"><a id="capII_art22_incIII" name="capII_art22_incIII" class="linkname"></a>III – situação de isolamento de pessoas idosas ou pessoas com deficiência;<p style="text-align:justify" linkname="capII_art22_incIV"><a id="capII_art22_incIV" name="capII_art22_incIV" class="linkname"></a>IV – situação de extrema pobreza;<p style="text-align:justify" linkname="capII_art22_incV"><a id="capII_art22_incV" name="capII_art22_incV" class="linkname"></a>V – indicativos de rupturas familiares.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_1c32332724c44170329ebc34edf48db2"><a id="txt_1c32332724c44170329ebc34edf48db2" name="txt_1c32332724c44170329ebc34edf48db2" class="linkname"></a>Seção V<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_6c8ddc0027af4f7ae9351638d41c4ee9"><a id="txt_6c8ddc0027af4f7ae9351638d41c4ee9" name="txt_6c8ddc0027af4f7ae9351638d41c4ee9" class="linkname"></a>Do Auxílio em Situação de Desastre ou Calamidade Pública<p style="text-align:justify" linkname="capII_art23"><a id="capII_art23" name="capII_art23" class="linkname"></a>Art. 23. O auxílio em situação de desastre ou calamidade pública é provisão suplementar e provisória de assistência social prestada para suprir a família e o indivíduo dos meios necessários à sobrevivência, durante as situações calamitosas, com o objetivo de assegurar a dignidade e a reconstrução da autonomia familiar e pessoal.<p style="text-align:justify" linkname="capII_art24"><a id="capII_art24" name="capII_art24" class="linkname"></a>Art. 24. As situações de calamidade pública e desastre caracterizam-se por eventos anormais, decorrentes de baixas ou altas temperaturas, tempestades, enchentes, inversão térmica, desabamentos, incêndios, epidemias, os quais causem sérios danos à comunidade afetada, inclusive à segurança ou à vida de seus integrantes, e outras situações imprevistas ou decorrentes de caso fortuito.<p style="text-align:justify" linkname="capII_art25"><a id="capII_art25" name="capII_art25" class="linkname"></a>Art. 25. O auxílio é concedido na forma de pecúnia e bens de consumo, em caráter provisório e suplementar, sendo seu valor fixado de acordo com o grau de complexidade do atendimento de vulnerabilidade e risco pessoal das famílias e indivíduos afetados.<p style="text-align:justify" linkname="capII_art25_par1"><a id="capII_art25_par1" name="capII_art25_par1" class="linkname"></a>§ 1º O requerente pode solicitar cumulativamente a concessão das duas formas dos benefícios.<p style="text-align:justify" linkname="capII_art25_par2"><a id="capII_art25_par2" name="capII_art25_par2" class="linkname"></a>§ 2º O atendimento na forma de pecúnia e de bens de consumo é concedido de pronto, visando à redução dos danos causados pela situação calamitosa.<p style="text-align:justify" linkname="capII_art25_par3"><a id="capII_art25_par3" name="capII_art25_par3" class="linkname"></a>§ 3º O valor em pecúnia é de R$ 408,00 (quatrocentos e oito reais).<p style="text-align:justify" linkname="capII_art26"><a id="capII_art26" name="capII_art26" class="linkname"></a>Art. 26. O auxílio é concedido às famílias e aos indivíduos vítimas de situações de desastre ou de calamidade pública que se encontrem impossibilitados de arcar sozinhos com o restabelecimento de sua dignidade.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="capIII" class=""><a id="capIII" name="capIII" class="linkname"></a>CAPÍTULO III&nbsp;<a href="/sinj/Norma/c0384360c5b14f7282723ff679a6b97c/Lei_6657_2020.html#art2_incII">(Legislação Correlata - Lei 6657 de 17/08/2020)</a><p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_860ee2748e9f4c3927cf7d48470e9c9b"><a id="txt_860ee2748e9f4c3927cf7d48470e9c9b" name="txt_860ee2748e9f4c3927cf7d48470e9c9b" class="linkname"></a>DO BENEFÍCIO EXCEPCIONAL<p style="text-align:justify" linkname="capIII_art27" class=""><a id="capIII_art27" name="capIII_art27" class="linkname"></a>Art. 27. O auxílio em razão do desabrigo temporário é prestação excepcional no âmbito da assistência social, subsidiária à Política de Habitação, decorrente da existência de situações de vulnerabilidade temporária ocasionadas pela falta ou pela inadequação da moradia, sendo destinado, exclusivamente, ao pagamento de aluguel de imóvel residencial.&nbsp;<a href="/sinj/Norma/01971dfb0bf34652a469e930ad27dc26/Lei_6937_2021.html#art5_incIV">(Legislação Correlata - Lei 6937 de 05/08/2021)</a><p style="text-align:justify" linkname="capIII_art28"><a id="capIII_art28" name="capIII_art28" class="linkname"></a>Art. 28. Para efeito desta Lei, o auxílio em razão do desabrigo temporário é concedido a pessoas ou famílias privadas da respectiva moradia em decorrência de um dos seguintes adventos:<p style="text-align:justify" linkname="capIII_art28_incI"><a id="capIII_art28_incI" name="capIII_art28_incI" class="linkname"></a>I – catástrofe, desastre ou calamidade pública;<p style="text-align:justify" linkname="capIII_art28_incII"><a id="capIII_art28_incII" name="capIII_art28_incII" class="linkname"></a>II – situações de risco geológico;<p style="text-align:justify" linkname="capIII_art28_incIII"><a id="capIII_art28_incIII" name="capIII_art28_incIII" class="linkname"></a>III – situações de risco à salubridade;<p style="text-align:justify" linkname="capIII_art28_incIV"><a id="capIII_art28_incIV" name="capIII_art28_incIV" class="linkname"></a>IV – desocupação de áreas de interesse ambiental;<p style="text-align:justify" linkname="capIII_art28_incV"><a id="capIII_art28_incV" name="capIII_art28_incV" class="linkname"></a>V – processos de realocação, remoção ou reassentamento;<p style="text-align:justify" linkname="capIII_art28_incVI"><a id="capIII_art28_incVI" name="capIII_art28_incVI" class="linkname"></a>VI – risco pessoal e eventos de risco, em casos excepcionais;<p style="text-align:justify" linkname="capIII_art28_incVII"><a id="capIII_art28_incVII" name="capIII_art28_incVII" class="linkname"></a>VII – situações de rua.<p style="text-align:justify" linkname="capIII_art28_par1"><a id="capIII_art28_par1" name="capIII_art28_par1" class="linkname"></a>§ 1º O benefício é concedido nas situações descritas nos incisos do caput, em prestações mensais em pecúnia, no valor de até R$ 600,00 (seiscentos reais), por até seis meses, podendo ser prorrogado por igual período.<p style="text-align:justify" linkname="capIII_art28_par2"><a id="capIII_art28_par2" name="capIII_art28_par2" class="linkname"></a>§ 2º Somente profissional da assistência social pode autorizar a concessão de benefício excepcional, podendo levar em consideração outras situações de vulnerabilidade, além dos critérios de renda previstos no art. 3º desta Lei.<p style="text-align:justify" linkname="capIII_art29"><a id="capIII_art29" name="capIII_art29" class="linkname"></a>Art. 29. O auxílio em razão de desabrigo temporário, em caso de haver necessidade de deslocamento compulsório de famílias e indivíduos que ocupam, há mais de cinco anos, assentamentos precários que estejam incluídos em programas de urbanização e regularização habitacional e fundiária, pode prorrogar-se por até quarenta e oito meses.<p style="text-align:justify" linkname="capIII_art29_par1"><a id="capIII_art29_par1" name="capIII_art29_par1" class="linkname"></a>§ 1º A concessão do auxílio está condicionada à habilitação do beneficiário na Política Habitacional do Distrito Federal e ao cumprimento de seus requisitos legais.<p style="text-align:justify" linkname="capIII_art29_par2"><a id="capIII_art29_par2" name="capIII_art29_par2" class="linkname"></a>§ 2º Na hipótese prevista neste artigo, a concessão do benefício excepcional é autorizada por profissional da assistência social.<p style="text-align:justify" linkname="capIII_art30"><a id="capIII_art30" name="capIII_art30" class="linkname"></a>Art. 30. São excluídos do recebimento do auxílio em razão do desabrigo temporário os beneficiários que retornem a situações de ocupação irregular de terras públicas ou privadas, bem como aqueles que empreguem os valores recebidos para fins diversos do pagamento de aluguel residencial.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="capIV"><a id="capIV" name="capIV" class="linkname"></a>CAPÍTULO IV<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_f6daa7609a8547b15b3c4002ccdb5afb"><a id="txt_f6daa7609a8547b15b3c4002ccdb5afb" name="txt_f6daa7609a8547b15b3c4002ccdb5afb" class="linkname"></a>DAS DISPOSIÇÕES FINAIS<p style="text-align:justify" linkname="capIV_art31"><a id="capIV_art31" name="capIV_art31" class="linkname"></a>Art. 31. É vedada a concessão de benefícios eventuais a mais de um membro da mesma família, em virtude do mesmo advento, sob pena de cancelamento do benefício.<p style="text-align:justify" linkname="capIV_art32"><a id="capIV_art32" name="capIV_art32" class="linkname"></a>Art. 32. É excluído do recebimento de benefícios eventuais o beneficiário que preste declaração falsa ou use meios ilícitos para obtenção de vantagens.<p style="text-align:justify" linkname="capIV_art33"><a id="capIV_art33" name="capIV_art33" class="linkname"></a>Art. 33. Pode ser suspensa, a qualquer tempo, a concessão de benefícios eventuais, mediante manifestação circunstanciada e fundamentada do órgão responsável.<p style="text-align:justify" linkname="capIV_art34"><a id="capIV_art34" name="capIV_art34" class="linkname"></a>Art. 34. As despesas decorrentes da execução desta Lei correm à conta de dotações orçamentárias do Fundo de Assistência Social do Distrito Federal.<p style="text-align:justify" linkname="capIV_art34_par"><a id="capIV_art34_par" name="capIV_art34_par" class="linkname"></a>Parágrafo único. Os recursos destinados ao pagamento de benefícios excepcionais são disponibilizados pelo Tesouro do Distrito Federal, sem prejuízo das ações continuadas da assistência social e dos benefícios eventuais.<p style="text-align:justify" linkname="capIV_art35"><a id="capIV_art35" name="capIV_art35" class="linkname"></a>Art. 35. Esta Lei entra em vigor na data de sua publicação.<p style="text-align:justify" linkname="capIV_art36"><a id="capIV_art36" name="capIV_art36" class="linkname"></a>Art. 36. Revogam-se as disposições em contrário.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_01307f984a564f821c41338639af83b6"><a id="txt_01307f984a564f821c41338639af83b6" name="txt_01307f984a564f821c41338639af83b6" class="linkname"></a>Brasília, 04 de setembro de 2013<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_c2a64e4057a84a5143d2989707e5c4af"><a id="txt_c2a64e4057a84a5143d2989707e5c4af" name="txt_c2a64e4057a84a5143d2989707e5c4af" class="linkname"></a>125º da República e 54º de Brasília<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_60285283240e4c6287223086ac37c69f"><a id="txt_60285283240e4c6287223086ac37c69f" name="txt_60285283240e4c6287223086ac37c69f" class="linkname"></a>AGNELO QUEIROZ<p style="text-align:right"><span style="color:#FF0000"><a href=http://www.sinj.df.gov.br/sinj/BaixarArquivoDiario.aspx?id_file=95996656-710b-3197-b0a2-859bd3095f3c target='_blank'>Este texto não substitui o publicado no DODF nº 185, seção 1 de 05/09/2013<span id='paginaEColuna'> p. 1, col. 1<a/></span></div>
+        </div>
+
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-20776101-1', 'auto');
+            ga('create', 'UA-90051523-1', 'auto', 'brlightTracker');
+            ga('send', 'pageview');
+            ga('brlightTracker.send', 'pageview');
+        </script>
+    </body>
+
+    </html>
