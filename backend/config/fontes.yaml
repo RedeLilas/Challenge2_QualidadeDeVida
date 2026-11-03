@@ -117,3 +117,10 @@ normas:
     numero: "35191"
     ano: 2014
     url: "https://www.sinj.df.gov.br/sinj/Norma/76276/Decreto_35191_21_02_2014.html"
+  - id: portaria-sm-df-49-2026
+    urn: "urn:lex:br;distrito.federal:distrital:portaria:2026-04-10;49"
+    titulo: "Portaria nº 49, de 10 de abril de 2026, da Secretaria da Mulher do DF (procedimentos do Aluguel Social)"
+    citacao: "Portaria SMDF 49/2026"
+    numero: "49"
+    ano: 2026
+    url: "https://www.sinj.df.gov.br/sinj/Norma/14ff3abeae1a49589c3af566f3a802c1/Portaria_49_10_04_2026.html"
