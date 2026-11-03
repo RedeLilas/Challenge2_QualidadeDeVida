@@ -1,0 +1,13 @@
+# Segredos
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Sistema
+.DS_Store

@@ -1,0 +1,60 @@
+schema: spec-driven
+
+context: |
+  Language: pt-BR
+  All artifacts must be written in pt-BR.
+  Keep OpenSpec structural headings and SHALL/MUST/WHEN/THEN keywords in English.
+
+  Projeto: Rede Lilás (Challenge 2, Mentes em Ação: Big Idea "Qualidade de Vida").
+  Apoia mulheres em situação ou risco de violência doméstica a reconhecer violações
+  de direitos, avaliar o nível de risco e encontrar benefícios e serviços de acolhimento.
+  Usuária primária: a própria mulher (persona Juliana). Secundária: pessoa de confiança
+  que ajuda outra (persona Camila / modo "estou ajudando outra pessoa").
+  Ameaça considerada no desenho: o agressor pode ter acesso ao celular.
+
+  Escopo: Distrito Federal. Legislação federal (Lei Maria da Penha, Fonar, benefícios
+  federais) + normas distritais aplicáveis. Rede de serviços apenas do DF, localizada
+  por Região Administrativa (RA) ou CEP (o DF não tem municípios). Fora do DF:
+  orientação jurídica e triagem funcionam; o mapa de serviços indica o Ligue 180.
+
+  Stack: backend Python (FastAPI, uv, pytest) servindo uma PWA em HTML/CSS/JS puros.
+  LLM local via Ollama (testes) e DeepSeek (produção), ambos pela API compatível com
+  OpenAI, trocados apenas por variáveis de ambiente. Deploy considerado desde a S2
+  (container Docker único).
+
+  Validação: sem entrevistas e sem usuárias reais. Apenas casos fictícios; gabarito
+  escrito pela equipe com fonte citada; LLM juiz com rubrica + revisão em dupla de
+  20% da amostra; usabilidade (SUS) com colegas na S7.
+
+  Calendário: S1 26-30/10, S2 02-06/11, S3 09-13/11, S4 16-20/11 (20/11 feriado),
+  S5 23-27/11, S6 30/11-04/12, S7 07-11/12 (2026). A equipe trabalha só às terças,
+  quintas e sextas. Plano semanal em ROADMAP.md (raiz do repositório).
+
+  As specs em openspec/specs/ descrevem o comportamento-alvo definido na Semana 1;
+  o andamento da implementação é acompanhado pelas mudanças e pelo ROADMAP.md.
+
+rules:
+  proposal:
+    - Nomear a mudança com o prefixo da semana (s2- a s7-) e citar a métrica do ROADMAP que ela afeta
+    - Listar o impacto em privacidade (LGPD) e na segurança da usuária
+    - Dizer explicitamente o que fica fora da mudança
+  specs:
+    - Todo requisito tem ao menos um cenário WHEN/THEN verificável por teste automatizado ou checagem objetiva
+    - Respostas jurídicas e de benefícios citam norma, artigo e data de verificação
+    - Risco imediato SHALL levar à orientação de ligar 190 antes de qualquer outra resposta, por regra determinística, sem LLM
+  design:
+    - Nenhum dado pessoal (nome, CPF, relato) é enviado a serviço externo sem decisão registrada no design
+    - Registrar alternativas consideradas e o motivo da escolha
+  tasks:
+    - Cada tarefa cabe em um dia de trabalho (terça, quinta ou sexta)
+    - Cada tarefa termina com um teste ou verificação objetiva
+    - Não atribuir tarefas a pessoas; a equipe distribui na terça
+
+operations:
+  apply:
+    guidance:
+      - Rodar a suíte de risco/190 antes de concluir qualquer mudança
+      - Nunca usar dados reais de vítimas em testes, fixtures ou exemplos
+  archive:
+    guidance:
+      - Atualizar o status da mudança no ROADMAP.md ao arquivar
