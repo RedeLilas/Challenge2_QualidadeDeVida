@@ -1,0 +1,119 @@
+# Normas da base legal. Cada entrada aponta para o texto compilado oficial.
+# A URN segue o padrão LexML e é a chave estável da norma.
+# Normas do DF vêm do SINJ-DF. "artigos" (opcional) restringe a coleta a esses artigos.
+normas:
+  - id: lei-11340-2006
+    urn: "urn:lex:br:federal:lei:2006-08-07;11340"
+    titulo: "Lei nº 11.340, de 7 de agosto de 2006 (Lei Maria da Penha)"
+    citacao: "Lei 11.340/2006"
+    numero: "11340"
+    ano: 2006
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm"
+
+  # Eixo 1: violência doméstica, risco e crimes
+  - id: lei-14149-2021
+    urn: "urn:lex:br:federal:lei:2021-05-05;14149"
+    titulo: "Lei nº 14.149, de 5 de maio de 2021 (Formulário Nacional de Avaliação de Risco)"
+    citacao: "Lei 14.149/2021"
+    numero: "14149"
+    ano: 2021
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14149.htm"
+  - id: decreto-lei-2848-1940
+    urn: "urn:lex:br:federal:decreto.lei:1940-12-07;2848"
+    titulo: "Decreto-Lei nº 2.848, de 7 de dezembro de 1940 (Código Penal)"
+    citacao: "Código Penal"
+    numero: "2848"
+    ano: 1940
+    url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm"
+    # Só os crimes ligados à violência doméstica: lesão corporal, ameaça, perseguição e violência psicológica.
+    artigos: ["129", "147", "147-A", "147-B"]
+
+  # Eixo 2: benefícios sociais e autonomia financeira
+  - id: lei-14601-2023
+    urn: "urn:lex:br:federal:lei:2023-06-19;14601"
+    titulo: "Lei nº 14.601, de 19 de junho de 2023 (Programa Bolsa Família)"
+    citacao: "Lei 14.601/2023"
+    numero: "14601"
+    ano: 2023
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14601.htm"
+  - id: lei-8742-1993
+    urn: "urn:lex:br:federal:lei:1993-12-07;8742"
+    titulo: "Lei nº 8.742, de 7 de dezembro de 1993 (Lei Orgânica da Assistência Social)"
+    citacao: "Lei 8.742/1993 (LOAS)"
+    numero: "8742"
+    ano: 1993
+    url: "https://www.planalto.gov.br/ccivil_03/leis/l8742compilado.htm"
+
+  # Eixo 3: saúde
+  - id: lei-12845-2013
+    urn: "urn:lex:br:federal:lei:2013-08-01;12845"
+    titulo: "Lei nº 12.845, de 1º de agosto de 2013 (Lei do Minuto Seguinte)"
+    citacao: "Lei 12.845/2013"
+    numero: "12845"
+    ano: 2013
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12845.htm"
+  - id: lei-14737-2023
+    urn: "urn:lex:br:federal:lei:2023-11-27;14737"
+    titulo: "Lei nº 14.737, de 27 de novembro de 2023 (direito a acompanhante nos serviços de saúde)"
+    citacao: "Lei 14.737/2023"
+    numero: "14737"
+    ano: 2023
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14737.htm"
+
+  # Eixo 4: Distrito Federal (texto consolidado do SINJ-DF; o parser do Planalto também lê essas páginas)
+  - id: lei-df-7009-2021
+    urn: "urn:lex:br;distrito.federal:distrital:lei:2021-12-17;7009"
+    titulo: "Lei Distrital nº 7.009, de 17 de dezembro de 2021 (Programa Cartão Prato Cheio)"
+    citacao: "Lei Distrital 7.009/2021"
+    numero: "7009"
+    ano: 2021
+    url: "https://www.sinj.df.gov.br/sinj/Norma/31975f014e7e4c8f82e0848abc555dd4/Lei_7009_17_12_2021.html"
+  - id: decreto-df-42873-2021
+    urn: "urn:lex:br;distrito.federal:distrital:decreto:2021-12-29;42873"
+    titulo: "Decreto Distrital nº 42.873, de 29 de dezembro de 2021 (regulamenta o Cartão Prato Cheio)"
+    citacao: "Decreto Distrital 42.873/2021"
+    numero: "42873"
+    ano: 2021
+    url: "https://www.sinj.df.gov.br/sinj/Norma/7535b22c3f9549fc813f7440a7aa1311/Decreto_42873_29_12_2021.html"
+  - id: lei-df-6938-2021
+    urn: "urn:lex:br;distrito.federal:distrital:lei:2021-08-10;6938"
+    titulo: "Lei Distrital nº 6.938, de 10 de agosto de 2021 (Programa Cartão Gás)"
+    citacao: "Lei Distrital 6.938/2021"
+    numero: "6938"
+    ano: 2021
+    url: "https://www.sinj.df.gov.br/sinj/Norma/73a4d82907db4ab98fbce2982adcf5a8/Lei_6938_2021.html"
+  - id: decreto-df-42376-2021
+    urn: "urn:lex:br;distrito.federal:distrital:decreto:2021-08-10;42376"
+    titulo: "Decreto Distrital nº 42.376, de 10 de agosto de 2021 (regulamenta o Cartão Gás)"
+    citacao: "Decreto Distrital 42.376/2021"
+    numero: "42376"
+    ano: 2021
+    url: "https://www.sinj.df.gov.br/sinj/Norma/e9129c13d17449089ad01203b731f2be/Decreto_42376_10_08_2021.html"
+  - id: lei-df-6623-2020
+    urn: "urn:lex:br;distrito.federal:distrital:lei:2020-06-25;6623"
+    titulo: "Lei Distrital nº 6.623, de 25 de junho de 2020 (Aluguel Social para mulheres vítimas de violência doméstica)"
+    citacao: "Lei Distrital 6.623/2020"
+    numero: "6623"
+    ano: 2020
+    url: "https://www.sinj.df.gov.br/sinj/Norma/8f17787cca524d5da839b613d96d9164/Lei_6623_25_06_2020.html"
+  - id: decreto-df-45989-2024
+    urn: "urn:lex:br;distrito.federal:distrital:decreto:2024-07-09;45989"
+    titulo: "Decreto Distrital nº 45.989, de 9 de julho de 2024 (regulamenta o Aluguel Social)"
+    citacao: "Decreto Distrital 45.989/2024"
+    numero: "45989"
+    ano: 2024
+    url: "https://www.sinj.df.gov.br/sinj/Norma/e42be6892a0243eaa9814a5063f16d0e/Decreto_45989_09_07_2024.html"
+  - id: lei-df-5165-2013
+    urn: "urn:lex:br;distrito.federal:distrital:lei:2013-09-04;5165"
+    titulo: "Lei Distrital nº 5.165, de 4 de setembro de 2013 (benefícios eventuais da assistência social no DF)"
+    citacao: "Lei Distrital 5.165/2013"
+    numero: "5165"
+    ano: 2013
+    url: "https://www.sinj.df.gov.br/sinj/Norma/74987/Lei_5165_2013.html"
+  - id: decreto-df-35191-2014
+    urn: "urn:lex:br;distrito.federal:distrital:decreto:2014-02-21;35191"
+    titulo: "Decreto Distrital nº 35.191, de 21 de fevereiro de 2014 (regulamenta os benefícios eventuais no DF)"
+    citacao: "Decreto Distrital 35.191/2014"
+    numero: "35191"
+    ano: 2014
+    url: "https://www.sinj.df.gov.br/sinj/Norma/76276/Decreto_35191_21_02_2014.html"

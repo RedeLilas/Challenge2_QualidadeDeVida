@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+    <html>
+
+    <head id="Head1"><meta content="IE=Edge" http-equiv="X-UA-Compatible"/><meta content="pt-br" http-equiv="Content-Language"/><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/><title>
+	
+            Decreto 35191 de 21/02/2014
+        
+</title><meta name="keywords" content="Decreto 35191 de 21/02/2014,sinj,distrito,federal,df"/><meta name="description" content="Regulamenta a Lei nº 5.165, de 04 de setembro de 2013, que dispõe sobre os benefícios eventuais da Política de Assistência Social do Distrito Federal e dá outras providências."/><meta content="index,follow" name="robots"/><meta content="index,follow" name="googlebot"/><script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js"></script>
+
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_norma.js?4.4.00134"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" language="javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/ckeditor/adapters/jquery.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.form.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.cookie.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/on_error.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/liblight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktrace.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.ajaxLight.js?3.2.00001"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.autocompleteLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jMenu.jquery.min.js"></script>
+        <script type="text/javascript"
+            src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/jquery.modalLight.js?3.2.00001"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/login.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/funcoes_sinj.js?3.2.00001"
+            charset="utf-8"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/sessao_sinj.js?3.2.00001"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/stacktable.js"></script>
+
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/platform.js"></script>
+        <script type="text/javascript" src="http://www.sinj.df.gov.br/sinjpadrao/Scripts/tooltip.js"></script>
+
+        <script type="text/javascript" language="javascript">
+            function Print() {
+                $('div.control').hide();
+                window.print();
+                $('div.control').show();
+            }
+            function exibirAlteracoes(el) {
+                if (el.getAttribute('refresh')) {
+                    location.reload();
+                }
+                else {
+
+                    // NOTE: Essa funcionalidade faz com o que o texto alterado "se transforme" 
+                    // em compilado (basicamente remove informações de vide), mas define 
+                    // um comportamento diferenciado para para os parágrafos que contiverem 
+                    // vides com os seguintes textos no link "revogado pelo(a)" ou 
+                    // "declarado(a) inconstitucional pelo(a)". By Questor
+                    
+                    var regex = undefined;
+                    regex = new RegExp(/Revogado.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Revogado")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    regex = new RegExp(/Inconstitucional.*?pelo\(a\)/);
+                    $('p[replaced_by]:contains("Inconstitucional")').each(function (k, p) {
+                        if (regex.test($(p).text())) {
+                            var aLinkVide = $('a.link_vide', $(p));
+                            if (aLinkVide.length > 0) {
+                                var aTexto = $(aLinkVide[aLinkVide.length - 1]).text();
+                                if (regex.test(aTexto)) {
+                                    var ds = generateDescriptionToParagraph($(p).text());
+                                    $(p).text(ds + ' ');
+                                    $(aLinkVide[aLinkVide.length - 1]).appendTo($(p));
+                                    $(p).removeAttr('replaced_by');
+                                }
+                            }
+                        }
+                    });
+                    $('p[replaced_by]').remove();
+                    $(el).attr('refresh', '1');
+                    $(el).text('Exibir Alterações');
+                }
+            }
+
+            //Verifica os links de LECO, ordena e insere o link 'exibir mais...' e 'exibir menos...' caso exista mais de 3 links de LECO
+            function verificarLinks() {
+                var aP = $('#div_texto > p');
+                var i = 0;
+                var length = aP.length;
+                var pAfter = null;
+                var aOrder = [];
+                for (; i < length; i++) {
+                    if ($('a[href]', aP[i]).length == 1 && $('a[href]', aP[i]).text().toLowerCase().indexOf('legislação correlata') == 0) {
+                        $('a[href]', aP[i]).attr('show', '1').attr('leco', 'leco');
+                        aOrder.push({ 'text': $('a[href]', aP[i]).text(), 'href': $('a[href]', aP[i]).attr('href') });
+                        if (i >= 3) {
+                            $('a[href]', aP[i]).attr('show', '0');
+                            pAfter = aP[i];
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                }
+                aOrder.sort(function (a1, a2) {
+                    return a1.text > a2.text ? 1 : a1.text < a2.text ? -1 : 0;
+                });
+                $('#div_texto a[leco="leco"]').each(function (i, o) {
+                    o.innerText = aOrder[i].text;
+                    o.href = aOrder[i].href;
+                });
+                if (pAfter != null && $('a[show="0"]').length > 3) {
+                    $('a[show="0"]').closest('p').hide();
+                    $('<p id="p_show"><a href="javascript:void(0);" onclick="exibirLinks()">Exibir mais...</a></p>').insertAfter($(pAfter));
+                    $('<p id="p_hide" style="display:none"><a href="javascript:void(0);" onclick="esconderLinks()">Exibir menos...</a></p>').insertAfter($(pAfter));
+                }
+            }
+            function exibirLinks() {
+                $('a[show="0"]').closest('p').show();
+                $('#p_hide').show();
+                $('#p_show').hide();
+            }
+            function esconderLinks() {
+                $('a[show="0"]').closest('p').hide();
+                $('#p_hide').hide();
+                $('#p_show').show();
+            }
+
+            function generateDescriptionToParagraph(text) {
+                var ds = '';
+                text = $.trim(text);
+                if (text != "") {
+                    var palavras = text.split(' ');
+                    if (palavras[0] == 'ANEXO' || palavras[0] == 'TÍTULO' || palavras[0] == 'CAPÍTULO' || palavras[0] == 'Art.' || (palavras[0] == 'Parágrafo' && palavras[1] == 'Único') || palavras[0] == '§') {
+                        ds = palavras[0] + ' ' + palavras[1];
+                    }
+                    else if (ehInciso(palavras[0]) || ehAlinea(palavras[0]) || ehNum(palavras[0])) {
+                        ds = palavras[0];
+                    }
+                    else {
+                        ds = "...";
+                    }
+                }
+                return ds;
+            }
+
+            function ehInciso(termo) {
+                var lastIndex = termo.indexOf("-");
+                if (lastIndex > 0) {
+                    termo = termo.substring(0, lastIndex);
+                }
+                return termo.match(/^[IVXLCDM]+$/i);
+            }
+
+            function ehAlinea(termo) {
+                var lastIndex = termo.indexOf(")");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return termo.match(/[a-z]/i);
+                }
+                return false;
+            }
+
+            function ehNum(termo) {
+                var lastIndex = termo.indexOf(".");
+                if (lastIndex < 0) {
+                    return false;
+                }
+                if (termo.length == (lastIndex + 1)) {
+                    termo = termo.substring(0, lastIndex);
+                    return isInt(termo);
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+
+                var urlPath = window.location.pathname;
+                var urlSplited = urlPath.split("/");
+                var numeroNorma = urlSplited[3];
+
+                //Pegar o texto do h1
+                var elementoh1 = $('#div_texto > h1')[0].textContent;
+                //Adicionar a tag 'a'
+                $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                //Adicionar o link
+                $("#div_texto h1 a").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                //--------------------------------------------------------------------------------------
+
+
+
+
+                // var paragrafo = $('p');
+                // for (var i = 0; i < paragrafo.length; i++) {
+                //     if (paragrafo[i].innerText.match(/Os anexos constam no DODF/g)) {
+    
+                //         var spanParagrafo = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+    
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span>" + spanParagrafo + "<span>" + "</a></form>";
+    
+                //     }
+
+                //     if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //         var span = paragrafo[i].textContent;
+                //         var form_consultar_diario = "\"form_consultar_diario\"";
+                //         var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                //         var arraySpan = $("p > span");
+                //         $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                //     }
+                // }
+                // if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                //     $('#paginaEColuna').hide();
+                // }
+                //--------------------------------------------------------------------------------------
+
+
+
+                if ($('#div_erro').length > 0) {
+                    $('#div_norma').hide();
+                }
+                else {
+                    if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                        $('.compilado').hide();
+                    }
+                    verificarLinks();
+                }
+            });
+
+
+            var normaOVEmFunction = new normaOVEmFunction();
+            
+                //A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378
+
+
+            if (normaOVEmFunction != true) {
+
+                    var urlPath = window.location.pathname;
+                    var urlSplited = urlPath.split("/");
+                    var numeroNorma = urlSplited[3];
+
+                    //Pegar o texto do h1
+                    var elementoh1 = $('#div_texto > h1')[0].textContent;
+                    //Adicionar a tag 'a'
+                    $('#div_texto > h1')[0].innerHTML = '<a>' + elementoh1 + '</a>';
+
+                    //Adicionar o link
+                    $("#div_texto h1").attr('href', '/' + urlSplited[1] + '/DetalhesDeNorma.aspx?id_norma=' + numeroNorma).attr("target", '_blank');
+                    //--------------------------------------------------------------------------------------
+
+                //consultarDiarioAspErro
+                    var paragrafo = $('p');
+
+                    for (var i = 0; i < paragrafo.length; i++) {
+
+                        if (paragrafo[i].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                            var span = paragrafo[i].textContent;
+                            var form_consultar_diario = "\"form_consultar_diario\"";
+                            var _form = "<form id='form_consultar_diario' name='form_consultar_diario' method='post' onsubmit='javascript: return consultarDiarioHTML(" + form_consultar_diario + ")\'>";
+                            var _button = "<a href='javascript: void(0)' onclick='javascript: consultarDiarioAspErro(" + form_consultar_diario + ")\'>";
+                            var arraySpan = $("p > span");
+                            $(paragrafo)[i].innerHTML = _form + _button + "<span style='text-decoration: underline red; color: red;' >" + span + "<span>" + "</a></form>";
+                        }
+                    }
+                    if (!paragrafo[i - 1].innerText.match(/Este texto não substitui o publicado no DODF/g)) {
+                        $('#paginaEColuna').hide();
+                    }
+                    //--------------------------------------------------------------------------------------
+
+                    if ($('#div_erro').length > 0) {
+                        $('#div_norma').hide();
+                    }
+                    else {
+                        if ($('p[replaced_by]').length <= 0 || $('p').length == $('p[replaced_by]').length) {
+                            $('.compilado').hide();
+                        }
+                        verificarLinks();
+                    }
+             }
+        </script>
+        <style type="text/css">
+            .control {
+                width: 100%;
+                float: left;
+            }
+
+            .print {
+                float: right;
+            }
+
+            .compilado {
+                float: left;
+            }
+
+            div.strike {
+                text-decoration: line-through;
+            }
+
+            body,
+            p,
+            h1 {
+                font-family: Tahoma;
+                font-size: 14px;
+            }
+
+            p[nota=nota] {
+                font-size: 12px;
+                border: 1px solid #777;
+                padding: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="div_norma">
+            <!-- A epígrafe do texto da norma deverá ser um link que direciona, para uma nova aba, os detalhes daquela norma; tarefa 378-->
+            
+            <!-- corpo dela epigrafe-->
+
+            <a href="/sinj/ ~/" title="Visitar o SINJ-DF - Sistema Integrado de Normas Jurídicas do
+                DF"><img src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/logo_sinj.png" alt="SINJ-DF" /></a>
+
+            <div class="control">
+                <div class="compilado">
+                    <a href="javascript:void(0)" onclick="javascript:exibirAlteracoes(this);">
+                        Texto Compilado
+                    </a>
+                </div>
+                <div class="print">
+                    <a href="javascript:void(0);" onclick="javascript:Print();" title="Imprimir">
+                        <img alt="print" src="http://www.sinj.df.gov.br/sinjpadrao/Imagens/ico_print_p.png" />
+                    </a>
+                </div>
+            </div>
+            <div id="div_texto"><p ch_norma_info="3dec6301f78e4b64a83ff591de6ffa75" class="adicionado"><a href="/sinj/Norma/3dec6301f78e4b64a83ff591de6ffa75/sedes_ses_poc_4_2020.html#art1">Legislação Correlata - Portaria Conjunta 4 de 23/09/2020</a><h1 epigrafe="epigrafe" noindex="" nota="" style="font-weight:bold; text-align:center">DECRETO N° 35.191, DE 21 DE FEVEREIRO DE 2014.</h1><p style="margin-left:50%; text-align:justify" linkname="txt_c35cd4720ec645e97d08ef91cc8cf81f"><a id="txt_c35cd4720ec645e97d08ef91cc8cf81f" name="txt_c35cd4720ec645e97d08ef91cc8cf81f" class="linkname"></a>Regulamenta a <a href="/sinj/Norma/74987/Lei_5165_2013.html" class="">Lei nº 5.165, de 04 de setembro de 2013</a>, que dispõe sobre os benefícios eventuais da Política de Assistência Social do Distrito Federal e dá outras providências.<p linkname="txt_5752d14fcfb5487691d5dd58c82826e2"><a id="txt_5752d14fcfb5487691d5dd58c82826e2" name="txt_5752d14fcfb5487691d5dd58c82826e2" class="linkname"></a>O GOVERNADOR DO DISTRITO FEDERAL, no uso das atribuições que lhe confere o artigo 100, incisos VII e XXVI, da Lei Orgânica do Distrito Federal,<p linkname="txt_4e45b5ee24fd4407ff6cf6f1653cdb49"><a id="txt_4e45b5ee24fd4407ff6cf6f1653cdb49" name="txt_4e45b5ee24fd4407ff6cf6f1653cdb49" class="linkname"></a>DECRETA:<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="capI"><a id="capI" name="capI" class="linkname"></a>CAPÍTULO I<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_4230f2363ed64f6fed8409300ab1ceb8"><a id="txt_4230f2363ed64f6fed8409300ab1ceb8" name="txt_4230f2363ed64f6fed8409300ab1ceb8" class="linkname"></a>Dos Benefícios Eventuais<p linkname="capI_art1"><a id="capI_art1" name="capI_art1" class="linkname"></a>Art. 1º Os benefícios eventuais são provisões suplementares e provisórias, prestadas aos cidadãos e às famílias em virtude de nascimento, de morte, situações de vulnerabilidade temporária, desastre e/ou de calamidade pública.<p linkname="capI_art1_par"><a id="capI_art1_par" name="capI_art1_par" class="linkname"></a>Parágrafo único. Os benefícios eventuais integram organicamente as garantias do Sistema Único de Assistência Social – SUAS, com fundamentação nos princípios de cidadania e nos direitos socioassistenciais.<p linkname="capI_art2"><a id="capI_art2" name="capI_art2" class="linkname"></a>Art. 2º Os benefícios eventuais devem atender aos seguintes princípios:<p linkname="capI_art2_incI"><a id="capI_art2_incI" name="capI_art2_incI" class="linkname"></a>I - não subordinação a contribuições prévias e de vinculação a quaisquer contrapartidas;<p linkname="capI_art2_incII"><a id="capI_art2_incII" name="capI_art2_incII" class="linkname"></a>II - adoção de critérios de elegibilidade em consonância com o Sistema Único de Assistência Social – SUAS;<p linkname="capI_art2_incIII"><a id="capI_art2_incIII" name="capI_art2_incIII" class="linkname"></a>III - garantia de qualidade e prontidão na concessão dos benefícios;<p linkname="capI_art2_incIV"><a id="capI_art2_incIV" name="capI_art2_incIV" class="linkname"></a>IV - garantia de igualdade de condições no acesso às informações e à fruição dos benefícios eventuais;<p linkname="capI_art2_incV"><a id="capI_art2_incV" name="capI_art2_incV" class="linkname"></a>V - afirmação dos benefícios eventuais como direito socioassistencial reclamável;<p linkname="capI_art2_incVI"><a id="capI_art2_incVI" name="capI_art2_incVI" class="linkname"></a>VI - ampla divulgação dos critérios para a sua concessão;<p linkname="capI_art2_incVII"><a id="capI_art2_incVII" name="capI_art2_incVII" class="linkname"></a>VII - desvinculação de comprovações complexas e vexatórias, que estigmatizam os beneficiários.<p linkname="capI_art3"><a id="capI_art3" name="capI_art3" class="linkname"></a>Art. 3º No Distrito Federal, os benefícios eventuais classificam-se nas seguintes modalidades:<p linkname="capI_art3_incI"><a id="capI_art3_incI" name="capI_art3_incI" class="linkname"></a>I - auxílio natalidade;<p linkname="capI_art3_incII"><a id="capI_art3_incII" name="capI_art3_incII" class="linkname"></a>II - auxílio por morte;<p linkname="capI_art3_incIII"><a id="capI_art3_incIII" name="capI_art3_incIII" class="linkname"></a>III - auxílio em situação de vulnerabilidade temporária;<p linkname="capI_art3_incIV"><a id="capI_art3_incIV" name="capI_art3_incIV" class="linkname"></a>IV - auxílio em situações de desastre e calamidade pública. Parágrafo único. Estes benefícios podem ser concedidos em pecúnia, em bens de consumo ou em passagens intraurbana e interestadual, isolada ou cumulativamente, na forma do estabelecida na Lei nº 5.165/2013, e em regulamentação da Secretaria de Estado de Desenvolvimento Social e de Transferência de Renda do Distrito Federal – SEDEST.<p linkname="capI_art4"><a id="capI_art4" name="capI_art4" class="linkname"></a>Art. 4º Os benefícios eventuais serão concedidos a quem possuir renda familiar per capita igual ou inferior a meio salário mínimo nacional, com observância das contingências, de riscos, perdas e danos estabelecidos na forma da Lei nº 5.165/2013 e Portaria da SEDEST.<p linkname="capI_art4_par1"><a id="capI_art4_par1" name="capI_art4_par1" class="linkname"></a>§ 1º Para fins de concessão de benefício, considera-se família o núcleo básico, vinculado por laços consanguíneos, de aliança ou afinidade circunscrito a obrigações recíprocas e mútuas, que vivam sob o mesmo teto, bem como o núcleo social unipessoal.<p linkname="capI_art4_par2"><a id="capI_art4_par2" name="capI_art4_par2" class="linkname"></a>§ 2º Quando se tratar de família cuja renda per capita seja superior à disposta no caput, serão analisadas as contingências, riscos, perdas e danos estabelecidos em razão de morte, nascimento, vulnerabilidade social temporária, desastre ou calamidade pública, podendo, excepcionalmente, ser concedido benefício eventual mediante avaliação técnica de profissional que atua nas Unidades da Subsecretaria de Assistência Social da SEDEST.<p linkname="capI_art4_par3"><a id="capI_art4_par3" name="capI_art4_par3" class="linkname"></a>§ 3º Caso o beneficiário não esteja no Cadastro Único para os Programas Sociais do Governo Federal, a inclusão deve ser providenciada logo após a concessão dos benefícios eventuais.<p linkname="capI_art4_par4"><a id="capI_art4_par4" name="capI_art4_par4" class="linkname"></a>§ 4º A ausência de documentação pessoal não é motivo de impedimento para concessão do benefício, devendo ser adotadas medidas que viabilizem o acesso do beneficiário à documentação civil.<p linkname="capI_art5"><a id="capI_art5" name="capI_art5" class="linkname"></a>Art. 5º Serão concedidos benefícios eventuais mediante avaliação técnica de profissional que atua nas Unidades da Subsecretaria de Assistência Social da SEDEST.<p linkname="capI_art6"><a id="capI_art6" name="capI_art6" class="linkname"></a>Art. 6º Para fins do disposto no inciso IV, do art. 22 da Lei nº 5.165/2013, o auxílio em situação de vulnerabilidade temporária poderá ser concedido visando a melhoria de habitabilidade, sem prejuízo do recebimento da suplementação financeira, na forma na Lei nº 4.737/2011 e do Decreto nº 34.308/2013.<p linkname="capI_art7"><a id="capI_art7" name="capI_art7" class="linkname"></a>Art. 7º O valor do auxílio em situação de desastre ou calamidade pública, na forma do disposto no caput do art. 25 da Lei nº 5.165/2013, poderá variar considerando-se o grau de complexidade da situação de vulnerabilidade e risco pessoal das famílias e indivíduos, exclusivamente para os itens que compõem os bens de consumo.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_657d69fab7e84665c108a11b7a580343"><a id="txt_657d69fab7e84665c108a11b7a580343" name="txt_657d69fab7e84665c108a11b7a580343" class="linkname"></a>CAPITULO II<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_92e200eacc814bb8c62d3c1b9656f5e2"><a id="txt_92e200eacc814bb8c62d3c1b9656f5e2" name="txt_92e200eacc814bb8c62d3c1b9656f5e2" class="linkname"></a>Do Benefício Excepcional<p linkname="capI_art8"><a id="capI_art8" name="capI_art8" class="linkname"></a>Art. 8º O auxílio em razão do desabrigo temporário é uma prestação excepcional no âmbito da assistência social, subsidiária à Política de Habitação do Distrito Federal decorrente da existência de situações de vulnerabilidade temporária ocasionadas pela falta ou pela inadequação da moradia, sendo destinado, exclusivamente, ao pagamento de aluguel de imóvel residencial.<p linkname="capI_art9"><a id="capI_art9" name="capI_art9" class="linkname"></a>Art. 9º O auxilio em razão do desabrigo temporário é concedido a pessoas ou famílias privadas da respectiva moradia em decorrência de um dos seguintes adventos:<p linkname="capI_art9_incI"><a id="capI_art9_incI" name="capI_art9_incI" class="linkname"></a>I - catástrofe, desastre ou calamidade pública;<p linkname="capI_art9_incII"><a id="capI_art9_incII" name="capI_art9_incII" class="linkname"></a>II - situações de risco geológico;<p linkname="capI_art9_incIII"><a id="capI_art9_incIII" name="capI_art9_incIII" class="linkname"></a>III - situações de risco à salubridade;<p linkname="capI_art9_incIV"><a id="capI_art9_incIV" name="capI_art9_incIV" class="linkname"></a>IV - desocupações de áreas de interesse ambiental;<p linkname="capI_art9_incV"><a id="capI_art9_incV" name="capI_art9_incV" class="linkname"></a>V - processos de realocação, remoção ou reassentamento;<p linkname="capI_art9_incVI"><a id="capI_art9_incVI" name="capI_art9_incVI" class="linkname"></a>VI - risco pessoal e eventos de risco, em casos excepcionais;<p linkname="capI_art9_incVII"><a id="capI_art9_incVII" name="capI_art9_incVII" class="linkname"></a>VII - situações de rua.<p linkname="capI_art9_par1"><a id="capI_art9_par1" name="capI_art9_par1" class="linkname"></a>§ 1º O benefício será concedido nas situações descritas nos incisos deste artigo, em prestações mensais em pecúnia, no valor de R$ 600,00 (seiscentos reais), por até 6 (seis) meses, podendo ser prorrogado por igual período.<p linkname="capI_art9_par2"><a id="capI_art9_par2" name="capI_art9_par2" class="linkname"></a>§ 2º Por se tratar de auxílio subsidiário à Política de Habitação do Distrito Federal, o mesmo será concedido por 6 (seis) meses, dada a condição de excepcionalidade, condicionada a sua prorrogação à habilitação do beneficiário na referida política habitacional.<p linkname="capI_art9_par3"><a id="capI_art9_par3" name="capI_art9_par3" class="linkname"></a>§ 3º Somente a avaliação técnica de profissional que atua nas Unidades da Subsecretaria de Assistência Social da SEDEST poderá autorizar a concessão de benefício excepcional, podendo levar em consideração outras situações de vulnerabilidade, além dos critérios de renda previstos no artigo 3º da Lei nº 5.165/2013.<p linkname="txt_b614e3c5e9f246bcc58b85968c1c0654"><a id="txt_b614e3c5e9f246bcc58b85968c1c0654" name="txt_b614e3c5e9f246bcc58b85968c1c0654" class="linkname"></a>Art.10. O auxílio em razão de desabrigo temporário pode ser concedido pelo prazo de até 48 (quarenta e oito) meses quando houver necessidade de deslocamento compulsório de famílias e indivíduos que ocupam, há mais de 5 (cinco) anos, assentamentos precários que estejam incluídos em programas de urbanização e regularização habitacional e fundiária.<p linkname="capI_art9_par1_fdc01e7711354e2c407b4b2eab52186c"><a id="capI_art9_par1_fdc01e7711354e2c407b4b2eab52186c" name="capI_art9_par1_fdc01e7711354e2c407b4b2eab52186c" class="linkname"></a>§ 1º A situação mencionada no caput deverá estar estabelecida em regulamento próprio do Governo do Distrito Federal.<p linkname="capI_art9_par2_03bb50413bc5493494dad4f1b93d01ad"><a id="capI_art9_par2_03bb50413bc5493494dad4f1b93d01ad" name="capI_art9_par2_03bb50413bc5493494dad4f1b93d01ad" class="linkname"></a>§ 2º A concessão do auxílio pela Secretaria de Estado de Desenvolvimento Social do Distrito Federal/SEDEST estará condicionada à habilitação da família beneficiária na Política de Habitação do Distrito Federal e aos requisitos legais estabelecidos pela mesma.<p linkname="capI_art9_par3_3c7be25a8c2c45439ac24c2ea6bc4c7d"><a id="capI_art9_par3_3c7be25a8c2c45439ac24c2ea6bc4c7d" name="capI_art9_par3_3c7be25a8c2c45439ac24c2ea6bc4c7d" class="linkname"></a>§ 3º Na hipótese prevista neste artigo, após atendidas as condições previstas nos incisos anteriores, caberá a avaliação técnica de profissional que atua nas Unidades da Subsecretaria de Assistência Social da SEDEST.<p linkname="capI_art11"><a id="capI_art11" name="capI_art11" class="linkname"></a>Art. 11. Serão excluídos do recebimento do auxílio excepcional em razão desabrigo temporário, os beneficiários que retornarem a situações de ocupação irregular de terras públicas ou privadas, bem como aqueles que empregarem os valores recebidos para fins diversos do pagamento de aluguel residencial.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="capIII"><a id="capIII" name="capIII" class="linkname"></a>CAPÍTULO III<p style="font-weight:bold; margin-top:0px; text-align:center" linkname="txt_0d56d0666dff47d9be76c639a0876d55"><a id="txt_0d56d0666dff47d9be76c639a0876d55" name="txt_0d56d0666dff47d9be76c639a0876d55" class="linkname"></a>Das Disposições Finais<p linkname="capIII_art12"><a id="capIII_art12" name="capIII_art12" class="linkname"></a>Art. 12. Será excluído do recebimento de benefícios eventuais o beneficiário que prestar informação falsa ou usar de meios ilícitos para obtenção de vantagens.<p linkname="capIII_art13"><a id="capIII_art13" name="capIII_art13" class="linkname"></a>Art. 13. Pode ser suspensa, a qualquer tempo, a concessão de benefícios eventuais, mediante manifestação circunstanciada de profissional que atua nas Unidades da Subsecretaria de Assistência Social da SEDEST.<p linkname="capIII_art14"><a id="capIII_art14" name="capIII_art14" class="linkname"></a>Art. 14. Fica a Secretaria de Estado de Desenvolvimento Social e Transferência de Renda do Distrito Federal – SEDEST autorizada a editar normas complementares relacionadas à operacionalização dos benefícios eventuais e excepcional.<p linkname="capIII_art15"><a id="capIII_art15" name="capIII_art15" class="linkname"></a>Art. 15. As despesas decorrentes da execução da Lei nº 5.165/2013 e deste Decreto correrão à conta de dotações orçamentárias do Fundo de Assistência Social do Distrito Federal.<p linkname="capIII_art15_par"><a id="capIII_art15_par" name="capIII_art15_par" class="linkname"></a>Parágrafo único. Os recursos destinados ao pagamento de benefícios excepcionais serão disponibilizados pelo Tesouro do Distrito Federal, sem prejuízo das ações continuadas da assistência social e dos benefícios eventuais.<p linkname="capIII_art16"><a id="capIII_art16" name="capIII_art16" class="linkname"></a>Art. 16. Este Decreto entra em vigor na data de sua publicação, revogando-se as disposições em contrário.<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_5e4abddb975b4fd1165a8e7f3ebec7b9"><a id="txt_5e4abddb975b4fd1165a8e7f3ebec7b9" name="txt_5e4abddb975b4fd1165a8e7f3ebec7b9" class="linkname"></a>Brasília, 21 de fevereiro de 2014<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_0fc1af9b0d7b4d09cea4043ef9a45d95"><a id="txt_0fc1af9b0d7b4d09cea4043ef9a45d95" name="txt_0fc1af9b0d7b4d09cea4043ef9a45d95" class="linkname"></a>126º da república e 54 º de Brasília<p style="font-weight:bold; margin-bottom:0px; text-align:center" linkname="txt_3f2257f2b7f444bc410d4792edd198c7"><a id="txt_3f2257f2b7f444bc410d4792edd198c7" name="txt_3f2257f2b7f444bc410d4792edd198c7" class="linkname"></a>AGNELO QUEIROZ<p style="text-align:right"><span style="color:#FF0000"><a href=http://www.sinj.df.gov.br/sinj/BaixarArquivoDiario.aspx?id_file=81144575-4886-3af6-9c83-ad095b3afcec target='_blank'>Este texto não substitui o publicado no DODF nº 41, seção 1 de 24/02/2014<span id='paginaEColuna'> p. 1, col. 1<a/></span></div>
+        </div>
+
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-20776101-1', 'auto');
+            ga('create', 'UA-90051523-1', 'auto', 'brlightTracker');
+            ga('send', 'pageview');
+            ga('brlightTracker.send', 'pageview');
+        </script>
+    </body>
+
+    </html>
