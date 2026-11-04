@@ -28,6 +28,12 @@ def salvar_raw(norma_id: str, data: str, conteudo: bytes) -> Path:
     return caminho
 
 
+def ultimo_raw(norma_id: str) -> Path | None:
+    """HTML da coleta mais recente; o nome começa pela data da coleta (AAAA-MM-DD_hash.html)."""
+    coletas = sorted((RAW / norma_id).glob("*.html"))
+    return coletas[-1] if coletas else None
+
+
 def versoes_processadas(norma_id: str) -> list[Path]:
     return sorted((PROCESSADOS / norma_id).glob("*.jsonl"))
 
