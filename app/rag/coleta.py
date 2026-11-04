@@ -1,8 +1,9 @@
-"""Coleta as normas de config/fontes.yaml, segmenta por dispositivo e gera relatório de alterações.
+"""Coleta as normas de dados/fontes/fontes.yaml, segmenta por dispositivo e gera relatório de alterações.
 
-Não altera o índice. Revise data/relatorios/<data>.md e depois rode scripts/indexar.py.
+Não altera os trechos do índice. Revise dados/fontes/relatorios/<data>.md e depois
+rode app.rag.ingestao.
 
-Uso: python scripts/ingerir.py [--norma lei-11340-2006] [--arquivo pagina.htm]
+Uso: uv run python -m app.rag.coleta [--norma lei-11340-2006] [--arquivo pagina.htm]
 """
 import argparse
 import sys
@@ -11,11 +12,9 @@ from pathlib import Path
 
 import yaml
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app.rag import planalto, versoes
 
-from app.ingestao import planalto, versoes  # noqa: E402
-
-FONTES = Path(__file__).resolve().parents[1] / "config" / "fontes.yaml"
+FONTES = versoes.FONTES / "fontes.yaml"
 
 
 def registros(norma: dict, resultado: planalto.ResultadoParse, data: str, hash_documento: str) -> list[dict]:
@@ -107,7 +106,7 @@ def main() -> None:
             resultado.duplicados = [i for i in resultado.duplicados if any(d.id == i for d in resultado.dispositivos)]
             resultado.ignorados = []
         if not resultado.dispositivos:
-            sys.exit(f"Nenhum dispositivo extraído de {norma['id']}: verifique o HTML em data/raw.")
+            sys.exit(f"Nenhum dispositivo extraído de {norma['id']}: verifique o HTML em dados/fontes/raw.")
 
         novos = registros(norma, resultado, data, versoes.hash_bytes(conteudo))
         anteriores = [v for v in versoes.versoes_processadas(norma["id"]) if v.stem != data]

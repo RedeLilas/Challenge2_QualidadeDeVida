@@ -10,10 +10,10 @@ import hashlib
 import json
 from pathlib import Path
 
-DADOS = Path(__file__).resolve().parents[2] / "data"
-RAW = DADOS / "raw"
-PROCESSADOS = DADOS / "processed"
-RELATORIOS = DADOS / "relatorios"
+FONTES = Path(__file__).resolve().parents[2] / "dados" / "fontes"
+RAW = FONTES / "raw"
+PROCESSADOS = FONTES / "dispositivos"
+RELATORIOS = FONTES / "relatorios"
 
 
 def hash_bytes(conteudo: bytes) -> str:
