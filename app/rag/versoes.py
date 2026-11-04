@@ -42,7 +42,7 @@ def salvar_processado(norma_id: str, data: str, registros: list[dict]) -> Path:
     pasta = PROCESSADOS / norma_id
     pasta.mkdir(parents=True, exist_ok=True)
     caminho = pasta / f"{data}.jsonl"
-    with caminho.open("w", encoding="utf-8") as f:
+    with caminho.open("w", encoding="utf-8", newline="\n") as f:
         for r in registros:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
     return caminho
@@ -73,5 +73,5 @@ def comparar(anteriores: list[dict], atuais: list[dict]) -> dict:
 def escrever_relatorio(data: str, secoes: list[str]) -> Path:
     RELATORIOS.mkdir(parents=True, exist_ok=True)
     caminho = RELATORIOS / f"{data}.md"
-    caminho.write_text(f"# Relatório de coleta — {data}\n\n" + "\n".join(secoes), encoding="utf-8")
+    caminho.write_text(f"# Relatório de coleta — {data}\n\n" + "\n".join(secoes), encoding="utf-8", newline="\n")
     return caminho
