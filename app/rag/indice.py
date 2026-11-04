@@ -34,13 +34,21 @@ def carregar_trechos(pasta: Path = PASTA_LEIS) -> list[dict]:
 class Indice:
     def __init__(self, trechos: list[dict]):
         self.trechos = trechos
+        self.eixos = np.array([t["eixo"] for t in trechos])
         # O capítulo dá contexto a incisos curtos ("I - pela autoridade judicial;").
         self.matriz = _vetores(
             [f"passage: {t['citacao']}\n{t['capitulo']}\n{t['texto']}" for t in trechos]
         )
 
-    def buscar(self, pergunta: str, k: int = 5) -> list[tuple[dict, float]]:
+    def buscar(self, pergunta: str, k: int = 5, eixos: set[str] | None = None) -> list[tuple[dict, float]]:
+        """Os k trechos mais similares; com `eixos`, só os desses temas (ex.: {"juridico"})."""
+        candidatos = np.arange(len(self.trechos))
+        if eixos is not None:
+            desconhecidos = set(eixos) - set(self.eixos)
+            if desconhecidos:
+                raise ValueError(f"Eixo sem trechos no índice: {sorted(desconhecidos)}")
+            candidatos = np.flatnonzero(np.isin(self.eixos, list(eixos)))
         # Vetores normalizados: o produto interno é a similaridade de cosseno.
-        similaridades = self.matriz @ _vetores([f"query: {pergunta}"])[0]
-        melhores = np.argsort(-similaridades)[:k]
-        return [(self.trechos[i], float(similaridades[i])) for i in melhores]
+        similaridades = self.matriz[candidatos] @ _vetores([f"query: {pergunta}"])[0]
+        ordem = np.argsort(-similaridades)[:k]
+        return [(self.trechos[candidatos[j]], float(similaridades[j])) for j in ordem]
