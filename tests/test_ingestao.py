@@ -53,6 +53,22 @@ def test_decodifica_utf16_com_byte_sobrando():
     assert "Art. 1º" in planalto.decodificar(conteudo)
 
 
+def test_artigo_seguido_de_travessao_nao_vira_artigo_com_letra():
+    # Código Penal: "Art. 147 - Ameaçar" é o art. 147, não o 147-A.
+    html = "<p>Art. 147 - Ameaçar alguém.</p><p>§ 1 - Primeiro.</p><p>Art. 147-A. Perseguir alguém.</p>"
+    ids = [d.id for d in planalto.parse(html).dispositivos]
+    assert ids == ["art147", "art147.par1", "art147-a"]
+
+
+def test_vetado_sem_parentese_de_fechamento():
+    html = "<p>Art. 1º Exemplo:</p><p>I - (VETADO.</p>"
+    assert {d.id: d.status for d in planalto.parse(html).dispositivos}["art1.inc_i"] == "vetado"
+
+
+def test_hash_do_dispositivo_depende_so_do_texto(dispositivos):
+    assert dispositivos["art1"].hash == planalto.hashlib.sha256(b"Art. 1\xc2\xba Esta Lei trata de um exemplo.").hexdigest()
+
+
 def test_trechos_ignoram_revogados_e_vetados(dispositivos):
     trechos = ingestao.trechos(list(dispositivos.values()), "2026-11-03")
     assert [t["artigo"] for t in trechos] == ["1", "2", "4-A"]
