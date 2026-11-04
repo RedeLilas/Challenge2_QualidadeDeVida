@@ -10,7 +10,7 @@
 
 - [x] 2.1 Adicionar `eixo` às normas de `fontes.yaml` e generalizar `app/rag/ingestao.py` para gerar `dados/leis/<norma_id>.jsonl` de todas as normas; verificação: a Lei 11.340/2006 continua com 109 trechos e toda norma tem trechos com url e data de acesso
 - [x] 2.2 Adicionar o filtro `eixos` a `Indice.buscar()` e rodar o teste das personas com `eixos={"juridico"}`; verificação: artigo esperado no top 5 em pelo menos 9 de 10, e "violência patrimonial" recupera o art. 7º no índice completo
-- [ ] 2.3 Portar a busca manual para `app/rag/buscar.py` com `--eixo`; verificação: "ele quebrou minhas coisas, isso é violência?" traz a Lei 11.340/2006, art. 7º, IV, no top 5
+- [x] 2.3 Portar a busca manual para `app/rag/buscar.py` com `--eixo`; verificação: "ele quebrou minhas coisas, isso é violência?" traz a Lei 11.340/2006, art. 7º, IV, no top 5
 
 ## 3. Remoção e documentação (sexta, 06/11)
 
