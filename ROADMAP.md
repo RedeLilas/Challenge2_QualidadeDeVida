@@ -66,6 +66,7 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | `s2-alerta-risco-190`: regras compartilhadas PWA + backend, suíte sem falso negativo | Proposta |
 | `s2-rag-juridico`: Lei Maria da Penha por artigo, embeddings locais, resposta com citação e recusa | Em andamento (4/9: ingestão, índice e teste rápido) |
 | `s2-fontes-df`: rede de proteção do DF, normas federais e distritais, notas do Fonar | Proposta |
+| `s2-base-juridica-unificada`: 16 normas na raiz com o `e5-base` em memória, filtro por eixo, remove `backend/` (Chroma) | Implementada, aguardando revisão da equipe (8/9) |
 
 **Decisões até sexta, 06/11** (registrar em `s2-plataforma-base/design.md`):
 - [ ] Plataforma de deploy (recomendação: Hugging Face Spaces com Docker)
