@@ -1,0 +1,3 @@
+# HTML bruto das coletas: guardado byte a byte, sem conversão de fim de linha,
+# para continuar batendo com o hash no nome do arquivo.
+dados/fontes/raw/** -text
