@@ -1,0 +1,9 @@
+# HTML bruto das coletas: guardado byte a byte, sem conversão de fim de linha,
+# para continuar batendo com o hash no nome do arquivo.
+dados/fontes/raw/** -text
+
+# Dados gerados pela coleta e pela ingestão: sempre LF, igual ao que os scripts gravam
+# em qualquer sistema. Sem isso, o checkout no Windows (CRLF) marca os arquivos como
+# modificados depois de cada ingestão, mesmo sem mudança de conteúdo.
+dados/**/*.jsonl text eol=lf
+dados/fontes/relatorios/*.md text eol=lf

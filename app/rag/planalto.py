@@ -1,9 +1,10 @@
-"""Coleta e segmentação de normas do Planalto por dispositivo legal.
+"""Coleta e segmentação de normas do Planalto e do SINJ-DF por dispositivo legal.
 
 O Planalto publica o texto compilado: a redação revogada fica riscada (<strike>)
-ao lado da redação atual. Removemos o texto riscado para indexar só o vigente.
-O histórico fica no git, pelo diff de dados/leis/*.jsonl.
+ao lado da redação atual. Removemos o texto riscado para indexar só o vigente;
+o HTML bruto de cada coleta fica guardado em dados/fontes/raw/ para consulta histórica.
 """
+import hashlib
 import re
 import time
 from dataclasses import dataclass, field
@@ -20,8 +21,9 @@ CABECALHOS = {
     "Accept-Language": "pt-BR",
 }
 
-RE_ARTIGO = re.compile(r"^Art\.\s*(\d+)\s*(?:º|°|o\b)?\s*(-\s*[A-Z])?\s*\.?\s*")
-RE_PARAGRAFO = re.compile(r"^(?:§\s*(\d+)\s*(?:º|°)?\s*(-\s*[A-Z])?|(Parágrafo único))\s*[.\-–]?\s*")
+# "(?!\w)" evita ler "Art. 147 - Ameaçar" como art. 147-A.
+RE_ARTIGO = re.compile(r"^Art\.\s*(\d+)\s*(?:º|°|o\b)?\s*(-\s*[A-Z](?!\w))?\s*\.?\s*")
+RE_PARAGRAFO = re.compile(r"^(?:§\s*(\d+)\s*(?:º|°)?\s*(-\s*[A-Z](?!\w))?|(Parágrafo único))\s*[.\-–]?\s*")
 RE_INCISO = re.compile(r"^([IVXLC]+)(-[A-Z])?\s*[-–]\s*")
 RE_ALINEA = re.compile(r"^([a-z])\)\s*")
 RE_DIVISAO = re.compile(r"^(TÍTULO|CAPÍTULO|SEÇÃO|Seção|SUBSEÇÃO|Subseção)\s+([IVXLC]+(?:-[A-Z])?)\b\s*(.*)$")
@@ -47,6 +49,10 @@ class Dispositivo:
     secao: str = ""
     ancora: str = ""
     contexto: str = ""  # caput e dispositivos-pai, para o texto do embedding
+
+    @property
+    def hash(self) -> str:
+        return hashlib.sha256(self.texto.encode()).hexdigest()
 
 
 @dataclass
