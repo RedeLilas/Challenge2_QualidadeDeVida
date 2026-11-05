@@ -3,7 +3,8 @@
 
 // Site neutro da saída rápida. location.replace() tira esta página do histórico.
 const SITE_NEUTRO = "https://www.climatempo.com.br/previsao-do-tempo/cidade/61/brasilia-df";
-const MAX_HISTORICO = 20;
+// Até o orquestrador (S4), toda mensagem é uma pergunta jurídica respondida com citações.
+const ROTA = "/juridico";
 // Um pouco acima do LLM_TIMEOUT do servidor (padrão 30 s): o servidor desiste primeiro e
 // devolve a mensagem com o Ligue 180. Este limite só vale quando a conexão cai.
 const TEMPO_LIMITE_MS = 35000;
@@ -21,8 +22,6 @@ const campo = document.getElementById("texto");
 const botaoEnviar = document.getElementById("enviar");
 const aviso = document.getElementById("aviso");
 
-// Turnos já respondidos: { papel: "usuaria" | "assistente", texto }.
-let conversa = [];
 let pedidoAtual = null;
 
 function sair() {
@@ -33,7 +32,6 @@ function sair() {
 function apagarConversa() {
   if (pedidoAtual) pedidoAtual.abort();
   pedidoAtual = null;
-  conversa = [];
   campo.value = "";
   lista.replaceChildren();
 }
@@ -54,6 +52,35 @@ function adicionar(classe, texto) {
   return item;
 }
 
+// Resposta jurídica: o texto e, embaixo, a norma, o artigo e a data em que o texto da lei foi
+// verificado. Sem link para o site da lei: abrir a página deixaria "Lei Maria da Penha" no
+// histórico do navegador, visível para quem pegar o celular.
+function adicionarResposta({ resposta, citacoes = [] }) {
+  const item = adicionar("msg--assistente", "");
+  const texto = document.createElement("p");
+  texto.textContent = resposta;
+  item.append(texto);
+
+  if (citacoes.length) {
+    const fontes = document.createElement("ul");
+    fontes.className = "msg__fontes";
+    fontes.setAttribute("aria-label", "Fontes");
+    for (const { citacao, data_acesso } of citacoes) {
+      const fonte = document.createElement("li");
+      fonte.textContent = `${citacao} · texto verificado em ${dataBrasileira(data_acesso)}`;
+      fontes.append(fonte);
+    }
+    item.append(fontes);
+  }
+  irParaOFim();
+}
+
+// "2026-11-03" -> "03/11/2026"
+function dataBrasileira(iso) {
+  const [ano, mes, dia] = String(iso).split("-");
+  return dia && mes && ano ? `${dia}/${mes}/${ano}` : String(iso);
+}
+
 // Rola a página até o fim: a última mensagem fica logo acima do campo de envio (que é fixo).
 function irParaOFim() {
   window.scrollTo(0, document.documentElement.scrollHeight);
@@ -71,10 +98,10 @@ async function enviar(texto) {
   const pensando = adicionar("msg--pensando", TEXTOS.pensando);
 
   try {
-    const resposta = await fetch("/mensagem", {
+    const resposta = await fetch(ROTA, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ texto, historico: conversa.slice(-MAX_HISTORICO) }),
+      body: JSON.stringify({ pergunta: texto }),
       cache: "no-store",
       signal: controle.signal,
     });
@@ -84,8 +111,7 @@ async function enviar(texto) {
       adicionar("msg--erro", dados.erro || TEXTOS.falha);
       return false;
     }
-    conversa.push({ papel: "usuaria", texto }, { papel: "assistente", texto: dados.resposta });
-    adicionar("msg--assistente", dados.resposta);
+    adicionarResposta(dados);
     return true;
   } catch (erro) {
     pensando.remove();

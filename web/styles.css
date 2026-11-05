@@ -188,6 +188,17 @@ body {
   font-size: 0.9375rem;
 }
 
+.msg__fontes {
+  margin: 10px 0 0;
+  padding: 8px 0 0;
+  list-style: none;
+  border-top: var(--borda);
+  color: var(--tinta-suave);
+  font-size: 0.875rem;
+  white-space: normal;
+}
+.msg__fontes li + li { margin-top: 2px; }
+
 .msg--erro {
   align-self: flex-start;
   background: var(--azulejo);
