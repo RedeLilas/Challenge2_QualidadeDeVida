@@ -49,6 +49,8 @@ Botão fixo em todas as telas. Ao tocar: limpa o estado da conversa em memória 
 ### Logs sem conteúdo
 Middleware registra método, rota, status e duração. Exceções são registradas com tipo e rota, sem o corpo da requisição.
 
+O uvicorn MUST rodar com `--no-access-log` (inclusive no `Dockerfile`): o access log padrão grava a query string e o IP de quem acessa, e o middleware já cobre o que é necessário. Texto da usuária vai sempre no corpo da requisição, nunca na URL.
+
 ### Pendente até sexta, 06/11: plataforma de deploy
 
 | Critério | Hugging Face Spaces (Docker) | Render (free) | VPS (ex.: Oracle Free, Hetzner) |
