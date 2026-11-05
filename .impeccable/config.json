@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "web/index.html"
+        ],
+        "createdAt": "2026-11-05T12:54:29.102Z",
+        "reason": "agent: rendered scan (impeccable detect on localhost:8000 with Chromium) reports 0 anti-patterns; static match is the visually-hidden .oculto label (padding 0 by design)"
+      }
+    ]
+  }
+}
