@@ -41,7 +41,7 @@ FastAPI é leve, assíncrono e tem testes simples com `TestClient`. Servir a PWA
 Não exige build, é leve para celular básico e qualquer pessoa da equipe consegue editar. O service worker guarda em cache a interface e `regras/risco_imediato.json`, para que o alerta de 190 funcione offline.
 
 ### Cliente de LLM compatível com OpenAI
-O Ollama expõe `http://localhost:11434/v1` e o DeepSeek expõe `https://api.deepseek.com`, ambos no protocolo da OpenAI. Um único cliente (pacote `openai`) recebe `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`. Modelo local sugerido para testes: um modelo instruct de 7–8B com bom português (ex.: `qwen2.5:7b-instruct`), a confirmar pela equipe no primeiro dia.
+O Ollama expõe `http://localhost:11434/v1` e o DeepSeek expõe `https://api.deepseek.com`, ambos no protocolo da OpenAI. Um único cliente (pacote `openai`) recebe `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`. Modelo local para testes: `qwen2.5:7b-instruct` (confirmado em 05/11; responde em 2–3 s na máquina da equipe). O `gemma4:12b-it-qat` foi testado e descartado: gasta cerca de 30 s raciocinando antes de responder e estoura o tempo limite da rota.
 
 ### Saída rápida
 Botão fixo em todas as telas. Ao tocar: limpa o estado da conversa em memória e chama `location.replace()` para um site neutro (ex.: previsão do tempo). O `replace` não deixa a página no histórico do navegador. A conversa nunca vai para `localStorage`.

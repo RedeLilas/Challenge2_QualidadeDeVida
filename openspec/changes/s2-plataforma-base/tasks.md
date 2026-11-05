@@ -9,9 +9,9 @@
 
 ## 2. PWA mínima (quinta, 05/11)
 
-- [ ] 2.1 Criar `web/index.html`, `app.js` e `styles.css` com a tela de conversa servida pelo FastAPI; verificação: a página abre em `/` e envia uma mensagem ao backend
-- [ ] 2.2 Implementar a saída rápida com `location.replace()` e a conversa só em memória; verificação manual: tocar em "sair" e confirmar que o botão voltar não reabre a conversa e que nada aparece no `localStorage`
-- [ ] 2.3 Criar `manifest.webmanifest` (nome e ícone provisórios discretos) e `sw.js` com cache da interface; verificação: o Chrome oferece a instalação e a interface abre offline
+- [x] 2.1 Criar `web/index.html`, `app.js` e `styles.css` com a tela de conversa servida pelo FastAPI; verificação: a página abre em `/` e envia uma mensagem ao backend
+- [x] 2.2 Implementar a saída rápida com `location.replace()` e a conversa só em memória; verificação manual: tocar em "sair" e confirmar que o botão voltar não reabre a conversa e que nada aparece no `localStorage`
+- [x] 2.3 Criar `manifest.webmanifest` (nome e ícone provisórios discretos) e `sw.js` com cache da interface; verificação: o Chrome oferece a instalação e a interface abre offline
 
 ## 3. Deploy e CI (sexta, 06/11)
 
