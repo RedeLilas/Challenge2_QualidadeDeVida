@@ -1,6 +1,6 @@
 // Service worker: guarda só a interface para ela abrir sem internet.
 // Nunca guarda a conversa: POST /mensagem passa direto para a rede.
-const VERSAO = "interface-v4";
+const VERSAO = "interface-v5";
 const INTERFACE = [
   "/",
   "/index.html",
@@ -16,7 +16,10 @@ const INTERFACE = [
 ];
 
 self.addEventListener("install", (evento) => {
-  evento.waitUntil(caches.open(VERSAO).then((cache) => cache.addAll(INTERFACE)).then(() => self.skipWaiting()));
+  // cache: "reload" ignora o cache HTTP do navegador: sem isso, a versão nova do service worker
+  // podia guardar um app.js ou um arquivo de regras antigo.
+  const pedidos = INTERFACE.map((url) => new Request(url, { cache: "reload" }));
+  evento.waitUntil(caches.open(VERSAO).then((cache) => cache.addAll(pedidos)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", (evento) => {
@@ -51,7 +54,8 @@ self.addEventListener("fetch", (evento) => {
 
   // Interface: responde do cache na hora e atualiza a cópia guardada em segundo plano.
   if (INTERFACE.includes(url.pathname)) {
-    const atualizar = fetch(pedido).then((resposta) => {
+    // no-cache: confere com o servidor em vez de reaproveitar a cópia do cache HTTP.
+    const atualizar = fetch(pedido, { cache: "no-cache" }).then((resposta) => {
       if (resposta.ok) {
         const copia = resposta.clone();
         caches.open(VERSAO).then((cache) => cache.put(pedido, copia));

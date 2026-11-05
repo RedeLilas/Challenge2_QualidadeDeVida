@@ -161,3 +161,15 @@ def test_alerta_de_190_na_tela_antes_do_envio_e_offline(cliente):
     assert '"/risco.js"' in sw and '"/regras/risco_imediato.json"' in sw
     regras = cliente.get("/regras/risco_imediato.json")
     assert regras.status_code == 200 and regras.json()["regras"]
+
+
+@pytest.mark.parametrize("caminho", ["/", "/app.js", "/risco.js", "/styles.css", "/regras/risco_imediato.json"])
+def test_arquivos_da_tela_sempre_conferidos_com_o_servidor(cliente, caminho):
+    # Sem Cache-Control, o navegador reaproveitava o app.js antigo depois de uma atualização (05/11).
+    assert cliente.get(caminho).headers["cache-control"] == "no-cache"
+
+
+def test_service_worker_ignora_o_cache_http_ao_atualizar(cliente):
+    sw = cliente.get("/sw.js").text
+    assert 'new Request(url, { cache: "reload" })' in sw
+    assert 'fetch(pedido, { cache: "no-cache" })' in sw

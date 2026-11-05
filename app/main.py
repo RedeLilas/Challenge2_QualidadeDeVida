@@ -131,6 +131,10 @@ async def _cabecalhos_de_privacidade(request, call_next):
     # Ao sair para o site neutro, ele não fica sabendo de onde a usuária veio.
     resposta.headers.setdefault("Referrer-Policy", "no-referrer")
     resposta.headers.setdefault("X-Content-Type-Options", "nosniff")
+    # Sem isso o navegador reaproveita arquivos antigos por conta própria (cache heurístico), e uma
+    # tela ou regra de risco nova demora a chegar. no-cache guarda, mas confere com o servidor (ETag).
+    # As rotas da API já mandam no-store, que não é sobrescrito.
+    resposta.headers.setdefault("Cache-Control", "no-cache")
     if request.url.path == "/sw.js":
         # O service worker precisa ser revalidado para as atualizações chegarem.
         resposta.headers["Cache-Control"] = "no-cache"
