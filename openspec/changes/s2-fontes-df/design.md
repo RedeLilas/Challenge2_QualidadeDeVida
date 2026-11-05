@@ -52,6 +52,13 @@ Apenas fontes oficiais: sites do Governo do DF (`df.gov.br` e secretarias), Pol�
 ### Benefício distrital
 Escolher 1 benefício ou programa do GDF voltado a mulheres em situação de violência ou vulnerabilidade, com critérios publicados em norma. Critério de escolha: regras objetivas o suficiente para virar regra determinística na S3.
 
+**Decisão registrada (05/11/2026):**
+- **Benefício distrital escolhido para a S3:** **Aluguel Social para Mulheres Vítimas de Violência Doméstica no Distrito Federal** (`Lei Distrital nº 6.623/2020`, regulamentada pelo `Decreto Distrital nº 45.989/2024` e pela `Portaria SMDF nº 49/2026`), tendo como benefício distrital complementar de segurança alimentar o **Programa Cartão Prato Cheio** (`Lei Distrital nº 7.009/2021` e `Decreto Distrital nº 42.873/2021`, que prevê prioridade legal para mulheres vítimas de violência doméstica no DF e valor fixo de R$ 250,00).
+- **Motivo da escolha:**
+  1. **Regras objetivas e auditáveis em norma oficial (SINJ-DF):** possuem critérios determinísticos claros (residência no DF, inscrição no CadÚnico, teto de renda familiar per capita de até meio salário mínimo, necessidade de afastamento do lar/medida protetiva ou encaminhamento pela rede especializada do DF — Casa da Mulher Brasileira, CEAM, DEAM, Defensoria ou CREAS).
+  2. **Alinhamento direto com as personas e o caso de uso:** responde diretamente à barreira de dependência financeira e habitacional para romper o ciclo da violência, complementando no plano distrital o auxílio-aluguel federal da `Lei nº 14.674/2023` (art. 23, VI da Lei Maria da Penha).
+  3. **Sincronia com o RAG jurídico (`backend/config/fontes.yaml`):** os textos integrais consolidados já foram ingeridos diretamente do SINJ-DF.
+
 ### Validação
 `scripts/validar_dados.py` confere colunas obrigatórias preenchidas, URLs de domínio oficial e datas válidas.
 
