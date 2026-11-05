@@ -37,6 +37,13 @@ A Lei 11.340/2006 tem poucas dezenas de artigos, então a base é pequena. O Dee
 - Após a geração, o código extrai os artigos citados e confere se estão entre os recuperados. Se não estiverem, a resposta é descartada e o sistema recusa.
 - A rota devolve `resposta` e `citacoes` (lei, artigo, url, data de acesso).
 
+Implementação (05/11, tarefas 2.1 e 2.2):
+- Rota `POST /juridico` com `{"pergunta"}`, separada de `/mensagem` (a tela passa a usá-la na tarefa 2.4). Devolve `{"resposta", "citacoes", "recusada"}`; cada citação traz `lei`, `artigo`, `citacao` (rótulo para exibir, ex.: "Lei 11.340/2006, art. 7º"), `url` e `data_acesso`. LLM indisponível: 503 com o Ligue 180, como em `/mensagem`.
+- Recupera os 5 trechos do eixo `juridico` (decisão de `s2-base-juridica-unificada`). No prompt, cada trecho vai com o rótulo "[Lei 11.340/2006, art. 7º]", e a instrução pede a citação nesse formato, só em português, sem prometer resultado ("o juiz pode conceder", não "você tem direito").
+- Verificação de citação (`app/rag/resposta.py`): extrai cada referência a artigo ("art. 7º", "artigo 5", "arts. 18, 19 e 22") e a associa à norma mencionada mais perto no texto (até 80 caracteres; "Lei Maria da Penha" conta como Lei 11.340/2006). A resposta é descartada se citar um artigo não recuperado, um artigo recuperado atribuído a outra norma, uma norma fora da base ou **nenhum** artigo (a spec exige citação em toda resposta jurídica). Descartada, a rota devolve a recusa com o Ligue 180 e a Defensoria Pública do DF, sem nada do texto do LLM. A verificação é por artigo; o inciso citado não é conferido.
+- O índice é montado uma vez por processo (`indice_padrao()`) e aquecido em segundo plano quando o servidor sobe: `/saude` responde na hora e uma pergunta que chegue antes aguarda o índice (cerca de 20 s em CPU).
+- Alternativa descartada: aceitar respostas sem citação quando o LLM só explica. Contraria a spec e, no teste com o `qwen2.5:7b-instruct`, as respostas sem citação foram justamente as de conteúdo errado (ex.: "o importante é que exista coabitação", o oposto do art. 5º, III).
+
 ### Recusa por baixa similaridade
 Se a maior similaridade ficar abaixo de um limite, o sistema recusa sem chamar o LLM. O limite inicial é calibrado com as 10 perguntas do teste rápido e algumas perguntas fora do tema.
 
@@ -48,4 +55,6 @@ Se a maior similaridade ficar abaixo de um limite, o sistema recusa sem chamar o
 - **Modelo de embeddings pesa na memória do deploy**: o `e5-base` usa cerca de 1,1 GB; considerado na escolha da plataforma (`s2-plataforma-base`).
 - **Teste rápido pequeno**: 10 perguntas escritas pela equipe podem favorecer um modelo por acaso. A comparação será refeita com as 50 perguntas da S3.
 - **Limite de similaridade mal calibrado**: alto demais gera recusas desnecessárias; baixo demais deixa passar respostas fracas. Será recalibrado com as 50 perguntas da S3.
+- **Citação certa não garante conteúdo certo**: a verificação confere se o artigo citado foi recuperado, não se a explicação está correta. A precisão jurídica é medida na S3 (LLM juiz + revisão em dupla).
+- **Modelo local troca de idioma**: em 05/11, o `qwen2.5:7b-instruct` respondeu em chinês em 1 das 10 perguntas do teste rápido ("a polícia pode tirar ele de casa na hora…", art. 12-C), 5 de 5 vezes, mesmo com a instrução de idioma reforçada e temperatura 0. A citação estava certa, então a verificação aprovou. Pendente: decidir se a verificação também recusa respostas fora do português.
 - **Mudanças no HTML do Planalto quebram a ingestão**: o texto processado fica versionado em `dados/leis/` e só é regenerado na revisão mensal.

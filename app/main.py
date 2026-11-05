@@ -1,6 +1,8 @@
 """Aplicação FastAPI: rotas do backend e a PWA estática em web/."""
 import logging
 import mimetypes
+import threading
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
@@ -12,6 +14,7 @@ from pydantic import BaseModel, Field
 from app import llm
 from app.config import ConfigIncompleta
 from app.logs import registrar_requisicao
+from app.rag import resposta as resposta_juridica
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
 
@@ -31,7 +34,22 @@ INDISPONIVEL = (
     "Se precisar falar com alguém, ligue 180 (gratuito, 24 horas)."
 )
 
-app = FastAPI(title="Rede Lilás", docs_url=None, redoc_url=None, openapi_url=None)
+def indice_juridico():
+    # Import tardio: o modelo de embeddings (torch) só carrega quando o índice é usado.
+    from app.rag import indice
+
+    return indice.indice_padrao()
+
+
+@asynccontextmanager
+async def _ciclo_de_vida(_app):
+    # Monta o índice em segundo plano (cerca de 20 s em CPU) para a primeira pergunta não esperar.
+    # O servidor já responde enquanto isso; uma pergunta que chegue antes aguarda o índice ficar pronto.
+    threading.Thread(target=indice_juridico, name="indice-juridico", daemon=True).start()
+    yield
+
+
+app = FastAPI(title="Rede Lilás", docs_url=None, redoc_url=None, openapi_url=None, lifespan=_ciclo_de_vida)
 app.middleware("http")(registrar_requisicao)
 
 
@@ -66,6 +84,25 @@ def mensagem(corpo: Mensagem, response: Response, cliente=Depends(cliente_llm, u
     mensagens.append({"role": "user", "content": corpo.texto})
     try:
         return {"resposta": cliente.responder(mensagens)}
+    except llm.LLMIndisponivel:
+        return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
+
+
+class PerguntaJuridica(BaseModel):
+    pergunta: str = Field(min_length=1, max_length=2000)
+
+
+@app.post("/juridico")
+def juridico(
+    corpo: PerguntaJuridica,
+    response: Response,
+    cliente=Depends(cliente_llm, use_cache=False),
+    indice=Depends(indice_juridico),
+):
+    """Resposta com as citações conferidas, ou a recusa com o Ligue 180 e a Defensoria Pública do DF."""
+    response.headers["Cache-Control"] = "no-store"
+    try:
+        return resposta_juridica.responder(corpo.pergunta, indice, cliente)
     except llm.LLMIndisponivel:
         return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
 
