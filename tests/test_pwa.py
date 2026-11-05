@@ -6,9 +6,9 @@ import re
 import pytest
 from fastapi.testclient import TestClient
 
-from app import llm
+from app import llm, main
 from app.config import TIMEOUT_PADRAO, ConfigIncompleta
-from app.main import app, cliente_llm
+from app.main import app
 
 # Frase fictícia: nunca usar relatos reais em testes.
 PERGUNTA = "Pergunta fictícia de teste sobre auxílio"
@@ -27,12 +27,14 @@ class LLMFalso:
 
 @pytest.fixture
 def cliente():
+    # As rotas chamam main.cliente_llm() depois da checagem de risco; os testes trocam a função.
+    original = main.cliente_llm
     yield TestClient(app)
-    app.dependency_overrides.clear()
+    main.cliente_llm = original
 
 
 def usar(llm_falso):
-    app.dependency_overrides[cliente_llm] = lambda: llm_falso
+    main.cliente_llm = lambda: llm_falso
     return llm_falso
 
 
@@ -111,7 +113,7 @@ def test_sem_configuracao_responde_indisponivel(cliente):
     def sem_config():
         raise ConfigIncompleta("Variável de ambiente não definida: LLM_MODEL")
 
-    app.dependency_overrides[cliente_llm] = sem_config
+    main.cliente_llm = sem_config
     resposta = cliente.post("/mensagem", json={"texto": PERGUNTA})
     assert resposta.status_code == 503
     assert "LLM_MODEL" not in resposta.text

@@ -46,6 +46,8 @@ Minúsculas, remoção de acentos (decomposição NFD e remoção de marcas), es
 
 A camada do backend protege contra uma PWA desatualizada; a da PWA garante tempo e funcionamento offline.
 
+Implementação no backend (05/11): a checagem roda nas **duas** rotas de conversa, `/juridico` (que a tela usa desde `s2-rag-juridico`) e `/mensagem`, e vem **antes** de obter o cliente de LLM e o índice. Assim o alerta não depende de o LLM estar configurado (spec `plataforma`, "Provedor indisponível") e não espera a montagem do índice ao subir o servidor (medido: 4 ms logo após o início). Com risco, a rota devolve `{"risco_imediato": true, "categoria", "resposta"}`, com o texto do alerta, e não chama o LLM.
+
 ### Suíte de testes
 `tests/casos_risco.yaml`, com cerca de 30 frases fictícias de risco e 30 de não risco, escritas pela equipe. O teste falha se qualquer frase de risco não disparar o alerta. Falsos positivos são contados e reportados, mas não reprovam a suíte.
 

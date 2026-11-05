@@ -12,6 +12,13 @@ from pathlib import Path
 
 ARQUIVO = Path(__file__).resolve().parents[1] / "regras" / "risco_imediato.json"
 
+# Mesmo texto da tela de alerta da PWA (web/app.js), que também funciona sem conexão.
+ALERTA = (
+    "Você pode estar em perigo agora. Ligue 190 (Polícia Militar). "
+    "Se a pessoa em perigo for outra, ligue 190 e informe o endereço dela. "
+    "Para conversar com alguém, ligue 180 (gratuito, 24 horas)."
+)
+
 # Marcas de acento que a decomposição NFD separa da letra (mesma faixa usada no JavaScript).
 ACENTOS = re.compile(r"[\u0300-\u036f]")
 ESPACOS = re.compile(r"\s+")

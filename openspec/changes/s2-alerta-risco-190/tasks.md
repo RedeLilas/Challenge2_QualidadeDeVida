@@ -9,7 +9,7 @@
 
 ## 2. Integração (sexta, 06/11)
 
-- [ ] 2.1 Chamar `app/risco.py` na rota de mensagem antes do LLM; verificação: teste que envia frase de risco e confirma que o cliente de LLM não foi chamado
+- [x] 2.1 Chamar `app/risco.py` na rota de mensagem antes do LLM; verificação: teste que envia frase de risco e confirma que o cliente de LLM não foi chamado
 - [ ] 2.2 Implementar a normalização e a avaliação em `web/app.js` usando o mesmo JSON; verificação manual com 5 frases da suíte, online e offline
 - [ ] 2.3 Criar a tela de alerta com `tel:190` e o Ligue 180; verificação: medir no celular o tempo entre enviar e ver o alerta (meta ≤ 2 s)
 - [ ] 2.4 Atualizar o status no `ROADMAP.md` e arquivar a mudança
