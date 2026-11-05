@@ -1,8 +1,9 @@
-"""Coleta as normas de config/fontes.yaml, segmenta por dispositivo e gera relatório de alterações.
+"""Coleta as normas de dados/fontes/fontes.yaml, segmenta por dispositivo e gera relatório de alterações.
 
-Não altera o índice. Revise data/relatorios/<data>.md e depois rode scripts/indexar.py.
+Não altera os trechos do índice. Revise dados/fontes/relatorios/<data>.md e depois
+rode app.rag.ingestao.
 
-Uso: python scripts/ingerir.py [--norma lei-11340-2006] [--arquivo pagina.htm]
+Uso: uv run python -m app.rag.coleta [--norma lei-11340-2006] [--arquivo pagina.htm]
 """
 import argparse
 import sys
@@ -11,11 +12,9 @@ from pathlib import Path
 
 import yaml
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app.rag import planalto, versoes
 
-from app.ingestao import planalto, versoes  # noqa: E402
-
-FONTES = Path(__file__).resolve().parents[1] / "config" / "fontes.yaml"
+FONTES = versoes.FONTES / "fontes.yaml"
 
 
 def registros(norma: dict, resultado: planalto.ResultadoParse, data: str, hash_documento: str) -> list[dict]:
@@ -47,7 +46,13 @@ def registros(norma: dict, resultado: planalto.ResultadoParse, data: str, hash_d
     return saida
 
 
-def secao_relatorio(norma: dict, novos: list[dict], anterior: Path | None, resultado: planalto.ResultadoParse) -> str:
+def secao_relatorio(
+    norma: dict,
+    novos: list[dict],
+    anterior: Path | None,
+    resultado: planalto.ResultadoParse,
+    reprocessamento: bool = False,
+) -> str:
     linhas = [f"## {norma['titulo']}", f"- URN: `{norma['urn']}`", f"- Dispositivos: {len(novos)}"]
     if resultado.duplicados:
         linhas.append(f"- **Atenção, IDs duplicados:** {', '.join(resultado.duplicados)}")
@@ -57,12 +62,17 @@ def secao_relatorio(norma: dict, novos: list[dict], anterior: Path | None, resul
     else:
         antigos = versoes.carregar(anterior)
         linhas.append(f"- Comparado com: `{anterior.name}`")
-        if antigos and antigos[0]["hash_documento"] == novos[0]["hash_documento"]:
+        # No reprocessamento o HTML é o mesmo e o que muda é o leitor: comparar sempre os dispositivos.
+        if not reprocessamento and antigos and antigos[0]["hash_documento"] == novos[0]["hash_documento"]:
             linhas.append("- HTML idêntico à coleta anterior.")
         else:
             diff = versoes.comparar(antigos, novos)
             if not any(diff.values()):
-                linhas.append("- HTML mudou, mas nenhum dispositivo mudou (provável mudança de formatação).")
+                linhas.append(
+                    "- Nenhum dispositivo mudou com o leitor atual."
+                    if reprocessamento
+                    else "- HTML mudou, mas nenhum dispositivo mudou (provável mudança de formatação)."
+                )
             for chave, rotulo in [
                 ("incluidos", "Incluídos"),
                 ("removidos", "Removidos"),
@@ -83,6 +93,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--norma", help="id da norma em fontes.yaml; padrão: todas")
     parser.add_argument("--arquivo", type=Path, help="HTML já baixado, em vez de baixar (só com --norma)")
+    parser.add_argument(
+        "--reprocessar",
+        action="store_true",
+        help="relê o HTML da última coleta em dados/fontes/raw, sem baixar; mantém a data da coleta",
+    )
     args = parser.parse_args()
 
     normas = yaml.safe_load(FONTES.read_text(encoding="utf-8"))["normas"]
@@ -92,13 +107,24 @@ def main() -> None:
             sys.exit(f"Norma não encontrada em fontes.yaml: {args.norma}")
     elif args.arquivo:
         sys.exit("--arquivo exige --norma")
+    if args.arquivo and args.reprocessar:
+        sys.exit("--arquivo e --reprocessar não combinam")
 
-    data = date.today().isoformat()
+    hoje = date.today().isoformat()
     secoes = []
     for norma in normas:
-        print(f"Coletando {norma['id']}...")
-        conteudo = args.arquivo.read_bytes() if args.arquivo else planalto.baixar(norma["url"])
-        versoes.salvar_raw(norma["id"], data, conteudo)
+        if args.reprocessar:
+            raw = versoes.ultimo_raw(norma["id"])
+            if raw is None:
+                sys.exit(f"Sem HTML coletado para {norma['id']} em dados/fontes/raw.")
+            # A data dos dispositivos é a da coleta do HTML, não a de hoje: é a data de acesso citada.
+            data, conteudo = raw.name[:10], raw.read_bytes()
+            print(f"Reprocessando {norma['id']} ({raw.name})...")
+        else:
+            data = hoje
+            print(f"Coletando {norma['id']}...")
+            conteudo = args.arquivo.read_bytes() if args.arquivo else planalto.baixar(norma["url"])
+            versoes.salvar_raw(norma["id"], data, conteudo)
 
         resultado = planalto.parse(planalto.decodificar(conteudo))
         if norma.get("artigos"):
@@ -107,17 +133,21 @@ def main() -> None:
             resultado.duplicados = [i for i in resultado.duplicados if any(d.id == i for d in resultado.dispositivos)]
             resultado.ignorados = []
         if not resultado.dispositivos:
-            sys.exit(f"Nenhum dispositivo extraído de {norma['id']}: verifique o HTML em data/raw.")
+            sys.exit(f"Nenhum dispositivo extraído de {norma['id']}: verifique o HTML em dados/fontes/raw.")
 
         novos = registros(norma, resultado, data, versoes.hash_bytes(conteudo))
-        anteriores = [v for v in versoes.versoes_processadas(norma["id"]) if v.stem != data]
+        if args.reprocessar:
+            # Compara com a versão da mesma data que está sendo substituída.
+            anteriores = [v for v in versoes.versoes_processadas(norma["id"]) if v.stem == data]
+        else:
+            anteriores = [v for v in versoes.versoes_processadas(norma["id"]) if v.stem != data]
         anterior = anteriores[-1] if anteriores else None
+        secoes.append(secao_relatorio(norma, novos, anterior, resultado, args.reprocessar))
 
         caminho = versoes.salvar_processado(norma["id"], data, novos)
-        secoes.append(secao_relatorio(norma, novos, anterior, resultado))
         print(f"  {len(novos)} dispositivos, {len(resultado.ignorados)} parágrafos ignorados -> {caminho}")
 
-    relatorio = versoes.escrever_relatorio(data, secoes)
+    relatorio = versoes.escrever_relatorio(f"{hoje}-reprocessamento" if args.reprocessar else hoje, secoes)
     print(f"Relatório: {relatorio}")
 
 
