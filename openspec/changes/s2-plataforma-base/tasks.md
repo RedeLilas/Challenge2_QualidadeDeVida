@@ -2,7 +2,7 @@
 
 ## 1. Esqueleto do backend (quinta, 05/11)
 
-- [ ] 1.1 Criar o projeto com `uv` (FastAPI, uvicorn, openai, pytest) e a estrutura `app/`, `web/`, `regras/`, `dados/`, `tests/`; verificação: `uv run pytest` passa com um teste de saúde (`GET /saude` → 200)
+- [x] 1.1 Criar o projeto com `uv` (FastAPI, uvicorn, openai, pytest) e a estrutura `app/`, `web/`, `regras/`, `dados/`, `tests/`; verificação: `uv run pytest` passa com um teste de saúde (`GET /saude` → 200)
 - [ ] 1.2 Criar `app/config.py` lendo `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`, e `.env.example` sem valores reais; verificação: teste que falha com mensagem clara se a variável faltar
 - [ ] 1.3 Criar `app/llm.py` com o cliente único e rodar contra o Ollama local; verificação: teste com cliente simulado + uma chamada manual ao modelo local
 - [ ] 1.4 Criar o middleware de log sem conteúdo; verificação: teste que envia uma mensagem e confirma que o texto não aparece no log
