@@ -61,6 +61,13 @@ def test_resposta_vazia_vira_llm_indisponivel():
         ClienteLLM(CONFIG, cliente=OpenAISimulado(resposta=None)).responder(MENSAGENS)
 
 
+def test_usa_o_tempo_limite_da_config_e_nao_repete_a_chamada():
+    # Repetir uma chamada lenta só dobra a espera; quem decide tentar de novo é a usuária.
+    cliente = ClienteLLM(Config(base_url=CONFIG.base_url, model=CONFIG.model, api_key="x", timeout=12.0))
+    assert cliente._cliente.timeout == 12.0
+    assert cliente._cliente.max_retries == 0
+
+
 def test_troca_de_provedor_so_pela_config():
     deepseek = Config(base_url="https://api.deepseek.com", model="deepseek-chat", api_key="chave-de-teste")
     cliente = ClienteLLM(deepseek)

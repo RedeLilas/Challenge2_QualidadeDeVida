@@ -4,7 +4,9 @@
 // Site neutro da saída rápida. location.replace() tira esta página do histórico.
 const SITE_NEUTRO = "https://www.climatempo.com.br/previsao-do-tempo/cidade/61/brasilia-df";
 const MAX_HISTORICO = 20;
-const TEMPO_LIMITE_MS = 75000; // margem para o LLM local; a meta em produção é p95 ≤ 10 s
+// Um pouco acima do LLM_TIMEOUT do servidor (padrão 30 s): o servidor desiste primeiro e
+// devolve a mensagem com o Ligue 180. Este limite só vale quando a conexão cai.
+const TEMPO_LIMITE_MS = 35000;
 
 const TEXTOS = {
   semInternet: "Sem internet. Sua mensagem não foi enviada. Tente de novo quando tiver conexão.",

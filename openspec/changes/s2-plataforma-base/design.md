@@ -43,6 +43,8 @@ Não exige build, é leve para celular básico e qualquer pessoa da equipe conse
 ### Cliente de LLM compatível com OpenAI
 O Ollama expõe `http://localhost:11434/v1` e o DeepSeek expõe `https://api.deepseek.com`, ambos no protocolo da OpenAI. Um único cliente (pacote `openai`) recebe `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`. Modelo local para testes: `qwen2.5:7b-instruct` (confirmado em 05/11; responde em 2–3 s na máquina da equipe). O `gemma4:12b-it-qat` foi testado e descartado: gasta cerca de 30 s raciocinando antes de responder e estoura o tempo limite da rota.
 
+**Tempo limite:** o servidor espera o LLM por `LLM_TIMEOUT` segundos (opcional, padrão 30) e **não** repete a chamada; ao estourar, responde 503 com a indicação do Ligue 180. A tela (`TEMPO_LIMITE_MS` em `web/app.js`, 35 s) espera um pouco mais que o servidor, para que quem desista primeiro seja o servidor e a mensagem com o 180 chegue à usuária. Antes eram 60 s com 1 nova tentativa no servidor (até cerca de 2 min) contra 75 s na tela: a tela desistia sem mostrar o 180 e o servidor seguia gerando uma resposta que ninguém leria, atrasando a próxima pergunta. Alternativa descartada: manter a nova tentativa automática, que dobra a espera no pior caso. O valor de 30 s dá margem ao prompt maior do RAG no modelo local; a calibração final é na S6, com o modelo de produção e a meta de p95 ≤ 10 s.
+
 ### Saída rápida
 Botão fixo em todas as telas. Ao tocar: limpa o estado da conversa em memória e chama `location.replace()` para um site neutro (ex.: previsão do tempo). O `replace` não deixa a página no histórico do navegador. A conversa nunca vai para `localStorage`.
 

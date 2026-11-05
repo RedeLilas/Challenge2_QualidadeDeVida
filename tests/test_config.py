@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from app.config import VARIAVEIS, ConfigIncompleta, carregar
+from app.config import TIMEOUT_PADRAO, VARIAVEIS, ConfigIncompleta, carregar
 
 COMPLETO = {
     "LLM_BASE_URL": "http://localhost:11434/v1",
@@ -39,6 +39,20 @@ def test_lista_todas_as_ausentes_de_uma_vez():
     with pytest.raises(ConfigIncompleta) as erro:
         carregar({})
     assert all(v in str(erro.value) for v in VARIAVEIS)
+
+
+def test_tempo_limite_padrao():
+    assert carregar(COMPLETO).timeout == TIMEOUT_PADRAO == 30.0
+
+
+def test_tempo_limite_configuravel():
+    assert carregar({**COMPLETO, "LLM_TIMEOUT": "12.5"}).timeout == 12.5
+
+
+@pytest.mark.parametrize("valor", ["abc", "0", "-5", "nan", "inf"])
+def test_tempo_limite_invalido_falha_com_mensagem_clara(valor):
+    with pytest.raises(ConfigIncompleta, match="LLM_TIMEOUT"):
+        carregar({**COMPLETO, "LLM_TIMEOUT": valor})
 
 
 def test_env_example_tem_as_variaveis_sem_chave_real():

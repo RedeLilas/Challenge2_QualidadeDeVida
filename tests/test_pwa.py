@@ -1,12 +1,13 @@
 """PWA servida pelo FastAPI e rota de mensagem (tarefas 2.1 a 2.3 de s2-plataforma-base)."""
 import json
 import logging
+import re
 
 import pytest
 from fastapi.testclient import TestClient
 
 from app import llm
-from app.config import ConfigIncompleta
+from app.config import TIMEOUT_PADRAO, ConfigIncompleta
 from app.main import app, cliente_llm
 
 # Frase fictícia: nunca usar relatos reais em testes.
@@ -75,6 +76,14 @@ def test_interface_nao_usa_armazenamento_do_aparelho(cliente):
 def test_saida_rapida_substitui_a_pagina(cliente):
     codigo = cliente.get("/app.js").text
     assert "location.replace(SITE_NEUTRO)" in codigo
+
+
+def test_tela_espera_mais_que_o_servidor(cliente):
+    # O servidor desiste primeiro e devolve a mensagem com o Ligue 180; o limite da tela
+    # é só a rede de segurança para quando a conexão cai.
+    codigo = cliente.get("/app.js").text
+    limite_ms = int(re.search(r"const TEMPO_LIMITE_MS = (\d+);", codigo).group(1))
+    assert TIMEOUT_PADRAO * 1000 < limite_ms <= TIMEOUT_PADRAO * 1000 + 10_000
 
 
 def test_mensagem_responde_com_o_llm(cliente):

@@ -26,10 +26,12 @@ class LLMIndisponivel(RuntimeError):
 
 
 class ClienteLLM:
-    def __init__(self, cfg: config.Config, cliente: openai.OpenAI | None = None, timeout: float = 60.0):
+    def __init__(self, cfg: config.Config, cliente: openai.OpenAI | None = None):
         self.modelo = cfg.model
+        # Sem nova tentativa automática: repetir uma chamada lenta só dobra a espera.
+        # A tela mostra "tente de novo" e a usuária decide.
         self._cliente = cliente or openai.OpenAI(
-            base_url=cfg.base_url, api_key=cfg.api_key, timeout=timeout, max_retries=1
+            base_url=cfg.base_url, api_key=cfg.api_key, timeout=cfg.timeout, max_retries=0
         )
 
     def responder(self, mensagens: list[dict], temperatura: float = 0.2) -> str:
