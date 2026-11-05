@@ -8,8 +8,9 @@
 # As frases imitam como se escreve com pressa no celular: sem acento, em maiúsculas, com
 # erros de digitação comuns ("matah") e em terceira pessoa (pessoa de confiança ajudando outra).
 #
-# Revisão em dupla: PENDENTE. Ao revisar, acrescente frases que deveriam disparar e não
-# disparam; a correção é sempre ampliar regras/risco_imediato.json, nunca tirar a frase daqui.
+# Revisão em dupla: feita em 05/11/2026. Em revisões futuras, acrescente frases que deveriam
+# disparar e não disparam; a correção é sempre ampliar regras/risco_imediato.json, nunca tirar a
+# frase daqui.
 
 risco:
   # Arma presente
