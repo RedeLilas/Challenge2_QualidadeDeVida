@@ -7,8 +7,8 @@ import logging
 import pytest
 from fastapi.testclient import TestClient
 
-from app import llm
-from app.main import app, cliente_llm, indice_juridico
+from app import llm, main
+from app.main import app
 from app.rag.resposta import LIMITE_SIMILARIDADE, RECUSA, em_portugues, extrair_referencias
 
 # Pergunta fictícia: nunca usar relatos reais em testes.
@@ -62,14 +62,15 @@ class LLMFalso:
 
 @pytest.fixture
 def cliente():
+    originais = main.cliente_llm, main.indice_juridico
     yield TestClient(app)
-    app.dependency_overrides.clear()
+    main.cliente_llm, main.indice_juridico = originais
 
 
 def usar(resposta_llm="", erro=None, indice=None):
     falso_llm, falso_indice = LLMFalso(resposta_llm, erro), indice or IndiceFalso()
-    app.dependency_overrides[cliente_llm] = lambda: falso_llm
-    app.dependency_overrides[indice_juridico] = lambda: falso_indice
+    main.cliente_llm = lambda: falso_llm
+    main.indice_juridico = lambda: falso_indice
     return falso_llm, falso_indice
 
 

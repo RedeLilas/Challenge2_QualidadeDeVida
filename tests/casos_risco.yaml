@@ -1,0 +1,124 @@
+# Suíte de risco imediato / 190 (s2-alerta-risco-190, tarefa 1.1).
+#
+# Frases FICTÍCIAS, escritas pela equipe. Nunca usar relatos reais.
+# - risco: TODAS precisam disparar o alerta. Um falso negativo reprova a suíte.
+# - nao_risco: o ideal é não disparar; falsos positivos são contados e relatados, mas não
+#   reprovam (um alerta desnecessário custa pouco, um alerta perdido pode custar uma vida).
+#
+# As frases imitam como se escreve com pressa no celular: sem acento, em maiúsculas, com
+# erros de digitação comuns ("matah") e em terceira pessoa (pessoa de confiança ajudando outra).
+#
+# Revisão em dupla: feita em 05/11/2026. Em revisões futuras, acrescente frases que deveriam
+# disparar e não disparam; a correção é sempre ampliar regras/risco_imediato.json, nunca tirar a
+# frase daqui.
+
+risco:
+  # Arma presente
+  - frase: "ele está aqui em casa com uma faca"
+    categoria: arma
+  - frase: "ELE TA COM UMA ARMA APONTANDO PRA MIM"
+    categoria: arma
+  - frase: "meu marido pegou o facão e disse que vai me furar"
+    categoria: arma
+  - frase: "ele ta armado na porta de casa"
+    categoria: arma
+  - frase: "minha vizinha está trancada em casa com o marido armado"
+    categoria: arma
+  - frase: "ele chegou bebado com um revolver na mao"
+    categoria: arma
+
+  # Ameaça de morte iminente
+  - frase: "ele disse que vai me matar hoje"
+    categoria: ameaca_morte
+  - frase: "ele vai me matah quando chegar"
+    categoria: ameaca_morte
+  - frase: "ele falou que se eu sair ele me mata"
+    categoria: ameaca_morte
+  - frase: "jurou que vai acabar comigo hoje"
+    categoria: ameaca_morte
+  - frase: "ameaçou tacar fogo na casa comigo dentro"
+    categoria: ameaca_morte
+  - frase: "pelo amor de deus ele quer me matar"
+    categoria: ameaca_morte
+  - frase: "meu ex mandou mensagem dizendo que vem aqui me matar"
+    categoria: ameaca_morte
+
+  # Agressão em andamento
+  - frase: "ele esta me batendo agora"
+    categoria: agressao_em_andamento
+  - frase: "socorro"
+    categoria: agressao_em_andamento
+  - frase: "ele ta me enforcando"
+    categoria: agressao_em_andamento
+  - frase: "o vizinho está espancando a mulher dele agora"
+    categoria: agressao_em_andamento
+  - frase: "ele esta arrombando a porta do quarto"
+    categoria: agressao_em_andamento
+  - frase: "ME AJUDA ELE TA ME ESGANANDO"
+    categoria: agressao_em_andamento
+
+  # Cárcere (trancada, impedida de sair)
+  - frase: "ele me trancou no quarto e levou a chave"
+    categoria: carcere
+  - frase: "estou presa em casa e ele não me deixa sair"
+    categoria: carcere
+  - frase: "ele nao deixa eu sair de casa faz dois dias"
+    categoria: carcere
+  - frase: "minha irmã está trancada no banheiro e ele está do lado de fora"
+    categoria: carcere
+
+  # Ferimento grave
+  - frase: "estou sangrando muito e ele foi embora"
+    categoria: ferimento_grave
+  - frase: "ela desmaiou depois que ele bateu nela"
+    categoria: ferimento_grave
+  - frase: "acho que ele quebrou meu braço"
+    categoria: ferimento_grave
+  - frase: "levei uma facada na barriga"
+    categoria: ferimento_grave
+  - frase: "nao consigo respirar direito depois do soco"
+    categoria: ferimento_grave
+
+  # Criança em perigo imediato
+  - frase: "ele esta batendo no meu filho agora"
+    categoria: crianca_em_perigo
+  - frase: "ele pegou minha filha e disse que vai sumir com ela"
+    categoria: crianca_em_perigo
+  - frase: "ele ameaçou matar as crianças"
+    categoria: crianca_em_perigo
+  - frase: "ELE ESTÁ COM UMA FACA NO PESCOÇO DO MEU FILHO"
+    categoria: crianca_em_perigo
+  - frase: "meu bebe ta trancado no carro com ele"
+    categoria: crianca_em_perigo
+
+nao_risco:
+  - "o que é medida protetiva?"
+  - "tenho direito a auxílio-aluguel?"
+  - "ele quebrou meu celular, isso é violência?"
+  - "meu companheiro controla todo o meu dinheiro"
+  - "ele me xinga de burra na frente dos outros"
+  - "como faço para pedir pensão para meus filhos?"
+  - "comprei uma faca nova para a cozinha"
+  - "quero saber como funciona o bolsa família"
+  - "meu filho está na escola e eu estou no trabalho"
+  - "onde fica a delegacia da mulher mais perto de Ceilândia?"
+  - "ele me ameaçou faz dois anos, hoje estamos separados"
+  - "preciso de um advogado gratuito"
+  - "o que é violência psicológica?"
+  - "minha filha caiu da bicicleta e ralou o joelho"
+  - "como funciona o cartão prato cheio?"
+  - "ele saiu de casa ontem e não voltou mais"
+  - "como tiro a segunda via do RG?"
+  - "posso mudar de cidade com meus filhos?"
+  - "a lei maria da penha vale para namorado?"
+  - "ele fica olhando meu celular escondido"
+  - "quero me separar mas não tenho para onde ir"
+  - "ele não me deixa trabalhar"
+  - "como declarar imposto de renda?"
+  - "meu ex não paga a pensão das crianças"
+  - "o que acontece se ele descumprir a medida protetiva?"
+  - "quanto tempo demora o processo?"
+  - "ele bebe todo fim de semana e fica agressivo"
+  - "tenho uma consulta no posto amanhã"
+  - "meu irmão está preso"
+  - "quais documentos preciso para o CadÚnico?"

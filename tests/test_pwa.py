@@ -6,9 +6,9 @@ import re
 import pytest
 from fastapi.testclient import TestClient
 
-from app import llm
+from app import llm, main
 from app.config import TIMEOUT_PADRAO, ConfigIncompleta
-from app.main import app, cliente_llm
+from app.main import app
 
 # Frase fictícia: nunca usar relatos reais em testes.
 PERGUNTA = "Pergunta fictícia de teste sobre auxílio"
@@ -27,12 +27,14 @@ class LLMFalso:
 
 @pytest.fixture
 def cliente():
+    # As rotas chamam main.cliente_llm() depois da checagem de risco; os testes trocam a função.
+    original = main.cliente_llm
     yield TestClient(app)
-    app.dependency_overrides.clear()
+    main.cliente_llm = original
 
 
 def usar(llm_falso):
-    app.dependency_overrides[cliente_llm] = lambda: llm_falso
+    main.cliente_llm = lambda: llm_falso
     return llm_falso
 
 
@@ -111,7 +113,7 @@ def test_sem_configuracao_responde_indisponivel(cliente):
     def sem_config():
         raise ConfigIncompleta("Variável de ambiente não definida: LLM_MODEL")
 
-    app.dependency_overrides[cliente_llm] = sem_config
+    main.cliente_llm = sem_config
     resposta = cliente.post("/mensagem", json={"texto": PERGUNTA})
     assert resposta.status_code == 503
     assert "LLM_MODEL" not in resposta.text
@@ -141,5 +143,33 @@ def test_tela_usa_a_rota_juridica_e_mostra_fontes_sem_link(cliente):
     assert 'const ROTA = "/juridico";' in codigo
     assert "JSON.stringify({ pergunta: texto })" in codigo
     assert "texto verificado em" in codigo
-    # Sem link para o site da lei: a página ficaria no histórico do navegador.
-    assert 'createElement("a")' not in codigo and ".href" not in codigo
+    # Sem link para sites (a página da lei ficaria no histórico do navegador); só tel:190 e tel:180.
+    assert "planalto" not in codigo
+    assert set(re.findall(r'\.href = "([^"]*)"', codigo)) == {"tel:190", "tel:180"}
+
+
+def test_alerta_de_190_na_tela_antes_do_envio_e_offline(cliente):
+    # s2-alerta-risco-190, tarefas 2.2 e 2.3. A paridade com o servidor está em test_risco_js.py.
+    html = cliente.get("/").text
+    assert html.index('src="/risco.js"') < html.index('src="/app.js"')
+    codigo = cliente.get("/app.js").text
+    # A checagem local vem antes do aviso de "sem internet" e do envio ao servidor.
+    assert codigo.index("Risco.avaliar(regrasDeRisco, texto)") < codigo.index("if (!navigator.onLine)")
+    assert codigo.index("Risco.avaliar(regrasDeRisco, texto)") < codigo.index("await fetch(ROTA")
+    assert "dados.risco_imediato" in codigo  # o servidor também pode mandar o alerta
+    sw = cliente.get("/sw.js").text
+    assert '"/risco.js"' in sw and '"/regras/risco_imediato.json"' in sw
+    regras = cliente.get("/regras/risco_imediato.json")
+    assert regras.status_code == 200 and regras.json()["regras"]
+
+
+@pytest.mark.parametrize("caminho", ["/", "/app.js", "/risco.js", "/styles.css", "/regras/risco_imediato.json"])
+def test_arquivos_da_tela_sempre_conferidos_com_o_servidor(cliente, caminho):
+    # Sem Cache-Control, o navegador reaproveitava o app.js antigo depois de uma atualização (05/11).
+    assert cliente.get(caminho).headers["cache-control"] == "no-cache"
+
+
+def test_service_worker_ignora_o_cache_http_ao_atualizar(cliente):
+    sw = cliente.get("/sw.js").text
+    assert 'new Request(url, { cache: "reload" })' in sw
+    assert 'fetch(pedido, { cache: "no-cache" })' in sw

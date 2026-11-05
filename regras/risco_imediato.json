@@ -1,0 +1,154 @@
+{
+  "versao": "2026-11-05",
+  "descricao": "Regras de risco imediato (190). Os padrões são aplicados ao texto normalizado: minúsculas, sem acentos e com espaços colapsados. Usam só a sintaxe de expressão regular comum a Python e JavaScript: sem lookbehind, sem grupos nomeados e sem flags dentro do padrão. Na dúvida, a regra deve disparar: um alerta desnecessário custa pouco, um alerta perdido pode custar uma vida.",
+  "categorias": {
+    "arma": "Arma presente no momento",
+    "ameaca_morte": "Ameaça de morte iminente",
+    "agressao_em_andamento": "Agressão acontecendo agora",
+    "carcere": "Trancada ou impedida de sair",
+    "ferimento_grave": "Ferimento grave",
+    "crianca_em_perigo": "Criança em perigo imediato"
+  },
+  "regras": [
+    {
+      "id": "arma-com-sinal-de-perigo",
+      "categoria": "arma",
+      "padrao": "\\b(faca|facas|facao|faquinha|canivete|arma|armas|revolver|pistola|espingarda|garrucha|machado|tesoura)\\b.*\\b(aqui|agora|na mao|apont\\w*|ameac\\w*|em casa|na porta|vindo|chegando|chegou|pescoco|me furar|me matar|me esfaquear)\\b",
+      "exemplo": "ele ta com uma arma apontando pra mim",
+      "justificativa": "Arma mencionada junto de presença, ameaça ou momento atual"
+    },
+    {
+      "id": "presenca-com-arma",
+      "categoria": "arma",
+      "padrao": "\\b(aqui|agora|apont\\w*|ameac\\w*|chegou|veio|esta|ta|tah|pegou)\\b.*\\b(faca|facas|facao|faquinha|canivete|arma|revolver|pistola|espingarda|garrucha|machado)\\b",
+      "exemplo": "ele esta aqui em casa com uma faca",
+      "justificativa": "Presença ou momento atual seguido de arma"
+    },
+    {
+      "id": "armado",
+      "categoria": "arma",
+      "padrao": "\\barmad[oa]s?\\b",
+      "exemplo": "ele ta armado na porta de casa",
+      "justificativa": "Agressor armado"
+    },
+    {
+      "id": "vai-matar",
+      "categoria": "ameaca_morte",
+      "padrao": "\\b(vai|vou|vem|quer|querendo|disse|falou|jurou|prometeu|ameac\\w*|tentou|tentando|pode)\\b.*\\b(matar|matah|mata|matala|matalo|matalas)\\b",
+      "exemplo": "ele disse que vai me matar hoje",
+      "justificativa": "Ameaça ou intenção de matar; 'matah' e 'mata' cobrem erros de digitação"
+    },
+    {
+      "id": "me-mata",
+      "categoria": "ameaca_morte",
+      "padrao": "\\bme (mata|matar|matah)\\b",
+      "exemplo": "ou eu fico ou ele me mata",
+      "justificativa": "Ameaça de morte em primeira pessoa"
+    },
+    {
+      "id": "acabar-comigo",
+      "categoria": "ameaca_morte",
+      "padrao": "\\b(acabar|acaba) com(igo| a minha vida| a vida dela| ela)\\b",
+      "exemplo": "jurou que vai acabar comigo hoje",
+      "justificativa": "Ameaça de morte por expressão comum"
+    },
+    {
+      "id": "fogo",
+      "categoria": "ameaca_morte",
+      "padrao": "\\b(tacar|taca|tacou|botar|bota|por|poe|atear|colocar|jogar|jogou) (fogo|alcool|gasolina)\\b",
+      "exemplo": "ameacou tacar fogo na casa comigo dentro",
+      "justificativa": "Ameaça de queimar"
+    },
+    {
+      "id": "tiro",
+      "categoria": "ameaca_morte",
+      "padrao": "\\b(dar|da|meter|enfiar) (um|uns) tiros?\\b",
+      "exemplo": "ele disse que vai me dar um tiro",
+      "justificativa": "Ameaça de tiro"
+    },
+    {
+      "id": "agressao-no-gerundio",
+      "categoria": "agressao_em_andamento",
+      "padrao": "\\b(batendo|espancando|enforcando|esganando|estrangulando|sufocando|chutando|socando|agredindo|esfaqueando|atacando|arrombando|invadindo)\\b",
+      "exemplo": "ele esta me batendo agora",
+      "justificativa": "Gerúndio indica agressão acontecendo agora"
+    },
+    {
+      "id": "socorro",
+      "categoria": "agressao_em_andamento",
+      "padrao": "\\bsocorro\\b",
+      "exemplo": "socorro",
+      "justificativa": "Pedido de socorro"
+    },
+    {
+      "id": "trancou",
+      "categoria": "carcere",
+      "padrao": "\\b(me|nos|ela|a|te) (trancou|tranca|trancaram|prendeu|prende)\\b",
+      "exemplo": "ele me trancou no quarto e levou a chave",
+      "justificativa": "Mantida trancada pelo agressor"
+    },
+    {
+      "id": "trancada",
+      "categoria": "carcere",
+      "padrao": "\\btrancad[oa]s?\\b",
+      "exemplo": "minha irma esta trancada no banheiro",
+      "justificativa": "Pessoa trancada"
+    },
+    {
+      "id": "presa-em-lugar",
+      "categoria": "carcere",
+      "padrao": "\\bpres[oa]s? (em casa|no quarto|no banheiro|dentro|aqui)\\b",
+      "exemplo": "estou presa em casa",
+      "justificativa": "Presa num lugar (não confundir com prisão do agressor)"
+    },
+    {
+      "id": "nao-deixa-sair",
+      "categoria": "carcere",
+      "padrao": "\\bnao (me |a |nos )?deixa(m)? (eu |ela |a gente )?sair\\b",
+      "exemplo": "ele nao me deixa sair",
+      "justificativa": "Impedida de sair"
+    },
+    {
+      "id": "chave",
+      "categoria": "carcere",
+      "padrao": "\\b(escondeu|levou|tirou|pegou) a chave\\b",
+      "exemplo": "ele escondeu a chave da porta",
+      "justificativa": "Chave retirada para impedir a saída"
+    },
+    {
+      "id": "ferimento",
+      "categoria": "ferimento_grave",
+      "padrao": "\\b(sangrando|sangue|sangrou|desmaiad[oa]|desmaiou|desacordad[oa]|inconsciente|facada|facadas|baleada|baleado|esfaquead[oa]|levei um tiro|tomei um tiro)\\b",
+      "exemplo": "estou sangrando muito",
+      "justificativa": "Sinal de ferimento grave"
+    },
+    {
+      "id": "sem-ar",
+      "categoria": "ferimento_grave",
+      "padrao": "\\bnao (consigo|consegue) respirar\\b",
+      "exemplo": "nao consigo respirar direito",
+      "justificativa": "Dificuldade para respirar"
+    },
+    {
+      "id": "osso-quebrado",
+      "categoria": "ferimento_grave",
+      "padrao": "\\bquebrou (o |a |meu |minha |o meu |a minha )?(braco|perna|costela|costelas|nariz|dente|dentes|mandibula|cabeca)\\b",
+      "exemplo": "acho que ele quebrou meu braco",
+      "justificativa": "Fratura"
+    },
+    {
+      "id": "crianca-e-perigo",
+      "categoria": "crianca_em_perigo",
+      "padrao": "\\b(filh[oa]s?|crianca|criancas|bebe|nene|menin[oa]s?)\\b.*\\b(batendo|espancando|machucando|apanhando|sangrando|trancad[oa]s?|faca|arma|matar|sumir|sequestr\\w*)\\b",
+      "exemplo": "meu filho esta apanhando dele",
+      "justificativa": "Criança mencionada junto de violência ou arma"
+    },
+    {
+      "id": "perigo-e-crianca",
+      "categoria": "crianca_em_perigo",
+      "padrao": "\\b(batendo|espancando|machucando|bateu|machucou|ameac\\w*|matar|pegou|levou|sumir com|sequestr\\w*)\\b.*\\b(filh[oa]s?|crianca|criancas|bebe|nene)\\b",
+      "exemplo": "ele pegou minha filha e foi embora",
+      "justificativa": "Violência ou retirada seguida de criança"
+    }
+  ]
+}

@@ -199,6 +199,39 @@ body {
 }
 .msg__fontes li + li { margin-top: 2px; }
 
+/* Alerta de 190: ocupa a largura da conversa e o botão de ligar é o elemento mais forte da tela. */
+.msg--alerta {
+  align-self: stretch;
+  max-width: 100%;
+  background: var(--azulejo);
+  border: 2px solid var(--cobalto);
+  white-space: normal;
+}
+.alerta__titulo { font-weight: 700; }
+.alerta__ligar {
+  display: block;
+  margin: 12px 0;
+  padding: 14px 16px;
+  min-height: 52px;
+  border-radius: var(--raio);
+  background: var(--cobalto);
+  color: var(--sobre-cobalto);
+  font-size: 1.375rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+.alerta__ligar:active { background: var(--cobalto-forte); }
+.alerta__secundario {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 10px 0;
+  min-height: 44px;
+  color: var(--tinta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .msg--erro {
   align-self: flex-start;
   background: var(--azulejo);

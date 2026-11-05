@@ -6,12 +6,12 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
-from fastapi import Depends, FastAPI, Response
+from fastapi import FastAPI, Response
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from app import llm
+from app import llm, risco
 from app.config import ConfigIncompleta
 from app.logs import registrar_requisicao
 from app.rag import resposta as resposta_juridica
@@ -65,6 +65,7 @@ class Mensagem(BaseModel):
 
 
 def cliente_llm() -> llm.ClienteLLM:
+    # Chamada dentro das rotas, depois da checagem de risco. Os testes trocam esta função.
     return llm.cliente()
 
 
@@ -73,10 +74,22 @@ def saude() -> dict:
     return {"status": "ok"}
 
 
+def alerta_de_risco(texto: str) -> dict | None:
+    """Resposta de alerta de 190 se o texto tiver sinal de risco imediato (regra, sem LLM)."""
+    resultado = risco.avaliar(texto)
+    if resultado is None:
+        return None
+    return {"risco_imediato": True, "categoria": resultado["categoria"], "resposta": risco.ALERTA}
+
+
 @app.post("/mensagem")
-def mensagem(corpo: Mensagem, response: Response, cliente=Depends(cliente_llm, use_cache=False)):
+def mensagem(corpo: Mensagem, response: Response):
     # Respostas com o texto da usuária nunca ficam em cache (navegador, proxy ou service worker).
     response.headers["Cache-Control"] = "no-store"
+    # O risco é checado antes de preparar o LLM: o alerta funciona mesmo sem LLM configurado.
+    if alerta := alerta_de_risco(corpo.texto):
+        return alerta
+    cliente = cliente_llm()
     mensagens = [{"role": "system", "content": INSTRUCOES}]
     mensagens += [
         {"role": "user" if t.papel == "usuaria" else "assistant", "content": t.texto} for t in corpo.historico
@@ -93,16 +106,15 @@ class PerguntaJuridica(BaseModel):
 
 
 @app.post("/juridico")
-def juridico(
-    corpo: PerguntaJuridica,
-    response: Response,
-    cliente=Depends(cliente_llm, use_cache=False),
-    indice=Depends(indice_juridico),
-):
-    """Resposta com as citações conferidas, ou a recusa com o Ligue 180 e a Defensoria Pública do DF."""
+def juridico(corpo: PerguntaJuridica, response: Response):
+    """Alerta de 190, resposta com as citações conferidas ou recusa com o Ligue 180 e a Defensoria."""
     response.headers["Cache-Control"] = "no-store"
+    # Antes do índice e do LLM: o alerta não espera o índice ser montado (cerca de 20 s ao subir)
+    # nem depende do LLM estar configurado.
+    if alerta := alerta_de_risco(corpo.pergunta):
+        return alerta
     try:
-        return resposta_juridica.responder(corpo.pergunta, indice, cliente)
+        return resposta_juridica.responder(corpo.pergunta, indice_juridico(), cliente_llm())
     except llm.LLMIndisponivel:
         return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
 
@@ -119,11 +131,17 @@ async def _cabecalhos_de_privacidade(request, call_next):
     # Ao sair para o site neutro, ele não fica sabendo de onde a usuária veio.
     resposta.headers.setdefault("Referrer-Policy", "no-referrer")
     resposta.headers.setdefault("X-Content-Type-Options", "nosniff")
+    # Sem isso o navegador reaproveita arquivos antigos por conta própria (cache heurístico), e uma
+    # tela ou regra de risco nova demora a chegar. no-cache guarda, mas confere com o servidor (ETag).
+    # As rotas da API já mandam no-store, que não é sobrescrito.
+    resposta.headers.setdefault("Cache-Control", "no-cache")
     if request.url.path == "/sw.js":
         # O service worker precisa ser revalidado para as atualizações chegarem.
         resposta.headers["Cache-Control"] = "no-cache"
     return resposta
 
 
+# Regras do alerta de 190, lidas pela PWA (web/risco.js) e guardadas pelo service worker.
+app.mount("/regras", StaticFiles(directory=WEB.parent / "regras"), name="regras")
 # Por último: as rotas da API acima têm prioridade sobre os arquivos estáticos.
 app.mount("/", StaticFiles(directory=WEB, html=True), name="web")
