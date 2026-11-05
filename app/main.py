@@ -1,16 +1,92 @@
-"""Aplicação FastAPI: rotas do backend (e, a partir da tarefa 2.1, a PWA em web/)."""
+"""Aplicação FastAPI: rotas do backend e a PWA estática em web/."""
 import logging
+import mimetypes
+from pathlib import Path
+from typing import Literal
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, Response
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
 
+from app import llm
+from app.config import ConfigIncompleta
 from app.logs import registrar_requisicao
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
 
-app = FastAPI(title="Rede Lilás")
+WEB = Path(__file__).resolve().parent.parent / "web"
+mimetypes.add_type("application/manifest+json", ".webmanifest")
+
+# Provisório até o orquestrador e o RAG: só garante o tom e o encaminhamento básico.
+INSTRUCOES = (
+    "Você responde em português do Brasil, com linguagem simples e frases curtas. "
+    "Quando usar um termo jurídico, explique-o em uma frase simples. "
+    "Não invente leis nem números de artigo. "
+    "Se a pessoa estiver em perigo agora, diga para ligar 190. "
+    "Para conversar com alguém, indique o Ligue 180 (gratuito, 24 horas)."
+)
+INDISPONIVEL = (
+    "Não consegui responder agora. Tente de novo em alguns instantes. "
+    "Se precisar falar com alguém, ligue 180 (gratuito, 24 horas)."
+)
+
+app = FastAPI(title="Rede Lilás", docs_url=None, redoc_url=None, openapi_url=None)
 app.middleware("http")(registrar_requisicao)
+
+
+class Turno(BaseModel):
+    papel: Literal["usuaria", "assistente"]
+    texto: str = Field(min_length=1, max_length=4000)
+
+
+class Mensagem(BaseModel):
+    texto: str = Field(min_length=1, max_length=2000)
+    # A conversa vive só na aba; o navegador reenvia os turnos anteriores a cada mensagem.
+    historico: list[Turno] = Field(default_factory=list, max_length=20)
+
+
+def cliente_llm() -> llm.ClienteLLM:
+    return llm.cliente()
 
 
 @app.get("/saude")
 def saude() -> dict:
     return {"status": "ok"}
+
+
+@app.post("/mensagem")
+def mensagem(corpo: Mensagem, response: Response, cliente=Depends(cliente_llm, use_cache=False)):
+    # Respostas com o texto da usuária nunca ficam em cache (navegador, proxy ou service worker).
+    response.headers["Cache-Control"] = "no-store"
+    mensagens = [{"role": "system", "content": INSTRUCOES}]
+    mensagens += [
+        {"role": "user" if t.papel == "usuaria" else "assistant", "content": t.texto} for t in corpo.historico
+    ]
+    mensagens.append({"role": "user", "content": corpo.texto})
+    try:
+        return {"resposta": cliente.responder(mensagens)}
+    except llm.LLMIndisponivel:
+        return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
+
+
+@app.exception_handler(ConfigIncompleta)
+def _sem_config(_request, _erro):
+    # Ambiente sem LLM configurado: a PWA mostra a mesma mensagem de indisponibilidade.
+    return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
+
+
+@app.middleware("http")
+async def _cabecalhos_de_privacidade(request, call_next):
+    resposta = await call_next(request)
+    # Ao sair para o site neutro, ele não fica sabendo de onde a usuária veio.
+    resposta.headers.setdefault("Referrer-Policy", "no-referrer")
+    resposta.headers.setdefault("X-Content-Type-Options", "nosniff")
+    if request.url.path == "/sw.js":
+        # O service worker precisa ser revalidado para as atualizações chegarem.
+        resposta.headers["Cache-Control"] = "no-cache"
+    return resposta
+
+
+# Por último: as rotas da API acima têm prioridade sobre os arquivos estáticos.
+app.mount("/", StaticFiles(directory=WEB, html=True), name="web")
