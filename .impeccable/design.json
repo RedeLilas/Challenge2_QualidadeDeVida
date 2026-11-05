@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T13:01:16+00:00",
+  "title": "Design System: Anotações",
+  "extensions": {
+    "colorMeta": {
+      "cobalto": {
+        "role": "primary",
+        "displayName": "Bulcão Cobalt",
+        "canonical": "#1e4597",
+        "tonalRamp": [
+          "#000728",
+          "#0b2150",
+          "#203e7c",
+          "#375dab",
+          "#5780d1",
+          "#80a4eb",
+          "#aacaff",
+          "#d6efff"
+        ]
+      },
+      "cobalto-forte": {
+        "role": "primary",
+        "displayName": "Deep Cobalt",
+        "canonical": "#163777",
+        "tonalRamp": [
+          "#010923",
+          "#102349",
+          "#264072",
+          "#3e609e",
+          "#5e82c3",
+          "#86a5df",
+          "#afcafa",
+          "#daf0ff"
+        ]
+      },
+      "topo": {
+        "role": "primary",
+        "displayName": "Header Cobalt",
+        "canonical": "#1e4597",
+        "tonalRamp": [
+          "#000728",
+          "#0b2150",
+          "#203e7c",
+          "#375dab",
+          "#5780d1",
+          "#80a4eb",
+          "#aacaff",
+          "#d6efff"
+        ]
+      },
+      "sobre-cobalto": {
+        "role": "primary",
+        "displayName": "On Cobalt",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "chao": {
+        "role": "neutral",
+        "displayName": "Chalk Ground",
+        "canonical": "#f4f6f9",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#242526",
+          "#414244",
+          "#606164",
+          "#818285",
+          "#a4a5a7",
+          "#c8c9cb",
+          "#edeef0"
+        ]
+      },
+      "azulejo": {
+        "role": "neutral",
+        "displayName": "Tile White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#142036",
+        "tonalRamp": [
+          "#060b15",
+          "#1d2533",
+          "#384255",
+          "#54627a",
+          "#75839c",
+          "#99a6bc",
+          "#bfcadd",
+          "#e6effe"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#4a5670",
+        "tonalRamp": [
+          "#070b15",
+          "#1e2533",
+          "#394255",
+          "#56617a",
+          "#76829c",
+          "#9aa5bc",
+          "#c0c9dd",
+          "#e7effe"
+        ]
+      },
+      "linha": {
+        "role": "neutral",
+        "displayName": "Joint Line",
+        "canonical": "#d5dce8",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252b",
+          "#3e424a",
+          "#5c616b",
+          "#7d838d",
+          "#a0a5ae",
+          "#c5c9d1",
+          "#ebeff5"
+        ]
+      },
+      "sair-pressionado": {
+        "role": "neutral",
+        "displayName": "Pressed Chalk",
+        "canonical": "#dfe6f3",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252b",
+          "#3e424a",
+          "#5c616c",
+          "#7d838d",
+          "#a0a5af",
+          "#c5c9d1",
+          "#ebeff5"
+        ]
+      },
+      "cobalto-escuro": {
+        "role": "primary",
+        "displayName": "Bulcão Cobalt (dark)",
+        "canonical": "#2c55a8",
+        "tonalRamp": [
+          "#000728",
+          "#0b2250",
+          "#203f7c",
+          "#375eab",
+          "#5780d0",
+          "#7fa5eb",
+          "#aacaff",
+          "#d6efff"
+        ]
+      },
+      "cobalto-forte-escuro": {
+        "role": "primary",
+        "displayName": "Deep Cobalt (dark)",
+        "canonical": "#3a66be",
+        "tonalRamp": [
+          "#000729",
+          "#0a2151",
+          "#1f3e7e",
+          "#355dad",
+          "#5580d3",
+          "#7ea4ed",
+          "#a9caff",
+          "#d5efff"
+        ]
+      },
+      "topo-escuro": {
+        "role": "primary",
+        "displayName": "Header Cobalt (dark)",
+        "canonical": "#13254d",
+        "tonalRamp": [
+          "#040a1b",
+          "#18243d",
+          "#314162",
+          "#4c618a",
+          "#6c82ae",
+          "#92a5cc",
+          "#b9caea",
+          "#e2efff"
+        ]
+      },
+      "chao-escuro": {
+        "role": "neutral",
+        "displayName": "Chalk Ground (dark)",
+        "canonical": "#0e1626",
+        "tonalRamp": [
+          "#080b12",
+          "#1f2530",
+          "#3b4251",
+          "#586174",
+          "#788396",
+          "#9ca5b7",
+          "#c2c9d8",
+          "#e9effa"
+        ]
+      },
+      "azulejo-escuro": {
+        "role": "neutral",
+        "displayName": "Tile White (dark)",
+        "canonical": "#172238",
+        "tonalRamp": [
+          "#070b14",
+          "#1e2533",
+          "#384255",
+          "#556179",
+          "#75839c",
+          "#9aa5bc",
+          "#c0cadc",
+          "#e7effe"
+        ]
+      },
+      "tinta-escuro": {
+        "role": "neutral",
+        "displayName": "Ink (dark)",
+        "canonical": "#e6ebf4",
+        "tonalRamp": [
+          "#0a0b0e",
+          "#232529",
+          "#3f4248",
+          "#5d6168",
+          "#7e828a",
+          "#a1a5ac",
+          "#c6c9cf",
+          "#eceef3"
+        ]
+      },
+      "tinta-suave-escuro": {
+        "role": "neutral",
+        "displayName": "Soft Ink (dark)",
+        "canonical": "#a9b4c8",
+        "tonalRamp": [
+          "#080b12",
+          "#20252f",
+          "#3b424f",
+          "#586272",
+          "#798394",
+          "#9da5b5",
+          "#c2c9d6",
+          "#e9eff9"
+        ]
+      },
+      "linha-escuro": {
+        "role": "neutral",
+        "displayName": "Joint Line (dark)",
+        "canonical": "#2b3a57",
+        "tonalRamp": [
+          "#060b16",
+          "#1c2536",
+          "#364259",
+          "#52617f",
+          "#7283a1",
+          "#97a6c1",
+          "#bdcae1",
+          "#e5efff"
+        ]
+      },
+      "faixa-quadrado-escuro": {
+        "role": "neutral",
+        "displayName": "Strip Square (dark)",
+        "canonical": "#4a76cc",
+        "tonalRamp": [
+          "#000728",
+          "#0b2250",
+          "#203f7c",
+          "#375eab",
+          "#5680d0",
+          "#7fa5eb",
+          "#aacaff",
+          "#d6efff"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "Title",
+        "purpose": "App name \"Anotações\" in the header; the only heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Every message tile; base size of the page."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Greeting note and offline notice."
+      },
+      "input": {
+        "displayName": "Input",
+        "purpose": "Composer field; never below 16px to prevent mobile focus zoom."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "The bold \"Sair\" quick-exit label."
+      }
+    },
+    "shadows": [],
+    "focus": [
+      {
+        "name": "foco",
+        "value": "outline: 3px solid var(--cobalto-forte); outline-offset: 2px",
+        "purpose": "Default focus ring."
+      },
+      {
+        "name": "foco-topo",
+        "value": "outline-color: var(--sobre-cobalto)",
+        "purpose": "Focus ring inside the cobalt header."
+      },
+      {
+        "name": "foco-campo",
+        "value": "outline: 2px solid var(--cobalto-forte); outline-offset: 0; border-color: var(--cobalto-forte)",
+        "purpose": "Composer field focus."
+      }
+    ],
+    "motion": [
+      {
+        "name": "curva",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Ease-out for the tile settle."
+      },
+      {
+        "name": "assentar",
+        "value": "160ms, transform translateY(6px) to 0, no opacity change",
+        "purpose": "A new message settles into the column; off under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "medida",
+        "value": "40rem",
+        "purpose": "Column width; bands align to it via --lateral = max(16px, calc((100% - 40rem) / 2 + 16px))."
+      }
+    ],
+    "schemes": {
+      "mechanism": "prefers-color-scheme remaps :root tokens; only the tile strip SVG is swapped per scheme.",
+      "themeColor": {
+        "light": "#1e4597",
+        "dark": "#13254d"
+      }
+    },
+    "ornament": {
+      "name": "faixa",
+      "value": "96x12px SVG period, 12px quarter-circle module in four rotations, irregular order",
+      "light": "white squares, #1e4597 discs",
+      "dark": "#4a76cc squares, #13254d discs",
+      "minHeight": "12px"
+    }
+  },
+  "components": [
+    {
+      "name": "Header with Tile Strip",
+      "kind": "nav",
+      "refersTo": "header-topo",
+      "description": "Sticky 56px cobalt band with the neutral app name and the quick exit, over the 12px quarter-circle tile strip.",
+      "html": "<header class=\"ds-cabeca\"><div class=\"ds-topo\"><h1 class=\"ds-topo-nome\">Anotações</h1><button type=\"button\" class=\"ds-sair\">Sair</button></div><div class=\"ds-faixa\" aria-hidden=\"true\"></div></header>",
+      "css": ".ds-topo { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 6px 16px; background: var(--topo, #1e4597); color: var(--sobre-cobalto, #ffffff); font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", sans-serif; } .ds-topo-nome { margin: 0; font-size: 1.125rem; font-weight: 600; letter-spacing: 0; } .ds-sair { min-width: 72px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 2px; background: #ffffff; color: #163777; font: inherit; font-size: 1.0625rem; font-weight: 700; cursor: pointer; } .ds-sair:hover, .ds-sair:active { background: #dfe6f3; } .ds-sair:focus-visible { outline: 3px solid #ffffff; outline-offset: 2px; } .ds-faixa { height: 12px; background-color: var(--topo, #1e4597); background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='12' viewBox='0 0 96 12'%3E%3Crect width='96' height='12' fill='%23ffffff'/%3E%3Cpath d='M0 0h12A12 12 0 0 1 0 12z' fill='%231e4597'/%3E%3Cpath d='M24 0v12A12 12 0 0 1 12 0z' fill='%231e4597'/%3E%3Cpath d='M24 0h12A12 12 0 0 1 24 12z' fill='%231e4597'/%3E%3Cpath d='M36 12v-12A12 12 0 0 1 48 12z' fill='%231e4597'/%3E%3Cpath d='M60 12h-12A12 12 0 0 1 60 0z' fill='%231e4597'/%3E%3Cpath d='M72 0v12A12 12 0 0 1 60 0z' fill='%231e4597'/%3E%3Cpath d='M72 12v-12A12 12 0 0 1 84 12z' fill='%231e4597'/%3E%3Cpath d='M96 12h-12A12 12 0 0 1 96 0z' fill='%231e4597'/%3E%3C/svg%3E\"); background-size: 96px 12px; } @media (prefers-color-scheme: dark) { .ds-faixa { background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='12' viewBox='0 0 96 12'%3E%3Crect width='96' height='12' fill='%234a76cc'/%3E%3Cpath d='M0 0h12A12 12 0 0 1 0 12z' fill='%2313254d'/%3E%3Cpath d='M24 0v12A12 12 0 0 1 12 0z' fill='%2313254d'/%3E%3Cpath d='M24 0h12A12 12 0 0 1 24 12z' fill='%2313254d'/%3E%3Cpath d='M36 12v-12A12 12 0 0 1 48 12z' fill='%2313254d'/%3E%3Cpath d='M60 12h-12A12 12 0 0 1 60 0z' fill='%2313254d'/%3E%3Cpath d='M72 0v12A12 12 0 0 1 60 0z' fill='%2313254d'/%3E%3Cpath d='M72 12v-12A12 12 0 0 1 84 12z' fill='%2313254d'/%3E%3Cpath d='M96 12h-12A12 12 0 0 1 96 0z' fill='%2313254d'/%3E%3C/svg%3E\"); } }"
+    },
+    {
+      "name": "Quick Exit Button",
+      "kind": "button",
+      "refersTo": "button-sair",
+      "description": "White square button with a bold deep-cobalt \"Sair\"; always in the header; clears the conversation and leaves.",
+      "html": "<div class=\"ds-band\"><button type=\"button\" class=\"ds-sair\">Sair</button></div>",
+      "css": ".ds-band { background: var(--topo, #1e4597); padding: 12px 16px; } .ds-sair { min-width: 72px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 2px; background: #ffffff; color: #163777; font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", sans-serif; font-size: 1.0625rem; font-weight: 700; cursor: pointer; } .ds-sair:hover, .ds-sair:active { background: #dfe6f3; } .ds-sair:focus-visible { outline: 3px solid #ffffff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Send Button",
+      "kind": "button",
+      "refersTo": "button-enviar",
+      "description": "48px cobalt square with an inline SVG arrow; deep cobalt on hover/press; joint-line grey when disabled.",
+      "html": "<button type=\"submit\" class=\"ds-enviar\" aria-label=\"Enviar\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M4 12h13M12 5l7 7-7 7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg></button> <button type=\"submit\" class=\"ds-enviar\" aria-label=\"Enviar\" disabled><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M4 12h13M12 5l7 7-7 7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg></button>",
+      "css": ".ds-enviar { display: inline-grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 2px; background: var(--cobalto, #1e4597); color: var(--sobre-cobalto, #ffffff); cursor: pointer; } .ds-enviar:hover:not(:disabled), .ds-enviar:active { background: var(--cobalto-forte, #163777); } .ds-enviar:focus-visible { outline: 3px solid var(--cobalto-forte, #163777); outline-offset: 2px; } .ds-enviar:disabled { background: var(--linha, #d5dce8); color: var(--tinta-suave, #4a5670); cursor: not-allowed; }"
+    },
+    {
+      "name": "Composer Field",
+      "kind": "input",
+      "refersTo": "input-envio",
+      "description": "Square tile-white field with a soft-ink stroke; deep-cobalt outline and caret on focus; 16px text.",
+      "html": "<label class=\"ds-oculto\" for=\"ds-texto\">Sua mensagem</label><textarea id=\"ds-texto\" class=\"ds-campo\" rows=\"1\" placeholder=\"Escreva aqui\"></textarea>",
+      "css": ".ds-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } .ds-campo { width: 100%; min-height: 48px; max-height: 9.5rem; padding: 12px 14px; border: 1px solid var(--tinta-suave, #4a5670); border-radius: 2px; background: var(--azulejo, #ffffff); color: var(--tinta, #142036); font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", sans-serif; font-size: 16px; line-height: 1.4; resize: none; caret-color: var(--cobalto-forte, #163777); } .ds-campo::placeholder { color: var(--tinta-suave, #4a5670); opacity: 1; } .ds-campo:focus-visible { outline: 2px solid var(--cobalto-forte, #163777); outline-offset: 0; border-color: var(--cobalto-forte, #163777); }"
+    },
+    {
+      "name": "Message Tiles",
+      "kind": "card",
+      "refersTo": "tile-assistente",
+      "description": "The conversation column: assistant tiles in tile white with a joint-line border, her tiles in cobalt, 12px joints, 2px corners, settle motion on arrival.",
+      "html": "<ol class=\"ds-mensagens\"><li class=\"ds-msg ds-msg-assistente\"><p>Escreva sua pergunta com suas palavras. Respondo de forma simples.</p><p class=\"ds-nota\">A conversa some quando você toca em <strong>Sair</strong> ou fecha o app.</p></li><li class=\"ds-msg ds-msg-usuaria ds-nova\">Tenho direito a algum auxílio?</li></ol>",
+      "css": ".ds-mensagens { list-style: none; margin: 0; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: var(--chao, #f4f6f9); font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", sans-serif; font-size: 1.0625rem; line-height: 1.5; } .ds-msg { max-width: 88%; padding: 12px 14px; border-radius: 2px; overflow-wrap: anywhere; } .ds-msg p { margin: 0; } .ds-msg p + p { margin-top: 8px; } .ds-msg-assistente { align-self: flex-start; background: var(--azulejo, #ffffff); color: var(--tinta, #142036); border: 1px solid var(--linha, #d5dce8); } .ds-msg-usuaria { align-self: flex-end; background: var(--cobalto, #1e4597); color: var(--sobre-cobalto, #ffffff); } .ds-nota { color: var(--tinta-suave, #4a5670); font-size: 0.9375rem; } .ds-nova { animation: ds-assentar 160ms cubic-bezier(0.16, 1, 0.3, 1) both; } @keyframes ds-assentar { from { transform: translateY(6px); } } @media (prefers-reduced-motion: reduce) { .ds-nova { animation: none; } }"
+    },
+    {
+      "name": "Error and Thinking Tiles",
+      "kind": "card",
+      "refersTo": "tile-erro",
+      "description": "Error tile stays in palette (tile white, ink, 1px cobalt rule); the pending tile is a dashed joint-line outline in soft ink.",
+      "html": "<ol class=\"ds-mensagens\"><li class=\"ds-msg ds-msg-pensando\">Escrevendo resposta…</li><li class=\"ds-msg ds-msg-erro\">Não consegui responder agora. Tente de novo em alguns instantes. Se precisar falar com alguém, ligue 180 (gratuito, 24 horas).</li></ol>",
+      "css": ".ds-mensagens { list-style: none; margin: 0; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: var(--chao, #f4f6f9); font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", sans-serif; font-size: 1.0625rem; line-height: 1.5; } .ds-msg { align-self: flex-start; max-width: 88%; padding: 12px 14px; border-radius: 2px; } .ds-msg-erro { background: var(--azulejo, #ffffff); color: var(--tinta, #142036); border: 1px solid var(--cobalto, #1e4597); } .ds-msg-pensando { background: transparent; color: var(--tinta-suave, #4a5670); border: 1px dashed var(--linha, #d5dce8); }"
+    },
+    {
+      "name": "Offline Notice",
+      "kind": "custom",
+      "refersTo": "aviso-offline",
+      "description": "Full-width tile-white status band with a 1px cobalt bottom rule, shown only while offline.",
+      "html": "<p class=\"ds-aviso\" role=\"status\">Sem internet. Você pode escrever, mas as respostas precisam de conexão.</p>",
+      "css": ".ds-aviso { margin: 0; padding: 10px 16px; background: var(--azulejo, #ffffff); color: var(--tinta, #142036); font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", sans-serif; font-size: 0.9375rem; line-height: 1.5; border-bottom: 1px solid var(--cobalto, #1e4597); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bulcão Wall",
+    "overview": "The app is a single conversation column laid out like a wall of Athos Bulcão tiles in a Brasília building: chalk-white tiles on a cool ground, deep cobalt as the one house colour, ink-blue text, square corners. It must read as an ordinary notes utility to anyone glancing at the phone, so the system is quiet, flat, and plain; its only ornament is one tile module (a square holding a quarter circle), used in the 12px strip under the header and in the app icon. It deliberately refuses the help-hotline category look: grey chat, a purple \"support\" accent, soft rounded bubbles.\n\nDensity is calm and mobile-first: one 40rem column, generous 17px body text, 44 to 48px touch targets, and a composer pinned above the safe area. Light and dark schemes are both first-class and switch only through `prefers-color-scheme`; every role token is remapped on `:root`, nothing is restyled per component except the tile strip's SVG.\n\nMotion is a single gesture: a new message settles into the column with a short rise, nothing else animates.",
+    "keyCharacteristics": [
+      "One house colour (cobalt) marking exactly three things: the header band, her messages, the send action.",
+      "Square-cornered tiles (2px) separated by 12px joints, flat, no shadows.",
+      "One ornament: the quarter-circle tile module, never anywhere else.",
+      "System sans only; no web fonts.",
+      "States and errors stay inside the chalk/cobalt/ink palette."
+    ],
+    "rules": [
+      {
+        "name": "The One House Colour Rule",
+        "body": "Cobalt marks only the header band, her messages, and the send action (plus focus and selection). Adding cobalt to a fourth kind of element dilutes the only signal the screen has.",
+        "section": "colors"
+      },
+      {
+        "name": "The Palette-Bound State Rule",
+        "body": "Errors and offline states are drawn with tile white, ink, and a 1px cobalt rule; never red, amber, or any hue outside the palette. Alarm colours would announce the app to an onlooker. The copy carries the meaning; the rule is a secondary cue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Ramp Rule",
+        "body": "Hierarchy comes from weight and colour (ink vs. soft ink), not size jumps; the ramp spans only 0.9375rem to 1.125rem. Never add uppercase tracking labels or eyebrow text above content.",
+        "section": "typography"
+      },
+      {
+        "name": "The Shared Edge Rule",
+        "body": "Anything that spans the full width (bands, bars, notices) aligns its content to the 40rem column, never to the viewport edge.",
+        "section": "layout"
+      },
+      {
+        "name": "The Laid Tile Rule",
+        "body": "Surfaces lie flat on the wall. Distinguish them with fill and a 1px rule, never with shadow, blur, or translucency.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Module Rule",
+        "body": "The quarter-circle tile is the only ornament, and it lives only in the header strip and the icon. Curves belong to the module; containers stay square. The strip is never smaller than 12px tall: the module stops reading below that.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** keep cobalt to the header band, her messages, and the send action, plus focus and selection (The One House Colour Rule).",
+      "**Do** draw every error and system notice with tile white, ink, and a 1px cobalt rule, and let the plain pt-BR copy carry the meaning.",
+      "**Do** keep all corners at 2px and all surfaces flat, separated by 1px rules.",
+      "**Do** align full-width bands to the 40rem column through the shared side inset and add safe-area insets to sticky bars.",
+      "**Do** keep touch targets at 44px minimum (Sair) and 48px for the send button and input.",
+      "**Do** keep the quick-exit \"Sair\" white-on-cobalt in the header on every screen, in both schemes.",
+      "**Do** remap colours only through the `:root` tokens for dark mode."
+    ],
+    "donts": [
+      "**Don't** use red, amber, or any hue outside chalk, cobalt, and ink for errors, warnings, or offline states.",
+      "**Don't** add shadows, blur, gradients, or translucency.",
+      "**Don't** use the quarter-circle module anywhere except the header strip and the app icon, and never render the strip below 12px.",
+      "**Don't** round containers beyond 2px or use soft pill bubbles; curves belong only to the tile module.",
+      "**Don't** load web fonts.",
+      "**Don't** add eyebrow or kicker labels, glyph-character icons, or icon fonts; icons are inline SVG.",
+      "**Don't** put \"Rede Lilás\", or anything that mentions violence, women, or reporting, in any visible name, title, or icon."
+    ]
+  }
+}

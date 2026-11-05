@@ -11,3 +11,8 @@ __pycache__/
 
 # Sistema
 .DS_Store
+
+# Impeccable: capturas de revisão e estado local da máquina
+.impeccable/review/
+.impeccable/config.local.json
+.impeccable/hook.cache.json

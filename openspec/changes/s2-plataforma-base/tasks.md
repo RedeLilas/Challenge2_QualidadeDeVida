@@ -2,16 +2,16 @@
 
 ## 1. Esqueleto do backend (quinta, 05/11)
 
-- [ ] 1.1 Criar o projeto com `uv` (FastAPI, uvicorn, openai, pytest) e a estrutura `app/`, `web/`, `regras/`, `dados/`, `tests/`; verificação: `uv run pytest` passa com um teste de saúde (`GET /saude` → 200)
-- [ ] 1.2 Criar `app/config.py` lendo `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`, e `.env.example` sem valores reais; verificação: teste que falha com mensagem clara se a variável faltar
-- [ ] 1.3 Criar `app/llm.py` com o cliente único e rodar contra o Ollama local; verificação: teste com cliente simulado + uma chamada manual ao modelo local
-- [ ] 1.4 Criar o middleware de log sem conteúdo; verificação: teste que envia uma mensagem e confirma que o texto não aparece no log
+- [x] 1.1 Criar o projeto com `uv` (FastAPI, uvicorn, openai, pytest) e a estrutura `app/`, `web/`, `regras/`, `dados/`, `tests/`; verificação: `uv run pytest` passa com um teste de saúde (`GET /saude` → 200)
+- [x] 1.2 Criar `app/config.py` lendo `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`, e `.env.example` sem valores reais; verificação: teste que falha com mensagem clara se a variável faltar
+- [x] 1.3 Criar `app/llm.py` com o cliente único e rodar contra o Ollama local; verificação: teste com cliente simulado + uma chamada manual ao modelo local
+- [x] 1.4 Criar o middleware de log sem conteúdo; verificação: teste que envia uma mensagem e confirma que o texto não aparece no log
 
 ## 2. PWA mínima (quinta, 05/11)
 
-- [ ] 2.1 Criar `web/index.html`, `app.js` e `styles.css` com a tela de conversa servida pelo FastAPI; verificação: a página abre em `/` e envia uma mensagem ao backend
-- [ ] 2.2 Implementar a saída rápida com `location.replace()` e a conversa só em memória; verificação manual: tocar em "sair" e confirmar que o botão voltar não reabre a conversa e que nada aparece no `localStorage`
-- [ ] 2.3 Criar `manifest.webmanifest` (nome e ícone provisórios discretos) e `sw.js` com cache da interface; verificação: o Chrome oferece a instalação e a interface abre offline
+- [x] 2.1 Criar `web/index.html`, `app.js` e `styles.css` com a tela de conversa servida pelo FastAPI; verificação: a página abre em `/` e envia uma mensagem ao backend
+- [x] 2.2 Implementar a saída rápida com `location.replace()` e a conversa só em memória; verificação manual: tocar em "sair" e confirmar que o botão voltar não reabre a conversa e que nada aparece no `localStorage`
+- [x] 2.3 Criar `manifest.webmanifest` (nome e ícone provisórios discretos) e `sw.js` com cache da interface; verificação: o Chrome oferece a instalação e a interface abre offline
 
 ## 3. Deploy e CI (sexta, 06/11)
 

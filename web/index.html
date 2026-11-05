@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1e4597" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#13254d" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <title>Anotações</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icones/icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icones/icone-192.png">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="cabeca">
+    <div class="topo">
+      <h1 class="topo__nome">Anotações</h1>
+      <button type="button" class="sair" id="sair">Sair</button>
+    </div>
+    <div class="faixa" aria-hidden="true"></div>
+  </header>
+
+  <p class="aviso" id="aviso" role="status" hidden>Sem internet. Você pode escrever, mas as respostas precisam de conexão.</p>
+
+  <main class="conversa" id="conversa" aria-label="Conversa">
+    <ol class="mensagens" id="mensagens" aria-live="polite" aria-relevant="additions">
+      <li class="msg msg--assistente msg--abertura">
+        <p>Escreva sua pergunta com suas palavras. Respondo de forma simples.</p>
+        <p class="msg__nota">A conversa some quando você toca em <strong>Sair</strong> ou fecha o app.</p>
+      </li>
+    </ol>
+  </main>
+
+  <form class="envio" id="envio" autocomplete="off">
+    <label class="oculto" for="texto">Sua mensagem</label>
+    <textarea id="texto" name="texto" rows="1" maxlength="2000" placeholder="Escreva aqui" enterkeyhint="send" autocomplete="off" autocorrect="on" spellcheck="true"></textarea>
+    <button type="submit" class="enviar" id="enviar" aria-label="Enviar">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square"/></svg>
+    </button>
+  </form>
+
+  <noscript><p class="aviso">Ative o JavaScript para usar a conversa.</p></noscript>
+</body>
+</html>
