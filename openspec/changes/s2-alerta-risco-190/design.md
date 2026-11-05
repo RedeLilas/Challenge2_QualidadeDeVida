@@ -48,6 +48,11 @@ A camada do backend protege contra uma PWA desatualizada; a da PWA garante tempo
 
 Implementação no backend (05/11): a checagem roda nas **duas** rotas de conversa, `/juridico` (que a tela usa desde `s2-rag-juridico`) e `/mensagem`, e vem **antes** de obter o cliente de LLM e o índice. Assim o alerta não depende de o LLM estar configurado (spec `plataforma`, "Provedor indisponível") e não espera a montagem do índice ao subir o servidor (medido: 4 ms logo após o início). Com risco, a rota devolve `{"risco_imediato": true, "categoria", "resposta"}`, com o texto do alerta, e não chama o LLM.
 
+Implementação na PWA (05/11):
+- `web/risco.js` repete a normalização e a avaliação do `app/risco.py` e lê o mesmo JSON, servido em `/regras/risco_imediato.json`. O service worker guarda os dois arquivos, então o alerta funciona sem internet. `tests/test_risco_js.py` roda o JavaScript no QuickJS e confere que ele dá o mesmo resultado que o Python em todas as frases da suíte.
+- A checagem local vem antes do aviso de "sem internet" e antes do envio. Com risco, a mensagem **não é enviada** ao servidor: o alerta aparece na hora e nada sai do aparelho. Se as regras não tiverem carregado, a mensagem segue e o servidor checa.
+- O alerta aparece na própria conversa (não é uma janela por cima): título "Você pode estar em perigo agora.", botão "Ligar 190" (`tel:190`) em destaque e com foco, orientação para informar o endereço quando a vítima é outra pessoa e "Ligar 180" como opção secundária. A conversa continua depois do alerta, e o botão Sair segue visível no topo.
+
 ### Suíte de testes
 `tests/casos_risco.yaml`, com cerca de 30 frases fictícias de risco e 30 de não risco, escritas pela equipe. O teste falha se qualquer frase de risco não disparar o alerta. Falsos positivos são contados e reportados, mas não reprovam a suíte.
 

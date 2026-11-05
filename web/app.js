@@ -5,6 +5,7 @@
 const SITE_NEUTRO = "https://www.climatempo.com.br/previsao-do-tempo/cidade/61/brasilia-df";
 // Até o orquestrador (S4), toda mensagem é uma pergunta jurídica respondida com citações.
 const ROTA = "/juridico";
+const REGRAS_DE_RISCO = "/regras/risco_imediato.json";
 // Um pouco acima do LLM_TIMEOUT do servidor (padrão 30 s): o servidor desiste primeiro e
 // devolve a mensagem com o Ligue 180. Este limite só vale quando a conexão cai.
 const TEMPO_LIMITE_MS = 35000;
@@ -23,6 +24,15 @@ const botaoEnviar = document.getElementById("enviar");
 const aviso = document.getElementById("aviso");
 
 let pedidoAtual = null;
+// Regras de risco imediato (regras/risco_imediato.json), guardadas pelo service worker para
+// funcionar sem internet. Se não carregarem, o servidor ainda checa cada mensagem.
+let regrasDeRisco = null;
+fetch(REGRAS_DE_RISCO)
+  .then((resposta) => (resposta.ok ? resposta.json() : Promise.reject(resposta.status)))
+  .then((dados) => {
+    regrasDeRisco = Risco.compilar(dados);
+  })
+  .catch(() => {});
 
 function sair() {
   apagarConversa();
@@ -86,7 +96,42 @@ function irParaOFim() {
   window.scrollTo(0, document.documentElement.scrollHeight);
 }
 
+// Alerta de 190: aparece na conversa, com o botão de ligar em destaque. Não bloqueia a conversa
+// e o botão Sair continua no topo.
+function mostrarAlerta() {
+  const item = document.createElement("li");
+  item.className = "msg msg--alerta msg--nova";
+  item.setAttribute("role", "alert");
+
+  const titulo = document.createElement("p");
+  titulo.className = "alerta__titulo";
+  titulo.textContent = "Você pode estar em perigo agora.";
+
+  const ligar190 = document.createElement("a");
+  ligar190.className = "alerta__ligar";
+  ligar190.href = "tel:190";
+  ligar190.textContent = "Ligar 190";
+
+  const outra = document.createElement("p");
+  outra.textContent = "Se a pessoa em perigo for outra, ligue 190 e informe o endereço dela.";
+
+  const ligar180 = document.createElement("a");
+  ligar180.className = "alerta__secundario";
+  ligar180.href = "tel:180";
+  ligar180.textContent = "Ligar 180 para conversar com alguém (gratuito, 24 horas)";
+
+  item.append(titulo, ligar190, outra, ligar180);
+  lista.append(item);
+  irParaOFim();
+  ligar190.focus({ preventScroll: true });
+}
+
 async function enviar(texto) {
+  // Risco imediato primeiro, no próprio aparelho: funciona sem internet e não espera o servidor.
+  if (regrasDeRisco && Risco.avaliar(regrasDeRisco, texto)) {
+    mostrarAlerta();
+    return true;
+  }
   if (!navigator.onLine) {
     adicionar("msg--erro", TEXTOS.semInternet);
     return false;
@@ -107,6 +152,11 @@ async function enviar(texto) {
     });
     const dados = await resposta.json().catch(() => ({}));
     pensando.remove();
+    // O servidor checa de novo (protege contra uma versão antiga desta tela).
+    if (dados.risco_imediato) {
+      mostrarAlerta();
+      return true;
+    }
     if (!resposta.ok || !dados.resposta) {
       adicionar("msg--erro", dados.erro || TEXTOS.falha);
       return false;

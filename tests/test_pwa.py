@@ -143,5 +143,21 @@ def test_tela_usa_a_rota_juridica_e_mostra_fontes_sem_link(cliente):
     assert 'const ROTA = "/juridico";' in codigo
     assert "JSON.stringify({ pergunta: texto })" in codigo
     assert "texto verificado em" in codigo
-    # Sem link para o site da lei: a página ficaria no histórico do navegador.
-    assert 'createElement("a")' not in codigo and ".href" not in codigo
+    # Sem link para sites (a página da lei ficaria no histórico do navegador); só tel:190 e tel:180.
+    assert "planalto" not in codigo
+    assert set(re.findall(r'\.href = "([^"]*)"', codigo)) == {"tel:190", "tel:180"}
+
+
+def test_alerta_de_190_na_tela_antes_do_envio_e_offline(cliente):
+    # s2-alerta-risco-190, tarefas 2.2 e 2.3. A paridade com o servidor está em test_risco_js.py.
+    html = cliente.get("/").text
+    assert html.index('src="/risco.js"') < html.index('src="/app.js"')
+    codigo = cliente.get("/app.js").text
+    # A checagem local vem antes do aviso de "sem internet" e do envio ao servidor.
+    assert codigo.index("Risco.avaliar(regrasDeRisco, texto)") < codigo.index("if (!navigator.onLine)")
+    assert codigo.index("Risco.avaliar(regrasDeRisco, texto)") < codigo.index("await fetch(ROTA")
+    assert "dados.risco_imediato" in codigo  # o servidor também pode mandar o alerta
+    sw = cliente.get("/sw.js").text
+    assert '"/risco.js"' in sw and '"/regras/risco_imediato.json"' in sw
+    regras = cliente.get("/regras/risco_imediato.json")
+    assert regras.status_code == 200 and regras.json()["regras"]

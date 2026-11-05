@@ -137,5 +137,7 @@ async def _cabecalhos_de_privacidade(request, call_next):
     return resposta
 
 
+# Regras do alerta de 190, lidas pela PWA (web/risco.js) e guardadas pelo service worker.
+app.mount("/regras", StaticFiles(directory=WEB.parent / "regras"), name="regras")
 # Por último: as rotas da API acima têm prioridade sobre os arquivos estáticos.
 app.mount("/", StaticFiles(directory=WEB, html=True), name="web")
