@@ -5,8 +5,10 @@
 - dados/fonar/notas.md
 
 Garante que todas as colunas obrigatórias estão preenchidas, os valores categóricos
-estão dentro do esperado, os CEPs e datas seguem o formato correto e todas as URLs
-pertencem a domínios públicos oficiais.
+estão dentro do esperado, os CEPs estão na faixa oficial do DF, as Regiões
+Administrativas (RAs) pertencem à lista oficial do DF, não há linhas duplicadas,
+as normas do fontes.yaml batem com o normas.csv e todas as URLs pertencem a
+domínios públicos oficiais.
 """
 
 from __future__ import annotations
@@ -22,6 +24,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 
 ARQUIVO_REDE = RAIZ / "dados" / "rede_protecao_df.csv"
 ARQUIVO_NORMAS = RAIZ / "dados" / "normas.csv"
+ARQUIVO_FONTES_YAML = RAIZ / "dados" / "fontes" / "fontes.yaml"
 ARQUIVO_FONAR = RAIZ / "dados" / "fonar" / "notas.md"
 
 COLUNAS_REDE = [
@@ -36,6 +39,45 @@ COLUNAS_REDE = [
     "data_verificacao",
 ]
 TIPOS_REDE_VALIDOS = {"CMB", "CEAM", "DEAM", "Defensoria", "Juizado", "outro"}
+
+# Lista oficial das 35 Regiões Administrativas do Distrito Federal
+RAS_OFICIAIS_DF = {
+    "Plano Piloto",
+    "Gama",
+    "Taguatinga",
+    "Brazlândia",
+    "Sobradinho",
+    "Planaltina",
+    "Paranoá",
+    "Núcleo Bandeirante",
+    "Ceilândia",
+    "Guará",
+    "Cruzeiro",
+    "Samambaia",
+    "Santa Maria",
+    "São Sebastião",
+    "Recanto das Emas",
+    "Lago Sul",
+    "Riacho Fundo",
+    "Lago Norte",
+    "Candangolândia",
+    "Águas Claras",
+    "Riacho Fundo II",
+    "Sudoeste/Octogonal",
+    "Varjão",
+    "Park Way",
+    "SCIA/Estrutural",
+    "Sobradinho II",
+    "Jardim Botânico",
+    "Itapoã",
+    "SIA",
+    "Vicente Pires",
+    "Fercal",
+    "Sol Nascente/Pôr do Sol",
+    "Arniqueira",
+    "Arapoanga",
+    "Água Quente",
+}
 
 COLUNAS_NORMAS = [
     "norma",
@@ -60,10 +102,26 @@ SUFIXOS_DOMINIOS_OFICIAIS = (
 )
 
 PADRAO_CEP = re.compile(r"^\d{5}-\d{3}$")
+CEP_DF_MIN = 70000000
+CEP_DF_MAX = 73699999
+
 CLASSIFICACOES_FONAR = {
     "adaptável para autoaplicação",
     "adaptável com cuidado",
     "não adaptável",
+}
+
+# Numeração oficial do Anexo Único da Portaria Conjunta CNJ/CNMP nº 6/2025 (Parte I)
+PERGUNTAS_FONAR_2025_ESPERADAS = {
+    *[str(n) for n in range(1, 25)],
+    "2.1",
+    "2.2",
+    "5.1",
+    "12.1",
+    "14.1",
+    "14.2",
+    "14.3",
+    "14.4",
 }
 
 
@@ -73,6 +131,15 @@ def _data_iso_valida(valor: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+def _cep_df_valido(cep: str) -> tuple[bool, str]:
+    if not PADRAO_CEP.match(cep):
+        return False, f"CEP '{cep}' fora do formato 00000-000"
+    numero = int(cep.replace("-", ""))
+    if not (CEP_DF_MIN <= numero <= CEP_DF_MAX):
+        return False, f"CEP '{cep}' fora da faixa do Distrito Federal (70000-000 a 73699-999)"
+    return True, ""
 
 
 def _url_oficial_valida(url: str) -> bool:
@@ -87,6 +154,34 @@ def _url_oficial_valida(url: str) -> bool:
         host == sufixo.lstrip(".") or host.endswith(sufixo)
         for sufixo in SUFIXOS_DOMINIOS_OFICIAIS
     )
+
+
+def _carregar_urls_fontes_yaml(caminho_yaml: Path) -> list[tuple[str, str]]:
+    """Extrai pares (citacao, url) de dados/fontes/fontes.yaml."""
+    texto = caminho_yaml.read_text(encoding="utf-8")
+    try:
+        import yaml  # type: ignore[import-untyped]
+
+        dados = yaml.safe_load(texto) or {}
+        normas = dados.get("normas") or []
+        return [
+            (str(item.get("citacao") or "").strip(), str(item.get("url") or "").strip())
+            for item in normas
+            if item.get("citacao") and item.get("url")
+        ]
+    except ModuleNotFoundError:
+        pares: list[tuple[str, str]] = []
+        citacao_atual: str | None = None
+        for linha in texto.splitlines():
+            m_cit = re.match(r'^\s*citacao:\s*["\']?([^"\']+)["\']?\s*$', linha)
+            if m_cit:
+                citacao_atual = m_cit.group(1).strip()
+                continue
+            m_url = re.match(r'^\s*url:\s*["\']?([^"\']+)["\']?\s*$', linha)
+            if m_url and citacao_atual:
+                pares.append((citacao_atual, m_url.group(1).strip()))
+                citacao_atual = None
+        return pares
 
 
 def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
@@ -108,11 +203,26 @@ def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
             return erros
 
         tipos_encontrados: set[str] = set()
+        nomes_vistos: set[str] = set()
+        linhas_vistas: set[tuple[str, ...]] = set()
+
         for idx, linha in enumerate(linhas, start=2):
             for col in COLUNAS_REDE:
                 valor = (linha.get(col) or "").strip()
                 if not valor:
                     erros.append(f"{caminho.name}:{idx}: coluna '{col}' vazia")
+
+            chave_linha = tuple((linha.get(c) or "").strip() for c in COLUNAS_REDE)
+            if chave_linha in linhas_vistas:
+                erros.append(f"{caminho.name}:{idx}: linha duplicada")
+            linhas_vistas.add(chave_linha)
+
+            nome = (linha.get("nome") or "").strip()
+            if nome:
+                nome_norm = nome.lower()
+                if nome_norm in nomes_vistos:
+                    erros.append(f"{caminho.name}:{idx}: serviço duplicado '{nome}'")
+                nomes_vistos.add(nome_norm)
 
             tipo = (linha.get("tipo") or "").strip()
             if tipo and tipo not in TIPOS_REDE_VALIDOS:
@@ -121,9 +231,17 @@ def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
                 )
             tipos_encontrados.add(tipo)
 
+            ra = (linha.get("ra") or "").strip()
+            if ra and ra not in RAS_OFICIAIS_DF:
+                erros.append(
+                    f"{caminho.name}:{idx}: RA '{ra}' não pertence à lista oficial de Regiões Administrativas do DF"
+                )
+
             cep = (linha.get("cep") or "").strip()
-            if cep and not PADRAO_CEP.match(cep):
-                erros.append(f"{caminho.name}:{idx}: CEP '{cep}' fora do formato 00000-000")
+            if cep:
+                ok_cep, msg_cep = _cep_df_valido(cep)
+                if not ok_cep:
+                    erros.append(f"{caminho.name}:{idx}: {msg_cep}")
 
             url = (linha.get("fonte_url") or "").strip()
             if url and not _url_oficial_valida(url):
@@ -143,7 +261,10 @@ def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
     return erros
 
 
-def validar_normas(caminho: Path = ARQUIVO_NORMAS) -> list[str]:
+def validar_normas(
+    caminho: Path = ARQUIVO_NORMAS,
+    caminho_fontes_yaml: Path | None = ARQUIVO_FONTES_YAML,
+) -> list[str]:
     erros: list[str] = []
     if not caminho.exists():
         return [f"Arquivo não encontrado: {caminho}"]
@@ -162,11 +283,21 @@ def validar_normas(caminho: Path = ARQUIVO_NORMAS) -> list[str]:
             return erros
 
         esferas_encontradas: set[str] = set()
+        normas_vistas: set[str] = set()
+        urls_vistos: set[str] = set()
+
         for idx, linha in enumerate(linhas, start=2):
             for col in COLUNAS_NORMAS:
                 valor = (linha.get(col) or "").strip()
                 if not valor:
                     erros.append(f"{caminho.name}:{idx}: coluna '{col}' vazia")
+
+            nome_norma = (linha.get("norma") or "").strip()
+            if nome_norma:
+                chave_norma = nome_norma.lower()
+                if chave_norma in normas_vistas:
+                    erros.append(f"{caminho.name}:{idx}: norma duplicada '{nome_norma}'")
+                normas_vistas.add(chave_norma)
 
             esfera = (linha.get("esfera") or "").strip()
             if esfera and esfera not in ESFERAS_VALIDAS:
@@ -187,13 +318,24 @@ def validar_normas(caminho: Path = ARQUIVO_NORMAS) -> list[str]:
                     erros.append(f"{caminho.name}:{idx}: {col_data} '{valor_data}' inválida")
 
             url = (linha.get("fonte_url") or "").strip()
-            if url and not _url_oficial_valida(url):
-                erros.append(f"{caminho.name}:{idx}: fonte_url '{url}' não pertence a domínio oficial")
+            if url:
+                if not _url_oficial_valida(url):
+                    erros.append(f"{caminho.name}:{idx}: fonte_url '{url}' não pertence a domínio oficial")
+                if url in urls_vistos:
+                    erros.append(f"{caminho.name}:{idx}: fonte_url duplicada '{url}'")
+                urls_vistos.add(url)
 
         if esferas_encontradas != ESFERAS_VALIDAS:
             erros.append(
                 f"{caminho.name}: deve conter normas federais e distritais (encontrado: {sorted(esferas_encontradas)})"
             )
+
+        if caminho_fontes_yaml and caminho_fontes_yaml.exists():
+            for citacao, url_yaml in _carregar_urls_fontes_yaml(caminho_fontes_yaml):
+                if url_yaml not in urls_vistos:
+                    erros.append(
+                        f"{caminho.name}: norma '{citacao}' de {caminho_fontes_yaml.name} ausente ou com URL divergente (esperado '{url_yaml}')"
+                    )
 
     return erros
 
@@ -213,31 +355,45 @@ def validar_fonar(caminho: Path = ARQUIVO_FONAR) -> list[str]:
         )
 
     padrao_linha_pergunta = re.compile(
-        r"^\|\s*\*\*(\d+)\*\*\s*\|([^|]+)\|([^|]+)\|([^|]+)\|",
+        r"^\|\s*\*\*(\d+(?:\.\d+)?)\*\*\s*\|([^|]+)\|([^|]+)\|([^|]+)\|",
         re.MULTILINE,
     )
-    perguntas_encontradas: dict[int, tuple[str, str, str]] = {}
+    perguntas_encontradas: dict[str, tuple[str, str, str]] = {}
     for match in padrao_linha_pergunta.finditer(texto):
-        numero = int(match.group(1))
+        codigo = match.group(1).strip()
         enunciado = match.group(2).strip()
         classificacao = match.group(3).strip().strip("`")
         motivo = match.group(4).strip()
-        perguntas_encontradas[numero] = (enunciado, classificacao, motivo)
+
+        if codigo in perguntas_encontradas:
+            erros.append(f"{caminho.name}: pergunta {codigo} duplicada")
+        perguntas_encontradas[codigo] = (enunciado, classificacao, motivo)
 
         if not enunciado:
-            erros.append(f"{caminho.name}: pergunta {numero} sem enunciado")
+            erros.append(f"{caminho.name}: pergunta {codigo} sem enunciado")
         if classificacao not in CLASSIFICACOES_FONAR:
             erros.append(
-                f"{caminho.name}: pergunta {numero} com classificação inválida '{classificacao}'"
+                f"{caminho.name}: pergunta {codigo} com classificação inválida '{classificacao}'"
             )
         if not motivo:
-            erros.append(f"{caminho.name}: pergunta {numero} sem motivo/justificativa")
+            erros.append(f"{caminho.name}: pergunta {codigo} sem motivo/justificativa")
 
-    esperadas = set(range(1, 28))
-    faltantes = sorted(esperadas - set(perguntas_encontradas.keys()))
+    faltantes = sorted(
+        PERGUNTAS_FONAR_2025_ESPERADAS - set(perguntas_encontradas.keys()),
+        key=lambda x: [int(p) for p in x.split(".")],
+    )
     if faltantes:
         erros.append(
-            f"{caminho.name}: faltam perguntas numeradas da Parte I do Fonar: {faltantes}"
+            f"{caminho.name}: faltam perguntas numeradas da Parte I do Fonar 2025: {faltantes}"
+        )
+
+    extras = sorted(
+        set(perguntas_encontradas.keys()) - PERGUNTAS_FONAR_2025_ESPERADAS,
+        key=lambda x: [int(p) for p in x.split(".")],
+    )
+    if extras:
+        erros.append(
+            f"{caminho.name}: perguntas fora da numeração oficial da Parte I do Fonar 2025: {extras}"
         )
 
     return erros
