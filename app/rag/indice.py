@@ -4,6 +4,7 @@ O DeepSeek não oferece embeddings, então o modelo roda localmente, inclusive n
 O multilingual-e5 exige os prefixos "query: " na pergunta e "passage: " no trecho.
 """
 import json
+import threading
 from functools import cache
 from pathlib import Path
 
@@ -52,3 +53,17 @@ class Indice:
         similaridades = self.matriz[candidatos] @ _vetores([f"query: {pergunta}"])[0]
         ordem = np.argsort(-similaridades)[:k]
         return [(self.trechos[candidatos[j]], float(similaridades[j])) for j in ordem]
+
+
+_trava = threading.Lock()
+_indice: Indice | None = None
+
+
+def indice_padrao() -> Indice:
+    """Índice de todas as normas de dados/leis/, montado uma única vez por processo."""
+    global _indice
+    # A trava garante uma só montagem quando o aquecimento e a primeira pergunta chegam juntos.
+    with _trava:
+        if _indice is None:
+            _indice = Indice(carregar_trechos())
+        return _indice

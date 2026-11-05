@@ -133,3 +133,13 @@ def test_texto_da_mensagem_nao_vai_para_o_log(cliente, caplog):
     log = "\n".join(r.getMessage() for r in caplog.records if not r.name.startswith(("httpx", "httpcore")))
     assert "POST /mensagem 200" in log
     assert "auxílio" not in log
+
+
+def test_tela_usa_a_rota_juridica_e_mostra_fontes_sem_link(cliente):
+    # s2-rag-juridico, tarefa 2.4: toda mensagem vai para /juridico (decisão de 05/11, até a S4).
+    codigo = cliente.get("/app.js").text
+    assert 'const ROTA = "/juridico";' in codigo
+    assert "JSON.stringify({ pergunta: texto })" in codigo
+    assert "texto verificado em" in codigo
+    # Sem link para o site da lei: a página ficaria no histórico do navegador.
+    assert 'createElement("a")' not in codigo and ".href" not in codigo
