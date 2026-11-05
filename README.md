@@ -13,6 +13,27 @@ uv run pytest
 
 Na primeira execução, o modelo de embeddings `intfloat/multilingual-e5-base` (cerca de 1,1 GB) é baixado do Hugging Face para o cache local. Os embeddings rodam no próprio processo, sem serviço externo.
 
+## Rodar o servidor
+
+O LLM é configurado por `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`. Nos testes locais usamos o [Ollama](https://ollama.com):
+
+```bash
+cp .env.example .env                 # .env não é versionado
+ollama pull qwen2.5:7b-instruct
+uv run --env-file .env uvicorn app.main:app --reload --no-access-log
+curl localhost:8000/saude            # {"status":"ok"}
+```
+
+Sempre use `--no-access-log`: o access log do uvicorn grava a query string e o IP de quem acessa. O log da aplicação (`app/logs.py`) registra só método, rota, status, duração e tipo de erro.
+
+Para conferir o LLM sem subir o servidor (só com perguntas fictícias):
+
+```bash
+uv run --env-file .env python -m app.llm "O que é violência patrimonial?"
+```
+
+Para usar o DeepSeek, troque as três variáveis no `.env`; nenhum código muda. Em produção, só depois da decisão de LGPD (tarefa 4.2 de `s2-plataforma-base`).
+
 ## Base jurídica (RAG)
 
 16 normas federais e distritais, listadas em `dados/fontes/fontes.yaml`, cada uma com um eixo: `juridico`, `beneficios`, `saude` ou `df`.
