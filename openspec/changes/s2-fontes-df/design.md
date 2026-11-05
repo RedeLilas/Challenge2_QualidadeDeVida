@@ -57,7 +57,7 @@ Escolher 1 benefício ou programa do GDF voltado a mulheres em situação de vio
 - **Motivo da escolha:**
   1. **Regras objetivas e auditáveis em norma oficial (SINJ-DF):** possuem critérios determinísticos claros (residência no DF, inscrição no CadÚnico, teto de renda familiar per capita de até meio salário mínimo, necessidade de afastamento do lar/medida protetiva ou encaminhamento pela rede especializada do DF — Casa da Mulher Brasileira, CEAM, DEAM, Defensoria ou CREAS).
   2. **Alinhamento direto com as personas e o caso de uso:** responde diretamente à barreira de dependência financeira e habitacional para romper o ciclo da violência, complementando no plano distrital o auxílio-aluguel federal da `Lei nº 14.674/2023` (art. 23, VI da Lei Maria da Penha).
-  3. **Sincronia com o RAG jurídico (`backend/config/fontes.yaml`):** os textos integrais consolidados já foram ingeridos diretamente do SINJ-DF.
+  3. **Sincronia com o RAG jurídico (`dados/fontes/fontes.yaml`):** os textos integrais consolidados já foram ingeridos diretamente do SINJ-DF.
 
 ### Validação
 `scripts/validar_dados.py` confere colunas obrigatórias preenchidas, URLs de domínio oficial e datas válidas.
