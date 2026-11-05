@@ -47,6 +47,13 @@ Implementação (05/11, tarefas 2.1 e 2.2):
 ### Recusa por baixa similaridade
 Se a maior similaridade ficar abaixo de um limite, o sistema recusa sem chamar o LLM. O limite inicial é calibrado com as 10 perguntas do teste rápido e algumas perguntas fora do tema.
 
+Calibração (05/11, `e5-base`, eixo `juridico`, similaridade do trecho mais parecido):
+- 15 perguntas do tema (as 10 do teste rápido + 5 novas): de 0,818 a 0,863.
+- Claramente fora do tema (tempo, bolo, futebol, série, RG, celular): de 0,785 a 0,805.
+- "Quase jurídicas": partilha no inventário 0,817, imposto de renda 0,830, multa de trânsito 0,853, dentro da faixa do tema.
+
+**Limite: 0,81.** Recusa as claramente fora do tema e nenhuma do tema; a margem é pequena (0,805 contra 0,818), porque o `e5` comprime as similaridades. As "quase jurídicas" passam do limite e são barradas pela segunda camada: o prompt manda dizer que não sabe, e a resposta sem citação é recusada (com o `qwen2.5:7b-instruct`, as três foram recusadas em duas rodadas). Os testes em `tests/test_indice.py` garantem que 3 perguntas fora do tema são recusadas com o Ligue 180 e a Defensoria sem chamar o LLM, e que as 10 do teste rápido passam do limite. Recalibrar com as 50 perguntas da S3.
+
 ### Teste rápido
 `tests/perguntas_juridicas.yaml`, com 10 perguntas no estilo das personas e os artigos esperados (ex.: "ele quebrou minhas coisas, isso é violência?" → art. 7º, IV). Meta: o artigo esperado aparece entre os 5 recuperados em pelo menos 9 das 10 perguntas.
 
@@ -56,5 +63,5 @@ Se a maior similaridade ficar abaixo de um limite, o sistema recusa sem chamar o
 - **Teste rápido pequeno**: 10 perguntas escritas pela equipe podem favorecer um modelo por acaso. A comparação será refeita com as 50 perguntas da S3.
 - **Limite de similaridade mal calibrado**: alto demais gera recusas desnecessárias; baixo demais deixa passar respostas fracas. Será recalibrado com as 50 perguntas da S3.
 - **Citação certa não garante conteúdo certo**: a verificação confere se o artigo citado foi recuperado, não se a explicação está correta. A precisão jurídica é medida na S3 (LLM juiz + revisão em dupla).
-- **Modelo local troca de idioma**: em 05/11, o `qwen2.5:7b-instruct` respondeu em chinês em 1 das 10 perguntas do teste rápido ("a polícia pode tirar ele de casa na hora…", art. 12-C), 5 de 5 vezes, mesmo com a instrução de idioma reforçada e temperatura 0. A citação estava certa, então a verificação aprovou. Pendente: decidir se a verificação também recusa respostas fora do português.
+- **Modelo local troca de idioma**: em 05/11, o `qwen2.5:7b-instruct` respondeu em chinês em 1 das 10 perguntas do teste rápido ("a polícia pode tirar ele de casa na hora…", art. 12-C), 5 de 5 vezes, mesmo com a instrução de idioma reforçada e temperatura 0. A citação estava certa, então a verificação aprovou. **Decisão (05/11):** a verificação também recusa respostas fora do português (`em_portugues()`): qualquer letra de outro alfabeto (chinês, cirílico etc.) ou, em texto latino, mais marcas de inglês ou espanhol que de português. Com o Qwen, essa pergunta passa a receber a recusa com o Ligue 180 e a Defensoria até o modelo de produção entrar.
 - **Mudanças no HTML do Planalto quebram a ingestão**: o texto processado fica versionado em `dados/leis/` e só é regenerado na revisão mensal.

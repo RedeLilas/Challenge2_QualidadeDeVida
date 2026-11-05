@@ -10,6 +10,11 @@ import unicodedata
 
 K = 5
 EIXOS = {"juridico"}
+# Abaixo desta similaridade (cosseno, e5-base) com o trecho mais parecido, recusa sem chamar o LLM.
+# Calibrado em 05/11: menor pergunta do tema 0,818; perguntas claramente fora do tema até 0,805.
+# Perguntas "quase jurídicas" (multa de trânsito, imposto de renda) passam e dependem da recusa
+# por falta de citação. Recalibrar com as 50 perguntas da S3.
+LIMITE_SIMILARIDADE = 0.81
 # Normas do eixo jurídico. Uma referência a outra norma nunca é aceita.
 LEIS_JURIDICAS = ("Lei 11.340/2006", "Lei 14.149/2021", "Código Penal")
 APELIDOS = {"Lei 11.340/2006": ["maria da penha"], "Código Penal": ["codigo penal", r"2\.?848"]}
@@ -128,11 +133,34 @@ def verificar_citacoes(texto: str, recuperados: list[dict]) -> list[dict] | None
     return list(citacoes.values())
 
 
+# Palavras frequentes que distinguem o português do inglês e do espanhol num texto em alfabeto latino.
+MARCAS_PORTUGUES = {"não", "você", "é", "são", "uma", "para", "pela", "pelo", "com", "os", "as", "da", "do",
+                    "das", "dos", "ao", "em", "no", "na", "pode", "que", "ele", "ela", "seu", "sua"}  # fmt: skip
+MARCAS_OUTRAS = {"the", "and", "you", "is", "are", "of", "to", "can", "with", "your", "that", "he", "she",
+                 "el", "y", "usted", "puede", "del", "los", "las", "ley", "si", "su"}  # fmt: skip
+ORDINAIS = set("ºª")  # "1º" e "1ª": letras para o Unicode, mas não são de outro alfabeto
+
+
+def em_portugues(texto: str) -> bool:
+    """Falso se houver letras de outro alfabeto (ex.: chinês) ou se o texto parecer inglês ou espanhol."""
+    if any(c.isalpha() and c not in ORDINAIS and not unicodedata.name(c, "").startswith("LATIN") for c in texto):
+        return False
+    palavras = re.findall(r"[^\W\d_]+", texto.lower())
+    portugues = sum(p in MARCAS_PORTUGUES for p in palavras)
+    outras = sum(p in MARCAS_OUTRAS for p in palavras)
+    # Textos curtos têm poucas marcas; só decide pelas palavras quando há o bastante para comparar.
+    return outras < 3 or portugues > outras
+
+
 def responder(pergunta: str, indice, cliente) -> dict:
-    """Recupera os trechos, pergunta ao LLM e só devolve a resposta se as citações forem conferidas."""
-    recuperados = [t for t, _ in indice.buscar(pergunta, k=K, eixos=EIXOS)]
+    """Recupera os trechos, pergunta ao LLM e só devolve a resposta em português e com as citações conferidas."""
+    resultados = indice.buscar(pergunta, k=K, eixos=EIXOS)
+    if not resultados or resultados[0][1] < LIMITE_SIMILARIDADE:
+        # A base não sustenta a resposta: recusa sem gastar uma chamada ao LLM.
+        return {"resposta": RECUSA, "citacoes": [], "recusada": True}
+    recuperados = [t for t, _ in resultados]
     texto = cliente.responder(montar_mensagens(pergunta, recuperados))
-    citacoes = verificar_citacoes(texto, recuperados)
+    citacoes = verificar_citacoes(texto, recuperados) if em_portugues(texto) else None
     if citacoes is None:
         return {"resposta": RECUSA, "citacoes": [], "recusada": True}
     return {"resposta": texto, "citacoes": citacoes, "recusada": False}

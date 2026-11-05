@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 
 from app import llm
 from app.main import app, cliente_llm, indice_juridico
-from app.rag.resposta import RECUSA, extrair_referencias
+from app.rag.resposta import LIMITE_SIMILARIDADE, RECUSA, em_portugues, extrair_referencias
 
 # Pergunta fictícia: nunca usar relatos reais em testes.
 PERGUNTA = "Pergunta fictícia: ele quebrou meu celular, isso é violência?"
@@ -199,3 +199,57 @@ def test_resposta_com_citacao_nao_sustentada_e_descartada(cliente, resposta_llm)
 )
 def test_extrai_referencias(texto, esperado):
     assert extrair_referencias(texto, ["Lei 11.340/2006", "Lei 14.149/2021", "Código Penal"]) == esperado
+
+
+# --- Idioma: só respostas em português são exibidas --------------------------------------
+
+PORTUGUES = (
+    "Sim, o juiz pode proibir que ele se aproxime de você (Lei 11.340/2006, art. 22, III, a). "
+    "Essa medida protetiva serve para a sua segurança e é decidida pelo juiz."
+)
+
+
+@pytest.mark.parametrize(
+    "texto",
+    [
+        # Caso real do qwen2.5:7b-instruct em 05/11 (art. 12-C), com a citação correta.
+        "Sim,可以根据第12-C条，警察可以立即将施暴者从家中带走。(Lei 11.340/2006, art. 7º)",
+        "Yes, the judge can order him to stay away from you and the police can remove him from the home "
+        "right away if you are in danger (Lei 11.340/2006, art. 7º).",
+        "Sí, el juez puede prohibir que el agresor se acerque a usted y la policía puede sacarlo de la casa "
+        "si usted está en peligro (Lei 11.340/2006, art. 7º).",
+        "Да, судья может запретить ему приближаться (Lei 11.340/2006, art. 7º).",
+    ],
+    ids=["chines", "ingles", "espanhol", "cirilico"],
+)
+def test_resposta_fora_do_portugues_e_recusada(cliente, texto):
+    usar(texto)
+    corpo = cliente.post("/juridico", json={"pergunta": PERGUNTA}).json()
+    assert corpo == {"resposta": RECUSA, "citacoes": [], "recusada": True}
+
+
+@pytest.mark.parametrize(
+    "texto",
+    [
+        PORTUGUES,
+        "Pode ser violência patrimonial (Lei 11.340/2006, art. 7º, IV).",  # curta
+        "Ameaçar é crime (Código Penal, art. 147). Procure ajuda: ligue 180.",
+        "A Lei 11.340/2006, no § 9º do art. 129 do Código Penal, prevê pena maior — veja o 1º e o 2º passo.",
+    ],
+)
+def test_portugues_e_aceito(texto):
+    assert em_portugues(texto)
+
+
+# --- 2.3: limite de recusa (com índice simulado; a calibração real está em test_indice.py) ---
+
+
+def test_similaridade_baixa_recusa_sem_chamar_o_llm(cliente):
+    class IndiceDistante(IndiceFalso):
+        def buscar(self, pergunta, k=5, eixos=None):
+            return [(t, LIMITE_SIMILARIDADE - 0.01) for t in self.trechos[:k]]
+
+    falso_llm, _ = usar("Resposta (Lei 11.340/2006, art. 7º).", indice=IndiceDistante())
+    corpo = cliente.post("/juridico", json={"pergunta": "Pergunta fictícia fora do tema"}).json()
+    assert corpo == {"resposta": RECUSA, "citacoes": [], "recusada": True}
+    assert falso_llm.recebido is None

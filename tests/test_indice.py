@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 import yaml
 
+from app.rag import resposta
 from app.rag.indice import Indice, carregar_trechos
 
 PERGUNTAS = Path(__file__).parent / "perguntas_juridicas.yaml"
@@ -42,3 +43,31 @@ def test_perguntas_das_personas_top5(indice):
             erros.append(f"{p['pergunta']!r}: esperado {p['artigos']}, recuperado {[t['citacao'] for t, _ in resultados]}")
     acertos = len(perguntas) - len(erros)
     assert acertos >= 9, f"{acertos}/{len(perguntas)} no top 5:\n" + "\n".join(erros)
+
+
+# Calibração do limite de recusa (s2-rag-juridico, tarefa 2.3), com o índice real.
+FORA_DO_TEMA = [
+    "qual a previsão do tempo para amanhã em Brasília?",
+    "como faço um bolo de chocolate?",
+    "quem ganhou o jogo do Flamengo ontem?",
+]
+
+
+class LLMQueNaoPodeSerChamado:
+    def responder(self, mensagens):
+        raise AssertionError("pergunta fora do tema não deveria chegar ao LLM")
+
+
+@pytest.mark.parametrize("pergunta", FORA_DO_TEMA)
+def test_pergunta_fora_do_tema_e_recusada_com_180_e_defensoria(indice, pergunta):
+    r = resposta.responder(pergunta, indice, LLMQueNaoPodeSerChamado())
+    assert r["recusada"] is True and r["citacoes"] == []
+    assert "180" in r["resposta"] and "Defensoria Pública do DF" in r["resposta"]
+
+
+def test_perguntas_das_personas_passam_do_limite(indice):
+    # O limite não pode recusar as perguntas do teste rápido antes de chegar ao LLM.
+    perguntas = [p["pergunta"] for p in yaml.safe_load(PERGUNTAS.read_text(encoding="utf-8"))["perguntas"]]
+    for pergunta in perguntas:
+        _, similaridade = indice.buscar(pergunta, k=1, eixos=resposta.EIXOS)[0]
+        assert similaridade >= resposta.LIMITE_SIMILARIDADE, pergunta
