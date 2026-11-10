@@ -2,8 +2,8 @@
 
 ## 1. Regras versionadas (sexta, 13/11)
 
-- [ ] 1.1 Verificar em fonte oficial o valor vigente do salário mínimo e se os R$ 218 do Bolsa Família foram reajustados, registrando fonte e data; verificação: o registro está em `regras/beneficios.json`
-- [ ] 1.2 Criar `regras/beneficios.json` com as quatro regras, norma, artigo, início de vigência, data de verificação e textos; verificação: teste confere que toda regra tem esses campos e que nenhum texto usa "direito garantido"
+- [x] 1.1 Verificar em fonte oficial o valor vigente do salário mínimo e se os R$ 218 do Bolsa Família foram reajustados, registrando fonte e data; verificação: o registro está em `regras/beneficios.json`
+- [x] 1.2 Criar `regras/beneficios.json` com as quatro regras, norma, artigo, início de vigência, data de verificação e textos; verificação: teste confere que toda regra tem esses campos e que nenhum texto usa "direito garantido"
 
 ## 2. Avaliação (sexta, 13/11)
 
