@@ -7,8 +7,8 @@
 
 ## 2. Avaliação (sexta, 13/11)
 
-- [ ] 2.1 Criar `web/beneficios.js` com o cálculo da renda per capita e a avaliação como função pura, no formato do contrato do design; verificação: testes em QuickJS, com casos fictícios, cobrem o valor no limite, acima do limite, número de pessoas inválido e dado não informado
-- [ ] 2.2 Cobrir os resultados de cada benefício; verificação: testes cobrem Bolsa Família sem CadÚnico, BPC por deficiência e por idade, auxílio-aluguel sempre judicial, e Aluguel Social com medida, só com boletim, sem nenhum dos dois, fora do DF e sem necessidade de moradia
+- [x] 2.1 Criar `web/beneficios.js` com o cálculo da renda per capita e a avaliação como função pura, no formato do contrato do design; verificação: testes em QuickJS, com casos fictícios, cobrem o valor no limite, acima do limite, número de pessoas inválido e dado não informado
+- [x] 2.2 Cobrir os resultados de cada benefício; verificação: testes cobrem Bolsa Família sem CadÚnico, BPC por deficiência e por idade, auxílio-aluguel sempre judicial, e Aluguel Social com medida, só com boletim, sem nenhum dos dois, fora do DF e sem necessidade de moradia
 
 ## 3. Tela (sexta, 13/11)
 
