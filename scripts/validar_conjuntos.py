@@ -15,7 +15,7 @@ from app.risco import avaliar
 RAIZ = Path(__file__).resolve().parent.parent
 PASTA_CONJUNTOS = RAIZ / "avaliacao" / "conjuntos"
 
-# Chaves estáveis; a apresentação dos nomes está em avaliacao/conjuntos/README.md.
+# Chaves estáveis definidas para os conjuntos da S3.
 DISTRIBUICAO_OFICIAL = {
     "violencia_e_protecao": 5,
     "medidas_protetivas": 7,
@@ -25,7 +25,6 @@ DISTRIBUICAO_OFICIAL = {
     "auxilio_fonar_trabalho": 3,
 }
 CATEGORIAS = set(DISTRIBUICAO_OFICIAL)
-CAMPOS_GABARITO = ("resposta_esperada", "pontos_obrigatorios", "normas_aceitas", "fonte")
 
 
 def _texto(valor: object) -> bool:

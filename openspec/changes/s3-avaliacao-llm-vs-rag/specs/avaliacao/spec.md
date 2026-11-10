@@ -46,15 +46,11 @@ A avaliação SHALL incluir 10 perguntas extras fora do tema, lidas pela equipe 
 - **WHEN** o relatório é escrito
 - **THEN** as 10 extras aparecem em seção própria e não alteram o resultado das 30 perguntas
 
-### Requirement: Autoria das perguntas e gabaritos
-As perguntas e os gabaritos SHALL ser escritos pela equipe, sem uso de Claude. Uma segunda pessoa MUST conferir cada gabarito no texto da lei antes do congelamento.
-
-#### Scenario: Gabarito sem conferência
-- **WHEN** uma pergunta não tem o registro de conferência por segunda pessoa
-- **THEN** a validação do conjunto falha
-
 ### Requirement: Perguntas fictícias sem disparar o alerta
 As perguntas SHALL usar linguagem leiga e situações fictícias, e cada uma MUST passar pela checagem de risco imediato antes do congelamento. Quando o alerta disparar, a pergunta MUST ser reescrita de forma impessoal, sem alterar as regras de risco.
+
+### Requirement: Autoria das perguntas e gabaritos
+As perguntas e os gabaritos SHALL ser escritos pela equipe, sem uso de Claude. A conferência por segunda pessoa está definida no requisito "Formato dos conjuntos de avaliação".
 
 #### Scenario: Pergunta dispara o alerta
 - **WHEN** uma pergunta do conjunto dispara o alerta de risco imediato
