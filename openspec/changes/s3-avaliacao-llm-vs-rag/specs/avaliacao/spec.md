@@ -16,6 +16,25 @@ O conjunto oficial SHALL ter 30 perguntas dentro do tema: formas de violência e
 - **WHEN** uma pergunta do conjunto oficial não tem pontos obrigatórios, normas aceitas ou fonte
 - **THEN** a validação do conjunto falha
 
+### Requirement: Formato dos conjuntos de avaliação
+Os conjuntos SHALL ser arquivos YAML UTF-8 versionados em `avaliacao/conjuntos/desenvolvimento.yaml` e `avaliacao/conjuntos/oficial.yaml`, ambos com raiz `versao: 1`, `perguntas` e `extras`. O conjunto de desenvolvimento MUST ter 15 perguntas do tema e 10 extras; o oficial MUST ter 30 perguntas do tema e 10 extras. As extras SHALL usar a categoria `fora_do_tema` e não exigem gabarito.
+
+Cada item MUST ter `id`, `pergunta`, `autor` e `categoria`. Os IDs MUST ser únicos dentro de cada arquivo. Cada item de `perguntas` MUST também ter `resposta_esperada`, `pontos_obrigatorios` (lista não vazia), `normas_aceitas` (lista não vazia) e `fonte`. Cada pergunta do conjunto oficial MUST ainda registrar `conferencia.revisor` e `conferencia.fonte_conferida`; o revisor MUST ser diferente do autor. Todos os enunciados MUST ser fictícios, em linguagem leiga, e passar pela regra de risco imediato.
+
+As categorias MUST usar estas chaves no YAML: `violencia_e_protecao` (formas de violência e quem a lei protege), `medidas_protetivas` (medidas protetivas e descumprimento), `policia_processo_defensoria` (polícia, processo e Defensoria), `crime` ("isso é crime?"), `guarda` (guarda) e `auxilio_fonar_trabalho` (auxílio-aluguel, Fonar e trabalho). Os itens de `extras` MUST usar `fora_do_tema`.
+
+#### Scenario: Campo obrigatório ausente
+- **WHEN** um item não contém um campo obrigatório para seu conjunto e tipo
+- **THEN** a validação falha e identifica o arquivo e o item
+
+#### Scenario: Gabarito oficial sem segunda pessoa
+- **WHEN** um gabarito oficial não registra conferência por uma segunda pessoa
+- **THEN** a validação do conjunto oficial falha
+
+#### Scenario: Pergunta extra sem gabarito
+- **WHEN** uma extra tem ID, enunciado, autoria e categoria fora do tema, sem campos de gabarito
+- **THEN** a validação aceita a extra se os demais limites e regras forem atendidos
+
 #### Scenario: Distribuição diferente da decidida
 - **WHEN** a quantidade de perguntas de um tema difere da distribuição
 - **THEN** a validação do conjunto falha

@@ -29,8 +29,41 @@ O mapa de versões fica em um arquivo separado da rodada, que nunca é enviado a
 ### Congelamento por hash
 O congelamento grava o SHA-256 de `oficial.yaml`. A rodada oficial compara o hash e recusa executar se ele divergir. Alternativa descartada: congelar apenas por combinação da equipe, que não deixa evidência.
 
+### Estrutura YAML v1
+Os dois arquivos compartilham a mesma raiz. O conjunto de desenvolvimento terá 15 itens em `perguntas` e 10 em `extras`; o oficial terá 30 e 10, respectivamente. As perguntas oficiais usam a distribuição e os campos definidos em `specs/avaliacao/spec.md`.
+
+```yaml
+versao: 1
+perguntas:
+  - id: of-001
+    categoria: violencia_e_protecao
+    pergunta: "<enunciado fictício escrito pela equipe>"
+    autor: "<pessoa autora>"
+    resposta_esperada: "<gabarito>"
+    pontos_obrigatorios:
+      - "<ponto que a resposta deve conter>"
+    normas_aceitas:
+      - "<norma e dispositivo>"
+    fonte: "<referência ao texto legal>"
+    conferencia:
+      revisor: "<segunda pessoa>"
+      fonte_conferida: "<referência consultada>"
+extras:
+  - id: of-extra-001
+    categoria: fora_do_tema
+    pergunta: "<enunciado fictício fora do tema>"
+    autor: "<pessoa autora>"
+```
+
 ### Validador do conjunto
-Um script confere a distribuição por tema, os campos obrigatórios, o registro de segunda pessoa e `app.risco.avaliar` em cada pergunta. O validador também roda em `tests/`, com fixtures fictícias próprias, sem usar o conjunto oficial.
+O formato normativo está em `specs/avaliacao/spec.md`. O validador confere os campos obrigatórios, a distribuição oficial, o registro de segunda pessoa e chama `app.risco.avaliar` em cada enunciado. Ele não determina se o gabarito está juridicamente correto; essa responsabilidade continua no processo de conferência humana registrado pelo conjunto oficial. O validador também é coberto em `tests/` por fixtures fictícias, sem usar perguntas reais.
+
+### Tecnologias do validador
+Os conjuntos usam YAML UTF-8, carregado com PyYAML, que já é dependência do projeto. YAML é legível para a equipe revisar perguntas e gabaritos em alterações de código. O validador usa Python para aplicar regras próprias da avaliação e emitir erros com arquivo e posição. Uma biblioteca de esquema genérica não cobriria por si só a distribuição nem a chamada à regra de risco, e adicionaria pouco para estes dois arquivos.
+
+O validador reutiliza `app.risco.avaliar`, mantendo a verificação de risco alinhada à aplicação sem duplicar padrões. Os testes usam pytest, já disponível no grupo de desenvolvimento, com arquivos temporários e conteúdo fictício; não precisam de serviços externos nem dos conjuntos oficiais.
+
+Para validar a partir da raiz do repositório, execute `uv run python -m scripts.validar_conjuntos desenvolvimento`, `uv run python -m scripts.validar_conjuntos oficial` ou `uv run python -m scripts.validar_conjuntos todos`. O script retorna código diferente de zero e aponta os registros inválidos quando encontra erros.
 
 ### Instruções da versão sem RAG
 A versão sem RAG remove a regra "Responda usando apenas os trechos". As outras duas frases que mencionam trechos são adaptadas só no necessário para fazer sentido sem eles: mantém-se o formato de citação e a orientação de dizer que não sabe. As duas listas de instruções ficam na rodada, para auditoria. Alternativa descartada: reescrever as instruções da versão sem RAG, que deixaria de ser uma comparação justa.
