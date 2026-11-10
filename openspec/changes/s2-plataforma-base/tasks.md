@@ -15,12 +15,12 @@
 
 ## 3. Deploy e CI (sexta, 06/11)
 
-- [ ] 3.1 Escrever o `Dockerfile` e rodar o container localmente; verificação: `docker run` responde em `/saude`
+- [ ] 3.1 Escrever o `Dockerfile` e rodar o container localmente; verificação: `docker run` responde em `/saude` (adiada para a S5, decisão de 09/11)
 - [ ] 3.2 Criar o workflow de CI com `uv run pytest` (passa a rodar quando o repositório estiver no GitHub)
-- [ ] 3.3 Publicar na plataforma escolhida; verificação: a URL de teste abre a PWA no celular
+- [ ] 3.3 Publicar na plataforma escolhida; verificação: a URL de teste abre a PWA no celular (adiada para a S5, decisão de 09/11)
 
 ## 4. Decisões da S2 (sexta, 06/11)
 
-- [ ] 4.1 Decidir a plataforma de deploy e registrar a escolha e o motivo neste `design.md`
-- [ ] 4.2 Decidir o tratamento LGPD do DeepSeek (opção a, b ou c) e registrar neste `design.md`
+- [ ] 4.1 Decidir a plataforma de deploy e registrar a escolha e o motivo neste `design.md` (adiada para a S5, decisão de 09/11)
+- [x] 4.2 Decidir o tratamento LGPD do DeepSeek (opção a, b ou c) e registrar neste `design.md`
 - [ ] 4.3 Atualizar o status no `ROADMAP.md` e arquivar a mudança

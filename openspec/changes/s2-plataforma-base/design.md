@@ -9,7 +9,7 @@ O repositório ainda não tem código. A equipe trabalha 3 dias por semana, e re
 **Goals:**
 - Uma unidade de deploy (um container) com backend e PWA.
 - Troca entre LLM local e de produção apenas por variáveis de ambiente.
-- URL de teste publicada até sexta, 06/11.
+- URL de teste publicada: adiada para a S5 (decisão de 09/11; a meta original era sexta, 06/11).
 
 **Non-Goals:**
 - Frameworks de frontend (React, Vue) e etapa de build no frontend.
@@ -53,7 +53,7 @@ Middleware registra método, rota, status e duração. Exceções são registrad
 
 O uvicorn MUST rodar com `--no-access-log` (inclusive no `Dockerfile`): o access log padrão grava a query string e o IP de quem acessa, e o middleware já cobre o que é necessário. Texto da usuária vai sempre no corpo da requisição, nunca na URL.
 
-### Pendente até sexta, 06/11: plataforma de deploy
+### Plataforma de deploy: adiada para a S5
 
 | Critério | Hugging Face Spaces (Docker) | Render (free) | VPS (ex.: Oracle Free, Hetzner) |
 | :--- | :--- | :--- | :--- |
@@ -64,14 +64,22 @@ O uvicorn MUST rodar com `--no-access-log` (inclusive no `Dockerfile`): o access
 
 **Recomendação:** Hugging Face Spaces com Docker, desde que a equipe confirme os limites atuais do plano gratuito. O `Dockerfile` mantém a aplicação portátil caso seja preciso migrar.
 
-### Pendente até sexta, 06/11: DeepSeek e LGPD
+**Decisão (09/11):** o deploy fica para a S5 e a plataforma continua em aberto.
+
+**Achado de 09/11 (sem nova verificação):** a documentação do Hugging Face dizia que Docker Spaces exigem plano pago (PRO, US$ 9/mês), mesmo no CPU Basic (2 vCPU, 16 GB, dorme após 48 h), o que contradiz a tabela e a recomendação acima. O Render grátis tem 512 MB. O RAG usou 2,5 GB de pico e 26 s para montar o índice numa máquina de 28 núcleos lógicos.
+
+### DeepSeek e LGPD: opção (c)
 A API oficial do DeepSeek processa dados fora do Brasil (transferência internacional, LGPD art. 33), e as mensagens podem conter relatos de violência. Opções:
 
 - **(a)** API oficial com anonimização antes do envio (remover nomes, telefones, endereços e números de documento).
 - **(b)** Pesos abertos do DeepSeek servidos por outro provedor, com política de dados conhecida.
 - **(c)** API oficial com o risco declarado no relatório, usada só com casos fictícios durante o projeto.
 
-Enquanto não houver decisão, o ambiente publicado usa o LLM local ou chamadas apenas com casos fictícios. A avaliação da S3 não é bloqueada, porque usa só casos fictícios.
+**Decisão (09/11): opção (c).** API oficial do DeepSeek, usada só com casos fictícios, com o risco declarado no relatório. O DeepSeek é o modelo de produção e também o da comparação LLM x RAG da S3.
+
+**Modelo:** `deepseek-flash`, sem raciocínio, em `https://api.deepseek.com`. O raciocínio vem ligado por padrão e é desligado por `extra_body` com `thinking` do tipo `disabled`. O nome não fixa uma versão, então cada rodada registra nome, data e versão do changelog, e as duas versões (com e sem RAG) rodam no mesmo dia.
+
+**Ainda não verificado (10/11):** nenhuma rodada com o DeepSeek foi feita, e o preço exato não foi confirmado. O `app/llm.py` ainda não envia `extra_body`, e cada máquina que chamar o DeepSeek precisa da própria chave no `.env` local.
 
 ## Risks / Trade-offs
 
