@@ -12,5 +12,5 @@
 - [x] 2.1 Criar a rota de pergunta jurídica (recuperação + prompt + LLM) devolvendo `resposta` e `citacoes`; verificação: teste com LLM simulado
 - [x] 2.2 Implementar a verificação de citação; verificação: teste em que o LLM simulado cita um artigo não recuperado e a resposta é descartada
 - [x] 2.3 Implementar e calibrar o limite de recusa; verificação: 3 perguntas fora do tema são recusadas com indicação do Ligue 180 e da Defensoria do DF
-- [ ] 2.4 Exibir resposta e citações na PWA; verificação: pergunta da persona Camila respondida na URL publicada com art. 7º citado
+- [ ] 2.4 Exibir resposta e citações na PWA; verificação: pergunta da persona Camila respondida na URL publicada com art. 7º citado (verificação na URL publicada adiada para a S5, junto com o deploy; decisão de 09/11)
 - [ ] 2.5 Atualizar o status no `ROADMAP.md` e arquivar a mudança
