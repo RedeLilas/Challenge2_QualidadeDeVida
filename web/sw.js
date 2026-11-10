@@ -1,10 +1,12 @@
 // Service worker: guarda só a interface para ela abrir sem internet.
 // Nunca guarda a conversa: POST /mensagem passa direto para a rede.
-const VERSAO = "interface-v5";
+const VERSAO = "interface-v8";
 const INTERFACE = [
   "/",
   "/index.html",
   "/styles.css",
+  "/perfil.js",
+  "/dados.js",
   "/app.js",
   "/risco.js",
   // Regras do alerta de 190: o alerta precisa funcionar sem internet.
