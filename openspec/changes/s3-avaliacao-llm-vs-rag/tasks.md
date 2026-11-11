@@ -2,12 +2,12 @@
 
 ## 1. Modelo de produção (terça, 10/11)
 
-- [ ] 1.1 Adicionar `LLM_THINKING` opcional em `app/config.py` e `extra_body` em `app/llm.py`; verificação: testes com cliente simulado em `tests/test_config.py` e `tests/test_llm.py` cobrem a variável definida, ausente e inválida
-- [ ] 1.2 Atualizar `.env.example` e `README.md` para `deepseek-flash`, sem raciocínio e sem chave; verificação: `grep deepseek-chat .env.example README.md` não encontra nada e não há chave versionada
+- [x] 1.1 Adicionar `LLM_THINKING` opcional em `app/config.py` e `extra_body` em `app/llm.py`; verificação: testes com cliente simulado em `tests/test_config.py` e `tests/test_llm.py` cobrem a variável definida, ausente e inválida
+- [x] 1.2 Atualizar `.env.example` e `README.md` para `deepseek-flash`, sem raciocínio e sem chave; verificação: `grep deepseek-chat .env.example README.md` não encontra nada e não há chave versionada
 
 ## 2. Conjuntos de perguntas (terça, 10/11, a quinta, 12/11)
 
-- [ ] 2.1 Definir o formato de `avaliacao/conjuntos/` e criar o validador do conjunto; verificação: testes com fixtures fictícias falham para campo faltando, distribuição errada, falta de segunda pessoa e pergunta que dispara o alerta
+- [x] 2.1 Definir o formato de `avaliacao/conjuntos/` e criar o validador do conjunto; verificação: testes com fixtures fictícias falham para campo faltando, distribuição errada, falta de segunda pessoa e pergunta que dispara o alerta
 - [ ] 2.2 Equipe completa as perguntas de desenvolvimento (15 do tema e 10 fora do tema), separadas do conjunto oficial, sem usar Claude; verificação: o validador do conjunto de desenvolvimento passa
 - [ ] 2.3 Equipe escreve as 19 perguntas que usam só a Lei 11.340/2006, com gabarito, pontos obrigatórios, normas aceitas e fonte, sem usar Claude; verificação: o validador aponta só as perguntas ainda não escritas
 - [ ] 2.4 Equipe escreve as 11 perguntas restantes e as 10 extras fora do tema, sem usar Claude; verificação: o conjunto tem a distribuição decidida
