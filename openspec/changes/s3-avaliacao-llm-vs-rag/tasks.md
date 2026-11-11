@@ -17,7 +17,7 @@
 
 - [x] 3.1 Separar as instruções das duas versões, sem mudar a resposta da versão com RAG; verificação: teste confere que só as frases sobre trechos diferem
 - [x] 3.2 Criar o script da rodada, que gera as duas versões e registra modelo, data, versão do changelog e instruções; verificação: teste com LLM simulado grava o registro completo e recusa rodar a oficial com hash divergente
-- [ ] 3.3 Criar o script dos arquivos enviados, com códigos neutros, sorteio com semente, respostas erradas de propósito e mapa separado; verificação: teste confere que os arquivos não trazem indicação de versão e que uma resposta errada fica perto do final
+- [x] 3.3 Criar o script dos arquivos enviados, com códigos neutros, sorteio com semente, respostas erradas de propósito e mapa separado; verificação: teste confere que os arquivos não trazem indicação de versão e que uma resposta errada fica perto do final
 - [ ] 3.4 Criar o script de conferência do retorno e cálculo de precisão, fidelidade, recusa e citação; verificação: testes cobrem linha faltando, trecho inexistente, resposta errada aprovada e recusa contada como erro
 
 ## 4. Teste com as perguntas de desenvolvimento (quinta, 12/11)
