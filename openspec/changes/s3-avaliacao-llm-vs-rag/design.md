@@ -74,6 +74,35 @@ Cada pergunta tem uma versão sorteada para o arquivo A e a outra para o arquivo
 ### Detecção por código
 Recusa é a resposta igual ao texto de recusa do sistema. Presença de citação usa a mesma extração da verificação de citação. Essas duas medidas não vão ao corretor.
 
+### Scripts e arquivos da rodada
+- `scripts/rodada.py congelar` valida `oficial.yaml` e grava o hash em `avaliacao/conjuntos/oficial.congelamento.yaml`. `scripts/rodada.py rodar <conjunto> --changelog "<versão>"` grava `registro.yaml` e `respostas.yaml` em `avaliacao/rodadas/<data>-<conjunto>/`, sem sobrescrever rodadas anteriores.
+- `scripts/envios.py <rodada>` grava os quatro arquivos em `<rodada>/envios/`, o texto enviado em cada código em `envios/conteudo.yaml` (sem a versão) e o mapa em `<rodada>/mapa.yaml`, fora da pasta dos envios.
+- `scripts/conferir.py <rodada>` lê os retornos e grava `<rodada>/resultado.yaml`.
+
+### Respostas erradas de propósito
+A equipe escreve as 3 em `avaliacao/conjuntos/erradas.yaml` (`versao: 1` e lista `erradas`), cada uma com `id`, `pergunta_id` de uma pergunta de desenvolvimento, `autor`, `resposta` e `erro` (o que está errado, para conferência). O gabarito e os pontos obrigatórios enviados vêm dessa pergunta de desenvolvimento. As mesmas 3 entram nos dois arquivos, e a última sorteada fica entre as duas últimas linhas. Na rodada de desenvolvimento, a mesma pergunta pode aparecer duas vezes no arquivo, com a resposta real e com a errada.
+
+### Formato do retorno
+Cada retorno é salvo como `<rodada>/retornos/<A|B>-<precisao|fidelidade>.json`, uma lista com um objeto por código (aceito também dentro de um bloco ```` ```json ````). O modelo corretor e a data de cada envio ficam em `retornos/registro.yaml`, por exemplo `A-precisao: {modelo: <nome>, data: 2026-11-12}`. A rubrica pede exatamente este formato:
+
+```json
+[{"codigo": "A01",
+  "pontos": [{"numero": 1, "presente": true, "trecho": "<cópia da resposta>"}],
+  "contradiz": false, "trecho_contradicao": ""}]
+```
+
+```json
+[{"codigo": "A01",
+  "afirmacoes": [{"afirmacao": "<cópia da resposta>", "suporte": "sim | nao | fora_da_base",
+                  "trecho_artigo": "<cópia do artigo, quando sim>"}]}]
+```
+
+### Conferência do retorno
+- Linha faltando, código desconhecido ou repetido, JSON inválido ou falta de modelo e data: a correção daquele arquivo não é aceita.
+- Resposta errada de propósito aprovada (todos os pontos presentes e sem contradição, ou nenhuma afirmação sem suporte), julgada pelas marcações do corretor: a correção daquele arquivo é rejeitada.
+- Trecho que não existe no texto enviado: a linha é apontada e a marcação conta contra a resposta (ponto presente vira ausente, afirmação com suporte vira sem suporte, contradição continua contando). Assim um erro de cópia do corretor nunca melhora a nota. Se as marcações apontadas forem muitas, a equipe decide repetir o envio.
+- As métricas usam só os arquivos aceitos e informam quantas respostas foram corrigidas. Afirmações `fora_da_base` ficam fora do percentual sem suporte e são contadas à parte.
+
 ## Risks / Trade-offs
 
 - **Sem revisão humana, um erro sistemático do corretor passa despercebido** → Respostas erradas de propósito, trechos comprobatórios e a declaração no relatório.
