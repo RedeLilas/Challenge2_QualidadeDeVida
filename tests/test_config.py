@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from app.config import TIMEOUT_PADRAO, VARIAVEIS, ConfigIncompleta, carregar
+from app.config import RACIOCINIO_VALIDOS, TIMEOUT_PADRAO, VARIAVEIS, ConfigIncompleta, carregar
 
 COMPLETO = {
     "LLM_BASE_URL": "http://localhost:11434/v1",
@@ -53,6 +53,25 @@ def test_tempo_limite_configuravel():
 def test_tempo_limite_invalido_falha_com_mensagem_clara(valor):
     with pytest.raises(ConfigIncompleta, match="LLM_TIMEOUT"):
         carregar({**COMPLETO, "LLM_TIMEOUT": valor})
+
+
+def test_raciocinio_ausente_nao_e_enviado():
+    assert carregar(COMPLETO).thinking is None
+
+
+def test_raciocinio_vazio_conta_como_ausente():
+    assert carregar({**COMPLETO, "LLM_THINKING": "  "}).thinking is None
+
+
+@pytest.mark.parametrize("valor", RACIOCINIO_VALIDOS)
+def test_raciocinio_definido(valor):
+    assert carregar({**COMPLETO, "LLM_THINKING": f" {valor.upper()} "}).thinking == valor
+
+
+@pytest.mark.parametrize("valor", ["off", "false", "0", "desligado"])
+def test_raciocinio_invalido_falha_com_mensagem_clara(valor):
+    with pytest.raises(ConfigIncompleta, match="LLM_THINKING"):
+        carregar({**COMPLETO, "LLM_THINKING": valor})
 
 
 def test_env_example_tem_as_variaveis_sem_chave_real():

@@ -28,6 +28,8 @@ class LLMIndisponivel(RuntimeError):
 class ClienteLLM:
     def __init__(self, cfg: config.Config, cliente: openai.OpenAI | None = None):
         self.modelo = cfg.model
+        # Parâmetro do DeepSeek: só vai na chamada quando LLM_THINKING está definida.
+        self._extra = {"extra_body": {"thinking": {"type": cfg.thinking}}} if cfg.thinking else {}
         # Sem nova tentativa automática: repetir uma chamada lenta só dobra a espera.
         # A tela mostra "tente de novo" e a usuária decide.
         self._cliente = cliente or openai.OpenAI(
@@ -37,7 +39,7 @@ class ClienteLLM:
     def responder(self, mensagens: list[dict], temperatura: float = 0.2) -> str:
         try:
             resposta = self._cliente.chat.completions.create(
-                model=self.modelo, messages=mensagens, temperature=temperatura
+                model=self.modelo, messages=mensagens, temperature=temperatura, **self._extra
             )
         except ERROS_DO_PROVEDOR as erro:
             raise LLMIndisponivel(type(erro).__name__) from erro
