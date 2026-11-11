@@ -44,7 +44,8 @@ INSTRUCOES = (
 
 # Versão sem RAG, usada só na comparação LLM x RAG da S3 (scripts de avaliação), nunca na
 # aplicação. Muda apenas as frases sobre os trechos: sai a regra de usar só os trechos, e as
-# outras duas são adaptadas para fazer sentido sem eles. None remove a frase.
+# outras duas são adaptadas para fazer sentido sem eles. None remove a frase. Se uma dessas
+# frases mudar em INSTRUCOES, tests/test_instrucoes_sem_rag.py falha (a aplicação não é afetada).
 _TROCAS_SEM_RAG = {
     "- Responda usando apenas os trechos de lei enviados junto com a pergunta. "
     "Não use conhecimento de fora deles.": None,
@@ -55,7 +56,6 @@ _TROCAS_SEM_RAG = {
     "- Se os trechos não bastarem para responder, diga apenas que não sabe responder com segurança.":
         "- Se não tiver certeza da resposta, diga apenas que não sabe responder com segurança.",
 }  # fmt: skip
-assert set(_TROCAS_SEM_RAG) <= set(INSTRUCOES.split("\n")), "frase trocada não existe mais em INSTRUCOES"
 INSTRUCOES_SEM_RAG = "\n".join(
     _TROCAS_SEM_RAG.get(linha, linha)
     for linha in INSTRUCOES.split("\n")
