@@ -42,6 +42,26 @@ INSTRUCOES = (
     "- Se a pessoa estiver em perigo agora, diga para ligar 190."
 )
 
+# Versão sem RAG, usada só na comparação LLM x RAG da S3 (scripts de avaliação), nunca na
+# aplicação. Muda apenas as frases sobre os trechos: sai a regra de usar só os trechos, e as
+# outras duas são adaptadas para fazer sentido sem eles. None remove a frase.
+_TROCAS_SEM_RAG = {
+    "- Responda usando apenas os trechos de lei enviados junto com a pergunta. "
+    "Não use conhecimento de fora deles.": None,
+    "- Cite a norma e o artigo de cada informação, entre parênteses, no formato do rótulo do trecho, "
+    "por exemplo: (Lei 11.340/2006, art. 7º). Cite somente artigos que aparecem nos trechos.":
+        "- Cite a norma e o artigo de cada informação, entre parênteses, "
+        "por exemplo: (Lei 11.340/2006, art. 7º).",
+    "- Se os trechos não bastarem para responder, diga apenas que não sabe responder com segurança.":
+        "- Se não tiver certeza da resposta, diga apenas que não sabe responder com segurança.",
+}  # fmt: skip
+assert set(_TROCAS_SEM_RAG) <= set(INSTRUCOES.split("\n")), "frase trocada não existe mais em INSTRUCOES"
+INSTRUCOES_SEM_RAG = "\n".join(
+    _TROCAS_SEM_RAG.get(linha, linha)
+    for linha in INSTRUCOES.split("\n")
+    if _TROCAS_SEM_RAG.get(linha, linha) is not None
+)
+
 RE_ARTIGO = re.compile(r"\b(art(?:igo)?s?)\.?\s*(\d+(?:-[a-z])?)(?!\d)\s*[º°o]?", re.IGNORECASE)
 RE_MAIS_ARTIGOS = re.compile(r"\s*(?:,|\be\b)\s*(\d+(?:-[a-z])?)(?!\d)\s*[º°o]?", re.IGNORECASE)
 # Aplicado ao texto sem acento: "isso constitui violência" não é a Constituição.
@@ -58,8 +78,20 @@ def montar_mensagens(pergunta: str, trechos: list[dict]) -> list[dict]:
     blocos = "\n\n".join(f"[{rotulo(t['lei'], t['artigo'])}]\n{t['texto']}" for t in trechos)
     return [
         {"role": "system", "content": INSTRUCOES},
-        {"role": "user", "content": f"Trechos de lei:\n\n{blocos}\n\nPergunta: {pergunta}"},
+        {"role": "user", "content": f"Trechos de lei:\n\n{blocos}\n\n{_pergunta(pergunta)}"},
     ]
+
+
+def montar_mensagens_sem_rag(pergunta: str) -> list[dict]:
+    """Mensagens da versão sem RAG da comparação da S3: a mesma pergunta, sem trechos."""
+    return [
+        {"role": "system", "content": INSTRUCOES_SEM_RAG},
+        {"role": "user", "content": _pergunta(pergunta)},
+    ]
+
+
+def _pergunta(pergunta: str) -> str:
+    return f"Pergunta: {pergunta}"
 
 
 def _sem_acento(texto: str) -> str:
