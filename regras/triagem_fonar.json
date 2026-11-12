@@ -1,0 +1,393 @@
+{
+  "versao": "2026-11-12",
+  "descricao": "Regras determinísticas de triagem de urgência baseadas no Formulário Nacional de Avaliação de Risco (Fonar 2025). Sem pontuação numérica, com encerramento no primeiro gatilho de risco alto confirmado e com aviso de limite em todos os resultados.",
+  "fonte": {
+    "referencia": "Lei 14.149/2021 e Portaria Conjunta CNJ/CNMP nº 6/2025 (Anexo Único do Fonar)",
+    "data_verificacao": "2026-11-12",
+    "normas": [
+      {
+        "norma": "Lei 14.149/2021",
+        "artigo": "arts. 1º a 4º",
+        "inicio_vigencia": "2021-05-06",
+        "data_verificacao": "2026-11-12",
+        "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14149.htm"
+      },
+      {
+        "norma": "Portaria Conjunta CNJ/CNMP 6/2025",
+        "artigo": "arts. 1º a 4º e Anexo Único",
+        "inicio_vigencia": "2025-07-25",
+        "data_verificacao": "2026-11-12",
+        "fonte_url": "https://atos.cnj.jus.br/atos/detalhar/6324"
+      }
+    ]
+  },
+  "aviso_limite": "Esta classificação não substitui a avaliação presencial de um profissional da rede de atendimento. Para orientação gratuita e sigilosa 24 horas, ligue 180.",
+  "resultados": {
+    "alto": {
+      "nivel": "alto",
+      "rotulo": "Risco alto",
+      "titulo": "Sinais de risco alto identificados",
+      "orientacao": "Sua segurança vem em primeiro lugar. Se você estiver em perigo agora, ligue 190 imediatamente. Você pode solicitar medida protetiva de urgência na Delegacia Especial de Atendimento à Mulher (DEAM), na Casa da Mulher Brasileira, na Defensoria Pública ou no Juizado de Violência Doméstica apenas com o seu depoimento, sem precisar de boletim de ocorrência ou provas prévias (Lei 14.550/2023).",
+      "como_pedir_medida_protetiva": "Procure uma DEAM (24h), a Casa da Mulher Brasileira de Ceilândia, a Defensoria Pública do DF (NUDEM) ou o Juizado de Violência Doméstica e peça a concessão de medida protetiva de urgência com base no seu relato.",
+      "telefone_emergencia": "190",
+      "telefone_orientacao": "Ligue 180 (gratuito, 24 horas)",
+      "aviso_limite": "Esta classificação não substitui a avaliação de um profissional da rede de atendimento. Procure os serviços de proteção do DF ou o Ligue 180 para acompanhamento profissional."
+    },
+    "alto_nao_descartado": {
+      "nivel": "alto_nao_descartado",
+      "rotulo": "Não foi possível descartar risco alto",
+      "titulo": "Não foi possível descartar risco alto",
+      "orientacao": "Como uma ou mais perguntas sobre fatores graves foram puladas ou respondidas com 'não sei', adotamos a orientação mais segura do nível alto: se estiver em perigo agora, ligue 190. Você pode solicitar medida protetiva de urgência na DEAM, na Casa da Mulher Brasileira, na Defensoria Pública ou no Juizado de Violência Doméstica apenas com o seu depoimento (Lei 14.550/2023).",
+      "como_pedir_medida_protetiva": "Procure uma DEAM (24h), a Casa da Mulher Brasileira de Ceilândia, a Defensoria Pública do DF (NUDEM) ou o Juizado de Violência Doméstica e peça a concessão de medida protetiva de urgência com base no seu relato.",
+      "telefone_emergencia": "190",
+      "telefone_orientacao": "Ligue 180 (gratuito, 24 horas)",
+      "aviso_limite": "Esta classificação não substitui a avaliação de um profissional da rede de atendimento. Procure os serviços de proteção do DF ou o Ligue 180 para acompanhamento profissional."
+    },
+    "atencao": {
+      "nivel": "atencao",
+      "rotulo": "Atenção",
+      "titulo": "Sinais de atenção identificados",
+      "orientacao": "Suas respostas indicam fatores de vulnerabilidade ou escalada que merecem acolhimento e proteção preventiva. Recomendamos procurar os serviços especializados do DF (CEAM, Casa da Mulher Brasileira ou Defensoria Pública) para orientação sobre medidas protetivas e apoio psicossocial, ou ligar para o Ligue 180 (gratuito, 24 horas).",
+      "como_pedir_medida_protetiva": "Você pode solicitar medida protetiva de urgência na DEAM, na Defensoria Pública ou no Juizado de Violência Doméstica a partir do seu depoimento (Lei 14.550/2023).",
+      "telefone_emergencia": "190",
+      "telefone_orientacao": "Ligue 180 (gratuito, 24 horas)",
+      "aviso_limite": "Esta classificação não substitui a avaliação de um profissional da rede de atendimento. Procure os serviços do DF ou o Ligue 180 para avaliação profissional."
+    },
+    "sem_sinais_graves": {
+      "nivel": "sem_sinais_graves",
+      "rotulo": "Sem sinais graves",
+      "titulo": "Sem sinais graves identificados nesta triagem",
+      "orientacao": "Não foram identificados os sinais de urgência consultados nesta triagem, mas qualquer forma de violência psicológica, moral, patrimonial, física ou sexual merece acolhimento. Procure os serviços do DF para avaliação profissional ou ligue para o Ligue 180 (gratuito, 24 horas).",
+      "como_pedir_medida_protetiva": "Caso precise de proteção, você pode solicitar medida protetiva na DEAM ou na Defensoria Pública com base no seu relato (Lei 14.550/2023).",
+      "telefone_emergencia": "190",
+      "telefone_orientacao": "Ligue 180 (gratuito, 24 horas)",
+      "aviso_limite": "Esta classificação não substitui a avaliação de um profissional da rede de atendimento. Procure os serviços do DF ou o Ligue 180 para avaliação profissional."
+    }
+  },
+  "perguntas": [
+    {
+      "id": "1",
+      "numero": "1",
+      "bloco": "Bloco I — Sobre o histórico de violência",
+      "tipo": "gatilho",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "O(A) agressor(a) já ameaçou você ou algum familiar com a finalidade de atingi-la?",
+      "opcoes": [
+        { "id": "sim_arma_fogo", "rotulo": "Sim, com arma de fogo", "efeito": "alto" },
+        { "id": "sim_faca", "rotulo": "Sim, com faca", "efeito": "alto" },
+        { "id": "sim_outra_forma", "rotulo": "Sim, de outra forma", "efeito": "atencao" },
+        { "id": "nao", "rotulo": "Não", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "2",
+      "numero": "2",
+      "bloco": "Bloco I — Sobre o histórico de violência",
+      "tipo": "gatilho",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "O(A) agressor(a) já praticou alguma(s) das seguintes formas graves de agressão física contra você (queimadura, enforcamento, sufocamento, estrangulamento, tiro, afogamento, facada ou paulada)?",
+      "opcoes": [
+        { "id": "sim", "rotulo": "Sim, praticou uma ou mais dessas formas graves de agressão", "efeito": "alto" },
+        { "id": "queimadura", "rotulo": "Queimadura", "efeito": "alto" },
+        { "id": "enforcamento", "rotulo": "Enforcamento", "efeito": "alto" },
+        { "id": "sufocamento", "rotulo": "Sufocamento", "efeito": "alto" },
+        { "id": "estrangulamento", "rotulo": "Estrangulamento", "efeito": "alto" },
+        { "id": "tiro", "rotulo": "Tiro", "efeito": "alto" },
+        { "id": "afogamento", "rotulo": "Afogamento", "efeito": "alto" },
+        { "id": "facada", "rotulo": "Facada", "efeito": "alto" },
+        { "id": "paulada", "rotulo": "Paulada", "efeito": "alto" },
+        { "id": "outro", "rotulo": "Outra agressão física grave", "efeito": "alto" },
+        { "id": "nao", "rotulo": "Nenhuma agressão física grave", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "5",
+      "numero": "5",
+      "bloco": "Bloco I — Sobre o histórico de violência",
+      "tipo": "gatilho",
+      "apenas_abre_subitem": "5.1",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "Você já registrou ocorrência policial ou solicitou medida protetiva de urgência contra o(a) agressor(a)?",
+      "opcoes": [
+        {
+          "id": "sim_ocorrencia_e_medida",
+          "rotulo": "Sim, registrei ocorrência policial e solicitei medida protetiva de urgência",
+          "efeito": "nenhum",
+          "abre_5_1": true
+        },
+        {
+          "id": "sim_apenas_ocorrencia",
+          "rotulo": "Sim, registrei apenas ocorrência policial",
+          "efeito": "nenhum",
+          "abre_5_1": true
+        },
+        {
+          "id": "sim_apenas_medida",
+          "rotulo": "Sim, solicitei apenas medida protetiva de urgência",
+          "efeito": "nenhum",
+          "abre_5_1": true
+        },
+        {
+          "id": "nao",
+          "rotulo": "Não, nunca registrei ocorrência ou solicitei medida protetiva de urgência",
+          "efeito": "nenhum",
+          "abre_5_1": false
+        },
+        {
+          "id": "nao_sei",
+          "rotulo": "Não sei",
+          "efeito": "nenhum",
+          "abre_5_1": true
+        },
+        {
+          "id": "pular",
+          "rotulo": "Prefiro não responder",
+          "efeito": "nenhum",
+          "abre_5_1": true
+        }
+      ]
+    },
+    {
+      "id": "5.1",
+      "numero": "5.1",
+      "bloco": "Bloco I — Sobre o histórico de violência",
+      "tipo": "gatilho",
+      "depende_de": "5",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "O(A) agressor(a) já descumpriu medida protetiva de urgência anteriormente?",
+      "opcoes": [
+        { "id": "sim", "rotulo": "Sim", "efeito": "alto" },
+        { "id": "nao", "rotulo": "Não", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "11",
+      "numero": "11",
+      "bloco": "Bloco II — Sobre o(a) agressor(a)",
+      "tipo": "gatilho",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "O(A) agressor(a) tem fácil acesso a arma de fogo?",
+      "opcoes": [
+        { "id": "sim", "rotulo": "Sim", "efeito": "alto" },
+        { "id": "nao", "rotulo": "Não", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não informar", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "3",
+      "numero": "3",
+      "bloco": "Bloco I — Sobre o histórico de violência",
+      "tipo": "atencao",
+      "classificacao": "adaptável com cuidado",
+      "aviso_cuidado": "Pergunta sobre tema sensível. Você pode pular esta pergunta se preferir, sem reduzir sua proteção.",
+      "enunciado": "O(A) agressor(a) já obrigou você a ter relações sexuais ou praticar atos sexuais contra a sua vontade?",
+      "opcoes": [
+        { "id": "sim", "rotulo": "Sim", "efeito": "atencao" },
+        { "id": "nao", "rotulo": "Não", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "4",
+      "numero": "4",
+      "bloco": "Bloco I — Sobre o histórico de violência",
+      "tipo": "atencao",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "O(A) agressor(a) já teve algum destes comportamentos?",
+      "opcoes": [
+        {
+          "id": "frase_posse",
+          "rotulo": "Disse algo parecido com: \"se não for minha, não será de mais ninguém\"",
+          "efeito": "atencao"
+        },
+        {
+          "id": "perseguicao",
+          "rotulo": "Perturbou, perseguiu ou vigiou você nos locais que frequenta",
+          "efeito": "atencao"
+        },
+        {
+          "id": "proibiu_visitas",
+          "rotulo": "Proibiu você de visitar familiares ou amigos",
+          "efeito": "atencao"
+        },
+        {
+          "id": "proibiu_trabalho_estudo",
+          "rotulo": "Proibiu você de trabalhar ou estudar",
+          "efeito": "atencao"
+        },
+        {
+          "id": "contato_insistente",
+          "rotulo": "Fez telefonemas, enviou mensagens pelo celular ou e-mails de forma insistente",
+          "efeito": "atencao"
+        },
+        {
+          "id": "bloqueio_patrimonial",
+          "rotulo": "Impediu você de ter acesso a dinheiro, conta bancária, documentos pessoais ou outros bens",
+          "efeito": "atencao"
+        },
+        {
+          "id": "outros_comportamentos",
+          "rotulo": "Teve outros comportamentos de ciúme excessivo ou controle",
+          "efeito": "atencao"
+        },
+        {
+          "id": "nao",
+          "rotulo": "Nenhum comportamento de ciúme excessivo ou controle",
+          "efeito": "nenhum"
+        },
+        {
+          "id": "nao_sei",
+          "rotulo": "Não sei",
+          "efeito": "indeterminado"
+        },
+        {
+          "id": "pular",
+          "rotulo": "Prefiro não responder",
+          "efeito": "indeterminado"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "numero": "6",
+      "bloco": "Bloco I — Sobre o histórico de violência",
+      "tipo": "atencao",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "As agressões ou ameaças do(a) agressor(a) se tornaram mais frequentes e/ou mais graves nos últimos 12 meses?",
+      "opcoes": [
+        {
+          "id": "sim",
+          "rotulo": "Sim, ficaram mais frequentes e/ou mais graves",
+          "efeito": "atencao"
+        },
+        {
+          "id": "nao",
+          "rotulo": "Não houve aumento da frequência e intensidade das agressões e/ou ameaças",
+          "efeito": "nenhum"
+        },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "9",
+      "numero": "9",
+      "bloco": "Bloco II — Sobre o(a) agressor(a)",
+      "tipo": "atencao",
+      "classificacao": "adaptável com cuidado",
+      "aviso_cuidado": "Pergunta sobre tema sensível. Você pode pular esta pergunta se preferir, sem reduzir sua proteção.",
+      "enunciado": "O(A) agressor(a) já tentou suicídio ou falou em suicidar-se?",
+      "opcoes": [
+        { "id": "sim_tentou", "rotulo": "Sim, já tentou suicídio", "efeito": "atencao" },
+        {
+          "id": "sim_falou",
+          "rotulo": "Sim, já falou em suicidar-se, mas nunca tentou",
+          "efeito": "atencao"
+        },
+        {
+          "id": "nao",
+          "rotulo": "Não, nunca tentou nem falou sobre suicídio",
+          "efeito": "nenhum"
+        },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "12",
+      "numero": "12",
+      "bloco": "Bloco II — Sobre o(a) agressor(a)",
+      "tipo": "atencao",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "O(A) agressor(a) já ameaçou ou agrediu seus(suas) filhos(as), outros familiares, outras parceiras íntimas, amigos(as), colegas de trabalho, pessoas desconhecidas ou animais de estimação?",
+      "opcoes": [
+        { "id": "sim_filhos", "rotulo": "Sim: Filhos(as)", "efeito": "atencao" },
+        { "id": "sim_familiares", "rotulo": "Sim: Outros familiares", "efeito": "atencao" },
+        { "id": "sim_animais", "rotulo": "Sim: Animais de estimação", "efeito": "atencao" },
+        { "id": "sim_parceiras", "rotulo": "Sim: Outras parceiras íntimas", "efeito": "atencao" },
+        { "id": "sim_outras_pessoas", "rotulo": "Sim: Outras pessoas", "efeito": "atencao" },
+        { "id": "nao", "rotulo": "Não", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "13",
+      "numero": "13",
+      "bloco": "Bloco III — Sobre você",
+      "tipo": "atencao",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "Você terminou, tentou ou manifestou intenção de terminar com o(a) agressor(a) recentemente?",
+      "opcoes": [
+        { "id": "sim_terminei", "rotulo": "Sim, terminei recentemente", "efeito": "atencao" },
+        {
+          "id": "sim_tentei",
+          "rotulo": "Sim, tentei terminar, mas ainda estou na relação",
+          "efeito": "atencao"
+        },
+        {
+          "id": "sim_manifestei",
+          "rotulo": "Sim, manifestei intenção de terminar",
+          "efeito": "atencao"
+        },
+        { "id": "nao", "rotulo": "Não", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "15",
+      "numero": "15",
+      "bloco": "Bloco III — Sobre você",
+      "tipo": "atencao",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "Você sofreu algum tipo de violência durante a gravidez ou até 18 meses após o parto?",
+      "opcoes": [
+        {
+          "id": "sim_gravida_atual",
+          "rotulo": "Sim, estou grávida atualmente e sofro violência",
+          "efeito": "atencao"
+        },
+        {
+          "id": "sim_puerperio_atual",
+          "rotulo": "Sim, tive filho(a) nos últimos 18 meses e sofro violência atualmente",
+          "efeito": "atencao"
+        },
+        {
+          "id": "sim_anterior",
+          "rotulo": "Sim, sofri violência durante a gravidez ou nos 18 meses após o parto, mas não atualmente",
+          "efeito": "atencao"
+        },
+        {
+          "id": "nao",
+          "rotulo": "Não sofri violência nesses períodos",
+          "efeito": "nenhum"
+        },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    },
+    {
+      "id": "22",
+      "numero": "22",
+      "bloco": "Bloco IV — Outras informações importantes",
+      "tipo": "atencao",
+      "classificacao": "adaptável para autoaplicação",
+      "enunciado": "Atualmente, você reside no mesmo imóvel com o(a) agressor(a)?",
+      "opcoes": [
+        { "id": "sim", "rotulo": "Sim", "efeito": "atencao" },
+        { "id": "nao", "rotulo": "Não", "efeito": "nenhum" },
+        { "id": "nao_sei", "rotulo": "Não sei", "efeito": "indeterminado" },
+        { "id": "pular", "rotulo": "Prefiro não responder", "efeito": "indeterminado" }
+      ]
+    }
+  ]
+}
