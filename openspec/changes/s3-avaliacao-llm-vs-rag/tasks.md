@@ -9,7 +9,7 @@
 
 - [x] 2.1 Definir o formato de `avaliacao/conjuntos/` e criar o validador do conjunto; verificação: testes com fixtures fictícias falham para campo faltando, distribuição errada, falta de segunda pessoa e pergunta que dispara o alerta
 - [ ] 2.2 Equipe completa as perguntas de desenvolvimento (15 do tema e 10 fora do tema), separadas do conjunto oficial, sem usar Claude; verificação: o validador do conjunto de desenvolvimento passa
-- [ ] 2.3 Equipe escreve as 19 perguntas que usam só a Lei 11.340/2006, com gabarito, pontos obrigatórios, normas aceitas e fonte, sem usar Claude; verificação: o validador aponta só as perguntas ainda não escritas
+- [x] 2.3 Equipe escreve as 19 perguntas que usam só a Lei 11.340/2006, com gabarito, pontos obrigatórios, normas aceitas e fonte, sem usar Claude; verificação: o validador aponta só as perguntas ainda não escritas
 - [ ] 2.4 Equipe escreve as 11 perguntas restantes e as 10 extras fora do tema, sem usar Claude; verificação: o conjunto tem a distribuição decidida
 - [ ] 2.5 Segunda pessoa confere cada gabarito no texto da lei e registra a conferência; verificação: o validador do conjunto oficial passa por inteiro
 
