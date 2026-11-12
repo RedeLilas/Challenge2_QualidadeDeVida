@@ -29,8 +29,33 @@ normas:
     numero: "2848"
     ano: 1940
     url: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm"
-    # Só os crimes ligados à violência doméstica: lesão corporal, ameaça, perseguição e violência psicológica.
-    artigos: ["129", "147", "147-A", "147-B"]
+    # Só os crimes ligados à violência doméstica: feminicídio, lesão corporal, crimes contra a honra,
+    # ameaça, perseguição, violência psicológica, cárcere privado, dano, imunidades entre cônjuges
+    # (arts. 181 a 183), estupro, violação sexual mediante fraude, importunação sexual e divulgação
+    # de cena de estupro ou de nudez sem consentimento.
+    artigos:
+      ["121-A", "129", "138", "139", "140", "147", "147-A", "147-B", "148", "163",
+       "181", "182", "183", "213", "215-A", "218-C"]
+  - id: lei-10406-2002
+    eixo: juridico
+    urn: "urn:lex:br:federal:lei:2002-01-10;10406"
+    titulo: "Lei nº 10.406, de 10 de janeiro de 2002 (Código Civil)"
+    citacao: "Código Civil"
+    numero: "10406"
+    ano: 2002
+    url: "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm"
+    # Só a guarda dos filhos, alterada pela Lei 14.713/2023 (violência doméstica impede a guarda compartilhada).
+    artigos: ["1.584"]
+  - id: lei-13105-2015
+    eixo: juridico
+    urn: "urn:lex:br:federal:lei:2015-03-16;13105"
+    titulo: "Lei nº 13.105, de 16 de março de 2015 (Código de Processo Civil)"
+    citacao: "Código de Processo Civil"
+    numero: "13105"
+    ano: 2015
+    url: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm"
+    # Só a pergunta ao juiz sobre violência doméstica nas ações de guarda, incluída pela Lei 14.713/2023.
+    artigos: ["699-A"]
 
   # Eixo 2: benefícios sociais e autonomia financeira
   - id: lei-14601-2023
