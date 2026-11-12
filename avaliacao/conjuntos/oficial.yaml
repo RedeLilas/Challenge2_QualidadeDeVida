@@ -241,4 +241,195 @@ perguntas:
       - "Lei 11.340/2006, art. 9º, § 2º"
     fonte: "Lei 11.340/2006, art. 9º, § 2º, inciso I"
 
-extras: []
+  - id: of-020
+    categoria: crime
+    pergunta: "Uma colega de trabalho terminou o namoro no ano passado, mas o ex-namorado passou meses mandando dezenas de mensagens por dia, criando perfis falsos para vigiá-la e aparecendo na porta do serviço dela, a ponto de perturbar a liberdade e a privacidade dela. Essa perseguição repetida é crime, tem aumento de pena quando é contra a mulher nessa situação e precisa de autorização da vítima para o processo seguir?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim. Perseguir alguém reiteradamente e por qualquer meio, ameaçando sua integridade física ou psicológica, restringindo sua capacidade de locomoção ou invadindo e perturbando sua esfera de liberdade ou privacidade é crime previsto no Código Penal, com pena de reclusão de 6 meses a 2 anos e multa. A pena é aumentada de metade quando o crime é cometido contra mulher por razões da condição de sexo feminino, e a ação penal somente se procede mediante representação da vítima."
+    pontos_obrigatorios:
+      - "Perseguir alguém reiteradamente por qualquer meio, perturbando sua liberdade ou privacidade, é crime punido com reclusão de 6 meses a 2 anos e multa."
+      - "A pena é aumentada de metade quando o crime é cometido contra mulher por razões da condição de sexo feminino."
+      - "A ação penal depende de representação (manifestação/autorização) da vítima."
+    normas_aceitas:
+      - "Código Penal, art. 147-A"
+    fonte: "Código Penal, art. 147-A, caput, § 1º, inciso II, e § 3º"
+
+  - id: of-021
+    categoria: crime
+    pergunta: "O ex-companheiro de uma vizinha vivia humilhando, manipulando e ridicularizando ela para controlar as decisões e o jeito dela se comportar, e ainda usou inteligência artificial para alterar a imagem e a voz dela em montagens. Causar esse dano emocional à mulher é crime, e o uso de inteligência artificial aumenta a pena?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim. Causar dano emocional à mulher que a prejudique e perturbe seu pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões — mediante ameaça, constrangimento, humilhação, manipulação, isolamento, chantagem, ridicularização ou limitação do direito de ir e vir — é crime punido com reclusão de 6 meses a 2 anos e multa, se a conduta não constitui crime mais grave. A pena é aumentada de metade se o crime é cometido mediante uso de inteligência artificial ou de qualquer outro recurso tecnológico que altere imagem ou som da vítima."
+    pontos_obrigatorios:
+      - "Causar dano emocional à mulher para degradar ou controlar suas ações e decisões é crime punido com reclusão de 6 meses a 2 anos e multa (se não constituir crime mais grave)."
+      - "A pena é aumentada de metade quando há uso de inteligência artificial ou outro recurso tecnológico que altere imagem ou som da vítima."
+    normas_aceitas:
+      - "Código Penal, art. 147-B"
+      - "Lei 11.340/2006, art. 7º, II"
+    fonte: "Código Penal, art. 147-B, caput e parágrafo único"
+
+  - id: of-022
+    categoria: crime
+    pergunta: "Depois que uma conhecida terminou o relacionamento, o ex-namorado divulgou em grupos na internet fotos e vídeos de nudez e momentos íntimos gravados quando estavam juntos, sem o consentimento dela, por vingança e para humilhá-la. Divulgar esses registros sem autorização é crime, e o fato de ele ter tido relação íntima de afeto com ela ou agir por vingança aumenta a pena?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim. Oferecer, trocar, disponibilizar, transmitir, distribuir, publicar ou divulgar, por qualquer meio, fotografia, vídeo ou outro registro audiovisual que contenha cena de sexo, nudez ou pornografia sem o consentimento da vítima é crime com pena de reclusão de 4 a 10 anos e multa, se o fato não constitui crime mais grave. A pena é aumentada de 1/3 a 2/3 se o crime é praticado por agente que mantém ou tenha mantido relação íntima de afeto com a vítima ou com o fim de vingança ou humilhação."
+    pontos_obrigatorios:
+      - "Divulgar fotografia ou vídeo com cena de sexo, nudez ou pornografia sem o consentimento da vítima é crime punido com reclusão de 4 a 10 anos e multa."
+      - "A pena é aumentada de 1/3 a 2/3 quando o autor mantém ou manteve relação íntima de afeto com a vítima ou age com fim de vingança ou humilhação."
+    normas_aceitas:
+      - "Código Penal, art. 218-C"
+    fonte: "Código Penal, art. 218-C, caput e § 1º"
+
+  - id: of-023
+    categoria: crime
+    pergunta: "Uma prima tem deficiência física e, meses atrás, sofreu agressões do companheiro dentro de casa que machucaram o corpo dela. Qual é a pena prevista na lei para quem agride e causa lesão corporal na companheira ou na mulher em situação de violência doméstica, e a pena aumenta quando a vítima é pessoa com deficiência?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "A lesão corporal praticada contra cônjuge ou companheiro no âmbito das relações domésticas ou de coabitação, ou praticada contra a mulher por razões da condição do sexo feminino, tem pena de reclusão de 2 a 5 anos. Quando a lesão em contexto doméstico é cometida contra pessoa portadora de deficiência, a pena é aumentada de 1/3."
+    pontos_obrigatorios:
+      - "A pena para a lesão corporal em contexto doméstico ou contra a mulher por razões da condição do sexo feminino é de reclusão de 2 a 5 anos."
+      - "A pena é aumentada de 1/3 quando o crime em contexto doméstico é cometido contra pessoa com deficiência."
+    normas_aceitas:
+      - "Código Penal, art. 129"
+      - "Código Penal, art. 129, § 9º"
+      - "Código Penal, art. 129, § 11"
+      - "Código Penal, art. 129, § 13"
+    fonte: "Código Penal, art. 129, §§ 9º, 11 e 13"
+
+  - id: of-024
+    categoria: crime
+    pergunta: "Uma vizinha contou que, durante uma discussão no mês passado, o ex-marido mandou mensagens prometendo fazer um mal grave contra ela caso ela pedisse o divórcio. Ameaçar alguém assim, por escrito ou falando, é crime, e quando é cometido contra a mulher em situação de violência doméstica o que muda na pena e na necessidade de autorização da vítima para o processo?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim. Ameaçar alguém, por palavra, escrito, gesto ou qualquer outro meio simbólico, de causar-lhe mal injusto e grave é crime punido com detenção de 1 a 6 meses ou multa. Quando o crime é cometido contra a mulher por razões da condição do sexo feminino, aplica-se a pena em dobro e a ação penal não depende de representação da vítima."
+    pontos_obrigatorios:
+      - "Ameaçar alguém de causar mal injusto e grave por palavra, escrito ou gesto é crime."
+      - "Quando cometido contra a mulher por razões da condição do sexo feminino, aplica-se a pena em dobro."
+      - "Nessa hipótese contra a mulher, o processo criminal não depende de representação (autorização) da vítima."
+    normas_aceitas:
+      - "Código Penal, art. 147"
+    fonte: "Código Penal, art. 147, caput, § 1º e § 2º"
+
+  - id: of-025
+    categoria: crime
+    pergunta: "Uma conhecida relatou na delegacia que, no ano passado, o companheiro a manteve em cárcere privado por vários dias, privando-a da liberdade de sair. Privar alguém de sua liberdade mediante cárcere privado é crime, e a pena é maior quando a vítima é esposa ou companheira de quem fez isso?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim. Privar alguém de sua liberdade mediante sequestro ou cárcere privado é crime com pena base de reclusão de 1 a 3 anos, mas a pena passa a ser de reclusão de 2 a 5 anos quando a vítima é ascendente, descendente, cônjuge ou companheiro do agente."
+    pontos_obrigatorios:
+      - "Privar alguém de sua liberdade mediante sequestro ou cárcere privado é crime."
+      - "Quando a vítima é cônjuge ou companheiro do autor, a pena passa a ser de reclusão de 2 a 5 anos."
+    normas_aceitas:
+      - "Código Penal, art. 148"
+    fonte: "Código Penal, art. 148, caput e § 1º, inciso I"
+
+  - id: of-026
+    categoria: crime
+    pergunta: "O ex-companheiro de uma amiga espalhou para os colegas de trabalho a mentira de que ela tinha furtado dinheiro do caixa da empresa, sabendo que era falso, e também inventou fofocas ofensivas para sujar a reputação dela. Acusar falsamente alguém de ter cometido um crime e atribuir fato ofensivo à reputação de uma pessoa são crimes?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim, são crimes contra a honra previstos no Código Penal. Imputar falsamente a alguém fato definido como crime é calúnia (detenção de 6 meses a 2 anos e multa, incorrendo na mesma pena quem, sabendo falsa a imputação, a propala ou divulga), enquanto imputar a alguém fato ofensivo à sua reputação é difamação (detenção de 3 meses a 1 ano e multa)."
+    pontos_obrigatorios:
+      - "Atribuir falsamente a alguém fato definido como crime (e espalhar sabendo ser falso) configura o crime de calúnia."
+      - "Atribuir a alguém fato ofensivo à sua reputação configura o crime de difamação."
+    normas_aceitas:
+      - "Código Penal, art. 138"
+      - "Código Penal, art. 139"
+      - "Lei 11.340/2006, art. 7º, V"
+    fonte: "Código Penal, art. 138, caput e § 1º, e art. 139, caput"
+
+  - id: of-027
+    categoria: crime
+    pergunta: "O marido de uma colega tirou dinheiro e bens dela usando força física e graves ameaças enquanto estavam casados, e depois disse que marido é isento de pena quando comete crime contra o patrimônio da esposa. Essa isenção de pena entre pessoas casadas vale quando há emprego de violência ou grave ameaça?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Não vale nesse caso. Embora o Código Penal preveja isenção de pena para quem comete crime contra o patrimônio em prejuízo do cônjuge na constância da sociedade conjugal, a própria lei estabelece que essa isenção não se aplica se o crime é de roubo ou de extorsão, ou, em geral, quando haja emprego de grave ameaça ou violência à pessoa."
+    pontos_obrigatorios:
+      - "A isenção de pena para crimes patrimoniais cometidos contra o cônjuge durante o casamento não se aplica quando há emprego de violência ou grave ameaça à pessoa (ou em crimes de roubo ou extorsão)."
+    normas_aceitas:
+      - "Código Penal, art. 181"
+      - "Código Penal, art. 183"
+    fonte: "Código Penal, art. 181, inciso I, e art. 183, inciso I"
+
+  - id: of-028
+    categoria: crime
+    pergunta: "Uma mulher contou a uma amiga que, tempos atrás, o companheiro usou força física e graves ameaças para forçá-la a ter relação sexual contra a vontade dela. Obrigar alguém, mediante violência ou grave ameaça, a manter relação sexual ou outro ato sexual é crime de estupro, e qual é a pena prevista na lei?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim. Constranger alguém, mediante violência ou grave ameaça, a ter conjunção carnal ou a praticar ou permitir que com ele se pratique outro ato libidinoso configura o crime de estupro previsto no Código Penal, com pena de reclusão de 6 a 10 anos."
+    pontos_obrigatorios:
+      - "Forçar alguém, mediante violência ou grave ameaça, a ter relação sexual ou praticar outro ato libidinoso configura o crime de estupro."
+      - "A pena prevista é de reclusão de 6 a 10 anos."
+    normas_aceitas:
+      - "Código Penal, art. 213"
+      - "Lei 11.340/2006, art. 7º, III"
+    fonte: "Código Penal, art. 213, caput"
+
+  - id: of-029
+    categoria: guarda
+    pergunta: "Uma amiga está se separando e não chegou a um acordo com o pai sobre a guarda das crianças, mas existem indícios de risco de violência doméstica ou familiar. Quando não há acordo entre os pais, o juiz ainda aplica a guarda compartilhada se houver probabilidade de risco de violência doméstica?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Não. Pelo Código Civil, quando não há acordo entre a mãe e o pai quanto à guarda do filho, a guarda compartilhada deixa de ser aplicada se um dos genitores declarar ao magistrado que não deseja a guarda ou quando houver elementos que evidenciem a probabilidade de risco de violência doméstica ou familiar."
+    pontos_obrigatorios:
+      - "A guarda compartilhada não é aplicada quando houver elementos que evidenciem a probabilidade de risco de violência doméstica ou familiar."
+    normas_aceitas:
+      - "Código Civil, art. 1.584"
+      - "Código Civil, art. 1.584, § 2º"
+    fonte: "Código Civil, art. 1.584, § 2º"
+
+  - id: of-030
+    categoria: guarda
+    pergunta: "Uma vizinha entrou na Justiça para decidir a guarda dos filhos depois de sofrer agressões do ex-companheiro. Antes de começar a audiência de mediação e conciliação na ação de guarda, o que o juiz deve perguntar sobre risco de violência doméstica e qual é o prazo que a lei dá para apresentar provas ou indícios?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Nas ações de guarda, antes de iniciada a audiência de mediação e conciliação, o juiz deve indagar às partes e ao Ministério Público se há risco de violência doméstica ou familiar, fixando o prazo de 5 dias para a apresentação de prova ou de indícios pertinentes."
+    pontos_obrigatorios:
+      - "Antes de iniciada a audiência de mediação e conciliação, o juiz deve indagar às partes e ao Ministério Público se há risco de violência doméstica ou familiar."
+      - "O juiz fixa o prazo de 5 dias para a apresentação de prova ou de indícios pertinentes."
+    normas_aceitas:
+      - "Código de Processo Civil, art. 699-A"
+    fonte: "Código de Processo Civil, art. 699-A, caput"
+
+extras:
+  - id: of-extra-001
+    categoria: fora_do_tema
+    pergunta: "Comprei um liquidificador pela internet na semana passada e me arrependi quando a encomenda chegou. Quantos dias o Código de Defesa do Consumidor dá para devolver o produto e receber o dinheiro de volta?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-002
+    categoria: fora_do_tema
+    pergunta: "Uma amiga recebeu uma multa de trânsito por radar na avenida, mas a placa na foto estava ilegível. Qual é o prazo e como ela faz para apresentar recurso administrativo no Detran?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-003
+    categoria: fora_do_tema
+    pergunta: "Quem trabalhou como microempreendedora individual no ano passado precisa entregar a declaração de Imposto de Renda de Pessoa Física mesmo tendo faturado pouco?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-004
+    categoria: fora_do_tema
+    pergunta: "Uma colega completou um ano de carteira assinada em uma padaria e o empregador quer dividir as férias dela em três períodos. A legislação trabalhista permite parcelar as férias dessa forma?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-005
+    categoria: fora_do_tema
+    pergunta: "Aluguei uma sala comercial para montar uma loja de roupas e o proprietário pediu quatro meses de aluguel adiantado como caução em dinheiro. A Lei do Inquilinato permite exigir essa garantia?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-006
+    categoria: fora_do_tema
+    pergunta: "O síndico do prédio aplicou uma multa de condomínio para uma moradora por causa de barulho de reforma no sábado à tarde, sem enviar advertência antes. Como ela pode recorrer dessa multa na assembleia?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-007
+    categoria: fora_do_tema
+    pergunta: "Qual é a receita de bolo de cenoura de liquidificador para a massa ficar bem fofinha e qual é a proporção certa de chocolate para fazer uma cobertura durinha?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-008
+    categoria: fora_do_tema
+    pergunta: "Quais são as regras do impedimento no futebol profissional e quantas substituições uma equipe pode fazer durante os noventa minutos de uma partida oficial?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-009
+    categoria: fora_do_tema
+    pergunta: "De quantos em quantos dias é recomendado regar uma samambaia que fica na varanda de um apartamento em Brasília durante os meses de seca?"
+    autor: "Túlio Celeri"
+
+  - id: of-extra-010
+    categoria: fora_do_tema
+    pergunta: "Como faço para limpar o armazenamento do celular quando os vídeos e fotos baixados deixam os aplicativos lentos e sem espaço para atualizar?"
+    autor: "Túlio Celeri"
+
