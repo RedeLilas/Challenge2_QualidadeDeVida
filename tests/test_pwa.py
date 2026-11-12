@@ -110,6 +110,7 @@ def test_service_worker_nao_guarda_a_conversa_e_inclui_novos_arquivos(cliente):
         '"/regras/beneficios.json"',
         '"/regras/triagem_fonar.json"',
         '"/regras/risco_imediato.json"',
+        '"/rede-protecao"',
     ):
         assert item in sw.text
 
@@ -193,6 +194,8 @@ def test_perfil_e_respostas_de_beneficios_nunca_saem_do_aparelho(cliente):
     assert 'id="benefits-specific-questions"' in html
     assert "Beneficios.avaliar(regrasDeBeneficios, entradaPerfil, especificas)" in app_js
     assert "Triagem.avaliar(regrasDeTriagem, respostasFonar)" in app_js
+    assert "ordemRespostasFonar.pop()" in app_js
+    assert 'respostasEspecificasBeneficios.acompanhamento_psicossocial || "prefiro_nao_informar"' in app_js
     assert "CRAS mais próximo" in html
 
 

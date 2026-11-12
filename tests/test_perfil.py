@@ -119,3 +119,42 @@ def test_prefiro_nao_informar_conta_como_preenchido_sem_inventar_valor(js):
     assert por_id["bpc"]["status"] == "faltam_informacoes"
     assert por_id["aluguel_social_df"]["status"] == "faltam_informacoes"
     assert por_id["auxilio_aluguel"]["status"] == "depende_decisao_judicial"
+
+
+def test_acima_de_dois_salarios_minimos_com_cinco_pessoas_reprova_criterio_de_renda(js):
+    respostas = {
+        "ra": "Ceilândia",
+        "moradia": "Preciso sair de casa com urgência para me proteger",
+        "renda": "Acima de 2 salários mínimos",
+        "pessoas_casa": "5 ou mais pessoas",
+        "filhos": "Não tenho filhos ou dependentes",
+        "idade": "30 a 59 anos",
+        "estado_civil": "Casada ou em união estável",
+        "cadunico": "Sim, está atualizado (nos últimos 2 anos)",
+        "inss": "Trabalho com carteira assinada (CLT)",
+        "medida_protetiva": "Sim, já tenho medida protetiva concedida pelo juiz",
+    }
+    js.eval(f"var salvoRendaAlta = Perfil.salvar({json.dumps(respostas)});")
+    avaliacao = json.loads(
+        js.eval("JSON.stringify(Beneficios.avaliar(REGRAS, Perfil.paraAvaliacaoBeneficios(salvoRendaAlta)))")
+    )
+    por_id = {b["id"]: b for b in avaliacao}
+    assert por_id["bolsa_familia"]["status"] == "nao_aplicavel"
+    assert por_id["bpc"]["status"] == "nao_aplicavel"
+    assert por_id["aluguel_social_df"]["status"] == "nao_aplicavel"
+
+
+def test_mapeamento_explicito_de_cadunico_e_medida_protetiva(js):
+    desatualizado = json.loads(
+        js.eval(
+            'JSON.stringify(Perfil.paraAvaliacaoBeneficios({ cadunico: "Sim, mas está desatualizado ou inclui o agressor", medida_protetiva: "Já pedi medida protetiva ou fiz Boletim de Ocorrência" }))'
+        )
+    )
+    assert desatualizado["cadunico"] is False
+    assert desatualizado["medida_protetiva"] is False
+
+    nao_sei = json.loads(
+        js.eval('JSON.stringify(Perfil.paraAvaliacaoBeneficios({ cadunico: "Não sei se tenho" }))')
+    )
+    assert nao_sei["cadunico"] == "prefiro_nao_informar"
+

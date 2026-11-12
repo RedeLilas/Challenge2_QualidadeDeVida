@@ -62,8 +62,9 @@ let destinoAposPerfil = "benefits";
 let etapaAtualWizard = 0;
 let direcaoWizard = "slide-in";
 let perfilUsuario = typeof Perfil !== "undefined" ? Perfil.ler() : {};
-let servicosRedeDF = typeof DadosRedeLilas !== "undefined" ? DadosRedeLilas.REDE_FALLBACK.slice() : [];
+let servicosRedeDF = [];
 let respostasFonar = {};
+let ordemRespostasFonar = [];
 // Respostas específicas de benefícios (mantidas exclusivamente em memória, nunca salvas nem enviadas)
 let respostasEspecificasBeneficios = {};
 let regrasDeBeneficios = null;
@@ -123,6 +124,7 @@ function sair() {
   apagarConversa();
   respostasEspecificasBeneficios = {};
   respostasFonar = {};
+  ordemRespostasFonar = [];
   if (typeof Perfil !== "undefined") Perfil.apagar();
   window.location.replace(SITE_NEUTRO);
 }
@@ -140,6 +142,7 @@ function apagarMeusDados() {
   }
   respostasEspecificasBeneficios = {};
   respostasFonar = {};
+  ordemRespostasFonar = [];
   etapaAtualWizard = 0;
   atualizarStatusPerfilUI();
   if (["benefits", "rights", "places"].includes(secaoAtual)) {
@@ -166,7 +169,25 @@ document.getElementById("apagar-dados")?.addEventListener("click", apagarMeusDad
 document.getElementById("apagar-dados-menu")?.addEventListener("click", apagarMeusDados);
 
 document.addEventListener("keydown", (evento) => {
-  if (evento.key === "Escape") sair();
+  if (evento.key !== "Escape") return;
+  // Se o chat flutuante estiver aberto, Esc fecha apenas o diálogo do chat
+  if (chatWindow && !chatWindow.hidden) {
+    alternarChat(false);
+    return;
+  }
+  // Se o menu mobile estiver aberto, Esc fecha apenas o menu
+  const menuLateral = document.getElementById("sidebar");
+  if (menuLateral && menuLateral.classList.contains("sidebar-open")) {
+    fecharMenuMobile();
+    return;
+  }
+  // Se o foco estiver dentro de um campo de texto ou seletor, tira o foco sem apagar o perfil
+  const ativo = document.activeElement;
+  if (ativo && ["INPUT", "TEXTAREA", "SELECT"].includes(ativo.tagName)) {
+    ativo.blur();
+    return;
+  }
+  sair();
 });
 // Se a página fechar normalmente, limpa apenas a conversa em memória (mantendo o perfil salvo no cache local).
 window.addEventListener("pagehide", apagarConversa);
@@ -483,26 +504,18 @@ function obterEspecificasBeneficios() {
     necessidadePadrao = "nao";
   }
 
-  let deficienciaPadrao = "nao";
-  if (
-    perfilUsuario.idade === "Sou pessoa com deficiência (qualquer idade)" ||
-    perfilUsuario.filhos === "Sim, filho(a) ou dependente com deficiência"
-  ) {
+  // Só assume "sim" para deficiência se ela já informou dependente com deficiência no perfil;
+  // caso contrário permanece "prefiro_nao_informar" até que ela responda a pergunta específica.
+  let deficienciaPadrao = "prefiro_nao_informar";
+  if (perfilUsuario.filhos === "Sim, filho(a) ou dependente com deficiência") {
     deficienciaPadrao = "sim";
-  } else if (
-    Perfil.ehNaoInformado(perfilUsuario.idade) &&
-    Perfil.ehNaoInformado(perfilUsuario.filhos)
-  ) {
-    deficienciaPadrao = "prefiro_nao_informar";
   }
 
+  // Pela Lei 14.550/2023 é possível pedir/ter medida protetiva sem BO prévio.
+  // Só marcamos "nao" quando ela declarou que não fez BO nem pediu medida; nos demais casos
+  // fica "prefiro_nao_informar" até que ela confirme na pergunta específica de BO.
   let boletimPadrao = "prefiro_nao_informar";
-  if (
-    perfilUsuario.medida_protetiva === "Sim, já tenho medida protetiva concedida pelo juiz" ||
-    perfilUsuario.medida_protetiva === "Já pedi medida protetiva ou fiz Boletim de Ocorrência"
-  ) {
-    boletimPadrao = "sim";
-  } else if (perfilUsuario.medida_protetiva === "Ainda não fiz BO nem pedi medida protetiva") {
+  if (perfilUsuario.medida_protetiva === "Ainda não fiz BO nem pedi medida protetiva") {
     boletimPadrao = "nao";
   }
 
@@ -510,7 +523,7 @@ function obterEspecificasBeneficios() {
     deficiencia: respostasEspecificasBeneficios.deficiencia || deficienciaPadrao,
     boletim_ocorrencia: respostasEspecificasBeneficios.boletim_ocorrencia || boletimPadrao,
     acompanhamento_psicossocial:
-      respostasEspecificasBeneficios.acompanhamento_psicossocial || "sim",
+      respostasEspecificasBeneficios.acompanhamento_psicossocial || "prefiro_nao_informar",
     necessidade_moradia:
       respostasEspecificasBeneficios.necessidade_moradia || necessidadePadrao,
   };
@@ -677,61 +690,7 @@ function renderizarBeneficios() {
       card.append(head, body);
       container.append(card);
     });
-    return;
   }
-
-  const beneficios = DadosRedeLilas.avaliarBeneficios(perfilUsuario);
-  beneficios.forEach((b, idx) => {
-    const card = document.createElement("article");
-    card.className = `recommendation ${idx === 0 ? "rec-open" : ""}`;
-
-    const head = document.createElement("button");
-    head.type = "button";
-    head.className = "rec-head";
-    head.innerHTML = `
-      <span class="rec-symbol">${ICONES.benefit}</span>
-      <div>
-        <div class="rec-meta">
-          <span class="status ${b.tomStatus}">${b.status}</span>
-          <span>${b.esfera}</span>
-          <span>· ${b.valor}</span>
-        </div>
-        <h2>${b.titulo}</h2>
-        <p>${b.resumo}</p>
-      </div>
-      <span class="rec-chevron">${ICONES.chevron}</span>
-    `;
-
-    const body = document.createElement("div");
-    body.className = "rec-body";
-    body.hidden = idx !== 0;
-
-    const criteriosHtml = b.criterios
-      .map((c, i) => `<li><span class="rec-step-num">${i + 1}</span><p class="rec-step-text">${c}</p></li>`)
-      .join("");
-    const passosHtml = b.comoSolicitar
-      .map((p, i) => `<li><span class="rec-step-num">${i + 1}</span><p class="rec-step-text">${p}</p></li>`)
-      .join("");
-
-    body.innerHTML = `
-      <h3>Critérios previstos na legislação</h3>
-      <ul>${criteriosHtml}</ul>
-      <h3>Como solicitar passo a passo</h3>
-      <ol>${passosHtml}</ol>
-      <div class="where">
-        <strong>Onde solicitar:</strong> ${b.ondeBuscar}<br>
-        <small>Base legal: ${b.baseLegal}</small>
-      </div>
-    `;
-
-    head.addEventListener("click", () => {
-      const aberto = card.classList.toggle("rec-open");
-      body.hidden = !aberto;
-    });
-
-    card.append(head, body);
-    container.append(card);
-  });
 }
 
 function renderizarDireitos() {
@@ -966,7 +925,7 @@ function renderizarFonar() {
   // Usa o avaliador oficial de triagem determinística (s3-triagem-fonar)
   if (typeof Triagem !== "undefined" && regrasDeTriagem) {
     const avaliacao = Triagem.avaliar(regrasDeTriagem, respostasFonar);
-    const idsRespondidos = Object.keys(respostasFonar).filter((k) => respostasFonar[k] !== undefined);
+    const idsRespondidos = ordemRespostasFonar.filter((k) => respostasFonar[k] !== undefined);
 
     if (!avaliacao.concluida && avaliacao.proxima_pergunta) {
       const p = avaliacao.proxima_pergunta;
@@ -996,6 +955,9 @@ function renderizarFonar() {
         btn.className = `option ${respostasFonar[p.id] === op.id ? "selected" : ""}`;
         btn.innerHTML = `<span class="radio-dot"></span><span>${op.rotulo}</span>`;
         btn.addEventListener("click", () => {
+          if (!ordemRespostasFonar.includes(p.id)) {
+            ordemRespostasFonar.push(p.id);
+          }
           respostasFonar[p.id] = op.id;
           renderizarFonar();
         });
@@ -1012,8 +974,10 @@ function renderizarFonar() {
         btnVoltar.className = "secondary-button";
         btnVoltar.textContent = "Voltar à pergunta anterior";
         btnVoltar.addEventListener("click", () => {
-          const ultimaChave = idsRespondidos[idsRespondidos.length - 1];
-          delete respostasFonar[ultimaChave];
+          const ultimaChave = ordemRespostasFonar.pop();
+          if (ultimaChave !== undefined) {
+            delete respostasFonar[ultimaChave];
+          }
           renderizarFonar();
         });
 
@@ -1023,6 +987,7 @@ function renderizarFonar() {
         btnLimpar.textContent = "Reiniciar triagem";
         btnLimpar.addEventListener("click", () => {
           respostasFonar = {};
+          ordemRespostasFonar = [];
           renderizarFonar();
         });
 
@@ -1074,108 +1039,11 @@ function renderizarFonar() {
       document.getElementById("fonar-ir-locais")?.addEventListener("click", () => irParaSecao("places"));
       document.getElementById("fonar-reiniciar")?.addEventListener("click", () => {
         respostasFonar = {};
+        ordemRespostasFonar = [];
         renderizarFonar();
       });
-      return;
     }
   }
-
-  DadosRedeLilas.PERGUNTAS_FONAR.forEach((q) => {
-    const card = document.createElement("div");
-    card.className = "fonar-card";
-    const atual = respostasFonar[q.id] || "";
-
-    const titulo = document.createElement("div");
-    titulo.innerHTML = `
-      <span class="fonar-kicker">${q.bloco}</span>
-      <h2>${q.pergunta}</h2>
-    `;
-
-    const opcoesDiv = document.createElement("div");
-    opcoesDiv.className = "fonar-options";
-
-    q.opcoes.forEach((op) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = `option ${atual === op.rotulo ? "selected" : ""}`;
-      btn.innerHTML = `<span class="radio-dot"></span><span>${op.rotulo}</span>`;
-      btn.addEventListener("click", () => {
-        respostasFonar[q.id] = op.rotulo;
-        respostasFonar[`${q.id}_risco`] = op.risco;
-        renderizarFonar();
-      });
-      opcoesDiv.append(btn);
-    });
-
-    card.append(titulo, opcoesDiv);
-    container.append(card);
-  });
-
-  atualizarResultadoFonar();
-}
-
-function atualizarResultadoFonar() {
-  const box = document.getElementById("fonar-result-box");
-  if (!box) return;
-
-  let temAlto = false;
-  let qtdMedio = 0;
-  let respondidas = 0;
-
-  DadosRedeLilas.PERGUNTAS_FONAR.forEach((q) => {
-    const r = respostasFonar[`${q.id}_risco`];
-    if (r) {
-      respondidas++;
-      if (r === "alto") temAlto = true;
-      if (r === "medio" || r === "pular") qtdMedio++;
-    }
-  });
-
-  box.className = "fonar-result";
-  if (respondidas === 0) {
-    box.innerHTML = `
-      <h2>Selecione as opções acima para ver a orientação de segurança</h2>
-      <p style="margin-top:6px; font-size:13.5px; color:#5e5470;">
-        Suas respostas nesta autoavaliação ficam apenas na memória temporária da página e nunca são enviadas ao servidor.
-      </p>
-    `;
-    return;
-  }
-
-  if (temAlto || qtdMedio >= 3) {
-    box.classList.add("risco-alto");
-    box.innerHTML = `
-      <span class="status warm">Atenção prioritária · Sinais de Risco Elevado identificados</span>
-      <h2 style="margin-top:10px; font-size:20px; color:#881337;">Sua segurança física vem em primeiro lugar</h2>
-      <p style="margin-top:8px; font-size:13.5px; line-height:1.6; color:#4c1d2e;">
-        Os fatores marcados (como ameaça com arma, agressão física grave, descumprimento de medida protetiva ou ameaça em momento de separação) são indicadores críticos no Formulário Nacional de Avaliação de Risco (CNJ).
-      </p>
-      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;">
-        <a href="tel:190" class="quick-exit">Ligar 190 (Emergência Policial)</a>
-        <a href="tel:180" class="emergency-call">Ligar 180 (Orientação 24h)</a>
-        <button type="button" class="secondary-button" id="fonar-ir-locais">Ver DEAMs 24h e Casa da Mulher Brasileira</button>
-      </div>
-    `;
-  } else if (qtdMedio >= 1) {
-    box.classList.add("risco-medio");
-    box.innerHTML = `
-      <span class="status warm">Sinais de Alerta Moderados · Busque orientação preventiva</span>
-      <h2 style="margin-top:10px; font-size:19px; color:#78350f;">Recomendamos apoio especializado e Medida Protetiva</h2>
-      <p style="margin-top:8px; font-size:13.5px; line-height:1.6; color:#5c3409;">
-        Comportamentos de controle, perseguição ou escalada de ameaças tendem a se agravar. Você pode solicitar Medida Protetiva de Urgência sem precisar de boletim de ocorrência prévio (Lei 14.550/2023) e receber acompanhamento gratuito nos CEAMs ou na Defensoria Pública.
-      </p>
-    `;
-  } else {
-    box.innerHTML = `
-      <span class="status good">Orientação Preventiva</span>
-      <h2 style="margin-top:10px; font-size:19px;">Continue informada sobre seus direitos e rede de apoio</h2>
-      <p style="margin-top:8px; font-size:13.5px; line-height:1.6; color:#494556;">
-        Mesmo sem sinais de letalidade imediata marcados acima, qualquer forma de violência psicológica, moral ou patrimonial merece acolhimento. Caso perceba qualquer mudança, procure um CEAM ou ligue 180.
-      </p>
-    `;
-  }
-
-  document.getElementById("fonar-ir-locais")?.addEventListener("click", () => irParaSecao("places"));
 }
 
 // =========================================================================

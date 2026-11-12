@@ -179,7 +179,8 @@ var Perfil = (function () {
         "Até R$ 600 por mês": 600,
         "De R$ 601 a R$ 1.621 (até 1 salário mínimo)": 1621,
         "De R$ 1.622 a R$ 3.242 (até 2 salários mínimos)": 3242,
-        "Acima de 2 salários mínimos": 3500,
+        // Valor acima de qualquer limite legal (familiar ou per capita) para nunca aprovar renda alta por engano
+        "Acima de 2 salários mínimos": 100000,
       };
       if (mapaRenda[rendaBruta] !== undefined) {
         rendaTotal = mapaRenda[rendaBruta];
@@ -199,15 +200,24 @@ var Perfil = (function () {
       }
     }
 
-    // 4. CadÚnico
+    // 4. CadÚnico (mapeamento explícito de cada opção, sem depender de prefixo "sim"/"não")
     var cadBruto = valorUtil(p, "cadunico");
     var cadunico = NAO_INFORMADO;
     if (cadBruto !== null) {
-      var cadLower = cadBruto.toLowerCase();
-      if (cadLower.indexOf("sim") === 0 || cadLower === "true") {
-        cadunico = true;
-      } else if (cadLower.indexOf("não") === 0 || cadLower.indexOf("nao") === 0 || cadLower === "false") {
-        cadunico = false;
+      var mapaCadunico = {
+        "Sim, está atualizado (nos últimos 2 anos)": true,
+        "Sim, mas está desatualizado ou inclui o agressor": false,
+        "Não tenho inscrição no CadÚnico": false,
+        "Não sei se tenho": NAO_INFORMADO,
+        sim: true,
+        true: true,
+        nao: false,
+        "não": false,
+        false: false,
+      };
+      var chaveCad = mapaCadunico[cadBruto] !== undefined ? cadBruto : cadBruto.toLowerCase();
+      if (mapaCadunico[chaveCad] !== undefined) {
+        cadunico = mapaCadunico[chaveCad];
       }
     }
 
@@ -229,22 +239,23 @@ var Perfil = (function () {
       }
     }
 
-    // 6. Medida protetiva
+    // 6. Medida protetiva (mapeamento explícito de cada opção)
     var mpuBruta = valorUtil(p, "medida_protetiva");
     var medidaProtetiva = NAO_INFORMADO;
     if (mpuBruta !== null) {
-      var mpuLower = mpuBruta.toLowerCase();
-      if (mpuLower.indexOf("sim") === 0 || mpuLower === "true") {
-        medidaProtetiva = true;
-      } else if (
-        mpuLower.indexOf("ainda não") === 0 ||
-        mpuLower.indexOf("não") === 0 ||
-        mpuLower.indexOf("nao") === 0 ||
-        mpuLower === "false"
-      ) {
-        medidaProtetiva = false;
-      } else if (mpuLower.indexOf("já pedi") === 0) {
-        medidaProtetiva = false;
+      var mapaMedida = {
+        "Sim, já tenho medida protetiva concedida pelo juiz": true,
+        "Já pedi medida protetiva ou fiz Boletim de Ocorrência": false,
+        "Ainda não fiz BO nem pedi medida protetiva": false,
+        sim: true,
+        true: true,
+        nao: false,
+        "não": false,
+        false: false,
+      };
+      var chaveMpu = mapaMedida[mpuBruta] !== undefined ? mpuBruta : mpuBruta.toLowerCase();
+      if (mapaMedida[chaveMpu] !== undefined) {
+        medidaProtetiva = mapaMedida[chaveMpu];
       }
     }
 

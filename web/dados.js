@@ -1,9 +1,7 @@
 // Catálogo de dados da interface Rede Lilás:
 // 1. Etapas do formulário de perfil (com "Prefiro não informar" em todos os campos)
-// 2. Perguntas de autoavaliação de risco (baseadas no Fonar — Portaria Conjunta CNJ/CNMP 6/2025)
-// 3. Regras de elegibilidade para Benefícios Sociais (3 federais + 1 distrital + complementares)
-// 4. Guia de Direitos e Leis (Lei Maria da Penha, Lei 14.550/2023, Lei 14.674/2023, Minuto Seguinte)
-// 5. Cópia local dos serviços da rede de proteção do DF (fallback caso esteja offline)
+// 2. Perguntas específicas e metadados de apresentação para os Benefícios Sociais
+// 3. Guia de Direitos e Leis (Lei Maria da Penha, Lei 14.550/2023, Lei 14.674/2023, Minuto Seguinte)
 "use strict";
 
 var DadosRedeLilas = (function () {
@@ -124,15 +122,14 @@ var DadosRedeLilas = (function () {
       campo: "idade",
       aba: "Sua idade",
       icone: "spark",
-      pergunta: "Qual é a sua faixa de idade ou condição de saúde?",
+      pergunta: "Qual é a sua faixa de idade?",
       ajuda: "Informação opcional e anônima.",
-      motivo: "Mulheres com 65 anos ou mais ou pessoas com deficiência podem ter direito ao BPC/LOAS (1 salário mínimo mensal).",
+      motivo: "Mulheres com 65 anos ou mais podem ter direito ao BPC/LOAS (1 salário mínimo mensal). A condição de deficiência é perguntada separadamente na tela de Benefícios.",
       opcoes: [
         "18 a 29 anos",
         "30 a 59 anos",
         "60 a 64 anos",
         "65 anos ou mais",
-        "Sou pessoa com deficiência (qualquer idade)",
         "Prefiro não informar",
       ],
     },
@@ -196,215 +193,6 @@ var DadosRedeLilas = (function () {
       ],
     },
   ];
-
-  // Autoavaliação baseada no Fonar (Portaria Conjunta CNJ/CNMP nº 6/2025)
-  var PERGUNTAS_FONAR = [
-    {
-      id: "ameaca_arma",
-      bloco: "Bloco I — Histórico de Violência (Fonar item 1)",
-      pergunta: "O(A) agressor(a) já ameaçou você ou algum familiar com arma de fogo ou faca?",
-      pesoAlto: true,
-      opcoes: [
-        { rotulo: "Sim, com arma de fogo ou faca", risco: "alto" },
-        { rotulo: "Sim, ameaçou de outra forma (sem arma)", risco: "medio" },
-        { rotulo: "Não", risco: "nenhum" },
-        { rotulo: "Prefiro não responder", risco: "pular" },
-      ],
-    },
-    {
-      id: "agressao_grave",
-      bloco: "Bloco I — Agressão Física Grave (Fonar item 2)",
-      pergunta: "O(A) agressor(a) já tentou enforcar, sufocar, estrangular, queimar, atirar ou esfaquear você?",
-      pesoAlto: true,
-      opcoes: [
-        { rotulo: "Sim, já praticou uma dessas agressões graves", risco: "alto" },
-        { rotulo: "Já praticou tapas, empurrões, socos ou puxões de cabelo (item 2.1)", risco: "medio" },
-        { rotulo: "Nenhuma agressão física", risco: "nenhum" },
-        { rotulo: "Prefiro não responder", risco: "pular" },
-      ],
-    },
-    {
-      id: "controle_stalking",
-      bloco: "Bloco I — Controle e Perseguição (Fonar item 4)",
-      pergunta: "O(A) agressor(a) persegue você, controla seu dinheiro/celular, proíbe visitas ou disse algo como 'se não for minha, não será de mais ninguém'?",
-      pesoAlto: false,
-      opcoes: [
-        { rotulo: "Sim, disse frase de ameaça de morte ou persegue constantemente", risco: "alto" },
-        { rotulo: "Sim, tem ciúme excessivo, controla dinheiro ou isola de amigos/família", risco: "medio" },
-        { rotulo: "Não apresenta esses comportamentos", risco: "nenhum" },
-        { rotulo: "Prefiro não responder", risco: "pular" },
-      ],
-    },
-    {
-      id: "descumpriu_mpu",
-      bloco: "Bloco I — Descumprimento de Medida Protetiva (Fonar item 5.1)",
-      pergunta: "O(A) agressor(a) já descumpriu medida protetiva anteriormente ou as ameaças ficaram mais graves nos últimos meses?",
-      pesoAlto: true,
-      opcoes: [
-        { rotulo: "Sim, já descumpriu medida protetiva", risco: "alto" },
-        { rotulo: "As agressões ou ameaças ficaram mais frequentes/graves recentemente (item 6)", risco: "medio" },
-        { rotulo: "Não", risco: "nenhum" },
-        { rotulo: "Prefiro não responder", risco: "pular" },
-      ],
-    },
-    {
-      id: "acesso_arma_suicidio",
-      bloco: "Bloco II — Sobre o(a) Agressor(a) (Fonar itens 7, 9 e 11)",
-      pergunta: "O(A) agressor(a) tem acesso fácil a arma de fogo, faz uso abusivo de álcool/drogas ou já ameaçou cometer suicídio?",
-      pesoAlto: true,
-      opcoes: [
-        { rotulo: "Sim, tem acesso a arma de fogo ou já falou em suicídio", risco: "alto" },
-        { rotulo: "Faz uso abusivo de álcool, drogas ou está com conflitos graves", risco: "medio" },
-        { rotulo: "Não / Não sei", risco: "nenhum" },
-        { rotulo: "Prefiro não responder", risco: "pular" },
-      ],
-    },
-    {
-      id: "separacao_coabitacao",
-      bloco: "Blocos III e IV — Ruptura e Moradia (Fonar itens 13, 22 e 24)",
-      pergunta: "Você terminou ou tentou terminar a relação recentemente e ainda reside no mesmo imóvel com o(a) agressor(a)?",
-      pesoAlto: false,
-      opcoes: [
-        { rotulo: "Sim, tentei terminar e ainda moramos juntos / preciso de abrigo", risco: "alto" },
-        { rotulo: "Terminei recentemente, mas não moramos juntos", risco: "medio" },
-        { rotulo: "Não", risco: "nenhum" },
-        { rotulo: "Prefiro não responder", risco: "pular" },
-      ],
-    },
-  ];
-
-  // Avalia elegibilidade aos benefícios com base no perfil salvo localmente
-  function avaliarBeneficios(perfil) {
-    var baixaRenda =
-      perfil.renda === "Sem renda no momento" ||
-      perfil.renda === "Até R$ 600 por mês" ||
-      perfil.renda === "De R$ 601 a R$ 1.621 (até 1 salário mínimo)";
-
-    var rendaAteDoisSalarios =
-      baixaRenda || perfil.renda === "De R$ 1.622 a R$ 3.242 (até 2 salários mínimos)";
-
-    var precisaMoradia =
-      perfil.moradia === "Preciso sair de casa com urgência para me proteger" ||
-      perfil.moradia === "Já saí do lar por causa da violência e pago aluguel / estou de favor" ||
-      perfil.moradia === "Moro em imóvel alugado ou cedido sem o agressor";
-
-    var temMedidaOuBO =
-      perfil.medida_protetiva === "Sim, já tenho medida protetiva concedida pelo juiz" ||
-      perfil.medida_protetiva === "Já pedi medida protetiva ou fiz Boletim de Ocorrência";
-
-    var temCriancaPequena = perfil.filhos === "Sim, crianças de 0 a 6 anos";
-    var temIdosaOuPcD =
-      perfil.idade === "65 anos ou mais" ||
-      perfil.idade === "Sou pessoa com deficiência (qualquer idade)" ||
-      perfil.filhos === "Sim, filho(a) ou dependente com deficiência";
-
-    return [
-      {
-        id: "aluguel-social-df",
-        esfera: "Benefício Distrital (GDF)",
-        titulo: "Aluguel Social para Mulheres Vítimas de Violência no DF",
-        valor: "R$ 600,00 por mês (por até 6 meses, prorrogável por mais 6 meses)",
-        baseLegal: "Lei Distrital nº 6.623/2020 · Decreto nº 45.989/2024 · Portaria SMDF nº 49/2026 (texto verificado em 05/11/2026)",
-        status: rendaAteDoisSalarios && precisaMoradia ? "Alta compatibilidade com seu perfil" : "Pode se aplicar ao seu caso",
-        tomStatus: rendaAteDoisSalarios && precisaMoradia ? "good" : "neutral",
-        resumo:
-          "Auxílio financeiro temporário custeado pela Secretaria da Mulher do DF para mulheres vítimas de violência doméstica que precisam deixar o lar e não possuem imóvel próprio em local seguro.",
-        criterios: [
-          "Renda familiar por pessoa de até meio salário mínimo OU renda familiar mensal total de até 2 salários mínimos (Portaria SMDF 49/2026, art. 5º, III).",
-          "Concessão de Medida Protetiva de Urgência e impossibilidade de retorno ao lar sem risco.",
-          "Residir no Distrito Federal (sem outro imóvel próprio seguro no DF).",
-          "Atenção: não ter CadÚnico NÃO impede o pedido inicial — a inscrição no CadÚnico pode ser feita durante o acompanhamento (Portaria SMDF 49/2026, art. 15, V).",
-        ],
-        comoSolicitar: [
-          "Se ainda não tiver Medida Protetiva, solicite na DEAM ou na Defensoria Pública (apenas seu depoimento já basta — Lei 14.550/2023).",
-          "Procure um CEAM (102 Sul, Ceilândia ou Planaltina), a Casa da Mulher Brasileira de Ceilândia ou o CRAS/CREAS para o relatório multiprofissional.",
-          "Leve documento de identificação (se tiver), número do processo/medida protetiva e comprovante ou declaração de residência e renda.",
-        ],
-        ondeBuscar: "Casa da Mulher Brasileira (Ceilândia), CEAMs da Secretaria da Mulher ou CRAS/CREAS da sua RA.",
-      },
-      {
-        id: "auxilio-aluguel-lmp",
-        esfera: "Benefício Federal (Medida Protetiva)",
-        titulo: "Auxílio-Aluguel Judicial da Lei Maria da Penha",
-        valor: "Valor fixado pelo Juizado (por até 6 meses)",
-        baseLegal: "Lei Federal nº 11.340/2006, art. 23, VI (incluído pela Lei nº 14.674/2023 · verificado em 05/11/2026)",
-        status: precisaMoradia || temMedidaOuBO ? "Alta compatibilidade com seu perfil" : "Direito previsto na Lei Maria da Penha",
-        tomStatus: precisaMoradia || temMedidaOuBO ? "good" : "neutral",
-        resumo:
-          "O juiz do Juizado de Violência Doméstica pode determinar a concessão de auxílio-aluguel em razão de afastamento do lar, considerando a situação de vulnerabilidade social e econômica da ofendida.",
-        criterios: [
-          "Estar em situação de violência doméstica e familiar e precisar se afastar do lar do agressor.",
-          "Encontrar-se em situação de vulnerabilidade social e econômica (Lei 11.340/2006, art. 23, VI).",
-        ],
-        comoSolicitar: [
-          "Ao registrar a ocorrência na DEAM ou ser atendida pelo NUDEM/Defensoria Pública, peça expressamente a inclusão do pedido de Auxílio-Aluguel (art. 23, VI) nas Medidas Protetivas.",
-          "Se você já tem processo de Medida Protetiva, a Defensoria Pública pode pedir ao juiz a inclusão desse benefício a qualquer momento.",
-        ],
-        ondeBuscar: "Defensoria Pública do DF (NUDEM ou núcleo da sua RA), DEAM ou Juizado de Violência Doméstica.",
-      },
-      {
-        id: "bolsa-familia",
-        esfera: "Benefício Federal",
-        titulo: "Programa Bolsa Família + Adicionais para Crianças e Gestantes",
-        valor: "Mínimo de R$ 600,00 por família + R$ 150 por criança (0 a 6 anos) + R$ 50 (7 a 17 anos / gestantes)",
-        baseLegal: "Lei Federal nº 14.601/2023, arts. 1º a 15 (texto verificado em 05/11/2026)",
-        status: baixaRenda ? "Alta compatibilidade com seu perfil" : "Verifique a renda por pessoa sem o agressor",
-        tomStatus: baixaRenda ? "good" : "warm",
-        resumo:
-          "Transferência direta de renda para famílias com renda mensal por pessoa de até R$ 218,00. Se você saiu da casa do agressor, você pode retirar o nome dele do seu CadÚnico no CRAS para que a renda dele pare de contar!",
-        criterios: [
-          "Renda familiar mensal por pessoa (per capita) igual ou inferior a R$ 218,00 (Lei 14.601/2023, art. 5º).",
-          "Inscrição atualizada no Cadastro Único (CadÚnico).",
-          "Cumprimento das condicionalidades de saúde e educação das crianças (quando houver).",
-        ],
-        comoSolicitar: [
-          "Compareça ao CRAS da sua Região Administrativa para fazer ou atualizar seu CadÚnico em núcleo familiar separado do agressor.",
-          "Informe se há crianças de 0 a 6 anos (Benefício Primeira Infância de R$ 150) ou de 7 a 18 anos incompletos (Benefício Variável Familiar de R$ 50).",
-        ],
-        ondeBuscar: "CRAS (Centro de Referência de Assistência Social) mais próximo da sua Região Administrativa.",
-      },
-      {
-        id: "bpc-loas",
-        esfera: "Benefício Federal (LOAS)",
-        titulo: "Benefício de Prestação Continuada (BPC / LOAS)",
-        valor: "1 salário mínimo por mês (não exige ter contribuído ao INSS)",
-        baseLegal: "Lei Federal nº 8.742/1993 (LOAS), art. 20 (texto verificado em 05/11/2026)",
-        status: temIdosaOuPcD ? "Alta compatibilidade com seu perfil" : "Para idosas (65+) ou pessoas/filhos com deficiência",
-        tomStatus: temIdosaOuPcD ? "good" : "neutral",
-        resumo:
-          "Garantia de 1 salário mínimo mensal à pessoa com deficiência (de qualquer idade, inclusive filhos) ou à pessoa idosa com 65 anos ou mais que comprove não possuir meios de prover a própria manutenção.",
-        criterios: [
-          "Ter 65 anos ou mais OU possuir deficiência de longo prazo (física, mental, intelectual ou sensorial) — vale para você ou para seu filho(a).",
-          "Renda por pessoa do grupo familiar igual ou inferior a 1/4 do salário mínimo (com possibilidade de flexibilização judicial até 1/2 salário mínimo conforme gastos com saúde).",
-          "Estar inscrita no CadÚnico (não precisa nunca ter pago INSS).",
-        ],
-        comoSolicitar: [
-          "Faça ou atualize o CadÚnico no CRAS.",
-          "Solicite o BPC pelo aplicativo/site Meu INSS, pelo telefone 135 ou com apoio do CRAS e da Defensoria Pública.",
-        ],
-        ondeBuscar: "CRAS da sua RA, Meu INSS (telefone 135) e Defensoria Pública do DF.",
-      },
-      {
-        id: "prato-cheio-eventuais",
-        esfera: "Complementares no DF",
-        titulo: "Cartão Prato Cheio, Cartão Gás e Benefícios Eventuais do DF",
-        valor: "R$ 250,00/mês (Prato Cheio) + auxílio gás bimestral + auxílio vulnerabilidade",
-        baseLegal: "Lei Distrital nº 7.009/2021 · Decreto nº 42.873/2021 · Lei Distrital nº 5.165/2013 (verificado em 05/11/2026)",
-        status: baixaRenda && temCriancaPequena ? "Prioridade para mães solo com crianças de 0 a 6 anos" : "Disponível via CRAS no DF",
-        tomStatus: baixaRenda ? "good" : "neutral",
-        resumo:
-          "O Cartão Prato Cheio concede R$ 250 mensais para alimentação, com prioridade legal para famílias monoparentais chefiadas por mulheres com crianças de 0 a 6 anos (Decreto 42.873/2021, atualizado pelo Decreto 48.095/2025).",
-        criterios: [
-          "Renda familiar por pessoa de até meio salário mínimo no DF e situação de insegurança alimentar.",
-          "Prioridade no atendimento para famílias monoparentais chefiadas por mulheres com crianças de 0 a 6 anos.",
-        ],
-        comoSolicitar: [
-          "Procure o CRAS da sua Região Administrativa e solicite a avaliação de insegurança alimentar no SISC/CadÚnico.",
-        ],
-        ondeBuscar: "CRAS e CREAS da Secretaria de Desenvolvimento Social (SEDES/DF).",
-      },
-    ];
-  }
 
   var DIREITOS_LEIS = [
     {
@@ -510,65 +298,6 @@ var DadosRedeLilas = (function () {
     },
   };
 
-  // Fallback local caso a usuária esteja sem internet ao abrir a aba de locais
-  var REDE_FALLBACK = [
-    {
-      nome: "Casa da Mulher Brasileira de Ceilândia",
-      tipo: "CMB",
-      ra: "Ceilândia",
-      endereco: "CNM 1, Bloco I, Lote 3, Ceilândia, Brasília - DF",
-      cep: "72215-110",
-      telefone: "(61) 3181-1474 / (61) 3181-2228 / (61) 3181-2233 / (61) 98312-0763 / (61) 99117-3406",
-      horario: "24 horas, todos os dias (inclusive finais de semana e feriados)",
-      fonte_url: "https://www.mulher.df.gov.br/casa-da-mulher-brasileira",
-      data_verificacao: "2026-11-05",
-    },
-    {
-      nome: "DEAM I - Delegacia Especial de Atendimento à Mulher I",
-      tipo: "DEAM",
-      ra: "Plano Piloto",
-      endereco: "EQS 204/205, Asa Sul, Brasília - DF",
-      cep: "70234-400",
-      telefone: "(61) 3207-6172 / (61) 3207-6195 / (61) 3207-6212",
-      horario: "24 horas, todos os dias (plantão permanente)",
-      fonte_url: "https://www.pcdf.df.gov.br/servicos/delegacias-especializadas",
-      data_verificacao: "2026-11-05",
-    },
-    {
-      nome: "DEAM II - Delegacia Especial de Atendimento à Mulher II",
-      tipo: "DEAM",
-      ra: "Ceilândia",
-      endereco: "QNM 02, Área Especial, Conjunto G/H, Ceilândia, Brasília - DF",
-      cep: "72210-020",
-      telefone: "(61) 3207-7391 / (61) 3207-7408 / (61) 3207-7438 / (61) 3207-7410",
-      horario: "24 horas, todos os dias (plantão permanente)",
-      fonte_url: "https://www.pcdf.df.gov.br/servicos/delegacias-especializadas",
-      data_verificacao: "2026-11-05",
-    },
-    {
-      nome: "CEAM 102 Sul - Centro Especializado de Atendimento à Mulher",
-      tipo: "CEAM",
-      ra: "Plano Piloto",
-      endereco: "Estação do Metrô 102 Sul, Asa Sul, Plano Piloto, Brasília - DF",
-      cep: "70330-000",
-      telefone: "(61) 3224-0943 / (61) 3181-2245 / (61) 99183-6454",
-      horario: "Segunda a sexta-feira, das 8h às 18h",
-      fonte_url: "https://www.mulher.df.gov.br/ceam",
-      data_verificacao: "2026-11-05",
-    },
-    {
-      nome: "NUDEM / NAJ de Defesa das Mulheres - Defensoria Pública do Distrito Federal",
-      tipo: "Defensoria",
-      ra: "Plano Piloto",
-      endereco: "Fórum José Júlio Leal Fagundes, Setor de Múltiplas Atividades Sul (SMAS), Trecho 3, Lotes 4/6, Bloco 4, Brasília - DF",
-      cep: "70610-906",
-      telefone: "(61) 98272-5123 / (61) 98108-1997 / (61) 2196-4461 / Disque 129",
-      horario: "Segunda a sexta-feira, das 13h às 18h (presencial) e das 12h às 19h (remoto)",
-      fonte_url: "https://www.defensoria.df.gov.br/nucleos-de-assistencia-juridica/",
-      data_verificacao: "2026-11-05",
-    },
-  ];
-
   // Respostas locais para o chat flutuante quando o servidor está sem chave de LLM configurada
   function respostaLocalChat(pergunta) {
     var t = String(pergunta || "").toLowerCase();
@@ -613,12 +342,9 @@ var DadosRedeLilas = (function () {
   return {
     RAS_DF: RAS_DF,
     ETAPAS_PERFIL: ETAPAS_PERFIL,
-    PERGUNTAS_FONAR: PERGUNTAS_FONAR,
     PERGUNTAS_ESPECIFICAS_BENEFICIOS: PERGUNTAS_ESPECIFICAS_BENEFICIOS,
     DETALHES_BENEFICIOS: DETALHES_BENEFICIOS,
     DIREITOS_LEIS: DIREITOS_LEIS,
-    REDE_FALLBACK: REDE_FALLBACK,
-    avaliarBeneficios: avaliarBeneficios,
     respostaLocalChat: respostaLocalChat,
   };
 })();

@@ -1,6 +1,6 @@
 // Service worker: guarda só a interface para ela abrir sem internet.
 // Nunca guarda a conversa: POST /mensagem passa direto para a rede.
-const VERSAO = "interface-v12";
+const VERSAO = "interface-v13";
 const INTERFACE = [
   "/",
   "/index.html",
@@ -11,10 +11,11 @@ const INTERFACE = [
   "/dados.js",
   "/app.js",
   "/risco.js",
-  // Regras do alerta de 190, dos benefícios e da triagem do Fonar: precisam funcionar sem internet.
+  // Regras do alerta de 190, dos benefícios, da triagem do Fonar e a lista da rede do DF: precisam funcionar sem internet.
   "/regras/risco_imediato.json",
   "/regras/beneficios.json",
   "/regras/triagem_fonar.json",
+  "/rede-protecao",
   "/manifest.webmanifest",
   "/icones/icone.svg",
   "/icones/icone-192.png",
