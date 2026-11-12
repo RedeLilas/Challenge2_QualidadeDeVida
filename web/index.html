@@ -5,45 +5,635 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#1e4597" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#13254d" media="(prefers-color-scheme: dark)">
-  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#6d48a8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#2d1f47" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light">
   <title>Anotações</title>
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/icones/icone.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icones/icone-192.png">
   <link rel="stylesheet" href="/styles.css">
   <script src="/risco.js" defer></script>
+  <script src="/perfil.js" defer></script>
+  <script src="/beneficios.js" defer></script>
+  <script src="/triagem.js" defer></script>
+  <script src="/dados.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
-  <header class="cabeca">
-    <div class="topo">
-      <h1 class="topo__nome">Anotações</h1>
-      <button type="button" class="sair" id="sair">Sair</button>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Fundo escuro do menu mobile -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop" hidden></div>
+
+  <!-- =========================================================
+       MENU LATERAL ESQUERDO (SIDEBAR)
+       ========================================================= -->
+  <aside id="sidebar" class="sidebar" aria-label="Menu principal">
+    <div class="sidebar-top">
+      <button type="button" class="brand" data-nav="home">
+        <svg viewBox="0 0 40 40" class="logo-mark" aria-hidden="true">
+          <defs>
+            <linearGradient id="lilasGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#8B63CE"/>
+              <stop offset="100%" stop-color="#6943A6"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="13" fill="url(#lilasGrad)"/>
+          <path d="M20 9.5c5.8 2.2 8.7 5.2 8.7 10.6 0 6.1-4.1 9.6-8.7 11.4-4.6-1.8-8.7-5.3-8.7-11.4 0-5.4 2.9-8.4 8.7-10.6Z" fill="rgba(255,255,255,0.22)"/>
+          <path d="M20 14.5c2.5-2.6 6.2-1.7 6.2 1.8 0 3.4-3.7 5.8-6.2 7.8-2.5-2-6.2-4.4-6.2-7.8 0-3.5 3.7-4.4 6.2-1.8Z" fill="#FFF"/>
+        </svg>
+        <div>
+          <span class="brand-title">Rede Lilás</span>
+          <span class="brand-subtitle">Acolhimento · DF</span>
+        </div>
+      </button>
+
+      <div class="nav-group">
+        <span class="nav-label">Menu de Orientação</span>
+        <nav class="nav-list" aria-label="Seções da plataforma">
+          <button type="button" class="nav-item active" data-nav="home">
+            <span class="nav-icon" data-icon="home"></span>
+            <span class="nav-item-text">Início</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="screening">
+            <span class="nav-icon" data-icon="check"></span>
+            <span class="nav-item-text">Meu Perfil &amp; Triagem</span>
+            <span id="nav-badge-perfil" class="nav-pill">0/10</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="benefits">
+            <span class="nav-icon" data-icon="benefit"></span>
+            <span class="nav-item-text">Benefícios Sociais</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="rights">
+            <span class="nav-icon" data-icon="scale"></span>
+            <span class="nav-item-text">Direitos &amp; Leis</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="places">
+            <span class="nav-icon" data-icon="pin"></span>
+            <span class="nav-item-text">Locais de Atendimento</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="fonar">
+            <span class="nav-icon" data-icon="shield"></span>
+            <span class="nav-item-text">Avaliação de Risco</span>
+          </button>
+        </nav>
+      </div>
     </div>
-    <div class="faixa" aria-hidden="true"></div>
+
+    <div class="sidebar-bottom">
+      <div class="privacy-box">
+        <div class="privacy-title">
+          <span class="nav-icon" data-icon="lock"></span>
+          <span>Navegação 100% anônima</span>
+        </div>
+        <p>Sem login · Suas respostas ficam salvas somente neste dispositivo.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================================
+       BARRA FIXA SUPERIOR DE SEGURANÇA (EM TODAS AS PÁGINAS)
+       ========================================================= -->
+  <header class="safety-header" aria-label="Controles de privacidade e emergência">
+    <div class="safety-left">
+      <button type="button" class="menu-button" id="abrir-menu" aria-label="Abrir menu lateral">
+        <span data-icon="menu"></span>
+      </button>
+    </div>
+
+    <div class="safety-actions">
+      <div class="emergency-call" role="group" aria-label="Telefones de emergência 180 e 190">
+        <span data-icon="phone"></span>
+        <a href="tel:180" class="emergency-link">Ligue <strong>180</strong></a>
+        <span class="emergency-sep" aria-hidden="true">/</span>
+        <a href="tel:190" class="emergency-link"><strong>190</strong></a>
+      </div>
+      <button type="button" class="ghost-button" id="apagar-dados" title="Apaga o perfil salvo neste navegador">
+        <span data-icon="trash"></span>
+        <span>Apagar meus dados</span>
+      </button>
+      <button type="button" class="quick-exit" id="sair" title="Limpa seus dados e abre um site neutro imediatamente (Atalho: tecla Esc)">
+        <span data-icon="exit"></span>
+        <span>Saída rápida</span>
+      </button>
+    </div>
   </header>
 
-  <p class="aviso" id="aviso" role="status" hidden>Sem internet. Você pode escrever, mas as respostas precisam de conexão.</p>
+  <p class="aviso" id="aviso" role="status" hidden>Sem internet. Você pode consultar o alerta 190 e seu perfil salvo, mas o chat com IA precisa de conexão.</p>
 
-  <main class="conversa" id="conversa" aria-label="Conversa">
-    <ol class="mensagens" id="mensagens" aria-live="polite" aria-relevant="additions">
-      <li class="msg msg--assistente msg--abertura">
-        <p>Escreva sua pergunta com suas palavras. Respondo de forma simples.</p>
-        <p class="msg__nota">A conversa some quando você toca em <strong>Sair</strong> ou fecha o app.</p>
-      </li>
-    </ol>
+  <!-- =========================================================
+       CONTEÚDO PRINCIPAL (SEÇÕES DINÂMICAS)
+       ========================================================= -->
+  <main id="main-content" class="main-content">
+
+    <!-- 1. TELA INICIAL (DASHBOARD COM HERO + 4 BLOCOS ILUSTRADOS) -->
+    <section id="sec-home" class="page-section page-enter">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span data-icon="shield"></span>
+            <span>Espaço seguro, confidencial e gratuito no DF</span>
+          </div>
+          <h1>Você não está sozinha.<br><span>Estamos aqui com você.</span></h1>
+          <p>
+            Descubra benefícios sociais que podem apoiar sua autonomia, conheça seus direitos na Lei Maria da Penha
+            e encontre os serviços oficiais de proteção na sua Região Administrativa — sem precisar fazer login.
+          </p>
+          <div class="hero-actions">
+            <button type="button" class="primary-button" id="btn-hero-triagem">
+              <span id="btn-hero-triagem-texto">Começar orientação personalizada</span>
+              <span data-icon="arrow"></span>
+            </button>
+          </div>
+          <div class="trust-row">
+            <span><i data-icon="check"></i> Sem cadastro ou CPF</span>
+            <span><i data-icon="check"></i> Salvo no cache do navegador</span>
+            <span><i data-icon="check"></i> Botão para apagar tudo a qualquer hora</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="support-chip">
+            <span data-icon="spark"></span>
+            <span>Acolhimento sem julgamentos</span>
+          </div>
+          <!-- Ilustração vetorial acolhedora (fiel ao protótipo do Figma) -->
+          <svg viewBox="0 0 380 280" class="hero-art" fill="none">
+            <circle cx="192" cy="146" r="112" fill="#EDE4FA" />
+            <circle cx="118" cy="96" r="36" fill="#F8D9E6" opacity="0.7" />
+            <circle cx="272" cy="92" r="42" fill="#DDD0F5" opacity="0.65" />
+            <!-- Folhagens suaves -->
+            <path d="M58 228C54 190 76 160 98 150C88 184 78 212 58 228Z" fill="#C9B3E8" />
+            <path d="M322 228C326 190 304 160 282 150C292 184 302 212 322 228Z" fill="#C9B3E8" />
+            <!-- Mulher 1 (esquerda) -->
+            <path d="M88 250C88 206 112 186 138 186C164 186 184 206 184 250" fill="#8B63CE" />
+            <circle cx="136" cy="138" r="28" fill="#4A2F27" />
+            <circle cx="136" cy="142" r="21" fill="#C68863" />
+            <path d="M115 136C118 118 152 116 157 136C148 128 126 128 115 136Z" fill="#2D1B14" />
+            <!-- Mulher 2 (centro) -->
+            <path d="M142 254C142 200 166 176 196 176C226 176 250 200 250 254" fill="#6943A6" />
+            <circle cx="196" cy="122" r="32" fill="#2B1D28" />
+            <circle cx="196" cy="128" r="22" fill="#E0A382" />
+            <path d="M174 122C178 102 214 102 218 122C206 112 186 112 174 122Z" fill="#2B1D28" />
+            <!-- Mulher 3 (direita) -->
+            <path d="M210 250C210 206 232 186 258 186C284 186 304 206 304 250" fill="#D97398" />
+            <circle cx="256" cy="138" r="27" fill="#5E3724" />
+            <circle cx="256" cy="142" r="20" fill="#F0C09D" />
+            <!-- Coração/Escudo central de união -->
+            <circle cx="196" cy="214" r="18" fill="#FFF" />
+            <path d="M196 207c2.4-2.5 6-1.6 6 1.7 0 3.3-3.6 5.6-6 7.5-2.4-1.9-6-4.2-6-7.5 0-3.3 3.6-4.2 6-1.7Z" fill="#8B63CE" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Banner de status do perfil salvo no navegador (sem botão repetido) -->
+      <div class="profile-banner" id="profile-banner">
+        <div class="banner-icon" id="banner-icon" data-icon="spark"></div>
+        <div class="banner-copy">
+          <div class="banner-title-row">
+            <h2 id="banner-title">Personalize sua experiência sem cadastro</h2>
+            <span class="badge" id="banner-badge">Leva 1 minuto</span>
+          </div>
+          <p id="banner-desc">
+            Responda o formulário rápido uma única vez para liberar as respostas personalizadas nos blocos abaixo.
+            Fica salvo apenas neste navegador e você pode apagar quando quiser.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">BLOCOS DE ORIENTAÇÃO</span>
+          <h2>Escolha o que você precisa consultar agora</h2>
+        </div>
+        <p>Cada bloco gera orientações adaptadas à sua realidade no Distrito Federal.</p>
+      </div>
+
+      <!-- 4 BLOCOS ILUSTRADOS (COM DESENHOS VETORIAIS E MICRO-ANIMAÇÕES) -->
+      <div class="feature-grid">
+        <!-- Bloco 1: Benefícios Sociais -->
+        <button type="button" class="feature-card tone-lilac" data-block="benefits">
+          <div class="feature-card-top">
+            <span class="card-badge" data-card-status="benefits">Requer perfil rápido</span>
+            <span class="card-arrow" data-icon="arrow"></span>
+          </div>
+          <div class="feature-card-illustration" aria-hidden="true">
+            <svg viewBox="0 0 140 96" fill="none">
+              <rect x="14" y="14" width="112" height="68" rx="16" fill="#EFE7FB"/>
+              <path d="M44 52L70 30L96 52V74H44V52Z" fill="#8B63CE" opacity="0.22"/>
+              <path d="M38 54L70 27L102 54" stroke="#6F46B0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="70" cy="57" r="13" fill="#6F46B0"/>
+              <path d="M70 50v14M66 54h6.5a2.5 2.5 0 0 1 0 5h-5a2.5 2.5 0 0 0 0 5H74" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Benefícios e Auxílios Financeiros</h3>
+          <p>Aluguel Social do DF (R$ 600), Auxílio-Aluguel da Lei Maria da Penha, Bolsa Família, BPC/LOAS e Prato Cheio.</p>
+          <span class="card-cta">
+            <span data-card-cta="benefits">Responder perfil e ver benefícios</span>
+            <i data-icon="arrow"></i>
+          </span>
+        </button>
+
+        <!-- Bloco 2: Direitos e Leis -->
+        <button type="button" class="feature-card tone-rose" data-block="rights">
+          <div class="feature-card-top">
+            <span class="card-badge" data-card-status="rights">Requer perfil rápido</span>
+            <span class="card-arrow" data-icon="arrow"></span>
+          </div>
+          <div class="feature-card-illustration" aria-hidden="true">
+            <svg viewBox="0 0 140 96" fill="none">
+              <rect x="14" y="14" width="112" height="68" rx="16" fill="#FCE8F0"/>
+              <path d="M70 24C86 30 94 38 94 52C94 66 82 74 70 79C58 74 46 66 46 52C46 38 54 30 70 24Z" fill="#D45B87" opacity="0.2"/>
+              <path d="M70 28V72M52 40H88" stroke="#B83B6A" stroke-width="3" stroke-linecap="round"/>
+              <path d="M52 40L45 55H59L52 40ZM88 40L81 55H95L88 40Z" fill="#B83B6A"/>
+            </svg>
+          </div>
+          <h3>Leis e Direitos que Protegem Você</h3>
+          <p>Medidas protetivas sem BO prévio, manutenção do emprego por 6 meses, guarda dos filhos e proteção contra perseguição.</p>
+          <span class="card-cta">
+            <span data-card-cta="rights">Responder perfil e ver direitos</span>
+            <i data-icon="arrow"></i>
+          </span>
+        </button>
+
+        <!-- Bloco 3: Locais de Atendimento no DF -->
+        <button type="button" class="feature-card tone-teal" data-block="places">
+          <div class="feature-card-top">
+            <span class="card-badge" data-card-status="places">Requer perfil rápido</span>
+            <span class="card-arrow" data-icon="arrow"></span>
+          </div>
+          <div class="feature-card-illustration" aria-hidden="true">
+            <svg viewBox="0 0 140 96" fill="none">
+              <rect x="14" y="14" width="112" height="68" rx="16" fill="#E3F6F1"/>
+              <circle cx="70" cy="46" r="20" fill="#138A72" opacity="0.18"/>
+              <path d="M70 25C60.6 25 53 32.6 53 42C53 54.5 70 71 70 71C70 71 87 54.5 87 42C87 32.6 79.4 25 70 25Z" fill="#0F766E"/>
+              <circle cx="70" cy="42" r="6.5" fill="#FFF"/>
+            </svg>
+          </div>
+          <h3>Locais de Atendimento no DF</h3>
+          <p>Endereços, telefones e horários verificados da Casa da Mulher Brasileira, DEAMs 24h, CEAMs, Defensoria e Juizados.</p>
+          <span class="card-cta">
+            <span data-card-cta="places">Responder perfil e ver locais</span>
+            <i data-icon="arrow"></i>
+          </span>
+        </button>
+
+        <!-- Bloco 4: Avaliação de Risco (Fonar) — sempre aberto imediatamente -->
+        <button type="button" class="feature-card tone-amber" data-block="fonar">
+          <div class="feature-card-top">
+            <span class="card-badge card-badge--ready">Acesso imediato</span>
+            <span class="card-arrow" data-icon="arrow"></span>
+          </div>
+          <div class="feature-card-illustration" aria-hidden="true">
+            <svg viewBox="0 0 140 96" fill="none">
+              <rect x="14" y="14" width="112" height="68" rx="16" fill="#FFF2DE"/>
+              <path d="M70 24C84 29 91 36 91 49C91 63 80 71 70 76C60 71 49 63 49 49C49 36 56 29 70 24Z" fill="#D97706" opacity="0.22"/>
+              <path d="M62 49L68 55L80 42" stroke="#B45309" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Autoavaliação de Risco (Fonar)</h3>
+          <p>Identifique sinais de alerta com base no Formulário Nacional de Avaliação de Risco (CNJ) e receba orientação de segurança.</p>
+          <span class="card-cta">
+            <span>Iniciar avaliação de risco</span>
+            <i data-icon="arrow"></i>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         2. TELA DE TRIAGEM / FORMULÁRIO DE PERFIL (ESTILO DO CÓDIGO FIGMA)
+         ========================================================= -->
+    <section id="sec-screening" class="page-section" hidden>
+      <div class="wizard-wrap">
+        <div class="wizard-heading">
+          <div>
+            <span class="eyebrow">
+              <span data-icon="lock"></span>
+              <span>Formulário único · Salvo somente neste navegador</span>
+            </span>
+            <h1>Seu Perfil de Orientação</h1>
+            <p id="wizard-destination-notice" class="wizard-destination-notice" hidden></p>
+          </div>
+          <span class="wizard-counter" id="wizard-counter">Etapa 1 de 10</span>
+        </div>
+
+        <!-- Barra de progresso animada -->
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="wizard-progress-fill" style="width: 10%"></div>
+        </div>
+
+        <!-- Abas de etapas (clicáveis) -->
+        <div class="step-tabs" id="wizard-step-tabs" role="tablist" aria-label="Etapas do perfil"></div>
+
+        <div class="wizard-layout">
+          <!-- Cartão principal da pergunta com animação slide-in / slide-back -->
+          <div class="wizard-card">
+            <div class="wizard-top">
+              <button type="button" class="text-button" data-nav="home">
+                <span data-icon="back"></span>
+                <span>Voltar ao início</span>
+              </button>
+              <span class="autosave-indicator">
+                <i class="status-dot"></i> Salvo automaticamente no navegador
+              </span>
+            </div>
+
+            <div id="wizard-question-panel" class="question-panel slide-in">
+              <!-- Preenchido dinamicamente por app.js -->
+            </div>
+
+            <div class="wizard-actions">
+              <button type="button" class="secondary-button" id="wizard-prev-btn">
+                <span data-icon="back"></span>
+                <span>Anterior</span>
+              </button>
+              <div class="wizard-actions-right">
+                <button type="button" class="ghost-button" id="wizard-skip-btn">
+                  Prefiro não informar
+                </button>
+                <button type="button" class="primary-button" id="wizard-next-btn">
+                  <span id="wizard-next-text">Próxima pergunta</span>
+                  <span data-icon="arrow"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna direita de acolhimento e transparência (fiel ao código que você gostou) -->
+          <aside class="wizard-aside">
+            <div class="control-card">
+              <span class="control-icon" data-icon="shield"></span>
+              <h2>Você está no controle</h2>
+              <p>
+                Não pedimos nome, CPF nem login. Suas respostas ficam guardadas apenas na memória local deste navegador
+                para que você não precise responder tudo de novo ao trocar de seção.
+              </p>
+              <strong>Use "Apagar meus dados" no topo para limpar tudo em 1 clique.</strong>
+            </div>
+
+            <div class="why-card">
+              <span>POR QUE PERGUNTAMOS ISSO?</span>
+              <p id="wizard-why-text">
+                Cada pergunta serve unicamente para cruzar seu perfil com os requisitos das leis e dos benefícios sociais do DF.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. TELA DO BLOCO: BENEFÍCIOS SOCIAIS PERSONALIZADOS
+         ========================================================= -->
+    <section id="sec-benefits" class="page-section" hidden>
+      <div class="results">
+        <div class="results-header">
+          <button type="button" class="text-button" data-nav="home">
+            <span data-icon="back"></span>
+            <span>Voltar aos blocos</span>
+          </button>
+
+          <div class="results-title">
+            <div>
+              <span class="eyebrow">
+                <span data-icon="benefit"></span>
+                <span>Análise baseada no seu perfil local</span>
+              </span>
+              <h1>Benefícios e Auxílios Financeiros para Você</h1>
+              <p class="results-subtitle">
+                Veja abaixo os programas distritais e federais compatíveis com as informações que você preencheu,
+                os critérios na lei e o passo a passo para solicitar.
+              </p>
+            </div>
+            <div class="results-actions">
+              <button type="button" class="secondary-button" data-edit-profile="benefits">
+                <span>Editar respostas do perfil</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="benefits-profile-chips" class="profile-summary"></div>
+        </div>
+
+        <!-- Perguntas específicas de benefícios (mantidas apenas em memória, nunca salvas nem enviadas) -->
+        <div id="benefits-specific-questions" class="specific-questions-card" aria-label="Perguntas complementares de benefícios"></div>
+
+        <div id="benefits-list" class="recommendation-list"></div>
+
+        <div class="disclaimer">
+          <span data-icon="info"></span>
+          <p>
+            <strong>Importante:</strong> Esta avaliação é apenas indicativa: a concessão depende da análise e confirmação do órgão responsável.
+            O cálculo considera a renda da casa como ficará sem o agressor — lembre-se de atualizar o CadÚnico no <strong>CRAS mais próximo</strong> para refletir essa mudança.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. TELA DO BLOCO: DIREITOS & LEIS QUE SE ENQUADRAM
+         ========================================================= -->
+    <section id="sec-rights" class="page-section" hidden>
+      <div class="results">
+        <div class="results-header">
+          <button type="button" class="text-button" data-nav="home">
+            <span data-icon="back"></span>
+            <span>Voltar aos blocos</span>
+          </button>
+
+          <div class="results-title">
+            <div>
+              <span class="eyebrow">
+                <span data-icon="scale"></span>
+                <span>Orientação Jurídica Fundamentada</span>
+              </span>
+              <h1>Seus Direitos na Lei Maria da Penha e Normas de Proteção</h1>
+              <p class="results-subtitle">
+                Informações em linguagem simples com citação exata da lei e artigo. Se tiver uma dúvida específica sobre o seu caso,
+                use o chat flutuante no canto inferior direito.
+              </p>
+            </div>
+            <div class="results-actions">
+              <button type="button" class="secondary-button" data-edit-profile="rights">
+                <span>Editar respostas do perfil</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="rights-profile-chips" class="profile-summary"></div>
+        </div>
+
+        <div id="rights-personalized-callout" class="personalized-callout"></div>
+
+        <div id="rights-list" class="recommendation-list"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. TELA DO BLOCO: LOCAIS DE ATENDIMENTO NO DF
+         ========================================================= -->
+    <section id="sec-places" class="page-section" hidden>
+      <div class="results">
+        <div class="results-header">
+          <button type="button" class="text-button" data-nav="home">
+            <span data-icon="back"></span>
+            <span>Voltar aos blocos</span>
+          </button>
+
+          <div class="results-title">
+            <div>
+              <span class="eyebrow">
+                <span data-icon="pin"></span>
+                <span>Rede Oficial de Proteção à Mulher no Distrito Federal</span>
+              </span>
+              <h1>Onde Buscar Atendimento no DF</h1>
+              <p class="results-subtitle">
+                Unidades oficiais verificadas. Recomendamos ligar antes de ir para confirmar horários de atendimento presencial,
+                exceto nas unidades 24 horas (DEAM I, DEAM II e Casa da Mulher Brasileira).
+              </p>
+            </div>
+            <div class="results-actions">
+              <button type="button" class="secondary-button" data-edit-profile="places">
+                <span>Alterar minha Região Administrativa</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filtros rápidos por RA e Tipo de Serviço -->
+          <div class="places-filters">
+            <div class="filter-field">
+              <label for="filtro-ra">Ordenar / destacar Região Administrativa:</label>
+              <select id="filtro-ra"></select>
+            </div>
+            <div class="filter-field">
+              <label for="filtro-tipo">Tipo de serviço:</label>
+              <select id="filtro-tipo">
+                <option value="todos">Todos os serviços (20 unidades)</option>
+                <option value="CMB">Casa da Mulher Brasileira (24h)</option>
+                <option value="DEAM">Delegacias da Mulher — DEAM (24h)</option>
+                <option value="CEAM">Centros Especializados — CEAM</option>
+                <option value="Defensoria">Defensoria Pública do DF (NUDEM / NAJ)</option>
+                <option value="Juizado">Juizados de Violência Doméstica (TJDFT)</option>
+                <option value="outro">Promotoria / Espaço Acolher / NJM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="places-ra-notice" class="personalized-callout" hidden></div>
+
+        <div id="places-list" class="places-grid"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. TELA DO BLOCO: AUTOAVALIAÇÃO DE RISCO (FONAR)
+         ========================================================= -->
+    <section id="sec-fonar" class="page-section" hidden>
+      <div class="results">
+        <div class="results-header">
+          <button type="button" class="text-button" data-nav="home">
+            <span data-icon="back"></span>
+            <span>Voltar aos blocos</span>
+          </button>
+
+          <div class="results-title">
+            <div>
+              <span class="eyebrow">
+                <span data-icon="shield"></span>
+                <span>Baseado no Formulário Nacional de Avaliação de Risco (CNJ/CNMP)</span>
+              </span>
+              <h1>Autoavaliação de Sinais de Risco</h1>
+              <p class="results-subtitle">
+                Responda apenas o que se sentir confortável. Pular uma pergunta nunca reduz a atenção ao seu caso.
+                Se você estiver em perigo imediato agora, ligue <strong>190</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="fonar-questions" class="fonar-list"></div>
+
+        <div id="fonar-result-box" class="fonar-result" role="region" aria-live="polite">
+          <!-- Resultado dinâmico do Fonar -->
+        </div>
+
+        <div class="disclaimer">
+          <span data-icon="info"></span>
+          <p>
+            <strong>Aviso de limite da triagem (Portaria Conjunta CNJ/CNMP nº 6/2025):</strong>
+            Esta autoavaliação ajuda a identificar fatores objetivos de risco da Parte I do Fonar, mas <strong>não substitui</strong>
+            a avaliação técnica presencial realizada por profissionais da rede de proteção (Parte II do Fonar).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-brand">
+        <strong>Rede Lilás · Distrito Federal</strong>
+        <p>Orientação segura sobre direitos, benefícios sociais e rede de proteção à mulher.</p>
+      </div>
+      <span>Dados salvos apenas localmente · Saída rápida: tecla Esc</span>
+    </footer>
   </main>
 
-  <form class="envio" id="envio" autocomplete="off">
-    <label class="oculto" for="texto">Sua mensagem</label>
-    <textarea id="texto" name="texto" rows="1" maxlength="2000" placeholder="Escreva aqui" enterkeyhint="send" autocomplete="off" autocorrect="on" spellcheck="true"></textarea>
-    <button type="submit" class="enviar" id="enviar" aria-label="Enviar">
-      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square"/></svg>
-    </button>
-  </form>
+  <!-- =========================================================
+       CHAT FLUTUANTE SEMPRE VISÍVEL NA PARTE INFERIOR DA TELA
+       (Design do código Figma + integração com Risco 190 e /juridico)
+       ========================================================= -->
+  <div class="chat-root" id="conversa" aria-label="Conversa com a assistente">
+    <div id="chat-window" class="chat-window" role="dialog" aria-label="Assistente de orientação Rede Lilás" hidden>
+      <div class="chat-head">
+        <div class="assistant-avatar" data-icon="chat"></div>
+        <div class="chat-head-info">
+          <strong>Assistente Rede Lilás</strong>
+          <span><i></i> Orientação jurídica e acolhimento</span>
+        </div>
+        <button type="button" id="chat-close" aria-label="Minimizar conversa" title="Minimizar chat">
+          <span data-icon="close"></span>
+        </button>
+      </div>
 
-  <noscript><p class="aviso">Ative o JavaScript para usar a conversa.</p></noscript>
+      <!-- Lista de mensagens (compatível com a estrutura do projeto) -->
+      <ol class="chat-messages" id="mensagens" aria-live="polite" aria-relevant="additions">
+        <li class="msg msg--assistente msg--abertura bot-message">
+          <p>Olá! Estou aqui para tirar suas dúvidas sobre direitos, medidas protetivas, benefícios ou locais de ajuda no DF com calma e sem julgamentos.</p>
+          <p class="msg__nota">A conversa não fica gravada e some ao clicar em <strong>Saída rápida</strong>.</p>
+        </li>
+      </ol>
+
+      <!-- Atalhos rápidos de pergunta -->
+      <div class="quick-replies" aria-label="Sugestões de pergunta">
+        <button type="button" data-quick-msg="Como pedir medida protetiva de urgência?">Como pedir medida protetiva?</button>
+        <button type="button" data-quick-msg="Como funciona o Aluguel Social no DF?">Aluguel Social no DF</button>
+        <button type="button" data-quick-msg="Onde buscar atendimento 24h no DF?">Atendimento 24h no DF</button>
+      </div>
+
+      <form class="chat-input" id="envio" autocomplete="off">
+        <label class="oculto" for="texto">Sua mensagem</label>
+        <textarea id="texto" name="texto" rows="1" maxlength="2000" placeholder="Digite sua dúvida aqui…" enterkeyhint="send" autocomplete="off"></textarea>
+        <button type="submit" class="enviar" id="enviar" aria-label="Enviar mensagem">
+          <span data-icon="arrow"></span>
+        </button>
+      </form>
+      <p class="chat-privacy-note">Não compartilhe nome completo, CPF ou endereço exato no chat.</p>
+    </div>
+
+    <button type="button" id="chat-trigger" class="chat-trigger" aria-expanded="false">
+      <span class="chat-trigger-icon" id="chat-trigger-icon" data-icon="chat"></span>
+      <span class="chat-trigger-text">
+        <strong>Tem alguma dúvida?</strong>
+        <small>Pergunte no chat da Rede Lilás</small>
+      </span>
+    </button>
+  </div>
+
+  <!-- Toast de confirmação ao apagar dados ou salvar perfil -->
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <noscript><p class="aviso">Ative o JavaScript para usar a plataforma.</p></noscript>
 </body>
 </html>

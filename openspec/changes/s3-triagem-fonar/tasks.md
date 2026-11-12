@@ -12,10 +12,10 @@
 
 ## 3. Tela e funcionamento offline (até quinta, 12/11)
 
-- [ ] 3.1 Criar a tela da triagem na navegação de `s3-frontend-e-perfil`, com as respostas só em memória; verificação: `tests/test_pwa.py` confere que a tela não grava no aparelho e não envia requisição com as respostas
-- [ ] 3.2 Incluir os novos arquivos no service worker e subir a versão do cache; verificação: `tests/test_pwa.py` confere a lista, e a triagem abre sem internet na verificação manual
-- [ ] 3.3 Conferir a saída rápida durante a triagem; verificação manual: tocar em Sair no meio da triagem, voltar e confirmar que as respostas não reaparecem
-- [ ] 3.4 Rodar a suíte de risco/190 e a suíte completa; verificação: `uv run pytest` passa sem falso negativo
+- [x] 3.1 Criar a tela da triagem na navegação de `s3-frontend-e-perfil`, com as respostas só em memória; verificação: `tests/test_pwa.py` confere que a tela não grava no aparelho e não envia requisição com as respostas
+- [x] 3.2 Incluir os novos arquivos no service worker e subir a versão do cache; verificação: `tests/test_pwa.py` confere a lista, e a triagem abre sem internet na verificação manual
+- [x] 3.3 Conferir a saída rápida durante a triagem; verificação manual: tocar em Sair no meio da triagem, voltar e confirmar que as respostas não reaparecem
+- [x] 3.4 Rodar a suíte de risco/190 e a suíte completa; verificação: `uv run pytest` passa sem falso negativo
 
 ## Workflow follow-up
 

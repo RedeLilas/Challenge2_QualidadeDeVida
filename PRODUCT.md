@@ -29,11 +29,11 @@ Answers come only from curated official legal texts (federal laws plus DF norms)
 ## Capabilities and Constraints
 
 - Stack: FastAPI backend serving a PWA in plain HTML/CSS/JS. No frontend framework, no build step.
-- Conversation lives only in the memory of the open tab; never in `localStorage`, never on the server.
-- Quick exit on every screen: one tap clears the conversation and calls `location.replace()` to a weather forecast page, so Back does not reopen the app.
+- Conversation lives only in the memory of the open tab; never in `localStorage`, never on the server. Only the optional anonymous profile (without name, CPF, or document number) is stored locally in `localStorage` (`web/perfil.js`), never sent to the server, and erased on quick exit or via "Apagar meus dados".
+- Quick exit on every screen: one tap clears the conversation and the local profile and calls `location.replace()` to a weather forecast page, so Back does not reopen the app.
 - No notifications. Server logs carry only technical data, never message text.
 - Opening screen is the conversation itself, ready to type.
-- Out of scope for now: suggested questions (week 4), local profile (week 3), final name and icon (week 6), full WCAG audit (week 6).
+- Out of scope for now: suggested questions (week 4), final name and icon (week 6), full WCAG audit (week 6).
 
 ## Brand Commitments
 
@@ -44,7 +44,7 @@ Answers come only from curated official legal texts (federal laws plus DF norms)
 ## Evidence on Hand
 
 - Product definitions: `docs/Challenge 2 - Definições do Projeto Semana 1.md`.
-- Requirements: `openspec/changes/s1-definicoes-base/specs/`.
+- Requirements: `openspec/specs/`.
 - Legal base: `dados/leis/`, `dados/fontes/fontes.yaml`.
 - No testimonials, users, logos, or real cases exist. Do not fabricate any.
 

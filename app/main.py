@@ -1,4 +1,5 @@
 """Aplicação FastAPI: rotas do backend e a PWA estática em web/."""
+import csv
 import logging
 import mimetypes
 import threading
@@ -72,6 +73,14 @@ def cliente_llm() -> llm.ClienteLLM:
 @app.get("/saude")
 def saude() -> dict:
     return {"status": "ok"}
+
+
+@app.get("/rede-protecao")
+def rede_protecao() -> list[dict]:
+    """Devolve os serviços verificados da rede de proteção do DF (sem receber dados da usuária)."""
+    caminho = WEB.parent / "dados" / "rede_protecao_df.csv"
+    with caminho.open(encoding="utf-8") as arquivo:
+        return list(csv.DictReader(arquivo))
 
 
 def alerta_de_risco(texto: str) -> dict | None:
