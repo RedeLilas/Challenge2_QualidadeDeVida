@@ -40,7 +40,7 @@ Para usar o DeepSeek, troque as variáveis no `.env` (veja o bloco comentado em 
 
 ## Base jurídica (RAG)
 
-16 normas federais e distritais, listadas em `dados/fontes/fontes.yaml`, cada uma com um eixo: `juridico`, `beneficios`, `saude` ou `df`.
+18 normas federais e distritais, listadas em `dados/fontes/fontes.yaml`, cada uma com um eixo: `juridico`, `beneficios`, `saude` ou `df`.
 
 | Pasta | Conteúdo |
 |---|---|
@@ -64,6 +64,7 @@ O número entre colchetes é a similaridade de cosseno (quanto maior, mais parec
 
 ```bash
 uv run python -m app.rag.coleta                      # baixa todas as normas de fontes.yaml
+uv run python -m app.rag.coleta --norma <id> --norma <id>            # só essas normas, num relatório
 uv run python -m app.rag.coleta --norma <id> --arquivo pagina.html   # usa um HTML já baixado
 uv run python -m app.rag.coleta --reprocessar        # relê o HTML salvo com o leitor atual, sem baixar
 uv run python -m app.rag.ingestao                    # gera os trechos em dados/leis/

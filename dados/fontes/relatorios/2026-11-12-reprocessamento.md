@@ -1,0 +1,314 @@
+# Relatório de coleta — 2026-11-12-reprocessamento
+
+## Lei nº 11.340, de 7 de agosto de 2006 (Lei Maria da Penha)
+- URN: `urn:lex:br:federal:lei:2006-08-07;11340`
+- Dispositivos: 206
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (18)
+- Presidência da República Secretaria-Geral Subchefia para Assuntos Jurídicos
+- LEI Nº 11.340, DE 7 DE AGOSTO DE 2006
+- Cria mecanismos para coibir a violência doméstica e familiar contra a mulher, nos termos do § 8º do art. 226 da Constituição Federal, da Convenção sobre a Elimi
+- O PRESIDENTE DA REPÚBLICA Faço saber que o Congresso Nacional decreta e eu sanciono a seguinte Lei:
+- “Art. 313..................................................
+- ................................................................
+- “Art. 61...................................................
+- .................................................................
+- .................................................................
+- ........................................................... ” (NR)
+- “Art. 129...................................................
+- ..................................................................
+- ..................................................................
+- “Art. 152....................................................
+- Brasília, 7 de agosto de 2006; 185º da Independência e 118º da República.
+- LUIZ INÁCIO LULA DA SILVA Dilma Rousseff
+- Este texto não substitui o publicado no DOU de 8.8.2006
+- *
+
+## Lei nº 14.149, de 5 de maio de 2021 (Formulário Nacional de Avaliação de Risco)
+- URN: `urn:lex:br:federal:lei:2021-05-05;14149`
+- Dispositivos: 7
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (10)
+- Presidência da República Secretaria-Geral Subchefia para Assuntos Jurídicos
+- LEI Nº 14.149, DE 5 DE MAIO DE 2021
+- Institui o Formulário Nacional de Avaliação de Risco, a ser aplicado à mulher vítima de violência doméstica e familiar.
+- O PRESIDENTE DA REPÚBLICA Faço saber que o Congresso Nacional decreta e eu sanciono a seguinte Lei:
+- Brasília, 5 de maio de 2021; 200 o da Independência e 133 o da República.
+- JAIR MESSIAS BOLSONARO
+- Carlos Alberto Franco França
+- Damares Regina Alves
+- Este texto não substitui o publicado no DOU de 6.5.2021.
+- *
+
+## Decreto-Lei nº 2.848, de 7 de dezembro de 1940 (Código Penal)
+- URN: `urn:lex:br:federal:decreto.lei:1940-12-07;2848`
+- Dispositivos: 102
+- Comparado com: `2026-11-12.jsonl`
+- **Incluídos:** art140.par1, art140.par1.inc_i, art140.par1.inc_ii, art148.par1, art148.par1.inc_i, art148.par1.inc_ii, art148.par1.inc_iii, art148.par1.inc_iv, art148.par1.inc_v
+- **Removidos:** art140.par1-o, art140.par1-o.inc_i, art140.par1-o.inc_ii, art148.par1-a, art148.par1-a.inc_i, art148.par1-a.inc_ii, art148.par1-a.inc_iii, art148.par1-a.inc_iv, art148.par1-a.inc_v
+
+### Parágrafos não reconhecidos (0)
+
+## Lei nº 10.406, de 10 de janeiro de 2002 (Código Civil)
+- URN: `urn:lex:br:federal:lei:2002-01-10;10406`
+- Dispositivos: 9
+- Comparado com: `2026-11-12.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (0)
+
+## Lei nº 13.105, de 16 de março de 2015 (Código de Processo Civil)
+- URN: `urn:lex:br:federal:lei:2015-03-16;13105`
+- Dispositivos: 1
+- Comparado com: `2026-11-12.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (0)
+
+## Lei nº 14.601, de 19 de junho de 2023 (Programa Bolsa Família)
+- URN: `urn:lex:br:federal:lei:2023-06-19;14601`
+- Dispositivos: 224
+- **Atenção, IDs duplicados:** art28.par4
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (18)
+- Presidência da República Casa Civil Secretaria Especial para Assuntos Jurídicos
+- LEI Nº 14.601, DE 19 DE JUNHO DE 2023
+- Vigência
+- Conversão da Medida Provisória nº 1.164, de 2023
+- Regulamento
+- Institui o Programa Bolsa Família; altera a Lei nº 8.742, de 7 de dezembro de 1993 (Lei Orgânica da Assistência Social), a Lei nº 10.820, de 17 de dezembro de 2
+- O PRESIDENTE DA REPÚBLICA Faço saber que o Congresso Nacional decreta e eu sanciono a seguinte Lei:
+- “Art. 6º-F Fica instituído o Cadastro Único para Programas Sociais do Governo Federal (CadÚnico), registro público eletrônico com a finalidade de coletar, proce
+- .................................................................................................................................................
+- “Art. 20........................................................................................................................
+- .................................................................................................................................................
+- ........................................................................................................................................” (NR)
+- “Art. 6º..............................................................................................................................
+- .................................................................................................................................................
+- “Art. 2º..............................................................................................................................
+- ........................................................................................................................................” (NR)
+- Brasília, 19 de junho de 2023; 202 o da Independência e 135 o da República.
+- LUIZ INÁCIO LULA DA SILVA José Wellington Barroso de Araujo Dias Fernando Haddad Simone Nassar Tebet
+
+## Lei nº 8.742, de 7 de dezembro de 1993 (Lei Orgânica da Assistência Social)
+- URN: `urn:lex:br:federal:lei:1993-12-07;8742`
+- Dispositivos: 304
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (9)
+- Presidência da República Casa Civil Subchefia para Assuntos Jurídicos
+- LEI Nº 8.742, DE 7 DE DEZEMBRO DE 1993
+- Vide Lei nº 13.014, de 2014
+- Dispõe sobre a organização da Assistência Social e dá outras providências.
+- O PRESIDENTE DA REPÚBLICA, faço saber que o Congresso Nacional decreta e eu sanciono a seguinte lei:
+- LEI ORGÂNICA DA ASSISTÊNCIA SOCIAL
+- Brasília, 7 de dezembro de 1993, 172º da Independência e 105º da República.
+- Este texto não substitui o publicado no DOU de 8.12.1993
+- *
+
+## Lei nº 12.845, de 1º de agosto de 2013 (Lei do Minuto Seguinte)
+- URN: `urn:lex:br:federal:lei:2013-08-01;12845`
+- Dispositivos: 17
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (6)
+- LEI Nº 12.845, DE 1º DE AGOSTO DE 2013.
+- Dispõe sobre o atendimento obrigatório e integral de pessoas em situação de violência sexual.
+- A PRESIDENTA DA REPÚBLICA Faço saber que o Congresso Nacional decreta e eu sanciono a seguinte Lei:
+- Brasília, 1º de agosto de 2013; 192º da Independência e 125º da República.
+- DILMA ROUSSEFF José Eduardo Cardozo Alexandre Rocha Santos Padilha Eleonora Menicucci de Oliveira Maria do Rosário Nunes
+- Este texto não substitui o publicado no DOU de 2.8.2013
+
+## Lei nº 14.737, de 27 de novembro de 2023 (direito a acompanhante nos serviços de saúde)
+- URN: `urn:lex:br:federal:lei:2023-11-27;14737`
+- Dispositivos: 8
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (10)
+- Presidência da República Casa Civil Secretaria Especial para Assuntos Jurídicos
+- LEI Nº 14.737, DE 27 DE NOVEMBRO DE 2023
+- Altera a Lei nº 8.080, de 19 de setembro de 1990 (Lei Orgânica da Saúde), para ampliar o direito da mulher de ter acompanhante nos atendimentos realizados em se
+- O PRESIDENTE DA REPÚBLICA Faço saber que o Congresso Nacional decreta e eu sanciono a seguinte Lei:
+- “‘ CAPÍTULO VII
+- DO SUBSISTEMA DE ACOMPANHAMENTO À MULHER NOS SERVIÇOS DE SAÚDE’
+- ‘Art. 19-J. Em consultas, exames e procedimentos realizados em unidades de saúde públicas ou privadas, toda mulher tem o direito de fazer-se acompanhar por pess
+- ........................................................................................................ ”
+- Brasília, 27 de novembro de 2023; 202 o da Independência e 135 o da República.
+- LUIZ INÁCIO LULA DA SILVA Flávio Dino de Castro e Costa Nísia Verônica Trindade Lima
+
+## Lei Distrital nº 7.009, de 17 de dezembro de 2021 (Programa Cartão Prato Cheio)
+- URN: `urn:lex:br;distrito.federal:distrital:lei:2021-12-17;7009`
+- Dispositivos: 15
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (13)
+- Legislação Correlata - Portaria 52 de 30/12/2021
+- Legislação Correlata - Portaria 32 de 11/05/2022
+- Legislação Correlata - Portaria 35 de 24/05/2022
+- Legislação Correlata - Portaria 199 de 17/03/2025
+- Legislação Correlata - Portaria 1 de 23/01/2026
+- (Regulamentado(a) pelo(a) Decreto 42873 de 29/12/2021
+- (Autoria do Projeto: Poder Executivo)
+- Institui programa de provimento alimentar direto em caráter emergencial, denominado Cartão Prato Cheio.
+- O GOVERNADOR DO DISTRITO FEDERAL, FAÇO SABER QUE A CÂMARA LEGISLATIVA DO DISTRITO FEDERAL DECRETA E EU SANCIONO A SEGUINTE LEI:
+- Brasília, 17 de dezembro de 2021
+- 133º da República e 62º de Brasília
+- IBANEIS ROCHA
+- Este texto não substitui o publicado no DODF nº 102 A, Edição Extra, seção 1 e 2 de 17/12/2021 p. 2, col. 1
+
+## Decreto Distrital nº 42.873, de 29 de dezembro de 2021 (regulamenta o Cartão Prato Cheio)
+- URN: `urn:lex:br;distrito.federal:distrital:decreto:2021-12-29;42873`
+- Dispositivos: 21
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (11)
+- Legislação Correlata - Portaria 35 de 24/05/2022
+- Legislação Correlata - Portaria 57 de 27/10/2022
+- Legislação Correlata - Portaria 1 de 23/01/2026
+- (Regulamentado(a) pelo(a) Portaria 52 de 30/12/2021
+- (Regulamentado(a) pelo(a) Portaria 32 de 11/05/2022
+- Regulamenta a Lei nº 7.009, de 17 de dezembro de 2021, que institui o programa de provimento alimentar direto em caráter emergencial, denominado “Cartão Prato C
+- O GOVERNADOR DO DISTRITO FEDERAL, no uso das atribuições que lhe confere o artigo 100, inciso VII, da Lei Orgânica do Distrito Federal, DECRETA:
+- Brasília, 29 de dezembro de 2021
+- 133º da República e 62º de Brasília
+- IBANEIS ROCHA
+- Este texto não substitui o publicado no DODF nº 107 A, Edição Extra, seção 1 e 3 de 29/12/2021 p. 2, col. 1
+
+## Lei Distrital nº 6.938, de 10 de agosto de 2021 (Programa Cartão Gás)
+- URN: `urn:lex:br;distrito.federal:distrital:lei:2021-08-10;6938`
+- Dispositivos: 22
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (14)
+- Legislação Correlata - Portaria 211 de 10/08/2021
+- Legislação Correlata - Portaria 33 de 21/09/2021
+- Legislação Correlata - Portaria 35 de 24/09/2021
+- Legislação Correlata - Decreto 43963 de 22/11/2022
+- Legislação Correlata - Portaria 8 de 23/04/2024
+- (Regulamentado(a) pelo(a) Decreto 42376 de 10/08/2021
+- (Autoria do Projeto: Poder Executivo)
+- Institui o Programa Cartão Gás como medida de enfrentamento das consequências sociais e econômicas decorrentes da pandemia da Covid-19 e seus efeitos.
+- O GOVERNADOR DO DISTRITO FEDERAL, FAÇO SABER QUE A CÂMARA LEGISLATIVA DO DISTRITO FEDERAL DECRETA E EU SANCIONO A SEGUINTE LEI:
+- (Artigo Revogado(a) pelo(a) Lei 7010 de 17/12/2021)
+- Brasília, 10 de agosto de 2021
+- 132º da República e 62º de Brasília
+- IBANEIS ROCHA
+- Este texto não substitui o publicado no DODF nº 67 A, Edição Extra, seção 1 de 10/08/2021 p. 1, col. 1
+
+## Decreto Distrital nº 42.376, de 10 de agosto de 2021 (regulamenta o Cartão Gás)
+- URN: `urn:lex:br;distrito.federal:distrital:decreto:2021-08-10;42376`
+- Dispositivos: 44
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (13)
+- Legislação Correlata - Portaria 211 de 10/08/2021
+- Legislação Correlata - Portaria 33 de 21/09/2021
+- Legislação Correlata - Portaria 35 de 24/09/2021
+- Legislação Correlata - Portaria 8 de 23/04/2024
+- Regulamenta a Lei nº 6.938, de 10 de agosto de 2021, que institui o Programa Cartão Gás como medida de enfrentamento das consequências sociais e econômicas deco
+- O GOVERNADOR DO DISTRITO FEDERAL, no uso das atribuições que lhe são conferidas pelo inciso VII do art. 100 da Lei Orgânica do Distrito Federal, DECRETA:
+- (Artigo Revogado(a) pelo(a) Decreto 45192 de 22/11/2023)
+- (Artigo Revogado(a) pelo(a) Decreto 43963 de 22/11/2022)
+- Brasília, 10 de agosto de 2021
+- 132º da República e 62º de Brasília
+- IBANEIS ROCHA
+- Este texto não substitui o publicado no DODF nº 67 A, Edição Extra de 10/08/2021 Este texto não substitui o publicado no DODF nº 67 A, Edição Extra, seção 1 de 
+- Este texto não substitui o publicado no DODF nº 67 A, Edição Extra, seção 1 de 10/08/2021 p. 1, col. 2
+
+## Lei Distrital nº 6.623, de 25 de junho de 2020 (Aluguel Social para mulheres vítimas de violência doméstica)
+- URN: `urn:lex:br;distrito.federal:distrital:lei:2020-06-25;6623`
+- Dispositivos: 8
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (10)
+- Legislação Correlata - Lei 7455 de 28/02/2024
+- (Regulamentado(a) pelo(a) Decreto 45989 de 09/07/2024
+- (Autoria do Projeto: Deputado Rafael Prudente)
+- Dispõe sobre a concessão do Aluguel Social às mulheres vítimas de violência doméstica no Distrito Federal e dá outras providências.
+- Faço saber que a Câmara Legislativa do Distrito Federal aprovou, o Governador do Distrito Federal, nos termos do § 3º do art. 74 da Lei Orgânica do Distrito Fed
+- Brasília, 3 de julho de 2020
+- DEPUTADO RAFAEL PRUDENTE
+- Presidente
+- Este texto não substitui o publicado no DODF nº 127 de 08/07/2020 Este texto não substitui o publicado no DODF nº 127, seção 1, 2 e 3 de 08/07/2020 p. 1, col. 1
+- Este texto não substitui o publicado no DODF nº 127, seção 1, 2 e 3 de 08/07/2020 p. 1, col. 1
+
+## Decreto Distrital nº 45.989, de 9 de julho de 2024 (regulamenta o Aluguel Social)
+- URN: `urn:lex:br;distrito.federal:distrital:decreto:2024-07-09;45989`
+- Dispositivos: 13
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (8)
+- Legislação Correlata - Portaria 131 de 05/09/2024
+- Regulamenta a Lei nº 6.623, de 25 de junho de 2020, que dispõe sobre a concessão de aluguel social às mulheres vítimas de violência doméstica no Distrito Federa
+- A VICE-GOVERNADORA NO EXERCÍCIO DO CARGO DE GOVERNADORA DO DISTRITO FEDERAL, com fundamento no artigo 92, e no uso das atribuições que lhe confere o artigo 100,
+- Brasília, 09 de julho de 2024
+- 135º da República e 65º de Brasília
+- CELINA LEÃO
+- Governadora em exercício
+- Este texto não substitui o publicado no DODF nº 130, seção 1, 2 e 3 de 10/07/2024 p. 1, col. 1
+
+## Lei Distrital nº 5.165, de 4 de setembro de 2013 (benefícios eventuais da assistência social no DF)
+- URN: `urn:lex:br;distrito.federal:distrital:lei:2013-09-04;5165`
+- Dispositivos: 112
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (13)
+- Legislação Correlata - Lei 6678 de 22/09/2020
+- Legislação Correlata - Portaria Conjunta 4 de 23/09/2020
+- Legislação Correlata - Ordem de Serviço 23 de 26/06/2024
+- Legislação Correlata - Instrução 416 de 13/10/2025
+- (Regulamentado(a) pelo(a) Decreto 35191 de 21/02/2014
+- (Autoria do Projeto: Poder Executivo)
+- Dispõe sobre os benefícios eventuais da Política de Assistência Social do Distrito Federal e dá outras providências.
+- O GOVERNADOR DO DISTRITO FEDERAL, FAÇO SABER QUE A CÂMARA LEGISLATIVA DO DISTRITO FEDERAL DECRETA E EU SANCIONO A SEGUINTE LEI:
+- DO BENEFÍCIO EXCEPCIONAL
+- Brasília, 04 de setembro de 2013
+- 125º da República e 54º de Brasília
+- AGNELO QUEIROZ
+- Este texto não substitui o publicado no DODF nº 185, seção 1 de 05/09/2013 p. 1, col. 1
+
+## Decreto Distrital nº 35.191, de 21 de fevereiro de 2014 (regulamenta os benefícios eventuais no DF)
+- URN: `urn:lex:br;distrito.federal:distrital:decreto:2014-02-21;35191`
+- Dispositivos: 46
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (10)
+- Legislação Correlata - Portaria Conjunta 4 de 23/09/2020
+- Regulamenta a Lei nº 5.165, de 04 de setembro de 2013, que dispõe sobre os benefícios eventuais da Política de Assistência Social do Distrito Federal e dá outra
+- O GOVERNADOR DO DISTRITO FEDERAL, no uso das atribuições que lhe confere o artigo 100, incisos VII e XXVI, da Lei Orgânica do Distrito Federal,
+- DECRETA:
+- CAPITULO II
+- Do Benefício Excepcional
+- Brasília, 21 de fevereiro de 2014
+- 126º da república e 54 º de Brasília
+- AGNELO QUEIROZ
+- Este texto não substitui o publicado no DODF nº 41, seção 1 de 24/02/2014 p. 1, col. 1
+
+## Portaria nº 49, de 10 de abril de 2026, da Secretaria da Mulher do DF (procedimentos do Aluguel Social)
+- URN: `urn:lex:br;distrito.federal:distrital:portaria:2026-04-10;49`
+- Dispositivos: 91
+- Comparado com: `2026-11-03.jsonl`
+- Nenhum dispositivo mudou com o leitor atual.
+
+### Parágrafos não reconhecidos (4)
+- Dispõe sobre as normas de concessão de aluguel social às mulheres vítimas de violência doméstica e familiar no Distrito Federal e dá outras providências.
+- A SECRETÁRIA DE ESTADO DA MULHER DO DISTRITO FEDERAL, no uso das atribuições que lhe confere o art.105, parágrafo único, incisos III e V, da Lei Orgânica do Dis
+- GISELLE FERREIRA
+- Este texto não substitui o publicado no DODF nº 70, seção 1, 2 e 3 de 16/04/2026 p. 17, col. 1

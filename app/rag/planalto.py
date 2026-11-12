@@ -23,8 +23,10 @@ CABECALHOS = {
 
 # "(?!\w)" evita ler "Art. 147 - Ameaçar" como art. 147-A.
 # "(?:\.\d{3})?" lê o separador de milhar: "Art. 1.584." é o art. 1.584, não o art. 1.
-RE_ARTIGO = re.compile(r"^Art\.\s*(\d+(?:\.\d{3})?)\s*(?:º|°|o\b)?\s*(-\s*[A-Z](?!\w))?\s*\.?\s*")
-RE_PARAGRAFO = re.compile(r"^(?:§\s*(\d+)\s*(?:º|°)?\s*(-\s*[A-Z](?!\w))?|(Parágrafo único))\s*[.\-–]?\s*")
+# A letra do sufixo vem colada ao hífen ("147-A", "§ 2º-A", "6 o -A"). Com espaço depois do
+# hífen, a letra começa o texto: "§ 1º - O juiz", "Art. 3º - A lei".
+RE_ARTIGO = re.compile(r"^Art\.\s*(\d+(?:\.\d{3})?)\s*(?:º|°|o\b)?\s*(-[A-Z](?!\w))?\s*\.?\s*")
+RE_PARAGRAFO = re.compile(r"^(?:§\s*(\d+)\s*(?:º|°)?\s*(-[A-Z](?!\w))?|(Parágrafo único))\s*[.\-–]?\s*")
 RE_INCISO = re.compile(r"^([IVXLC]+)(-[A-Z])?\s*[-–]\s*")
 RE_ALINEA = re.compile(r"^([a-z])\)\s*")
 RE_DIVISAO = re.compile(r"^(TÍTULO|CAPÍTULO|SEÇÃO|Seção|SUBSEÇÃO|Subseção)\s+([IVXLC]+(?:-[A-Z])?)\b\s*(.*)$")

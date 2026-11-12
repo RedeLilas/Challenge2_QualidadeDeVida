@@ -3,7 +3,7 @@
 Não altera os trechos do índice. Revise dados/fontes/relatorios/<data>.md e depois
 rode app.rag.ingestao.
 
-Uso: uv run python -m app.rag.coleta [--norma lei-11340-2006] [--arquivo pagina.htm]
+Uso: uv run python -m app.rag.coleta [--norma lei-11340-2006 [--norma ...]] [--arquivo pagina.htm]
 """
 import argparse
 import sys
@@ -91,7 +91,11 @@ def secao_relatorio(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--norma", help="id da norma em fontes.yaml; padrão: todas")
+    parser.add_argument(
+        "--norma",
+        action="append",
+        help="id da norma em fontes.yaml; pode repetir para gerar um só relatório; padrão: todas",
+    )
     parser.add_argument("--arquivo", type=Path, help="HTML já baixado, em vez de baixar (só com --norma)")
     parser.add_argument(
         "--reprocessar",
@@ -102,9 +106,12 @@ def main() -> None:
 
     normas = yaml.safe_load(FONTES.read_text(encoding="utf-8"))["normas"]
     if args.norma:
-        normas = [n for n in normas if n["id"] == args.norma]
-        if not normas:
-            sys.exit(f"Norma não encontrada em fontes.yaml: {args.norma}")
+        faltando = [i for i in args.norma if i not in {n["id"] for n in normas}]
+        if faltando:
+            sys.exit(f"Norma não encontrada em fontes.yaml: {', '.join(faltando)}")
+        normas = [n for n in normas if n["id"] in args.norma]
+        if args.arquivo and len(normas) > 1:
+            sys.exit("--arquivo exige uma só --norma")
     elif args.arquivo:
         sys.exit("--arquivo exige --norma")
     if args.arquivo and args.reprocessar:

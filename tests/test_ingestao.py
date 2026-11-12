@@ -59,6 +59,31 @@ def test_artigo_seguido_de_travessao_nao_vira_artigo_com_letra():
     assert ids == ["art147", "art147.par1", "art147-a"]
 
 
+def test_texto_iniciado_por_a_ou_o_apos_travessao_nao_vira_letra():
+    # Código Penal: "§ 1º - O juiz" e "Art. 3º - A lei" começam o texto; não são § 1º-O nem art. 3º-A.
+    html = (
+        "<p>Art. 3º - A lei excepcional se aplica.</p>"
+        "<p>§ 1º - O juiz pode deixar de aplicar a pena.</p>"
+        "<p>§ 2º - A pena é de reclusão.</p>"
+    )
+    ids = [d.id for d in planalto.parse(html).dispositivos]
+    assert ids == ["art3", "art3.par1", "art3.par2"]
+
+
+def test_letra_colada_ao_hifen_continua_sendo_sufixo():
+    # Formas reais do Planalto: "§ 2º-A A pena", "§ 1º-A - Incorre" e "Art. 6 o -A." (LOAS).
+    html = (
+        "<p>Art. 6 o -A. A assistência social organiza-se.</p>"
+        "<p>§ 1º-A - Incorre nas penas.</p>"
+        "<p>§ 2º-A A pena aumenta-se.</p>"
+    )
+    assert [(d.id, d.rotulo) for d in planalto.parse(html).dispositivos] == [
+        ("art6-a", "art. 6º-A"),
+        ("art6-a.par1-a", "art. 6º-A, § 1º-A"),
+        ("art6-a.par2-a", "art. 6º-A, § 2º-A"),
+    ]
+
+
 def test_artigo_com_separador_de_milhar():
     # Código Civil: "Art. 1.584." é o art. 1.584, não o art. 1.
     html = "<p>Art. 1.584. A guarda será atribuída:</p><p>§ 2º Texto fictício do parágrafo.</p>"

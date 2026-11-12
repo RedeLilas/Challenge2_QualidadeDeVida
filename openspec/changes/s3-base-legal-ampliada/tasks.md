@@ -8,10 +8,10 @@
 
 ## 2. Ampliação da base (terça, 10/11)
 
-- [ ] 2.1 Acrescentar ao Código Penal, em `dados/fontes/fontes.yaml`, os arts. 121-A, 138, 139, 140, 148, 163, 181, 182, 183, 213, 215-A e 218-C; verificação: `uv run python -m app.rag.coleta --norma decreto-lei-2848-1940` grava um arquivo em `dados/fontes/dispositivos/` com todos os artigos pedidos
-- [ ] 2.2 Incluir Código Civil (art. 1.584) e CPC (art. 699-A) em `fontes.yaml`, no eixo `juridico`, conferindo URL e URN oficiais, e coletar; verificação: os dois artigos aparecem em `dados/fontes/dispositivos/` com o número completo
-- [ ] 2.3 Revisar o relatório em `dados/fontes/relatorios/` e rodar `uv run python -m app.rag.ingestao`; verificação: cada artigo da spec tem ao menos um trecho em `dados/leis/` com URL e data, e `uv run pytest` passa
-- [ ] 2.4 Atualizar a quantidade de normas no `README.md`; verificação: o número citado é igual ao de normas em `fontes.yaml`
+- [x] 2.1 Acrescentar ao Código Penal, em `dados/fontes/fontes.yaml`, os arts. 121-A, 138, 139, 140, 148, 163, 181, 182, 183, 213, 215-A e 218-C; verificação: `uv run python -m app.rag.coleta --norma decreto-lei-2848-1940` grava um arquivo em `dados/fontes/dispositivos/` com todos os artigos pedidos
+- [x] 2.2 Incluir Código Civil (art. 1.584) e CPC (art. 699-A) em `fontes.yaml`, no eixo `juridico`, conferindo URL e URN oficiais, e coletar; verificação: os dois artigos aparecem em `dados/fontes/dispositivos/` com o número completo
+- [x] 2.3 Revisar o relatório em `dados/fontes/relatorios/` e rodar `uv run python -m app.rag.ingestao`; verificação: cada artigo da spec tem ao menos um trecho em `dados/leis/` com URL e data, e `uv run pytest` passa
+- [x] 2.4 Atualizar a quantidade de normas no `README.md`; verificação: o número citado é igual ao de normas em `fontes.yaml`
 
 ## 3. Recalibração (quinta, 12/11)
 
