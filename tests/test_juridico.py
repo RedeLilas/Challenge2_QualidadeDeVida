@@ -202,6 +202,94 @@ def test_extrai_referencias(texto, esperado):
     assert extrair_referencias(texto, ["Lei 11.340/2006", "Lei 14.149/2021", "Código Penal"]) == esperado
 
 
+# --- Artigos com separador de milhar ("art. 1.584") ---------------------------------------
+
+
+@pytest.mark.parametrize(
+    "texto, esperado",
+    [
+        ("(Código Civil, art. 1.584, § 2º)", [("Código Civil", "1.584")]),
+        ("o art. 1584 do Código Civil", [("Código Civil", "1584")]),
+        ("arts. 1.583 e 1.584 do Código Civil", [("Código Civil", "1.583"), ("Código Civil", "1.584")]),
+        ("(Lei 11.340/2006, art. 7º.)", [("Lei 11.340/2006", "7")]),
+    ],
+)
+def test_extrai_artigo_com_separador_de_milhar(texto, esperado):
+    assert extrair_referencias(texto, ["Lei 11.340/2006", "Código Civil"]) == esperado
+
+
+GUARDA = [
+    trecho("Código Civil", "1.584", norma_id="lei-10406-2002"),
+    trecho("Código Civil", "1.583", norma_id="lei-10406-2002"),
+    trecho("Lei 11.340/2006", "7"),
+]
+
+
+@pytest.mark.parametrize(
+    "resposta_llm",
+    [
+        "O juiz decide a guarda considerando a violência (Código Civil, art. 1.584, § 2º).",
+        "O juiz decide a guarda considerando a violência (Código Civil, art. 1584).",
+    ],
+    ids=["com-ponto", "sem-ponto"],
+)
+def test_citacao_com_separador_de_milhar_e_aceita(cliente, resposta_llm):
+    usar(resposta_llm, indice=IndiceFalso(GUARDA))
+    corpo = cliente.post("/juridico", json={"pergunta": PERGUNTA}).json()
+    assert corpo["recusada"] is False
+    assert [(c["lei"], c["artigo"], c["citacao"]) for c in corpo["citacoes"]] == [
+        ("Código Civil", "1.584", "Código Civil, art. 1.584")
+    ]
+
+
+def test_lista_de_artigos_com_separador_de_milhar_e_aceita(cliente):
+    usar("A guarda segue os arts. 1.583 e 1.584 do Código Civil.", indice=IndiceFalso(GUARDA))
+    corpo = cliente.post("/juridico", json={"pergunta": PERGUNTA}).json()
+    assert [c["artigo"] for c in corpo["citacoes"]] == ["1.583", "1.584"]
+
+
+CPC_699A = trecho("Código de Processo Civil", "699-A", norma_id="lei-13105-2015")
+
+
+@pytest.mark.parametrize(
+    "resposta_llm",
+    [
+        "O juiz deve perguntar sobre violência antes de decidir a guarda (CPC, art. 699-A, "
+        "incluído pela Lei 14.713/2023).",
+        # A Lei 14.713/2023 alterou o CC e o CPC: sozinha, a menção vale para os dois.
+        "O art. 699-A, incluído pela Lei 14.713/2023, manda o juiz perguntar sobre violência.",
+    ],
+    ids=["cpc-e-lei-14713", "so-lei-14713"],
+)
+def test_mencao_a_lei_14713_nao_recusa_resposta_correta(cliente, resposta_llm):
+    usar(resposta_llm, indice=IndiceFalso([CPC_699A, *GUARDA]))
+    corpo = cliente.post("/juridico", json={"pergunta": PERGUNTA}).json()
+    assert corpo["recusada"] is False
+    assert [(c["lei"], c["artigo"]) for c in corpo["citacoes"]] == [("Código de Processo Civil", "699-A")]
+
+
+@pytest.mark.parametrize(
+    "resposta_llm",
+    ["Isso é violência (Código Civil, art. 7º).", "Isso é violência (CPC, art. 7º)."],
+    ids=["codigo-civil", "cpc"],
+)
+def test_artigo_atribuido_a_codigo_nao_recuperado_e_recusado(cliente, resposta_llm):
+    # O art. 7º recuperado é da Lei Maria da Penha, não do Código Civil nem do CPC.
+    usar(resposta_llm)
+    corpo = cliente.post("/juridico", json={"pergunta": PERGUNTA}).json()
+    assert corpo == {"resposta": RECUSA, "citacoes": [], "recusada": True}
+
+
+def test_artigo_com_separador_nao_e_confundido_com_o_art_1(cliente):
+    # Só o art. 1 de outra norma foi recuperado: a citação do art. 1.584 não está sustentada.
+    usar(
+        "O juiz decide a guarda considerando a violência (Código Civil, art. 1.584).",
+        indice=IndiceFalso([trecho("Lei 11.340/2006", "1"), trecho("Lei 11.340/2006", "7")]),
+    )
+    corpo = cliente.post("/juridico", json={"pergunta": PERGUNTA}).json()
+    assert corpo == {"resposta": RECUSA, "citacoes": [], "recusada": True}
+
+
 # --- Idioma: só respostas em português são exibidas --------------------------------------
 
 PORTUGUES = (
