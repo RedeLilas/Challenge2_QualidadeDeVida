@@ -123,7 +123,10 @@ def test_interface_permite_armazenamento_apenas_em_perfil_js():
 
     # Em perfil.js, somente localStorage é usado (nunca sessionStorage, indexedDB ou cookies)
     codigo_perfil = scripts["perfil.js"]
-    assert "localStorage." in codigo_perfil
+    # perfil.js usa localStorage por uma variável ("s = storage || localStorage"), sem "localStorage.".
+    # Os comentários saem antes da busca, para a menção no cabeçalho não bastar.
+    sem_comentarios = re.sub(r"//[^\n]*", "", codigo_perfil)
+    assert re.search(r"\blocalStorage\b", sem_comentarios)
     for api_proibida in ("sessionStorage", "indexedDB", "document.cookie"):
         assert f"{api_proibida}." not in codigo_perfil and f"{api_proibida}[" not in codigo_perfil
 
@@ -160,7 +163,8 @@ def test_saida_rapida_e_apagar_dados_preservam_service_worker(cliente):
     assert "location.replace(SITE_NEUTRO)" in codigo
 
     # sair() apaga a conversa e o perfil
-    bloco_sair = re.search(r"function sair\(\)\s*\{([^}]*)\}", codigo).group(1)
+    # Até a chave que fecha a função no início da linha: "{}" dentro do corpo não encerra o bloco.
+    bloco_sair = re.search(r"function sair\(\)\s*\{(.*?)\n\}", codigo, re.S).group(1)
     assert "apagarConversa()" in bloco_sair
     assert "Perfil.apagar()" in bloco_sair
 

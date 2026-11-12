@@ -1,6 +1,7 @@
 """Testes do perfil local da usuária e integração com benefícios em QuickJS (s3-frontend-e-perfil, tarefa 2.1)."""
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -64,7 +65,8 @@ def test_formulario_cobre_todos_os_campos_da_spec_com_prefiro_nao_informar_e_sem
         pergunta_lower = etapa["pergunta"].lower()
         assert "cpf" not in pergunta_lower
         assert "seu nome" not in pergunta_lower
-        assert "rg" not in pergunta_lower
+        # Palavra inteira: "urgência" contém "rg" e não pede documento.
+        assert not re.search(r"\brg\b", pergunta_lower)
 
 
 def test_salvar_ler_e_apagar_usa_uma_unica_chave(js):
