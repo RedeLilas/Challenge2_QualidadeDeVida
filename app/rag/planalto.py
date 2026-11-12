@@ -22,7 +22,8 @@ CABECALHOS = {
 }
 
 # "(?!\w)" evita ler "Art. 147 - Ameaçar" como art. 147-A.
-RE_ARTIGO = re.compile(r"^Art\.\s*(\d+)\s*(?:º|°|o\b)?\s*(-\s*[A-Z](?!\w))?\s*\.?\s*")
+# "(?:\.\d{3})?" lê o separador de milhar: "Art. 1.584." é o art. 1.584, não o art. 1.
+RE_ARTIGO = re.compile(r"^Art\.\s*(\d+(?:\.\d{3})?)\s*(?:º|°|o\b)?\s*(-\s*[A-Z](?!\w))?\s*\.?\s*")
 RE_PARAGRAFO = re.compile(r"^(?:§\s*(\d+)\s*(?:º|°)?\s*(-\s*[A-Z](?!\w))?|(Parágrafo único))\s*[.\-–]?\s*")
 RE_INCISO = re.compile(r"^([IVXLC]+)(-[A-Z])?\s*[-–]\s*")
 RE_ALINEA = re.compile(r"^([a-z])\)\s*")
@@ -91,7 +92,7 @@ def _limpar(texto: str) -> str:
 
 
 def _ordinal(numero: str) -> str:
-    return f"{numero}º" if int(numero) < 10 else numero
+    return f"{numero}º" if int(numero.replace(".", "")) < 10 else numero
 
 
 def _romano_minusculo(romano: str) -> str:
@@ -172,7 +173,8 @@ def parse(html: str) -> ResultadoParse:
             numero = m.group(1) + (m.group(2) or "").replace(" ", "")
             corpo = texto[m.end():]
             caput = Dispositivo(
-                id=f"art{numero.lower()}",
+                # O ponto já separa as partes do id ("art1584.par2"), então sai do número.
+                id=f"art{numero.replace('.', '').lower()}",
                 tipo="caput",
                 artigo=numero,
                 rotulo=f"art. {_ordinal(m.group(1))}{(m.group(2) or '').replace(' ', '')}",

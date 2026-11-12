@@ -37,6 +37,21 @@ def test_envia_modelo_e_mensagens_e_devolve_o_texto():
     assert simulado.chamadas[0]["messages"] == MENSAGENS
 
 
+def test_sem_raciocinio_configurado_nao_envia_extra_body():
+    # O parâmetro é do DeepSeek; o modelo local não pode depender dele.
+    simulado = OpenAISimulado(resposta="ok")
+    ClienteLLM(CONFIG, cliente=simulado).responder(MENSAGENS)
+    assert "extra_body" not in simulado.chamadas[0]
+
+
+@pytest.mark.parametrize("valor", ["disabled", "enabled"])
+def test_raciocinio_configurado_vai_no_extra_body(valor):
+    simulado = OpenAISimulado(resposta="ok")
+    cfg = Config(base_url=CONFIG.base_url, model=CONFIG.model, api_key="x", thinking=valor)
+    ClienteLLM(cfg, cliente=simulado).responder(MENSAGENS)
+    assert simulado.chamadas[0]["extra_body"] == {"thinking": {"type": valor}}
+
+
 REQUISICAO = httpx.Request("POST", "http://localhost:11434/v1/chat/completions")
 
 
@@ -69,7 +84,7 @@ def test_usa_o_tempo_limite_da_config_e_nao_repete_a_chamada():
 
 
 def test_troca_de_provedor_so_pela_config():
-    deepseek = Config(base_url="https://api.deepseek.com", model="deepseek-chat", api_key="chave-de-teste")
+    deepseek = Config(base_url="https://api.deepseek.com", model="deepseek-flash", api_key="chave-de-teste")
     cliente = ClienteLLM(deepseek)
     assert str(cliente._cliente.base_url).rstrip("/") == "https://api.deepseek.com"
-    assert cliente.modelo == "deepseek-chat"
+    assert cliente.modelo == "deepseek-flash"

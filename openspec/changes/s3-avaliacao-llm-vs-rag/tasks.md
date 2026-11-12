@@ -2,12 +2,12 @@
 
 ## 1. Modelo de produção (terça, 10/11)
 
-- [ ] 1.1 Adicionar `LLM_THINKING` opcional em `app/config.py` e `extra_body` em `app/llm.py`; verificação: testes com cliente simulado em `tests/test_config.py` e `tests/test_llm.py` cobrem a variável definida, ausente e inválida
-- [ ] 1.2 Atualizar `.env.example` e `README.md` para `deepseek-flash`, sem raciocínio e sem chave; verificação: `grep deepseek-chat .env.example README.md` não encontra nada e não há chave versionada
+- [x] 1.1 Adicionar `LLM_THINKING` opcional em `app/config.py` e `extra_body` em `app/llm.py`; verificação: testes com cliente simulado em `tests/test_config.py` e `tests/test_llm.py` cobrem a variável definida, ausente e inválida
+- [x] 1.2 Atualizar `.env.example` e `README.md` para `deepseek-flash`, sem raciocínio e sem chave; verificação: `grep deepseek-chat .env.example README.md` não encontra nada e não há chave versionada
 
 ## 2. Conjuntos de perguntas (terça, 10/11, a quinta, 12/11)
 
-- [ ] 2.1 Definir o formato de `avaliacao/conjuntos/` e criar o validador do conjunto; verificação: testes com fixtures fictícias falham para campo faltando, distribuição errada, falta de segunda pessoa e pergunta que dispara o alerta
+- [x] 2.1 Definir o formato de `avaliacao/conjuntos/` e criar o validador do conjunto; verificação: testes com fixtures fictícias falham para campo faltando, distribuição errada, falta de segunda pessoa e pergunta que dispara o alerta
 - [ ] 2.2 Equipe completa as perguntas de desenvolvimento (15 do tema e 10 fora do tema), separadas do conjunto oficial, sem usar Claude; verificação: o validador do conjunto de desenvolvimento passa
 - [ ] 2.3 Equipe escreve as 19 perguntas que usam só a Lei 11.340/2006, com gabarito, pontos obrigatórios, normas aceitas e fonte, sem usar Claude; verificação: o validador aponta só as perguntas ainda não escritas
 - [ ] 2.4 Equipe escreve as 11 perguntas restantes e as 10 extras fora do tema, sem usar Claude; verificação: o conjunto tem a distribuição decidida
@@ -15,10 +15,10 @@
 
 ## 3. Scripts da rodada e da correção (terça, 10/11, a quinta, 12/11)
 
-- [ ] 3.1 Separar as instruções das duas versões, sem mudar a resposta da versão com RAG; verificação: teste confere que só as frases sobre trechos diferem
-- [ ] 3.2 Criar o script da rodada, que gera as duas versões e registra modelo, data, versão do changelog e instruções; verificação: teste com LLM simulado grava o registro completo e recusa rodar a oficial com hash divergente
-- [ ] 3.3 Criar o script dos arquivos enviados, com códigos neutros, sorteio com semente, respostas erradas de propósito e mapa separado; verificação: teste confere que os arquivos não trazem indicação de versão e que uma resposta errada fica perto do final
-- [ ] 3.4 Criar o script de conferência do retorno e cálculo de precisão, fidelidade, recusa e citação; verificação: testes cobrem linha faltando, trecho inexistente, resposta errada aprovada e recusa contada como erro
+- [x] 3.1 Separar as instruções das duas versões, sem mudar a resposta da versão com RAG; verificação: teste confere que só as frases sobre trechos diferem
+- [x] 3.2 Criar o script da rodada, que gera as duas versões e registra modelo, data, versão do changelog e instruções; verificação: teste com LLM simulado grava o registro completo e recusa rodar a oficial com hash divergente
+- [x] 3.3 Criar o script dos arquivos enviados, com códigos neutros, sorteio com semente, respostas erradas de propósito e mapa separado; verificação: teste confere que os arquivos não trazem indicação de versão e que uma resposta errada fica perto do final
+- [x] 3.4 Criar o script de conferência do retorno e cálculo de precisão, fidelidade, recusa e citação; verificação: testes cobrem linha faltando, trecho inexistente, resposta errada aprovada e recusa contada como erro
 
 ## 4. Teste com as perguntas de desenvolvimento (quinta, 12/11)
 

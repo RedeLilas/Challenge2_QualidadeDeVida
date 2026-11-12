@@ -16,8 +16,14 @@ EIXOS = {"juridico"}
 # por falta de citação. Recalibrar com as 50 perguntas da S3.
 LIMITE_SIMILARIDADE = 0.81
 # Normas do eixo jurídico. Uma referência a outra norma nunca é aceita.
-LEIS_JURIDICAS = ("Lei 11.340/2006", "Lei 14.149/2021", "Código Penal")
-APELIDOS = {"Lei 11.340/2006": ["maria da penha"], "Código Penal": ["codigo penal", r"2\.?848"]}
+LEIS_JURIDICAS = ("Lei 11.340/2006", "Lei 14.149/2021", "Código Penal", "Código Civil", "Código de Processo Civil")
+# A Lei 14.713/2023 alterou o art. 1.584 do Código Civil e incluiu o art. 699-A no CPC: é apelido dos dois.
+APELIDOS = {
+    "Lei 11.340/2006": ["maria da penha"],
+    "Código Penal": ["codigo penal", r"2\.?848"],
+    "Código Civil": [r"10\.?406", r"14\.?713"],
+    "Código de Processo Civil": [r"\bcpc\b", r"13\.?105", r"14\.?713"],
+}
 # Distância máxima, em caracteres, entre o artigo e o nome da norma para associar os dois.
 DISTANCIA_MAXIMA = 80
 
@@ -42,8 +48,29 @@ INSTRUCOES = (
     "- Se a pessoa estiver em perigo agora, diga para ligar 190."
 )
 
-RE_ARTIGO = re.compile(r"\b(art(?:igo)?s?)\.?\s*(\d+(?:-[a-z])?)(?!\d)\s*[º°o]?", re.IGNORECASE)
-RE_MAIS_ARTIGOS = re.compile(r"\s*(?:,|\be\b)\s*(\d+(?:-[a-z])?)(?!\d)\s*[º°o]?", re.IGNORECASE)
+# Versão sem RAG, usada só na comparação LLM x RAG da S3 (scripts de avaliação), nunca na
+# aplicação. Muda apenas as frases sobre os trechos: sai a regra de usar só os trechos, e as
+# outras duas são adaptadas para fazer sentido sem eles. None remove a frase. Se uma dessas
+# frases mudar em INSTRUCOES, tests/test_instrucoes_sem_rag.py falha (a aplicação não é afetada).
+_TROCAS_SEM_RAG = {
+    "- Responda usando apenas os trechos de lei enviados junto com a pergunta. "
+    "Não use conhecimento de fora deles.": None,
+    "- Cite a norma e o artigo de cada informação, entre parênteses, no formato do rótulo do trecho, "
+    "por exemplo: (Lei 11.340/2006, art. 7º). Cite somente artigos que aparecem nos trechos.":
+        "- Cite a norma e o artigo de cada informação, entre parênteses, "
+        "por exemplo: (Lei 11.340/2006, art. 7º).",
+    "- Se os trechos não bastarem para responder, diga apenas que não sabe responder com segurança.":
+        "- Se não tiver certeza da resposta, diga apenas que não sabe responder com segurança.",
+}  # fmt: skip
+INSTRUCOES_SEM_RAG = "\n".join(
+    _TROCAS_SEM_RAG.get(linha, linha)
+    for linha in INSTRUCOES.split("\n")
+    if _TROCAS_SEM_RAG.get(linha, linha) is not None
+)
+
+# "(?:\.\d{3})?" lê o separador de milhar: "art. 1.584" é o art. 1.584, não o art. 1.
+RE_ARTIGO = re.compile(r"\b(art(?:igo)?s?)\.?\s*(\d+(?:\.\d{3})?(?:-[a-z])?)(?!\d)\s*[º°o]?", re.IGNORECASE)
+RE_MAIS_ARTIGOS = re.compile(r"\s*(?:,|\be\b)\s*(\d+(?:\.\d{3})?(?:-[a-z])?)(?!\d)\s*[º°o]?", re.IGNORECASE)
 # Aplicado ao texto sem acento: "isso constitui violência" não é a Constituição.
 RE_OUTRA_LEI = re.compile(r"\blei\s+(?:n[º°o.]*\s*)?(\d{1,2}\.?\d{3})\b|\bconstituicao\b", re.IGNORECASE)
 
@@ -58,8 +85,20 @@ def montar_mensagens(pergunta: str, trechos: list[dict]) -> list[dict]:
     blocos = "\n\n".join(f"[{rotulo(t['lei'], t['artigo'])}]\n{t['texto']}" for t in trechos)
     return [
         {"role": "system", "content": INSTRUCOES},
-        {"role": "user", "content": f"Trechos de lei:\n\n{blocos}\n\nPergunta: {pergunta}"},
+        {"role": "user", "content": f"Trechos de lei:\n\n{blocos}\n\n{_pergunta(pergunta)}"},
     ]
+
+
+def montar_mensagens_sem_rag(pergunta: str) -> list[dict]:
+    """Mensagens da versão sem RAG da comparação da S3: a mesma pergunta, sem trechos."""
+    return [
+        {"role": "system", "content": INSTRUCOES_SEM_RAG},
+        {"role": "user", "content": _pergunta(pergunta)},
+    ]
+
+
+def _pergunta(pergunta: str) -> str:
+    return f"Pergunta: {pergunta}"
 
 
 def _sem_acento(texto: str) -> str:
@@ -84,8 +123,11 @@ def _mencoes_de_leis(texto: str, leis: list[str]) -> list[tuple[int, int, str]]:
     return mencoes
 
 
-def extrair_referencias(texto: str, leis: list[str]) -> list[tuple[str | None, str]]:
-    """(lei, artigo) citados no texto, na ordem; lei é None quando nenhuma norma aparece perto."""
+def extrair_referencias(texto: str, leis: list[str]) -> list[tuple[str | tuple[str, ...] | None, str]]:
+    """(lei, artigo) citados no texto, na ordem; lei é None quando nenhuma norma aparece perto.
+
+    Quando a menção mais próxima vale para mais de uma norma (a Lei 14.713/2023), lei é a tupla delas.
+    """
     mencoes = _mencoes_de_leis(texto, leis)
     referencias = []
     for m in RE_ARTIGO.finditer(texto):
@@ -100,7 +142,11 @@ def extrair_referencias(texto: str, leis: list[str]) -> list[tuple[str | None, s
             return m.start() - termino if termino <= m.start() else max(inicio - fim, 0)
 
         proximas = [(distancia(x), x[2]) for x in mencoes if distancia(x) <= DISTANCIA_MAXIMA]
-        lei = min(proximas)[1] if proximas else None
+        lei = None
+        if proximas:
+            menor = min(d for d, _ in proximas)
+            empatadas = sorted({nome for d, nome in proximas if d == menor})
+            lei = empatadas[0] if len(empatadas) == 1 else tuple(empatadas)
         referencias += [(lei, artigo.upper()) for artigo in artigos]
     return referencias
 
@@ -112,10 +158,17 @@ def verificar_citacoes(texto: str, recuperados: list[dict]) -> list[dict] | None
     if not referencias:
         return None
 
+    def sem_ponto(artigo: str) -> str:
+        # O LLM pode escrever "art. 1584" para o art. 1.584.
+        return artigo.replace(".", "").upper()
+
+    def da_lei(lei, t: dict) -> bool:
+        return lei is None or t["lei"] == lei or (isinstance(lei, tuple) and t["lei"] in lei)
+
     citacoes = {}
     for lei, artigo in referencias:
         trecho = next(
-            (t for t in recuperados if t["artigo"].upper() == artigo and lei in (None, t["lei"])), None
+            (t for t in recuperados if sem_ponto(t["artigo"]) == sem_ponto(artigo) and da_lei(lei, t)), None
         )
         if trecho is None:
             return None

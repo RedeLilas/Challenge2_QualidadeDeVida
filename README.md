@@ -34,7 +34,9 @@ uv run --env-file .env python -m app.llm "O que é violência patrimonial?"
 
 `LLM_TIMEOUT` (opcional, padrão 30) é quantos segundos o servidor espera o LLM antes de responder que não consegue agora, sem tentar de novo. Se mudar, ajuste `TEMPO_LIMITE_MS` em `web/app.js` para um pouco acima desse valor: a tela precisa esperar mais que o servidor.
 
-Para usar o DeepSeek, troque as três variáveis no `.env`; nenhum código muda. Em produção, só depois da decisão de LGPD (tarefa 4.2 de `s2-plataforma-base`).
+`LLM_THINKING` (opcional) liga ou desliga o raciocínio do modelo: com `disabled` ou `enabled`, a chamada envia esse parâmetro do DeepSeek; sem a variável, nada é enviado, como o Ollama espera.
+
+Para usar o DeepSeek, troque as variáveis no `.env` (veja o bloco comentado em `.env.example`): modelo `deepseek-flash` com `LLM_THINKING=disabled`. Nenhum código muda. A chave fica só no `.env` de cada máquina e nunca é versionada. Pela decisão de LGPD (opção (c), em `openspec/changes/s2-plataforma-base/design.md`), só casos fictícios vão ao DeepSeek.
 
 ## Base jurídica (RAG)
 

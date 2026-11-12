@@ -1,0 +1,179 @@
+{
+  "versao": "2026-11-10",
+  "descricao": "Regras determinísticas e auditáveis de elegibilidade para benefícios federais e distritais voltados à autonomia financeira de mulheres em situação de violência doméstica no Distrito Federal. A avaliação roda exclusivamente no navegador e informa sempre que a concessão depende da análise do órgão responsável.",
+  "salario_minimo": {
+    "valor": 1621.0,
+    "moeda": "BRL",
+    "norma": "Decreto 12.797/2025",
+    "artigo": "art. 1º",
+    "fonte": "Decreto nº 12.797, de 23 de dezembro de 2025 (Planalto)",
+    "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm",
+    "inicio_vigencia": "2026-01-01",
+    "data_verificacao": "2026-11-10"
+  },
+  "verificacao_valores": {
+    "salario_minimo": {
+      "valor_vigente": 1621.0,
+      "norma": "Decreto 12.797/2025",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm",
+      "data_verificacao": "2026-11-10",
+      "observacao": "Valor mensal vigente a partir de 1º de janeiro de 2026."
+    },
+    "bolsa_familia_limite_per_capita": {
+      "valor_vigente": 218.0,
+      "reajustado": false,
+      "norma": "Lei 14.601/2023, art. 5º, II",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14601.htm",
+      "data_verificacao": "2026-11-10",
+      "observacao": "O limite de renda familiar per capita mensal de até R$ 218,00 permanece vigente em 2026 sem reajuste por decreto posterior."
+    }
+  },
+  "rotulos_status": {
+    "provavel": "Provável",
+    "depende_decisao_judicial": "Depende de decisão judicial",
+    "nao_aplicavel": "Não aplicável",
+    "nao_aplicavel_por_enquanto": "Não aplicável por enquanto",
+    "faltam_informacoes": "Faltam informações"
+  },
+  "textos_gerais": {
+    "aviso_concessao": "Esta avaliação é apenas indicativa: a concessão depende da análise e confirmação do órgão responsável.",
+    "aviso_cadunico_sem_agressor": "O cálculo considera a renda da casa como ficará sem o agressor. Lembre-se de que o CadÚnico precisa ser atualizado no CRAS para refletir essa mudança na composição familiar.",
+    "orientacao_cras": "Procure o CRAS mais próximo da sua Região Administrativa no DF.",
+    "motivo_pessoas_invalido": "Informe um número válido de pessoas na casa (pelo menos 1) para calcular a renda por pessoa.",
+    "motivo_renda_nao_informada": "Informe a renda total aproximada da casa (sem o agressor) para avaliar o critério de renda."
+  },
+  "regras": [
+    {
+      "id": "bolsa_familia",
+      "nome": "Programa Bolsa Família",
+      "esfera": "federal",
+      "norma": "Lei 14.601/2023",
+      "artigo": "art. 5º, II",
+      "inicio_vigencia": "2023-06-20",
+      "data_verificacao": "2026-11-10",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14601.htm",
+      "usa_salario_minimo": false,
+      "requisitos": {
+        "renda_per_capita_max": 218.0,
+        "exige_cadunico": true
+      },
+      "onde_pedir": "Procure o CRAS mais próximo da sua Região Administrativa no DF para inscrição ou atualização do CadÚnico.",
+      "textos": {
+        "motivo_renda_atendida": "Renda familiar por pessoa de até R$ 218,00 (considerando a casa sem o agressor).",
+        "motivo_renda_acima": "A renda familiar por pessoa ultrapassa o limite legal de R$ 218,00 mensais.",
+        "motivo_cadunico_atendido": "Família já inscrita no CadÚnico.",
+        "falta_cadunico": "Primeiro passo: fazer a inscrição no CadÚnico no CRAS mais próximo e informar a composição da casa sem o agressor.",
+        "falta_atualizar_cadunico": "Atualizar o CadÚnico no CRAS mais próximo para refletir a renda e a composição da casa sem o agressor.",
+        "falta_renda": "Informar a renda total aproximada da casa (sem o agressor).",
+        "falta_pessoas": "Informar o número de pessoas que ficarão na casa (sem o agressor).",
+        "aviso": "A concessão depende da análise do órgão responsável e da manutenção do cadastro atualizado no CadÚnico, refletindo a casa sem o agressor."
+      }
+    },
+    {
+      "id": "bpc",
+      "nome": "Benefício de Prestação Continuada (BPC/LOAS)",
+      "esfera": "federal",
+      "norma": "Lei 8.742/1993",
+      "artigo": "art. 20, § 3º",
+      "inicio_vigencia": "1993-12-08",
+      "data_verificacao": "2026-11-10",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8742compilado.htm",
+      "usa_salario_minimo": true,
+      "requisitos": {
+        "idade_minima": 65,
+        "aceita_deficiencia": true,
+        "renda_per_capita_fracao_sm": 0.25,
+        "exige_cadunico": true
+      },
+      "onde_pedir": "Procure o CRAS mais próximo da sua Região Administrativa para inscrição ou atualização no CadÚnico e faça o pedido pelo Meu INSS ou telefone 135.",
+      "textos": {
+        "motivo_deficiencia": "Pessoa com deficiência informada.",
+        "motivo_idade": "Idade de 65 anos ou mais.",
+        "motivo_sem_deficiencia_nem_idade": "O BPC exige ser pessoa com deficiência ou ter 65 anos ou mais.",
+        "motivo_renda_atendida": "Renda familiar por pessoa de até 1/4 do salário mínimo (R$ 405,25).",
+        "motivo_renda_acima": "A renda familiar por pessoa ultrapassa o limite de 1/4 do salário mínimo (R$ 405,25).",
+        "falta_cadunico": "Inscrição no CadÚnico no CRAS mais próximo e pedido junto ao INSS.",
+        "falta_atualizar_cadunico": "Manter o CadÚnico atualizado no CRAS refletindo a casa sem o agressor e formalizar o pedido no INSS.",
+        "falta_avaliacao_deficiencia": "Passar pela avaliação biopsicossocial e médica da deficiência no INSS.",
+        "falta_idade_ou_deficiencia": "Informar a idade ou se há pessoa com deficiência.",
+        "falta_renda": "Informar a renda total aproximada da casa (sem o agressor).",
+        "falta_pessoas": "Informar o número de pessoas que ficarão na casa (sem o agressor).",
+        "aviso_deficiencia": "A concessão depende da avaliação da deficiência pelo INSS e da análise do órgão responsável. O CadÚnico precisa refletir a casa sem o agressor.",
+        "aviso_idade": "A concessão depende da análise do INSS. O CadÚnico precisa refletir a casa sem o agressor."
+      }
+    },
+    {
+      "id": "auxilio_aluguel",
+      "nome": "Auxílio-aluguel (Lei Maria da Penha)",
+      "esfera": "federal",
+      "norma": "Lei 11.340/2006",
+      "artigo": "art. 23, VI (incluído pela Lei 14.674/2023)",
+      "inicio_vigencia": "2023-09-15",
+      "data_verificacao": "2026-11-10",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14674.htm",
+      "usa_salario_minimo": false,
+      "requisitos": {
+        "sempre_depende_decisao_judicial": true,
+        "prazo_maximo_meses": 6
+      },
+      "onde_pedir": "Peça ao juiz junto à medida protetiva de urgência (na Delegacia, Defensoria Pública ou Juizado de Violência Doméstica) e procure o CRAS mais próximo para orientação socioassistencial.",
+      "textos": {
+        "motivo_judicial": "O auxílio-aluguel previsto na Lei Maria da Penha é concedido pelo juiz junto à medida protetiva de urgência, por até 6 meses, conforme a situação de vulnerabilidade social e econômica.",
+        "falta_medida_protetiva": "Solicitar medida protetiva de urgência e pedir ao juiz a inclusão do auxílio-aluguel.",
+        "falta_pedido_juiz": "Solicitar ao juiz a concessão do auxílio-aluguel vinculado à medida protetiva e apresentar dados de vulnerabilidade no CRAS mais próximo.",
+        "aviso": "A concessão depende de decisão judicial e da avaliação da situação de vulnerabilidade pelo juízo e pelo órgão responsável."
+      }
+    },
+    {
+      "id": "aluguel_social_df",
+      "nome": "Aluguel Social do Distrito Federal",
+      "esfera": "distrital",
+      "norma": "Portaria SMDF 49/2026",
+      "artigo": "arts. 2º e 5º",
+      "inicio_vigencia": "2026-04-16",
+      "data_verificacao": "2026-11-10",
+      "fonte_url": "https://www.sinj.df.gov.br/sinj/Norma/14ff3abeae1a49589c3af566f3a802c1/Portaria_49_10_04_2026.html",
+      "norma_boletim": {
+        "norma": "Lei Distrital 6.623/2020",
+        "artigo": "art. 1º, § 2º",
+        "inicio_vigencia": "2020-07-08",
+        "data_verificacao": "2026-11-10",
+        "fonte_url": "https://www.sinj.df.gov.br/sinj/Norma/8f17787cca524d5da839b613d96d9164/Lei_6623_25_06_2020.html"
+      },
+      "usa_salario_minimo": true,
+      "requisitos": {
+        "moradia_df": true,
+        "renda_per_capita_fracao_sm": 0.5,
+        "renda_familiar_multiplo_sm": 2.0,
+        "exige_acompanhamento_psicossocial": true,
+        "exige_necessidade_moradia": true,
+        "exige_medida_ou_boletim": true,
+        "valor_mensal_referencia": 600.0
+      },
+      "onde_pedir": "Procure o CRAS mais próximo da sua Região Administrativa ou um equipamento da Secretaria de Estado da Mulher do DF (Casa da Mulher Brasileira, CEAM ou NAFAVD).",
+      "textos": {
+        "motivo_moradia_df": "Moradia no Distrito Federal.",
+        "motivo_fora_df": "O Aluguel Social do DF exige residir no Distrito Federal.",
+        "motivo_renda_atendida": "Renda dentro do limite de até 1/2 salário mínimo por pessoa (R$ 810,50) ou até 2 salários mínimos de renda familiar (R$ 3.242,00).",
+        "motivo_renda_acima": "A renda informada ultrapassa o limite de 1/2 salário mínimo por pessoa (R$ 810,50) e o limite de 2 salários mínimos de renda familiar total (R$ 3.242,00).",
+        "motivo_necessidade_moradia": "Necessidade de saída emergencial do lar ou de permanecer em imóvel alugado sem condições de custeio.",
+        "motivo_sem_necessidade_moradia": "O programa exige necessidade de saída emergencial do lar ou de permanecer em imóvel alugado sem recursos próprios.",
+        "motivo_acompanhamento": "Em acompanhamento psicossocial na rede de proteção.",
+        "motivo_medida_protetiva": "Possui medida protetiva de urgência.",
+        "motivo_boletim": "Possui boletim de ocorrência registrado (Lei Distrital 6.623/2020, art. 1º, § 2º).",
+        "motivo_sem_medida_nem_boletim": "Ainda não possui medida protetiva de urgência nem boletim de ocorrência.",
+        "falta_medida_ou_boletim": "Registrar boletim de ocorrência ou solicitar medida protetiva de urgência.",
+        "falta_acompanhamento": "Iniciar acompanhamento psicossocial em equipamento da Secretaria da Mulher do DF ou da Rede de Proteção (ou procurar o CRAS mais próximo).",
+        "falta_atualizar_cadunico": "Manter o CadÚnico atualizado no CRAS refletindo a composição da casa sem o agressor.",
+        "falta_localizacao": "Informar se mora no Distrito Federal.",
+        "falta_renda": "Informar a renda total aproximada da casa (sem o agressor).",
+        "falta_pessoas": "Informar o número de pessoas que ficarão na casa (sem o agressor).",
+        "falta_necessidade_moradia": "Informar se precisa sair emergencialmente do lar ou permanecer em imóvel alugado.",
+        "falta_info_acompanhamento": "Informar se está em acompanhamento psicossocial.",
+        "falta_info_medida_ou_boletim": "Informar se possui medida protetiva de urgência ou boletim de ocorrência.",
+        "aviso_padrao": "A concessão depende da análise da Secretaria de Estado da Mulher do DF e da disponibilidade de vagas. O CadÚnico deve refletir a casa sem o agressor.",
+        "aviso_boletim": "A Lei Distrital 6.623/2020, art. 1º, § 2º, garante o acesso ao Aluguel Social desde o registro do boletim de ocorrência, mas o órgão responsável ainda pode pedir a medida protetiva de urgência. A concessão depende da análise da Secretaria de Estado da Mulher do DF, e o CadÚnico precisa refletir a casa sem o agressor."
+      }
+    }
+  ]
+}

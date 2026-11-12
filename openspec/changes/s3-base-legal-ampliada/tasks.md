@@ -2,9 +2,9 @@
 
 ## 1. Leitura de artigos com separador de milhar (terça, 10/11)
 
-- [ ] 1.1 Corrigir a leitura de "Art. 1.584." em `app/rag/planalto.py` e o identificador do dispositivo; verificação: novos testes em `tests/test_ingestao.py` cobrem "Art. 1.584.", "Art. 699-A." e "Art. 147 - Ameaçar"
-- [ ] 1.2 Corrigir `RE_ARTIGO` e `RE_MAIS_ARTIGOS` em `app/rag/resposta.py`, comparando o artigo sem o ponto; verificação: novos testes em `tests/test_juridico.py` cobrem "art. 1.584", "art. 1584", "arts. 1.583 e 1.584" e a recusa quando só há o art. 1 de outra norma
-- [ ] 1.3 Incluir Código Civil e Código de Processo Civil em `LEIS_JURIDICAS` e `APELIDOS`, com a Lei 14.713/2023 como apelido; verificação: teste em que uma resposta correta menciona a Lei 14.713/2023 e não é recusada
+- [x] 1.1 Corrigir a leitura de "Art. 1.584." em `app/rag/planalto.py` e o identificador do dispositivo; verificação: novos testes em `tests/test_ingestao.py` cobrem "Art. 1.584.", "Art. 699-A." e "Art. 147 - Ameaçar"
+- [x] 1.2 Corrigir `RE_ARTIGO` e `RE_MAIS_ARTIGOS` em `app/rag/resposta.py`, comparando o artigo sem o ponto; verificação: novos testes em `tests/test_juridico.py` cobrem "art. 1.584", "art. 1584", "arts. 1.583 e 1.584" e a recusa quando só há o art. 1 de outra norma
+- [x] 1.3 Incluir Código Civil e Código de Processo Civil em `LEIS_JURIDICAS` e `APELIDOS`, com a Lei 14.713/2023 como apelido; verificação: teste em que uma resposta correta menciona a Lei 14.713/2023 e não é recusada
 
 ## 2. Ampliação da base (terça, 10/11)
 
