@@ -106,7 +106,7 @@ Cada retorno é salvo como `<rodada>/retornos/<A|B>-<precisao|fidelidade>.json`,
 ## Risks / Trade-offs
 
 - **Sem revisão humana, um erro sistemático do corretor passa despercebido** → Respostas erradas de propósito, trechos comprobatórios e a declaração no relatório.
-- **O curso pode não aceitar 30 perguntas e correção só por LLM** → Confirmar antes do congelamento. A pendência continua aberta, e `docs/` ainda promete o método da Semana 1.
+- **O método diverge do documento da Semana 1 em `docs/` (50 perguntas e revisão em dupla)** → O grupo aceitou a mudança em 12/11 (#9), e a aceitação do grupo basta, sem confirmar com o curso. O relatório declara que o método mudou.
 - **O corretor pode truncar 33 linhas em uma conversa** → O teste com as perguntas de desenvolvimento valida o formato, e o script aponta linhas faltantes.
 - **O nome `deepseek-flash` não fixa uma versão** → Rodar as duas versões no mesmo dia e registrar nome, data e versão do changelog.
 - **As perguntas podem ficar prontas só no meio da quinta** → A rodada pode passar para a manhã de sexta, e o relatório continua sendo a prioridade.

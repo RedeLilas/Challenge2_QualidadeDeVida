@@ -59,6 +59,29 @@ def test_artigo_seguido_de_travessao_nao_vira_artigo_com_letra():
     assert ids == ["art147", "art147.par1", "art147-a"]
 
 
+def test_artigo_com_separador_de_milhar():
+    # Código Civil: "Art. 1.584." é o art. 1.584, não o art. 1.
+    html = "<p>Art. 1.584. A guarda será atribuída:</p><p>§ 2º Texto fictício do parágrafo.</p>"
+    caput, paragrafo = planalto.parse(html).dispositivos
+    assert (caput.id, caput.artigo, caput.rotulo) == ("art1584", "1.584", "art. 1.584")
+    assert (paragrafo.id, paragrafo.rotulo) == ("art1584.par2", "art. 1.584, § 2º")
+
+
+def test_artigo_com_letra_sem_ordinal():
+    # CPC: "Art. 699-A." é o art. 699-A.
+    caput = planalto.parse("<p>Art. 699-A. Texto fictício do artigo.</p>").dispositivos[0]
+    assert (caput.id, caput.artigo, caput.rotulo) == ("art699-a", "699-A", "art. 699-A")
+
+
+def test_artigos_sem_separador_continuam_iguais():
+    html = "<p>Art. 1º Primeiro.</p><p>Art. 147 - Ameaçar alguém.</p><p>Art. 1000. Mil, sem ponto.</p>"
+    assert [(d.id, d.artigo, d.rotulo) for d in planalto.parse(html).dispositivos] == [
+        ("art1", "1", "art. 1º"),
+        ("art147", "147", "art. 147"),
+        ("art1000", "1000", "art. 1000"),
+    ]
+
+
 def test_vetado_sem_parentese_de_fechamento():
     html = "<p>Art. 1º Exemplo:</p><p>I - (VETADO.</p>"
     assert {d.id: d.status for d in planalto.parse(html).dispositivos}["art1.inc_i"] == "vetado"

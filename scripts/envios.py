@@ -71,11 +71,18 @@ def _citados(texto: str, base: dict[tuple[str, str], str]) -> tuple[dict[str, st
     """Artigos citados na resposta: os da base com o texto integral, e os de fora à parte."""
     artigos, fora = {}, []
     leis = sorted({lei for lei, _ in base})
+    # Sem o ponto: o LLM pode escrever "art. 1584" para o art. 1.584 guardado na base.
+    por_numero = {(lei, artigo.replace(".", "")): (lei, artigo) for lei, artigo in base}
     for lei, artigo in dict.fromkeys(extrair_referencias(texto, leis)):
-        if lei is not None and (lei, artigo) in base:
-            artigos[rotulo(lei, artigo)] = base[(lei, artigo)]
+        # A Lei 14.713/2023 vale para o Código Civil e para o CPC: lei vem como a tupla dos dois.
+        candidatas = lei if isinstance(lei, tuple) else (lei,)
+        numero = artigo.replace(".", "")
+        chave = next((por_numero[c, numero] for c in candidatas if (c, numero) in por_numero), None)
+        if lei is not None and chave:
+            artigos[rotulo(*chave)] = base[chave]
         else:
-            rotulo_fora = rotulo(lei, artigo) if lei else f"art. {artigo} (norma não identificada)"
+            nome = " ou ".join(candidatas) if lei else None
+            rotulo_fora = rotulo(nome, artigo) if nome else f"art. {artigo} (norma não identificada)"
             if rotulo_fora not in fora:
                 fora.append(rotulo_fora)
     return artigos, fora

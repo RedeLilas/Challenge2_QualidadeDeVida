@@ -165,3 +165,34 @@ def test_recusa_erradas_invalidas(rodada, mudar, mensagem):
     with pytest.raises(ErroEnvio, match=mensagem):
         preparar_(rodada)
     assert not (rodada[0] / "mapa.yaml").exists()
+
+
+# --- Artigos da base citados na resposta (texto que vai ao corretor de fidelidade) ---------
+
+BASE_GUARDA = {
+    ("Código Civil", "1.584"): "Art. 1.584. Texto fictício do Código Civil.",
+    ("Código de Processo Civil", "699-A"): "Art. 699-A. Texto fictício do CPC.",
+    ("Lei 11.340/2006", "7"): "Art. 7º Texto fictício da Lei Maria da Penha.",
+}
+
+
+@pytest.mark.parametrize(
+    "resposta, rotulo",
+    [
+        ("O juiz considera a violência (Código Civil, art. 1584).", "Código Civil, art. 1.584"),
+        ("O art. 699-A, incluído pela Lei 14.713/2023, manda o juiz perguntar.", "Código de Processo Civil, art. 699-A"),
+    ],
+    ids=["sem-ponto", "so-lei-14713"],
+)
+def test_citado_da_base_leva_o_texto_integral(resposta, rotulo):
+    from scripts.envios import _citados
+
+    artigos, fora = _citados(resposta, BASE_GUARDA)
+    assert list(artigos) == [rotulo] and fora == []
+
+
+def test_citado_por_lei_14713_fora_da_base_tem_rotulo_legivel():
+    from scripts.envios import _citados
+
+    artigos, fora = _citados("O art. 7º, incluído pela Lei 14.713/2023, diz isso.", BASE_GUARDA)
+    assert artigos == {} and fora == ["Código Civil ou Código de Processo Civil, art. 7º"]
