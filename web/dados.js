@@ -34,8 +34,8 @@ var DadosRedeLilas = (function () {
       campo: "ra",
       aba: "Localização",
       icone: "pin",
-      pergunta: "Em qual Região Administrativa (RA) do DF você está?",
-      ajuda: "Usamos apenas para ordenar os locais de atendimento mais próximos de você.",
+      pergunta: "Em qual Região Administrativa (RA) ou CEP você está?",
+      ajuda: "Você pode escolher sua Região Administrativa abaixo ou digitar apenas o CEP. Usamos somente para ordenar os locais mais próximos.",
       motivo: "Permite mostrar primeiro as delegacias (DEAM), CEAMs, Defensoria e Juizados da sua região.",
       tipo: "select_E_opcoes",
       opcoes: [
@@ -52,6 +52,7 @@ var DadosRedeLilas = (function () {
         "Paranoá",
         "Núcleo Bandeirante",
         "Outra RA do DF",
+        "Moro fora do Distrito Federal",
         "Prefiro não informar",
       ],
     },
@@ -61,7 +62,7 @@ var DadosRedeLilas = (function () {
       icone: "home",
       pergunta: "Qual é a sua situação atual de moradia?",
       ajuda: "Não pedimos seu endereço completo.",
-      motivo: "Ajuda a identificar direito ao Aluguel Social do DF e ao Auxílio-Aluguel da Lei Maria da Penha.",
+      motivo: "Ajuda a identificar elegibilidade ao Aluguel Social do DF e ao Auxílio-Aluguel da Lei Maria da Penha.",
       opcoes: [
         "Preciso sair de casa com urgência para me proteger",
         "Já saí do lar por causa da violência e pago aluguel / estou de favor",
@@ -74,11 +75,12 @@ var DadosRedeLilas = (function () {
       campo: "renda",
       aba: "Renda da casa",
       icone: "benefit",
-      pergunta: "Qual é a renda mensal total aproximada da sua casa?",
-      ajuda: "Considere a soma dos ganhos das pessoas que moram com você (sem contar a renda do agressor se você pretende sair ou já saiu).",
-      motivo: "Os programas sociais usam a renda familiar total ou por pessoa para definir quem tem direito.",
+      pergunta: "Qual é a renda mensal total aproximada da sua casa (sem o agressor)?",
+      ajuda: "Considere a soma dos ganhos da casa como ficará sem o agressor. Lembre-se de atualizar o CadÚnico no CRAS para refletir essa mudança.",
+      motivo: "Os programas sociais calculam a renda familiar total ou por pessoa considerando a casa sem o agressor.",
       opcoes: [
         "Sem renda no momento",
+        "Até R$ 218 por mês",
         "Até R$ 600 por mês",
         "De R$ 601 a R$ 1.621 (até 1 salário mínimo)",
         "De R$ 1.622 a R$ 3.242 (até 2 salários mínimos)",
@@ -205,7 +207,7 @@ var DadosRedeLilas = (function () {
       opcoes: [
         { rotulo: "Sim, com arma de fogo ou faca", risco: "alto" },
         { rotulo: "Sim, ameaçou de outra forma (sem arma)", risco: "medio" },
-        { rotulo: "Não", risco: "baixo" },
+        { rotulo: "Não", risco: "nenhum" },
         { rotulo: "Prefiro não responder", risco: "pular" },
       ],
     },
@@ -217,7 +219,7 @@ var DadosRedeLilas = (function () {
       opcoes: [
         { rotulo: "Sim, já praticou uma dessas agressões graves", risco: "alto" },
         { rotulo: "Já praticou tapas, empurrões, socos ou puxões de cabelo (item 2.1)", risco: "medio" },
-        { rotulo: "Nenhuma agressão física", risco: "baixo" },
+        { rotulo: "Nenhuma agressão física", risco: "nenhum" },
         { rotulo: "Prefiro não responder", risco: "pular" },
       ],
     },
@@ -229,7 +231,7 @@ var DadosRedeLilas = (function () {
       opcoes: [
         { rotulo: "Sim, disse frase de ameaça de morte ou persegue constantemente", risco: "alto" },
         { rotulo: "Sim, tem ciúme excessivo, controla dinheiro ou isola de amigos/família", risco: "medio" },
-        { rotulo: "Não apresenta esses comportamentos", risco: "baixo" },
+        { rotulo: "Não apresenta esses comportamentos", risco: "nenhum" },
         { rotulo: "Prefiro não responder", risco: "pular" },
       ],
     },
@@ -241,7 +243,7 @@ var DadosRedeLilas = (function () {
       opcoes: [
         { rotulo: "Sim, já descumpriu medida protetiva", risco: "alto" },
         { rotulo: "As agressões ou ameaças ficaram mais frequentes/graves recentemente (item 6)", risco: "medio" },
-        { rotulo: "Não", risco: "baixo" },
+        { rotulo: "Não", risco: "nenhum" },
         { rotulo: "Prefiro não responder", risco: "pular" },
       ],
     },
@@ -253,7 +255,7 @@ var DadosRedeLilas = (function () {
       opcoes: [
         { rotulo: "Sim, tem acesso a arma de fogo ou já falou em suicídio", risco: "alto" },
         { rotulo: "Faz uso abusivo de álcool, drogas ou está com conflitos graves", risco: "medio" },
-        { rotulo: "Não / Não sei", risco: "baixo" },
+        { rotulo: "Não / Não sei", risco: "nenhum" },
         { rotulo: "Prefiro não responder", risco: "pular" },
       ],
     },
@@ -265,7 +267,7 @@ var DadosRedeLilas = (function () {
       opcoes: [
         { rotulo: "Sim, tentei terminar e ainda moramos juntos / preciso de abrigo", risco: "alto" },
         { rotulo: "Terminei recentemente, mas não moramos juntos", risco: "medio" },
-        { rotulo: "Não", risco: "baixo" },
+        { rotulo: "Não", risco: "nenhum" },
         { rotulo: "Prefiro não responder", risco: "pular" },
       ],
     },
@@ -452,6 +454,62 @@ var DadosRedeLilas = (function () {
     },
   ];
 
+  // Perguntas específicas exibidas na tela de Benefícios (mantidas apenas em memória, nunca salvas no localStorage)
+  var PERGUNTAS_ESPECIFICAS_BENEFICIOS = [
+    {
+      campo: "deficiencia",
+      pergunta: "Há pessoa com deficiência na casa (você ou dependente)?",
+      detalhe: "Critério do BPC/LOAS (Lei 8.742/1993, art. 20).",
+    },
+    {
+      campo: "boletim_ocorrencia",
+      pergunta: "Você já registrou Boletim de Ocorrência (BO)?",
+      detalhe: "Critério do Aluguel Social do DF (Lei Distrital 6.623/2020, art. 1º, § 2º).",
+    },
+    {
+      campo: "acompanhamento_psicossocial",
+      pergunta: "Está em acompanhamento psicossocial na rede (CEAM, Casa da Mulher Brasileira ou CRAS/CREAS)?",
+      detalhe: "Requisito da Portaria SMDF 49/2026 para o Aluguel Social do DF.",
+    },
+    {
+      campo: "necessidade_moradia",
+      pergunta: "Precisa sair emergencialmente do lar ou permanecer em imóvel alugado sem recursos próprios?",
+      detalhe: "Requisito de vulnerabilidade habitacional (Portaria SMDF 49/2026, art. 5º, IV).",
+    },
+  ];
+
+  // Metadados complementares de apresentação para os 4 benefícios avaliados por Beneficios.avaliar()
+  var DETALHES_BENEFICIOS = {
+    aluguel_social_df: {
+      titulo: "Aluguel Social do Distrito Federal",
+      esfera: "Benefício Distrital (GDF)",
+      valor: "R$ 600,00 por mês (por até 6 meses, prorrogável por mais 6 meses)",
+      resumo:
+        "Auxílio financeiro temporário da Secretaria de Estado da Mulher do DF para mulheres vítimas de violência doméstica que precisam deixar o lar ou manter aluguel sem recursos próprios.",
+    },
+    auxilio_aluguel: {
+      titulo: "Auxílio-aluguel (Lei Maria da Penha)",
+      esfera: "Benefício Federal (Medida Protetiva)",
+      valor: "Valor fixado pelo Juizado (por até 6 meses)",
+      resumo:
+        "Medida protetiva de urgência concedida pelo juiz em razão de afastamento do lar, conforme a situação de vulnerabilidade social e econômica.",
+    },
+    bolsa_familia: {
+      titulo: "Programa Bolsa Família",
+      esfera: "Benefício Federal",
+      valor: "Mínimo de R$ 600,00 por família + adicionais para crianças e gestantes",
+      resumo:
+        "Transferência direta de renda para famílias com renda mensal por pessoa de até R$ 218,00, considerando a composição da casa sem o agressor.",
+    },
+    bpc: {
+      titulo: "Benefício de Prestação Continuada (BPC/LOAS)",
+      esfera: "Benefício Federal (LOAS)",
+      valor: "1 salário mínimo por mês (R$ 1.621,00 em 2026 — não exige contribuição ao INSS)",
+      resumo:
+        "Benefício assistencial de 1 salário mínimo mensal para pessoa com deficiência (de qualquer idade) ou pessoa idosa com 65 anos ou mais com renda familiar por pessoa de até 1/4 do salário mínimo.",
+    },
+  };
+
   // Fallback local caso a usuária esteja sem internet ao abrir a aba de locais
   var REDE_FALLBACK = [
     {
@@ -462,6 +520,7 @@ var DadosRedeLilas = (function () {
       cep: "72215-110",
       telefone: "(61) 3181-1474 / (61) 3181-2228 / (61) 3181-2233 / (61) 98312-0763 / (61) 99117-3406",
       horario: "24 horas, todos os dias (inclusive finais de semana e feriados)",
+      fonte_url: "https://www.mulher.df.gov.br/casa-da-mulher-brasileira",
       data_verificacao: "2026-11-05",
     },
     {
@@ -472,6 +531,7 @@ var DadosRedeLilas = (function () {
       cep: "70234-400",
       telefone: "(61) 3207-6172 / (61) 3207-6195 / (61) 3207-6212",
       horario: "24 horas, todos os dias (plantão permanente)",
+      fonte_url: "https://www.pcdf.df.gov.br/servicos/delegacias-especializadas",
       data_verificacao: "2026-11-05",
     },
     {
@@ -482,6 +542,7 @@ var DadosRedeLilas = (function () {
       cep: "72210-020",
       telefone: "(61) 3207-7391 / (61) 3207-7408 / (61) 3207-7438 / (61) 3207-7410",
       horario: "24 horas, todos os dias (plantão permanente)",
+      fonte_url: "https://www.pcdf.df.gov.br/servicos/delegacias-especializadas",
       data_verificacao: "2026-11-05",
     },
     {
@@ -492,6 +553,7 @@ var DadosRedeLilas = (function () {
       cep: "70330-000",
       telefone: "(61) 3224-0943 / (61) 3181-2245 / (61) 99183-6454",
       horario: "Segunda a sexta-feira, das 8h às 18h",
+      fonte_url: "https://www.mulher.df.gov.br/ceam",
       data_verificacao: "2026-11-05",
     },
     {
@@ -502,6 +564,7 @@ var DadosRedeLilas = (function () {
       cep: "70610-906",
       telefone: "(61) 98272-5123 / (61) 98108-1997 / (61) 2196-4461 / Disque 129",
       horario: "Segunda a sexta-feira, das 13h às 18h (presencial) e das 12h às 19h (remoto)",
+      fonte_url: "https://www.defensoria.df.gov.br/nucleos-de-assistencia-juridica/",
       data_verificacao: "2026-11-05",
     },
   ];
@@ -551,6 +614,8 @@ var DadosRedeLilas = (function () {
     RAS_DF: RAS_DF,
     ETAPAS_PERFIL: ETAPAS_PERFIL,
     PERGUNTAS_FONAR: PERGUNTAS_FONAR,
+    PERGUNTAS_ESPECIFICAS_BENEFICIOS: PERGUNTAS_ESPECIFICAS_BENEFICIOS,
+    DETALHES_BENEFICIOS: DETALHES_BENEFICIOS,
     DIREITOS_LEIS: DIREITOS_LEIS,
     REDE_FALLBACK: REDE_FALLBACK,
     avaliarBeneficios: avaliarBeneficios,

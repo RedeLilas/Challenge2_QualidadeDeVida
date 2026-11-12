@@ -12,9 +12,9 @@
 
 ## 3. Tela (sexta, 13/11)
 
-- [ ] 3.1 Criar a tela de Benefícios atrás do formulário de `s3-frontend-e-perfil`, com as perguntas específicas só em memória, referência legal, aviso de concessão pelo órgão e orientação para procurar o CRAS mais próximo; verificação: `tests/test_pwa.py` confere que as respostas não são gravadas nem enviadas
-- [ ] 3.2 Incluir os novos arquivos no service worker e subir a versão do cache; verificação: `tests/test_pwa.py` confere a lista
-- [ ] 3.3 Rodar a suíte de risco/190 e a suíte completa; verificação: `uv run pytest` passa sem falso negativo
+- [x] 3.1 Criar a tela de Benefícios atrás do formulário de `s3-frontend-e-perfil`, com as perguntas específicas só em memória, referência legal, aviso de concessão pelo órgão e orientação para procurar o CRAS mais próximo; verificação: `tests/test_pwa.py` confere que as respostas não são gravadas nem enviadas
+- [x] 3.2 Incluir os novos arquivos no service worker e subir a versão do cache; verificação: `tests/test_pwa.py` confere a lista
+- [x] 3.3 Rodar a suíte de risco/190 e a suíte completa; verificação: `uv run pytest` passa sem falso negativo
 
 ## Workflow follow-up
 

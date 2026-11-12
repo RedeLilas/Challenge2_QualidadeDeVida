@@ -46,3 +46,8 @@ A triagem segue o padrão atual dos testes de JavaScript, que passou no Mac e n�
 - **Falso negativo em um gatilho** → Testes percorrem cada gatilho, cada pulo e as combinações com perguntas de atenção, e a suíte falha em qualquer caso que reduza o nível.
 - **A pergunta pode reavivar sofrimento** → Os itens "adaptável com cuidado" têm redação acolhedora e podem ser pulados, sem reduzir o nível.
 - **A triagem tem até 13 perguntas e a usuária pode estar com pressa** → Os gatilhos vêm primeiro e a triagem encerra no primeiro gatilho alto.
+
+## Verificação Manual Registrada (12/11/2026)
+
+- **Abertura e execução sem internet (tarefa 3.2):** Com o Service Worker (`interface-v12`) instalado e o navegador offline, a seção de Avaliação de Risco (`#sec-fonar`) carrega `web/triagem.js` e `regras/triagem_fonar.json` do cache local e executa todas as etapas até o resultado final.
+- **Saída rápida durante a triagem (tarefa 3.3):** Respondendo perguntas no meio da triagem e acionando `"Saída rápida"` (ou `Esc`), a página é substituída pelo site neutro e, ao retornar para a aplicação, nenhuma resposta anterior da triagem reaparece.

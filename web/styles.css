@@ -1936,6 +1936,102 @@ footer {
   }
 }
 
+/* Links internos do botão Ligue 180 / 190 e cartão de perguntas específicas em memória */
+.emergency-link {
+  color: inherit;
+  text-decoration: none;
+}
+.emergency-link:hover {
+  text-decoration: underline;
+}
+.emergency-sep {
+  opacity: 0.65;
+  margin: 0 2px;
+}
+
+.specific-questions-card {
+  margin-top: 18px;
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #e3daf2;
+  box-shadow: 0 8px 24px rgba(42, 26, 74, 0.04);
+}
+.specific-questions-head {
+  margin-bottom: 14px;
+}
+.specific-kicker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #6b43a8;
+  text-transform: uppercase;
+}
+.specific-questions-head h2 {
+  margin: 4px 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #241b35;
+}
+.specific-questions-head p {
+  margin: 0;
+  font-size: 13px;
+  color: #5e5470;
+}
+.specific-questions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.specific-question-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: #faf7fe;
+  border: 1px solid #ebe3f7;
+}
+.specific-question-copy strong {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: #261d38;
+}
+.specific-question-copy small {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #6c6180;
+}
+.specific-question-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.specific-pill {
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 1px solid #d9cde9;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4f4363;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+.specific-pill:hover {
+  border-color: #8b63ce;
+  color: #4b2b82;
+}
+.specific-pill.active {
+  background: #6d48a8;
+  border-color: #6d48a8;
+  color: #fff;
+}
+
 /* Responsividade Mobile e Tablet */
 @media (max-width: 1024px) {
   .sidebar {
@@ -1980,7 +2076,8 @@ footer {
   .places-grid,
   .places-filters,
   .option-list,
-  .fonar-options {
+  .fonar-options,
+  .specific-questions-grid {
     grid-template-columns: 1fr;
   }
   .step-tabs {

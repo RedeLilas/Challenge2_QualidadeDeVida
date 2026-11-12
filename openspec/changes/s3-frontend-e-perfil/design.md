@@ -43,15 +43,25 @@ Cada campo aceita "prefiro não informar", e o valor fica marcado como ausente. 
 O formulário guarda só dados estáveis. As perguntas específicas de cada benefício ficam em Benefícios, só em memória.
 
 ### Onde buscar ajuda na S3
-Lista os serviços de `dados/rede_protecao_df.csv` com fonte, data de verificação e orientação para confirmar por telefone, com os da RA do perfil primeiro. Os dados chegam por uma rota GET sem parâmetros, então nada da usuária vai ao servidor. É o que dá para entregar sem antecipar a busca por RA ou CEP da S4. **Aguarda confirmação do grupo.**
+Lista os serviços de `dados/rede_protecao_df.csv` com fonte, data de verificação e orientação para confirmar por telefone, com os da RA do perfil primeiro. Os dados chegam por uma rota GET sem parâmetros (`GET /rede-protecao`), então nada da usuária vai ao servidor. É o que dá para entregar sem antecipar a busca por RA ou CEP da S4. Confirmado pelo grupo.
+
+### Finalidade do campo `estado_civil`
+O campo `estado_civil` faz parte do formulário de perfil para contextualizar a orientação jurídica sobre regime de bens, divórcio, dissolução de união estável, restituição de bens retidos e garantia de que o afastamento do lar por segurança não configura abandono de lar nem perda de direitos patrimoniais ou de guarda (Lei 11.340/2006, arts. 22 a 24), tanto na seção de Direitos & Leis quanto no orquestrador da S4.
 
 ## Risks / Trade-offs
 
 - **A exigência do formulário atrasa quem procura uma delegacia às pressas, talvez perto do agressor** → 190 e Ligue 180 visíveis no formulário e nas telas bloqueadas, "prefiro não informar" e formulário curto.
 - **O perfil persistente fica no celular** → Sem nome ou documento, chave neutra, função de apagar e saída rápida que apaga o perfil.
 - **Os nomes "Benefícios" e "Onde buscar ajuda" na navegação podem denunciar o uso a quem vir a tela** → Os nomes seguem a decisão do grupo. O risco é revisado na S6, com o nome e o ícone finais.
-- **Sem conexão, a lista de serviços não carrega** → A tela avisa e mantém 190 e Ligue 180 visíveis.
+- **Sem conexão, a lista de serviços não carrega** → A tela avisa e mantém 190 e Ligue 180 visíveis (com fallback local das unidades essenciais).
 
 ## Open Questions
 
-- Finalidade do estado civil: nenhuma regra da S3 usa esse dado. A equipe precisa registrar para que ele serve antes do arquivamento. O campo existe de qualquer forma.
+- Nenhuma pendência aberta: a finalidade do campo `estado_civil` e a rota `GET /rede-protecao` sem parâmetros foram definidas e registradas na seção Decisions acima.
+
+## Verificação Manual Registrada (12/11/2026)
+
+- **Funcionamento sem internet (tarefa 1.2):** Com o Service Worker (`interface-v12`) ativo e o navegador em modo offline, todas as seções (`Início`, `Meu Perfil & Triagem`, `Benefícios Sociais`, `Direitos & Leis`, `Locais de Atendimento` e `Avaliação de Risco`) abrem normalmente sem conexão.
+- **Apagar meus dados e alerta de 190 offline (tarefa 2.3):** Acionar o botão `"Apagar meus dados"` remove apenas a chave `anotacoes_preferencias_v1` do `localStorage` e preserva o cache do Service Worker; em seguida, mesmo sem internet, enviar uma frase de risco imediato no chat dispara imediatamente o alerta com `Ligar 190` (`tel:190`) e `Ligue 180` (`tel:180`).
+- **Persistência ao fechar a aba vs. Saída rápida (tarefa 2.4):** Salvar o perfil, fechar a aba e reabrir mantém o perfil preenchido e limpa a conversa; tocar em `"Saída rápida"` (ou tecla `Esc`) apaga tanto a conversa quanto o perfil e redireciona via `location.replace()`.
+- **Teclado, rótulos e foco (tarefa 3.5):** Todos os campos e filtros possuem `<label>` ou `aria-label`, os botões de opção usam `aria-pressed` e as abas usam `role="tab"` / `aria-selected`, permitindo navegação integral por teclado (`Tab`, `Enter`, `Espaço` e `Esc`).

@@ -43,9 +43,12 @@ class HandlerRedeLilas(http.server.SimpleHTTPRequestHandler):
         if caminho == "/rede-protecao":
             with (DADOS / "rede_protecao_df.csv").open(encoding="utf-8") as f:
                 return self._json(list(csv.DictReader(f)))
-        if caminho == "/regras/risco_imediato.json":
-            dados = json.loads((REGRAS / "risco_imediato.json").read_text(encoding="utf-8"))
-            return self._json(dados)
+        if caminho.startswith("/regras/") and caminho.endswith(".json"):
+            nome_arquivo = Path(caminho).name
+            alvo = REGRAS / nome_arquivo
+            if alvo.is_file():
+                dados = json.loads(alvo.read_text(encoding="utf-8"))
+                return self._json(dados)
         return super().do_GET()
 
     def do_POST(self):

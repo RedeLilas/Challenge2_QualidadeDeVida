@@ -81,9 +81,9 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | :--- | :--- |
 | `s3-base-legal-ampliada`: Código Penal ampliado, guarda (Código Civil e CPC), correção da leitura de artigos como "1.584" e nova calibração do limite | Planejada |
 | `s3-avaliacao-llm-vs-rag`: 30 perguntas com gabarito e fonte, 10 extras fora do tema, correção só por LLM externo, declarada no relatório | Planejada |
-| `s3-triagem-fonar`: perguntas adaptadas do Fonar e regras de nível de urgência | Planejada |
-| `s3-frontend-e-perfil`: navegação e telas do site; perfil guardado só no navegador, com função de apagar; Benefícios e Onde buscar ajuda exigem o formulário | Planejada |
-| `s3-beneficios`: regras de 3 benefícios federais + 1 distrital | Planejada |
+| `s3-triagem-fonar`: perguntas adaptadas do Fonar e regras de nível de urgência | Implementada (8/8 tarefas concluídas) |
+| `s3-frontend-e-perfil`: navegação e telas do site; perfil guardado só no navegador, com função de apagar; Benefícios e Onde buscar ajuda exigem o formulário | Implementada (12/12 tarefas concluídas) |
+| `s3-beneficios`: regras de 3 benefícios federais + 1 distrital | Implementada (7/7 tarefas concluídas) |
 
 **Adiantar para a S4** (que perde a sexta por feriado): definir o contrato comum dos agentes (entrada, saída, citações) no design de `s3-beneficios`.
 
