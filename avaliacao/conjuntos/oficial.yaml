@@ -13,6 +13,9 @@ perguntas:
       - "Lei 11.340/2006, art. 5º, III"
       - "Lei 11.340/2006, art. 5º, parágrafo único"
     fonte: "Lei 11.340/2006, art. 5º, inciso III e parágrafo único"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art5"
 
   - id: of-002
     categoria: violencia_e_protecao
@@ -25,6 +28,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 7º, II"
     fonte: "Lei 11.340/2006, art. 7º, inciso II"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art7"
 
   - id: of-003
     categoria: violencia_e_protecao
@@ -37,6 +43,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 7º, III"
     fonte: "Lei 11.340/2006, art. 7º, inciso III"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art7"
 
   - id: of-004
     categoria: violencia_e_protecao
@@ -49,6 +58,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 7º, IV"
     fonte: "Lei 11.340/2006, art. 7º, inciso IV"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art7"
 
   - id: of-005
     categoria: violencia_e_protecao
@@ -61,6 +73,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 7º, VI"
     fonte: "Lei 11.340/2006, art. 7º, inciso VI"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art7"
 
   - id: of-006
     categoria: medidas_protetivas
@@ -75,6 +90,9 @@ perguntas:
       - "Lei 11.340/2006, art. 18, I"
       - "Lei 11.340/2006, art. 19, § 1º"
     fonte: "Lei 11.340/2006, art. 18, inciso I e art. 19, § 1º"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art18 ; https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art19"
 
   - id: of-007
     categoria: medidas_protetivas
@@ -88,6 +106,9 @@ perguntas:
       - "Lei 11.340/2006, art. 19, § 5º"
       - "Lei 11.340/2006, art. 19, § 6º"
     fonte: "Lei 11.340/2006, art. 19, §§ 5º e 6º"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art19"
 
   - id: of-008
     categoria: medidas_protetivas
@@ -100,6 +121,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 12-C"
     fonte: "Lei 11.340/2006, art. 12-C, incisos I a III e § 1º"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art12c"
 
   - id: of-009
     categoria: medidas_protetivas
@@ -114,6 +138,9 @@ perguntas:
       - "Lei 11.340/2006, art. 22, II"
       - "Lei 11.340/2006, art. 22, III"
     fonte: "Lei 11.340/2006, art. 22, incisos I, II e III"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art22"
 
   - id: of-010
     categoria: medidas_protetivas
@@ -129,6 +156,9 @@ perguntas:
       - "Lei 11.340/2006, art. 22, VII"
       - "Lei 11.340/2006, art. 22, § 10"
     fonte: "Lei 11.340/2006, art. 22, incisos V, VI e VII"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art22"
 
   - id: of-011
     categoria: medidas_protetivas
@@ -141,6 +171,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 24"
     fonte: "Lei 11.340/2006, art. 24, incisos I a IV e parágrafo único"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art24"
 
   - id: of-012
     categoria: medidas_protetivas
@@ -154,6 +187,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 24-A"
     fonte: "Lei 11.340/2006, art. 24-A, caput, § 1º e § 2º"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art24a"
 
   - id: of-013
     categoria: policia_processo_defensoria
@@ -166,6 +202,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 11"
     fonte: "Lei 11.340/2006, art. 11, incisos I a V"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art11"
 
   - id: of-014
     categoria: policia_processo_defensoria
@@ -178,6 +217,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 14-A"
     fonte: "Lei 11.340/2006, art. 14-A, caput e § 1º"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art14a"
 
   - id: of-015
     categoria: policia_processo_defensoria
@@ -190,6 +232,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 16"
     fonte: "Lei 11.340/2006, art. 16, caput e parágrafo único"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art16"
 
   - id: of-016
     categoria: policia_processo_defensoria
@@ -203,6 +248,9 @@ perguntas:
       - "Lei 11.340/2006, art. 17"
       - "Lei 11.340/2006, art. 21"
     fonte: "Lei 11.340/2006, art. 17 e art. 21, parágrafo único"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art17 ; https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art21"
 
   - id: of-017
     categoria: auxilio_fonar_trabalho
@@ -216,6 +264,9 @@ perguntas:
       - "Lei 11.340/2006, art. 23"
       - "Lei 11.340/2006, art. 23, VI"
     fonte: "Lei 11.340/2006, art. 23, inciso VI"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art23"
 
   - id: of-018
     categoria: auxilio_fonar_trabalho
@@ -228,6 +279,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 9º, § 2º"
     fonte: "Lei 11.340/2006, art. 9º, § 2º, inciso II"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art9"
 
   - id: of-019
     categoria: auxilio_fonar_trabalho
@@ -240,6 +294,9 @@ perguntas:
     normas_aceitas:
       - "Lei 11.340/2006, art. 9º, § 2º"
     fonte: "Lei 11.340/2006, art. 9º, § 2º, inciso I"
+    conferencia:
+      revisor: "Túlio Celeri"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art9"
 
   - id: of-020
     categoria: crime
@@ -252,6 +309,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 147-A"
     fonte: "Código Penal, art. 147-A, caput e § 1º, inciso II"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art147a"
 
   - id: of-021
     categoria: crime
@@ -264,6 +324,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 147-B"
     fonte: "Código Penal, art. 147-B, caput e parágrafo único"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art147b"
 
   - id: of-022
     categoria: crime
@@ -276,6 +339,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 218-C"
     fonte: "Código Penal, art. 218-C, caput e § 1º"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art218c"
 
   - id: of-023
     categoria: crime
@@ -291,6 +357,9 @@ perguntas:
       - "Código Penal, art. 129, § 11"
       - "Código Penal, art. 129, § 13"
     fonte: "Código Penal, art. 129, §§ 9º, 11 e 13"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art129"
 
   - id: of-024
     categoria: crime
@@ -304,6 +373,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 147"
     fonte: "Código Penal, art. 147, caput, § 1º e § 2º"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art147"
 
   - id: of-025
     categoria: crime
@@ -316,6 +388,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 148"
     fonte: "Código Penal, art. 148, caput e § 1º, inciso I"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art148"
 
   - id: of-026
     categoria: crime
@@ -329,6 +404,9 @@ perguntas:
       - "Código Penal, art. 138"
       - "Código Penal, art. 139"
     fonte: "Código Penal, art. 138, caput e § 1º, e art. 139, caput"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art138 ; https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art139"
 
   - id: of-027
     categoria: crime
@@ -341,6 +419,9 @@ perguntas:
       - "Código Penal, art. 181"
       - "Código Penal, art. 183"
     fonte: "Código Penal, art. 181, inciso I, e art. 183, inciso I"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art181 ; https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art183"
 
   - id: of-028
     categoria: crime
@@ -353,6 +434,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 213"
     fonte: "Código Penal, art. 213, caput"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art213"
 
   - id: of-029
     categoria: guarda
@@ -365,6 +449,9 @@ perguntas:
       - "Código Civil, art. 1.584"
       - "Código Civil, art. 1.584, § 2º"
     fonte: "Código Civil, art. 1.584, § 2º"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm#art1584"
 
   - id: of-030
     categoria: guarda
@@ -377,6 +464,9 @@ perguntas:
     normas_aceitas:
       - "Código de Processo Civil, art. 699-A"
     fonte: "Código de Processo Civil, art. 699-A, caput"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm#art699a"
 
 extras:
   - id: of-extra-001
