@@ -309,6 +309,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 147-A"
     fonte: "Código Penal, art. 147-A, caput e § 1º, inciso II"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art147a"
 
   - id: of-021
     categoria: crime
@@ -321,6 +324,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 147-B"
     fonte: "Código Penal, art. 147-B, caput e parágrafo único"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art147b"
 
   - id: of-022
     categoria: crime
@@ -333,6 +339,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 218-C"
     fonte: "Código Penal, art. 218-C, caput e § 1º"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art218c"
 
   - id: of-023
     categoria: crime
@@ -348,6 +357,9 @@ perguntas:
       - "Código Penal, art. 129, § 11"
       - "Código Penal, art. 129, § 13"
     fonte: "Código Penal, art. 129, §§ 9º, 11 e 13"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art129"
 
   - id: of-024
     categoria: crime
@@ -361,6 +373,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 147"
     fonte: "Código Penal, art. 147, caput, § 1º e § 2º"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art147"
 
   - id: of-025
     categoria: crime
@@ -373,6 +388,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 148"
     fonte: "Código Penal, art. 148, caput e § 1º, inciso I"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art148"
 
   - id: of-026
     categoria: crime
@@ -386,6 +404,9 @@ perguntas:
       - "Código Penal, art. 138"
       - "Código Penal, art. 139"
     fonte: "Código Penal, art. 138, caput e § 1º, e art. 139, caput"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art138 ; https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art139"
 
   - id: of-027
     categoria: crime
@@ -398,6 +419,9 @@ perguntas:
       - "Código Penal, art. 181"
       - "Código Penal, art. 183"
     fonte: "Código Penal, art. 181, inciso I, e art. 183, inciso I"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art181 ; https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art183"
 
   - id: of-028
     categoria: crime
@@ -410,6 +434,9 @@ perguntas:
     normas_aceitas:
       - "Código Penal, art. 213"
     fonte: "Código Penal, art. 213, caput"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm#art213"
 
   - id: of-029
     categoria: guarda
@@ -422,6 +449,9 @@ perguntas:
       - "Código Civil, art. 1.584"
       - "Código Civil, art. 1.584, § 2º"
     fonte: "Código Civil, art. 1.584, § 2º"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm#art1584"
 
   - id: of-030
     categoria: guarda
@@ -434,6 +464,9 @@ perguntas:
     normas_aceitas:
       - "Código de Processo Civil, art. 699-A"
     fonte: "Código de Processo Civil, art. 699-A, caput"
+    conferencia:
+      revisor: "Vítor Gonçalves de Andrade, Leo Alec e Ana Marques"
+      fonte_conferida: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm#art699a"
 
 extras:
   - id: of-extra-001
