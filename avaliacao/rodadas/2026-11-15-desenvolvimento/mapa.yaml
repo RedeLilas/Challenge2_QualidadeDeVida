@@ -1,0 +1,113 @@
+semente: 2908616306
+rodada: 2026-11-15-desenvolvimento
+arquivos:
+  A:
+  - codigo: A01
+    id: dv-013
+    versao: sem_rag
+  - codigo: A02
+    id: dv-001
+    versao: sem_rag
+  - codigo: A03
+    id: errada-2
+    versao: errada
+  - codigo: A04
+    id: dv-010
+    versao: rag
+  - codigo: A05
+    id: dv-003
+    versao: rag
+  - codigo: A06
+    id: errada-1
+    versao: errada
+  - codigo: A07
+    id: dv-007
+    versao: sem_rag
+  - codigo: A08
+    id: dv-008
+    versao: rag
+  - codigo: A09
+    id: dv-006
+    versao: sem_rag
+  - codigo: A10
+    id: dv-011
+    versao: rag
+  - codigo: A11
+    id: dv-014
+    versao: rag
+  - codigo: A12
+    id: dv-005
+    versao: rag
+  - codigo: A13
+    id: dv-002
+    versao: sem_rag
+  - codigo: A14
+    id: dv-009
+    versao: rag
+  - codigo: A15
+    id: dv-015
+    versao: rag
+  - codigo: A16
+    id: dv-012
+    versao: rag
+  - codigo: A17
+    id: errada-3
+    versao: errada
+  - codigo: A18
+    id: dv-004
+    versao: rag
+  B:
+  - codigo: B01
+    id: dv-003
+    versao: sem_rag
+  - codigo: B02
+    id: dv-004
+    versao: sem_rag
+  - codigo: B03
+    id: dv-008
+    versao: sem_rag
+  - codigo: B04
+    id: dv-001
+    versao: rag
+  - codigo: B05
+    id: dv-002
+    versao: rag
+  - codigo: B06
+    id: dv-010
+    versao: sem_rag
+  - codigo: B07
+    id: dv-007
+    versao: rag
+  - codigo: B08
+    id: dv-015
+    versao: sem_rag
+  - codigo: B09
+    id: errada-1
+    versao: errada
+  - codigo: B10
+    id: errada-3
+    versao: errada
+  - codigo: B11
+    id: dv-014
+    versao: sem_rag
+  - codigo: B12
+    id: dv-011
+    versao: sem_rag
+  - codigo: B13
+    id: dv-005
+    versao: sem_rag
+  - codigo: B14
+    id: dv-013
+    versao: rag
+  - codigo: B15
+    id: dv-009
+    versao: sem_rag
+  - codigo: B16
+    id: dv-012
+    versao: sem_rag
+  - codigo: B17
+    id: dv-006
+    versao: rag
+  - codigo: B18
+    id: errada-2
+    versao: errada
