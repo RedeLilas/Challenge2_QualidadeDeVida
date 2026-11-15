@@ -22,9 +22,11 @@ context: |
   OpenAI, trocados apenas por variáveis de ambiente. Deploy considerado desde a S2
   (container Docker único).
 
-  Validação: sem entrevistas e sem usuárias reais. Apenas casos fictícios; gabarito
-  escrito pela equipe com fonte citada; LLM juiz com rubrica + revisão em dupla de
-  20% da amostra; usabilidade (SUS) com colegas na S7.
+  Validação: sem entrevistas e sem usuárias reais. Apenas casos fictícios; perguntas e
+  gabaritos escritos e conferidos pela equipe, com fonte citada; correção por um único
+  LLM externo (de outra empresa que não a do modelo avaliado), com rubrica e respostas
+  erradas de propósito, sem revisão humana das notas, declarado no relatório;
+  usabilidade (SUS) com colegas na S7.
 
   Calendário: S1 26-30/10, S2 02-06/11, S3 09-13/11, S4 16-20/11 (20/11 feriado),
   S5 23-27/11, S6 30/11-04/12, S7 07-11/12 (2026). A equipe trabalha só às terças,
