@@ -49,12 +49,16 @@ A avaliação SHALL incluir 10 perguntas extras fora do tema, lidas pela equipe 
 ### Requirement: Perguntas fictícias sem disparar o alerta
 As perguntas SHALL usar linguagem leiga e situações fictícias, e cada uma MUST passar pela checagem de risco imediato antes do congelamento. Quando o alerta disparar, a pergunta MUST ser reescrita de forma impessoal, sem alterar as regras de risco.
 
-### Requirement: Autoria das perguntas e gabaritos
-As perguntas e os gabaritos SHALL ser escritos pela equipe, sem uso de Claude. A conferência por segunda pessoa está definida no requisito "Formato dos conjuntos de avaliação".
-
 #### Scenario: Pergunta dispara o alerta
 - **WHEN** uma pergunta do conjunto dispara o alerta de risco imediato
 - **THEN** a validação do conjunto falha até a pergunta ser reescrita, e as regras de risco continuam iguais
+
+### Requirement: Autoria das perguntas e gabaritos
+As perguntas e os gabaritos SHALL ser escritos pela equipe, sem uso de Claude. A conferência por segunda pessoa está definida no requisito "Formato dos conjuntos de avaliação".
+
+#### Scenario: Registro da autoria
+- **WHEN** uma pergunta entra em um conjunto de avaliação
+- **THEN** ela traz no campo `autor` a pessoa da equipe que a escreveu
 
 ### Requirement: Separação e congelamento do conjunto oficial
 As perguntas de desenvolvimento SHALL ficar separadas do conjunto oficial. O conjunto MUST congelar antes da rodada oficial, e qualquer ajuste depois do resultado MUST obrigar a refazer a rodada e declarar o ajuste no relatório.
