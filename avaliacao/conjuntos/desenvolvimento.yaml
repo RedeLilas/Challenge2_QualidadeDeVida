@@ -1,0 +1,273 @@
+versao: 1
+
+perguntas:
+  - id: dv-001
+    categoria: violencia_e_protecao
+    pergunta: "ele nunca me bateu, só quebrou minhas coisas e me humilhou, isso conta?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Sim. A Lei Maria da Penha protege a mulher contra formas de violência doméstica e familiar que não exigem agressão física: quebrar objetos ou bens configura violência patrimonial (destruição parcial ou total de objetos, instrumentos de trabalho, documentos pessoais ou bens) e humilhar a mulher configura violência psicológica (conduta que cause dano emocional e diminuição da autoestima mediante humilhação, insulto ou ridicularização)."
+    pontos_obrigatorios:
+      - "A proteção da Lei Maria da Penha abrange condutas mesmo sem agressão física."
+      - "Quebrar objetos ou bens da mulher configura violência patrimonial."
+      - "Humilhar a mulher configura violência psicológica."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 7º"
+      - "Lei 11.340/2006, art. 7º, II"
+      - "Lei 11.340/2006, art. 7º, IV"
+      - "Código Penal, art. 147-B"
+      - "Código Penal, art. 163"
+    fonte: "Lei 11.340/2006, art. 7º, incisos II e IV"
+
+  - id: dv-002
+    categoria: violencia_e_protecao
+    pergunta: "meu companheiro controla todo o meu dinheiro e não me deixa trabalhar"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Essas condutas configuram violência doméstica e familiar previstas na Lei Maria da Penha: controlar o dinheiro ou reter valores e recursos econômicos da mulher caracteriza violência patrimonial, enquanto controlar suas ações, comportamentos e decisões, como impedi-la de trabalhar e prejudicar sua autodeterminação, caracteriza violência psicológica."
+    pontos_obrigatorios:
+      - "Controlar o dinheiro ou reter recursos econômicos da mulher configura violência patrimonial."
+      - "Controlar as ações e decisões da mulher, como impedi-la de trabalhar, configura violência psicológica."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 7º"
+      - "Lei 11.340/2006, art. 7º, II"
+      - "Lei 11.340/2006, art. 7º, IV"
+      - "Código Penal, art. 147-B"
+    fonte: "Lei 11.340/2006, art. 7º, incisos II e IV"
+
+  - id: dv-003
+    categoria: crime
+    pergunta: "ele me xinga e me chama de burra na frente dos outros, isso é crime?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Sim. Injuriar alguém ofendendo sua dignidade ou o seu decoro é crime previsto no Código Penal, com pena de detenção de 1 a 6 meses ou multa. Além disso, no âmbito doméstico e familiar, xingar, insultar e ridicularizar a mulher configuram violência moral e violência psicológica nos termos da Lei Maria da Penha."
+    pontos_obrigatorios:
+      - "Ofender a dignidade ou o decoro de alguém com xingamentos configura o crime de injúria previsto no Código Penal."
+      - "No âmbito doméstico, a conduta também configura violência moral ou violência psicológica segundo a Lei Maria da Penha."
+    normas_aceitas:
+      - "Código Penal, art. 140"
+      - "Código Penal, art. 147-B"
+      - "Lei 11.340/2006, art. 7º"
+      - "Lei 11.340/2006, art. 7º, II"
+      - "Lei 11.340/2006, art. 7º, V"
+    fonte: "Código Penal, art. 140, caput, e Lei 11.340/2006, art. 7º, incisos II e V"
+
+  - id: dv-004
+    categoria: violencia_e_protecao
+    pergunta: "meu namorado não mora comigo, a Lei Maria da Penha vale pra mim?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Sim. A Lei Maria da Penha aplica-se a qualquer relação íntima de afeto na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação, ou seja, mesmo que não morem na mesma casa."
+    pontos_obrigatorios:
+      - "A Lei Maria da Penha protege a mulher em qualquer relação íntima de afeto."
+      - "A aplicação da lei independe de coabitação, não sendo necessário morar junto."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 5º"
+      - "Lei 11.340/2006, art. 5º, III"
+    fonte: "Lei 11.340/2006, art. 5º, inciso III"
+
+  - id: dv-005
+    categoria: medidas_protetivas
+    pergunta: "o que é medida protetiva e como eu peço?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "As medidas protetivas de urgência são ordens judiciais previstas na Lei Maria da Penha para proteger a mulher em situação de violência doméstica e familiar, podendo obrigar o agressor ao afastamento do lar e à proibição de aproximação ou contato com a ofendida. Elas podem ser concedidas pelo juiz a pedido da própria ofendida — inclusive registrado perante a autoridade policial na delegacia, que remete o expediente ao juiz em até 48 horas — ou a requerimento do Ministério Público, cabendo ao juiz decidir em até 48 horas."
+    pontos_obrigatorios:
+      - "São medidas judiciais de proteção de urgência à mulher em situação de violência doméstica, como afastamento do agressor ou proibição de aproximação e contato."
+      - "Podem ser solicitadas pela própria ofendida, inclusive na delegacia, ou requeridas pelo Ministério Público para decisão do juiz."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 12"
+      - "Lei 11.340/2006, art. 12, III"
+      - "Lei 11.340/2006, art. 18"
+      - "Lei 11.340/2006, art. 19"
+      - "Lei 11.340/2006, art. 22"
+      - "Lei 11.340/2006, art. 23"
+    fonte: "Lei 11.340/2006, arts. 12, inciso III, 18, 19 e 22"
+
+  - id: dv-006
+    categoria: medidas_protetivas
+    pergunta: "o juiz pode proibir ele de chegar perto de mim?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Sim. Constatada a prática de violência doméstica e familiar contra a mulher, o juiz pode aplicar de imediato ao agressor a proibição de aproximação da ofendida, de seus familiares e das testemunhas, fixando um limite mínimo de distância entre estes e o agressor."
+    pontos_obrigatorios:
+      - "O juiz pode proibir o agressor de se aproximar da ofendida, de seus familiares e das testemunhas."
+      - "O juiz fixa um limite mínimo de distância que o agressor deve manter."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 22"
+      - "Lei 11.340/2006, art. 22, III"
+    fonte: "Lei 11.340/2006, art. 22, inciso III, alínea a"
+
+  - id: dv-007
+    categoria: auxilio_fonar_trabalho
+    pergunta: "tenho direito a auxílio-aluguel se eu sair de casa com meus filhos?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Sim. A Lei Maria da Penha prevê que o juiz pode conceder à ofendida auxílio-aluguel, com valor fixado em função de sua situação de vulnerabilidade social e econômica, por período não superior a 6 meses, além de assegurar o afastamento da ofendida do lar sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos."
+    pontos_obrigatorios:
+      - "O juiz pode conceder auxílio-aluguel em função da situação de vulnerabilidade social e econômica da ofendida."
+      - "O auxílio-aluguel tem prazo máximo de até 6 meses."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 23"
+      - "Lei 11.340/2006, art. 23, III"
+      - "Lei 11.340/2006, art. 23, VI"
+    fonte: "Lei 11.340/2006, art. 23, incisos III e VI"
+
+  - id: dv-008
+    categoria: medidas_protetivas
+    pergunta: "o que acontece se ele descumprir a medida protetiva?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Descumprir decisão judicial que defere medidas protetivas de urgência previstas na Lei Maria da Penha é crime punido com pena de reclusão de 2 a 5 anos e multa, independentemente da competência civil ou criminal do juiz que deferiu as medidas. Em caso de prisão em flagrante, apenas a autoridade judicial pode conceder fiança."
+    pontos_obrigatorios:
+      - "Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa."
+      - "Em caso de prisão em flagrante por esse crime, apenas o juiz pode conceder fiança."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 24-A"
+      - "Lei 11.340/2006, art. 10"
+      - "Lei 11.340/2006, art. 20"
+    fonte: "Lei 11.340/2006, art. 24-A, caput, § 1º e § 2º"
+
+  - id: dv-009
+    categoria: policia_processo_defensoria
+    pergunta: "a polícia pode tirar ele de casa na hora se eu estiver correndo perigo?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "Verificada a existência de risco atual ou iminente à vida ou à integridade da mulher ou de seus dependentes, o agressor será imediatamente afastado do lar pela autoridade judicial, pelo delegado de polícia quando o município não for sede de comarca, ou pelo policial quando o município não for sede de comarca e não houver delegado disponível no momento da denúncia. Quando o afastamento é determinado pelo delegado ou pelo policial, o juiz deve ser comunicado no prazo máximo de 24 horas e decidirá em igual prazo sobre a manutenção ou revogação da medida."
+    pontos_obrigatorios:
+      - "Em caso de risco atual ou iminente, o afastamento imediato do agressor do lar pode ser determinado pelo delegado, quando o município não for sede de comarca, ou pelo policial, quando também não houver delegado disponível."
+      - "O juiz deve ser comunicado no prazo máximo de 24 horas e decidir em igual prazo sobre a manutenção ou revogação da medida."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 12-C"
+      - "Lei 11.340/2006, art. 12-C, I"
+      - "Lei 11.340/2006, art. 12-C, II"
+      - "Lei 11.340/2006, art. 12-C, III"
+      - "Lei 11.340/2006, art. 12-C, § 1º"
+    fonte: "Lei 11.340/2006, art. 12-C, caput, incisos I a III e § 1º"
+
+  - id: dv-010
+    categoria: policia_processo_defensoria
+    pergunta: "não tenho dinheiro para advogado, quem pode me ajudar no processo?"
+    autor: "Vítor Gonçalves de Andrade (pergunta); Túlio Celeri (gabarito)"
+    resposta_esperada: "É garantido a toda mulher em situação de violência doméstica e familiar o acesso aos serviços de Defensoria Pública ou de Assistência Judiciária Gratuita, nos termos da lei, em sede policial e judicial, mediante atendimento específico e humanizado. Em todos os atos processuais cíveis e criminais a mulher deverá estar acompanhada de advogado, ressalvado o pedido de medidas protetivas de urgência."
+    pontos_obrigatorios:
+      - "A mulher tem direito garantido ao atendimento gratuito pela Defensoria Pública ou pela Assistência Judiciária Gratuita, na delegacia e no processo judicial."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 27"
+      - "Lei 11.340/2006, art. 28"
+      - "Lei 11.340/2006, art. 9º, § 2º"
+      - "Lei 11.340/2006, art. 11"
+      - "Lei 11.340/2006, art. 18"
+    fonte: "Lei 11.340/2006, arts. 27 e 28"
+
+  - id: dv-011
+    categoria: crime
+    pergunta: "Durante uma briga no mês passado, o ex-companheiro de uma vizinha jogou no chão o computador e a impressora que ela usava para trabalhar até quebrar tudo, deixando um prejuízo alto para ela. Quebrar de propósito os objetos de outra pessoa é crime no Código Penal, e a pena aumenta quando isso causa prejuízo grande ou tem agressão?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Sim. Destruir, inutilizar ou deteriorar coisa alheia configura o crime de dano previsto no Código Penal, com pena de detenção de 1 a 6 meses ou multa. Se o crime é cometido com violência à pessoa ou grave ameaça, por motivo egoístico ou com prejuízo considerável para a vítima, a pena passa a ser de detenção de 6 meses a 3 anos e multa, além da pena correspondente à violência."
+    pontos_obrigatorios:
+      - "Destruir, inutilizar ou deteriorar coisa alheia é crime de dano previsto no Código Penal."
+      - "A pena aumenta para detenção de 6 meses a 3 anos e multa quando o crime é cometido com violência à pessoa ou grave ameaça, por motivo egoístico ou com prejuízo considerável para a vítima."
+    normas_aceitas:
+      - "Código Penal, art. 163"
+      - "Código Penal, art. 163, parágrafo único"
+      - "Lei 11.340/2006, art. 7º"
+      - "Lei 11.340/2006, art. 7º, IV"
+    fonte: "Código Penal, art. 163, caput e parágrafo único, incisos I e IV"
+
+  - id: dv-012
+    categoria: crime
+    pergunta: "Em uma reunião de família no ano passado, o cunhado de uma amiga aproveitou que ela estava sozinha na cozinha e passou a mão pelo corpo dela e tentou beijá-la sem permissão, embora não tenha batido nela nem feito ameaças. Que crime comete quem passa a mão ou tenta beijar alguém sem a pessoa deixar, e qual é a pena prevista na lei?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Praticar contra alguém e sem a sua anuência ato libidinoso com o objetivo de satisfazer a própria lascívia ou a de terceiro configura o crime de importunação sexual previsto no Código Penal, com pena de reclusão de 1 a 5 anos, se o ato não constitui crime mais grave."
+    pontos_obrigatorios:
+      - "Praticar ato libidinoso contra alguém sem o seu consentimento para satisfazer o próprio desejo sexual ou o de terceiro é crime de importunação sexual."
+      - "A pena prevista é de reclusão de 1 a 5 anos, se o ato não constituir crime mais grave."
+    normas_aceitas:
+      - "Código Penal, art. 215-A"
+    fonte: "Código Penal, art. 215-A, caput"
+
+  - id: dv-013
+    categoria: crime
+    pergunta: "O irmão de uma colega pegou escondido uma quantia em dinheiro da bolsa dela sem usar agressão nem intimidação, e o ex-marido de quem ela já estava separada no papel também sumiu com um objeto dela sem violência. Quando um irmão ou um ex-marido separado judicialmente pega bens da pessoa sem usar violência, o processo criminal começa sozinho ou depende de a vítima dar autorização?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Depende de representação da vítima. Pelo Código Penal, quando um crime contra o patrimônio sem emprego de grave ameaça ou violência à pessoa é cometido em prejuízo de cônjuge desquitado ou judicialmente separado, de irmão, ou de tio ou sobrinho com quem o agente coabita, a ação penal somente se procede mediante representação da vítima."
+    pontos_obrigatorios:
+      - "Nos crimes contra o patrimônio cometidos sem violência ou grave ameaça em prejuízo de irmão ou de cônjuge judicialmente separado, a ação penal depende de representação da vítima."
+    normas_aceitas:
+      - "Código Penal, art. 182"
+      - "Código Penal, art. 182, I"
+      - "Código Penal, art. 182, II"
+      - "Código Penal, art. 183"
+    fonte: "Código Penal, art. 182, incisos I e II, e art. 183, inciso I"
+
+  - id: dv-014
+    categoria: guarda
+    pergunta: "No processo de família de uma conhecida, o juiz viu que a criança não tinha condições seguras de continuar morando nem com o pai nem com a mãe, mas uma avó muito próxima que sempre cuidou do neto pediu para ficar com a guarda. Quando o filho não deve ficar sob a guarda do pai nem da mãe, para quem o juiz transfere a guarda e o que ele leva em conta?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "Se o juiz verificar que o filho não deve permanecer sob a guarda do pai ou da mãe, deferirá a guarda a pessoa que revele compatibilidade com a natureza da medida, considerados, de preferência, o grau de parentesco e as relações de afinidade e afetividade."
+    pontos_obrigatorios:
+      - "Quando o filho não deve permanecer sob a guarda do pai ou da mãe, o juiz defere a guarda a outra pessoa compatível com a medida."
+      - "O juiz considera de preferência o grau de parentesco e as relações de afinidade e afetividade."
+    normas_aceitas:
+      - "Código Civil, art. 1.584"
+      - "Código Civil, art. 1.584, § 5º"
+    fonte: "Código Civil, art. 1.584, § 5º"
+
+  - id: dv-015
+    categoria: auxilio_fonar_trabalho
+    pergunta: "Quando uma amiga foi registrar ocorrência de violência doméstica na delegacia, aplicaram nela o Formulário Nacional de Avaliação de Risco. Para que serve esse formulário, quais órgãos devem aplicá-lo no atendimento à mulher e as informações que ela responde ficam protegidas por sigilo?"
+    autor: "Túlio Celeri"
+    resposta_esperada: "O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e da rede de proteção na gestão do risco identificado. Ele deve ser preferencialmente aplicado pela Polícia Civil no momento do registro da ocorrência ou, em sua impossibilidade, pelo Ministério Público ou pelo Poder Judiciário no primeiro atendimento, devendo ser preservado em qualquer hipótese o sigilo das informações."
+    pontos_obrigatorios:
+      - "Tem o objetivo de identificar fatores de risco de violência doméstica para subsidiar a atuação dos órgãos de segurança pública, Ministério Público, Judiciário e rede de proteção."
+      - "Deve ser aplicado preferencialmente pela Polícia Civil no registro da ocorrência, ou pelo Ministério Público ou Poder Judiciário no primeiro atendimento."
+      - "O sigilo das informações deve ser preservado em qualquer hipótese."
+    normas_aceitas:
+      - "Lei 14.149/2021, art. 1º"
+      - "Lei 14.149/2021, art. 2º"
+      - "Lei 14.149/2021, art. 2º, § 1º"
+      - "Lei 14.149/2021, art. 2º, § 2º"
+    fonte: "Lei 14.149/2021, art. 2º, caput, § 1º e § 2º"
+
+extras:
+  - id: dv-extra-001
+    categoria: fora_do_tema
+    pergunta: "Quantos anos de contribuição e qual é a idade mínima para uma trabalhadora conseguir pedir aposentadoria por idade pelo INSS atualmente?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-002
+    categoria: fora_do_tema
+    pergunta: "Meu tio mora em um terreno urbano há mais de quinze anos pagando o IPTU em dia sem ninguém reclamar. Como funciona o pedido de usucapião para passar a escritura para o nome dele?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-003
+    categoria: fora_do_tema
+    pergunta: "Quando uma pessoa falece deixando um apartamento e todos os filhos são maiores e estão de acordo com a divisão, é possível fazer o inventário direto no cartório?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-004
+    categoria: fora_do_tema
+    pergunta: "Meu voo para São Paulo atrasou mais de seis horas no aeroporto por problema na aeronave. A companhia aérea é obrigada a fornecer alimentação e hotel aos passageiros?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-005
+    categoria: fora_do_tema
+    pergunta: "Uma candidata passou dentro do número de vagas previstas no edital de um concurso público municipal. Ela tem direito garantido de ser nomeada antes de vencer o prazo de validade do concurso?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-006
+    categoria: fora_do_tema
+    pergunta: "Qual é o melhor jeito caseiro de tirar mancha de café de uma camisa branca de algodão sem estragar o tecido?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-007
+    categoria: fora_do_tema
+    pergunta: "Como se calcula a regra de três composta quando uma das grandezas é inversamente proporcional às outras?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-008
+    categoria: fora_do_tema
+    pergunta: "De quantos em quantos quilômetros é recomendado trocar o óleo do motor e o filtro de um carro popular que roda só na cidade?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-009
+    categoria: fora_do_tema
+    pergunta: "Quais são os acordes mais fáceis para quem está começando a aprender a tocar violão do zero em casa?"
+    autor: "Túlio Celeri"
+
+  - id: dv-extra-010
+    categoria: fora_do_tema
+    pergunta: "Por que o eclipse solar total não acontece todos os meses quando a Lua passa pela fase de Lua Nova?"
+    autor: "Túlio Celeri"
