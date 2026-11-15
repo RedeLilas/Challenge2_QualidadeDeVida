@@ -26,8 +26,20 @@ class LLMRecusaPrimeira:
         return RESPOSTA_CITADA
 
 
-@pytest.fixture
-def rodada(pastas, tmp_path):  # noqa: F811
+NAO_SEI = "Não sei responder com segurança. Procure a Defensoria Pública."
+
+
+class LLMNaoSabeSemRag(LLMRecusaPrimeira):
+    """Sem os trechos, o modelo diz que não sabe na q-002 e em todas as extras."""
+
+    def responder(self, mensagens):
+        pedido = mensagens[-1]["content"]
+        if "Trechos de lei" not in pedido and ("fictícia 2 " in pedido or "extra" in pedido):
+            return NAO_SEI
+        return super().responder(mensagens)
+
+
+def preparar_rodada(pastas, tmp_path, cliente):  # noqa: F811
     conjuntos, rodadas = pastas
     (conjuntos / ARQUIVO_ERRADAS).write_text(yaml.safe_dump(ERRADAS, allow_unicode=True), encoding="utf-8")
     norma = tmp_path / "dispositivos" / "lei-11340-2006"
@@ -35,10 +47,15 @@ def rodada(pastas, tmp_path):  # noqa: F811
     registros = [dispositivo("7", "caput", "Art. 7º São formas fictícias de violência:")]
     (norma / "2026-11-10.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in registros),
                                             encoding="utf-8")  # fmt: skip
-    pasta = rodar("desenvolvimento", cliente=LLMRecusaPrimeira(), indice=IndiceFalso(), changelog="fictício",
+    pasta = rodar("desenvolvimento", cliente=cliente, indice=IndiceFalso(), changelog="fictício",
                   pasta_conjuntos=conjuntos, pasta_rodadas=rodadas, agora=lambda: AGORA)  # fmt: skip
     preparar(pasta, semente=3, pasta_conjuntos=conjuntos, pasta_dispositivos=tmp_path / "dispositivos")
     return pasta
+
+
+@pytest.fixture
+def rodada(pastas, tmp_path):  # noqa: F811
+    return preparar_rodada(pastas, tmp_path, LLMRecusaPrimeira())
 
 
 def ler(caminho):
@@ -91,11 +108,27 @@ def test_retorno_completo_e_correto_e_aceito(rodada):
     assert all(resultado["arquivos"][n]["modelo"] == "corretor-ficticio" for n in ARQUIVOS)
     rag, sem_rag = resultado["versoes"]["rag"], resultado["versoes"]["sem_rag"]
     # A recusa da q-001 na versão com RAG conta como erro, mesmo com os pontos marcados.
-    assert rag["precisao"] == {"corrigidas": 15, "certas": 14, "recusas": 1, "percentual": round(100 * 14 / 15, 1)}
-    assert sem_rag["precisao"] == {"corrigidas": 15, "certas": 15, "recusas": 0, "percentual": 100.0}
+    assert rag["precisao"] == {"corrigidas": 15, "certas": 14, "recusas": 1, "recusas_do_modelo": 0,
+                               "percentual": round(100 * 14 / 15, 1)}  # fmt: skip
+    assert sem_rag["precisao"] == {"corrigidas": 15, "certas": 15, "recusas": 0, "recusas_do_modelo": 0,
+                                   "percentual": 100.0}  # fmt: skip
     assert rag["citacao"] == {"respostas": 15, "com_citacao": 14, "percentual": round(100 * 14 / 15, 1)}
     assert sem_rag["fidelidade"]["afirmacoes"] == 15 and sem_rag["fidelidade"]["sem_suporte"] == 0
+    assert rag["extras"] == {"total": 10, "recusas": 0, "recusas_do_modelo": 0}
     assert (rodada / "resultado.yaml").is_file()
+
+
+def test_recusa_do_modelo_e_contada_a_parte_sem_mudar_a_precisao(pastas, tmp_path):  # noqa: F811
+    rodada = preparar_rodada(pastas, tmp_path, LLMNaoSabeSemRag())
+    gravar_retornos(rodada)
+    sem_rag = conferir(rodada)["versoes"]["sem_rag"]
+
+    assert sem_rag["precisao"]["recusas"] == 0 and sem_rag["precisao"]["recusas_do_modelo"] == 1
+    assert sem_rag["recusas"] == 0 and sem_rag["recusas_do_modelo"] == 1
+    # Quem decide se a resposta está certa continua sendo o corretor.
+    assert sem_rag["precisao"]["certas"] == 15
+    # As extras não vão ao corretor, mas as recusas delas são relatadas à parte.
+    assert sem_rag["extras"] == {"total": 10, "recusas": 0, "recusas_do_modelo": 10}
 
 
 def test_linha_faltando_rejeita_a_correcao(rodada):

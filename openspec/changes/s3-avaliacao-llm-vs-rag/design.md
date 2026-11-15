@@ -74,6 +74,8 @@ Cada pergunta tem uma versão sorteada para o arquivo A e a outra para o arquivo
 ### Detecção por código
 Recusa é a resposta igual ao texto de recusa do sistema. Presença de citação usa a mesma extração da verificação de citação. Essas duas medidas não vão ao corretor.
 
+A recusa do modelo é contada à parte: a resposta que começa com "Não sei responder com segurança", a frase que as instruções das duas versões pedem. Ela não muda a precisão, que continua com o corretor, porque uma resposta "não sei" fica sem os pontos obrigatórios. Sem essa contagem, a versão sem RAG, que nunca recebe a recusa do sistema, apareceria sem nenhuma recusa. As recusas das extras são contadas do mesmo jeito, para a seção própria do relatório. Alternativa descartada: tratar a recusa do modelo como erro automático, que puniria uma resposta que diz "não sei" e mesmo assim traz o conteúdo certo.
+
 ### Scripts e arquivos da rodada
 - `scripts/rodada.py congelar` valida `oficial.yaml` e grava o hash em `avaliacao/conjuntos/oficial.congelamento.yaml`. `scripts/rodada.py rodar <conjunto> --changelog "<versão>"` grava `registro.yaml` e `respostas.yaml` em `avaliacao/rodadas/<data>-<conjunto>/`, sem sobrescrever rodadas anteriores.
 - `scripts/envios.py <rodada>` grava os quatro arquivos em `<rodada>/envios/`, o texto enviado em cada código em `envios/conteudo.yaml` (sem a versão) e o mapa em `<rodada>/mapa.yaml`, fora da pasta dos envios.
