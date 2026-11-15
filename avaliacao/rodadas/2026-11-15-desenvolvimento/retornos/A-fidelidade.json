@@ -1,0 +1,521 @@
+[
+  {
+    "codigo": "A01",
+    "afirmacoes": [
+      {
+        "afirmacao": "A Lei Maria da Penha trata de violência contra a mulher no âmbito da família e de relação íntima de afeto (Lei 11.340/2006, art. 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 5º Para os efeitos desta Lei, configura violência doméstica e familiar contra a mulher qualquer ação ou omissão baseada no gênero que lhe cause morte, lesão, sofrimento físico, sexual ou psicológico e dano moral ou patrimonial:\nI - no âmbito da unidade doméstica, compreendida como o espaço de convívio permanente de pessoas, com ou sem vínculo familiar, inclusive as esporadicamente agregadas;\nII - no âmbito da família, compreendida como a comunidade formada por indivíduos que são ou se consideram aparentados, unidos por laços naturais, por afinidade ou por vontade expressa;\nIII - em qualquer relação íntima de afeto, na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação."
+      },
+      {
+        "afirmacao": "Ela não cobre todo conflito entre irmãos.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Pegar dinheiro alheio sem violência pode ser tratado como furto, se houver subtração para si (Código Penal, art. 155).",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Em regra, o furto é crime de ação penal pública: o processo não depende de autorização da vítima.",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Mas há casos em que a lei exige representação, que é a manifestação da vítima querendo que o fato seja investigado (Código Penal, art. 167).",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Se a separação já está formalizada e não há mais relação de afeto, pode ser discutido se a Lei Maria da Penha se aplica.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Sem violência, o fato pode ser tratado como furto ou apropriação indébita, que é ficar com coisa alheia que estava em sua posse (Código Penal, arts. 155 e 168).",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Também aqui a ação costuma ser pública, mas pode haver exigência de representação em alguns casos (Código Penal, art. 167).",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Quem decide se o crime é de ação pública ou depende de representação é a autoridade policial e o juiz, com base no caso concreto.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A02",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei não fala só de agressão física.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 7º São formas de violência doméstica e familiar contra a mulher, entre outras:\nI - a violência física, entendida como qualquer conduta que ofenda sua integridade ou saúde corporal;"
+      },
+      {
+        "afirmacao": "**Violência patrimonial** é quando alguém quebra, esconde ou destrói seus objetos, documentos ou bens (Lei 11.340/2006, art. 7º, inciso IV).",
+        "suporte": "sim",
+        "trecho_artigo": "IV - a violência patrimonial, entendida como qualquer conduta que configure retenção, subtração, destruição parcial ou total de seus objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades;"
+      },
+      {
+        "afirmacao": "**Violência moral** é quando alguém faz xingamento, calúnia ou difamação contra você (Lei 11.340/2006, art. 7º, inciso V).",
+        "suporte": "sim",
+        "trecho_artigo": "V - a violência moral, entendida como qualquer conduta que configure calúnia, difamação ou injúria."
+      },
+      {
+        "afirmacao": "**Violência psicológica** é quando alguém causa dano emocional, diminui sua autoestima ou controla suas ações (Lei 11.340/2006, art. 7º, inciso II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;"
+      },
+      {
+        "afirmacao": "Quem decide se houve violência e se dá medida protetiva é o juiz.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 18. Recebido o expediente com o pedido da ofendida, caberá ao juiz, no prazo de 48 (quarenta e oito) horas:\nI - conhecer do expediente e do pedido e decidir sobre as medidas protetivas de urgência;"
+      },
+      {
+        "afirmacao": "Ele pode conceder medidas protetivas de urgência, como afastamento do agressor (Lei 11.340/2006, arts. 18 e 22).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:\nI - suspensão da posse ou restrição do porte de armas, com comunicação ao órgão competente, nos termos da Lei nº 10.826, de 22 de dezembro de 2003;\nII - afastamento do lar, domicílio ou local de convivência com a ofendida;"
+      }
+    ]
+  },
+  {
+    "codigo": "A03",
+    "afirmacoes": [
+      {
+        "afirmacao": "Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 24-A. Descumprir decisão judicial que defere medidas protetivas de urgência previstas nesta Lei: Pena – reclusão, de 2 (dois) a 5 (cinco) anos, e multa."
+      },
+      {
+        "afirmacao": "mas o crime só se configura quando a medida foi determinada por um juiz criminal, não valendo para decisões de juiz cível (Lei 11.340/2006, art. 24-A, § 1º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Caso o agressor seja preso em flagrante, o próprio delegado de polícia pode conceder fiança na delegacia para que ele responda em liberdade, sem precisar de decisão do juiz (Lei 11.340/2006, art. 24-A, § 2º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A04",
+    "afirmacoes": []
+  },
+  {
+    "codigo": "A05",
+    "afirmacoes": [
+      {
+        "afirmacao": "Xingar e chamar de \"burra\" na frente dos outros pode se encaixar no crime de injúria, que é ofender a dignidade ou o decoro de alguém.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 140 - Injuriar alguém, ofendendo-lhe a dignidade ou o decoro: Pena - detenção, de um a seis meses, ou multa."
+      },
+      {
+        "afirmacao": "A pena prevista é detenção de um a seis meses, ou multa (Código Penal, art. 140).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 140 - Injuriar alguém, ofendendo-lhe a dignidade ou o decoro: Pena - detenção, de um a seis meses, ou multa."
+      },
+      {
+        "afirmacao": "injúria é ofender a honra da pessoa, sem imputar a ela um fato criminoso.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "O juiz pode deixar de aplicar a pena em algumas situações, por exemplo, quando a própria pessoa ofendida provocou diretamente a injúria de forma reprovável (Código Penal, art. 140, § 1º, I).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º - O juiz pode deixar de aplicar a pena:\nI - quando o ofendido, de forma reprovável, provocou diretamente a injúria;"
+      },
+      {
+        "afirmacao": "Se a injúria for feita com violência ou vias de fato consideradas aviltantes, a pena é maior: detenção de três meses a um ano, e multa, além da pena correspondente à violência (Código Penal, art. 140, § 2º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º - Se a injúria consiste em violência ou vias de fato, que, por sua natureza ou pelo meio empregado, se considerem aviltantes: Pena - detenção, de três meses a um ano, e multa, além da pena correspondente à violência."
+      },
+      {
+        "afirmacao": "Esses xingamentos também podem ser uma forma de violência doméstica e familiar contra a mulher",
+        "suporte": "sim",
+        "trecho_artigo": "V - a violência moral, entendida como qualquer conduta que configure calúnia, difamação ou injúria."
+      },
+      {
+        "afirmacao": "a lei trata como violência física qualquer conduta que ofenda a integridade ou a saúde corporal (Lei 11.340/2006, art. 7º, I).",
+        "suporte": "sim",
+        "trecho_artigo": "I - a violência física, entendida como qualquer conduta que ofenda sua integridade ou saúde corporal;"
+      },
+      {
+        "afirmacao": "Quem decide se há crime e qual pena aplicar é o juiz.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A06",
+    "afirmacoes": [
+      {
+        "afirmacao": "Se você precisar sair de casa com seus filhos por causa de violência doméstica, o juiz pode autorizar o seu afastamento do lar sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos (Lei 11.340/2006, art. 23, III).",
+        "suporte": "sim",
+        "trecho_artigo": "III - determinar o afastamento da ofendida do lar, sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos;"
+      },
+      {
+        "afirmacao": "Além disso, o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica, pelo prazo de até 24 meses (Lei 11.340/2006, art. 23, VI).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A07",
+    "afirmacoes": [
+      {
+        "afirmacao": "O juiz pode conceder auxílio-aluguel à mulher que sair do lar em situação de violência. O valor e o tempo ficam a critério do juiz (Lei 11.340/2006, art. 9º, § 4º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Esse auxílio é uma medida protetiva de urgência.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Medida protetiva é uma decisão rápida do juiz para proteger você (Lei 11.340/2006, art. 22, inciso V).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:"
+      },
+      {
+        "afirmacao": "O pedido pode incluir seus filhos, que também são protegidos pela lei (Lei 11.340/2006, art. 22, caput).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º O pedido da ofendida será tomado a termo pela autoridade policial e deverá conter:\nI - qualificação da ofendida e do agressor;\nII - nome e idade dos dependentes;\nIII - descrição sucinta do fato e das medidas protetivas solicitadas pela ofendida."
+      },
+      {
+        "afirmacao": "Não é automático. Depende do pedido e da análise do juiz.",
+        "suporte": "sim",
+        "trecho_artigo": "III - remeter, no prazo de 48 (quarenta e oito) horas, expediente apartado ao juiz com o pedido da ofendida, para a concessão de medidas protetivas de urgência;"
+      },
+      {
+        "afirmacao": "Quem pode pedir por você: advogada, defensora pública ou a delegacia, que encaminha o pedido ao juiz (Lei 11.340/2006, art. 12).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A08",
+    "afirmacoes": [
+      {
+        "afirmacao": "Se ele descumprir uma medida protetiva de urgência, isso é crime.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 24-A. Descumprir decisão judicial que defere medidas protetivas de urgência previstas nesta Lei: Pena – reclusão, de 2 (dois) a 5 (cinco) anos, e multa."
+      },
+      {
+        "afirmacao": "A lei prevê pena de reclusão de 2 a 5 anos, e multa (Lei 11.340/2006, art. 24-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 24-A. Descumprir decisão judicial que defere medidas protetivas de urgência previstas nesta Lei: Pena – reclusão, de 2 (dois) a 5 (cinco) anos, e multa."
+      },
+      {
+        "afirmacao": "Reclusão é o tipo de pena em que a pessoa cumpre a pena em regime mais rigoroso, conforme a decisão do juiz.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "O crime existe mesmo que o juiz que concedeu a medida seja da área civil ou criminal (Lei 11.340/2006, art. 24-A, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º A configuração do crime independe da competência civil ou criminal do juiz que deferiu as medidas."
+      },
+      {
+        "afirmacao": "Se ele for preso em flagrante, só uma autoridade judicial pode conceder fiança (Lei 11.340/2006, art. 24-A, § 2º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º Na hipótese de prisão em flagrante, apenas a autoridade judicial poderá conceder fiança."
+      },
+      {
+        "afirmacao": "Fiança é o valor pago para responder ao processo em liberdade.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Essa punição não impede outras sanções cabíveis (Lei 11.340/2006, art. 24-A, § 3º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 3º O disposto neste artigo não exclui a aplicação de outras sanções cabíveis."
+      },
+      {
+        "afirmacao": "A pena aumenta de um terço até a metade se o descumprimento envolver violação de áreas de exclusão monitoradas eletronicamente ou remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial (Lei 11.340/2006, art. 24-A, § 4º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 4º A pena será aumentada de 1/3 (um terço) até a metade se o descumprimento decorrer da violação das áreas de exclusão monitoradas eletronicamente ou da remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial."
+      },
+      {
+        "afirmacao": "Quem decide sobre a pena é o juiz.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A09",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei prevê que o juiz pode aplicar medidas protetivas de urgência.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:"
+      },
+      {
+        "afirmacao": "Uma delas é a proibição de aproximação da ofendida. Isso inclui manter uma distância mínima de você (Lei 11.340/2006, art. 22, inciso III, alínea \"a\").",
+        "suporte": "sim",
+        "trecho_artigo": "III - proibição de determinadas condutas, entre as quais:\na) aproximação da ofendida, de seus familiares e das testemunhas, fixando o limite mínimo de distância entre estes e o agressor;"
+      },
+      {
+        "afirmacao": "\"Medida protetiva de urgência\" é uma decisão rápida do juiz para proteger você.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:"
+      },
+      {
+        "afirmacao": "Quem decide é o juiz. Ele pode conceder se entender que há risco à sua integridade.",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º As medidas referidas neste artigo não impedem a aplicação de outras previstas na legislação em vigor, sempre que a segurança da ofendida ou as circunstâncias o exigirem, devendo a providência ser comunicada ao Ministério Público."
+      },
+      {
+        "afirmacao": "A lei também prevê que ele pode proibir o contato com você por qualquer meio de comunicação (Lei 11.340/2006, art. 22, inciso III, alínea \"b\").",
+        "suporte": "sim",
+        "trecho_artigo": "b) contato com a ofendida, seus familiares e testemunhas por qualquer meio de comunicação;"
+      }
+    ]
+  },
+  {
+    "codigo": "A10",
+    "afirmacoes": [
+      {
+        "afirmacao": "Destruir, inutilizar ou deteriorar coisa alheia é crime, com pena de detenção de um a seis meses, ou multa (Código Penal, art. 163).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 163 - Destruir, inutilizar ou deteriorar coisa alheia: Pena - detenção, de um a seis meses, ou multa."
+      },
+      {
+        "afirmacao": "A pena aumenta — detenção de seis meses a três anos, e multa — se o crime é cometido com violência à pessoa ou grave ameaça, ou por motivo egoístico ou com prejuízo considerável para a vítima (Código Penal, art. 163, parágrafo único, incisos I e IV).",
+        "suporte": "sim",
+        "trecho_artigo": "Parágrafo único - Se o crime é cometido:\nI - com violência à pessoa ou grave ameaça;\nII - com emprego de substância inflamável ou explosiva, se o fato não constitui crime mais grave\nIV - por motivo egoístico ou com prejuízo considerável para a vítima: Pena - detenção, de seis meses a três anos, e multa, além da pena correspondente à violência."
+      },
+      {
+        "afirmacao": "\"Coisa alheia\" é o objeto que pertence a outra pessoa.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "\"Detenção\" é um tipo de pena privativa de liberdade.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Quem decide se há crime e qual pena aplicar é o juiz.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A11",
+    "afirmacoes": [
+      {
+        "afirmacao": "Quando o juiz verifica que o filho não deve permanecer sob a guarda do pai nem da mãe, ele defere a guarda a uma pessoa que mostre compatibilidade com a natureza da medida (Código Civil, art. 1.584, § 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 5º Se o juiz verificar que o filho não deve permanecer sob a guarda do pai ou da mãe, deferirá a guarda a pessoa que revele compatibilidade com a natureza da medida, considerados, de preferência, o grau de parentesco e as relações de afinidade e afetividade."
+      },
+      {
+        "afirmacao": "Nessa escolha, o juiz considera, de preferência, o grau de parentesco e as relações de afinidade e afetividade (Código Civil, art. 1.584, § 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 5º Se o juiz verificar que o filho não deve permanecer sob a guarda do pai ou da mãe, deferirá a guarda a pessoa que revele compatibilidade com a natureza da medida, considerados, de preferência, o grau de parentesco e as relações de afinidade e afetividade."
+      }
+    ]
+  },
+  {
+    "codigo": "A12",
+    "afirmacoes": [
+      {
+        "afirmacao": "O juiz pode aplicar medidas ao agressor, como prestação de alimentos provisionais — uma ajuda de custo temporária para o seu sustento (Lei 11.340/2006, art. 22, V).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:\nI - suspensão da posse ou restrição do porte de armas, com comunicação ao órgão competente, nos termos da Lei nº 10.826, de 22 de dezembro de 2003;\nII - afastamento do lar, domicílio ou local de convivência com a ofendida;\nIII - proibição de determinadas condutas, entre as quais:\na) aproximação da ofendida, de seus familiares e das testemunhas, fixando o limite mínimo de distância entre estes e o agressor;\nb) contato com a ofendida, seus familiares e testemunhas por qualquer meio de comunicação;\nc) freqüentação de determinados lugares a fim de preservar a integridade física e psicológica da ofendida;\nIV - restrição ou suspensão de visitas aos dependentes menores, ouvida a equipe de atendimento multidisciplinar ou serviço similar;\nV - prestação de alimentos provisionais ou provisórios."
+      },
+      {
+        "afirmacao": "A lei diz que as medidas podem ser concedidas pelo juiz a pedido da ofendida — ou seja, a seu pedido — ou a requerimento do Ministério Público (Lei 11.340/2006, art. 19).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 19. As medidas protetivas de urgência poderão ser concedidas pelo juiz, a requerimento do Ministério Público ou a pedido da ofendida."
+      },
+      {
+        "afirmacao": "O juiz pode conceder de imediato, sem ouvir antes as partes nem o Ministério Público, que depois é comunicado (Lei 11.340/2006, art. 19, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º As medidas protetivas de urgência poderão ser concedidas de imediato, independentemente de audiência das partes e de manifestação do Ministério Público, devendo este ser prontamente comunicado."
+      },
+      {
+        "afirmacao": "Não é preciso que a violência já tenha um tipo penal definido, nem ação penal ou cível, nem inquérito, nem boletim de ocorrência para o juiz conceder (Lei 11.340/2006, art. 19, § 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 5º As medidas protetivas de urgência serão concedidas independentemente da tipificação penal da violência, do ajuizamento de ação penal ou cível, da existência de inquérito policial ou do registro de boletim de ocorrência."
+      },
+      {
+        "afirmacao": "Depois de concedida, a medida é registrada em banco de dados do Conselho Nacional de Justiça (Lei 11.340/2006, art. 38-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Parágrafo único. As medidas protetivas de urgência serão, após sua concessão, imediatamente registradas em banco de dados mantido e regulamentado pelo Conselho Nacional de Justiça, garantido o acesso instantâneo do Ministério Público, da Defensoria Pública e dos órgãos de segurança pública e de assistência social, com vistas à fiscalização e à efetividade das medidas protetivas."
+      },
+      {
+        "afirmacao": "Se o agressor descumprir a decisão, isso é crime, com pena de reclusão de 2 a 5 anos e multa (Lei 11.340/2006, art. 24-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 24-A. Descumprir decisão judicial que defere medidas protetivas de urgência previstas nesta Lei: Pena – reclusão, de 2 (dois) a 5 (cinco) anos, e multa."
+      }
+    ]
+  },
+  {
+    "codigo": "A13",
+    "afirmacoes": [
+      {
+        "afirmacao": "Violência patrimonial é quando alguém controla, retém ou tira seus bens, dinheiro ou documentos (Lei 11.340/2006, art. 7º, inciso IV).",
+        "suporte": "sim",
+        "trecho_artigo": "IV - a violência patrimonial, entendida como qualquer conduta que configure retenção, subtração, destruição parcial ou total de seus objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades;"
+      },
+      {
+        "afirmacao": "Impedir você de trabalhar também é uma forma de violência. A lei trata do direito à autonomia econômica (Lei 11.340/2006, art. 7º, inciso IV).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Você pode pedir medida protetiva de urgência. Medida protetiva é uma decisão rápida do juiz para proteger você. O juiz pode conceder, por exemplo, afastamento do agressor do lar e proibição de contato (Lei 11.340/2006, arts. 18 e 22).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:\nI - suspensão da posse ou restrição do porte de armas, com comunicação ao órgão competente, nos termos da Lei nº 10.826, de 22 de dezembro de 2003;\nII - afastamento do lar, domicílio ou local de convivência com a ofendida;\nIII - proibição de determinadas condutas, entre as quais:\na) aproximação da ofendida, de seus familiares e das testemunhas, fixando o limite mínimo de distância entre estes e o agressor;\nb) contato com a ofendida, seus familiares e testemunhas por qualquer meio de comunicação;"
+      },
+      {
+        "afirmacao": "A lei prevê atendimento pela Defensoria Pública e assistência jurídica gratuita (Lei 11.340/2006, art. 28).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 28. É garantido a toda mulher em situação de violência doméstica e familiar o acesso aos serviços de Defensoria Pública ou de Assistência Judiciária Gratuita, nos termos da lei, em sede policial e judicial, mediante atendimento específico e humanizado."
+      },
+      {
+        "afirmacao": "Quem decide é o juiz.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 18. Recebido o expediente com o pedido da ofendida, caberá ao juiz, no prazo de 48 (quarenta e oito) horas:\nI - conhecer do expediente e do pedido e decidir sobre as medidas protetivas de urgência;"
+      }
+    ]
+  },
+  {
+    "codigo": "A14",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei prevê que o agressor seja afastado do lar imediatamente quando houver risco atual ou iminente à sua vida ou à sua integridade física, sexual, psicológica, moral ou patrimonial (Lei 11.340/2006, art. 12-C).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 12-C. Verificada a existência de risco atual ou iminente à vida ou à integridade física, sexual, psicológica, moral ou patrimonial da mulher em situação de violência doméstica e familiar, ou de seus dependentes, o agressor será imediatamente afastado do lar, domicílio ou local de convivência com a ofendida:"
+      },
+      {
+        "afirmacao": "A autoridade judicial, ou seja, o juiz ou juíza (Lei 11.340/2006, art. 12-C, I).",
+        "suporte": "sim",
+        "trecho_artigo": "I - pela autoridade judicial;"
+      },
+      {
+        "afirmacao": "O delegado de polícia, quando o Município não for sede de comarca — comarca é a região onde o juiz atua (Lei 11.340/2006, art. 12-C, II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - pelo delegado de polícia, quando o Município não for sede de comarca; ou"
+      },
+      {
+        "afirmacao": "O policial, quando o Município não for sede de comarca e não houver delegado disponível no momento da denúncia (Lei 11.340/2006, art. 12-C, III).",
+        "suporte": "sim",
+        "trecho_artigo": "III - pelo policial, quando o Município não for sede de comarca e não houver delegado disponível no momento da denúncia."
+      },
+      {
+        "afirmacao": "Nesses dois últimos casos, o juiz é comunicado em até 24 horas e decide, no mesmo prazo, se mantém ou revoga a medida (Lei 11.340/2006, art. 12-C, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º Nas hipóteses dos incisos II e III do caput deste artigo, o juiz será comunicado no prazo máximo de 24 (vinte e quatro) horas e decidirá, em igual prazo, sobre a manutenção ou a revogação da medida aplicada, devendo dar ciência ao Ministério Público concomitantemente."
+      },
+      {
+        "afirmacao": "A lei também prevê que o agressor seja submetido à monitoração eletrônica — fiscalização por equipamento, como tornozeleira — quando verificado risco atual ou iminente (Lei 11.340/2006, art. 12-D).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 12-D. Verificada a existência de risco atual ou iminente à vida ou à integridade física ou psicológica da mulher em situação de violência doméstica e familiar, ou de seus dependentes, o agressor será imediatamente submetido à monitoração eletrônica:"
+      },
+      {
+        "afirmacao": "Ao registrar a ocorrência, a autoridade policial deve ouvir você e lavrar o boletim de ocorrência (Lei 11.340/2006, art. 12, I)",
+        "suporte": "sim",
+        "trecho_artigo": "I - ouvir a ofendida, lavrar o boletim de ocorrência e tomar a representação a termo, se apresentada;"
+      },
+      {
+        "afirmacao": "e deve enviar ao juiz, em até 48 horas, seu pedido de medidas protetivas de urgência (Lei 11.340/2006, art. 12, III).",
+        "suporte": "sim",
+        "trecho_artigo": "III - remeter, no prazo de 48 (quarenta e oito) horas, expediente apartado ao juiz com o pedido da ofendida, para a concessão de medidas protetivas de urgência;"
+      }
+    ]
+  },
+  {
+    "codigo": "A15",
+    "afirmacoes": [
+      {
+        "afirmacao": "O Formulário Nacional de Avaliação de Risco serve para identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas.",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e dos órgãos e das entidades da rede de proteção na gestão do risco identificado, devendo ser preservado, em qualquer hipótese, o sigilo das informações."
+      },
+      {
+        "afirmacao": "Ele subsidia a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e da rede de proteção na gestão do risco identificado (Lei 14.149/2021, art. 2º, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e dos órgãos e das entidades da rede de proteção na gestão do risco identificado, devendo ser preservado, em qualquer hipótese, o sigilo das informações."
+      },
+      {
+        "afirmacao": "o formulário deve ser aplicado preferencialmente pela Polícia Civil no momento de registro da ocorrência.",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º O Formulário Nacional de Avaliação de Risco deve ser preferencialmente aplicado pela Polícia Civil no momento de registro da ocorrência ou, em sua impossibilidade, pelo Ministério Público ou pelo Poder Judiciário, por ocasião do primeiro atendimento à mulher vítima de violência doméstica e familiar."
+      },
+      {
+        "afirmacao": "Se não for possível, pelo Ministério Público ou pelo Poder Judiciário, no primeiro atendimento à mulher (Lei 14.149/2021, art. 2º, § 2º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º O Formulário Nacional de Avaliação de Risco deve ser preferencialmente aplicado pela Polícia Civil no momento de registro da ocorrência ou, em sua impossibilidade, pelo Ministério Público ou pelo Poder Judiciário, por ocasião do primeiro atendimento à mulher vítima de violência doméstica e familiar."
+      },
+      {
+        "afirmacao": "Outros órgãos e entidades públicas ou privadas que atuem nessa área também podem usar o modelo, de forma facultativa (Lei 14.149/2021, art. 2º, § 3º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 3º É facultada a utilização do modelo de Formulário Nacional de Avaliação de Risco por outros órgãos e entidades públicas ou privadas que atuem na área de prevenção e de enfrentamento da violência doméstica e familiar contra a mulher."
+      },
+      {
+        "afirmacao": "as informações devem ser preservadas em sigilo em qualquer hipótese (Lei 14.149/2021, art. 2º, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e dos órgãos e das entidades da rede de proteção na gestão do risco identificado, devendo ser preservado, em qualquer hipótese, o sigilo das informações."
+      }
+    ]
+  },
+  {
+    "codigo": "A16",
+    "afirmacoes": [
+      {
+        "afirmacao": "O art. 213 do Código Penal exige violência ou grave ameaça para o crime de estupro",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 213. Constranger alguém, mediante violência ou grave ameaça, a ter conjunção carnal ou a praticar ou permitir que com ele se pratique outro ato libidinoso: Pena - reclusão, de 6 (seis) a 10 (dez) anos."
+      },
+      {
+        "afirmacao": "e o art. 129 trata de lesão corporal",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 129. Ofender a integridade corporal ou a saúde de outrem: Pena - detenção, de três meses a um ano."
+      }
+    ]
+  },
+  {
+    "codigo": "A17",
+    "afirmacoes": [
+      {
+        "afirmacao": "O Formulário Nacional de Avaliação de Risco serve para identificar fatores de risco de violência doméstica contra a mulher",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e dos órgãos e das entidades da rede de proteção na gestão do risco identificado, devendo ser preservado, em qualquer hipótese, o sigilo das informações."
+      },
+      {
+        "afirmacao": "mas a lei exige como condição obrigatória a realização prévia de perícia médica",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "e proíbe que a Polícia Civil ou entidades privadas apliquem o formulário, sendo sua aplicação exclusiva do juiz após o início do processo (Lei 14.149/2021, art. 2º, §§ 2º e 3º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Além disso, as informações prestadas pela mulher não têm sigilo e ficam abertas à consulta pública nos autos (Lei 14.149/2021, art. 2º, § 1º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "A18",
+    "afirmacoes": []
+  }
+]
+

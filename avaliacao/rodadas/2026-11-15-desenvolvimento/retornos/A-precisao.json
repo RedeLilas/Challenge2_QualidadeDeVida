@@ -1,0 +1,314 @@
+[
+  {
+    "codigo": "A01",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A02",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Sim, conta. A lei não fala só de agressão física."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "**Violência patrimonial** é quando alguém quebra, esconde ou destrói seus objetos, documentos ou bens (Lei 11.340/2006, art. 7º, inciso IV). Quebrar suas coisas entra aí."
+      },
+      {
+        "numero": 3,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A03",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa"
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "o crime só se configura quando a medida foi determinada por um juiz criminal, não valendo para decisões de juiz cível (Lei 11.340/2006, art. 24-A, § 1º). Caso o agressor seja preso em flagrante, o próprio delegado de polícia pode conceder fiança na delegacia para que ele responda em liberdade, sem precisar de decisão do juiz (Lei 11.340/2006, art. 24-A, § 2º)."
+  },
+  {
+    "codigo": "A04",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A05",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Xingar e chamar de \"burra\" na frente dos outros pode se encaixar no crime de injúria, que é ofender a dignidade ou o decoro de alguém."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A06",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica"
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "Além disso, o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica, pelo prazo de até 24 meses (Lei 11.340/2006, art. 23, VI)."
+  },
+  {
+    "codigo": "A07",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "O valor e o tempo ficam a critério do juiz (Lei 11.340/2006, art. 9º, § 4º)."
+  },
+  {
+    "codigo": "A08",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Se ele descumprir uma medida protetiva de urgência, isso é crime. A lei prevê pena de reclusão de 2 a 5 anos, e multa (Lei 11.340/2006, art. 24-A)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "Se ele for preso em flagrante, só uma autoridade judicial pode conceder fiança (Lei 11.340/2006, art. 24-A, § 2º)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A09",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "Uma delas é a proibição de aproximação da ofendida. Isso inclui manter uma distância mínima de você (Lei 11.340/2006, art. 22, inciso III, alínea \"a\")."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A10",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Destruir, inutilizar ou deteriorar coisa alheia é crime, com pena de detenção de um a seis meses, ou multa (Código Penal, art. 163)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "A pena aumenta — detenção de seis meses a três anos, e multa — se o crime é cometido com violência à pessoa ou grave ameaça, ou por motivo egoístico ou com prejuízo considerável para a vítima (Código Penal, art. 163, parágrafo único, incisos I e IV)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A11",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Quando o juiz verifica que o filho não deve permanecer sob a guarda do pai nem da mãe, ele defere a guarda a uma pessoa que mostre compatibilidade com a natureza da medida (Código Civil, art. 1.584, § 5º)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "Nessa escolha, o juiz considera, de preferência, o grau de parentesco e as relações de afinidade e afetividade (Código Civil, art. 1.584, § 5º)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A12",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A13",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Violência patrimonial é quando alguém controla, retém ou tira seus bens, dinheiro ou documentos (Lei 11.340/2006, art. 7º, inciso IV)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A14",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "- O delegado de polícia, quando o Município não for sede de comarca — comarca é a região onde o juiz atua (Lei 11.340/2006, art. 12-C, II).\n- O policial, quando o Município não for sede de comarca e não houver delegado disponível no momento da denúncia (Lei 11.340/2006, art. 12-C, III)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "Nesses dois últimos casos, o juiz é comunicado em até 24 horas e decide, no mesmo prazo, se mantém ou revoga a medida (Lei 11.340/2006, art. 12-C, § 1º)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A15",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "O Formulário Nacional de Avaliação de Risco serve para identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas. Ele subsidia a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e da rede de proteção na gestão do risco identificado (Lei 14.149/2021, art. 2º, § 1º)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "Sobre quem aplica: o formulário deve ser aplicado preferencialmente pela Polícia Civil no momento de registro da ocorrência. Se não for possível, pelo Ministério Público ou pelo Poder Judiciário, no primeiro atendimento à mulher (Lei 14.149/2021, art. 2º, § 2º)."
+      },
+      {
+        "numero": 3,
+        "presente": true,
+        "trecho": "Sobre o sigilo: sim, as informações devem ser preservadas em sigilo em qualquer hipótese (Lei 14.149/2021, art. 2º, § 1º)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A16",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A17",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 3,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "a lei exige como condição obrigatória a realização prévia de perícia médica e proíbe que a Polícia Civil ou entidades privadas apliquem o formulário, sendo sua aplicação exclusiva do juiz após o início do processo (Lei 14.149/2021, art. 2º, §§ 2º e 3º). Além disso, as informações prestadas pela mulher não têm sigilo e ficam abertas à consulta pública nos autos (Lei 14.149/2021, art. 2º, § 1º)."
+  },
+  {
+    "codigo": "A18",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  }
+]
+

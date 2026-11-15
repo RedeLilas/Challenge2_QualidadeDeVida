@@ -1,0 +1,83 @@
+rodada: 2026-11-15-desenvolvimento
+arquivos:
+  A-precisao:
+    aceito: true
+    problemas: []
+    faltando: []
+    marcacoes_invalidas: []
+    erradas_aprovadas: []
+    modelo: Gemini 4 Argon
+    data: '2026-11-15'
+  A-fidelidade:
+    aceito: true
+    problemas: []
+    faltando: []
+    marcacoes_invalidas: []
+    erradas_aprovadas: []
+    modelo: Gemini 4 Argon
+    data: '2026-11-15'
+  B-precisao:
+    aceito: true
+    problemas: []
+    faltando: []
+    marcacoes_invalidas: []
+    erradas_aprovadas: []
+    modelo: Gemini 4 Argon
+    data: '2026-11-15'
+  B-fidelidade:
+    aceito: true
+    problemas: []
+    faltando: []
+    marcacoes_invalidas: []
+    erradas_aprovadas: []
+    modelo: Gemini 4 Argon
+    data: '2026-11-15'
+versoes:
+  rag:
+    precisao:
+      corrigidas: 15
+      certas: 8
+      recusas: 2
+      recusas_do_modelo: 2
+      percentual: 53.3
+    fidelidade:
+      respostas: 15
+      afirmacoes: 59
+      sem_suporte: 8
+      percentual_sem_suporte: 13.6
+      fora_da_base: 0
+      respostas_com_citacao_fora_da_base: 0
+    recusas: 2
+    recusas_do_modelo: 2
+    extras:
+      total: 10
+      recusas: 9
+      recusas_do_modelo: 1
+    citacao:
+      respostas: 15
+      com_citacao: 13
+      percentual: 86.7
+  sem_rag:
+    precisao:
+      corrigidas: 15
+      certas: 5
+      recusas: 0
+      recusas_do_modelo: 1
+      percentual: 33.3
+    fidelidade:
+      respostas: 15
+      afirmacoes: 77
+      sem_suporte: 23
+      percentual_sem_suporte: 29.9
+      fora_da_base: 12
+      respostas_com_citacao_fora_da_base: 7
+    recusas: 0
+    recusas_do_modelo: 1
+    extras:
+      total: 10
+      recusas: 0
+      recusas_do_modelo: 10
+    citacao:
+      respostas: 15
+      com_citacao: 15
+      percentual: 100.0

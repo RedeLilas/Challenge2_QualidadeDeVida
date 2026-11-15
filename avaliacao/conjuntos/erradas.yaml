@@ -1,0 +1,21 @@
+versao: 1
+
+erradas:
+  - id: errada-1
+    pergunta_id: dv-007
+    autor: "Túlio Celeri"
+    resposta: "Se você precisar sair de casa com seus filhos por causa de violência doméstica, o juiz pode autorizar o seu afastamento do lar sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos (Lei 11.340/2006, art. 23, III). Além disso, o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica, pelo prazo de até 24 meses (Lei 11.340/2006, art. 23, VI)."
+    erro: "Número errado (prazo): afirma que o auxílio-aluguel pode ser concedido pelo prazo de até 24 meses, mas o art. 23, inciso VI, da Lei 11.340/2006 estabelece 'por período não superior a 6 (seis) meses'."
+
+  - id: errada-2
+    pergunta_id: dv-008
+    autor: "Túlio Celeri"
+    resposta: "Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa, mas o crime só se configura quando a medida foi determinada por um juiz criminal, não valendo para decisões de juiz cível (Lei 11.340/2006, art. 24-A, § 1º). Caso o agressor seja preso em flagrante, o próprio delegado de polícia pode conceder fiança na delegacia para que ele responda em liberdade, sem precisar de decisão do juiz (Lei 11.340/2006, art. 24-A, § 2º)."
+    erro: "Regra invertida: afirma que o crime só vale para decisões de juiz criminal e que o delegado pode conceder fiança na delegacia, contradizendo o art. 24-A, § 1º ('A configuração do crime independe da competência civil ou criminal do juiz que deferiu as medidas') e § 2º ('Na hipótese de prisão em flagrante, apenas a autoridade judicial poderá conceder fiança') da Lei 11.340/2006."
+
+  - id: errada-3
+    pergunta_id: dv-015
+    autor: "Túlio Celeri"
+    resposta: "O Formulário Nacional de Avaliação de Risco serve para identificar fatores de risco de violência doméstica contra a mulher, mas a lei exige como condição obrigatória a realização prévia de perícia médica e proíbe que a Polícia Civil ou entidades privadas apliquem o formulário, sendo sua aplicação exclusiva do juiz após o início do processo (Lei 14.149/2021, art. 2º, §§ 2º e 3º). Além disso, as informações prestadas pela mulher não têm sigilo e ficam abertas à consulta pública nos autos (Lei 14.149/2021, art. 2º, § 1º)."
+    erro: "Condição inventada e contradição ao texto legal: inventa a exigência de perícia médica prévia e contradiz o art. 2º da Lei 14.149/2021 nos §§ 1º, 2º e 3º, que preveem aplicação preferencial pela Polícia Civil no registro da ocorrência, facultam o uso por entidades públicas ou privadas e determinam que deve 'ser preservado, em qualquer hipótese, o sigilo das informações'."
+

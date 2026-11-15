@@ -1,0 +1,403 @@
+=== A01 ===
+PERGUNTA:
+O irmão de uma colega pegou escondido uma quantia em dinheiro da bolsa dela sem usar agressão nem intimidação, e o ex-marido de quem ela já estava separada no papel também sumiu com um objeto dela sem violência. Quando um irmão ou um ex-marido separado judicialmente pega bens da pessoa sem usar violência, o processo criminal começa sozinho ou depende de a vítima dar autorização?
+
+GABARITO:
+Depende de representação da vítima. Pelo Código Penal, quando um crime contra o patrimônio sem emprego de grave ameaça ou violência à pessoa é cometido em prejuízo de cônjuge desquitado ou judicialmente separado, de irmão, ou de tio ou sobrinho com quem o agente coabita, a ação penal somente se procede mediante representação da vítima.
+
+PONTOS OBRIGATÓRIOS:
+1. Nos crimes contra o patrimônio cometidos sem violência ou grave ameaça em prejuízo de irmão ou de cônjuge judicialmente separado, a ação penal depende de representação da vítima.
+
+RESPOSTA:
+Não sei responder com segurança se esses dois casos entram na Lei Maria da Penha. Vou explicar o que sei e o que depende de cada situação.
+
+**1. Irmão que pegou dinheiro da bolsa**
+- A Lei Maria da Penha trata de violência contra a mulher no âmbito da família e de relação íntima de afeto (Lei 11.340/2006, art. 5º). Ela não cobre todo conflito entre irmãos.
+- Pegar dinheiro alheio sem violência pode ser tratado como furto, se houver subtração para si (Código Penal, art. 155).
+- Em regra, o furto é crime de ação penal pública: o processo não depende de autorização da vítima. Mas há casos em que a lei exige representação, que é a manifestação da vítima querendo que o fato seja investigado (Código Penal, art. 167).
+- Não sei dizer com segurança se o caso do irmão se encaixa nessa exigência.
+
+**2. Ex-marido separado que sumiu com um objeto**
+- Se a separação já está formalizada e não há mais relação de afeto, pode ser discutido se a Lei Maria da Penha se aplica. Não sei responder com segurança.
+- Sem violência, o fato pode ser tratado como furto ou apropriação indébita, que é ficar com coisa alheia que estava em sua posse (Código Penal, arts. 155 e 168).
+- Também aqui a ação costuma ser pública, mas pode haver exigência de representação em alguns casos (Código Penal, art. 167).
+
+**O que fazer**
+- Orientar a colega a procurar uma delegacia, de preferência a Delegacia da Mulher, e uma advogada ou a Defensoria Pública.
+- Quem decide se o crime é de ação pública ou depende de representação é a autoridade policial e o juiz, com base no caso concreto.
+
+Se ela estiver em perigo agora, ligue 190.
+
+=== A02 ===
+PERGUNTA:
+ele nunca me bateu, só quebrou minhas coisas e me humilhou, isso conta?
+
+GABARITO:
+Sim. A Lei Maria da Penha protege a mulher contra formas de violência doméstica e familiar que não exigem agressão física: quebrar objetos ou bens configura violência patrimonial (destruição parcial ou total de objetos, instrumentos de trabalho, documentos pessoais ou bens) e humilhar a mulher configura violência psicológica (conduta que cause dano emocional e diminuição da autoestima mediante humilhação, insulto ou ridicularização).
+
+PONTOS OBRIGATÓRIOS:
+1. A proteção da Lei Maria da Penha abrange condutas mesmo sem agressão física.
+2. Quebrar objetos ou bens da mulher configura violência patrimonial.
+3. Humilhar a mulher configura violência psicológica.
+
+RESPOSTA:
+Sim, conta. A lei não fala só de agressão física.
+
+**Violência patrimonial** é quando alguém quebra, esconde ou destrói seus objetos, documentos ou bens (Lei 11.340/2006, art. 7º, inciso IV). Quebrar suas coisas entra aí.
+
+**Violência moral** é quando alguém faz xingamento, calúnia ou difamação contra você (Lei 11.340/2006, art. 7º, inciso V). Humilhar e ofender entra aí.
+
+**Violência psicológica** é quando alguém causa dano emocional, diminui sua autoestima ou controla suas ações (Lei 11.340/2006, art. 7º, inciso II). Também pode se encaixar no seu caso.
+
+Quem decide se houve violência e se dá medida protetiva é o juiz. Ele pode conceder medidas protetivas de urgência, como afastamento do agressor (Lei 11.340/2006, arts. 18 e 22).
+
+Você pode procurar a Delegacia da Mulher ou a Defensoria Pública para orientação. Isso não substitui advogada ou defensora.
+
+Se você estiver em perigo agora, ligue 190.
+
+=== A03 ===
+PERGUNTA:
+o que acontece se ele descumprir a medida protetiva?
+
+GABARITO:
+Descumprir decisão judicial que defere medidas protetivas de urgência previstas na Lei Maria da Penha é crime punido com pena de reclusão de 2 a 5 anos e multa, independentemente da competência civil ou criminal do juiz que deferiu as medidas. Em caso de prisão em flagrante, apenas a autoridade judicial pode conceder fiança.
+
+PONTOS OBRIGATÓRIOS:
+1. Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa.
+2. Em caso de prisão em flagrante por esse crime, apenas o juiz pode conceder fiança.
+
+RESPOSTA:
+Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa, mas o crime só se configura quando a medida foi determinada por um juiz criminal, não valendo para decisões de juiz cível (Lei 11.340/2006, art. 24-A, § 1º). Caso o agressor seja preso em flagrante, o próprio delegado de polícia pode conceder fiança na delegacia para que ele responda em liberdade, sem precisar de decisão do juiz (Lei 11.340/2006, art. 24-A, § 2º).
+
+=== A04 ===
+PERGUNTA:
+não tenho dinheiro para advogado, quem pode me ajudar no processo?
+
+GABARITO:
+É garantido a toda mulher em situação de violência doméstica e familiar o acesso aos serviços de Defensoria Pública ou de Assistência Judiciária Gratuita, nos termos da lei, em sede policial e judicial, mediante atendimento específico e humanizado. Em todos os atos processuais cíveis e criminais a mulher deverá estar acompanhada de advogado, ressalvado o pedido de medidas protetivas de urgência.
+
+PONTOS OBRIGATÓRIOS:
+1. A mulher tem direito garantido ao atendimento gratuito pela Defensoria Pública ou pela Assistência Judiciária Gratuita, na delegacia e no processo judicial.
+
+RESPOSTA:
+Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+
+=== A05 ===
+PERGUNTA:
+ele me xinga e me chama de burra na frente dos outros, isso é crime?
+
+GABARITO:
+Sim. Injuriar alguém ofendendo sua dignidade ou o seu decoro é crime previsto no Código Penal, com pena de detenção de 1 a 6 meses ou multa. Além disso, no âmbito doméstico e familiar, xingar, insultar e ridicularizar a mulher configuram violência moral e violência psicológica nos termos da Lei Maria da Penha.
+
+PONTOS OBRIGATÓRIOS:
+1. Ofender a dignidade ou o decoro de alguém com xingamentos configura o crime de injúria previsto no Código Penal.
+2. No âmbito doméstico, a conduta também configura violência moral ou violência psicológica segundo a Lei Maria da Penha.
+
+RESPOSTA:
+Xingar e chamar de "burra" na frente dos outros pode se encaixar no crime de injúria, que é ofender a dignidade ou o decoro de alguém. A pena prevista é detenção de um a seis meses, ou multa (Código Penal, art. 140).
+
+Explicando: injúria é ofender a honra da pessoa, sem imputar a ela um fato criminoso.
+
+O juiz pode deixar de aplicar a pena em algumas situações, por exemplo, quando a própria pessoa ofendida provocou diretamente a injúria de forma reprovável (Código Penal, art. 140, § 1º, I).
+
+Se a injúria for feita com violência ou vias de fato consideradas aviltantes, a pena é maior: detenção de três meses a um ano, e multa, além da pena correspondente à violência (Código Penal, art. 140, § 2º).
+
+Esses xingamentos também podem ser uma forma de violência doméstica e familiar contra a mulher, pois a lei trata como violência física qualquer conduta que ofenda a integridade ou a saúde corporal (Lei 11.340/2006, art. 7º, I).
+
+Quem decide se há crime e qual pena aplicar é o juiz. Eu não posso garantir resultado.
+
+Se você estiver em perigo agora, ligue 190.
+
+=== A06 ===
+PERGUNTA:
+tenho direito a auxílio-aluguel se eu sair de casa com meus filhos?
+
+GABARITO:
+Sim. A Lei Maria da Penha prevê que o juiz pode conceder à ofendida auxílio-aluguel, com valor fixado em função de sua situação de vulnerabilidade social e econômica, por período não superior a 6 meses, além de assegurar o afastamento da ofendida do lar sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos.
+
+PONTOS OBRIGATÓRIOS:
+1. O juiz pode conceder auxílio-aluguel em função da situação de vulnerabilidade social e econômica da ofendida.
+2. O auxílio-aluguel tem prazo máximo de até 6 meses.
+
+RESPOSTA:
+Se você precisar sair de casa com seus filhos por causa de violência doméstica, o juiz pode autorizar o seu afastamento do lar sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos (Lei 11.340/2006, art. 23, III). Além disso, o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica, pelo prazo de até 24 meses (Lei 11.340/2006, art. 23, VI).
+
+=== A07 ===
+PERGUNTA:
+tenho direito a auxílio-aluguel se eu sair de casa com meus filhos?
+
+GABARITO:
+Sim. A Lei Maria da Penha prevê que o juiz pode conceder à ofendida auxílio-aluguel, com valor fixado em função de sua situação de vulnerabilidade social e econômica, por período não superior a 6 meses, além de assegurar o afastamento da ofendida do lar sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos.
+
+PONTOS OBRIGATÓRIOS:
+1. O juiz pode conceder auxílio-aluguel em função da situação de vulnerabilidade social e econômica da ofendida.
+2. O auxílio-aluguel tem prazo máximo de até 6 meses.
+
+RESPOSTA:
+Não posso dizer que você "tem direito" — quem decide é o juiz. Mas a lei prevê esse auxílio em alguns casos.
+
+O que a lei diz:
+- O juiz pode conceder auxílio-aluguel à mulher que sair do lar em situação de violência. O valor e o tempo ficam a critério do juiz (Lei 11.340/2006, art. 9º, § 4º).
+- Esse auxílio é uma medida protetiva de urgência. Medida protetiva é uma decisão rápida do juiz para proteger você (Lei 11.340/2006, art. 22, inciso V).
+- O pedido pode incluir seus filhos, que também são protegidos pela lei (Lei 11.340/2006, art. 22, caput).
+
+Pontos importantes:
+- Não é automático. Depende do pedido e da análise do juiz.
+- Costuma ser pedido junto com outras medidas protetivas.
+- Quem pode pedir por você: advogada, defensora pública ou a delegacia, que encaminha o pedido ao juiz (Lei 11.340/2006, art. 12).
+
+Se você está em perigo agora, ligue 190.
+
+Procure a Defensoria Pública ou uma advogada para avaliar seu caso. Eu oriento, mas não substituo advogada ou defensora.
+
+=== A08 ===
+PERGUNTA:
+o que acontece se ele descumprir a medida protetiva?
+
+GABARITO:
+Descumprir decisão judicial que defere medidas protetivas de urgência previstas na Lei Maria da Penha é crime punido com pena de reclusão de 2 a 5 anos e multa, independentemente da competência civil ou criminal do juiz que deferiu as medidas. Em caso de prisão em flagrante, apenas a autoridade judicial pode conceder fiança.
+
+PONTOS OBRIGATÓRIOS:
+1. Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa.
+2. Em caso de prisão em flagrante por esse crime, apenas o juiz pode conceder fiança.
+
+RESPOSTA:
+Se ele descumprir uma medida protetiva de urgência, isso é crime. A lei prevê pena de reclusão de 2 a 5 anos, e multa (Lei 11.340/2006, art. 24-A).
+
+Reclusão é o tipo de pena em que a pessoa cumpre a pena em regime mais rigoroso, conforme a decisão do juiz.
+
+O crime existe mesmo que o juiz que concedeu a medida seja da área civil ou criminal (Lei 11.340/2006, art. 24-A, § 1º).
+
+Se ele for preso em flagrante, só uma autoridade judicial pode conceder fiança (Lei 11.340/2006, art. 24-A, § 2º). Fiança é o valor pago para responder ao processo em liberdade.
+
+Essa punição não impede outras sanções cabíveis (Lei 11.340/2006, art. 24-A, § 3º).
+
+A pena aumenta de um terço até a metade se o descumprimento envolver violação de áreas de exclusão monitoradas eletronicamente ou remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial (Lei 11.340/2006, art. 24-A, § 4º).
+
+Quem decide sobre a pena é o juiz. Eu não posso garantir resultado.
+
+Se você estiver em perigo agora, ligue 190.
+
+Isto é orientação e não substitui advogada ou defensora.
+
+=== A09 ===
+PERGUNTA:
+o juiz pode proibir ele de chegar perto de mim?
+
+GABARITO:
+Sim. Constatada a prática de violência doméstica e familiar contra a mulher, o juiz pode aplicar de imediato ao agressor a proibição de aproximação da ofendida, de seus familiares e das testemunhas, fixando um limite mínimo de distância entre estes e o agressor.
+
+PONTOS OBRIGATÓRIOS:
+1. O juiz pode proibir o agressor de se aproximar da ofendida, de seus familiares e das testemunhas.
+2. O juiz fixa um limite mínimo de distância que o agressor deve manter.
+
+RESPOSTA:
+Sim. A lei prevê que o juiz pode aplicar medidas protetivas de urgência. Uma delas é a proibição de aproximação da ofendida. Isso inclui manter uma distância mínima de você (Lei 11.340/2006, art. 22, inciso III, alínea "a").
+
+"Medida protetiva de urgência" é uma decisão rápida do juiz para proteger você.
+
+Quem decide é o juiz. Ele pode conceder se entender que há risco à sua integridade. A lei também prevê que ele pode proibir o contato com você por qualquer meio de comunicação (Lei 11.340/2006, art. 22, inciso III, alínea "b").
+
+Se você estiver em perigo agora, ligue 190.
+
+Isso é orientação e não substitui advogada ou defensora.
+
+=== A10 ===
+PERGUNTA:
+Durante uma briga no mês passado, o ex-companheiro de uma vizinha jogou no chão o computador e a impressora que ela usava para trabalhar até quebrar tudo, deixando um prejuízo alto para ela. Quebrar de propósito os objetos de outra pessoa é crime no Código Penal, e a pena aumenta quando isso causa prejuízo grande ou tem agressão?
+
+GABARITO:
+Sim. Destruir, inutilizar ou deteriorar coisa alheia configura o crime de dano previsto no Código Penal, com pena de detenção de 1 a 6 meses ou multa. Se o crime é cometido com violência à pessoa ou grave ameaça, por motivo egoístico ou com prejuízo considerável para a vítima, a pena passa a ser de detenção de 6 meses a 3 anos e multa, além da pena correspondente à violência.
+
+PONTOS OBRIGATÓRIOS:
+1. Destruir, inutilizar ou deteriorar coisa alheia é crime de dano previsto no Código Penal.
+2. A pena aumenta para detenção de 6 meses a 3 anos e multa quando o crime é cometido com violência à pessoa ou grave ameaça, por motivo egoístico ou com prejuízo considerável para a vítima.
+
+RESPOSTA:
+Sim. Destruir, inutilizar ou deteriorar coisa alheia é crime, com pena de detenção de um a seis meses, ou multa (Código Penal, art. 163).
+
+A pena aumenta — detenção de seis meses a três anos, e multa — se o crime é cometido com violência à pessoa ou grave ameaça, ou por motivo egoístico ou com prejuízo considerável para a vítima (Código Penal, art. 163, parágrafo único, incisos I e IV).
+
+"Coisa alheia" é o objeto que pertence a outra pessoa. "Detenção" é um tipo de pena privativa de liberdade. Quem decide se há crime e qual pena aplicar é o juiz.
+
+Se houver perigo agora, ligue 190.
+
+=== A11 ===
+PERGUNTA:
+No processo de família de uma conhecida, o juiz viu que a criança não tinha condições seguras de continuar morando nem com o pai nem com a mãe, mas uma avó muito próxima que sempre cuidou do neto pediu para ficar com a guarda. Quando o filho não deve ficar sob a guarda do pai nem da mãe, para quem o juiz transfere a guarda e o que ele leva em conta?
+
+GABARITO:
+Se o juiz verificar que o filho não deve permanecer sob a guarda do pai ou da mãe, deferirá a guarda a pessoa que revele compatibilidade com a natureza da medida, considerados, de preferência, o grau de parentesco e as relações de afinidade e afetividade.
+
+PONTOS OBRIGATÓRIOS:
+1. Quando o filho não deve permanecer sob a guarda do pai ou da mãe, o juiz defere a guarda a outra pessoa compatível com a medida.
+2. O juiz considera de preferência o grau de parentesco e as relações de afinidade e afetividade.
+
+RESPOSTA:
+Quando o juiz verifica que o filho não deve permanecer sob a guarda do pai nem da mãe, ele defere a guarda a uma pessoa que mostre compatibilidade com a natureza da medida (Código Civil, art. 1.584, § 5º).
+
+Nessa escolha, o juiz considera, de preferência, o grau de parentesco e as relações de afinidade e afetividade (Código Civil, art. 1.584, § 5º).
+
+"Defere" significa que o juiz concede a guarda. Quem decide é o juiz, após analisar o caso.
+
+Isso é orientação geral e não substitui advogada ou defensora. Se houver perigo agora, ligue 190.
+
+=== A12 ===
+PERGUNTA:
+o que é medida protetiva e como eu peço?
+
+GABARITO:
+As medidas protetivas de urgência são ordens judiciais previstas na Lei Maria da Penha para proteger a mulher em situação de violência doméstica e familiar, podendo obrigar o agressor ao afastamento do lar e à proibição de aproximação ou contato com a ofendida. Elas podem ser concedidas pelo juiz a pedido da própria ofendida — inclusive registrado perante a autoridade policial na delegacia, que remete o expediente ao juiz em até 48 horas — ou a requerimento do Ministério Público, cabendo ao juiz decidir em até 48 horas.
+
+PONTOS OBRIGATÓRIOS:
+1. São medidas judiciais de proteção de urgência à mulher em situação de violência doméstica, como afastamento do agressor ou proibição de aproximação e contato.
+2. Podem ser solicitadas pela própria ofendida, inclusive na delegacia, ou requeridas pelo Ministério Público para decisão do juiz.
+
+RESPOSTA:
+**O que é medida protetiva**
+
+É uma decisão do juiz para proteger você. O juiz pode aplicar medidas ao agressor, como prestação de alimentos provisionais — uma ajuda de custo temporária para o seu sustento (Lei 11.340/2006, art. 22, V).
+
+**Como pedir**
+
+Você pode pedir. A lei diz que as medidas podem ser concedidas pelo juiz a pedido da ofendida — ou seja, a seu pedido — ou a requerimento do Ministério Público (Lei 11.340/2006, art. 19).
+
+O juiz pode conceder de imediato, sem ouvir antes as partes nem o Ministério Público, que depois é comunicado (Lei 11.340/2006, art. 19, § 1º).
+
+Não é preciso que a violência já tenha um tipo penal definido, nem ação penal ou cível, nem inquérito, nem boletim de ocorrência para o juiz conceder (Lei 11.340/2006, art. 19, § 5º).
+
+Depois de concedida, a medida é registrada em banco de dados do Conselho Nacional de Justiça (Lei 11.340/2006, art. 38-A).
+
+**Importante**
+
+Se o agressor descumprir a decisão, isso é crime, com pena de reclusão de 2 a 5 anos e multa (Lei 11.340/2006, art. 24-A).
+
+Eu não sei responder com segurança, com base apenas nesses trechos, qual é o passo a passo prático para fazer o pedido (onde e como protocolar). Para isso, procure uma advogada ou a Defensoria Pública.
+
+Se você estiver em perigo agora, ligue 190.
+
+=== A13 ===
+PERGUNTA:
+meu companheiro controla todo o meu dinheiro e não me deixa trabalhar
+
+GABARITO:
+Essas condutas configuram violência doméstica e familiar previstas na Lei Maria da Penha: controlar o dinheiro ou reter valores e recursos econômicos da mulher caracteriza violência patrimonial, enquanto controlar suas ações, comportamentos e decisões, como impedi-la de trabalhar e prejudicar sua autodeterminação, caracteriza violência psicológica.
+
+PONTOS OBRIGATÓRIOS:
+1. Controlar o dinheiro ou reter recursos econômicos da mulher configura violência patrimonial.
+2. Controlar as ações e decisões da mulher, como impedi-la de trabalhar, configura violência psicológica.
+
+RESPOSTA:
+Isso é violência patrimonial. A lei prevê esse tipo de violência.
+
+Violência patrimonial é quando alguém controla, retém ou tira seus bens, dinheiro ou documentos (Lei 11.340/2006, art. 7º, inciso IV).
+
+Impedir você de trabalhar também é uma forma de violência. A lei trata do direito à autonomia econômica (Lei 11.340/2006, art. 7º, inciso IV).
+
+O que a lei prevê:
+- Você pode pedir medida protetiva de urgência. Medida protetiva é uma decisão rápida do juiz para proteger você. O juiz pode conceder, por exemplo, afastamento do agressor do lar e proibição de contato (Lei 11.340/2006, arts. 18 e 22).
+- A lei prevê atendimento pela Defensoria Pública e assistência jurídica gratuita (Lei 11.340/2006, art. 28).
+
+Quem decide é o juiz. Não há resultado garantido.
+
+Você pode procurar:
+- Delegacia da Mulher ou qualquer delegacia para registrar boletim de ocorrência.
+- Defensoria Pública ou advogada.
+- Ligue 180 para orientação gratuita.
+
+Se você estiver em perigo agora, ligue 190.
+
+Isso é orientação e não substitui advogada ou defensora.
+
+=== A14 ===
+PERGUNTA:
+a polícia pode tirar ele de casa na hora se eu estiver correndo perigo?
+
+GABARITO:
+Verificada a existência de risco atual ou iminente à vida ou à integridade da mulher ou de seus dependentes, o agressor será imediatamente afastado do lar pela autoridade judicial, pelo delegado de polícia quando o município não for sede de comarca, ou pelo policial quando o município não for sede de comarca e não houver delegado disponível no momento da denúncia. Quando o afastamento é determinado pelo delegado ou pelo policial, o juiz deve ser comunicado no prazo máximo de 24 horas e decidirá em igual prazo sobre a manutenção ou revogação da medida.
+
+PONTOS OBRIGATÓRIOS:
+1. Em caso de risco atual ou iminente, o afastamento imediato do agressor do lar pode ser determinado pelo delegado, quando o município não for sede de comarca, ou pelo policial, quando também não houver delegado disponível.
+2. O juiz deve ser comunicado no prazo máximo de 24 horas e decidir em igual prazo sobre a manutenção ou revogação da medida.
+
+RESPOSTA:
+Em alguns casos, sim. A lei prevê que o agressor seja afastado do lar imediatamente quando houver risco atual ou iminente à sua vida ou à sua integridade física, sexual, psicológica, moral ou patrimonial (Lei 11.340/2006, art. 12-C).
+
+Quem pode fazer esse afastamento:
+- A autoridade judicial, ou seja, o juiz ou juíza (Lei 11.340/2006, art. 12-C, I).
+- O delegado de polícia, quando o Município não for sede de comarca — comarca é a região onde o juiz atua (Lei 11.340/2006, art. 12-C, II).
+- O policial, quando o Município não for sede de comarca e não houver delegado disponível no momento da denúncia (Lei 11.340/2006, art. 12-C, III).
+
+Nesses dois últimos casos, o juiz é comunicado em até 24 horas e decide, no mesmo prazo, se mantém ou revoga a medida (Lei 11.340/2006, art. 12-C, § 1º).
+
+A lei também prevê que o agressor seja submetido à monitoração eletrônica — fiscalização por equipamento, como tornozeleira — quando verificado risco atual ou iminente (Lei 11.340/2006, art. 12-D).
+
+Ao registrar a ocorrência, a autoridade policial deve ouvir você e lavrar o boletim de ocorrência (Lei 11.340/2006, art. 12, I), e deve enviar ao juiz, em até 48 horas, seu pedido de medidas protetivas de urgência (Lei 11.340/2006, art. 12, III).
+
+Se você estiver em perigo agora, ligue 190.
+
+Isso é orientação e não substitui advogada ou defensora.
+
+=== A15 ===
+PERGUNTA:
+Quando uma amiga foi registrar ocorrência de violência doméstica na delegacia, aplicaram nela o Formulário Nacional de Avaliação de Risco. Para que serve esse formulário, quais órgãos devem aplicá-lo no atendimento à mulher e as informações que ela responde ficam protegidas por sigilo?
+
+GABARITO:
+O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e da rede de proteção na gestão do risco identificado. Ele deve ser preferencialmente aplicado pela Polícia Civil no momento do registro da ocorrência ou, em sua impossibilidade, pelo Ministério Público ou pelo Poder Judiciário no primeiro atendimento, devendo ser preservado em qualquer hipótese o sigilo das informações.
+
+PONTOS OBRIGATÓRIOS:
+1. Tem o objetivo de identificar fatores de risco de violência doméstica para subsidiar a atuação dos órgãos de segurança pública, Ministério Público, Judiciário e rede de proteção.
+2. Deve ser aplicado preferencialmente pela Polícia Civil no registro da ocorrência, ou pelo Ministério Público ou Poder Judiciário no primeiro atendimento.
+3. O sigilo das informações deve ser preservado em qualquer hipótese.
+
+RESPOSTA:
+O Formulário Nacional de Avaliação de Risco serve para identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas. Ele subsidia a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e da rede de proteção na gestão do risco identificado (Lei 14.149/2021, art. 2º, § 1º).
+
+Sobre quem aplica: o formulário deve ser aplicado preferencialmente pela Polícia Civil no momento de registro da ocorrência. Se não for possível, pelo Ministério Público ou pelo Poder Judiciário, no primeiro atendimento à mulher (Lei 14.149/2021, art. 2º, § 2º). Outros órgãos e entidades públicas ou privadas que atuem nessa área também podem usar o modelo, de forma facultativa (Lei 14.149/2021, art. 2º, § 3º).
+
+Sobre o sigilo: sim, as informações devem ser preservadas em sigilo em qualquer hipótese (Lei 14.149/2021, art. 2º, § 1º).
+
+Lembrando: isso é orientação e não substitui advogada ou defensora. Se ela estiver em perigo agora, ligue 190.
+
+=== A16 ===
+PERGUNTA:
+Em uma reunião de família no ano passado, o cunhado de uma amiga aproveitou que ela estava sozinha na cozinha e passou a mão pelo corpo dela e tentou beijá-la sem permissão, embora não tenha batido nela nem feito ameaças. Que crime comete quem passa a mão ou tenta beijar alguém sem a pessoa deixar, e qual é a pena prevista na lei?
+
+GABARITO:
+Praticar contra alguém e sem a sua anuência ato libidinoso com o objetivo de satisfazer a própria lascívia ou a de terceiro configura o crime de importunação sexual previsto no Código Penal, com pena de reclusão de 1 a 5 anos, se o ato não constitui crime mais grave.
+
+PONTOS OBRIGATÓRIOS:
+1. Praticar ato libidinoso contra alguém sem o seu consentimento para satisfazer o próprio desejo sexual ou o de terceiro é crime de importunação sexual.
+2. A pena prevista é de reclusão de 1 a 5 anos, se o ato não constituir crime mais grave.
+
+RESPOSTA:
+Não sei responder com segurança. Os trechos enviados não tratam especificamente de toque ou beijo forçado sem violência ou grave ameaça. O art. 213 do Código Penal exige violência ou grave ameaça para o crime de estupro, e o art. 129 trata de lesão corporal, o que não parece ser o caso descrito. Para orientação adequada, é importante procurar uma advogada ou defensora.
+
+=== A17 ===
+PERGUNTA:
+Quando uma amiga foi registrar ocorrência de violência doméstica na delegacia, aplicaram nela o Formulário Nacional de Avaliação de Risco. Para que serve esse formulário, quais órgãos devem aplicá-lo no atendimento à mulher e as informações que ela responde ficam protegidas por sigilo?
+
+GABARITO:
+O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e da rede de proteção na gestão do risco identificado. Ele deve ser preferencialmente aplicado pela Polícia Civil no momento do registro da ocorrência ou, em sua impossibilidade, pelo Ministério Público ou pelo Poder Judiciário no primeiro atendimento, devendo ser preservado em qualquer hipótese o sigilo das informações.
+
+PONTOS OBRIGATÓRIOS:
+1. Tem o objetivo de identificar fatores de risco de violência doméstica para subsidiar a atuação dos órgãos de segurança pública, Ministério Público, Judiciário e rede de proteção.
+2. Deve ser aplicado preferencialmente pela Polícia Civil no registro da ocorrência, ou pelo Ministério Público ou Poder Judiciário no primeiro atendimento.
+3. O sigilo das informações deve ser preservado em qualquer hipótese.
+
+RESPOSTA:
+O Formulário Nacional de Avaliação de Risco serve para identificar fatores de risco de violência doméstica contra a mulher, mas a lei exige como condição obrigatória a realização prévia de perícia médica e proíbe que a Polícia Civil ou entidades privadas apliquem o formulário, sendo sua aplicação exclusiva do juiz após o início do processo (Lei 14.149/2021, art. 2º, §§ 2º e 3º). Além disso, as informações prestadas pela mulher não têm sigilo e ficam abertas à consulta pública nos autos (Lei 14.149/2021, art. 2º, § 1º).
+
+=== A18 ===
+PERGUNTA:
+meu namorado não mora comigo, a Lei Maria da Penha vale pra mim?
+
+GABARITO:
+Sim. A Lei Maria da Penha aplica-se a qualquer relação íntima de afeto na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação, ou seja, mesmo que não morem na mesma casa.
+
+PONTOS OBRIGATÓRIOS:
+1. A Lei Maria da Penha protege a mulher em qualquer relação íntima de afeto.
+2. A aplicação da lei independe de coabitação, não sendo necessário morar junto.
+
+RESPOSTA:
+Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.

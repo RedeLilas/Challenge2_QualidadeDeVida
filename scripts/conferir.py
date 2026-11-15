@@ -16,6 +16,9 @@ Regras:
 - Resposta errada de propósito aprovada pelo corretor: a correção daquele arquivo é rejeitada.
 - Recusa (resposta igual ao texto de recusa do sistema) e presença de citação são calculadas
   por código. Recusa dentro do tema conta como erro de precisão.
+- Recusa do modelo (resposta que começa com "Não sei responder com segurança", a frase que as
+  instruções das duas versões pedem) é contada à parte e não muda a precisão, que fica com o corretor.
+- As extras não vão ao corretor; as recusas delas são contadas por versão.
 
 Grava resultado.yaml na pasta da rodada.
 """
@@ -34,6 +37,7 @@ ARQUIVOS = ("A", "B")
 TIPOS = ("precisao", "fidelidade")
 VERSOES = ("rag", "sem_rag")
 SUPORTES = ("sim", "nao", "fora_da_base")
+INICIO_RECUSA_DO_MODELO = "não sei responder com segurança"
 
 
 class ErroConferencia(RuntimeError):
@@ -51,6 +55,14 @@ def _normalizar(texto) -> str:
 def _contido(trecho, texto: str) -> bool:
     trecho = _normalizar(trecho)
     return bool(trecho) and trecho in _normalizar(texto)
+
+
+def _recusa(resposta: str) -> bool:
+    return resposta.strip() == RECUSA
+
+
+def _recusa_do_modelo(resposta: str) -> bool:
+    return _normalizar(resposta).lower().startswith(INICIO_RECUSA_DO_MODELO)
 
 
 def _ler_json(caminho: Path) -> list:
@@ -169,6 +181,7 @@ def conferir(pasta_rodada: Path) -> dict:
     conteudo = _ler(pasta_rodada / "envios" / "conteudo.yaml")
     mapa = _ler(pasta_rodada / "mapa.yaml")
     versoes = {i["codigo"]: i["versao"] for itens in mapa["arquivos"].values() for i in itens}
+    extras = [r for r in _ler(pasta_rodada / "respostas.yaml") if r["tipo"] == "extra"]
     registro_retornos = pasta / "registro.yaml"
     registro = (_ler(registro_retornos) or {}) if registro_retornos.is_file() else {}
 
@@ -181,7 +194,8 @@ def conferir(pasta_rodada: Path) -> dict:
     metricas = {}
     for versao in VERSOES:
         codigos = [(a, c) for a in ARQUIVOS for c in conteudo[a] if versoes[c] == versao]
-        recusa = {c: conteudo[a][c]["resposta"].strip() == RECUSA for a, c in codigos}
+        recusa = {c: _recusa(conteudo[a][c]["resposta"]) for a, c in codigos}
+        recusa_do_modelo = {c: _recusa_do_modelo(conteudo[a][c]["resposta"]) for a, c in codigos}
         citada = {c: bool(extrair_referencias(conteudo[a][c]["resposta"], list(LEIS_JURIDICAS))) for a, c in codigos}
         precisao = {c: certa for a, c in codigos if (certa := correcoes[f"{a}-precisao"].get(c)) is not None}
         certas = sum(certa and not recusa[c] for c, certa in precisao.items())
@@ -192,6 +206,7 @@ def conferir(pasta_rodada: Path) -> dict:
                 "corrigidas": len(precisao),
                 "certas": certas,
                 "recusas": sum(recusa[c] for c in precisao),
+                "recusas_do_modelo": sum(recusa_do_modelo[c] for c in precisao),
                 "percentual": _percentual(certas, len(precisao)),
             },
             "fidelidade": {
@@ -205,6 +220,12 @@ def conferir(pasta_rodada: Path) -> dict:
                 ),
             },
             "recusas": sum(recusa.values()),
+            "recusas_do_modelo": sum(recusa_do_modelo.values()),
+            "extras": {
+                "total": len(extras),
+                "recusas": sum(_recusa(r[versao]["resposta"]) for r in extras),
+                "recusas_do_modelo": sum(_recusa_do_modelo(r[versao]["resposta"]) for r in extras),
+            },
             "citacao": {
                 "respostas": len(codigos),
                 "com_citacao": sum(citada.values()),
@@ -236,7 +257,10 @@ def main() -> int:
         print(
             f"{versao}: precisão {m['precisao']['certas']}/{m['precisao']['corrigidas']}, "
             f"sem suporte {m['fidelidade']['sem_suporte']}/{m['fidelidade']['afirmacoes']}, "
-            f"recusas {m['recusas']}, com citação {m['citacao']['com_citacao']}/{m['citacao']['respostas']}"
+            f"recusas {m['recusas']} (do modelo: {m['recusas_do_modelo']}), "
+            f"com citação {m['citacao']['com_citacao']}/{m['citacao']['respostas']}; "
+            f"extras recusadas {m['extras']['recusas']} (do modelo: {m['extras']['recusas_do_modelo']})"
+            f"/{m['extras']['total']}"
         )
     print(f"Resultado em {args.rodada / 'resultado.yaml'}")
     return 0 if all(s["aceito"] for s in resultado["arquivos"].values()) else 1
