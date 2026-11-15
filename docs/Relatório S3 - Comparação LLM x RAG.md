@@ -133,7 +133,10 @@ As 10 extras não foram ao corretor e não entram na precisão nem na fidelidade
 
 ### Observações da equipe
 
-<!-- PENDENTE (tarefa 5.4): resumo da leitura das 10 extras nas duas versões, escrito pela equipe a partir de leitura-extras.md. -->
+- **Com RAG, nenhuma pergunta fora do tema foi respondida:** em 9 das 10 extras, o sistema aplicou a recusa padrão, com encaminhamento ao Ligue 180 e à Defensoria Pública do DF. Só 1 delas (of-extra-010) foi barrada pelo limite de similaridade; as outras 8 passaram do limite (de 0,811 a 0,843) e foram barradas pela verificação de citação ou de idioma. Ou seja, com o limite em 0,81, quem segura as extras é a segunda camada. Na única recusa vinda do próprio modelo (of-extra-008, sobre futebol), ele recusou o tema mas citou um artigo que veio nos trechos recuperados (`Código Penal, art. 129`). Por isso a resposta passou pela verificação de citação sem o encaminhamento padrão, e ela expôs que o modelo recebeu trechos sobre lesão corporal.
+- **Sem RAG, o modelo extrapolou o escopo em perguntas jurídicas de outras áreas:** embora tenha recusado bem as 4 perguntas cotidianas (of-extra-007 a 010) e 3 das jurídicas, respondeu integralmente sobre direito do consumidor (of-extra-001, citando `Lei 8.078/1990, art. 49`) e direito do trabalho (of-extra-004, citando `CLT, art. 134` e `art. 136`). Além disso, em of-extra-005 (locação comercial), mesmo começando com a frase de recusa, adentrou o mérito e citou a Lei do Inquilinato (`Lei 8.245/1991, art. 37` e `art. 38`).
+- **Orientação jurídica revogada na versão sem RAG:** em of-extra-004 (parcelamento de férias em três períodos), o modelo sem RAG afirmou que a CLT proíbe dividir as férias em três períodos e só admite até dois períodos em casos excepcionais — reproduzindo a redação anterior à Reforma Trabalhista (Lei 13.467/2017) com aparência de certeza e citação de artigo.
+- **Vazamento de caractere não latino sem o filtro do sistema:** em of-extra-010, a versão sem RAG grafou a última palavra com letra cirílica (`orientо`), falha que na versão com RAG é barrada pela checagem `em_portugues`.
 
 ## Risco da opção (c): DeepSeek e LGPD
 

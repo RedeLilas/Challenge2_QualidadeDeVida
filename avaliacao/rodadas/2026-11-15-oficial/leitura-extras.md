@@ -22,7 +22,7 @@ Respostas copiadas sem alteração de `respostas.yaml`. A classificação (recus
 | of-extra-009 | recusa do sistema | recusa do modelo |
 | of-extra-010 | recusa do sistema | recusa do modelo |
 
-Lido por: <!-- nomes de quem leu --> 
+Lido por: Túlio Celeri
 
 ---
 
@@ -50,7 +50,7 @@ Lido por: <!-- nomes de quem leu -->
 >
 > Se a loja não resolver, você pode procurar o Procon ou a Defensoria Pública. Eu não substituo advogada ou defensora.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Com RAG, o sistema recusou de forma adequada e encaminhou para o Ligue 180 e para a Defensoria Pública do DF (a pergunta passou pelo corte de similaridade, mas foi barrada na verificação de citação ou de idioma; a rodada não guarda o texto recusado, então o motivo exato não fica registrado). Sem RAG, o modelo ignorou o limite de escopo do prompt e respondeu integralmente sobre direito do consumidor, citando lei fora da base (`Lei 8.078/1990, art. 49`) e sugerindo o Procon. Embora não prejudique diretamente alguém em situação de violência, desvirtua o propósito do assistente.
 
 ---
 
@@ -68,7 +68,7 @@ Lido por: <!-- nomes de quem leu -->
 >
 > Sobre violência contra a mulher, posso ajudar. Se sua amiga estiver em perigo agora, ligue 190.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Ambas as versões recusaram adequadamente sem inventar leis ou procedimentos. Com RAG, a recusa do sistema trouxe o encaminhamento padrão ao 180 e à Defensoria Pública do DF; sem RAG, o modelo explicou que o tema foge da Lei Maria da Penha e lembrou o 190 em caso de perigo, mas não mencionou o 180 nem a Defensoria.
 
 ---
 
@@ -84,7 +84,7 @@ Lido por: <!-- nomes de quem leu -->
 
 > Não sei responder com segurança. Esse tema é de Imposto de Renda, não da Lei Maria da Penha. Para orientação sobre a declaração de IRPF do MEI, procure a Receita Federal ou uma contadora.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Recusa adequada nas duas versões. Com RAG, entrou a mensagem padrão com indicação do 180 e da Defensoria Pública do DF. Sem RAG, o modelo delimitou bem o escopo à Lei Maria da Penha e indicou a Receita Federal ou uma contadora, sem citar artigos fora da base.
 
 ---
 
@@ -112,7 +112,7 @@ Lido por: <!-- nomes de quem leu -->
 >
 > Isso é orientação geral e não substitui advogada ou defensora.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Com RAG, houve recusa segura do sistema com encaminhamento ao 180 e à Defensoria Pública do DF. Sem RAG, o caso é grave: além de responder fora do escopo e citar artigos fora da base (`CLT, art. 134, caput`, `CLT, art. 134, § 1º` e `CLT, art. 136`), o modelo deu orientação jurídica desatualizada — reproduziu a regra anterior à Reforma Trabalhista (Lei 13.467/2017), afirmando que a CLT proíbe dividir férias em três períodos, quando a redação vigente do art. 134, § 1º permite o parcelamento em até três períodos desde que haja concordância do empregado. Isso mostra o risco concreto de operar sem RAG: o modelo apresenta regra revogada com aparência de certeza e citação de artigo.
 
 ---
 
@@ -134,7 +134,7 @@ Lido por: <!-- nomes de quem leu -->
 >
 > Para saber o que se aplica ao seu contrato, procure uma advogada ou a Defensoria Pública.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Com RAG, o sistema recusou e encaminhou para o 180 e para a Defensoria Pública do DF. Sem RAG, embora a resposta tenha sido classificada automaticamente como "recusa do modelo" por começar com "Não sei responder com segurança", o modelo na prática adentrou o tema fora do escopo e citou dispositivos fora da base (`Lei 8.245/1991, art. 37` e `Lei 8.245/1991, art. 38`) antes de encaminhar para advogada ou Defensoria Pública.
 
 ---
 
@@ -150,7 +150,7 @@ Lido por: <!-- nomes de quem leu -->
 
 > Não sei responder com segurança sobre como recorrer dessa multa específica na assembleia.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Ambas as versões recusaram sem inventar regras de condomínio. Com RAG, a recusa do sistema incluiu o encaminhamento padrão ao 180 e à Defensoria Pública do DF; sem RAG, o modelo deu uma recusa seca de uma frase, sem explicar que atende apenas casos de violência contra a mulher nem indicar canais de atendimento.
 
 ---
 
@@ -166,7 +166,7 @@ Lido por: <!-- nomes de quem leu -->
 
 > Não sei responder com segurança sobre receita de bolo. Meu trabalho é orientar sobre a Lei Maria da Penha e normas relacionadas. Se você quiser, posso falar sobre seus direitos nessa lei.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Recusa adequada nas duas versões; nenhuma tratou o assunto cotidiano como jurídico. Com RAG, a pergunta passou pelo corte de similaridade (0,812) e foi recusada na verificação seguinte, com a mensagem padrão do 180 e da Defensoria Pública do DF. Sem RAG, o modelo recusou educadamente e informou seu escopo na Lei Maria da Penha.
 
 ---
 
@@ -182,7 +182,7 @@ Lido por: <!-- nomes de quem leu -->
 
 > Não sei responder com segurança sobre as regras do impedimento no futebol profissional nem sobre o número de substituições em partidas oficiais. Minha atuação é orientar sobre a Lei Maria da Penha e normas relacionadas à violência contra a mulher.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Ambas as versões recusaram sem responder sobre futebol. Ponto de atenção na versão com RAG: a pergunta passou pelo corte de similaridade e o modelo recusou mencionando que os trechos enviados tratavam de lesão corporal (`Código Penal, art. 129`). Como citou um artigo presente nos trechos recuperados, a verificação de citação aprovou a resposta do próprio modelo em vez de substituí-la pela recusa padrão do sistema — o que deixou a resposta sem o encaminhamento ao 180 e à Defensoria e expôs o funcionamento interno dos trechos enviados.
 
 ---
 
@@ -198,7 +198,7 @@ Lido por: <!-- nomes de quem leu -->
 
 > Não sei responder com segurança. Não sou especialista em plantas e não tenho informação confiável sobre rega de samambaias. Posso orientar sobre a Lei Maria da Penha e normas relacionadas. Se quiser, faça sua pergunta sobre esse tema.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Recusa adequada nas duas versões. Com RAG, o sistema aplicou a recusa padrão com indicação do 180 e da Defensoria Pública do DF; sem RAG, o modelo recusou o tema cotidiano e informou que orienta sobre a Lei Maria da Penha.
 
 ---
 
@@ -214,4 +214,4 @@ Lido por: <!-- nomes de quem leu -->
 
 > Não sei responder com segurança sobre limpeza de armazenamento de celular. Esse tema não é sobre a Lei Maria da Penha nem sobre normas de proteção à mulher, que é o que eu orientо.
 
-**Observação:** <!-- escreva aqui -->
+**Observação:** Recusa adequada nas duas versões. Com RAG, houve recusa do sistema com encaminhamento ao 180 e à Defensoria Pública do DF. Sem RAG, o modelo recusou mantendo o escopo na Lei Maria da Penha, mas gerou um caractere cirílico na última palavra (`orientо`, com `о` U+043E) — falha conhecida do DeepSeek que na versão com RAG é barrada pelo filtro `em_portugues`.
