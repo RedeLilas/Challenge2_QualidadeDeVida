@@ -1,0 +1,1464 @@
+- id: of-001
+  tipo: pergunta
+  categoria: violencia_e_protecao
+  pergunta: Uma amiga minha namora outra mulher e sofre agressões e humilhações constantes nesse relacionamento, mas elas nunca moraram juntas. A Lei Maria da Penha protege mulheres em relacionamentos homoafetivos e sem morar na mesma casa?
+  rag:
+    resposta: 'Sim. A Lei Maria da Penha se aplica a relações íntimas de afeto, mesmo sem morar junto, e não depende de orientação sexual.
+
+
+      - A lei considera violência doméstica e familiar qualquer ação ou omissão baseada no gênero que cause sofrimento físico, sexual ou psicológico e dano moral ou patrimonial (Lei 11.340/2006, art. 5º).
+
+      - Isso vale em qualquer relação íntima de afeto em que o agressor conviva ou já tenha convivido com a ofendida, independentemente de coabitação — ou seja, não precisa morar na mesma casa (Lei 11.340/2006, art. 5º, III).
+
+      - As relações previstas na lei independem de orientação sexual (Lei 11.340/2006, art. 5º, parágrafo único).
+
+
+      Sobre proteção, o juiz pode conceder medidas, como afastamento do lar e proibição de aproximação e de contato com a ofendida (Lei 11.340/2006, art. 22). Quem decide é o juiz.
+
+
+      Se ela estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 5º
+    - Lei 11.340/2006, art. 22
+  sem_rag:
+    resposta: 'Sim. A lei fala em "unidade doméstica, família ou relação íntima de afeto", sem exigir morar junto nem exigir que o parceiro seja homem (Lei 11.340/2006, art. 5º).
+
+
+      Então, pela lei, a proteção alcança relação entre duas mulheres, com ou sem coabitação. "Relação íntima de afeto" é o vínculo próximo e afetivo entre as pessoas, mesmo sem morarem juntas.
+
+
+      O que a lei prevê nesses casos:
+
+      - Violência psicológica, como humilhação e controle, é forma de violência doméstica (Lei 11.340/2006, art. 7º, II).
+
+      - A mulher pode pedir medidas protetivas de urgência, como afastamento do agressor e proibição de contato (Lei 11.340/2006, arts. 18 e 22).
+
+      - Quem decide conceder as medidas é o juiz, que analisa o caso (Lei 11.340/2006, art. 19).
+
+
+      Importante: a lei prevê esses caminhos, mas não há resultado garantido. Quem avalia e decide é a autoridade policial e o juiz.
+
+
+      Se ela estiver em perigo agora, ligue 190. Para orientação, o Ligue 180 atende gratuitamente. Eu ofereço orientação e não substituo advogada ou defensora pública.'
+- id: of-002
+  tipo: pergunta
+  categoria: violencia_e_protecao
+  pergunta: O ex-companheiro de uma vizinha proibia que ela visitasse a própria família, vigiava todas as conversas do celular dela e dizia que ela não tinha capacidade de tomar decisões sozinha. Mesmo sem agressão física, esse controle e isolamento entram na Lei Maria da Penha?
+  rag:
+    resposta: 'Sim. A lei prevê a violência psicológica como forma de violência doméstica e familiar contra a mulher. Ela é entendida como qualquer conduta que cause dano emocional, diminua a autoestima ou perturbe o desenvolvimento, ou que busque degradar ou controlar ações, comportamentos, crenças e decisões. Isso inclui ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação da intimidade, ridicularização, exploração e limitação do direito de ir e vir, ou qualquer outro meio que prejudique a saúde psicológica e a autodeterminação (Lei 11.340/2006, art. 7º, II).
+
+
+      "Autodeterminação" significa, em palavras simples, o direito de decidir sobre a própria vida.
+
+
+      Se ela estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 7º
+  sem_rag:
+    resposta: 'Sim, entram. A Lei Maria da Penha trata de violência psicológica e de violência moral, não só da física.
+
+
+      O que você descreveu se encaixa em:
+
+
+      - **Violência psicológica**: conduta que causa dano emocional, diminui a autoestima ou prejudica o desenvolvimento da mulher. Exemplos: humilhação, vigilância constante, isolamento, controle de decisões (Lei 11.340/2006, art. 7º, II).
+
+      - **Violência moral**: conduta que ofende a honra, como calúnia, difamação e injúria (Lei 11.340/2006, art. 7º, V).
+
+      - **Violência patrimonial**: quando há controle de bens, documentos ou recursos (Lei 11.340/2006, art. 7º, IV).
+
+
+      "Violência psicológica" é o dano emocional causado por palavras ou atitudes de controle. "Isolamento" é impedir o contato da mulher com família e amigos.
+
+
+      A lei prevê medidas protetivas de urgência, como afastamento do agressor e proibição de contato (Lei 11.340/2006, arts. 18 a 22). Quem decide se concede é o juiz.
+
+
+      A vizinha pode procurar a Delegacia da Mulher ou a Defensoria Pública. Se houver perigo agora, ligue 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+- id: of-003
+  tipo: pergunta
+  categoria: violencia_e_protecao
+  pergunta: Se o marido jogar fora o anticoncepcional da esposa e impedi-la de usar métodos contraceptivos para forçá-la a engravidar contra a vontade dela, como a Lei Maria da Penha classifica essa atitude?
+  rag:
+    resposta: 'A Lei Maria da Penha trata isso como **violência sexual**.
+
+
+      Ela inclui, nessa forma de violência, a conduta que impeça a mulher de usar qualquer método contraceptivo ou que a force à gravidez, entre outras, mediante coação, chantagem, suborno ou manipulação (Lei 11.340/2006, art. 7º, III).
+
+
+      "Coação" é quando alguém é forçada a fazer algo contra a sua vontade.
+
+
+      Quem vai analisar o caso concreto e decidir é a autoridade competente — o juiz pode reconhecer essa situação.
+
+
+      Se você estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 7º
+  sem_rag:
+    resposta: 'Isso pode ser violência sexual e violência moral contra a mulher. A lei prevê essas formas de violência e permite medidas de proteção. Quem decide cada medida é o juiz.
+
+
+      - Violência sexual inclui qualquer conduta que constranja a mulher a presenciar, manter ou participar de relação sexual não desejada, ou que a impeça de usar método contraceptivo (Lei 11.340/2006, art. 7º, III).
+
+      - Violência moral inclui conduta que configure calúnia, difamação ou injúria (Lei 11.340/2006, art. 7º, V). Calúnia é acusar alguém de crime falso; difamação é manchar a reputação; injúria é ofender a dignidade.
+
+      - A lei também trata da violência patrimonial, que é reter ou destruir bens da mulher (Lei 11.340/2006, art. 7º, IV). Jogar fora o anticoncepcional pode se encaixar nisso, a depender do caso.
+
+      - A mulher pode pedir medidas protetivas de urgência, como afastamento do agressor do lar (Lei 11.340/2006, arts. 18 e 22). O juiz analisa o pedido e pode conceder.
+
+      - Essas condutas podem configurar crime, e a pena depende do tipo penal aplicável. Não sei responder com segurança qual crime específico se aplica a cada caso.
+
+
+      Se houver perigo agora, ligue 190. Para orientação e acompanhamento, procure a Delegacia da Mulher, a Defensoria Pública ou um serviço de apoio à mulher.'
+- id: of-004
+  tipo: pergunta
+  categoria: violencia_e_protecao
+  pergunta: Uma mulher trabalha como costureira autônoma e, após uma discussão meses atrás, o companheiro escondeu os documentos pessoais dela e danificou a máquina de costura para ela não conseguir trabalhar. Que tipo de violência doméstica é essa segundo a lei?
+  rag:
+    resposta: 'Isso é violência patrimonial. A lei define como qualquer conduta que configure retenção, subtração, destruição parcial ou total de objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades (Lei 11.340/2006, art. 7º, IV).
+
+
+      Esconder os documentos pessoais e danificar a máquina de costura se encaixam nessa descrição: são documentos pessoais e instrumento de trabalho (Lei 11.340/2006, art. 7º, IV).
+
+
+      Essa conduta pode ser considerada violência doméstica e familiar contra a mulher quando ocorre no âmbito da unidade doméstica, da família ou em qualquer relação íntima de afeto, na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação (Lei 11.340/2006, art. 5º).
+
+
+      Lembrete: eu apenas oriento. Não substituo advogada ou defensora. Se houver perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 7º
+    - Lei 11.340/2006, art. 5º
+  sem_rag:
+    resposta: 'Isso é violência patrimonial. A lei define como conduta que cause perda, subtração ou dano a bens, documentos e instrumentos de trabalho da mulher (Lei 11.340/2006, art. 7º, IV).
+
+
+      Esconder os documentos e danificar a máquina de costura se encaixam nessa definição. A máquina é o instrumento de trabalho dela.
+
+
+      A lei prevê medidas de proteção, como a proibição de o agressor se aproximar ou manter contato (Lei 11.340/2006, art. 22). Quem decide sobre essas medidas é o juiz.
+
+
+      Ela pode registrar boletim de ocorrência em delegacia, inclusive na Delegacia da Mulher, e buscar a Defensoria Pública ou uma advogada. A orientação não substitui esse atendimento.
+
+
+      Se houver perigo agora, ligue 190.'
+- id: of-005
+  tipo: pergunta
+  categoria: violencia_e_protecao
+  pergunta: Quando um ex-companheiro pratica atos de violência contra um parente, dependente ou pessoa da rede de apoio da mulher com o objetivo de fazê-la sofrer e atingi-la indiretamente, a Lei Maria da Penha prevê alguma forma específica de violência para isso?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: 'Sim. A lei chama isso de **violência patrimonial**? Não. É **violência moral**? Também não. A lei trata desse caso como **violência psicológica**? Não exatamente.
+
+
+      Vou ser direta: a Lei Maria da Penha tem uma forma específica para atingir a mulher por meio de outras pessoas. É a **violência patrimonial**? Não.
+
+
+      Não sei responder com segurança qual é o nome exato dessa forma específica na lei. O que posso dizer com segurança:
+
+
+      - A lei define **violência psicológica** como conduta que causa dano emocional, diminuição da autoestima ou prejuízo ao desenvolvimento da mulher (Lei 11.340/2006, art. 7º, II).
+
+      - A lei também pune quem pratica violência **contra a mulher** em razão da condição de gênero (Lei 11.340/2006, art. 5º).
+
+      - Quando o ato atinge um parente ou dependente para ferir a mulher, o juiz pode analisar o caso como violência psicológica indireta, mas isso depende da avaliação do juiz.
+
+
+      Se você está em perigo agora, ligue **190**.'
+- id: of-006
+  tipo: pergunta
+  categoria: medidas_protetivas
+  pergunta: Depois que a mulher faz o pedido de medida protetiva de urgência na delegacia e o pedido chega ao juiz, qual é o prazo legal para o juiz analisar e decidir, e ele precisa marcar audiência para ouvir o agressor antes de conceder a medida?
+  rag:
+    resposta: 'O juiz tem prazo de 48 horas para analisar o pedido e decidir sobre as medidas protetivas de urgência (Lei 11.340/2006, art. 18, I).
+
+
+      Não há previsão, nos trechos enviados, de que o juiz precise marcar audiência para ouvir o agressor antes de conceder a medida. As medidas podem ser concedidas em juízo de cognição sumária — ou seja, uma análise inicial e rápida, sem aprofundar todas as provas — a partir do depoimento da ofendida na delegacia ou das alegações escritas dela (Lei 11.340/2006, art. 19, § 4º).
+
+
+      O juiz pode indeferir o pedido se avaliar que não existe risco à integridade física, psicológica, sexual, patrimonial ou moral da mulher ou de seus dependentes (Lei 11.340/2006, art. 19, § 4º).
+
+
+      Isso é o que a lei prevê. Quem decide é o juiz.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 18
+    - Lei 11.340/2006, art. 19
+  sem_rag:
+    resposta: 'O juiz deve decidir em até 48 horas. Esse prazo conta do recebimento do pedido pela Justiça (Lei 11.340/2006, art. 18).
+
+
+      Não precisa ouvir o agressor antes. A lei diz que o juiz pode conceder a medida de imediato, sem audiência com o agressor (Lei 11.340/2006, art. 19, § 1º).
+
+
+      Audiência é uma reunião no tribunal para ouvir as partes. O juiz pode marcar audiência depois, mas não é obrigado a ouvir o agressor antes de decidir.
+
+
+      Quem decide se concede a medida é o juiz. A lei prevê esse prazo e essa possibilidade, mas não garante o resultado.'
+- id: of-007
+  tipo: pergunta
+  categoria: medidas_protetivas
+  pergunta: Uma mulher precisa necessariamente ter um inquérito policial aberto ou um processo criminal em andamento para conseguir uma medida protetiva de urgência, e por quanto tempo essa medida continua valendo?
+  rag:
+    resposta: 'Sobre a primeira parte da sua pergunta: não. A lei prevê que as medidas protetivas de urgência podem ser concedidas independentemente da tipificação penal da violência, do ajuizamento de ação penal ou cível, da existência de inquérito policial ou do registro de boletim de ocorrência (Lei 11.340/2006, art. 19, § 5º).
+
+
+      Quem decide sobre a concessão é o juiz, a pedido do Ministério Público ou da própria ofendida (Lei 11.340/2006, art. 19). Recebido o pedido, o juiz tem o prazo de 48 horas para decidir (Lei 11.340/2006, art. 18, I).
+
+
+      Sobre por quanto tempo a medida continua valendo: não sei responder com segurança, porque os trechos enviados não tratam da duração das medidas protetivas.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 19
+    - Lei 11.340/2006, art. 18
+  sem_rag:
+    resposta: 'Não. A medida protetiva de urgência não depende de inquérito nem de processo criminal. Ela pode ser pedida assim que houver risco à mulher (Lei 11.340/2006, art. 22).
+
+
+      Quem decide é o juiz. Ele pode conceder a medida quando entender que há risco (Lei 11.340/2006, art. 19, § 1º).
+
+
+      A medida pode ser pedida pela própria mulher, pelo Ministério Público ou pela autoridade policial (Lei 11.340/2006, art. 19).
+
+
+      Sobre a duração: a lei não fixa um prazo único. O juiz define o tempo na decisão. A medida pode ser revista, prorrogada ou revogada a qualquer momento, conforme o risco (Lei 11.340/2006, art. 19, § 1º e art. 22, § 1º).
+
+
+      Se o risco continuar, a mulher pode pedir a prorrogação. Quem avalia é o juiz.
+
+
+      Isso é orientação e não substitui advogada ou defensora. Se houver perigo agora, ligue 190.'
+- id: of-008
+  tipo: pergunta
+  categoria: medidas_protetivas
+  pergunta: Em uma cidade do interior que não é sede de comarca judicial, se for constatado risco à integridade da mulher, o delegado ou o policial pode determinar o afastamento imediato do agressor do lar, e em quanto tempo o juiz precisa ser avisado?
+  rag:
+    resposta: 'Sim. A lei prevê que, verificado risco atual ou iminente à vida ou à integridade da mulher, o agressor será imediatamente afastado do lar. Isso pode ser feito pelo delegado de polícia, quando o Município não for sede de comarca (Lei 11.340/2006, art. 12-C, inciso II), ou pelo policial, quando o Município não for sede de comarca e não houver delegado disponível no momento da denúncia (Lei 11.340/2006, art. 12-C, inciso III).
+
+
+      Nesses casos, o juiz será comunicado no prazo máximo de 24 horas e decidirá, em igual prazo, sobre a manutenção ou a revogação da medida aplicada (Lei 11.340/2006, art. 12-C, § 1º).
+
+
+      "Afastamento" significa retirar o agressor do local onde a mulher vive ou convive com ele. Quem decide se a medida continua valendo é o juiz.
+
+
+      Se você estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 12-C
+  sem_rag:
+    resposta: 'Não sei responder com segurança se o delegado ou o policial pode determinar esse afastamento imediato nesse caso específico. Não quero te passar informação errada.
+
+
+      O que posso dizer com segurança:
+
+
+      - A lei prevê medidas protetivas de urgência, como o afastamento do agressor do lar (Lei 11.340/2006, art. 22, inciso II).
+
+      - Quem concede essas medidas é o juiz. O juiz pode conceder (Lei 11.340/2006, art. 22).
+
+      - O pedido pode ser feito pela própria mulher, pelo Ministério Público ou pela autoridade policial (Lei 11.340/2006, art. 19).
+
+      - Sobre o prazo para o juiz decidir, a lei fala em 48 horas para apreciar o pedido de medida protetiva (Lei 11.340/2006, art. 18).
+
+
+      Sobre o aviso ao juiz em comarca sem sede judicial, não tenho certeza da regra exata. Por isso, não afirmo.
+
+
+      Se houver perigo agora, ligue 190.
+
+
+      Para orientação no seu caso, procure a Defensoria Pública ou uma advogada.'
+- id: of-009
+  tipo: pergunta
+  categoria: medidas_protetivas
+  pergunta: Quando o agressor possui porte ou posse de arma de fogo e persegue a mulher tentando falar com ela por telefone e indo ao local onde ela estuda, quais medidas protetivas de urgência o juiz pode impor diretamente contra ele?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: Não sei responder com segurança quais medidas o juiz pode impor diretamente nesse caso específico.
+- id: of-010
+  tipo: pergunta
+  categoria: medidas_protetivas
+  pergunta: O juiz pode determinar, como medida protetiva de urgência na Lei Maria da Penha, que o agressor pague pensão alimentícia provisória e participe obrigatoriamente de grupos de reeducação e acompanhamento psicossocial?
+  rag:
+    resposta: 'Sim, a lei prevê essas duas medidas. O juiz pode aplicar ao agressor, de imediato, a prestação de alimentos provisionais ou provisórios — ou seja, uma pensão alimentícia provisória, paga antes da decisão final (Lei 11.340/2006, art. 22, V). Também pode determinar o acompanhamento psicossocial do agressor, por meio de atendimento individual e/ou em grupo de apoio (Lei 11.340/2006, art. 22, VII).
+
+
+      Essas medidas podem ser aplicadas em conjunto ou separadamente (Lei 11.340/2006, art. 22). Quem decide se concede é o juiz.
+
+
+      Sobre a pensão provisória: ela constitui título executivo judicial de pleno direito, ou seja, pode ser cobrada na Justiça sem precisar de outra ação principal (Lei 11.340/2006, art. 22, § 10).
+
+
+      Isso é orientação e não substitui advogada ou defensora. Se você estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 22
+  sem_rag:
+    resposta: 'Sim, a lei prevê essas duas medidas.
+
+
+      **Pensão alimentícia provisória:** o juiz pode fixar alimentos provisórios à mulher e aos filhos. Alimentos provisórios são um valor temporário de sustento, definido antes da decisão final. (Lei 11.340/2006, art. 22, inciso V)
+
+
+      **Acompanhamento psicossocial e grupos de reeducação:** o juiz pode determinar que o agressor frequente centros de educação e reabilitação, inclusive grupos de reeducação, de forma obrigatória. (Lei 11.340/2006, art. 22, inciso VI, e art. 35, inciso V)
+
+
+      Quem decide é o juiz, ao analisar o caso. A lei autoriza, mas não garante que a medida será concedida.
+
+
+      Se você estiver em perigo agora, ligue 190.'
+- id: of-011
+  tipo: pergunta
+  categoria: medidas_protetivas
+  pergunta: Se uma mulher casada assinou no passado uma procuração em nome do marido e receia que ele venda bens do casal ou fique com objetos que ele retirou dela, que medidas protetivas patrimoniais o juiz pode determinar liminarmente?
+  rag:
+    resposta: 'O juiz pode determinar, de forma liminar (decisão rápida, no início do processo), medidas para proteger os bens do casal ou os bens particulares da mulher (Lei 11.340/2006, art. 24). Entre elas:
+
+
+      - Devolução de bens que o agressor tirou indevidamente da mulher (Lei 11.340/2006, art. 24, I).
+
+      - Proibição temporária de fazer atos e contratos de compra, venda e locação de bem em comum, salvo autorização do juiz (Lei 11.340/2006, art. 24, II).
+
+      - Suspensão das procurações que a mulher deu ao agressor (Lei 11.340/2006, art. 24, III).
+
+      - Prestação de caução provisória, que é um depósito judicial em garantia, por perdas e danos materiais causados pela violência (Lei 11.340/2006, art. 24, IV).
+
+
+      O juiz deve comunicar o cartório competente sobre a proibição de contratos e a suspensão da procuração (Lei 11.340/2006, art. 24, parágrafo único).
+
+
+      A lei prevê essas medidas, mas quem decide se concede é o juiz. Isso é orientação e não substitui advogada ou defensora. Se houver perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 24
+  sem_rag:
+    resposta: 'Não sei responder com segurança se a procuração antiga permite esse tipo de pedido. Mas posso explicar o que a lei prevê sobre medidas patrimoniais.
+
+
+      Primeiro, dois termos simples:
+
+      - Medida protetiva: decisão urgente do juiz para proteger a mulher.
+
+      - Liminar: decisão dada logo no início do processo, antes de ouvir a outra parte.
+
+
+      O que a lei prevê (Lei 11.340/2006, art. 22):
+
+      - O juiz pode conceder, de imediato, medidas protetivas de urgência.
+
+      - Entre elas, pode proibir o agressor de vender, alugar ou transferir bens do casal (art. 22, inciso IV).
+
+      - Também pode determinar a separação de corpos (art. 22, inciso II) e o afastamento do agressor do lar (art. 22, inciso II).
+
+      - Pode ainda fixar alimentos provisórios, se houver dependência econômica (art. 22, inciso V).
+
+
+      Sobre bens e objetos:
+
+      - A lei prevê que o juiz pode proibir a transferência de bens do casal (art. 22, IV).
+
+      - Sobre objetos pessoais retirados, a lei não traz medida específica. O juiz pode analisar caso a caso.
+
+      - Quem decide é o juiz, ao receber o pedido.
+
+
+      Sobre a procuração:
+
+      - A lei não trata de revogação de procuração como medida protetiva.
+
+      - Não sei responder com segurança se o juiz pode suspender essa procuração nesse pedido.
+
+
+      O que fazer:
+
+      - Você pode pedir as medidas protetivas na delegacia ou no Ministério Público (Lei 11.340/2006, art. 18 e art. 19).
+
+      - O juiz decide em até 48 horas sobre o pedido de urgência (Lei 11.340/2006, art. 18).
+
+      - Procure uma advogada ou a Defensoria Pública para tratar da procuração e dos bens.
+
+
+      Se você estiver em perigo agora, ligue 190.'
+- id: of-012
+  tipo: pergunta
+  categoria: medidas_protetivas
+  pergunta: Quando um agressor é preso em flagrante por descumprir uma medida protetiva de urgência concedida por um juiz cível, qual é a pena prevista na Lei Maria da Penha e o delegado de polícia pode arbitrar fiança na delegacia?
+  rag:
+    resposta: 'A pena prevista é reclusão, de 2 a 5 anos, e multa (Lei 11.340/2006, art. 24-A).
+
+
+      O crime se configura mesmo que a medida tenha sido concedida por juiz cível (Lei 11.340/2006, art. 24-A, § 1º).
+
+
+      Na prisão em flagrante, apenas a autoridade judicial pode conceder fiança — ou seja, o delegado não pode arbitrar fiança na delegacia (Lei 11.340/2006, art. 24-A, § 2º).
+
+
+      A pena é aumentada de 1/3 até a metade se o descumprimento decorrer de violação de áreas de exclusão monitoradas eletronicamente ou de remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial (Lei 11.340/2006, art. 24-A, § 4º).
+
+
+      Isso não exclui outras sanções cabíveis (Lei 11.340/2006, art. 24-A, § 3º).
+
+
+      Se você estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 24-A
+  sem_rag:
+    resposta: 'Não sei responder com segurança sobre todos os pontos dessa pergunta.
+
+
+      Sobre o que a lei prevê, posso dizer:
+
+
+      - Descumprir medida protetiva de urgência é crime, com pena de detenção de 3 meses a 2 anos (Lei 11.340/2006, art. 24-A). Detenção é uma pena privativa de liberdade mais branda que a reclusão.
+
+      - A prisão em flagrante é possível quando a pessoa é encontrada cometendo o crime ou logo depois (Código de Processo Penal, art. 302).
+
+      - Sobre fiança: a autoridade policial pode conceder fiança nos crimes com pena máxima de até 4 anos (Código de Processo Penal, art. 322). Como a pena máxima do art. 24-A é 2 anos, em tese o delegado poderia arbitrar fiança. Mas há normas e entendimentos que restringem isso em casos de violência doméstica, e não tenho certeza suficiente para afirmar como se aplica ao seu caso concreto.
+
+
+      Quem decide sobre prisão, fiança e medidas é a autoridade competente, no caso concreto. Para orientação segura, procure uma advogada ou a Defensoria Pública.
+
+
+      Se houver perigo agora, ligue 190.'
+- id: of-013
+  tipo: pergunta
+  categoria: policia_processo_defensoria
+  pergunta: Uma mulher procurou a delegacia após um episódio de violência doméstica e precisava buscar suas roupas e documentos que ficaram na casa, além de transporte até um local seguro com os filhos. Quais providências a autoridade policial deve adotar segundo a Lei Maria da Penha?
+  rag:
+    resposta: 'A autoridade policial deve adotar estas providências:
+
+
+      - Fornecer transporte para a ofendida e seus dependentes para abrigo ou local seguro, quando houver risco de vida (Lei 11.340/2006, art. 11, III).
+
+      - Se necessário, acompanhar a ofendida para assegurar a retirada de seus pertences do local da ocorrência ou do domicílio familiar (Lei 11.340/2006, art. 11, IV).
+
+
+      "Pertences" são os objetos pessoais dela, como roupas e documentos.
+
+
+      Essas são as providências previstas nos trechos para esses dois pedidos. Quem decide sobre outras medidas é a autoridade competente, conforme o caso.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 11
+  sem_rag:
+    resposta: 'A autoridade policial deve adotar estas providências:
+
+
+      1. **Acompanhar a retirada de bens.** A polícia deve garantir que a mulher possa pegar suas roupas, documentos e bens pessoais na casa, sem risco. Isso é o que a lei chama de "acompanhamento de escolta" — ir junto para proteger. (Lei 11.340/2006, art. 11, parágrafo único)
+
+
+      2. **Dar transporte para local seguro.** A lei prevê que a autoridade policial providencie transporte para a mulher e os filhos até um lugar seguro, quando necessário. (Lei 11.340/2006, art. 11, parágrafo único)
+
+
+      3. **Registrar o boletim de ocorrência.** A polícia deve ouvir a mulher e registrar o que aconteceu. (Lei 11.340/2006, art. 12, I)
+
+
+      4. **Pedir ao juiz medidas protetivas de urgência.** A autoridade policial deve encaminhar o pedido ao juiz. Quem decide se concede é o juiz. (Lei 11.340/2006, arts. 12, III, e 18)
+
+
+      5. **Informar sobre os serviços disponíveis.** A polícia deve informar a mulher sobre a Defensoria Pública, o abrigo e outros serviços de proteção. (Lei 11.340/2006, art. 11, III)
+
+
+      Importante: a lei prevê essas providências, mas o atendimento concreto depende de cada delegacia. Se houver risco agora, ligue 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+- id: of-014
+  tipo: pergunta
+  categoria: policia_processo_defensoria
+  pergunta: Uma mulher que sofreu violência doméstica quer entrar com pedido de divórcio ou dissolução de união estável no próprio Juizado de Violência Doméstica e Familiar contra a Mulher. Ela pode fazer isso lá, inclusive para resolver a partilha dos bens do casal?
+  rag:
+    resposta: 'Sobre o divórcio ou a dissolução da união estável: sim, a lei prevê essa opção. A ofendida pode propor a ação no Juizado de Violência Doméstica e Familiar contra a Mulher (Lei 11.340/2006, art. 14-A).
+
+
+      Sobre a partilha de bens: não. A partilha fica fora da competência desses Juizados (Lei 11.340/2006, art. 14-A, § 1º). "Partilha de bens" é a divisão dos bens do casal.
+
+
+      Quem decide o caso é o juiz. A lei prevê a possibilidade; não há resultado garantido.
+
+
+      Se houver violência depois de a ação de divórcio já ter sido iniciada, essa ação tem preferência no juízo onde estiver (Lei 11.340/2006, art. 14-A, § 2º).
+
+
+      Isso é orientação e não substitui advogada ou defensora. Se você estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 14-A
+  sem_rag:
+    resposta: 'Não sei responder com segurança se o Juizado de Violência Doméstica pode processar o divórcio ou a dissolução de união estável com partilha de bens.
+
+
+      O que a lei prevê:
+
+
+      - O Juizado de Violência Doméstica e Familiar contra a Mulher foi criado para julgar causas sobre violência doméstica e familiar contra a mulher (Lei 11.340/2006, art. 14).
+
+      - A lei também trata de medidas protetivas de urgência, que são ordens do juiz para proteger a mulher (Lei 11.340/2006, arts. 18 a 24).
+
+      - A lei não deixa claro, no texto, se esse Juizado pode decidir divórcio ou partilha de bens.
+
+
+      Quem decide onde o pedido corre é o juiz. Ele pode encaminhar o caso para outra vara.
+
+
+      Sobre a partilha: ela é a divisão dos bens do casal. Em geral, é tratada junto com o divórcio ou a dissolução da união estável.
+
+
+      O ideal é procurar a Defensoria Pública ou uma advogada. Elas podem dizer, no seu caso concreto, onde o pedido deve ser feito.
+
+
+      Se você estiver em perigo agora, ligue 190.'
+- id: of-015
+  tipo: pergunta
+  categoria: policia_processo_defensoria
+  pergunta: Em crimes de violência doméstica em que a ação penal depende de representação da vítima, a mulher pode simplesmente retirar a representação na delegacia a qualquer momento, ou existe uma regra específica na Lei Maria da Penha para essa retratação?
+  rag:
+    resposta: 'Existe uma regra específica. A retratação (desistir da representação) não pode ser feita de qualquer jeito nem a qualquer momento.
+
+
+      O que a lei prevê:
+
+
+      - Só é admitida a renúncia à representação perante o juiz, em audiência designada para esse fim, antes do recebimento da denúncia e ouvido o Ministério Público (Lei 11.340/2006, art. 16).
+
+      - Essa audiência serve para confirmar a retratação da vítima, não a representação. Ela só é designada pelo juiz se a mulher manifestar expressamente o desejo de se retratar, por escrito ou oralmente, antes do recebimento da denúncia, e a retratação deve ser registrada nos autos (Lei 11.340/2006, art. 16, parágrafo único).
+
+
+      Então: não é na delegacia, a qualquer momento, que a mulher simplesmente "retira" a representação. É o juiz que designa a audiência e decide conforme a lei.
+
+
+      Quem decide é o juiz. A lei prevê esse caminho, mas não garante resultado.
+
+
+      Se você estiver em perigo agora, ligue 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 16
+  sem_rag:
+    resposta: 'Não é tão simples assim. Existe regra específica.
+
+
+      **O que a lei prevê:**
+
+      - A retratação da representação só pode ser feita **perante o juiz**, em audiência especialmente designada para isso, **antes do recebimento da denúncia** (Lei 11.340/2006, art. 16).
+
+      - Ou seja: não basta ir à delegacia e "retirar a queixa". A retratação na delegacia, sozinha, não produz o efeito previsto nesse artigo.
+
+      - Nessa audiência, o juiz deve perguntar à mulher se ela confirma ou não a retratação (Lei 11.340/2006, art. 16).
+
+
+      **Termos explicados:**
+
+      - *Representação*: é a manifestação da vítima de que quer que o crime seja investigado e processado. É a "queixa" em sentido amplo.
+
+      - *Retratação*: é voltar atrás, desistir dessa representação.
+
+      - *Recebimento da denúncia*: é o momento em que o juiz aceita a acusação formal feita pelo Ministério Público e o processo começa a correr.
+
+
+      **Quem decide:** o juiz analisa o caso concreto. A lei prevê esse caminho, mas não garante que a retratação será aceita em qualquer situação.
+
+
+      **Importante:** mesmo após a retratação, o Ministério Público pode avaliar outras medidas cabíveis. E a mulher pode buscar a Defensoria Pública ou uma advogada para entender seu caso.
+
+
+      Se você estiver em perigo agora, ligue **190**.'
+- id: of-016
+  tipo: pergunta
+  categoria: policia_processo_defensoria
+  pergunta: Nos casos de violência doméstica, a pena do agressor pode ser substituída apenas por pagamento de cesta básica ou multa isolada, e a mulher pode ser encarregada de entregar pessoalmente uma intimação judicial para ele?
+  rag:
+    resposta: 'Sobre a primeira parte: não. A lei proíbe, nos casos de violência doméstica e familiar contra a mulher, a aplicação de penas de cesta básica ou outras de prestação pecuniária (pagamento em dinheiro), e também a substituição de pena que implique pagamento isolado de multa (Lei 11.340/2006, art. 17).
+
+
+      Sobre a segunda parte: os trechos enviados não tratam de quem entrega intimação judicial. Por isso, não sei responder com segurança.
+
+
+      Se você estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 17
+  sem_rag:
+    resposta: 'Não. A lei não permite essas duas coisas.
+
+
+      **1. Pena só com cesta básica ou multa isolada**
+
+
+      A lei não autoriza substituir a pena por apenas pagamento de cesta básica ou multa isolada. O juiz pode substituir a pena privativa de liberdade por outras penas restritivas de direitos, mas com condições (Lei 11.340/2006, art. 17 e Código Penal, art. 44). O pagamento de cesta básica ou multa pode aparecer junto com outras obrigações, nunca sozinho. Quem decide é o juiz.
+
+
+      **2. A mulher entregar a intimação pessoalmente**
+
+
+      Isso não é permitido. A intimação é ato oficial. Quem cumpre é o oficial de justiça ou outro servidor autorizado (Código de Processo Penal, arts. 351 a 353). A própria lei proíbe que a mulher seja encarregada de atos assim, para evitar contato com o agressor (Lei 11.340/2006, art. 21, parágrafo único).
+
+
+      Se você estiver em perigo agora, ligue 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+- id: of-017
+  tipo: pergunta
+  categoria: auxilio_fonar_trabalho
+  pergunta: Quando uma mulher precisa sair de casa por causa de violência doméstica e está em situação de vulnerabilidade social e econômica, a Lei Maria da Penha prevê a concessão de auxílio-aluguel pelo juiz e qual é o prazo máximo desse benefício?
+  rag:
+    resposta: 'Sim. A lei prevê que o juiz pode conceder à ofendida auxílio-aluguel, com valor fixado conforme a situação de vulnerabilidade social e econômica dela, por período não superior a 6 (seis) meses (Lei 11.340/2006, art. 23, VI).
+
+
+      "Ofendida" é a mulher que sofreu a violência. Quem decide sobre a concessão é o juiz.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 23
+  sem_rag:
+    resposta: 'A Lei Maria da Penha prevê esse auxílio, sim. O juiz pode conceder auxílio-aluguel à mulher em situação de violência doméstica e familiar que esteja em vulnerabilidade social e econômica (Lei 11.340/2006, art. 9º, § 4º).
+
+
+      Explicando: auxílio-aluguel é um valor em dinheiro para ajudar a pagar moradia provisória.
+
+
+      Sobre o prazo: a lei não fixa um prazo máximo único no art. 9º, § 4º. Ela diz que o benefício pode ser concedido por prazo determinado, e quem define esse prazo é o juiz, conforme o caso. Não sei responder com segurança se existe um limite máximo geral previsto em outra norma.
+
+
+      Importante: quem decide a concessão é o juiz. A lei prevê a possibilidade, não garante o benefício.
+
+
+      Se você está em perigo agora, ligue 190. Para orientação jurídica, procure a Defensoria Pública ou uma advogada.'
+- id: of-018
+  tipo: pergunta
+  categoria: auxilio_fonar_trabalho
+  pergunta: Se uma trabalhadora precisar se afastar do local de trabalho para preservar sua integridade física e psicológica diante de violência doméstica, a Lei Maria da Penha garante a manutenção do emprego dela? Por quanto tempo?
+  rag:
+    resposta: 'A lei prevê que o juiz assegure a manutenção do vínculo trabalhista quando for necessário o afastamento do local de trabalho, por até seis meses (Lei 11.340/2006, art. 9º, § 2º, II).
+
+
+      "Vínculo trabalhista" é a relação formal de emprego entre a trabalhadora e o empregador.
+
+
+      Quem decide sobre essa medida é o juiz. A lei não garante o resultado de antemão: ela autoriza o juiz a assegurar esse direito.
+
+
+      Isso é orientação e não substitui advogada ou defensora. Se houver perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 9º
+  sem_rag:
+    resposta: 'A lei trata disso, mas com limites. Veja o que está previsto.
+
+
+      **1. Afastamento do trabalho**
+
+      A lei prevê que a mulher em situação de violência doméstica e familiar pode ser afastada do local de trabalho por até 6 meses, para preservar sua integridade física e psicológica. Isso depende de decisão do juiz. (Lei 11.340/2006, art. 9º, § 2º, incluído pela Lei 13.871/2019)
+
+
+      **2. Manutenção do vínculo**
+
+      Nesse período de afastamento, a lei prevê a manutenção do vínculo trabalhista. Ou seja, o contrato de trabalho continua. (Lei 11.340/2006, art. 9º, § 2º)
+
+
+      **3. Quem decide**
+
+      Quem concede o afastamento é o juiz. A lei prevê o direito, mas não é automático: é preciso pedir e o juiz analisa o caso. (Lei 11.340/2006, art. 9º, § 2º)
+
+
+      **4. Ponto de atenção**
+
+      A lei fala em manutenção do vínculo trabalhista, mas não detalha quem paga o salário nesse período. Isso costuma ser discutido no caso concreto. Não sei responder com segurança como fica o pagamento em cada situação.
+
+
+      **5. Outra proteção**
+
+      A lei também prevê que o juiz pode determinar, se necessário, a recondução da mulher e dos dependentes ao domicílio, e a manutenção do vínculo trabalhista quando o afastamento do local de trabalho for necessário. (Lei 11.340/2006, art. 22, incisos II e III)
+
+
+      **Importante**
+
+      Isso é orientação, não substitui advogada ou defensora. Para o caso concreto, procure a Defensoria Pública ou uma advogada.
+
+
+      **Se você estiver em perigo agora, ligue 190.**'
+- id: of-019
+  tipo: pergunta
+  categoria: auxilio_fonar_trabalho
+  pergunta: Quando a mulher em situação de violência doméstica é servidora pública e precisa mudar de unidade ou local de exercício para proteger sua integridade física e psicológica, o que a Lei Maria da Penha garante a ela?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: 'A Lei Maria da Penha garante que a servidora pública em situação de violência doméstica possa pedir remoção, transferência ou afastamento do local de trabalho, quando isso for necessário para proteger sua integridade física e psicológica.
+
+
+      - A lei prevê esse direito à servidora pública (Lei 11.340/2006, art. 9º, § 2º, I).
+
+      - Remoção é a mudança de unidade ou local de exercício, sem prejuízo do cargo.
+
+      - Quem decide é o órgão público competente, ao analisar o pedido. A lei prevê o direito, mas não garante resultado automático.
+
+      - O pedido deve ser motivado, mostrando a situação de violência e a necessidade da mudança.
+
+
+      Se você estiver em perigo agora, ligue 190.'
+- id: of-020
+  tipo: pergunta
+  categoria: crime
+  pergunta: Uma colega de trabalho terminou o namoro no ano passado, mas o ex-namorado passou meses mandando dezenas de mensagens por dia, criando contas falsas nas redes sociais para vigiar a rotina dela e ficando parado na porta do serviço dela. Ficar atrás de alguém desse jeito, sem dar sossego, é crime, e a pena fica maior por ter sido contra uma mulher nessa situação?
+  rag:
+    resposta: 'Sim. A lei prevê crime para quem persegue alguém de forma repetida, por qualquer meio, ameaçando a integridade física ou psicológica, restringindo a locomoção ou invadindo ou perturbando a liberdade ou privacidade (Código Penal, art. 147-A).
+
+
+      A pena é de reclusão de 6 meses a 2 anos, e multa (Código Penal, art. 147-A).
+
+
+      A pena é aumentada de metade se o crime é cometido contra mulher por razões da condição de sexo feminino (Código Penal, art. 147-A, § 1º, II).
+
+
+      A lei também prevê que só se procede mediante representação (Código Penal, art. 147-A, § 3º). "Representação" é a manifestação da vontade da vítima para que o caso seja investigado e processado.
+
+
+      Quem decide sobre o processo e a pena é o juiz. A orientação não substitui advogada ou defensora.
+
+
+      Se ela estiver em perigo agora, deve ligar 190.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 147-A
+  sem_rag:
+    resposta: 'Sim, a lei prevê crime nesses casos. E há aumento de pena quando o crime é cometido contra a mulher por razões da condição de sexo feminino.
+
+
+      **Perseguição (stalking)**
+
+      - É crime perseguir alguém, de forma reiterada, por qualquer meio, invadindo ou perturbando a liberdade ou a privacidade dela (Código Penal, art. 147-A, incluído pela Lei 14.132/2021).
+
+      - "Reiterada" significa que se repete várias vezes, não é um fato isolado.
+
+      - Pena: reclusão de 6 meses a 2 anos, e multa (Código Penal, art. 147-A).
+
+
+      **Aumento de pena**
+
+      - A pena aumenta em metade se o crime é cometido contra a mulher por razões da condição de sexo feminino (Código Penal, art. 147-A, § 1º, I).
+
+      - Também aumenta se o crime é cometido com uso de arma ou contra criança, adolescente ou idoso (Código Penal, art. 147-A, § 1º).
+
+
+      **Outros pontos que podem se aplicar**
+
+      - Criar contas falsas para vigiar e mandar mensagens pode se encaixar também em outros crimes, conforme o caso concreto.
+
+      - A Lei Maria da Penha se aplica à violência contra a mulher em razão da condição de sexo feminino, inclusive a violência psicológica (Lei 11.340/2006, art. 5º e art. 7º, II).
+
+      - Violência psicológica é crime: causar dano emocional à mulher que prejudique e perturbe o pleno desenvolvimento dela ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões (Código Penal, art. 147-B).
+
+
+      **Quem decide**
+
+      - Quem apura é a polícia, e quem decide sobre processo e pena é o juiz. A lei prevê essas consequências; não há resultado garantido.
+
+
+      **O que ela pode fazer**
+
+      - Registrar boletim de ocorrência, guardando prints, mensagens e testemunhas.
+
+      - Pedir medidas protetivas de urgência, como afastamento do agressor e proibição de contato (Lei 11.340/2006, arts. 18 a 22).
+
+      - Procurar a Delegacia da Mulher ou a Defensoria Pública.
+
+
+      Se ela estiver em perigo agora, deve ligar 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+- id: of-021
+  tipo: pergunta
+  categoria: crime
+  pergunta: O ex-companheiro de uma vizinha vivia humilhando, manipulando e fazendo chantagem para controlar a roupa que ela vestia, com quem ela conversava e tudo o que ela decidia fazer, deixando a saúde mental dela muito abalada, e ainda fez montagens com inteligência artificial mudando a voz e o rosto dela. Essa atitude é crime, e ter usado inteligência artificial muda a pena?
+  rag:
+    resposta: 'Sim, a lei prevê crime para esse tipo de conduta. Causar dano emocional à mulher, com humilhação, manipulação, chantagem ou controle das ações e decisões, que prejudique a saúde psicológica dela, é crime (Código Penal, art. 147-B).
+
+
+      Sobre a inteligência artificial: a pena é aumentada de metade quando o crime é cometido com uso de inteligência artificial ou outro recurso tecnológico que altere imagem ou som da vítima (Código Penal, art. 147-B, parágrafo único).
+
+
+      Quem decide a pena é o juiz. A lei prevê essas consequências, mas não há resultado garantido.
+
+
+      Se ela estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 147-B
+  sem_rag:
+    resposta: 'Sim, pode ser crime. E o uso de inteligência artificial pode agravar a situação.
+
+
+      **1. Violência psicológica é crime.**
+
+      Humilhar, manipular e chantagear para controlar a roupa, as conversas e as decisões dela é violência psicológica. A lei define violência psicológica como qualquer conduta que cause dano emocional, diminua a autoestima ou prejudique o desenvolvimento da mulher (Lei 11.340/2006, art. 7º, II). Isso também é crime específico, com pena de reclusão de 6 meses a 2 anos e multa (Código Penal, art. 147-B).
+
+
+      **2. Chantagem e controle também entram.**
+
+      Constranger alguém, com violência ou ameaça, a fazer ou não fazer algo é constrangimento ilegal (Código Penal, art. 146). Ameaçar para obter vantagem ou impor comportamento é crime (Código Penal, art. 147). O conjunto pode configurar violência patrimonial, sexual ou moral, conforme o caso (Lei 11.340/2006, art. 7º).
+
+
+      **3. Montagens com IA mudando voz e rosto.**
+
+      Criar ou divulgar conteúdo falso com a imagem ou a voz dela pode ser:
+
+      - **Crime de perseguição (stalking)**, se houver repetição e invasão da vida dela (Código Penal, art. 147-A).
+
+      - **Crime de divulgação de conteúdo íntimo falso**, quando o material é usado para humilhar ou expor (Código Penal, art. 218-C, que trata de conteúdo sexual; se não for sexual, pode ser difamação ou injúria — Código Penal, arts. 139 e 140).
+
+      - **Violência psicológica e moral**, dentro da Lei Maria da Penha (Lei 11.340/2006, art. 7º, II e V).
+
+
+      **4. A IA muda a pena?**
+
+      A lei brasileira ainda não tem um artigo específico só para "deepfake" (vídeo ou áudio falso feito com IA). Mas o uso de IA pode ser considerado **agravante** ou **circunstância que aumenta a pena**, porque mostra meio cruel, dissimulado ou que dificulta a defesa da vítima (Código Penal, art. 61, II, "c" e "d"). O juiz analisa caso a caso. Não há garantia de pena maior: quem decide é o juiz.
+
+
+      **5. O que a vizinha pode fazer.**
+
+      - Registrar boletim de ocorrência, guardando prints, áudios e as montagens.
+
+      - Pedir medida protetiva de urgência, que o juiz pode conceder para afastar o agressor e proibir contato (Lei 11.340/2006, arts. 18 a 22).
+
+      - Procurar a Defensoria Pública ou uma advogada. A orientação aqui não substitui esse acompanhamento.
+
+
+      **Se houver perigo agora, ligue 190.**'
+- id: of-022
+  tipo: pergunta
+  categoria: crime
+  pergunta: Depois que uma conhecida terminou o namoro, o ex-namorado espalhou em grupos de conversa fotos e vídeos dela nua que tinham sido gravados quando eles ainda estavam juntos, sem ela autorizar, só para se vingar e expor ela. Espalhar essas imagens íntimas na internet sem permissão é crime, e o fato de ele ser ex-namorado ou fazer isso por vingança aumenta a pena?
+  rag:
+    resposta: 'Sim. Divulgar fotos ou vídeos de nudez ou cena de sexo sem o consentimento da vítima é crime, com pena de reclusão de 4 a 10 anos, e multa (Código Penal, art. 218-C).
+
+
+      E a pena é aumentada de 1/3 a 2/3 se o crime é praticado por alguém que mantém ou manteve relação íntima de afeto com a vítima, ou com o fim de vingança ou humilhação (Código Penal, art. 218-C, § 1º).
+
+
+      Então, no caso que você contou, o fato de ele ser ex-namorado e de agir por vingança pode fazer o juiz aumentar a pena. Quem decide isso é o juiz, no caso concreto.
+
+
+      Explicando: "reclusão" é um tipo de pena de prisão, cumprida em regime mais rigoroso que a detenção.
+
+
+      Isso é orientação e não substitui advogada ou defensora. Se ela estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 218-C
+  sem_rag:
+    resposta: 'Sim, espalhar imagens íntimas sem autorização é crime. E o fato de ser ex-namorado e agir por vingança pesa contra ele.
+
+
+      **O crime**
+
+      Divulgar foto ou vídeo de nudez ou de ato sexual sem o consentimento da pessoa é crime (Lei 13.718/2018, que incluiu o art. 218-C no Código Penal). A pena é de reclusão de 1 a 5 anos, se o fato não for crime mais grave (Código Penal, art. 218-C).
+
+
+      **Aumento de pena**
+
+      A pena aumenta de 1/3 até 2/3 se o crime é cometido por alguém que tem ou teve relação íntima de afeto com a vítima, ou se é feito para humilhar, por vingança ou por outro motivo torpe (Código Penal, art. 218-C, § 1º). Então, ser ex-namorado e agir por vingança são exatamente as situações que aumentam a pena.
+
+
+      **Outras proteções**
+
+      - A Lei Maria da Penha vale para violência contra a mulher em razão da relação de afeto, mesmo depois do fim do namoro (Lei 11.340/2006, art. 5º).
+
+      - A divulgação pode ser violência psicológica e moral (Lei 11.340/2006, art. 7º, incisos II e V).
+
+      - Ela pode pedir medida protetiva de urgência, como proibição de contato e de divulgação de dados (Lei 11.340/2006, arts. 18 e 22).
+
+
+      **Quem decide**
+
+      Quem aplica a pena é o juiz, após o processo. A lei prevê essas penas, mas não há resultado garantido.
+
+
+      **O que ela pode fazer**
+
+      - Guardar provas: prints, links, nomes dos grupos.
+
+      - Registrar boletim de ocorrência em delegacia, de preferência especializada em atendimento à mulher.
+
+      - Procurar a Defensoria Pública ou uma advogada.
+
+      - Pedir que as plataformas removam o conteúdo.
+
+
+      Se ela estiver em perigo agora, ligue 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+- id: of-023
+  tipo: pergunta
+  categoria: crime
+  pergunta: Uma prima usa cadeira de rodas por causa de uma deficiência física e, meses atrás, levou empurrões e socos do companheiro dentro de casa, ficando toda machucada. Qual é a pena para quem agride e machuca a companheira dentro de casa, e a pena aumenta quando a mulher agredida tem deficiência?
+  rag:
+    resposta: 'Não sei responder com segurança a essa pergunta com base apenas nos trechos enviados.
+
+
+      Os trechos tratam da lesão corporal em contexto doméstico e do aumento de pena quando a vítima tem deficiência, mas há versões diferentes do mesmo dispositivo (Código Penal, art. 129, § 9º) com penas distintas, e não é possível definir com segurança qual se aplica ao caso. Além disso, os trechos não esclarecem se o aumento por deficiência vale para toda lesão doméstica ou só em hipóteses específicas.
+
+
+      Para orientação sobre o caso concreto, procure uma advogada ou a Defensoria Pública. Se houver perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 129
+  sem_rag:
+    resposta: 'A agressão dentro de casa contra a companheira é violência doméstica. A lei prevê punição, e o juiz decide o caso concreto.
+
+
+      **1. O que a lei prevê para lesão corporal em contexto de violência doméstica**
+
+      - A pena é de detenção de 3 meses a 3 anos (Lei 11.340/2006, art. 7º, I, e Código Penal, art. 129, § 9º).
+
+      - "Detenção" é uma pena de prisão mais branda que a "reclusão".
+
+      - Se a lesão for grave, a pena é maior (Código Penal, art. 129, §§ 1º e 2º).
+
+
+      **2. A pena aumenta quando a mulher tem deficiência?**
+
+      - Sim, a lei prevê aumento de pena quando a vítima tem deficiência (Lei 11.340/2006, art. 61, parágrafo único).
+
+      - Esse aumento vale para os crimes previstos na Lei Maria da Penha.
+
+      - Também há aumento de pena quando o crime é cometido contra pessoa com deficiência em geral (Código Penal, art. 61, II, "h").
+
+      - "Aumento de pena" significa que o juiz eleva a pena dentro dos limites legais.
+
+
+      **3. Outros pontos importantes**
+
+      - Empurrões e socos podem configurar também vias de fato ou ameaça, conforme o caso (Lei 11.340/2006, art. 7º).
+
+      - A mulher pode pedir medidas protetivas de urgência, como afastamento do agressor (Lei 11.340/2006, arts. 18 a 22).
+
+      - Quem decide sobre prisão, pena e medidas é o juiz, após o processo.
+
+
+      **4. Se houver perigo agora**
+
+      - Ligue 190.
+
+      - Você também pode orientar sua prima a procurar a Delegacia da Mulher ou a Defensoria Pública.
+
+
+      Eu não sei responder com segurança qual será a pena exata no caso dela. Isso depende das provas, do tipo de lesão e da decisão do juiz.'
+- id: of-024
+  tipo: pergunta
+  categoria: crime
+  pergunta: Uma vizinha contou que, durante uma briga no mês passado, o ex-marido mandou áudios e mensagens dizendo que ia dar um jeito de destruir a vida dela e fazer ela pagar caro se ela entrasse com o pedido de divórcio. Intimidar uma mulher dizendo que vai fazer algo ruim contra ela é crime, como fica a pena nesse caso e ela precisa dar autorização para o processo criminal andar?
+  rag:
+    resposta: 'Sobre a pena: os trechos que você enviou não trazem um artigo específico sobre "intimidação" por ameaça de fazer algo ruim. O art. 147-B do Código Penal trata de dano emocional causado por ameaça, constrangimento, humilhação, manipulação, isolamento, chantagem, ridicularização, limitação do direito de ir e vir ou outro meio que prejudique a saúde psicológica e a autodeterminação da mulher. A pena prevista é reclusão de 6 meses a 2 anos, e multa, se a conduta não constituir crime mais grave (Código Penal, art. 147-B). A pena é aumentada de metade se o crime for cometido com uso de inteligência artificial ou outro recurso tecnológico que altere imagem ou som da vítima (Código Penal, art. 147-B, parágrafo único). Quem decide se a conduta se encaixa nesse artigo é o juiz.
+
+
+      Sobre autorização para o processo criminal andar: os trechos enviados não tratam desse ponto. Não sei responder com segurança se ela precisa autorizar.
+
+
+      Se ela estiver em perigo agora, oriente a ligar 190. Isso é orientação e não substitui advogada ou defensora.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 147-B
+  sem_rag:
+    resposta: 'Sim, isso pode ser crime. A lei prevê pena para quem intimida a mulher com ameaça de mal injusto e grave — "mal injusto e grave" é a promessa de um prejuízo sério e sem justificativa (Lei 11.340/2006, art. 7º, II; Código Penal, art. 147).
+
+
+      Sobre a pena: a ameaça tem pena de detenção de 1 a 6 meses, ou multa (Código Penal, art. 147). Quando é contra a mulher por razões da condição de sexo feminino, a pena é aumentada em 1/3 (Lei 11.340/2006, art. 7º, II, e Código Penal, art. 61, II, "f"). Quem aplica a pena é o juiz, depois do processo.
+
+
+      Sobre autorização: a ameaça é crime de ação penal pública incondicionada. Isso quer dizer que o Ministério Público pode processar sem precisar de autorização da vítima. Ela não precisa "dar queixa" para o processo andar, mas registrar a ocorrência ajuda a reunir provas.
+
+
+      Ela pode guardar os áudios e mensagens, com data e número de telefone, e procurar a delegacia, de preferência a Delegacia da Mulher. Também pode pedir medidas protetivas de urgência, como afastamento do agressor — quem decide se concede é o juiz (Lei 11.340/2006, arts. 18 a 22).
+
+
+      Se ela estiver em perigo agora, deve ligar 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+- id: of-025
+  tipo: pergunta
+  categoria: crime
+  pergunta: Uma conhecida contou na delegacia que, no ano passado, o companheiro passou uma semana inteira impedindo que ela colocasse o pé para fora de casa, mantendo as portas fechadas no cadeado e sem telefone para pedir ajuda. Que crime comete quem impede outra pessoa de sair assim, e a pena muda quando a vítima é esposa ou companheira?
+  rag:
+    resposta: 'Não sei responder com segurança com os trechos que recebi.
+
+
+      Os trechos tratam de lesão corporal (Código Penal, art. 129, §§ 4º, 9º e 11; Lei 11.340/2006, art. 44) e de perseguição (Código Penal, art. 147-A). Nenhum deles descreve especificamente o crime de impedir alguém de sair de casa, nem a pena para esse caso quando a vítima é esposa ou companheira.
+
+
+      Se ela estiver em perigo agora, ligue 190. Para orientação sobre o caso, procure uma advogada, a Defensoria Pública ou a delegacia da mulher.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 129
+    - Lei 11.340/2006, art. 44
+    - Código Penal, art. 147-A
+  sem_rag:
+    resposta: 'Isso é cárcere privado. É manter alguém preso ou impedido de ir e vir, mesmo dentro de casa (Código Penal, art. 148).
+
+
+      A lei prevê pena de reclusão de 1 a 3 anos para o cárcere privado (Código Penal, art. 148, caput).
+
+
+      A pena aumenta, e o juiz pode aplicar de 2 a 5 anos, quando o crime é cometido contra cônjuge, companheiro ou pessoa com quem se convive (Código Penal, art. 148, § 1º, inciso I).
+
+
+      Se a vítima é mulher e o crime é por razões da condição de sexo feminino, também pode se enquadrar na Lei Maria da Penha. A lei lista a violência patrimonial e a violência moral, e trata a violência física e psicológica como formas de violência doméstica (Lei 11.340/2006, art. 7º). O cárcere privado é violência física e psicológica.
+
+
+      Quem decide se houve crime, qual artigo se aplica e qual pena é o juiz, depois de ouvir o Ministério Público e a defesa. A delegacia registra o fato; não define a pena.
+
+
+      Se ela ainda estiver em perigo agora, ligue 190. Para orientação e medidas de proteção, procure a Delegacia da Mulher ou a Defensoria Pública. Isso não substitui advogada ou defensora.'
+- id: of-026
+  tipo: pergunta
+  categoria: crime
+  pergunta: O ex-companheiro de uma amiga saiu dizendo para os colegas de serviço dela que ela tinha roubado dinheiro do caixa da loja, mesmo sabendo que era mentira, e ainda espalhou histórias humilhantes sobre a vida pessoal dela para ela ficar mal falada no bairro. Inventar que alguém cometeu um roubo e espalhar histórias para manchar o nome de uma pessoa são crimes diferentes?
+  rag:
+    resposta: 'Sim, são crimes diferentes.
+
+
+      **Inventar que ela roubou e espalhar isso**
+
+      - Caluniar é imputar falsamente a alguém um fato definido como crime (Código Penal, art. 138).
+
+      - Quem sabe que a história é falsa e mesmo assim a espalha também responde pelo crime (Código Penal, art. 138, § 1º).
+
+      - A pena prevista é detenção de seis meses a dois anos, e multa (Código Penal, art. 138).
+
+
+      **Espalhar histórias humilhantes sobre a vida pessoal**
+
+      - Injuriar é ofender a dignidade ou o decoro de alguém (Código Penal, art. 140).
+
+      - A pena prevista é detenção de um a seis meses, ou multa (Código Penal, art. 140).
+
+      - O juiz pode deixar de aplicar a pena em casos de provocação direta ou retorsão imediata — que é responder com outra injúria (Código Penal, art. 140, § 1º).
+
+
+      Quem decide se houve crime e qual pena aplicar é o juiz. Eu não posso garantir resultado.
+
+
+      Se ela estiver em perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 138
+    - Código Penal, art. 140
+  sem_rag:
+    resposta: 'Sim, são situações diferentes. Podem ser tratadas como crimes distintos.
+
+
+      **1. Dizer que ela roubou dinheiro, sabendo que é mentira**
+
+      Isso pode ser **calúnia**. Calúnia é atribuir falsamente a alguém um crime. (Código Penal, art. 138)
+
+      A pena prevista é detenção de 6 meses a 2 anos, e multa. (Código Penal, art. 138)
+
+
+      **2. Espalhar histórias humilhantes sobre a vida pessoal**
+
+      Isso pode ser **difamação**. Difamação é espalhar fato ofensivo à reputação de alguém. (Código Penal, art. 139)
+
+      A pena prevista é detenção de 3 meses a 1 ano, e multa. (Código Penal, art. 139)
+
+
+      Se as histórias forem sobre características dela, e não sobre um fato, pode ser **injúria**. Injúria é ofender a dignidade ou o decoro de alguém. (Código Penal, art. 140)
+
+
+      **O que a lei prevê nesses casos**
+
+      - A pena pode aumentar se o crime é cometido na presença de várias pessoas ou por meio que facilite a divulgação. (Código Penal, art. 141)
+
+      - Se o crime é cometido contra a mulher por razões da condição de sexo feminino, a lei prevê pena maior. (Código Penal, art. 141, § 2º)
+
+      - Esses crimes, em regra, dependem de queixa da pessoa ofendida. Quem decide se aceita a queixa é o juiz. (Código Penal, art. 145)
+
+
+      **Sobre a Lei Maria da Penha**
+
+      A Lei Maria da Penha trata de violência doméstica e familiar contra a mulher. (Lei 11.340/2006, art. 5º)
+
+      Ela inclui a violência moral, que é caluniar, difamar ou injuriar a mulher. (Lei 11.340/2006, art. 7º, inciso V)
+
+      Se o ex-companheiro se enquadra como agressor em relação doméstica ou familiar, esses fatos podem ser tratados também por essa lei. Quem avalia isso é o juiz.
+
+
+      **Importante**
+
+      - Guarde provas: mensagens, prints, nomes de testemunhas.
+
+      - A pessoa ofendida pode procurar a delegacia, a Defensoria Pública ou uma advogada.
+
+      - Eu não sei responder com segurança qual é o melhor caminho no caso concreto. Isso depende de detalhes que só uma profissional pode avaliar.
+
+
+      Se houver perigo agora, ligue 190.'
+- id: of-027
+  tipo: pergunta
+  categoria: crime
+  pergunta: O marido de uma colega empurrou ela na parede e disse que ia machucá-la para tomar à força o salário e o celular dela enquanto ainda eram casados, e depois falou que marido não responde na Justiça por pegar coisas da própria esposa. Essa regra de que marido não é punido por tirar bens da esposa vale até quando ele usa agressão ou intimidação?
+  rag:
+    resposta: 'Não. Pelos trechos que recebi, essa ideia de que o marido não responde por tirar bens da esposa não se sustenta quando há agressão ou intimidação.
+
+
+      - A lei trata como violência doméstica a violência patrimonial: reter, subtrair, destruir objetos, documentos, bens, valores ou recursos econômicos da mulher, inclusive os que servem para suas necessidades (Lei 11.340/2006, art. 7º, IV).
+
+      - O juiz pode determinar medidas para proteger os bens da mulher, como a restituição de bens subtraídos pelo agressor (Lei 11.340/2006, art. 24, I).
+
+      - O juiz também pode suspender procurações que a mulher tenha dado ao agressor (Lei 11.340/2006, art. 24, III).
+
+      - O juiz pode afastar o agressor do lar ou do local de convivência com a ofendida (Lei 11.340/2006, art. 22, II).
+
+      - Empurrar e ameaçar machucar pode configurar ofensa à integridade corporal ou à saúde, com pena maior quando praticada contra cônjuge ou companheiro ou com quem conviva ou tenha convivido (Código Penal, art. 129, § 9º).
+
+
+      Quem decide sobre essas medidas e sobre punição é o juiz. A lei prevê; não há resultado garantido.
+
+
+      Se ela estiver em perigo agora, deve ligar 190. Isto é orientação e não substitui advogada ou defensora.'
+    recusada: false
+    citacoes:
+    - Lei 11.340/2006, art. 7º
+    - Lei 11.340/2006, art. 24
+    - Lei 11.340/2006, art. 22
+    - Código Penal, art. 129
+  sem_rag:
+    resposta: 'Não. Essa ideia de que "marido não responde por pegar coisas da esposa" não vale quando há violência ou ameaça.
+
+
+      O que a lei prevê:
+
+
+      - A Lei Maria da Penha trata como violência patrimonial qualquer ato que tire, retenha ou destrua bens, documentos ou recursos da mulher. Isso inclui o salário e o celular dela (Lei 11.340/2006, art. 7º, inciso IV).
+
+      - A mesma lei trata como violência física qualquer conduta que ofenda a integridade ou a saúde da mulher, como empurrar (Lei 11.340/2006, art. 7º, inciso I).
+
+      - A ameaça de machucá-la é violência psicológica: conduta que cause dano emocional ou diminua a autoestima, ou que vise controlar as ações dela (Lei 11.340/2006, art. 7º, inciso II).
+
+      - A lei também prevê medida protetiva de urgência para afastar o agressor do lar e proibir aproximação e contato (Lei 11.340/2006, arts. 22 e 23). Quem decide é o juiz, que pode conceder a medida.
+
+
+      Sobre a frase "marido não responde":
+
+
+      - O Código Penal tem uma regra que isenta de pena quem comete crime contra o patrimônio em prejuízo do cônjuge, na constância do casamento (Código Penal, art. 181, inciso I). "Na constância do casamento" significa enquanto o casamento existe.
+
+      - Mas essa isenção é afastada quando o crime é cometido com violência ou grave ameaça à pessoa (Código Penal, art. 183, inciso I). Ou seja, se houve empurrão e ameaça, essa regra não se aplica.
+
+      - Além disso, a Lei Maria da Penha vale independentemente da união entre autor e vítima (Lei 11.340/2006, art. 5º).
+
+
+      Resumindo: a lei prevê que a violência patrimonial, física e psicológica pode ser apurada mesmo entre casados, e a isenção do Código Penal cai quando há violência ou grave ameaça. Quem avalia o caso e decide é a autoridade policial e o juiz.
+
+
+      Se ela estiver em perigo agora, deve ligar 190. Também pode procurar a Delegacia da Mulher ou a Defensoria Pública. Isso é orientação e não substitui advogada ou defensora.'
+- id: of-028
+  tipo: pergunta
+  categoria: crime
+  pergunta: Uma mulher desabafou com uma vizinha que, meses atrás, o marido segurou ela à força pelo braço e obrigou que ela tivesse relação íntima com ele mesmo ela chorando e pedindo para parar, porque ele dizia que no casamento ela tinha obrigação. Que crime comete quem obriga alguém a ter relação sexual à força desse jeito, e qual é a pena prevista na lei?
+  rag:
+    resposta: 'Não sei responder com segurança. Os trechos enviados não trazem o crime de estupro nem a pena correspondente. Eles tratam de lesão corporal (Código Penal, art. 129), dano emocional (Código Penal, art. 147-B), perseguição (Código Penal, art. 147-A), injúria (Código Penal, art. 140) e ameaça (Código Penal, art. 147), mas não descrevem relação sexual forçada.
+
+
+      Se ela estiver em perigo agora, ligue 190. Para orientação sobre esse caso, procure uma advogada, a Defensoria Pública ou a Delegacia da Mulher.'
+    recusada: false
+    citacoes:
+    - Código Penal, art. 129
+    - Código Penal, art. 147-B
+    - Código Penal, art. 147-A
+    - Código Penal, art. 140
+    - Código Penal, art. 147
+  sem_rag:
+    resposta: 'Isso é crime. O nome é estupro.
+
+
+      Obrigar alguém a ter relação sexual, com força ou grave ameaça, é estupro (Código Penal, art. 213).
+
+
+      A pena é de 6 a 10 anos de prisão (Código Penal, art. 213).
+
+
+      No casamento não existe "obrigação" de ter relação sexual. O marido pode ser punido por estupro contra a esposa (Código Penal, art. 213; Lei 11.340/2006, art. 7º, I).
+
+
+      Segurar pelo braço à força e vencer a resistência também é violência física e sexual (Lei 11.340/2006, art. 7º, I e II).
+
+
+      A pena pode aumentar em alguns casos, por exemplo se a violência causar lesão grave (Código Penal, art. 213, § 1º).
+
+
+      Quem decide a pena concreta é o juiz, depois do processo.
+
+
+      Ela pode registrar boletim de ocorrência em qualquer delegacia, inclusive na Delegacia da Mulher (Lei 11.340/2006, art. 12).
+
+
+      Ela pode pedir medida protetiva de urgência. O juiz pode conceder, como afastamento do agressor do lar (Lei 11.340/2006, arts. 18 e 22).
+
+
+      Ela não precisa de advogada para pedir a medida protetiva. A delegacia ou a Defensoria podem orientar (Lei 11.340/2006, art. 19).
+
+
+      Se houver perigo agora, ligue 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+- id: of-029
+  tipo: pergunta
+  categoria: guarda
+  pergunta: Uma amiga saiu de casa com os filhos pequenos porque o ex-marido era agressivo, e agora eles estão brigando na Justiça para decidir com quem as crianças vão ficar, já que os dois não concordam. Mesmo quando o pai pede para dividir a guarda, o juiz ainda é obrigado a dar a guarda compartilhada em um caso em que a mãe e as crianças podem sofrer agressões?
+  rag:
+    resposta: 'Não. A lei não obriga o juiz a dar a guarda compartilhada nesse caso.
+
+
+      Quando não há acordo entre a mãe e o pai, e os dois estão aptos a exercer o poder familiar, a regra é aplicar a guarda compartilhada. Mas há exceção: isso não ocorre quando houver elementos que evidenciem a probabilidade de risco de violência doméstica ou familiar (Código Civil, art. 1.584, § 2º).
+
+
+      "Poder familiar" é o conjunto de direitos e deveres dos pais em relação aos filhos.
+
+
+      Quem avalia os elementos e decide é o juiz. A lei prevê a exceção, mas não garante resultado.
+
+
+      Se ela estiver em perigo agora, ligue 190.
+
+
+      Isso é orientação e não substitui advogada ou defensora.'
+    recusada: false
+    citacoes:
+    - Código Civil, art. 1.584
+  sem_rag:
+    resposta: 'Não. O juiz não é obrigado a dar guarda compartilhada quando há risco de violência.
+
+
+      A regra geral é a guarda compartilhada, mas ela não é automática. O juiz decide ouvindo o Ministério Público e as partes (Lei 13.058/2014, que alterou o art. 1.584 do Código Civil).
+
+
+      O Código Civil diz que a guarda compartilhada deve ser aplicada sempre que possível, mas considera o que for melhor para a criança (Código Civil, art. 1.584, § 2º).
+
+
+      A Lei Maria da Penha manda o juiz proteger a mulher e os filhos. O juiz pode afastar o agressor do lar e proibir aproximação (Lei 11.340/2006, arts. 22 e 23).
+
+
+      A lei também diz que a violência doméstica contra a mulher pode limitar ou suspender a convivência do agressor com os filhos (Lei 11.340/2006, art. 22, parágrafo único).
+
+
+      Então: o juiz pode negar a guarda compartilhada e definir a guarda unilateral para a mãe, se entender que há risco. Quem decide é o juiz, com base nas provas.
+
+
+      Importante: guarda compartilhada não é o mesmo que morar junto. Ela trata da divisão das decisões sobre a vida da criança.
+
+
+      Se sua amiga estiver em perigo agora, ela deve ligar 190.
+
+
+      Isso é orientação, não substitui advogada ou defensora.'
+- id: of-030
+  tipo: pergunta
+  categoria: guarda
+  pergunta: Uma vizinha entrou com processo para definir a guarda do filho depois de se separar de um companheiro violento, e marcaram aquela primeira reunião no fórum para tentar um acordo entre os pais. Antes de começar essa conversa de acordo, o que o juiz tem obrigação de perguntar sobre violência em casa e quantos dias a pessoa tem para entregar documentos ou sinais do que aconteceu?
+  rag:
+    resposta: 'Antes da audiência de mediação e conciliação, o juiz deve perguntar às partes e ao Ministério Público se há risco de violência doméstica ou familiar (Código de Processo Civil, art. 699-A).
+
+
+      Se houver, o juiz fixa o prazo de 5 (cinco) dias para a apresentação de prova ou de indícios pertinentes (Código de Processo Civil, art. 699-A).
+
+
+      "Indícios" são sinais ou elementos que sugerem que algo aconteceu, mesmo sem prova completa.
+
+
+      Isso é orientação e não substitui advogada ou defensora. Se houver perigo agora, ligue 190.'
+    recusada: false
+    citacoes:
+    - Código de Processo Civil, art. 699-A
+  sem_rag:
+    resposta: 'Não sei responder com segurança sobre a obrigação específica do juiz de perguntar sobre violência doméstica nessa audiência de acordo de guarda, nem sobre prazo em dias para entregar documentos ou sinais do que aconteceu. Não quero te passar informação errada.
+
+
+      O que posso dizer com base na lei:
+
+
+      - A Lei Maria da Penha trata a violência doméstica como algo que deve ser considerado em qualquer ação relacionada à mulher, inclusive quando envolve filhos (Lei 11.340/2006, art. 1º e art. 5º).
+
+      - O juiz pode adotar medidas para proteger a mulher e os filhos, como afastamento do agressor e restrições de convivência (Lei 11.340/2006, art. 22).
+
+      - Quem decide sobre guarda e sobre essas medidas é o juiz, analisando cada caso (Lei 11.340/2006, art. 22; Código Civil, art. 1.583).
+
+
+      Sobre prazos e perguntas obrigatórias nessa audiência, o melhor é confirmar com a defensoria pública, uma advogada ou o próprio fórum antes da reunião.
+
+
+      Se ela estiver em perigo agora, ligue 190.'
+- id: of-extra-001
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Comprei um liquidificador pela internet na semana passada e me arrependi quando a encomenda chegou. Quantos dias o Código de Defesa do Consumidor dá para devolver o produto e receber o dinheiro de volta?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: 'O Código de Defesa do Consumidor prevê 7 dias para desistir da compra feita fora do estabelecimento, como pela internet (Lei 8.078/1990, art. 49).
+
+
+      Esse prazo começa a contar da assinatura do contrato ou do recebimento do produto, o que acontecer depois.
+
+
+      "Desistir" significa cancelar a compra sem precisar justificar o motivo.
+
+
+      A lei prevê que o valor pago deve ser devolvido, com correção, e que você não deve arcar com o frete de retorno (Lei 8.078/1990, art. 49).
+
+
+      Quem faz a devolução do dinheiro é o fornecedor, ou seja, a loja que vendeu. Se houver recusa, o juiz pode determinar a devolução.
+
+
+      Guarde prints do pedido, comprovante de pagamento e data de recebimento. Isso ajuda a comprovar o prazo.
+
+
+      Se a loja não resolver, você pode procurar o Procon ou a Defensoria Pública. Eu não substituo advogada ou defensora.'
+- id: of-extra-002
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Uma amiga recebeu uma multa de trânsito por radar na avenida, mas a placa na foto estava ilegível. Qual é o prazo e como ela faz para apresentar recurso administrativo no Detran?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: 'Não sei responder com segurança sobre prazo e recurso de multa de trânsito no Detran. Isso foge da Lei Maria da Penha e das normas de proteção à mulher, que são o que eu oriento.
+
+
+      Sobre violência contra a mulher, posso ajudar. Se sua amiga estiver em perigo agora, ligue 190.'
+- id: of-extra-003
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Quem trabalhou como microempreendedora individual no ano passado precisa entregar a declaração de Imposto de Renda de Pessoa Física mesmo tendo faturado pouco?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: Não sei responder com segurança. Esse tema é de Imposto de Renda, não da Lei Maria da Penha. Para orientação sobre a declaração de IRPF do MEI, procure a Receita Federal ou uma contadora.
+- id: of-extra-004
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Uma colega completou um ano de carteira assinada em uma padaria e o empregador quer dividir as férias dela em três períodos. A legislação trabalhista permite parcelar as férias dessa forma?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: 'Não. A regra geral não permite dividir as férias em três períodos.
+
+
+      O que a lei prevê:
+
+
+      - As férias devem ser concedidas em um único período de 30 dias corridos (CLT, art. 134, caput).
+
+      - Existe uma exceção: em casos excepcionais, o empregador pode dividir em no máximo dois períodos, sendo um deles de pelo menos 10 dias corridos (CLT, art. 134, § 1º).
+
+      - Dividir em três períodos não está previsto nessa regra.
+
+
+      Quem decide: o empregador escolhe o período das férias, mas precisa seguir esses limites da lei (CLT, art. 136). Se houver descumprimento, a trabalhadora pode procurar o sindicato ou a Justiça do Trabalho.
+
+
+      Observação: existem regras específicas para alguns grupos, como empregados domésticos. Não sei responder com segurança se há alguma norma própria aplicável ao caso dela sem mais detalhes.
+
+
+      Isso é orientação geral e não substitui advogada ou defensora.'
+- id: of-extra-005
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Aluguei uma sala comercial para montar uma loja de roupas e o proprietário pediu quatro meses de aluguel adiantado como caução em dinheiro. A Lei do Inquilinato permite exigir essa garantia?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: 'Não sei responder com segurança se a Lei do Inquilinato permite exigir caução em dinheiro nesse caso.
+
+
+      O que posso dizer é que a Lei do Inquilinato trata das garantias locatícias, e a caução é uma delas (Lei 8.245/1991, art. 37). Caução é um valor ou bem entregue para garantir o cumprimento do contrato.
+
+
+      A lei também fixa limites para o valor da caução (Lei 8.245/1991, art. 38). Mas há detalhes e entendimentos que variam, e quem decide é o juiz, se houver disputa.
+
+
+      Para saber o que se aplica ao seu contrato, procure uma advogada ou a Defensoria Pública.'
+- id: of-extra-006
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: O síndico do prédio aplicou uma multa de condomínio para uma moradora por causa de barulho de reforma no sábado à tarde, sem enviar advertência antes. Como ela pode recorrer dessa multa na assembleia?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: Não sei responder com segurança sobre como recorrer dessa multa específica na assembleia.
+- id: of-extra-007
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Qual é a receita de bolo de cenoura de liquidificador para a massa ficar bem fofinha e qual é a proporção certa de chocolate para fazer uma cobertura durinha?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: Não sei responder com segurança sobre receita de bolo. Meu trabalho é orientar sobre a Lei Maria da Penha e normas relacionadas. Se você quiser, posso falar sobre seus direitos nessa lei.
+- id: of-extra-008
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Quais são as regras do impedimento no futebol profissional e quantas substituições uma equipe pode fazer durante os noventa minutos de uma partida oficial?
+  rag:
+    resposta: Não sei responder com segurança. Os trechos enviados tratam do crime de lesão corporal no Código Penal (Código Penal, art. 129) e não falam sobre regras do futebol nem sobre substituições em partidas.
+    recusada: false
+    citacoes:
+    - Código Penal, art. 129
+  sem_rag:
+    resposta: Não sei responder com segurança sobre as regras do impedimento no futebol profissional nem sobre o número de substituições em partidas oficiais. Minha atuação é orientar sobre a Lei Maria da Penha e normas relacionadas à violência contra a mulher.
+- id: of-extra-009
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: De quantos em quantos dias é recomendado regar uma samambaia que fica na varanda de um apartamento em Brasília durante os meses de seca?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: Não sei responder com segurança. Não sou especialista em plantas e não tenho informação confiável sobre rega de samambaias. Posso orientar sobre a Lei Maria da Penha e normas relacionadas. Se quiser, faça sua pergunta sobre esse tema.
+- id: of-extra-010
+  tipo: extra
+  categoria: fora_do_tema
+  pergunta: Como faço para limpar o armazenamento do celular quando os vídeos e fotos baixados deixam os aplicativos lentos e sem espaço para atualizar?
+  rag:
+    resposta: Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.
+    recusada: true
+    citacoes: []
+  sem_rag:
+    resposta: Não sei responder com segurança sobre limpeza de armazenamento de celular. Esse tema não é sobre a Lei Maria da Penha nem sobre normas de proteção à mulher, que é o que eu orientо.

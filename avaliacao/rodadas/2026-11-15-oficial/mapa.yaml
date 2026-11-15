@@ -1,0 +1,203 @@
+semente: 566655662
+rodada: 2026-11-15-oficial
+arquivos:
+  A:
+  - codigo: A01
+    id: errada-3
+    versao: errada
+  - codigo: A02
+    id: of-009
+    versao: rag
+  - codigo: A03
+    id: errada-2
+    versao: errada
+  - codigo: A04
+    id: of-013
+    versao: sem_rag
+  - codigo: A05
+    id: of-016
+    versao: rag
+  - codigo: A06
+    id: of-024
+    versao: rag
+  - codigo: A07
+    id: of-027
+    versao: rag
+  - codigo: A08
+    id: of-021
+    versao: rag
+  - codigo: A09
+    id: of-012
+    versao: sem_rag
+  - codigo: A10
+    id: of-004
+    versao: sem_rag
+  - codigo: A11
+    id: of-023
+    versao: rag
+  - codigo: A12
+    id: of-028
+    versao: sem_rag
+  - codigo: A13
+    id: of-006
+    versao: rag
+  - codigo: A14
+    id: of-020
+    versao: rag
+  - codigo: A15
+    id: of-030
+    versao: sem_rag
+  - codigo: A16
+    id: of-010
+    versao: sem_rag
+  - codigo: A17
+    id: of-007
+    versao: sem_rag
+  - codigo: A18
+    id: of-002
+    versao: rag
+  - codigo: A19
+    id: of-019
+    versao: rag
+  - codigo: A20
+    id: of-005
+    versao: rag
+  - codigo: A21
+    id: of-029
+    versao: sem_rag
+  - codigo: A22
+    id: of-008
+    versao: sem_rag
+  - codigo: A23
+    id: of-018
+    versao: sem_rag
+  - codigo: A24
+    id: of-026
+    versao: rag
+  - codigo: A25
+    id: of-017
+    versao: sem_rag
+  - codigo: A26
+    id: of-011
+    versao: rag
+  - codigo: A27
+    id: of-015
+    versao: sem_rag
+  - codigo: A28
+    id: of-022
+    versao: sem_rag
+  - codigo: A29
+    id: of-014
+    versao: sem_rag
+  - codigo: A30
+    id: of-001
+    versao: rag
+  - codigo: A31
+    id: of-025
+    versao: rag
+  - codigo: A32
+    id: errada-1
+    versao: errada
+  - codigo: A33
+    id: of-003
+    versao: sem_rag
+  B:
+  - codigo: B01
+    id: of-016
+    versao: sem_rag
+  - codigo: B02
+    id: of-028
+    versao: rag
+  - codigo: B03
+    id: of-029
+    versao: rag
+  - codigo: B04
+    id: errada-1
+    versao: errada
+  - codigo: B05
+    id: of-020
+    versao: sem_rag
+  - codigo: B06
+    id: of-010
+    versao: rag
+  - codigo: B07
+    id: of-003
+    versao: rag
+  - codigo: B08
+    id: of-030
+    versao: rag
+  - codigo: B09
+    id: of-027
+    versao: sem_rag
+  - codigo: B10
+    id: of-015
+    versao: rag
+  - codigo: B11
+    id: errada-2
+    versao: errada
+  - codigo: B12
+    id: of-014
+    versao: rag
+  - codigo: B13
+    id: of-025
+    versao: sem_rag
+  - codigo: B14
+    id: of-011
+    versao: sem_rag
+  - codigo: B15
+    id: of-021
+    versao: sem_rag
+  - codigo: B16
+    id: of-007
+    versao: rag
+  - codigo: B17
+    id: of-002
+    versao: sem_rag
+  - codigo: B18
+    id: of-009
+    versao: sem_rag
+  - codigo: B19
+    id: of-006
+    versao: sem_rag
+  - codigo: B20
+    id: of-023
+    versao: sem_rag
+  - codigo: B21
+    id: of-008
+    versao: rag
+  - codigo: B22
+    id: of-018
+    versao: rag
+  - codigo: B23
+    id: of-026
+    versao: sem_rag
+  - codigo: B24
+    id: of-001
+    versao: sem_rag
+  - codigo: B25
+    id: of-013
+    versao: rag
+  - codigo: B26
+    id: of-004
+    versao: rag
+  - codigo: B27
+    id: of-019
+    versao: sem_rag
+  - codigo: B28
+    id: of-012
+    versao: rag
+  - codigo: B29
+    id: of-024
+    versao: sem_rag
+  - codigo: B30
+    id: of-005
+    versao: sem_rag
+  - codigo: B31
+    id: of-017
+    versao: rag
+  - codigo: B32
+    id: of-022
+    versao: rag
+  - codigo: B33
+    id: errada-3
+    versao: errada
