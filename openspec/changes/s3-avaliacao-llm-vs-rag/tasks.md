@@ -31,8 +31,8 @@
 - [x] 5.1 Congelar o conjunto oficial; verificação: o hash está registrado e o validador passa
 - [x] 5.2 Rodar as duas versões no mesmo dia com o conjunto oficial; verificação: a rodada tem as 30 respostas de cada versão e as 10 extras
 - [x] 5.3 Fazer os quatro envios e guardar tudo o que foi enviado e recebido; verificação: o script aceita os quatro retornos
-- [ ] 5.4 Equipe lê as 10 extras nas duas versões e registra as observações; verificação: a seção das extras está no relatório
-- [ ] 5.5 Escrever o relatório comparativo em `docs/`, lado a lado, com o risco da opção (c), a declaração "avaliação feita por LLM, sem verificação humana das notas" e o resultado real; verificação: precisão e fidelidade das duas versões aparecem na tabela e `uv run pytest` passa, incluindo a suíte de risco/190
+- [x] 5.4 Equipe lê as 10 extras nas duas versões e registra as observações; verificação: a seção das extras está no relatório
+- [x] 5.5 Escrever o relatório comparativo em `docs/`, lado a lado, com o risco da opção (c), a declaração "avaliação feita por LLM, sem verificação humana das notas" e o resultado real; verificação: precisão e fidelidade das duas versões aparecem na tabela e `uv run pytest` passa, incluindo a suíte de risco/190
 
 ## Workflow follow-up
 
