@@ -29,6 +29,21 @@ O campo `artigo` guarda "1.584", e a expressão aceita um grupo opcional de trê
 ### Recalibração só com perguntas de desenvolvimento
 O limite é recalibrado depois da ampliação, com as 15 perguntas de desenvolvimento do tema e as 10 fora do tema, separadas do conjunto oficial. Usar as perguntas oficiais contaminaria a medição. Alternativa descartada: manter 0,81 sem recalibrar, porque a base nova muda a distribuição das similaridades.
 
+### Resultado da recalibração (15/11)
+Similaridade do trecho mais parecido no eixo jurídico, com a base ampliada (`avaliacao/conjuntos/desenvolvimento.yaml`):
+
+| Grupo | Menor | Maior |
+|---|---|---|
+| 15 perguntas do tema | 0,826 (dv-002) | 0,885 (dv-015) |
+| 10 extras fora do tema | 0,796 (dv-extra-006) | 0,831 (dv-extra-001) |
+| 3 perguntas fora do tema de `tests/test_indice.py` | 0,785 | 0,802 |
+
+As faixas se sobrepõem: a extra mais parecida passa da pergunta do tema menos parecida, então nenhum valor separa os dois grupos. O limite continua em **0,81**: nenhuma pergunta do tema é recusada (margem de 0,016), e 4 das 10 extras e as 3 do teste são barradas antes do LLM. As outras 6 extras dependem da recusa por falta de citação; na rodada de desenvolvimento do DeepSeek, 9 das 10 extras foram recusadas pelo sistema.
+
+Alternativa descartada: subir para 0,82, que barraria 6 das 10 extras, mas deixaria margem de só 0,006 abaixo do tema e poderia recusar uma pergunta oficial antes de chegar ao LLM.
+
+O teste rápido manteve 9 de 10 perguntas com o artigo esperado no top 5. As recusas da dv-004 e da dv-010 na rodada de desenvolvimento não vieram do limite (similaridade de 0,845 e 0,847): o LLM citou artigo que não estava entre os trechos recuperados. Na dv-004, o art. 5º da Lei 11.340/2006 não aparece no top 5.
+
 ## Risks / Trade-offs
 
 - **O HTML do Planalto para Código Civil e CPC pode ter estrutura diferente** → A coleta aceita HTML já baixado (`--arquivo`), e o relatório de alterações é revisado antes da ingestão.

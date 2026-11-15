@@ -11,9 +11,10 @@ import unicodedata
 K = 5
 EIXOS = {"juridico"}
 # Abaixo desta similaridade (cosseno, e5-base) com o trecho mais parecido, recusa sem chamar o LLM.
-# Calibrado em 05/11: menor pergunta do tema 0,818; perguntas claramente fora do tema até 0,805.
-# Perguntas "quase jurídicas" (multa de trânsito, imposto de renda) passam e dependem da recusa
-# por falta de citação. Recalibrar com as 50 perguntas da S3.
+# Recalibrado em 15/11, com a base ampliada e só as perguntas de desenvolvimento: menor pergunta do
+# tema 0,826; extras fora do tema de 0,796 a 0,831. As faixas se sobrepõem, então o limite fica
+# abaixo do tema, e as extras que passam dependem da recusa por falta de citação
+# (openspec/changes/s3-base-legal-ampliada/design.md).
 LIMITE_SIMILARIDADE = 0.81
 # Normas do eixo jurídico. Uma referência a outra norma nunca é aceita.
 LEIS_JURIDICAS = ("Lei 11.340/2006", "Lei 14.149/2021", "Código Penal", "Código Civil", "Código de Processo Civil")

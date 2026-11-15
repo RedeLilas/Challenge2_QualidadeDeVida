@@ -15,9 +15,9 @@
 
 ## 3. Recalibração (quinta, 12/11)
 
-- [ ] 3.1 Rodar de novo o teste rápido com a base ampliada; verificação: `uv run pytest tests/test_indice.py` mantém ao menos 9 de 10 perguntas no top 5
-- [ ] 3.2 Recalibrar `LIMITE_SIMILARIDADE` só com as perguntas de desenvolvimento, sem usar o conjunto oficial, e registrar os valores em `openspec/changes/s3-base-legal-ampliada/design.md`; verificação: nenhuma pergunta de desenvolvimento do tema é recusada pelo limite, e o comentário em `app/rag/resposta.py` não cita mais as 50 perguntas
-- [ ] 3.3 Rodar a suíte de risco/190 e a suíte completa; verificação: `uv run pytest` passa sem falso negativo
+- [x] 3.1 Rodar de novo o teste rápido com a base ampliada; verificação: `uv run pytest tests/test_indice.py` mantém ao menos 9 de 10 perguntas no top 5
+- [x] 3.2 Recalibrar `LIMITE_SIMILARIDADE` só com as perguntas de desenvolvimento, sem usar o conjunto oficial, e registrar os valores em `openspec/changes/s3-base-legal-ampliada/design.md`; verificação: nenhuma pergunta de desenvolvimento do tema é recusada pelo limite, e o comentário em `app/rag/resposta.py` não cita mais as 50 perguntas
+- [x] 3.3 Rodar a suíte de risco/190 e a suíte completa; verificação: `uv run pytest` passa sem falso negativo
 
 ## Workflow follow-up
 
