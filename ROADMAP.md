@@ -79,11 +79,13 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 
 | Mudança (propor na terça, 10/11) | Status |
 | :--- | :--- |
-| `s3-base-legal-ampliada`: Código Penal ampliado, guarda (Código Civil e CPC), correção da leitura de artigos como "1.584" e nova calibração do limite | Planejada |
-| `s3-avaliacao-llm-vs-rag`: 30 perguntas com gabarito e fonte, 10 extras fora do tema, correção só por LLM externo, declarada no relatório | Planejada |
-| `s3-triagem-fonar`: perguntas adaptadas do Fonar e regras de nível de urgência | Implementada (8/8 tarefas concluídas) |
-| `s3-frontend-e-perfil`: navegação e telas do site; perfil guardado só no navegador, com função de apagar; Benefícios e Onde buscar ajuda exigem o formulário | Implementada (12/12 tarefas concluídas) |
-| `s3-beneficios`: regras de 3 benefícios federais + 1 distrital | Implementada (7/7 tarefas concluídas) |
+| `s3-base-legal-ampliada`: Código Penal ampliado, guarda (Código Civil e CPC), correção da leitura de artigos como "1.584" e nova calibração do limite | Arquivada em 15/11 (10/10; limite mantido em 0,81) |
+| `s3-avaliacao-llm-vs-rag`: 30 perguntas com gabarito e fonte, 10 extras fora do tema, correção só por LLM externo, declarada no relatório | Arquivada em 15/11 (19/19; relatório em `docs/Relatório S3 - Comparação LLM x RAG.md`) |
+| `s3-triagem-fonar`: perguntas adaptadas do Fonar e regras de nível de urgência | Arquivada em 15/11 (8/8) |
+| `s3-frontend-e-perfil`: navegação e telas do site; perfil guardado só no navegador, com função de apagar; Benefícios e Onde buscar ajuda exigem o formulário | Arquivada em 15/11 (12/12) |
+| `s3-beneficios`: regras de 3 benefícios federais + 1 distrital | Arquivada em 15/11 (7/7) |
+
+**Resultado (rodada oficial de 15/11, versão com RAG):** precisão de 16/30 (53,3%), abaixo da meta de 90%; 3,9% das afirmações sem suporte, dentro da meta de 5%; 27/30 respostas citadas, abaixo de 100% (as 3 sem citação são recusas do sistema). A S3 foi fechada com a meta de precisão não atingida (ver registro de decisões de 15/11).
 
 **Adiantar para a S4** (que perde a sexta por feriado): definir o contrato comum dos agentes (entrada, saída, citações) no design de `s3-beneficios`.
 
@@ -129,6 +131,8 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | :--- | :--- |
 | `s7-validacao-final`: rodar todas as métricas, corrigir falhas, SUS com colegas (terça e quinta), relatório e apresentação (sexta) | Planejada |
 
+**Pendência da S3:** melhorar a recuperação do RAG (5 das 30 perguntas oficiais sem o artigo aceito no top 5, 4 delas de "isso é crime?") e refazer a rodada oficial de precisão, declarada como refeita no relatório.
+
 ---
 
 ## Métricas
@@ -173,3 +177,7 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | 10/11 | Nova mudança de front-end na S3 |
 | 10/11 | `s1-definicoes-base` arquivada; a S3 altera as specs só nos pontos em conflito |
 | 10/11 | A S3 mantém base legal com guarda, avaliação, triagem, front-end com perfil e benefícios, com cerca de 19 horas extras do grupo até quinta de manhã |
+| 12/11 | Método da avaliação (#9): 30 perguntas oficiais e 10 extras, correção por um único LLM externo, sem a revisão em dupla prevista em 03/11 |
+| 15/11 | Corretor da avaliação: Gemini 4 Argon (Google), com busca na web e memória desligadas |
+| 15/11 | Limite de similaridade mantido em 0,81 depois da recalibração com as perguntas de desenvolvimento (#22) |
+| 15/11 | S3 fechada com a meta de precisão não atingida (16/30 com RAG; meta de 27/30). O resultado real fica no relatório, sem ajuste na rodada oficial. A melhoria da recuperação, sobretudo dos artigos do Código Penal ("isso é crime?"), fica para a S7; uma nova rodada oficial terá de ser declarada como refeita |
