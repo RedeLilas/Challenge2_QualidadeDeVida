@@ -103,6 +103,13 @@ Cada retorno é salvo como `<rodada>/retornos/<A|B>-<precisao|fidelidade>.json`,
 - Trecho que não existe no texto enviado: a linha é apontada e a marcação conta contra a resposta (ponto presente vira ausente, afirmação com suporte vira sem suporte, contradição continua contando). Assim um erro de cópia do corretor nunca melhora a nota. Se as marcações apontadas forem muitas, a equipe decide repetir o envio.
 - As métricas usam só os arquivos aceitos e informam quantas respostas foram corrigidas. Afirmações `fora_da_base` ficam fora do percentual sem suporte e são contadas à parte.
 
+### LLM corretor e rubricas
+O corretor é o Gemini 4 Argon (Google), escolhido pela equipe em 15/11. Ele corrige a rodada de desenvolvimento e a oficial. As rubricas ficam em `avaliacao/rubricas/precisao.md` e `fidelidade.md`, e o passo a passo dos envios em `avaliacao/rubricas/README.md`. Critérios:
+- **Precisão:** informação a mais que não conflita com o gabarito não é contradição.
+- **Fidelidade:** só entram as afirmações sobre o que a lei diz. Na dúvida, a afirmação fica sem suporte.
+
+`tests/test_rubricas.py` garante que o JSON pedido pelas rubricas é o que `scripts/conferir.py` lê.
+
 ## Risks / Trade-offs
 
 - **Sem revisão humana, um erro sistemático do corretor passa despercebido** → Respostas erradas de propósito, trechos comprobatórios e a declaração no relatório.
@@ -113,4 +120,4 @@ Cada retorno é salvo como `<rodada>/retornos/<A|B>-<precisao|fidelidade>.json`,
 
 ## Open Questions
 
-- Qual LLM externo será usado. A escolha precisa sair antes do teste de quinta e é registrada na tarefa correspondente. Se ele não aceitar o formato, muda-se o modelo, sem mudar as specs.
+- Nenhuma. O LLM externo foi escolhido (ver "LLM corretor e rubricas"). Se ele não aceitar o formato, muda-se o modelo, sem mudar as specs.
