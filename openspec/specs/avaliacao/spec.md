@@ -1,7 +1,7 @@
 # avaliacao Specification
 
 ## Purpose
-Medir objetivamente a qualidade da Rede Lilás sem entrevistas nem dados reais: casos fictícios com gabarito e fonte, LLM juiz com revisão humana em amostra e teste de usabilidade com colegas. Origem: seção 8 (métricas de sucesso) das definições da Semana 1.
+Medir objetivamente a qualidade da Rede Lilás sem entrevistas nem dados reais: casos fictícios com gabarito e fonte, correção por um único LLM externo, sem revisão humana das notas e com controles (respostas erradas de propósito e trechos comprobatórios), e teste de usabilidade com colegas. Origem: seção 8 (métricas de sucesso) das definições da Semana 1; método da correção alterado na S3 (decisões de 09/11 e 12/11).
 
 ## Requirements
 
