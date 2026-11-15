@@ -22,9 +22,9 @@
 
 ## 4. Teste com as perguntas de desenvolvimento (quinta, 12/11)
 
-- [ ] 4.1 Escrever as rubricas de precisão e de fidelidade e registrar a escolha do LLM externo; verificação: as rubricas estão em `avaliacao/rubricas/` e o modelo escolhido está registrado na rodada
-- [ ] 4.2 Rodar as duas versões com as perguntas de desenvolvimento e o DeepSeek; verificação: o registro da rodada existe e o tamanho das respostas e as recusas foram revisados
-- [ ] 4.3 Enviar ao LLM externo e conferir o retorno; verificação: o script aceita o retorno, e nenhuma resposta errada de propósito foi aprovada
+- [x] 4.1 Escrever as rubricas de precisão e de fidelidade e registrar a escolha do LLM externo; verificação: as rubricas estão em `avaliacao/rubricas/` e o modelo escolhido está registrado na rodada
+- [x] 4.2 Rodar as duas versões com as perguntas de desenvolvimento e o DeepSeek; verificação: o registro da rodada existe e o tamanho das respostas e as recusas foram revisados
+- [x] 4.3 Enviar ao LLM externo e conferir o retorno; verificação: o script aceita o retorno, e nenhuma resposta errada de propósito foi aprovada
 
 ## 5. Rodada oficial e relatório (quinta, 12/11, e sexta, 13/11)
 
