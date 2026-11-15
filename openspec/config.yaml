@@ -19,8 +19,8 @@ context: |
 
   Stack: backend Python (FastAPI, uv, pytest) servindo uma PWA em HTML/CSS/JS puros.
   LLM local via Ollama (testes) e DeepSeek (produção), ambos pela API compatível com
-  OpenAI, trocados apenas por variáveis de ambiente. Deploy considerado desde a S2
-  (container Docker único).
+  OpenAI, trocados apenas por variáveis de ambiente. Deploy adiado para a S5, em
+  container Docker único, com a plataforma ainda em aberto (decisão de 09/11).
 
   Validação: sem entrevistas e sem usuárias reais. Apenas casos fictícios; perguntas e
   gabaritos escritos e conferidos pela equipe, com fonte citada; correção por um único
