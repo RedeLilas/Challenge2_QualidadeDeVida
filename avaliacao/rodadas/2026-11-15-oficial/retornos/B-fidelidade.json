@@ -1,0 +1,816 @@
+[
+  {
+    "codigo": "B01",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei não autoriza substituir a pena por apenas pagamento de cesta básica ou multa isolada.",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "O juiz pode substituir a pena privativa de liberdade por outras penas restritivas de direitos, mas com condições (Lei 11.340/2006, art. 17 e Código Penal, art. 44).",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "O pagamento de cesta básica ou multa pode aparecer junto com outras obrigações, nunca sozinho.",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "A intimação é ato oficial. Quem cumpre é o oficial de justiça ou outro servidor autorizado (Código de Processo Penal, arts. 351 a 353).",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "A própria lei proíbe que a mulher seja encarregada de atos assim, para evitar contato com o agressor (Lei 11.340/2006, art. 21, parágrafo único).",
+        "suporte": "sim",
+        "trecho_artigo": "Parágrafo único. A ofendida não poderá entregar intimação ou notificação ao agressor."
+      }
+    ]
+  },
+  {
+    "codigo": "B02",
+    "afirmacoes": [
+      {
+        "afirmacao": "Eles tratam de lesão corporal (Código Penal, art. 129), dano emocional (Código Penal, art. 147-B), perseguição (Código Penal, art. 147-A), injúria (Código Penal, art. 140) e ameaça (Código Penal, art. 147), mas não descrevem relação sexual forçada.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 129. Ofender a integridade corporal ou a saúde de outrem: Pena - detenção, de três meses a um ano."
+      }
+    ]
+  },
+  {
+    "codigo": "B03",
+    "afirmacoes": [
+      {
+        "afirmacao": "Quando não há acordo entre a mãe e o pai, e os dois estão aptos a exercer o poder familiar, a regra é aplicar a guarda compartilhada.",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º Quando não houver acordo entre a mãe e o pai quanto à guarda do filho, encontrando-se ambos os genitores aptos a exercer o poder familiar, será aplicada a guarda compartilhada, salvo se um dos genitores declarar ao magistrado que não deseja a guarda da criança ou do adolescente ou quando houver elementos que evidenciem a probabilidade de risco de violência doméstica ou familiar."
+      },
+      {
+        "afirmacao": "Mas há exceção: isso não ocorre quando houver elementos que evidenciem a probabilidade de risco de violência doméstica ou familiar (Código Civil, art. 1.584, § 2º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º Quando não houver acordo entre a mãe e o pai quanto à guarda do filho, encontrando-se ambos os genitores aptos a exercer o poder familiar, será aplicada a guarda compartilhada, salvo se um dos genitores declarar ao magistrado que não deseja a guarda da criança ou do adolescente ou quando houver elementos que evidenciem a probabilidade de risco de violência doméstica ou familiar."
+      },
+      {
+        "afirmacao": "\"Poder familiar\" é o conjunto de direitos e deveres dos pais em relação aos filhos.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B04",
+    "afirmacoes": [
+      {
+        "afirmacao": "Se você precisar sair de casa com seus filhos por causa de violência doméstica, o juiz pode autorizar o seu afastamento do lar sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos (Lei 11.340/2006, art. 23, III).",
+        "suporte": "sim",
+        "trecho_artigo": "III - determinar o afastamento da ofendida do lar, sem prejuízo dos direitos relativos a bens, guarda dos filhos e alimentos;"
+      },
+      {
+        "afirmacao": "Além disso, o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica, pelo prazo de até 24 meses (Lei 11.340/2006, art. 23, VI).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B05",
+    "afirmacoes": [
+      {
+        "afirmacao": "É crime perseguir alguém, de forma reiterada, por qualquer meio, invadindo ou perturbando a liberdade ou a privacidade dela (Código Penal, art. 147-A, incluído pela Lei 14.132/2021).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 147-A. Perseguir alguém, reiteradamente e por qualquer meio, ameaçando-lhe a integridade física ou psicológica, restringindo-lhe a capacidade de locomoção ou, de qualquer forma, invadindo ou perturbando sua esfera de liberdade ou privacidade."
+      },
+      {
+        "afirmacao": "Pena: reclusão de 6 meses a 2 anos, e multa (Código Penal, art. 147-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Pena – reclusão, de 6 (seis) meses a 2 (dois) anos, e multa."
+      },
+      {
+        "afirmacao": "A pena aumenta em metade se o crime é cometido contra a mulher por razões da condição de sexo feminino (Código Penal, art. 147-A, § 1º, I).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º A pena é aumentada de metade se o crime é cometido:\nI – contra criança, adolescente ou idoso;\nII – contra mulher por razões da condição de sexo feminino, nos termos do § 2º-A do art. 121 deste Código;"
+      },
+      {
+        "afirmacao": "Também aumenta se o crime é cometido com uso de arma ou contra criança, adolescente ou idoso (Código Penal, art. 147-A, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º A pena é aumentada de metade se o crime é cometido:\nI – contra criança, adolescente ou idoso;\nII – contra mulher por razões da condição de sexo feminino, nos termos do § 2º-A do art. 121 deste Código;\nIII – mediante concurso de 2 (duas) ou mais pessoas ou com o emprego de arma."
+      },
+      {
+        "afirmacao": "A Lei Maria da Penha se aplica à violência contra a mulher em razão da condição de sexo feminino, inclusive a violência psicológica (Lei 11.340/2006, art. 5º e art. 7º, II).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 5º Para os efeitos desta Lei, configura violência doméstica e familiar contra a mulher qualquer ação ou omissão baseada no gênero que lhe cause morte, lesão, sofrimento físico, sexual ou psicológico e dano moral ou patrimonial:"
+      },
+      {
+        "afirmacao": "Violência psicológica é crime: causar dano emocional à mulher que prejudique e perturbe o pleno desenvolvimento dela ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões (Código Penal, art. 147-B).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 147-B. Causar dano emocional à mulher que a prejudique e perturbe seu pleno desenvolvimento ou que vise a degradar ou a controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, chantagem, ridicularização, limitação do direito de ir e vir ou qualquer outro meio que cause prejuízo à sua saúde psicológica e autodeterminação: Pena - reclusão, de 6 (seis) meses a 2 (dois) anos, e multa, se a conduta não constitui crime mais grave."
+      },
+      {
+        "afirmacao": "Pedir medidas protetivas de urgência, como afastamento do agressor e proibição de contato (Lei 11.340/2006, arts. 18 a 22).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B06",
+    "afirmacoes": [
+      {
+        "afirmacao": "O juiz pode aplicar ao agressor, de imediato, a prestação de alimentos provisionais ou provisórios — ou seja, uma pensão alimentícia provisória, paga antes da decisão final (Lei 11.340/2006, art. 22, V).",
+        "suporte": "sim",
+        "trecho_artigo": "V - prestação de alimentos provisionais ou provisórios."
+      },
+      {
+        "afirmacao": "Também pode determinar o acompanhamento psicossocial do agressor, por meio de atendimento individual e/ou em grupo de apoio (Lei 11.340/2006, art. 22, VII).",
+        "suporte": "sim",
+        "trecho_artigo": "VII – acompanhamento psicossocial do agressor, por meio de atendimento individual e/ou em grupo de apoio."
+      },
+      {
+        "afirmacao": "Essas medidas podem ser aplicadas em conjunto ou separadamente (Lei 11.340/2006, art. 22).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:"
+      },
+      {
+        "afirmacao": "Sobre a pensão provisória: ela constitui título executivo judicial de pleno direito, ou seja, pode ser cobrada na Justiça sem precisar de outra ação principal (Lei 11.340/2006, art. 22, § 10).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 10 As medidas protetivas de natureza cível, inclusive as de prestação de alimentos provisionais ou provisórios, constituem título executivo judicial de pleno direito, dispensando a propositura de ação principal."
+      }
+    ]
+  },
+  {
+    "codigo": "B07",
+    "afirmacoes": [
+      {
+        "afirmacao": "A Lei Maria da Penha trata isso como **violência sexual**.",
+        "suporte": "sim",
+        "trecho_artigo": "III - a violência sexual, entendida como qualquer conduta que a constranja a presenciar, a manter ou a participar de relação sexual não desejada, mediante intimidação, ameaça, coação ou uso da força; que a induza a comercializar ou a utilizar, de qualquer modo, a sua sexualidade, que a impeça de usar qualquer método contraceptivo ou que a force ao matrimônio, à gravidez, ao aborto ou à prostituição, mediante coação, chantagem, suborno ou manipulação; ou que limite ou anule o exercício de seus direitos sexuais e reprodutivos;"
+      },
+      {
+        "afirmacao": "Ela inclui, nessa forma de violência, a conduta que impeça a mulher de usar qualquer método contraceptivo ou que a force à gravidez, entre outras, mediante coação, chantagem, suborno ou manipulação (Lei 11.340/2006, art. 7º, III).",
+        "suporte": "sim",
+        "trecho_artigo": "que a impeça de usar qualquer método contraceptivo ou que a force ao matrimônio, à gravidez, ao aborto ou à prostituição, mediante coação, chantagem, suborno ou manipulação;"
+      }
+    ]
+  },
+  {
+    "codigo": "B08",
+    "afirmacoes": [
+      {
+        "afirmacao": "Antes da audiência de mediação e conciliação, o juiz deve perguntar às partes e ao Ministério Público se há risco de violência doméstica ou familiar (Código de Processo Civil, art. 699-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 699-A. Nas ações de guarda, antes de iniciada a audiência de mediação e conciliação de que trata o art. 695 deste Código, o juiz indagará às partes e ao Ministério Público se há risco de violência doméstica ou familiar, fixando o prazo de 5 (cinco) dias para a apresentação de prova ou de indícios pertinentes."
+      },
+      {
+        "afirmacao": "Se houver, o juiz fixa o prazo de 5 (cinco) dias para a apresentação de prova ou de indícios pertinentes (Código de Processo Civil, art. 699-A).",
+        "suporte": "sim",
+        "trecho_artigo": "fixando o prazo de 5 (cinco) dias para a apresentação de prova ou de indícios pertinentes."
+      }
+    ]
+  },
+  {
+    "codigo": "B09",
+    "afirmacoes": [
+      {
+        "afirmacao": "A Lei Maria da Penha trata como violência patrimonial qualquer ato que tire, retenha ou destrua bens, documentos ou recursos da mulher. Isso inclui o salário e o celular dela (Lei 11.340/2006, art. 7º, inciso IV).",
+        "suporte": "sim",
+        "trecho_artigo": "IV - a violência patrimonial, entendida como qualquer conduta que configure retenção, subtração, destruição parcial ou total de seus objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades;"
+      },
+      {
+        "afirmacao": "A mesma lei trata como violência física qualquer conduta que ofenda a integridade ou a saúde da mulher, como empurrar (Lei 11.340/2006, art. 7º, inciso I).",
+        "suporte": "sim",
+        "trecho_artigo": "I - a violência física, entendida como qualquer conduta que ofenda sua integridade ou saúde corporal;"
+      },
+      {
+        "afirmacao": "A ameaça de machucá-la é violência psicológica: conduta que cause dano emocional ou diminua a autoestima, ou que vise controlar as ações dela (Lei 11.340/2006, art. 7º, inciso II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;"
+      },
+      {
+        "afirmacao": "A lei também prevê medida protetiva de urgência para afastar o agressor do lar e proibir aproximação e contato (Lei 11.340/2006, arts. 22 e 23).",
+        "suporte": "sim",
+        "trecho_artigo": "II - afastamento do lar, domicílio ou local de convivência com a ofendida;\nIII - proibição de determinadas condutas, entre as quais:\na) aproximação da ofendida, de seus familiares e das testemunhas, fixando o limite mínimo de distância entre estes e o agressor;\nb) contato com a ofendida, seus familiares e testemunhas por qualquer meio de comunicação;"
+      },
+      {
+        "afirmacao": "O Código Penal tem uma regra que isenta de pena quem comete crime contra o patrimônio em prejuízo do cônjuge, na constância do casamento (Código Penal, art. 181, inciso I).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 181 - É isento de pena quem comete qualquer dos crimes previstos neste título, em prejuízo:\nI - do cônjuge, na constância da sociedade conjugal;"
+      },
+      {
+        "afirmacao": "Mas essa isenção é afastada quando o crime é cometido com violência ou grave ameaça à pessoa (Código Penal, art. 183, inciso I).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 183 - Não se aplica o disposto nos dois artigos anteriores:\nI - se o crime é de roubo ou de extorsão, ou, em geral, quando haja emprego de grave ameaça ou violência à pessoa;"
+      },
+      {
+        "afirmacao": "Além disso, a Lei Maria da Penha vale independentemente da união entre autor e vítima (Lei 11.340/2006, art. 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "I - no âmbito da unidade doméstica, compreendida como o espaço de convívio permanente de pessoas, com ou sem vínculo familiar, inclusive as esporadicamente agregadas;\nII - no âmbito da família, compreendida como a comunidade formada por indivíduos que são ou se consideram aparentados, unidos por laços naturais, por afinidade ou por vontade expressa;\nIII - em qualquer relação íntima de afeto, na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação."
+      }
+    ]
+  },
+  {
+    "codigo": "B10",
+    "afirmacoes": [
+      {
+        "afirmacao": "Só é admitida a renúncia à representação perante o juiz, em audiência designada para esse fim, antes do recebimento da denúncia e ouvido o Ministério Público (Lei 11.340/2006, art. 16).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 16. Nas ações penais públicas condicionadas à representação da ofendida de que trata esta Lei, só será admitida a renúncia à representação perante o juiz, em audiência especialmente designada com tal finalidade, antes do recebimento da denúncia e ouvido o Ministério Público."
+      },
+      {
+        "afirmacao": "Essa audiência serve para confirmar a retratação da vítima, não a representação. Ela só é designada pelo juiz se a mulher manifestar expressamente o desejo de se retratar, por escrito ou oralmente, antes do recebimento da denúncia, e a retratação deve ser registrada nos autos (Lei 11.340/2006, art. 16, parágrafo único).",
+        "suporte": "sim",
+        "trecho_artigo": "Parágrafo único. A audiência prevista no caput deste artigo tem por objetivo confirmar a retratação da vítima, não a representação, e somente será designada pelo juiz mediante manifestação expressa de seu desejo de se retratar, apresentada por escrito ou oralmente antes do recebimento da denúncia, devendo a retratação ser devidamente registrada nos autos."
+      }
+    ]
+  },
+  {
+    "codigo": "B11",
+    "afirmacoes": [
+      {
+        "afirmacao": "Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 24-A. Descumprir decisão judicial que defere medidas protetivas de urgência previstas nesta Lei: Pena – reclusão, de 2 (dois) a 5 (cinco) anos, e multa."
+      },
+      {
+        "afirmacao": "mas o crime só se configura quando a medida foi determinada por um juiz criminal, não valendo para decisões de juiz cível (Lei 11.340/2006, art. 24-A, § 1º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Caso o agressor seja preso em flagrante, o próprio delegado de polícia pode conceder fiança na delegacia para que ele responda em liberdade, sem precisar de decisão do juiz (Lei 11.340/2006, art. 24-A, § 2º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B12",
+    "afirmacoes": [
+      {
+        "afirmacao": "A ofendida pode propor a ação no Juizado de Violência Doméstica e Familiar contra a Mulher (Lei 11.340/2006, art. 14-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 14-A. A ofendida tem a opção de propor ação de divórcio ou de dissolução de união estável no Juizado de Violência Doméstica e Familiar contra a Mulher."
+      },
+      {
+        "afirmacao": "A partilha fica fora da competência desses Juizados (Lei 11.340/2006, art. 14-A, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º Exclui-se da competência dos Juizados de Violência Doméstica e Familiar contra a Mulher a pretensão relacionada à partilha de bens."
+      },
+      {
+        "afirmacao": "Se houver violência depois de a ação de divórcio já ter sido iniciada, essa ação tem preferência no juízo onde estiver (Lei 11.340/2006, art. 14-A, § 2º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º Iniciada a situação de violência doméstica e familiar após o ajuizamento da ação de divórcio ou de dissolução de união estável, a ação terá preferência no juízo onde estiver."
+      }
+    ]
+  },
+  {
+    "codigo": "B13",
+    "afirmacoes": [
+      {
+        "afirmacao": "Isso é cárcere privado. É manter alguém preso ou impedido de ir e vir, mesmo dentro de casa (Código Penal, art. 148).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 148 - Privar alguém de sua liberdade, mediante seqüestro ou cárcere privado:"
+      },
+      {
+        "afirmacao": "A lei prevê pena de reclusão de 1 a 3 anos para o cárcere privado (Código Penal, art. 148, caput).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 148 - Privar alguém de sua liberdade, mediante seqüestro ou cárcere privado: Pena - reclusão, de um a três anos."
+      },
+      {
+        "afirmacao": "A pena aumenta, e o juiz pode aplicar de 2 a 5 anos, quando o crime é cometido contra cônjuge, companheiro ou pessoa com quem se convive (Código Penal, art. 148, § 1º, inciso I).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "A lei lista a violência patrimonial e a violência moral, e trata a violência física e psicológica como formas de violência doméstica (Lei 11.340/2006, art. 7º).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 7º São formas de violência doméstica e familiar contra a mulher, entre outras:\nI - a violência física, entendida como qualquer conduta que ofenda sua integridade ou saúde corporal;\nII - a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;"
+      }
+    ]
+  },
+  {
+    "codigo": "B14",
+    "afirmacoes": [
+      {
+        "afirmacao": "O juiz pode conceder, de imediato, medidas protetivas de urgência.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 22. Constatada a prática de violência doméstica e familiar contra a mulher, nos termos desta Lei, o juiz poderá aplicar, de imediato, ao agressor, em conjunto ou separadamente, as seguintes medidas protetivas de urgência, entre outras:"
+      },
+      {
+        "afirmacao": "Entre elas, pode proibir o agressor de vender, alugar ou transferir bens do casal (art. 22, inciso IV).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Também pode determinar a separação de corpos (art. 22, inciso II)",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "e o afastamento do agressor do lar (art. 22, inciso II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - afastamento do lar, domicílio ou local de convivência com a ofendida;"
+      },
+      {
+        "afirmacao": "Pode ainda fixar alimentos provisórios, se houver dependência econômica (art. 22, inciso V).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "A lei prevê que o juiz pode proibir a transferência de bens do casal (art. 22, IV).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Você pode pedir as medidas protetivas na delegacia ou no Ministério Público (Lei 11.340/2006, art. 18 e art. 19).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 19. As medidas protetivas de urgência poderão ser concedidas pelo juiz, a requerimento do Ministério Público ou a pedido da ofendida."
+      },
+      {
+        "afirmacao": "O juiz decide em até 48 horas sobre o pedido de urgência (Lei 11.340/2006, art. 18).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 18. Recebido o expediente com o pedido da ofendida, caberá ao juiz, no prazo de 48 (quarenta e oito) horas:\nI - conhecer do expediente e do pedido e decidir sobre as medidas protetivas de urgência;"
+      }
+    ]
+  },
+  {
+    "codigo": "B15",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei define violência psicológica como qualquer conduta que cause dano emocional, diminua a autoestima ou prejudique o desenvolvimento da mulher (Lei 11.340/2006, art. 7º, II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;"
+      },
+      {
+        "afirmacao": "Isso também é crime específico, com pena de reclusão de 6 meses a 2 anos e multa (Código Penal, art. 147-B).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 147-B. Causar dano emocional à mulher que a prejudique e perturbe seu pleno desenvolvimento ou que vise a degradar ou a controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, chantagem, ridicularização, limitação do direito de ir e vir ou qualquer outro meio que cause prejuízo à sua saúde psicológica e autodeterminação: Pena - reclusão, de 6 (seis) meses a 2 (dois) anos, e multa, se a conduta não constitui crime mais grave."
+      },
+      {
+        "afirmacao": "Constranger alguém, com violência ou ameaça, a fazer ou não fazer algo é constrangimento ilegal (Código Penal, art. 146).",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Ameaçar para obter vantagem ou impor comportamento é crime (Código Penal, art. 147).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "O conjunto pode configurar violência patrimonial, sexual ou moral, conforme o caso (Lei 11.340/2006, art. 7º).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 7º São formas de violência doméstica e familiar contra a mulher, entre outras:"
+      },
+      {
+        "afirmacao": "**Crime de perseguição (stalking)**, se houver repetição e invasão da vida dela (Código Penal, art. 147-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 147-A. Perseguir alguém, reiteradamente e por qualquer meio, ameaçando-lhe a integridade física ou psicológica, restringindo-lhe a capacidade de locomoção ou, de qualquer forma, invadindo ou perturbando sua esfera de liberdade ou privacidade."
+      },
+      {
+        "afirmacao": "**Crime de divulgação de conteúdo íntimo falso**, quando o material é usado para humilhar ou expor (Código Penal, art. 218-C, que trata de conteúdo sexual; se não for sexual, pode ser difamação ou injúria — Código Penal, arts. 139 e 140).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 218-C. Oferecer, trocar, disponibilizar, transmitir, vender ou expor à venda, distribuir, publicar ou divulgar, por qualquer meio - inclusive por meio de comunicação de massa ou sistema de informática ou telemática -, fotografia, vídeo ou outro registro audiovisual que contenha cena de estupro ou de estupro de vulnerável ou que faça apologia ou induza a sua prática, ou, sem o consentimento da vítima, cena de sexo, nudez ou pornografia: Pena – reclusão, de 4 (quatro) a 10 (dez) anos, e multa, se o fato não constitui crime mais grave."
+      },
+      {
+        "afirmacao": "**Violência psicológica e moral**, dentro da Lei Maria da Penha (Lei 11.340/2006, art. 7º, II e V).",
+        "suporte": "sim",
+        "trecho_artigo": "V - a violência moral, entendida como qualquer conduta que configure calúnia, difamação ou injúria."
+      },
+      {
+        "afirmacao": "A lei brasileira ainda não tem um artigo específico só para \"deepfake\" (vídeo ou áudio falso feito com IA).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Mas o uso de IA pode ser considerado **agravante** ou **circunstância que aumenta a pena**, porque mostra meio cruel, dissimulado ou que dificulta a defesa da vítima (Código Penal, art. 61, II, \"c\" e \"d\").",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Pedir medida protetiva de urgência, que o juiz pode conceder para afastar o agressor e proibir contato (Lei 11.340/2006, arts. 18 a 22).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B16",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei prevê que as medidas protetivas de urgência podem ser concedidas independentemente da tipificação penal da violência, do ajuizamento de ação penal ou cível, da existência de inquérito policial ou do registro de boletim de ocorrência (Lei 11.340/2006, art. 19, § 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 5º As medidas protetivas de urgência serão concedidas independentemente da tipificação penal da violência, do ajuizamento de ação penal ou cível, da existência de inquérito policial ou do registro de boletim de ocorrência."
+      },
+      {
+        "afirmacao": "Quem decide sobre a concessão é o juiz, a pedido do Ministério Público ou da própria ofendida (Lei 11.340/2006, art. 19).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 19. As medidas protetivas de urgência poderão ser concedidas pelo juiz, a requerimento do Ministério Público ou a pedido da ofendida."
+      },
+      {
+        "afirmacao": "Recebido o pedido, o juiz tem o prazo de 48 horas para decidir (Lei 11.340/2006, art. 18, I).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 18. Recebido o expediente com o pedido da ofendida, caberá ao juiz, no prazo de 48 (quarenta e oito) horas:\nI - conhecer do expediente e do pedido e decidir sobre as medidas protetivas de urgência;"
+      },
+      {
+        "afirmacao": "Sobre por quanto tempo a medida continua valendo: não sei responder com segurança, porque os trechos enviados não tratam da duração das medidas protetivas.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B17",
+    "afirmacoes": [
+      {
+        "afirmacao": "A Lei Maria da Penha trata de violência psicológica e de violência moral, não só da física.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 7º São formas de violência doméstica e familiar contra a mulher, entre outras:\nI - a violência física, entendida como qualquer conduta que ofenda sua integridade ou saúde corporal;"
+      },
+      {
+        "afirmacao": "**Violência psicológica**: conduta que causa dano emocional, diminui a autoestima ou prejudica o desenvolvimento da mulher. Exemplos: humilhação, vigilância constante, isolamento, controle de decisões (Lei 11.340/2006, art. 7º, II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;"
+      },
+      {
+        "afirmacao": "**Violência moral**: conduta que ofende a honra, como calúnia, difamação e injúria (Lei 11.340/2006, art. 7º, V).",
+        "suporte": "sim",
+        "trecho_artigo": "V - a violência moral, entendida como qualquer conduta que configure calúnia, difamação ou injúria."
+      },
+      {
+        "afirmacao": "**Violência patrimonial**: quando há controle de bens, documentos ou recursos (Lei 11.340/2006, art. 7º, IV).",
+        "suporte": "sim",
+        "trecho_artigo": "IV - a violência patrimonial, entendida como qualquer conduta que configure retenção, subtração, destruição parcial ou total de seus objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades;"
+      },
+      {
+        "afirmacao": "A lei prevê medidas protetivas de urgência, como afastamento do agressor e proibição de contato (Lei 11.340/2006, arts. 18 a 22).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B18",
+    "afirmacoes": []
+  },
+  {
+    "codigo": "B19",
+    "afirmacoes": [
+      {
+        "afirmacao": "O juiz deve decidir em até 48 horas. Esse prazo conta do recebimento do pedido pela Justiça (Lei 11.340/2006, art. 18).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 18. Recebido o expediente com o pedido da ofendida, caberá ao juiz, no prazo de 48 (quarenta e oito) horas:\nI - conhecer do expediente e do pedido e decidir sobre as medidas protetivas de urgência;"
+      },
+      {
+        "afirmacao": "A lei diz que o juiz pode conceder a medida de imediato, sem audiência com o agressor (Lei 11.340/2006, art. 19, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º As medidas protetivas de urgência poderão ser concedidas de imediato, independentemente de audiência das partes e de manifestação do Ministério Público, devendo este ser prontamente comunicado."
+      }
+    ]
+  },
+  {
+    "codigo": "B20",
+    "afirmacoes": [
+      {
+        "afirmacao": "A pena é de detenção de 3 meses a 3 anos (Lei 11.340/2006, art. 7º, I, e Código Penal, art. 129, § 9º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Se a lesão for grave, a pena é maior (Código Penal, art. 129, §§ 1º e 2º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º Se resulta:\nI - Incapacidade para as ocupações habituais, por mais de trinta dias;\nII - perigo de vida;\nIII - debilidade permanente de membro, sentido ou função;\nIV - aceleração de parto: Pena - reclusão, de um a cinco anos."
+      },
+      {
+        "afirmacao": "Sim, a lei prevê aumento de pena quando a vítima tem deficiência (Lei 11.340/2006, art. 61, parágrafo único).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 11. Na hipótese do § 9 o deste artigo, a pena será aumentada de um terço se o crime for cometido contra pessoa portadora de deficiência."
+      },
+      {
+        "afirmacao": "Esse aumento vale para os crimes previstos na Lei Maria da Penha.",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Também há aumento de pena quando o crime é cometido contra pessoa com deficiência em geral (Código Penal, art. 61, II, \"h\").",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Empurrões e socos podem configurar também vias de fato ou ameaça, conforme o caso (Lei 11.340/2006, art. 7º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "A mulher pode pedir medidas protetivas de urgência, como afastamento do agressor (Lei 11.340/2006, arts. 18 a 22).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B21",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei prevê que, verificado risco atual ou iminente à vida ou à integridade da mulher, o agressor será imediatamente afastado do lar.",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 12-C. Verificada a existência de risco atual ou iminente à vida ou à integridade física, sexual, psicológica, moral ou patrimonial da mulher em situação de violência doméstica e familiar, ou de seus dependentes, o agressor será imediatamente afastado do lar, domicílio ou local de convivência com a ofendida:"
+      },
+      {
+        "afirmacao": "Isso pode ser feito pelo delegado de polícia, quando o Município não for sede de comarca (Lei 11.340/2006, art. 12-C, inciso II)",
+        "suporte": "sim",
+        "trecho_artigo": "II - pelo delegado de polícia, quando o Município não for sede de comarca; ou"
+      },
+      {
+        "afirmacao": "ou pelo policial, quando o Município não for sede de comarca e não houver delegado disponível no momento da denúncia (Lei 11.340/2006, art. 12-C, inciso III).",
+        "suporte": "sim",
+        "trecho_artigo": "III - pelo policial, quando o Município não for sede de comarca e não houver delegado disponível no momento da denúncia."
+      },
+      {
+        "afirmacao": "Nesses casos, o juiz será comunicado no prazo máximo de 24 horas e decidirá, em igual prazo, sobre a manutenção ou a revogação da medida aplicada (Lei 11.340/2006, art. 12-C, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º Nas hipóteses dos incisos II e III do caput deste artigo, o juiz será comunicado no prazo máximo de 24 (vinte e quatro) horas e decidirá, em igual prazo, sobre a manutenção ou a revogação da medida aplicada, devendo dar ciência ao Ministério Público concomitantemente."
+      }
+    ]
+  },
+  {
+    "codigo": "B22",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei prevê que o juiz assegure a manutenção do vínculo trabalhista quando for necessário o afastamento do local de trabalho, por até seis meses (Lei 11.340/2006, art. 9º, § 2º, II).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º O juiz assegurará à mulher em situação de violência doméstica e familiar, para preservar sua integridade física e psicológica:\nI - acesso prioritário à remoção quando servidora pública, integrante da administração direta ou indireta;\nII - manutenção do vínculo trabalhista, quando necessário o afastamento do local de trabalho, por até seis meses."
+      }
+    ]
+  },
+  {
+    "codigo": "B23",
+    "afirmacoes": [
+      {
+        "afirmacao": "Calúnia é atribuir falsamente a alguém um crime. (Código Penal, art. 138)",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 138 - Caluniar alguém, imputando-lhe falsamente fato definido como crime: Pena - detenção, de seis meses a dois anos, e multa."
+      },
+      {
+        "afirmacao": "A pena prevista é detenção de 6 meses a 2 anos, e multa. (Código Penal, art. 138)",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 138 - Caluniar alguém, imputando-lhe falsamente fato definido como crime: Pena - detenção, de seis meses a dois anos, e multa."
+      },
+      {
+        "afirmacao": "Difamação é espalhar fato ofensivo à reputação de alguém. (Código Penal, art. 139)",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 139 - Difamar alguém, imputando-lhe fato ofensivo à sua reputação: Pena - detenção, de três meses a um ano, e multa."
+      },
+      {
+        "afirmacao": "A pena prevista é detenção de 3 meses a 1 ano, e multa. (Código Penal, art. 139)",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 139 - Difamar alguém, imputando-lhe fato ofensivo à sua reputação: Pena - detenção, de três meses a um ano, e multa."
+      },
+      {
+        "afirmacao": "Injúria é ofender a dignidade ou o decoro de alguém. (Código Penal, art. 140)",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 140 - Injuriar alguém, ofendendo-lhe a dignidade ou o decoro: Pena - detenção, de um a seis meses, ou multa."
+      },
+      {
+        "afirmacao": "A pena pode aumentar se o crime é cometido na presença de várias pessoas ou por meio que facilite a divulgação. (Código Penal, art. 141)",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Se o crime é cometido contra a mulher por razões da condição de sexo feminino, a lei prevê pena maior. (Código Penal, art. 141, § 2º)",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Esses crimes, em regra, dependem de queixa da pessoa ofendida. Quem decide se aceita a queixa é o juiz. (Código Penal, art. 145)",
+        "suporte": "fora_da_base",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "A Lei Maria da Penha trata de violência doméstica e familiar contra a mulher. (Lei 11.340/2006, art. 5º)",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 5º Para os efeitos desta Lei, configura violência doméstica e familiar contra a mulher qualquer ação ou omissão baseada no gênero que lhe cause morte, lesão, sofrimento físico, sexual ou psicológico e dano moral ou patrimonial:"
+      },
+      {
+        "afirmacao": "Ela inclui a violência moral, que é caluniar, difamar ou injuriar a mulher. (Lei 11.340/2006, art. 7º, inciso V)",
+        "suporte": "sim",
+        "trecho_artigo": "V - a violência moral, entendida como qualquer conduta que configure calúnia, difamação ou injúria."
+      }
+    ]
+  },
+  {
+    "codigo": "B24",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei fala em \"unidade doméstica, família ou relação íntima de afeto\", sem exigir morar junto nem exigir que o parceiro seja homem (Lei 11.340/2006, art. 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "III - em qualquer relação íntima de afeto, na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação.\nParágrafo único. As relações pessoais enunciadas neste artigo independem de orientação sexual."
+      },
+      {
+        "afirmacao": "Então, pela lei, a proteção alcança relação entre duas mulheres, com ou sem coabitação.",
+        "suporte": "sim",
+        "trecho_artigo": "III - em qualquer relação íntima de afeto, na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação.\nParágrafo único. As relações pessoais enunciadas neste artigo independem de orientação sexual."
+      },
+      {
+        "afirmacao": "Violência psicológica, como humilhação e controle, é forma de violência doméstica (Lei 11.340/2006, art. 7º, II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;"
+      },
+      {
+        "afirmacao": "A mulher pode pedir medidas protetivas de urgência, como afastamento do agressor e proibição de contato (Lei 11.340/2006, arts. 18 e 22).",
+        "suporte": "sim",
+        "trecho_artigo": "II - afastamento do lar, domicílio ou local de convivência com a ofendida;\nIII - proibição de determinadas condutas, entre as quais:\na) aproximação da ofendida, de seus familiares e das testemunhas, fixando o limite mínimo de distância entre estes e o agressor;\nb) contato com a ofendida, seus familiares e testemunhas por qualquer meio de comunicação;"
+      },
+      {
+        "afirmacao": "Quem decide conceder as medidas é o juiz, que analisa o caso (Lei 11.340/2006, art. 19).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 19. As medidas protetivas de urgência poderão ser concedidas pelo juiz, a requerimento do Ministério Público ou a pedido da ofendida."
+      }
+    ]
+  },
+  {
+    "codigo": "B25",
+    "afirmacoes": [
+      {
+        "afirmacao": "Fornecer transporte para a ofendida e seus dependentes para abrigo ou local seguro, quando houver risco de vida (Lei 11.340/2006, art. 11, III).",
+        "suporte": "sim",
+        "trecho_artigo": "III - fornecer transporte para a ofendida e seus dependentes para abrigo ou local seguro, quando houver risco de vida;"
+      },
+      {
+        "afirmacao": "Se necessário, acompanhar a ofendida para assegurar a retirada de seus pertences do local da ocorrência ou do domicílio familiar (Lei 11.340/2006, art. 11, IV).",
+        "suporte": "sim",
+        "trecho_artigo": "IV - se necessário, acompanhar a ofendida para assegurar a retirada de seus pertences do local da ocorrência ou do domicílio familiar;"
+      }
+    ]
+  },
+  {
+    "codigo": "B26",
+    "afirmacoes": [
+      {
+        "afirmacao": "Isso é violência patrimonial. A lei define como qualquer conduta que configure retenção, subtração, destruição parcial ou total de objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades (Lei 11.340/2006, art. 7º, IV).",
+        "suporte": "sim",
+        "trecho_artigo": "IV - a violência patrimonial, entendida como qualquer conduta que configure retenção, subtração, destruição parcial ou total de seus objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades;"
+      },
+      {
+        "afirmacao": "Esconder os documentos pessoais e danificar a máquina de costura se encaixam nessa descrição: são documentos pessoais e instrumento de trabalho (Lei 11.340/2006, art. 7º, IV).",
+        "suporte": "sim",
+        "trecho_artigo": "IV - a violência patrimonial, entendida como qualquer conduta que configure retenção, subtração, destruição parcial ou total de seus objetos, instrumentos de trabalho, documentos pessoais, bens, valores e direitos ou recursos econômicos, incluindo os destinados a satisfazer suas necessidades;"
+      },
+      {
+        "afirmacao": "Essa conduta pode ser considerada violência doméstica e familiar contra a mulher quando ocorre no âmbito da unidade doméstica, da família ou em qualquer relação íntima de afeto, na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação (Lei 11.340/2006, art. 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 5º Para os efeitos desta Lei, configura violência doméstica e familiar contra a mulher qualquer ação ou omissão baseada no gênero que lhe cause morte, lesão, sofrimento físico, sexual ou psicológico e dano moral ou patrimonial:\nI - no âmbito da unidade doméstica, compreendida como o espaço de convívio permanente de pessoas, com ou sem vínculo familiar, inclusive as esporadicamente agregadas;\nII - no âmbito da família, compreendida como a comunidade formada por indivíduos que são ou se consideram aparentados, unidos por laços naturais, por afinidade ou por vontade expressa;\nIII - em qualquer relação íntima de afeto, na qual o agressor conviva ou tenha convivido com a ofendida, independentemente de coabitação."
+      }
+    ]
+  },
+  {
+    "codigo": "B27",
+    "afirmacoes": [
+      {
+        "afirmacao": "A Lei Maria da Penha garante que a servidora pública em situação de violência doméstica possa pedir remoção, transferência ou afastamento do local de trabalho, quando isso for necessário para proteger sua integridade física e psicológica.",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º O juiz assegurará à mulher em situação de violência doméstica e familiar, para preservar sua integridade física e psicológica:\nI - acesso prioritário à remoção quando servidora pública, integrante da administração direta ou indireta;\nII - manutenção do vínculo trabalhista, quando necessário o afastamento do local de trabalho, por até seis meses."
+      },
+      {
+        "afirmacao": "A lei prevê esse direito à servidora pública (Lei 11.340/2006, art. 9º, § 2º, I).",
+        "suporte": "sim",
+        "trecho_artigo": "I - acesso prioritário à remoção quando servidora pública, integrante da administração direta ou indireta;"
+      },
+      {
+        "afirmacao": "Quem decide é o órgão público competente, ao analisar o pedido.",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B28",
+    "afirmacoes": [
+      {
+        "afirmacao": "A pena prevista é reclusão, de 2 a 5 anos, e multa (Lei 11.340/2006, art. 24-A).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 24-A. Descumprir decisão judicial que defere medidas protetivas de urgência previstas nesta Lei: Pena – reclusão, de 2 (dois) a 5 (cinco) anos, e multa."
+      },
+      {
+        "afirmacao": "O crime se configura mesmo que a medida tenha sido concedida por juiz cível (Lei 11.340/2006, art. 24-A, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º A configuração do crime independe da competência civil ou criminal do juiz que deferiu as medidas."
+      },
+      {
+        "afirmacao": "Na prisão em flagrante, apenas a autoridade judicial pode conceder fiança — ou seja, o delegado não pode arbitrar fiança na delegacia (Lei 11.340/2006, art. 24-A, § 2º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 2º Na hipótese de prisão em flagrante, apenas a autoridade judicial poderá conceder fiança."
+      },
+      {
+        "afirmacao": "A pena é aumentada de 1/3 até a metade se o descumprimento decorrer de violação de áreas de exclusão monitoradas eletronicamente ou de remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial (Lei 11.340/2006, art. 24-A, § 4º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 4º A pena será aumentada de 1/3 (um terço) até a metade se o descumprimento decorrer da violação das áreas de exclusão monitoradas eletronicamente ou da remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial."
+      },
+      {
+        "afirmacao": "Isso não exclui outras sanções cabíveis (Lei 11.340/2006, art. 24-A, § 3º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 3º O disposto neste artigo não exclui a aplicação de outras sanções cabíveis."
+      }
+    ]
+  },
+  {
+    "codigo": "B29",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei prevê pena para quem intimida a mulher com ameaça de mal injusto e grave — \"mal injusto e grave\" é a promessa de um prejuízo sério e sem justificativa (Lei 11.340/2006, art. 7º, II; Código Penal, art. 147).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 147 - Ameaçar alguém, por palavra, escrito ou gesto, ou qualquer outro meio simbólico, de causar-lhe mal injusto e grave: Pena - detenção, de um a seis meses, ou multa."
+      },
+      {
+        "afirmacao": "Sobre a pena: a ameaça tem pena de detenção de 1 a 6 meses, ou multa (Código Penal, art. 147).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 147 - Ameaçar alguém, por palavra, escrito ou gesto, ou qualquer outro meio simbólico, de causar-lhe mal injusto e grave: Pena - detenção, de um a seis meses, ou multa."
+      },
+      {
+        "afirmacao": "Quando é contra a mulher por razões da condição de sexo feminino, a pena é aumentada em 1/3 (Lei 11.340/2006, art. 7º, II, e Código Penal, art. 61, II, \"f\").",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Sobre autorização: a ameaça é crime de ação penal pública incondicionada. Isso quer dizer que o Ministério Público pode processar sem precisar de autorização da vítima.",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º Se o crime é cometido contra a mulher por razões da condição do sexo feminino, nos termos do § 1º do art. 121-A deste Código, aplica-se a pena em dobro.\n§ 2º Somente se procede mediante representação, exceto na hipótese prevista no § 1º deste artigo."
+      },
+      {
+        "afirmacao": "Também pode pedir medidas protetivas de urgência, como afastamento do agressor — quem decide se concede é o juiz (Lei 11.340/2006, arts. 18 a 22).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  },
+  {
+    "codigo": "B30",
+    "afirmacoes": [
+      {
+        "afirmacao": "a Lei Maria da Penha tem uma forma específica para atingir a mulher por meio de outras pessoas.",
+        "suporte": "sim",
+        "trecho_artigo": "VI – a violência vicária, entendida como qualquer forma de violência praticada contra descendente, ascendente, dependente, enteado, parente, pessoa sob guarda ou responsabilidade direta da mulher ou pessoa de sua rede de apoio, com vistas a atingi-la."
+      },
+      {
+        "afirmacao": "A lei define **violência psicológica** como conduta que causa dano emocional, diminuição da autoestima ou prejuízo ao desenvolvimento da mulher (Lei 11.340/2006, art. 7º, II).",
+        "suporte": "sim",
+        "trecho_artigo": "II - a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;"
+      },
+      {
+        "afirmacao": "A lei também pune quem pratica violência **contra a mulher** em razão da condição de gênero (Lei 11.340/2006, art. 5º).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 5º Para os efeitos desta Lei, configura violência doméstica e familiar contra a mulher qualquer ação ou omissão baseada no gênero que lhe cause morte, lesão, sofrimento físico, sexual ou psicológico e dano moral ou patrimonial:"
+      }
+    ]
+  },
+  {
+    "codigo": "B31",
+    "afirmacoes": [
+      {
+        "afirmacao": "A lei prevê que o juiz pode conceder à ofendida auxílio-aluguel, com valor fixado conforme a situação de vulnerabilidade social e econômica dela, por período não superior a 6 (seis) meses (Lei 11.340/2006, art. 23, VI).",
+        "suporte": "sim",
+        "trecho_artigo": "VI – conceder à ofendida auxílio-aluguel, com valor fixado em função de sua situação de vulnerabilidade social e econômica, por período não superior a 6 (seis) meses."
+      }
+    ]
+  },
+  {
+    "codigo": "B32",
+    "afirmacoes": [
+      {
+        "afirmacao": "Divulgar fotos ou vídeos de nudez ou cena de sexo sem o consentimento da vítima é crime, com pena de reclusão de 4 a 10 anos, e multa (Código Penal, art. 218-C).",
+        "suporte": "sim",
+        "trecho_artigo": "Art. 218-C. Oferecer, trocar, disponibilizar, transmitir, vender ou expor à venda, distribuir, publicar ou divulgar, por qualquer meio - inclusive por meio de comunicação de massa ou sistema de informática ou telemática -, fotografia, vídeo ou outro registro audiovisual que contenha cena de estupro ou de estupro de vulnerável ou que faça apologia ou induza a sua prática, ou, sem o consentimento da vítima, cena de sexo, nudez ou pornografia: Pena – reclusão, de 4 (quatro) a 10 (dez) anos, e multa, se o fato não constitui crime mais grave."
+      },
+      {
+        "afirmacao": "E a pena é aumentada de 1/3 a 2/3 se o crime é praticado por alguém que mantém ou manteve relação íntima de afeto com a vítima, ou com o fim de vingança ou humilhação (Código Penal, art. 218-C, § 1º).",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º A pena é aumentada de 1/3 (um terço) a 2/3 (dois terços) se o crime é praticado por agente que mantém ou tenha mantido relação íntima de afeto com a vítima ou com o fim de vingança ou humilhação."
+      }
+    ]
+  },
+  {
+    "codigo": "B33",
+    "afirmacoes": [
+      {
+        "afirmacao": "O Formulário Nacional de Avaliação de Risco serve para identificar fatores de risco de violência doméstica contra a mulher",
+        "suporte": "sim",
+        "trecho_artigo": "§ 1º O Formulário Nacional de Avaliação de Risco tem por objetivo identificar os fatores que indicam o risco de a mulher vir a sofrer qualquer forma de violência no âmbito das relações domésticas, para subsidiar a atuação dos órgãos de segurança pública, do Ministério Público, do Poder Judiciário e dos órgãos e das entidades da rede de proteção na gestão do risco identificado, devendo ser preservado, em qualquer hipótese, o sigilo das informações."
+      },
+      {
+        "afirmacao": "mas a lei exige como condição obrigatória a realização prévia de perícia médica",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "e proíbe que a Polícia Civil ou entidades privadas apliquem o formulário, sendo sua aplicação exclusiva do juiz após o início do processo (Lei 14.149/2021, art. 2º, §§ 2º e 3º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      },
+      {
+        "afirmacao": "Além disso, as informações prestadas pela mulher não têm sigilo e ficam abertas à consulta pública nos autos (Lei 14.149/2021, art. 2º, § 1º).",
+        "suporte": "nao",
+        "trecho_artigo": ""
+      }
+    ]
+  }
+]

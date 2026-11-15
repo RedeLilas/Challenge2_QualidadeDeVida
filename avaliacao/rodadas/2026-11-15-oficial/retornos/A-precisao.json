@@ -1,0 +1,569 @@
+[
+  {
+    "codigo": "A01",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 3,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "O Formulário Nacional de Avaliação de Risco serve para identificar fatores de risco de violência doméstica contra a mulher, mas a lei exige como condição obrigatória a realização prévia de perícia médica e proíbe que a Polícia Civil ou entidades privadas apliquem o formulário, sendo sua aplicação exclusiva do juiz após o início do processo (Lei 14.149/2021, art. 2º, §§ 2º e 3º)."
+  },
+  {
+    "codigo": "A02",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A03",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Descumprir decisão judicial que concede medida protetiva de urgência é crime punido com reclusão de 2 a 5 anos e multa"
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "mas o crime só se configura quando a medida foi determinada por um juiz criminal, não valendo para decisões de juiz cível (Lei 11.340/2006, art. 24-A, § 1º)."
+  },
+  {
+    "codigo": "A04",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "A lei prevê que a autoridade policial providencie transporte para a mulher e os filhos até um lugar seguro, quando necessário."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "A polícia deve garantir que a mulher possa pegar suas roupas, documentos e bens pessoais na casa, sem risco."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A05",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "A lei proíbe, nos casos de violência doméstica e familiar contra a mulher, a aplicação de penas de cesta básica ou outras de prestação pecuniária (pagamento em dinheiro), e também a substituição de pena que implique pagamento isolado de multa (Lei 11.340/2006, art. 17)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A06",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 3,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A07",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A08",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "Sobre a inteligência artificial: a pena é aumentada de metade quando o crime é cometido com uso de inteligência artificial ou outro recurso tecnológico que altere imagem ou som da vítima (Código Penal, art. 147-B, parágrafo único)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A09",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 3,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "Descumprir medida protetiva de urgência é crime, com pena de detenção de 3 meses a 2 anos (Lei 11.340/2006, art. 24-A)."
+  },
+  {
+    "codigo": "A10",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Isso é violência patrimonial. A lei define como conduta que cause perda, subtração ou dano a bens, documentos e instrumentos de trabalho da mulher (Lei 11.340/2006, art. 7º, IV)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "A lei define como conduta que cause perda, subtração ou dano a bens, documentos e instrumentos de trabalho da mulher (Lei 11.340/2006, art. 7º, IV)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A11",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A12",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Obrigar alguém a ter relação sexual, com força ou grave ameaça, é estupro (Código Penal, art. 213)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "A pena é de 6 a 10 anos de prisão (Código Penal, art. 213)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A13",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "O juiz tem prazo de 48 horas para analisar o pedido e decidir sobre as medidas protetivas de urgência (Lei 11.340/2006, art. 18, I)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A14",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "A lei prevê crime para quem persegue alguém de forma repetida, por qualquer meio, ameaçando a integridade física ou psicológica, restringindo a locomoção ou invadindo ou perturbando a liberdade ou privacidade (Código Penal, art. 147-A).\n\nA pena é de reclusão de 6 meses a 2 anos, e multa (Código Penal, art. 147-A)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "A pena é aumentada de metade se o crime é cometido contra mulher por razões da condição de sexo feminino (Código Penal, art. 147-A, § 1º, II)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A15",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A16",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "**Pensão alimentícia provisória:** o juiz pode fixar alimentos provisórios à mulher e aos filhos."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "**Acompanhamento psicossocial e grupos de reeducação:** o juiz pode determinar que o agressor frequente centros de educação e reabilitação, inclusive grupos de reeducação, de forma obrigatória."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A17",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "O juiz define o tempo na decisão."
+  },
+  {
+    "codigo": "A18",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "A lei prevê a violência psicológica como forma de violência doméstica e familiar contra a mulher."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "Isso inclui ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação da intimidade, ridicularização, exploração e limitação do direito de ir e vir, ou qualquer outro meio que prejudique a saúde psicológica e a autodeterminação (Lei 11.340/2006, art. 7º, II)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A19",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A20",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A21",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Não. O juiz não é obrigado a dar guarda compartilhada quando há risco de violência."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A22",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A23",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Nesse período de afastamento, a lei prevê a manutenção do vínculo trabalhista."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "A lei prevê que a mulher em situação de violência doméstica e familiar pode ser afastada do local de trabalho por até 6 meses, para preservar sua integridade física e psicológica."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A24",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "- Caluniar é imputar falsamente a alguém um fato definido como crime (Código Penal, art. 138).\n- Quem sabe que a história é falsa e mesmo assim a espalha também responde pelo crime (Código Penal, art. 138, § 1º)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A25",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "O juiz pode conceder auxílio-aluguel à mulher em situação de violência doméstica e familiar que esteja em vulnerabilidade social e econômica (Lei 11.340/2006, art. 9º, § 4º)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "Sobre o prazo: a lei não fixa um prazo máximo único no art. 9º, § 4º."
+  },
+  {
+    "codigo": "A26",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "- Devolução de bens que o agressor tirou indevidamente da mulher (Lei 11.340/2006, art. 24, I).\n- Proibição temporária de fazer atos e contratos de compra, venda e locação de bem em comum, salvo autorização do juiz (Lei 11.340/2006, art. 24, II)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "- Suspensão das procurações que a mulher deu ao agressor (Lei 11.340/2006, art. 24, III)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A27",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "A retratação da representação só pode ser feita **perante o juiz**, em audiência especialmente designada para isso, **antes do recebimento da denúncia** (Lei 11.340/2006, art. 16)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A28",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "A pena aumenta de 1/3 até 2/3 se o crime é cometido por alguém que tem ou teve relação íntima de afeto com a vítima, ou se é feito para humilhar, por vingança ou por outro motivo torpe (Código Penal, art. 218-C, § 1º)."
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "A pena é de reclusão de 1 a 5 anos, se o fato não for crime mais grave (Código Penal, art. 218-C)."
+  },
+  {
+    "codigo": "A29",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A30",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Isso vale em qualquer relação íntima de afeto em que o agressor conviva ou já tenha convivido com a ofendida, independentemente de coabitação — ou seja, não precisa morar na mesma casa (Lei 11.340/2006, art. 5º, III)."
+      },
+      {
+        "numero": 2,
+        "presente": true,
+        "trecho": "As relações previstas na lei independem de orientação sexual (Lei 11.340/2006, art. 5º, parágrafo único)."
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A31",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": false,
+        "trecho": ""
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  },
+  {
+    "codigo": "A32",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Além disso, o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica, pelo prazo de até 24 meses (Lei 11.340/2006, art. 23, VI)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": true,
+    "trecho_contradicao": "Além disso, o juiz pode conceder o auxílio-aluguel, com valor fixado de acordo com a sua situação de vulnerabilidade social e econômica, pelo prazo de até 24 meses (Lei 11.340/2006, art. 23, VI)."
+  },
+  {
+    "codigo": "A33",
+    "pontos": [
+      {
+        "numero": 1,
+        "presente": true,
+        "trecho": "Violência sexual inclui qualquer conduta que constranja a mulher a presenciar, manter ou participar de relação sexual não desejada, ou que a impeça de usar método contraceptivo (Lei 11.340/2006, art. 7º, III)."
+      },
+      {
+        "numero": 2,
+        "presente": false,
+        "trecho": ""
+      }
+    ],
+    "contradiz": false,
+    "trecho_contradicao": ""
+  }
+]
+
