@@ -7,6 +7,7 @@ from app.rag import resposta
 from app.rag.indice import Indice, carregar_trechos
 
 PERGUNTAS = Path(__file__).parent / "perguntas_juridicas.yaml"
+DESENVOLVIMENTO = Path(__file__).parents[1] / "avaliacao" / "conjuntos" / "desenvolvimento.yaml"
 
 
 @pytest.fixture(scope="module")
@@ -65,9 +66,14 @@ def test_pergunta_fora_do_tema_e_recusada_com_180_e_defensoria(indice, pergunta)
     assert "180" in r["resposta"] and "Defensoria Pública do DF" in r["resposta"]
 
 
-def test_perguntas_das_personas_passam_do_limite(indice):
-    # O limite não pode recusar as perguntas do teste rápido antes de chegar ao LLM.
-    perguntas = [p["pergunta"] for p in yaml.safe_load(PERGUNTAS.read_text(encoding="utf-8"))["perguntas"]]
-    for pergunta in perguntas:
-        _, similaridade = indice.buscar(pergunta, k=1, eixos=resposta.EIXOS)[0]
-        assert similaridade >= resposta.LIMITE_SIMILARIDADE, pergunta
+def test_perguntas_de_desenvolvimento_do_tema_passam_do_limite(indice):
+    # Recalibração (s3-base-legal-ampliada, tarefa 3.2): o limite não pode recusar nenhuma das 15 perguntas
+    # de desenvolvimento do tema antes de chegar ao LLM. O conjunto oficial nunca entra na calibração.
+    perguntas = yaml.safe_load(DESENVOLVIMENTO.read_text(encoding="utf-8"))["perguntas"]
+    assert len(perguntas) == 15
+    recusadas = []
+    for p in perguntas:
+        _, similaridade = indice.buscar(p["pergunta"], k=1, eixos=resposta.EIXOS)[0]
+        if similaridade < resposta.LIMITE_SIMILARIDADE:
+            recusadas.append(f"{p['id']}: {similaridade:.4f}")
+    assert recusadas == []
