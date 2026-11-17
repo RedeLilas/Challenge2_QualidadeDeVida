@@ -514,3 +514,89 @@ def test_lista_curta_de_rede_usa_rede_ordenar_quando_web_rede_js_esta_presente()
     ]
 
 
+def test_filtro_por_tipo_de_servico_na_pergunta():
+    # Carrega web/rede.js junto com web/conversa.js
+    contexto = quickjs.Context()
+    contexto.eval((RAIZ / "web" / "perfil.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "beneficios.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "rede.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "conversa.js").read_text(encoding="utf-8"))
+
+    servicos_com_defensoria = SERVICOS_FICTICIOS + [
+        {
+            "nome": "Defensoria Pública de Ceilândia",
+            "tipo": "Defensoria",
+            "ra": "Ceilândia",
+            "endereco": "Fórum de Ceilândia",
+            "cep": "72210-000",
+            "telefone": "(61) 3103-0000",
+            "horario": "Segunda a sexta-feira, das 12h às 19h",
+            "fonte_url": "https://www.defensoria.df.gov.br/",
+            "data_verificacao": "2026-11-17",
+        }
+    ]
+
+    # 1. Pergunta com "cras" filtra serviços do tipo CRAS
+    resp_cras = json.loads(json.dumps(POR_NOME["rede_com_ra"]["resposta"]))
+    bloco_cras = para_blocos(
+        contexto,
+        resp_cras,
+        {"servicos": servicos_com_defensoria, "perfil": {}, "pergunta": "tem cras na ceilandia?"},
+    )[0]
+    assert bloco_cras["tipo_servico"] == "CRAS"
+    assert len(bloco_cras["servicos"]) == 1
+    assert bloco_cras["servicos"][0]["tipo"] == "CRAS"
+    assert bloco_cras["servicos"][0]["nome"] == "CRAS Sol Nascente"
+
+    # 2. Pergunta com "defensoria" sem RA
+    resp_def = json.loads(json.dumps(POR_NOME["rede_com_ra"]["resposta"]))
+    resp_def["campos"]["ra"] = None
+    bloco_def = para_blocos(
+        contexto,
+        resp_def,
+        {"servicos": servicos_com_defensoria, "perfil": {}, "pergunta": "onde acho a defensoria?"},
+    )[0]
+    assert bloco_def["tipo_servico"] == "Defensoria"
+    assert len(bloco_def["servicos"]) == 1
+    assert bloco_def["servicos"][0]["tipo"] == "Defensoria"
+    assert bloco_def["servicos"][0]["nome"] == "Defensoria Pública de Ceilândia"
+
+    # 3. Pergunta com "delegacia" ou "deam"
+    bloco_deam = para_blocos(
+        contexto,
+        resp_cras,
+        {"servicos": servicos_com_defensoria, "perfil": {}, "pergunta": "tem delegacia da mulher na ceilandia?"},
+    )[0]
+    assert bloco_deam["tipo_servico"] == "DEAM"
+    assert all(s["tipo"] == "DEAM" for s in bloco_deam["servicos"])
+
+    # 4. Tipo sem serviços disponíveis no alvo volta lista sem filtro (não exclui tudo)
+    bloco_sem_especifico = para_blocos(
+        contexto,
+        resp_cras,
+        {"servicos": servicos_com_defensoria, "perfil": {}, "pergunta": "tem hospital no gama?"},
+    )[0]
+    assert bloco_sem_especifico["tipo_servico"] == "Saúde"
+    assert len(bloco_sem_especifico["servicos"]) > 0
+
+    # 5. Texto legal de saúde não atribui à Lei 12.845/2013 dispensa de Boletim de Ocorrência
+    t_saude = contexto.eval("Conversa.TEXTOS_FIXOS.saudeViolenciaSexual")
+    t_saude_ajudando = contexto.eval("Conversa.TEXTOS_FIXOS.saudeViolenciaSexualAjudando")
+    assert "Boletim de Ocorrência" not in t_saude
+    assert "Boletim de Ocorrência" not in t_saude_ajudando
+    assert "Lei 12.845/2013" in t_saude
+
+
+def test_filtro_por_tipo_de_servico_no_fallback_sem_rede():
+    js = carregar_conversa()
+    resp = json.loads(json.dumps(POR_NOME["rede_com_ra"]["resposta"]))
+    bloco = para_blocos(
+        js,
+        resp,
+        {"servicos": SERVICOS_FICTICIOS, "perfil": {}, "pergunta": "onde fica a delegacia?"},
+    )[0]
+    assert bloco["tipo_servico"] == "DEAM"
+    assert all(s["tipo"] == "DEAM" for s in bloco["servicos"])
+
+
+

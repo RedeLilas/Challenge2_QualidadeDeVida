@@ -1305,6 +1305,7 @@ function responderLocalComConversa(texto, opcoes = {}) {
       especificas: obterEspecificasBeneficios(),
       servicos: servicosRedeDF,
       ajudando: modoAjudando,
+      pergunta: texto,
     });
     adicionarBlocosConversa(blocos);
     return;
@@ -1462,6 +1463,7 @@ async function enviar(texto, opcoes = {}) {
       especificas: obterEspecificasBeneficios(),
       servicos: servicosRedeDF,
       ajudando: modoAjudando,
+      pergunta: texto,
     });
     adicionarBlocosConversa(blocos);
     return true;
