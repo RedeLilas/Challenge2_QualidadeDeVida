@@ -9,12 +9,14 @@ exatamente um agente numa mensagem sem marca de várias perguntas; nos demais ca
 """
 import json
 import re
+import typing
 from functools import cache
 from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from app import llm
 from app.risco import normalizar
 
 ARQUIVO_ROTEAMENTO = Path(__file__).resolve().parents[1] / "regras" / "roteamento.json"
@@ -237,3 +239,125 @@ def por_regra(texto: str) -> Decisao | None:
     agente = agentes.pop()
     tipo = ("direito" if direito else "explicacao") if agente == "beneficios" else None
     return Decisao(agente=agente, tipo=tipo, campos=campos_do_texto(texto))
+
+
+# --- Segunda etapa: classificação pelo LLM (tarefas 2.3 e 2.4) ----------------------------------
+
+# Até 3 perguntas são tratadas: uma respondida e até 2 sugeridas. Com mais, `excedeu`.
+MAXIMO_PERGUNTAS = 3
+
+INSTRUCOES_CLASSIFICACAO = (
+    "Você encaminha mensagens de um serviço de apoio a mulheres em situação de violência doméstica "
+    "no Distrito Federal. Não responda à mensagem: só classifique.\n"
+    "Separe a mensagem em perguntas, na ordem em que foram escritas. Reescreva cada uma para ser "
+    "entendida sozinha, trocando pronomes pelo assunto (\"onde eu peço ela?\" vira \"Onde peço medida "
+    "protetiva?\"), sem acrescentar fatos. Uma mensagem com uma pergunta só gera uma pergunta.\n"
+    "Para cada pergunta, escolha um agente desta lista fechada:\n"
+    "- juridico: leis, direitos, crimes, medida protetiva, processo, guarda, divórcio, Lei Maria da Penha. "
+    "Inclui explicar o auxílio-aluguel da Lei Maria da Penha (\"aluguel da Maria da Penha\", "
+    "\"aluguel do juiz\").\n"
+    "- beneficios: benefícios sociais (Bolsa Família, BPC, Aluguel Social do DF, Cartão Gás, Prato Cheio "
+    "e outros). Use tipo \"direito\" quando a pessoa quer saber se tem direito ou pode receber, e tipo "
+    "\"explicacao\" quando quer saber o que é, como funciona ou quem pode receber.\n"
+    "- triagem: a pessoa quer saber se corre perigo ou qual o nível de risco.\n"
+    "- rede: onde buscar atendimento (delegacia, CRAS, Defensoria, hospital, Casa da Mulher Brasileira).\n"
+    "- fora_do_tema: qualquer outro assunto.\n"
+    "Campos tirados só do texto da mensagem, nunca supostos:\n"
+    "- beneficio: \"bolsa_familia\", \"bpc\", \"auxilio_aluguel\", \"aluguel_social_df\", \"outro\" "
+    "(benefício citado fora desses) ou null.\n"
+    "- ra: a Região Administrativa do DF citada, escrita exatamente como um destes valores: "
+    + ", ".join(f'"{ra}"' for ra in RAS_DO_SITE)
+    + "; ou null.\n"
+    "- violencia_sexual_recente: true se a mensagem fala de violência sexual recente ou sem dizer quando; "
+    "false se diz que foi há mais tempo; null se não fala de violência sexual.\n"
+    "Responda só com JSON, sem texto fora dele, neste formato:\n"
+    '{"perguntas": [{"agente": "juridico", "tipo": null, "pergunta": "...", "beneficio": null, '
+    '"ra": null, "violencia_sexual_recente": null}]}\n'
+    "O campo tipo é null em todos os agentes, menos em beneficios."
+)
+
+
+class PerguntaClassificada(BaseModel):
+    """Um item da saída do LLM. Agente ou tipo inválidos invalidam a saída inteira (vai para a reserva)."""
+
+    agente: Agente
+    tipo: TipoBeneficio | None = None
+    pergunta: str = Field(min_length=1, max_length=2000)
+    beneficio: str | None = None
+    ra: str | None = None
+    violencia_sexual_recente: bool | None = None
+
+    def decisao(self) -> Decisao:
+        # Valores fora do contrato nos campos viram nulos (spec conversa: "RA fora da lista do site").
+        beneficio = self.beneficio if self.beneficio in typing.get_args(Beneficio) else None
+        ra = self.ra if self.ra in RAS_DO_SITE else None
+        campos = Campos(beneficio=beneficio, ra=ra, violencia_sexual_recente=self.violencia_sexual_recente)
+        return Decisao(agente=self.agente, tipo=self.tipo, campos=campos)
+
+
+class SaidaClassificacao(BaseModel):
+    perguntas: list[PerguntaClassificada] = Field(min_length=1)
+
+
+class Classificacao(BaseModel):
+    """Resultado das duas etapas: quem decidiu, o agente da pergunta respondida e as sugestões."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    decidido_por: DecididoPor
+    decisao: Decisao
+    # Texto que o agente recebe: o original com uma pergunta; a pergunta reescrita com várias.
+    pergunta: str
+    outras_perguntas: list[str] = Field(default_factory=list, max_length=MAXIMO_PERGUNTAS - 1)
+    excedeu: bool = False
+
+
+def montar_mensagens_classificacao(texto: str) -> list[dict]:
+    return [
+        {"role": "system", "content": INSTRUCOES_CLASSIFICACAO},
+        {"role": "user", "content": f"Mensagem: {texto}"},
+    ]
+
+
+def _ler_saida(saida: str) -> list[tuple[Decisao, str]] | None:
+    """Perguntas da saída do LLM, ou None se ela não seguir o formato (aceita cercas de código em volta)."""
+    bloco = re.search(r"\{.*\}", saida, re.S)
+    if bloco is None:
+        return None
+    try:
+        lidas = SaidaClassificacao.model_validate_json(bloco[0])
+        return [(p.decisao(), p.pergunta.strip()) for p in lidas.perguntas]
+    except ValueError:  # JSON quebrado, agente fora da lista, tipo inválido ou tipo fora de benefícios
+        return None
+
+
+def por_llm(texto: str, cliente) -> list[tuple[Decisao, str]] | None:
+    """Perguntas classificadas pelo LLM, na ordem escrita, ou None (saída inválida ou LLM indisponível)."""
+    try:
+        saida = cliente.responder(montar_mensagens_classificacao(texto), temperatura=0)
+    except llm.LLMIndisponivel:
+        return None
+    return _ler_saida(saida)
+
+
+def classificar(texto: str, cliente) -> Classificacao:
+    """Regra, depois LLM, depois reserva no jurídico. A checagem de risco é feita antes, pela rota."""
+    if decisao := por_regra(texto):
+        return Classificacao(decidido_por="regra", decisao=decisao, pergunta=texto)
+    perguntas = por_llm(texto, cliente)
+    if perguntas is None:
+        # O jurídico já tem a própria recusa (similaridade e citação).
+        return Classificacao(
+            decidido_por="reserva", decisao=Decisao(agente="juridico", campos=campos_do_texto(texto)), pergunta=texto
+        )
+    # Ordenação estável: triagem primeiro, depois a ordem em que a usuária escreveu.
+    ordenadas = sorted(perguntas, key=lambda item: item[0].agente != "triagem")
+    decisao, reescrita = ordenadas[0]
+    return Classificacao(
+        decidido_por="llm",
+        decisao=decisao,
+        # Com uma pergunta só, a reescrita não altera o que a usuária escreveu.
+        pergunta=texto if len(perguntas) == 1 else reescrita,
+        outras_perguntas=[p for _, p in ordenadas[1:MAXIMO_PERGUNTAS]],
+        excedeu=len(perguntas) > MAXIMO_PERGUNTAS,
+    )

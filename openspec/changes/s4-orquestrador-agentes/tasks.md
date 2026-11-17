@@ -9,8 +9,8 @@
 
 - [x] 2.1 Criar `regras/roteamento.json` (palavras por agente, marcas de "tenho direito?", marcas de várias perguntas e apelidos do auxílio-aluguel) e a etapa de regra, sem acento e em minúsculas; verificação: testes cobrem a decisão com um agente só, a não decisão com dois agentes, com 2+ "?" e com "e também", "outra coisa" e "além disso", o par auxílio-aluguel (explicação → jurídico; "tenho direito?" → benefícios) e o Aluguel Social → benefícios
 - [x] 2.2 Tirar do texto `beneficio`, `ra` e `violencia_sexual_recente`, com `ra` restrito a `RAS_DF`; verificação: testes cobrem RA da lista, RA fora da lista → `null`, benefício sem regra → `"outro"`, e um teste confere que a lista do servidor é igual a `RAS_DF` de `web/dados.js`, sem "Outra RA do DF" e "Prefiro não informar"
-- [ ] 2.3 Classificar pelo LLM com instrução de lista fechada, temperatura 0 e saída validada; JSON inválido, agente fora da lista ou `LLMIndisponivel` levam à reserva `juridico`; verificação: testes com LLM falso cobrem cada caso e conferem a temperatura 0
-- [ ] 2.4 Separar e ordenar até 3 perguntas (triagem primeiro, depois a ordem escrita), devolvendo até 2 em `outras_perguntas` e `excedeu` com mais de 3; verificação: testes com LLM falso cobrem duas perguntas, triagem depois de benefício, quatro perguntas e o uso do texto original quando há só uma pergunta
+- [x] 2.3 Classificar pelo LLM com instrução de lista fechada, temperatura 0 e saída validada; JSON inválido, agente fora da lista ou `LLMIndisponivel` levam à reserva `juridico`; verificação: testes com LLM falso cobrem cada caso e conferem a temperatura 0
+- [x] 2.4 Separar e ordenar até 3 perguntas (triagem primeiro, depois a ordem escrita), devolvendo até 2 em `outras_perguntas` e `excedeu` com mais de 3; verificação: testes com LLM falso cobrem duas perguntas, triagem depois de benefício, quatro perguntas e o uso do texto original quando há só uma pergunta
 
 ## 3. Servidor: rota `/orquestrar` (terça, 17/11, e quinta, 19/11)
 
