@@ -1,0 +1,450 @@
+resumo:
+  casos: 30
+  medidos: 30
+  nao_medidos: {}
+  acerto:
+    acertos: 28
+    total: 30
+    taxa: 0.9333
+  acerto_so_agente:
+    acertos: 28
+    total: 30
+    taxa: 0.9333
+  por_quem_decidiu:
+    llm:
+      acertos: 9
+      total: 11
+      taxa: 0.8182
+    regra:
+      acertos: 19
+      total: 19
+      taxa: 1.0
+  por_agente_esperado:
+    beneficios:
+      acertos: 7
+      total: 8
+      taxa: 0.875
+    fora_do_tema:
+      acertos: 3
+      total: 3
+      taxa: 1.0
+    juridico:
+      acertos: 9
+      total: 10
+      taxa: 0.9
+    rede:
+      acertos: 6
+      total: 6
+      taxa: 1.0
+    triagem:
+      acertos: 3
+      total: 3
+      taxa: 1.0
+  erros:
+  - id: r-007
+    texto: Tenho direito ao auxílio-aluguel previsto na Lei Maria da Penha?
+    esperado: &id001
+      agente: beneficios
+      tipo: direito
+    obtido: &id002
+      agente: juridico
+      tipo: null
+    decidido_por: llm
+  - id: r-027
+    texto: Quais são as regras do auxílio-aluguel e onde encontro atendimento?
+    esperado: &id003
+      agente: juridico
+      tipo: null
+    obtido: &id004
+      agente: beneficios
+      tipo: explicacao
+    decidido_por: llm
+casos:
+- id: r-001
+  texto: eu tenho direito ao bolsa família se moro só com as criança?
+  esperado:
+    agente: beneficios
+    tipo: direito
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: beneficios
+    tipo: direito
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-002
+  texto: o loas é pra quem?
+  esperado:
+    agente: beneficios
+    tipo: explicacao
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: beneficios
+    tipo: explicacao
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-003
+  texto: como pega o cartão gás aqui no df?
+  esperado:
+    agente: beneficios
+    tipo: explicacao
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: beneficios
+    tipo: explicacao
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-004
+  texto: Posso receber o Aluguel Social do DF?
+  esperado:
+    agente: beneficios
+    tipo: direito
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: beneficios
+    tipo: direito
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-005
+  texto: O que é o Aluguel Social e onde peço informação?
+  esperado:
+    agente: beneficios
+    tipo: explicacao
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: beneficios
+    tipo: explicacao
+  acerto_agente: true
+  acerto: true
+  outras_perguntas:
+  - Onde peço informação sobre o Aluguel Social?
+- id: r-006
+  texto: Como funciona o aluguel da Maria da Penha?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-007
+  texto: Tenho direito ao auxílio-aluguel previsto na Lei Maria da Penha?
+  esperado: *id001
+  situacao: medido
+  decidido_por: llm
+  obtido: *id002
+  acerto_agente: false
+  acerto: false
+  outras_perguntas: []
+- id: r-008
+  texto: O juiz pode me dar o aluguel do juiz?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-009
+  texto: como peço uma protetiva?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-010
+  texto: Meu ex pode ser obrigado a sair de casa pela Lei Maria da Penha?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-011
+  texto: Como funciona a guarda dos meus filhos depois da separação?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-012
+  texto: Reter meus documentos é violência patrimonial?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-013
+  texto: se ele não cumprir a protetiva, dá em quê?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-014
+  texto: tem delegacia da mulher na ceilandia?
+  esperado:
+    agente: rede
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: rede
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-015
+  texto: tem cras na ceilandia?
+  esperado:
+    agente: rede
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: rede
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-016
+  texto: Como encontro a Casa da Mulher Brasileira?
+  esperado:
+    agente: rede
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: rede
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-017
+  texto: onde acho a defensoria?
+  esperado:
+    agente: rede
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: rede
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-018
+  texto: Onde posso ser atendida perto de casa em Planaltina?
+  esperado:
+    agente: rede
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: rede
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-019
+  texto: Queria fazer uma avaliação de risco, por onde começo?
+  esperado:
+    agente: triagem
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: triagem
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-020
+  texto: Como sei se estou em uma situação de risco?
+  esperado:
+    agente: triagem
+    tipo: null
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: triagem
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-021
+  texto: como faço a avaliação de risco pelo fonar?
+  esperado:
+    agente: triagem
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: triagem
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-022
+  texto: Ele controla meu dinheiro e diz que não posso trabalhar. Isso é violência psicológica?
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: regra
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-023
+  texto: Tenho direito ao Bolsa Família e onde faço o cadastro?
+  esperado:
+    agente: beneficios
+    tipo: direito
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: beneficios
+    tipo: direito
+  acerto_agente: true
+  acerto: true
+  outras_perguntas:
+  - Onde faço o cadastro do Bolsa Família?
+- id: r-024
+  texto: Quero saber o que é medida protetiva e onde posso pedir uma.
+  esperado:
+    agente: juridico
+    tipo: null
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: juridico
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas:
+  - Onde posso pedir uma medida protetiva?
+- id: r-025
+  texto: Preciso de uma delegacia e também quero entender meus direitos no divórcio.
+  esperado:
+    agente: rede
+    tipo: null
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: rede
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas:
+  - Quais são meus direitos no divórcio?
+- id: r-026
+  texto: Tenho direito ao BPC? E como faço para solicitar?
+  esperado:
+    agente: beneficios
+    tipo: direito
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: beneficios
+    tipo: direito
+  acerto_agente: true
+  acerto: true
+  outras_perguntas:
+  - Como faço para solicitar o BPC?
+- id: r-027
+  texto: Quais são as regras do auxílio-aluguel e onde encontro atendimento?
+  esperado: *id003
+  situacao: medido
+  decidido_por: llm
+  obtido: *id004
+  acerto_agente: false
+  acerto: false
+  outras_perguntas:
+  - Onde encontro atendimento?
+- id: r-028
+  texto: me ensina a fazer bolo de cenoura?
+  esperado:
+    agente: fora_do_tema
+    tipo: null
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: fora_do_tema
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-029
+  texto: Qual é o resultado do jogo de ontem?
+  esperado:
+    agente: fora_do_tema
+    tipo: null
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: fora_do_tema
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
+- id: r-030
+  texto: Me ajuda a escolher um celular para comprar?
+  esperado:
+    agente: fora_do_tema
+    tipo: null
+  situacao: medido
+  decidido_por: llm
+  obtido:
+    agente: fora_do_tema
+    tipo: null
+  acerto_agente: true
+  acerto: true
+  outras_perguntas: []
