@@ -254,14 +254,18 @@ def test_cartao_beneficio_filtrado_e_todos_os_beneficios_seguem_contrato_comum(j
         assert isinstance(c["artigo"], str) and c["artigo"].strip()
         assert DATA_ISO.fullmatch(c["data_verificacao"])
         assert DATA_BR.fullmatch(c["data"])
-        assert isinstance(c["aviso"], str) and "órgão" in c["aviso"].lower() or "juiz" in c["aviso"].lower()
+        assert (
+            isinstance(c["aviso"], str)
+            and "a concessão depende" in c["aviso"].lower()
+            and any(termo in c["aviso"].lower() for termo in ("órgão", "inss", "juiz", "secretaria"))
+        )
 
     # Auxílio-aluguel da Lei Maria da Penha é sempre "depende de decisão judicial"
     aux = por_id["auxilio_aluguel"]
     assert aux["status"] == "depende_decisao_judicial"
     assert aux["situacao"] == "Depende de decisão judicial"
-    assert aux["norma"] == "Lei 11.340/2006 (redação dada pela Lei 14.674/2023)"
-    assert aux["artigo"] == "art. 23, VI"
+    assert aux["norma"] == "Lei 11.340/2006"
+    assert aux["artigo"] == "art. 23, VI (incluído pela Lei 14.674/2023)"
 
     # Como as perguntas específicas (BO, acompanhamento psicossocial, necessidade de moradia) não foram
     # respondidas no chat, o Aluguel Social DF fica em "faltam_informacoes" e ativa o botão para a tela Benefícios
