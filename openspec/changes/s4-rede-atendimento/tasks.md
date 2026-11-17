@@ -10,8 +10,8 @@
 
 ## 2. Lógica da rede no navegador (terça, 17/11)
 
-- [ ] 2.1 Criar `web/rede.js` com `cepParaRa`, `tirarCep`, `ordenar`, `VIZINHAS` e `textoSaude`, no contrato do design (fechado com a frente do chat na terça de manhã); verificação: testes em QuickJS cobrem CEP de cada uma das duas faixas do DF, 72800-000 como fora do DF, CEP de Goiânia, os formatos `00000-000`, `00.000-000` e 8 dígitos, texto sem CEP (`dentroDF: null`) e a ordem com e sem violência sexual recente
-- [ ] 2.2 Escrever o texto de saúde com a Lei 12.845/2013 (arts. 1º e 3º, IV e V), a orientação de pronto-socorro de hospital público e a versão em terceira pessoa; verificação: teste em QuickJS confere a citação, as duas versões e que o texto é condicional ("se foi nas últimas 72 horas")
+- [x] 2.1 Criar `web/rede.js` com `cepParaRa`, `tirarCep`, `ordenar`, `VIZINHAS` e `textoSaude`, no contrato do design (fechado com a frente do chat na terça de manhã); verificação: testes em QuickJS cobrem CEP de cada uma das duas faixas do DF, 72800-000 como fora do DF, CEP de Goiânia, os formatos `00000-000`, `00.000-000` e 8 dígitos, texto sem CEP (`dentroDF: null`) e a ordem com e sem violência sexual recente
+- [x] 2.2 Escrever o texto de saúde com a Lei 12.845/2013 (arts. 1º e 3º, IV e V), a orientação de pronto-socorro de hospital público e a versão em terceira pessoa; verificação: teste em QuickJS confere a citação, as duas versões e que o texto é condicional ("se foi nas últimas 72 horas")
 
 ## 3. Tela e chat (quinta, 19/11)
 
