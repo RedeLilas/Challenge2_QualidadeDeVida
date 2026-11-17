@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 from app import main
 from app.main import app
 from app.rag import resposta
-from app.rag.resposta import EIXOS, INSTRUCOES, LIMITE_SIMILARIDADE, RECUSA, responder
+from app.rag.resposta import EIXOS, INSTRUCOES, JURIDICO, LIMITE_SIMILARIDADE, RECUSA, responder
 from tests.test_juridico import PERGUNTA, RECUPERADOS, IndiceFalso, LLMFalso
 
 
@@ -27,6 +27,7 @@ def test_padroes_de_responder_sao_os_valores_da_s3():
     assert parametros["eixos"].default == {"juridico"} == EIXOS
     assert parametros["instrucoes"].default == INSTRUCOES
     assert parametros["limite"].default == 0.81 == LIMITE_SIMILARIDADE
+    assert parametros["verificacao"].default == JURIDICO
 
 
 def test_rota_juridico_usa_eixos_instrucoes_e_limite_da_s3(cliente, monkeypatch):
@@ -37,15 +38,26 @@ def test_rota_juridico_usa_eixos_instrucoes_e_limite_da_s3(cliente, monkeypatch)
     chamadas = []
     original = resposta.responder
 
-    def espiao(pergunta, indice, cliente_arg, *, eixos=EIXOS, instrucoes=INSTRUCOES, limite=LIMITE_SIMILARIDADE):
-        chamadas.append({"eixos": eixos, "instrucoes": instrucoes, "limite": limite})
-        return original(pergunta, indice, cliente_arg, eixos=eixos, instrucoes=instrucoes, limite=limite)
+    def espiao(
+        pergunta,
+        indice,
+        cliente_arg,
+        *,
+        eixos=EIXOS,
+        instrucoes=INSTRUCOES,
+        limite=LIMITE_SIMILARIDADE,
+        verificacao=JURIDICO,
+    ):
+        chamadas.append({"eixos": eixos, "instrucoes": instrucoes, "limite": limite, "verificacao": verificacao})
+        return original(
+            pergunta, indice, cliente_arg, eixos=eixos, instrucoes=instrucoes, limite=limite, verificacao=verificacao
+        )
 
     monkeypatch.setattr(resposta, "responder", espiao)
     r = cliente.post("/juridico", json={"pergunta": PERGUNTA})
 
     assert r.status_code == 200
-    assert chamadas == [{"eixos": {"juridico"}, "instrucoes": INSTRUCOES, "limite": 0.81}]
+    assert chamadas == [{"eixos": {"juridico"}, "instrucoes": INSTRUCOES, "limite": 0.81, "verificacao": JURIDICO}]
     assert falso_indice.chamadas == [{"pergunta": PERGUNTA, "k": 5, "eixos": {"juridico"}}]
     assert falso_llm.recebido[0] == {"role": "system", "content": INSTRUCOES}
 
