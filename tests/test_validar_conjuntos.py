@@ -1,4 +1,4 @@
-"""Fixtures fictícias para o contrato dos conjuntos da S3."""
+"""Contrato dos conjuntos de avaliação da S3 e da S4."""
 
 from copy import deepcopy
 from pathlib import Path
@@ -79,22 +79,82 @@ def _carregar_s4(nome: str) -> dict:
     return yaml.safe_load((raiz / f"{nome}.yaml").read_text(encoding="utf-8"))
 
 
-def test_conjuntos_s4_existentes_validos():
-    assert validar_elegibilidade_s4() == []
-    assert validar_triagem_s4() == []
+def _conferir_todos(dados: dict) -> dict:
+    for caso in dados["casos"]:
+        caso["conferencia"]["status"] = "conferido"
+    return dados
+
+
+def test_conjuntos_s4_aguardam_conferencia_humana(tmp_path: Path):
+    erros_elegibilidade = validar_elegibilidade_s4()
+    erros_triagem = validar_triagem_s4()
+    assert len(erros_elegibilidade) == len(_carregar_s4("elegibilidade")["casos"])
+    assert len(erros_triagem) == len(_carregar_s4("triagem")["casos"])
+    assert all("conferencia.status" in erro for erro in erros_elegibilidade + erros_triagem)
     assert validar_roteamento_s4() == []
+    for nome, validar in (("elegibilidade", validar_elegibilidade_s4), ("triagem", validar_triagem_s4)):
+        caminho = _s4(tmp_path, nome, _conferir_todos(_carregar_s4(nome)))
+        assert validar(caminho) == []
 
 
 def test_fonte_e_revisor_s4_obrigatorios(tmp_path: Path):
-    triagem = _carregar_s4("triagem")
+    triagem = _conferir_todos(_carregar_s4("triagem"))
     triagem["casos"][0]["fonte"] = ""
     erros = validar_triagem_s4(_s4(tmp_path, "triagem", triagem))
     assert any("t-001" in erro and "fonte" in erro for erro in erros)
 
-    elegibilidade = _carregar_s4("elegibilidade")
+    elegibilidade = _conferir_todos(_carregar_s4("elegibilidade"))
     elegibilidade["casos"][0]["conferencia"]["revisor"] = elegibilidade["casos"][0]["autor"]
     erros = validar_elegibilidade_s4(_s4(tmp_path, "elegibilidade", elegibilidade))
     assert any("e-001" in erro and "revisor deve ser diferente" in erro for erro in erros)
+
+
+def test_s4_rejeita_fonte_sem_norma_e_dispositivo(tmp_path: Path):
+    dados = _conferir_todos(_carregar_s4("elegibilidade"))
+    dados["casos"][0]["fontes_por_beneficio"]["bpc"] = "a lei"
+    erros = validar_elegibilidade_s4(_s4(tmp_path, "elegibilidade", dados))
+    assert any("e-001" in erro and "fonte de 'bpc'" in erro for erro in erros)
+
+    dados = _conferir_todos(_carregar_s4("triagem"))
+    dados["casos"][0]["fonte"] = "a lei"
+    erros = validar_triagem_s4(_s4(tmp_path, "triagem", dados))
+    assert any("t-001" in erro and "fonte" in erro for erro in erros)
+
+
+def test_s4_rejeita_beneficio_ou_situacao_desconhecidos(tmp_path: Path):
+    dados = _conferir_todos(_carregar_s4("elegibilidade"))
+    dados["beneficios"].remove("bpc")
+    for caso in dados["casos"]:
+        caso["esperado"].pop("bpc")
+        caso["fontes_por_beneficio"].pop("bpc")
+    erros = validar_elegibilidade_s4(_s4(tmp_path, "elegibilidade", dados))
+    assert any("ids de regras/beneficios.json" in erro for erro in erros)
+
+    dados = _conferir_todos(_carregar_s4("elegibilidade"))
+    dados["casos"][0]["esperado"]["bpc"] = "sim"
+    erros = validar_elegibilidade_s4(_s4(tmp_path, "elegibilidade", dados))
+    assert any("e-001" in erro and "situação inválida" in erro for erro in erros)
+
+
+def test_s4_rejeita_nivel_e_roteamento_desconhecidos(tmp_path: Path):
+    dados = _conferir_todos(_carregar_s4("triagem"))
+    dados["casos"][1]["nivel_esperado"] = "medio"
+    erros = validar_triagem_s4(_s4(tmp_path, "triagem", dados))
+    assert any("t-002" in erro and "nivel_esperado inválido" in erro for erro in erros)
+
+    dados = _carregar_s4("roteamento")
+    dados["casos"][0]["agente_esperado"] = "beneficio"
+    dados["casos"][1]["tipo_esperado"] = "talvez"
+    erros = validar_roteamento_s4(_s4(tmp_path, "roteamento", dados))
+    assert any("r-001" in erro and "agente_esperado inválido" in erro for erro in erros)
+    assert any("r-002" in erro and "tipo_esperado" in erro for erro in erros)
+
+
+def test_s4_exige_cobertura_dos_quatro_niveis_de_triagem(tmp_path: Path):
+    dados = _conferir_todos(_carregar_s4("triagem"))
+    dados["casos"] = [caso for caso in dados["casos"] if caso["nivel_esperado"] != "sem_sinais_graves"]
+    erros = validar_triagem_s4(_s4(tmp_path, "triagem", dados))
+    assert any("falta caso" in erro and "sem_sinais_graves" in erro for erro in erros)
 
 
 def test_elegibilidade_detecta_cada_limite_ausente(tmp_path: Path):
@@ -120,3 +180,10 @@ def test_elegibilidade_detecta_cada_limite_ausente(tmp_path: Path):
     erros = validar_elegibilidade_s4(_s4(tmp_path, "sem-incompletos", dados))
     assert any("prefiro não informar" in erro for erro in erros)
     assert any("perfil incompleto" in erro for erro in erros)
+
+    dados = _conferir_todos(_carregar_s4("elegibilidade"))
+    for caso in dados["casos"]:
+        if caso["perfil"].get("renda_total") == "prefiro_nao_informar":
+            caso["perfil"]["renda_total"] = "prefiro_informar"
+    erros = validar_elegibilidade_s4(_s4(tmp_path, "valor-oposto", dados))
+    assert any("prefiro não informar" in erro for erro in erros)
