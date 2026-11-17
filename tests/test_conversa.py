@@ -521,6 +521,7 @@ def test_filtro_por_tipo_de_servico_na_pergunta():
     contexto.eval((RAIZ / "web" / "beneficios.js").read_text(encoding="utf-8"))
     contexto.eval((RAIZ / "web" / "rede.js").read_text(encoding="utf-8"))
     contexto.eval((RAIZ / "web" / "conversa.js").read_text(encoding="utf-8"))
+    contexto.eval(f"var REGRAS_BENEFICIOS = {TEXTO_REGRAS_BENEFICIOS};")
 
     servicos_com_defensoria = SERVICOS_FICTICIOS + [
         {
@@ -587,8 +588,8 @@ def test_filtro_por_tipo_de_servico_na_pergunta():
     assert "Lei 12.845/2013" in t_saude
 
 
-def test_filtro_por_tipo_de_servico_no_fallback_sem_rede():
-    js = carregar_conversa()
+def test_filtro_por_tipo_de_servico_no_fallback_sem_rede(js):
+    # A fixture `js` carrega conversa.js sem web/rede.js: testa o fallback puro.
     resp = json.loads(json.dumps(POR_NOME["rede_com_ra"]["resposta"]))
     bloco = para_blocos(
         js,
@@ -599,4 +600,17 @@ def test_filtro_por_tipo_de_servico_no_fallback_sem_rede():
     assert all(s["tipo"] == "DEAM" for s in bloco["servicos"])
 
 
-
+@pytest.mark.parametrize(
+    "fixo, chamada",
+    [
+        ("saudeViolenciaSexual", "Rede.textoSaude(false)"),
+        ("saudeViolenciaSexualAjudando", "Rede.textoSaude(true)"),
+    ],
+)
+def test_texto_de_saude_do_fallback_igual_ao_de_rede_js(fixo, chamada):
+    # O texto existe em dois lugares: em web/rede.js e no fallback de web/conversa.js (usado se rede.js
+    # não carregar). Se um mudar (por exemplo, com a fonte das 72 horas, #78), o outro precisa mudar junto.
+    contexto = quickjs.Context()
+    contexto.eval((RAIZ / "web" / "rede.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "conversa.js").read_text(encoding="utf-8"))
+    assert contexto.eval(f"Conversa.TEXTOS_FIXOS.{fixo}") == contexto.eval(chamada)

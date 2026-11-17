@@ -40,14 +40,14 @@ var Conversa = (function () {
       "Confira os serviços de atendimento no Distrito Federal que podem acolher a pessoa que você está ajudando (confirme o horário por telefone antes de ir, exceto nos plantões 24 horas):",
     saudeViolenciaSexual:
       "Depois de uma violência sexual, você tem direito a atendimento imediato, de graça, em qualquer hospital público do SUS " +
-      "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Se foi nas últimas 72 horas, vá o quanto antes ao pronto-socorro de um hospital público. " +
-      "Quanto antes o atendimento, mais os remédios que evitam gravidez e infecções sexualmente transmissíveis ajudam " +
-      "(Lei 12.845/2013, art. 3º, IV e V).",
+      "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Esse atendimento inclui remédios para evitar gravidez e infecções sexualmente " +
+      "transmissíveis (Lei 12.845/2013, art. 3º, IV e V). Se foi nas últimas 72 horas, vá o quanto antes ao pronto-socorro " +
+      "de um hospital público, porque esses remédios dependem do tempo.",
     saudeViolenciaSexualAjudando:
       "Depois de uma violência sexual, a pessoa que você está ajudando tem direito a atendimento imediato, de graça, em qualquer hospital público do SUS " +
-      "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Se foi nas últimas 72 horas, apoie-a para ir o quanto antes ao pronto-socorro de um hospital público, se ela quiser. " +
-      "Quanto antes o atendimento, mais os remédios que evitam gravidez e infecções sexualmente transmissíveis ajudam " +
-      "(Lei 12.845/2013, art. 3º, IV e V).",
+      "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Esse atendimento inclui remédios para evitar gravidez e infecções sexualmente " +
+      "transmissíveis (Lei 12.845/2013, art. 3º, IV e V). Se foi nas últimas 72 horas, apoie-a para ir o quanto antes " +
+      "ao pronto-socorro de um hospital público, se ela quiser, porque esses remédios dependem do tempo.",
   };
 
   function dataBrasileira(iso) {
