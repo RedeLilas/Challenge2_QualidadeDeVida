@@ -4,8 +4,8 @@ Primeira mudança a cortar se a S4 apertar (vai para a S6). Depende da tarefa 1.
 
 ## 1. Perguntas de desenvolvimento (terça, 17/11)
 
-- [ ] 1.1 Escrever com o Claude `avaliacao/conjuntos/s4/desenvolvimento_beneficios.yaml`: cerca de 20 perguntas leigas cobrindo os seis programas (com apelidos, erros de digitação e parte sem o nome oficial), gabarito e norma (artigo) tirados de `dados/leis/`, cerca de 8 extras quase do tema e a pergunta "como funciona o aluguel da Maria da Penha?" marcada para o eixo jurídico; verificação: o arquivo carrega, cada pergunta passa pela regra de risco, e `avaliacao/conjuntos/desenvolvimento.yaml` não mudou (`git diff`)
-- [ ] 1.2 Validar o conjunto em `scripts/validar_conjuntos.py` (norma e artigo, autor, revisor diferente do autor, perguntas sem o nome oficial, extras, a pergunta do jurídico) e, para um futuro conjunto de medição de benefícios, a ausência de perguntas repetidas do desenvolvimento; verificação: testes em `tests/test_validar_conjuntos.py` cobrem pergunta sem norma, revisor igual ao autor e pergunta repetida
+- [x] 1.1 Escrever com o Claude `avaliacao/conjuntos/s4/desenvolvimento_beneficios.yaml`: cerca de 20 perguntas leigas cobrindo os seis programas (com apelidos, erros de digitação e parte sem o nome oficial), gabarito e norma (artigo) tirados de `dados/leis/`, cerca de 8 extras quase do tema e a pergunta "como funciona o aluguel da Maria da Penha?" marcada para o eixo jurídico; verificação: o arquivo carrega, cada pergunta passa pela regra de risco, e `avaliacao/conjuntos/desenvolvimento.yaml` não mudou (`git diff`)
+- [x] 1.2 Validar o conjunto em `scripts/validar_conjuntos.py` (norma e artigo, autor, revisor diferente do autor, perguntas sem o nome oficial, extras, a pergunta do jurídico) e, para um futuro conjunto de medição de benefícios, a ausência de perguntas repetidas do desenvolvimento; verificação: testes em `tests/test_validar_conjuntos.py` cobrem pergunta sem norma, revisor igual ao autor e pergunta repetida
 
 ## 2. Verificação de citação (terça, 17/11)
 
