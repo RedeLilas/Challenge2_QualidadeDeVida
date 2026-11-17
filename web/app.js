@@ -7,8 +7,8 @@
 
 // Site neutro da saída rápida. location.replace() tira esta página do histórico.
 const SITE_NEUTRO = "https://www.climatempo.com.br/previsao-do-tempo/cidade/61/brasilia-df";
-// Até o orquestrador (S4), toda mensagem é uma pergunta jurídica respondida com citações.
-const ROTA = "/juridico";
+// Rota do orquestrador de agentes (s4-orquestrador-agentes): classifica e responde no mesmo pedido.
+const ROTA = "/orquestrar";
 const ROTA_REDE = "/rede-protecao";
 const REGRAS_DE_RISCO = "/regras/risco_imediato.json";
 const REGRAS_DE_BENEFICIOS = "/regras/beneficios.json";
@@ -79,9 +79,25 @@ const aviso = document.getElementById("aviso");
 const chatWindow = document.getElementById("chat-window");
 const chatTrigger = document.getElementById("chat-trigger");
 const chatTriggerIcon = document.getElementById("chat-trigger-icon");
+const botaoModoAjudando = document.getElementById("modo-ajudando");
 
 let pedidoAtual = null;
 let regrasDeRisco = null;
+// Estado exclusivo em memória da conversa (nunca gravado no armazenamento do navegador)
+let modoAjudando = false;
+let textoAguardandoAlerta = "";
+let sugestoesConversa = [];
+
+function atualizarBotaoAjudando() {
+  if (!botaoModoAjudando) return;
+  botaoModoAjudando.setAttribute("aria-pressed", String(modoAjudando));
+  botaoModoAjudando.classList.toggle("active", modoAjudando);
+}
+
+botaoModoAjudando?.addEventListener("click", () => {
+  modoAjudando = !modoAjudando;
+  atualizarBotaoAjudando();
+});
 
 fetch(REGRAS_DE_RISCO)
   .then((resposta) => (resposta.ok ? resposta.json() : Promise.reject(resposta.status)))
@@ -132,6 +148,10 @@ function sair() {
 function apagarConversa() {
   if (pedidoAtual) pedidoAtual.abort();
   pedidoAtual = null;
+  textoAguardandoAlerta = "";
+  sugestoesConversa = [];
+  modoAjudando = false;
+  atualizarBotaoAjudando();
   if (campo) campo.value = "";
   if (lista) lista.replaceChildren();
 }
@@ -1087,23 +1107,51 @@ function adicionar(classe, texto) {
 // Resposta jurídica: o texto e, embaixo, a norma, o artigo e a data em que o texto da lei foi
 // verificado. Sem link para o site da lei: abrir a página deixaria "Lei Maria da Penha" no
 // histórico do navegador, visível para quem pegar o celular.
+function animarTextoProgressivo(elemento, textoCompleto, aoTerminar) {
+  const palavras = String(textoCompleto || "").split(/\s+/).filter(Boolean);
+  if (palavras.length <= 3) {
+    elemento.textContent = textoCompleto;
+    if (aoTerminar) aoTerminar();
+    return;
+  }
+  elemento.textContent = "";
+  let idx = 0;
+  const passo = Math.max(1, Math.ceil(palavras.length / 28));
+  const timer = setInterval(() => {
+    if (!elemento.isConnected) {
+      clearInterval(timer);
+      return;
+    }
+    idx = Math.min(palavras.length, idx + passo);
+    elemento.textContent = palavras.slice(0, idx).join(" ");
+    irParaOFim();
+    if (idx >= palavras.length) {
+      clearInterval(timer);
+      elemento.textContent = textoCompleto;
+      if (aoTerminar) aoTerminar();
+    }
+  }, 28);
+}
+
 function adicionarResposta({ resposta, citacoes = [] }) {
   const item = adicionar("msg--assistente", "");
   const texto = document.createElement("p");
-  texto.textContent = resposta;
   item.append(texto);
 
-  if (citacoes.length) {
-    const fontes = document.createElement("ul");
-    fontes.className = "msg__fontes";
-    fontes.setAttribute("aria-label", "Fontes");
-    for (const { citacao, data_acesso } of citacoes) {
-      const fonte = document.createElement("li");
-      fonte.textContent = `${citacao} · texto verificado em ${dataBrasileira(data_acesso)}`;
-      fontes.append(fonte);
+  animarTextoProgressivo(texto, resposta, () => {
+    if (citacoes.length && item.isConnected) {
+      const fontes = document.createElement("ul");
+      fontes.className = "msg__fontes chat-fade-step";
+      fontes.setAttribute("aria-label", "Fontes");
+      for (const { citacao, data_acesso } of citacoes) {
+        const fonte = document.createElement("li");
+        fonte.textContent = `${citacao} · texto verificado em ${dataBrasileira(data_acesso)}`;
+        fontes.append(fonte);
+      }
+      item.append(fontes);
+      irParaOFim();
     }
-    item.append(fontes);
-  }
+  });
   irParaOFim();
 }
 
@@ -1117,13 +1165,18 @@ function esperar(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Renderiza na conversa os blocos produzidos por Conversa.paraBlocos() (s4-orquestrador-agentes, tarefas 4.1 e 4.2)
+// Renderiza na conversa os blocos produzidos por Conversa.paraBlocos() (s4-orquestrador-agentes, tarefas 4.1 a 4.6)
 function adicionarBlocosConversa(blocos) {
   if (!Array.isArray(blocos) || !lista) return;
 
   for (const bloco of blocos) {
-    if (bloco.tipo === "alerta_190" || bloco.tipo === "linha_190") {
-      mostrarAlerta();
+    if (bloco.tipo === "alerta_190") {
+      mostrarAlerta({ comContinuar: true, textoAlerta: bloco.texto });
+      continue;
+    }
+
+    if (bloco.tipo === "linha_190") {
+      mostrarLinha190(bloco.texto);
       continue;
     }
 
@@ -1146,89 +1199,112 @@ function adicionarBlocosConversa(blocos) {
 
     const item = adicionar("msg--assistente", "");
     const p = document.createElement("p");
-    p.textContent = bloco.texto || "";
     item.append(p);
 
-    if (bloco.tipo === "cartao_beneficio" && Array.isArray(bloco.cartoes)) {
-      bloco.cartoes.forEach((c, idx) => {
-        const card = document.createElement("div");
-        card.className = "chat-subcard";
-        card.style.animationDelay = `${(idx + 1) * 90}ms`;
-        const motivosTexto = (c.motivos || []).join(" ");
-        const faltaTexto = (c.falta || []).length ? ` O que falta: ${(c.falta || []).join(" ")}` : "";
-        card.innerHTML = `
-          <strong>${c.titulo} — ${c.situacao}</strong>
-          <p style="margin:4px 0;">${motivosTexto}${faltaTexto}</p>
-          <p style="margin:4px 0;"><strong>Onde solicitar:</strong> ${c.onde_pedir}</p>
-          <small style="display:block; color:#5a4d72;">${c.norma}, ${c.artigo} · texto verificado em ${c.data} · ${c.aviso}</small>
-        `;
-        item.append(card);
-      });
-    }
+    const textoBloco =
+      bloco.tipo === "sugestoes" && Array.isArray(bloco.perguntas)
+        ? "Outras perguntas identificadas na sua mensagem:"
+        : bloco.texto || "";
 
-    if (bloco.tipo === "rede_atendimento" && Array.isArray(bloco.servicos)) {
-      if (bloco.texto_saude) {
-        const pSaude = document.createElement("p");
-        pSaude.style.cssText = "margin-top:6px; font-weight:600; color:#6d28d9;";
-        pSaude.textContent = bloco.texto_saude;
-        item.append(pSaude);
-      }
-      bloco.servicos.forEach((s, idx) => {
-        const cardSrv = document.createElement("div");
-        cardSrv.className = "chat-subcard";
-        cardSrv.style.animationDelay = `${(idx + 1) * 90}ms`;
-        cardSrv.innerHTML = `
-          <strong>${s.nome} (${s.ra})</strong><br>
-          <span>${s.endereco} · Tel.: ${s.telefone}</span><br>
-          <small>${s.horario} · ${s.recomendacao} · verificado em ${s.data_formatada}</small>
-        `;
-        item.append(cardSrv);
-      });
-    }
+    animarTextoProgressivo(p, textoBloco, () => {
+      if (!item.isConnected) return;
 
-    if (bloco.acao_destino && bloco.rotulo_acao) {
-      const btnAcao = document.createElement("button");
-      btnAcao.type = "button";
-      btnAcao.className = "secondary-button";
-      btnAcao.style.cssText = "margin-top:10px; font-size:12.5px; padding:7px 12px;";
-      btnAcao.textContent = bloco.rotulo_acao;
-      btnAcao.addEventListener("click", () => {
-        alternarChat(false);
-        irParaSecao(bloco.acao_destino);
-      });
-      item.append(btnAcao);
-    }
-
-    if (bloco.tipo === "sugestoes" && Array.isArray(bloco.perguntas)) {
-      p.textContent = "Outras perguntas identificadas na sua mensagem:";
-      const divSug = document.createElement("div");
-      divSug.style.cssText = "display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;";
-      for (const perg of bloco.perguntas) {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "secondary-button";
-        b.style.cssText = "font-size:12px; padding:6px 10px;";
-        b.textContent = perg;
-        b.addEventListener("click", () => {
-          campo.value = perg;
-          formulario.requestSubmit();
+      if (bloco.tipo === "cartao_beneficio" && Array.isArray(bloco.cartoes)) {
+        bloco.cartoes.forEach((c, idx) => {
+          const card = document.createElement("div");
+          card.className = "chat-subcard";
+          card.style.animationDelay = `${idx * 220}ms`;
+          const motivosTexto = (c.motivos || []).join(" ");
+          const faltaTexto = (c.falta || []).length ? ` O que falta: ${(c.falta || []).join(" ")}` : "";
+          card.innerHTML = `
+            <strong>${c.titulo} — ${c.situacao}</strong>
+            <p style="margin:4px 0;">${motivosTexto}${faltaTexto}</p>
+            <p style="margin:4px 0;"><strong>Onde solicitar:</strong> ${c.onde_pedir}</p>
+            <small style="display:block; color:#5a4d72;">${c.norma}, ${c.artigo} · texto verificado em ${c.data} · ${c.aviso}</small>
+          `;
+          item.append(card);
         });
-        divSug.append(b);
       }
-      item.append(divSug);
-    }
+
+      if (bloco.tipo === "rede_atendimento" && Array.isArray(bloco.servicos)) {
+        if (bloco.texto_saude) {
+          const pSaude = document.createElement("p");
+          pSaude.className = "chat-fade-step";
+          pSaude.style.cssText = "margin-top:6px; font-weight:600; color:#6d28d9;";
+          pSaude.textContent = bloco.texto_saude;
+          item.append(pSaude);
+        }
+        bloco.servicos.forEach((s, idx) => {
+          const cardSrv = document.createElement("div");
+          cardSrv.className = "chat-subcard";
+          cardSrv.style.animationDelay = `${idx * 220}ms`;
+          cardSrv.innerHTML = `
+            <strong>${s.nome} (${s.ra})</strong><br>
+            <span>${s.endereco} · Tel.: ${s.telefone}</span><br>
+            <small>${s.horario} · ${s.recomendacao} · verificado em ${s.data_formatada}</small>
+          `;
+          item.append(cardSrv);
+        });
+      }
+
+      if (bloco.acao_destino && bloco.rotulo_acao) {
+        const btnAcao = document.createElement("button");
+        btnAcao.type = "button";
+        btnAcao.className = "secondary-button chat-fade-step";
+        const qtdItens = (bloco.cartoes || bloco.servicos || []).length;
+        btnAcao.style.cssText = `margin-top:10px; font-size:12.5px; padding:7px 12px; animation-delay:${qtdItens * 220}ms;`;
+        btnAcao.textContent = bloco.rotulo_acao;
+        btnAcao.addEventListener("click", () => {
+          alternarChat(false);
+          irParaSecao(bloco.acao_destino);
+        });
+        item.append(btnAcao);
+      }
+
+      if (bloco.tipo === "sugestoes" && Array.isArray(bloco.perguntas)) {
+        const divSug = document.createElement("div");
+        divSug.className = "chat-fade-step";
+        divSug.style.cssText = "display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;";
+        for (const perg of bloco.perguntas) {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "secondary-button";
+          b.setAttribute("data-sugestao-conversa", "1");
+          b.style.cssText = "font-size:12px; padding:6px 10px;";
+          b.textContent = perg;
+          b.addEventListener("click", async () => {
+            if (pedidoAtual) return;
+            adicionar("msg--usuaria", perg);
+            botaoEnviar.disabled = true;
+            await enviar(perg);
+            botaoEnviar.disabled = false;
+          });
+          divSug.append(b);
+        }
+        item.append(divSug);
+      }
+
+      irParaOFim();
+    });
   }
   irParaOFim();
 }
 
-function responderLocalComConversa(texto) {
+function responderLocalComConversa(texto, opcoes = {}) {
   if (typeof Conversa !== "undefined" && typeof DadosRedeLilas !== "undefined" && DadosRedeLilas.respostaLocalOrquestrar) {
     const simulada = DadosRedeLilas.respostaLocalOrquestrar(texto);
+    if (opcoes.alertaVisto) {
+      simulada.risco_imediato = true;
+      simulada.categoria_risco = "risco";
+      simulada.alerta =
+        "Você pode estar em perigo agora. Ligue 190 (Polícia Militar). Se a pessoa em perigo for outra, ligue 190 e informe o endereço dela. Para conversar com alguém, ligue 180 (gratuito, 24 horas).";
+    }
     const blocos = Conversa.paraBlocos(simulada, {
       regrasBeneficios: regrasDeBeneficios,
       perfil: perfilUsuario,
       especificas: obterEspecificasBeneficios(),
       servicos: servicosRedeDF,
+      ajudando: modoAjudando,
     });
     adicionarBlocosConversa(blocos);
     return;
@@ -1244,8 +1320,34 @@ function irParaOFim() {
   }
 }
 
-// Alerta de 190: aparece na conversa, com o botão de ligar em destaque.
-function mostrarAlerta() {
+// Linha persistente de 190 exibida acima da resposta quando a usuária tocou em "Continuar com minha pergunta".
+function mostrarLinha190(textoAlerta) {
+  alternarChat(true);
+  const item = document.createElement("li");
+  item.className = "msg msg--alerta msg--linha-190 msg--nova";
+  item.setAttribute("role", "alert");
+
+  const titulo = document.createElement("p");
+  titulo.className = "alerta__titulo";
+  titulo.textContent = textoAlerta || "Se estiver em perigo agora, ligue 190 imediatamente.";
+
+  const ligar190 = document.createElement("a");
+  ligar190.className = "alerta__ligar";
+  ligar190.href = "tel:190";
+  ligar190.textContent = "Ligar 190";
+
+  const ligar180 = document.createElement("a");
+  ligar180.className = "alerta__secundario";
+  ligar180.href = "tel:180";
+  ligar180.textContent = "Ligar 180 (gratuito, 24 horas)";
+
+  item.append(titulo, ligar190, ligar180);
+  lista.append(item);
+  irParaOFim();
+}
+
+// Alerta de 190: aparece na conversa, com o botão de ligar em destaque e "Continuar com minha pergunta".
+function mostrarAlerta(opcoes = {}) {
   alternarChat(true);
   const item = document.createElement("li");
   item.className = "msg msg--alerta msg--nova";
@@ -1269,60 +1371,99 @@ function mostrarAlerta() {
   ligar180.textContent = "Ligar 180 para conversar com alguém (gratuito, 24 horas)";
 
   item.append(titulo, ligar190, outra, ligar180);
+
+  if (opcoes.comContinuar && textoAguardandoAlerta) {
+    const btnContinuar = document.createElement("button");
+    btnContinuar.type = "button";
+    btnContinuar.className = "alerta__continuar";
+    btnContinuar.setAttribute("data-continuar-pergunta", "1");
+    btnContinuar.textContent = "Continuar com minha pergunta";
+    btnContinuar.addEventListener("click", async () => {
+      const pendente = textoAguardandoAlerta;
+      textoAguardandoAlerta = "";
+      btnContinuar.disabled = true;
+      if (!pendente) return;
+      botaoEnviar.disabled = true;
+      await enviar(pendente, { alertaVisto: true });
+      botaoEnviar.disabled = false;
+    });
+    item.append(btnContinuar);
+  }
+
   lista.append(item);
   irParaOFim();
   ligar190.focus({ preventScroll: true });
 }
 
-async function enviar(texto) {
+async function enviar(texto, opcoes = {}) {
+  const alertaVisto = Boolean(opcoes.alertaVisto);
   // Risco imediato primeiro, no próprio aparelho: funciona sem internet e não espera o servidor.
-  if (regrasDeRisco && Risco.avaliar(regrasDeRisco, texto)) {
-    mostrarAlerta();
+  // Sem o toque em "Continuar com minha pergunta", nenhuma requisição com o texto é enviada.
+  if (!alertaVisto && regrasDeRisco && Risco.avaliar(regrasDeRisco, texto)) {
+    textoAguardandoAlerta = texto;
+    mostrarAlerta({ comContinuar: true });
     return true;
   }
   if (!navigator.onLine) {
     adicionar("msg--erro", TEXTOS.semInternet);
-    responderLocalComConversa(texto);
+    responderLocalComConversa(texto, { alertaVisto });
     return false;
   }
+
+  const corpoPedido = Conversa.montarPedido(texto, {
+    alerta_visto: alertaVisto,
+    ajudando: modoAjudando,
+  });
 
   const controle = new AbortController();
   pedidoAtual = controle;
   const inicioMs = Date.now();
   const limite = setTimeout(() => controle.abort("tempo"), TEMPO_LIMITE_MS);
+  await esperar(180);
   const pensando = adicionar("msg--pensando", TEXTOS.pensando);
 
   try {
     const resposta = await fetch(ROTA, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pergunta: texto }),
+      body: JSON.stringify(corpoPedido),
       cache: "no-store",
       signal: controle.signal,
     });
     const dados = await resposta.json().catch(() => ({}));
-    // O servidor checa de novo (protege contra uma versão antiga desta tela).
-    if (dados.risco_imediato) {
+    // O servidor checa de novo (protege contra uma versão antiga desta tela): sem agente, exibe só o alerta.
+    if (dados.risco_imediato && !dados.agente) {
       pensando.remove();
-      mostrarAlerta();
+      textoAguardandoAlerta = texto;
+      mostrarAlerta({ comContinuar: true, textoAlerta: dados.alerta });
       return true;
     }
-    // Mantém o indicador "Escrevendo resposta…" por pelo menos 520 ms para a resposta não surgir de forma abrupta
+    // Mantém o indicador "Escrevendo resposta…" visível por ~1,1 s e faz transição suave antes de revelar a resposta
     const decorrido = Date.now() - inicioMs;
-    if (decorrido < 520) {
-      await esperar(520 - decorrido);
+    if (decorrido < 1100) {
+      await esperar(1100 - decorrido);
     }
+    pensando.classList.add("msg--saindo");
+    await esperar(180);
     pensando.remove();
     if (pedidoAtual !== controle) return false;
-    if (!resposta.ok || !dados.resposta) {
+    if (!resposta.ok) {
       if (resposta.status === 503 && typeof Conversa !== "undefined") {
-        responderLocalComConversa(texto);
+        responderLocalComConversa(texto, { alertaVisto });
       } else {
         adicionar("msg--erro", dados.erro || TEXTOS.falha);
       }
       return false;
     }
-    adicionarResposta(dados);
+    sugestoesConversa = Array.isArray(dados.outras_perguntas) ? dados.outras_perguntas.slice(0, 2) : [];
+    const blocos = Conversa.paraBlocos(dados, {
+      regrasBeneficios: regrasDeBeneficios,
+      perfil: perfilUsuario,
+      especificas: obterEspecificasBeneficios(),
+      servicos: servicosRedeDF,
+      ajudando: modoAjudando,
+    });
+    adicionarBlocosConversa(blocos);
     return true;
   } catch (_erro) {
     pensando.remove();

@@ -1697,6 +1697,30 @@ a {
   background: #10b981;
 }
 
+.helping-toggle {
+  padding: 5px 10px;
+  border-radius: 99px;
+  border: 1px solid #cdb9eb;
+  background: rgba(255, 255, 255, 0.85);
+  color: #54358c;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.helping-toggle:hover {
+  background: #ece1fb;
+}
+
+.helping-toggle[aria-pressed="true"],
+.helping-toggle.active {
+  background: #5b3898;
+  border-color: #5b3898;
+  color: #ffffff;
+}
+
 .chat-messages {
   list-style: none;
   min-height: 190px;
@@ -1722,7 +1746,13 @@ a {
 }
 
 .msg--nova {
-  animation: msg-enter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: msg-enter 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.msg--saindo {
+  opacity: 0;
+  transform: translateY(-4px) scale(0.97);
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
 .msg--assistente {
@@ -1731,6 +1761,7 @@ a {
   background: #f2edf9;
   color: #322944;
   box-shadow: 0 4px 14px rgba(58, 36, 97, 0.06);
+  transition: height 0.25s ease;
 }
 
 .msg--usuaria {
@@ -1768,7 +1799,11 @@ a {
   background: #f8f5fc;
   border: 1px solid #e3d8f4;
   font-size: 12.8px;
-  animation: subcard-enter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: subcard-enter 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.chat-fade-step {
+  animation: subcard-enter 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .msg--erro {
@@ -1802,6 +1837,20 @@ a {
   margin-top: 6px;
   font-weight: 700;
   text-decoration: underline;
+}
+.alerta__continuar {
+  margin-top: 10px;
+  padding: 7px 12px;
+  border-radius: 9px;
+  border: 1px solid #fda4af;
+  background: #ffffff;
+  color: #881337;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.alerta__continuar:hover {
+  background: #ffe4e6;
 }
 
 .msg__nota {

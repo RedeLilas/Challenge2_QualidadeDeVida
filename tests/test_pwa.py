@@ -70,6 +70,7 @@ def test_raiz_serve_a_tela_de_conversa(cliente):
         "/beneficios.js",
         "/triagem.js",
         "/dados.js",
+        "/conversa.js",
         "/risco.js",
         "/styles.css",
         "/sw.js",
@@ -106,6 +107,7 @@ def test_service_worker_nao_guarda_a_conversa_e_inclui_novos_arquivos(cliente):
         '"/beneficios.js"',
         '"/triagem.js"',
         '"/dados.js"',
+        '"/conversa.js"',
         '"/risco.js"',
         '"/regras/beneficios.json"',
         '"/regras/triagem_fonar.json"',
@@ -116,9 +118,9 @@ def test_service_worker_nao_guarda_a_conversa_e_inclui_novos_arquivos(cliente):
 
 
 def test_interface_permite_armazenamento_apenas_em_perfil_js():
-    # s3-frontend-e-perfil, tarefa 2.2: verifica todos os scripts de web/ e permite armazenamento só em web/perfil.js.
+    # s3-frontend-e-perfil (tarefa 2.2) e s4-orquestrador-agentes (tarefa 4.7): verifica todos os scripts de web/
     scripts = {p.name: p.read_text(encoding="utf-8") for p in sorted((RAIZ / "web").glob("*.js"))}
-    assert "perfil.js" in scripts and "app.js" in scripts and "beneficios.js" in scripts
+    assert "perfil.js" in scripts and "app.js" in scripts and "beneficios.js" in scripts and "conversa.js" in scripts
     assert _scripts_usam_armazenamento(scripts) == []
 
     # Em perfil.js, somente localStorage é usado (nunca sessionStorage, indexedDB ou cookies)
@@ -168,8 +170,14 @@ def test_saida_rapida_e_apagar_dados_preservam_service_worker(cliente):
     assert "apagarConversa()" in bloco_sair
     assert "Perfil.apagar()" in bloco_sair
 
-    # pagehide apaga apenas a conversa em memória, mantendo o perfil salvo no navegador
+    # pagehide apaga apenas a conversa em memória (incluindo sugestões, texto em espera e modo ajudando),
+    # mantendo o perfil salvo no navegador (s4-orquestrador-agentes, tarefas 4.5 e 4.6)
     assert 'window.addEventListener("pagehide", apagarConversa);' in codigo
+    bloco_apagar_conversa = re.search(r"function apagarConversa\(\)\s*\{(.*?)\n\}", codigo, re.S).group(1)
+    assert 'textoAguardandoAlerta = "";' in bloco_apagar_conversa
+    assert "sugestoesConversa = [];" in bloco_apagar_conversa
+    assert "modoAjudando = false;" in bloco_apagar_conversa
+    assert "lista.replaceChildren()" in bloco_apagar_conversa
 
     # apagarMeusDados() remove apenas o perfil e dados em memória, sem apagar o cache do Service Worker
     bloco_apagar = re.search(r"function apagarMeusDados\(\)\s*\{(.*?)\n\}", codigo, re.S).group(1)
@@ -301,27 +309,36 @@ def test_texto_da_mensagem_nao_vai_para_o_log(cliente, caplog):
 
 
 def test_tela_usa_a_rota_juridica_e_mostra_fontes_sem_link(cliente):
-    # s2-rag-juridico, tarefa 2.4: toda mensagem vai para /juridico (decisão de 05/11, até a S4).
+    # s4-orquestrador-agentes, tarefas 4.4 e 4.6: toda mensagem do chat vai para /orquestrar via Conversa.montarPedido.
     codigo = cliente.get("/app.js").text
-    assert 'const ROTA = "/juridico";' in codigo
-    assert "JSON.stringify({ pergunta: texto })" in codigo
+    html = cliente.get("/").text
+    assert 'const ROTA = "/orquestrar";' in codigo
+    assert "Conversa.montarPedido(texto, {" in codigo
+    assert "body: JSON.stringify(corpoPedido)" in codigo
     assert "texto verificado em" in codigo
+    # Botão do modo "ajudando outra pessoa" com aria-pressed e estado apenas em memória
+    assert 'id="modo-ajudando"' in html and 'aria-pressed="false"' in html
+    assert "modoAjudando" not in (RAIZ / "web" / "perfil.js").read_text(encoding="utf-8")
     # Sem link para sites (a página da lei ficaria no histórico do navegador); só tel:190 e tel:180.
     assert "planalto" not in codigo
     assert set(re.findall(r'\.href = "([^"]*)"', codigo)) == {"tel:190", "tel:180"}
 
 
 def test_alerta_de_190_na_tela_antes_do_envio_e_offline(cliente):
-    # s2-alerta-risco-190, tarefas 2.2 e 2.3. A paridade com o servidor está em test_risco_js.py.
+    # s2-alerta-risco-190 (tarefas 2.2 e 2.3) e s4-orquestrador-agentes (tarefa 4.4).
     html = cliente.get("/").text
     assert html.index('src="/risco.js"') < html.index('src="/app.js"')
+    assert html.index('src="/conversa.js"') < html.index('src="/app.js"')
     codigo = cliente.get("/app.js").text
     # A checagem local vem antes do aviso de "sem internet" e do envio ao servidor.
     assert codigo.index("Risco.avaliar(regrasDeRisco, texto)") < codigo.index("if (!navigator.onLine)")
     assert codigo.index("Risco.avaliar(regrasDeRisco, texto)") < codigo.index("await fetch(ROTA")
+    # O envio após o alerta só acontece pelo botão "Continuar com minha pergunta" com alertaVisto: true
+    assert 'btnContinuar.textContent = "Continuar com minha pergunta";' in codigo
+    assert "await enviar(pendente, { alertaVisto: true });" in codigo
     assert "dados.risco_imediato" in codigo  # o servidor também pode mandar o alerta
     sw = cliente.get("/sw.js").text
-    assert '"/risco.js"' in sw and '"/regras/risco_imediato.json"' in sw
+    assert '"/risco.js"' in sw and '"/regras/risco_imediato.json"' in sw and '"/conversa.js"' in sw
     regras = cliente.get("/regras/risco_imediato.json")
     assert regras.status_code == 200 and regras.json()["regras"]
 
@@ -335,6 +352,7 @@ def test_alerta_de_190_na_tela_antes_do_envio_e_offline(cliente):
         "/beneficios.js",
         "/triagem.js",
         "/dados.js",
+        "/conversa.js",
         "/risco.js",
         "/styles.css",
         "/regras/beneficios.json",
