@@ -1,0 +1,3 @@
+cep_inicio,cep_fim,fonte_url,data_verificacao
+70000-000,72799-999,https://buscacepinter.correios.com.br/app/faixa_cep_uf_localidade/index.php,2026-11-17
+73000-000,73699-999,https://buscacepinter.correios.com.br/app/faixa_cep_uf_localidade/index.php,2026-11-17

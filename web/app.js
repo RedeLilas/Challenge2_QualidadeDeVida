@@ -914,7 +914,7 @@ function renderizarLocais() {
       </div>
       <h2>${s.nome}</h2>
       <p class="place-meta">
-        <strong>Endereço:</strong> ${s.endereco} · CEP ${s.cep}<br>
+        <strong>Endereço:</strong> ${s.endereco}${s.cep ? ` · CEP ${s.cep}` : ""}<br>
         <strong>Horário:</strong> ${s.horario}<br>
         <strong>Telefones:</strong> ${s.telefone}
       </p>
