@@ -1,7 +1,15 @@
 versao: 1
-descricao: Casos fictícios de desenvolvimento S4. Estados esperados seguem o motor
-  determinístico vigente e servem para comparação; não representam decisão administrativa.
-  Conjunto redigido e revisado a partir das regras e fontes locais.
+descricao: >-
+  Casos fictícios para medir a acurácia de elegibilidade da S4 (Beneficios.avaliar). Não
+  representam decisão administrativa. Os perfis e o gabarito foram redigidos por Léo a partir
+  das regras e fontes locais. Para o gabarito não depender só da regra medida, os 80 pares
+  perfil × benefício foram re-derivados do texto das normas pelo Claude, sem consultar o
+  gabarito nem rodar a regra (registro em elegibilidade_rederivacao.yaml), e conferidos por
+  Túlio, que não escreveu os casos. A re-derivação concordou em 79 de 80 pares; a divergência
+  (e-013, Aluguel Social com o número de pessoas desconhecido) foi decidida pelo texto da
+  Portaria SMDF 49/2026, art. 2º, I, e o gabarito foi corrigido para provavel. Os status
+  "faltam informações" e "não aplicável por enquanto" seguem as convenções da spec
+  beneficios, e o Aluguel Social só com boletim segue a Lei Distrital 6.623/2020, art. 1º, § 2º.
 beneficios:
 - bolsa_familia
 - bpc
@@ -35,8 +43,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -74,8 +82,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -113,8 +121,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -152,8 +160,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -191,8 +199,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -231,8 +239,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -270,8 +278,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -309,8 +317,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -348,8 +356,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -387,8 +395,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -426,8 +434,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -465,8 +473,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -494,7 +502,7 @@ casos:
     bolsa_familia: faltam_informacoes
     bpc: faltam_informacoes
     auxilio_aluguel: depende_decisao_judicial
-    aluguel_social_df: faltam_informacoes
+    aluguel_social_df: provavel
   fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
     R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
     e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
@@ -504,8 +512,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -513,9 +521,12 @@ casos:
       de renda); § 12 quando aplicável CadÚnico.
     auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
       conforme vulnerabilidade social e econômica).
-    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
-      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
-      do boletim de ocorrência).
+    aluguel_social_df: Portaria SMDF 49/2026, art. 2º, I (renda per capita de até meio
+      salário mínimo ou renda familiar mensal total de até dois salários mínimos; os
+      critérios são alternativos, e a renda total de R$ 400 já cumpre o segundo sem o
+      número de pessoas) e art. 5º (critérios de concessão). Gabarito corrigido de
+      faltam_informacoes para provavel na conferência de 17/11/2026 (ver
+      elegibilidade_rederivacao.yaml).
 - id: e-014
   descricao: Aluguel Social sem necessidade de moradia
   perfil:
@@ -543,8 +554,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -582,8 +593,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -619,8 +630,8 @@ casos:
     Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -657,8 +668,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -694,8 +705,8 @@ casos:
     Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -732,8 +743,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
@@ -771,8 +782,8 @@ casos:
     ocorrência).
   autor: Léo
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
   fontes_por_beneficio:
     bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
       de até R$ 218).
