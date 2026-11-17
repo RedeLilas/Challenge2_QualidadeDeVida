@@ -85,16 +85,17 @@ def _conferir_todos(dados: dict) -> dict:
     return dados
 
 
-def test_conjuntos_s4_aguardam_conferencia_humana(tmp_path: Path):
-    erros_elegibilidade = validar_elegibilidade_s4()
-    erros_triagem = validar_triagem_s4()
-    assert len(erros_elegibilidade) == len(_carregar_s4("elegibilidade")["casos"])
-    assert len(erros_triagem) == len(_carregar_s4("triagem")["casos"])
-    assert all("conferencia.status" in erro for erro in erros_elegibilidade + erros_triagem)
+def test_conjuntos_s4_conferidos_sao_validos_e_pendencia_e_recusada(tmp_path: Path):
+    # Os três conjuntos reais foram conferidos (#69): o validador passa nos três.
+    assert validar_elegibilidade_s4() == []
+    assert validar_triagem_s4() == []
     assert validar_roteamento_s4() == []
+    # Uma conferência pendente continua sendo recusada.
     for nome, validar in (("elegibilidade", validar_elegibilidade_s4), ("triagem", validar_triagem_s4)):
-        caminho = _s4(tmp_path, nome, _conferir_todos(_carregar_s4(nome)))
-        assert validar(caminho) == []
+        dados = _carregar_s4(nome)
+        dados["casos"][0]["conferencia"]["status"] = "pendente"
+        erros = validar(_s4(tmp_path, nome, dados))
+        assert len(erros) == 1 and "conferencia.status" in erros[0]
 
 
 def test_fonte_e_revisor_s4_obrigatorios(tmp_path: Path):

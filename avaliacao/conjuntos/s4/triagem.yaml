@@ -2,8 +2,8 @@ versao: 1
 descricao: Casos fictícios para aferição de Triagem.avaliar. Opções seguem os IDs
   de regras/triagem_fonar.json. O nível esperado é o nível interno determinístico
   da aplicação, não um nível oficial atribuído pelo Fonar. Conjunto redigido e revisado
-  pelo Codex a partir das regras e fontes locais. A conferência independente da equipe
-  permanece pendente.
+  pelo Codex a partir das regras e fontes locais. Conferido por Túlio, que não
+  escreveu os casos.
 casos:
 - id: t-001
   descricao: Todas as respostas negativas; nenhum sinal previsto nesta triagem
@@ -27,8 +27,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-002
   descricao: Ameaça com arma de fogo
   respostas:
@@ -51,8 +51,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-003
   descricao: Ameaça com faca
   respostas:
@@ -75,8 +75,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-004
   descricao: Agressão física grave por estrangulamento
   respostas:
@@ -99,8 +99,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-005
   descricao: Descumprimento anterior de medida protetiva
   respostas:
@@ -123,8 +123,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-006
   descricao: Acesso fácil a arma de fogo
   respostas:
@@ -147,8 +147,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-007
   descricao: Ameaça de outra forma, sem arma ou faca
   respostas:
@@ -171,8 +171,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-008
   descricao: Perseguição ou vigilância
   respostas:
@@ -195,8 +195,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-009
   descricao: Escalada da violência nos últimos 12 meses
   respostas:
@@ -219,8 +219,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-010
   descricao: O agressor falou em suicídio
   respostas:
@@ -243,8 +243,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-011
   descricao: Não foi possível responder a um gatilho de risco grave
   respostas:
@@ -267,8 +267,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-012
   descricao: Pergunta sobre histórico de medida foi pulada; item 5.1 permanece aplicável
   respostas:
@@ -291,8 +291,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-013
   descricao: Pergunta sensível de atenção pulada sem gatilho indeterminado
   respostas:
@@ -315,8 +315,8 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido
 - id: t-014
   descricao: Perseguição mais resposta desconhecida em gatilho grave; prevalece não
     descarte
@@ -340,5 +340,5 @@ casos:
     Único
   autor: Codex
   conferencia:
-    revisor: Yan
-    status: pendente
+    revisor: Túlio
+    status: conferido

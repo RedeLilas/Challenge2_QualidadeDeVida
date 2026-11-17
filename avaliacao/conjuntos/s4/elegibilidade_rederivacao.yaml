@@ -1,0 +1,149 @@
+versao: 1
+descricao: 'Re-derivação do gabarito de avaliacao/conjuntos/s4/elegibilidade.yaml a partir do texto das normas,
+  feita pelo Claude em 17/11/2026 sem consultar o gabarito do conjunto nem rodar a regra (web/beneficios.js), e
+  conferida por Túlio. Ressalva: o Claude já tinha lido o código da regra e sabia que o gabarito original concordava
+  com ela; por isso esta não é uma conferência às cegas feita por uma pessoa. Só depois da derivação, um script
+  comparou o resultado com o gabarito e com a regra: 79 de 80 pares iguais. A divergência (e-013, aluguel_social_df)
+  foi decidida pelo texto da Portaria SMDF 49/2026, art. 2º, I, e o gabarito foi corrigido.'
+salario_minimo: 'R$ 1.621,00 (Decreto 12.797/2025, art. 1º, como em regras/beneficios.json): 1/4 = 405,25; 1/2 =
+  810,50; 2 SM = 3.242,00'
+fundamentos:
+  bolsa_familia: Lei 14.601/2023, art. 5º, I e II (CadÚnico e renda per capita de até R$ 218).
+  bpc: Lei 8.742/1993 (LOAS), art. 20, caput e § 3º (deficiência ou 65 anos ou mais; per capita de até 1/4 do SM).
+  auxilio_aluguel: 'Lei 11.340/2006, art. 23, VI (concedido pelo juiz): sempre depende de decisão judicial.'
+  aluguel_social_df: Portaria SMDF 49/2026, art. 2º, I (per capita de até 1/2 SM ou renda familiar total de até
+    2 SM, critérios alternativos) e art. 5º, I a IV; Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o boletim).
+  convencoes: Os status 'faltam_informacoes' e 'nao_aplicavel' por enquanto seguem a spec beneficios.
+divergencias:
+- caso: e-013
+  beneficio: aluguel_social_df
+  rederivado: provavel
+  gabarito_original: faltam_informacoes
+  regra: faltam_informacoes
+  decisao: provavel (gabarito corrigido; a regra fica como está para a medição e o erro vai para o relatório)
+  fundamento: 'Portaria SMDF 49/2026, art. 2º, I: com a renda total de R$ 400 (<= 2 SM), o critério alternativo
+    é cumprido sem o número de pessoas.'
+casos:
+- id: e-001
+  bolsa_familia: provavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BF: per capita 218 <= 218. BPC: 40 anos, sem deficiência. AS: per capita 218 <= 1/2 SM, com medida
+    protetiva.'
+- id: e-002
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BF: per capita 219 > 218.'
+- id: e-003
+  bolsa_familia: nao_aplicavel
+  bpc: provavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BF: per capita 405,25 > 218. BPC: 65 anos e per capita 405,25 <= 1/4 SM.'
+- id: e-004
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BPC: per capita 406,25 > 1/4 SM (405,25).'
+- id: e-005
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'AS: per capita 810,50 = 1/2 SM.'
+- id: e-006
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'AS: per capita 811,50 > 1/2 SM, mas renda total 811,50 <= 2 SM (critério alternativo).'
+- id: e-007
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'AS: renda total 3.242 = 2 SM.'
+- id: e-008
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: nao_aplicavel
+  fundamento: 'AS: renda total 3.243 > 2 SM e per capita 810,75 > 1/2 SM.'
+- id: e-009
+  bolsa_familia: nao_aplicavel
+  bpc: provavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BPC: pessoa com deficiência e per capita 405,25 <= 1/4 SM.'
+- id: e-010
+  bolsa_familia: nao_aplicavel
+  bpc: faltam_informacoes
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BF: per capita 300 > 218. BPC: idade e deficiência não informadas.'
+- id: e-011
+  bolsa_familia: provavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BF: sem CadÚnico, a spec classifica como provável com a inscrição como primeiro passo. AS: só com
+    boletim (Lei Distrital 6.623/2020, art. 1º, § 2º).'
+- id: e-012
+  bolsa_familia: faltam_informacoes
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: faltam_informacoes
+  fundamento: 'BF e AS: renda não informada. BPC: já excluído por idade e deficiência, independentemente da renda.'
+- id: e-013
+  bolsa_familia: faltam_informacoes
+  bpc: faltam_informacoes
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BF e BPC: sem o número de pessoas, a per capita é indeterminada. AS: renda total 400 <= 2 SM cumpre
+    o critério alternativo da Portaria 49/2026, art. 2º, I.'
+- id: e-014
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: nao_aplicavel
+  fundamento: 'AS: sem necessidade de moradia (Portaria 49/2026, art. 5º, IV).'
+- id: e-015
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: nao_aplicavel
+  fundamento: 'AS: mora fora do DF (Portaria 49/2026, art. 5º, III).'
+- id: e-016
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: nao_aplicavel
+  fundamento: 'AS: sem medida protetiva e sem boletim (spec: não aplicável por enquanto).'
+- id: e-017
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'AS: per capita 600, só com boletim (Lei Distrital 6.623/2020, art. 1º, § 2º).'
+- id: e-018
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'AS: per capita 500, com medida protetiva.'
+- id: e-019
+  bolsa_familia: provavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: provavel
+  fundamento: 'BF: per capita 200 <= 218.'
+- id: e-020
+  bolsa_familia: nao_aplicavel
+  bpc: nao_aplicavel
+  auxilio_aluguel: depende_decisao_judicial
+  aluguel_social_df: nao_aplicavel
+  fundamento: 'BPC: 67 anos, mas per capita 2.500 > 1/4 SM. AS: renda total 5.000 > 2 SM.'
