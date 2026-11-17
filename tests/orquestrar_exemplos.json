@@ -85,7 +85,7 @@
         "resposta": null,
         "outras_perguntas": [],
         "excedeu": false,
-        "decidido_por": "llm"
+        "decidido_por": "regra"
       }
     },
     {
@@ -128,7 +128,7 @@
         },
         "outras_perguntas": [],
         "excedeu": false,
-        "decidido_por": "llm"
+        "decidido_por": "regra"
       }
     },
     {
@@ -207,7 +207,7 @@
         "resposta": null,
         "outras_perguntas": [],
         "excedeu": false,
-        "decidido_por": "llm"
+        "decidido_por": "regra"
       }
     },
     {
