@@ -123,7 +123,9 @@ def juridico(corpo: PerguntaJuridica, response: Response):
     if alerta := alerta_de_risco(corpo.pergunta):
         return alerta
     try:
-        return resposta_juridica.responder(corpo.pergunta, indice_juridico(), cliente_llm())
+        return resposta_juridica.responder(
+            corpo.pergunta, indice_juridico(), cliente_llm(), verificacao=resposta_juridica.JURIDICO
+        )
     except llm.LLMIndisponivel:
         return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
 

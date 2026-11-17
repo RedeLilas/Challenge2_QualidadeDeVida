@@ -5,6 +5,7 @@ e a norma mais próxima no texto ("Lei 11.340/2006", "Lei Maria da Penha", "Cód
 só é exibida se tiver ao menos uma citação e todas estiverem entre os trechos recuperados; senão,
 o sistema recusa (spec orientacao-juridica: "Citação conferida" e "Recusa sem fundamentação").
 """
+from dataclasses import dataclass
 import re
 import unicodedata
 
@@ -25,6 +26,85 @@ APELIDOS = {
     "Código Civil": [r"10\.?406", r"14\.?713"],
     "Código de Processo Civil": [r"\bcpc\b", r"13\.?105", r"14\.?713"],
 }
+# 11 normas dos eixos beneficios e df (s4-rag-beneficios).
+LEIS_BENEFICIOS = (
+    "Lei 14.601/2023",
+    "Lei 8.742/1993 (LOAS)",
+    "Lei Distrital 6.623/2020",
+    "Decreto Distrital 45.989/2024",
+    "Portaria SMDF 49/2026",
+    "Lei Distrital 6.938/2021",
+    "Decreto Distrital 42.376/2021",
+    "Lei Distrital 7.009/2021",
+    "Decreto Distrital 42.873/2021",
+    "Lei Distrital 5.165/2013",
+    "Decreto Distrital 35.191/2014",
+)
+# Apelidos sem acento, com ponto e "/ano" opcionais e "Distrital"/"SMDF" opcionais.
+# Nomes de programa compartilhados entre lei e decreto ("cartão gás", "prato cheio") apontam só para a lei.
+APELIDOS_BENEFICIOS = {
+    "Lei 14.601/2023": [
+        r"\blei\s+(?:n[º°o.]*\s*)?14\.?601(?:/2023)?\b",
+        r"\b14\.?601(?:/2023)?\b",
+        r"\bbolsa\s+familia\b",
+    ],
+    "Lei 8.742/1993 (LOAS)": [
+        r"\blei\s+(?:n[º°o.]*\s*)?8\.?742(?:/1993)?\b",
+        r"\b8\.?742(?:/1993)?\b",
+        r"\bloas\b",
+    ],
+    "Lei Distrital 6.623/2020": [
+        r"\blei\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?6\.?623(?:/2020)?\b",
+    ],
+    "Decreto Distrital 45.989/2024": [
+        r"\bdecreto\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?45\.?989(?:/2024)?\b",
+    ],
+    "Portaria SMDF 49/2026": [
+        r"\bportaria\s+(?:smdf\s+)?(?:n[º°o.]*\s*)?49(?:/2026)?\b",
+    ],
+    "Lei Distrital 6.938/2021": [
+        r"\blei\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?6\.?938(?:/2021)?\b",
+        r"\bcartao\s+gas\b",
+    ],
+    "Decreto Distrital 42.376/2021": [
+        r"\bdecreto\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?42\.?376(?:/2021)?\b",
+    ],
+    "Lei Distrital 7.009/2021": [
+        r"\blei\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?7\.?009(?:/2021)?\b",
+        r"\bprato\s+cheio\b",
+    ],
+    "Decreto Distrital 42.873/2021": [
+        r"\bdecreto\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?42\.?873(?:/2021)?\b",
+    ],
+    "Lei Distrital 5.165/2013": [
+        r"\blei\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?5\.?165(?:/2013)?\b",
+    ],
+    "Decreto Distrital 35.191/2014": [
+        r"\bdecreto\s+(?:distrital\s+)?(?:n[º°o.]*\s*)?35\.?191(?:/2014)?\b",
+    ],
+}
+_TODOS_APELIDOS = {**APELIDOS, **APELIDOS_BENEFICIOS}
+
+
+@dataclass(frozen=True)
+class ConfigVerificacao:
+    """Configuração de verificação de citações por agente (s4-rag-beneficios)."""
+
+    leis: tuple[str, ...]
+    apelidos: dict[str, list[str]]
+    recusar_artigo_sem_norma_em_varias_leis: bool = False
+
+
+JURIDICO = ConfigVerificacao(
+    leis=LEIS_JURIDICAS,
+    apelidos=APELIDOS,
+    recusar_artigo_sem_norma_em_varias_leis=False,
+)
+BENEFICIOS = ConfigVerificacao(
+    leis=LEIS_BENEFICIOS,
+    apelidos=APELIDOS_BENEFICIOS,
+    recusar_artigo_sem_norma_em_varias_leis=True,
+)
 # Distância máxima, em caracteres, entre o artigo e o nome da norma para associar os dois.
 DISTANCIA_MAXIMA = 80
 
@@ -107,12 +187,15 @@ def _sem_acento(texto: str) -> str:
     return "".join(unicodedata.normalize("NFD", c)[0] for c in texto).lower()
 
 
-def _mencoes_de_leis(texto: str, leis: list[str]) -> list[tuple[int, int, str]]:
+def _mencoes_de_leis(
+    texto: str, leis: list[str], apelidos: dict[str, list[str]] | None = None
+) -> list[tuple[int, int, str]]:
     """(início, fim, lei) de cada menção a uma norma no texto."""
+    mapa_apelidos = _TODOS_APELIDOS if apelidos is None else apelidos
     base = _sem_acento(texto)
     mencoes = []
     for lei in leis:
-        padroes = list(APELIDOS.get(lei, []))
+        padroes = list(mapa_apelidos.get(lei, []))
         numero = re.match(r"Lei (\d+)\.(\d+)/\d{4}$", lei)
         padroes.append(rf"{numero[1]}\.?{numero[2]}" if numero else re.escape(_sem_acento(lei)))
         for padrao in padroes:
@@ -124,12 +207,14 @@ def _mencoes_de_leis(texto: str, leis: list[str]) -> list[tuple[int, int, str]]:
     return mencoes
 
 
-def extrair_referencias(texto: str, leis: list[str]) -> list[tuple[str | tuple[str, ...] | None, str]]:
+def extrair_referencias(
+    texto: str, leis: list[str], apelidos: dict[str, list[str]] | None = None
+) -> list[tuple[str | tuple[str, ...] | None, str]]:
     """(lei, artigo) citados no texto, na ordem; lei é None quando nenhuma norma aparece perto.
 
     Quando a menção mais próxima vale para mais de uma norma (a Lei 14.713/2023), lei é a tupla delas.
     """
-    mencoes = _mencoes_de_leis(texto, leis)
+    mencoes = _mencoes_de_leis(texto, leis, apelidos=apelidos)
     referencias = []
     for m in RE_ARTIGO.finditer(texto):
         artigos, fim = [m[2]], m.end()
@@ -152,10 +237,12 @@ def extrair_referencias(texto: str, leis: list[str]) -> list[tuple[str | tuple[s
     return referencias
 
 
-def verificar_citacoes(texto: str, recuperados: list[dict]) -> list[dict] | None:
+def verificar_citacoes(
+    texto: str, recuperados: list[dict], verificacao: ConfigVerificacao = JURIDICO
+) -> list[dict] | None:
     """Citações da resposta, se todas estiverem entre os trechos recuperados; senão None."""
-    leis = sorted(set(LEIS_JURIDICAS) | {t["lei"] for t in recuperados})
-    referencias = extrair_referencias(texto, leis)
+    leis = sorted(set(verificacao.leis) | {t["lei"] for t in recuperados})
+    referencias = extrair_referencias(texto, leis, apelidos=verificacao.apelidos)
     if not referencias:
         return None
 
@@ -163,8 +250,12 @@ def verificar_citacoes(texto: str, recuperados: list[dict]) -> list[dict] | None
         # O LLM pode escrever "art. 1584" para o art. 1.584.
         return artigo.replace(".", "").upper()
 
+    aceita_sem_lei = not (
+        verificacao.recusar_artigo_sem_norma_em_varias_leis and len({t["lei"] for t in recuperados}) > 1
+    )
+
     def da_lei(lei, t: dict) -> bool:
-        return lei is None or t["lei"] == lei or (isinstance(lei, tuple) and t["lei"] in lei)
+        return (lei is None and aceita_sem_lei) or t["lei"] == lei or (isinstance(lei, tuple) and t["lei"] in lei)
 
     citacoes = {}
     for lei, artigo in referencias:
@@ -214,6 +305,7 @@ def responder(
     eixos: set[str] = EIXOS,
     instrucoes: str = INSTRUCOES,
     limite: float = LIMITE_SIMILARIDADE,
+    verificacao: ConfigVerificacao = JURIDICO,
 ) -> dict:
     """Recupera os trechos, pergunta ao LLM e só devolve a resposta em português e com as citações conferidas."""
     resultados = indice.buscar(pergunta, k=K, eixos=eixos)
@@ -222,7 +314,7 @@ def responder(
         return {"resposta": RECUSA, "citacoes": [], "recusada": True}
     recuperados = [t for t, _ in resultados]
     texto = cliente.responder(montar_mensagens(pergunta, recuperados, instrucoes=instrucoes))
-    citacoes = verificar_citacoes(texto, recuperados) if em_portugues(texto) else None
+    citacoes = verificar_citacoes(texto, recuperados, verificacao=verificacao) if em_portugues(texto) else None
     if citacoes is None:
         return {"resposta": RECUSA, "citacoes": [], "recusada": True}
     return {"resposta": texto, "citacoes": citacoes, "recusada": False}

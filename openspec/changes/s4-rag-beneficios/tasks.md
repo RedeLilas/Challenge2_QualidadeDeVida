@@ -9,9 +9,9 @@ Primeira mudança a cortar se a S4 apertar (vai para a S6). Depende da tarefa 1.
 
 ## 2. Verificação de citação (terça, 17/11)
 
-- [ ] 2.1 Criar as configurações `JURIDICO` e `BENEFICIOS` da verificação, com o `/juridico` passando `JURIDICO` com os valores de hoje; verificação: `tests/test_juridico.py` passa sem alteração
-- [ ] 2.2 Acrescentar os apelidos das 11 normas de benefícios, com e sem o ano e com e sem "Distrital"; verificação: testes com trechos fictícios aceitam "(Lei 8.742/1993, art. 20)", "(LOAS, art. 20)", "(Lei 6.623, art. 1º)" e "(Lei Distrital 6.623, art. 1º)" quando o artigo foi recuperado, e recusam "(Decreto 42.376, art. 3º)" e "(Lei Distrital 6.623, art. 1º)" quando o único artigo com esse número é de outra norma
-- [ ] 2.3 Recusar, na configuração `BENEFICIOS`, artigo sem norma reconhecida quando os trechos vêm de mais de uma norma; verificação: testes cobrem a recusa com várias normas, a aceitação com uma norma só e o mesmo caso no jurídico, que continua com o resultado de antes
+- [x] 2.1 Criar as configurações `JURIDICO` e `BENEFICIOS` da verificação, com o `/juridico` passando `JURIDICO` com os valores de hoje; verificação: `tests/test_juridico.py` passa sem alteração
+- [x] 2.2 Acrescentar os apelidos das 11 normas de benefícios, com e sem o ano e com e sem "Distrital"; verificação: testes com trechos fictícios aceitam "(Lei 8.742/1993, art. 20)", "(LOAS, art. 20)", "(Lei 6.623, art. 1º)" e "(Lei Distrital 6.623, art. 1º)" quando o artigo foi recuperado, e recusam "(Decreto 42.376, art. 3º)" e "(Lei Distrital 6.623, art. 1º)" quando o único artigo com esse número é de outra norma
+- [x] 2.3 Recusar, na configuração `BENEFICIOS`, artigo sem norma reconhecida quando os trechos vêm de mais de uma norma; verificação: testes cobrem a recusa com várias normas, a aceitação com uma norma só e o mesmo caso no jurídico, que continua com o resultado de antes
 
 ## 3. Resposta de benefícios (terça, 17/11, e quinta, 19/11)
 
