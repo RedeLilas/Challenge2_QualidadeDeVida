@@ -1,0 +1,785 @@
+versao: 1
+descricao: Casos fictícios de desenvolvimento S4. Estados esperados seguem o motor
+  determinístico vigente e servem para comparação; não representam decisão administrativa.
+  Conjunto redigido e revisado a partir das regras e fontes locais.
+beneficios:
+- bolsa_familia
+- bpc
+- auxilio_aluguel
+- aluguel_social_df
+casos:
+- id: e-001
+  descricao: corte Bolsa Família exato
+  perfil:
+    renda_total: 218
+    numero_pessoas: 1
+    cadunico: true
+    idade: 40
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: provavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-002
+  descricao: um real acima do corte Bolsa Família
+  perfil:
+    renda_total: 219
+    numero_pessoas: 1
+    cadunico: true
+    idade: 40
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-003
+  descricao: corte BPC exato com idade mínima
+  perfil:
+    renda_total: 405.25
+    numero_pessoas: 1
+    cadunico: true
+    idade: 65
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: provavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-004
+  descricao: um real acima do corte BPC
+  perfil:
+    renda_total: 406.25
+    numero_pessoas: 1
+    cadunico: true
+    idade: 65
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-005
+  descricao: corte per capita Aluguel Social exato
+  perfil:
+    renda_total: 810.5
+    numero_pessoas: 1
+    cadunico: true
+    idade: 32
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-006
+  descricao: um real acima do corte per capita, dentro do limite familiar alternativo
+    do Aluguel Social
+  perfil:
+    renda_total: 811.5
+    numero_pessoas: 1
+    cadunico: true
+    idade: 32
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-007
+  descricao: corte de renda familiar total do Aluguel Social
+  perfil:
+    renda_total: 3242
+    numero_pessoas: 4
+    cadunico: true
+    idade: 32
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-008
+  descricao: um real acima do corte familiar total
+  perfil:
+    renda_total: 3243
+    numero_pessoas: 4
+    cadunico: true
+    idade: 32
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: nao_aplicavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-009
+  descricao: pessoa com deficiência e renda no corte BPC
+  perfil:
+    renda_total: 405.25
+    numero_pessoas: 1
+    cadunico: true
+    idade: 32
+    deficiencia: true
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: provavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-010
+  descricao: sem idade ou deficiência informadas
+  perfil:
+    renda_total: 300
+    numero_pessoas: 1
+    cadunico: true
+    idade: null
+    deficiencia: null
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: faltam_informacoes
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-011
+  descricao: CadÚnico ausente com renda baixa
+  perfil:
+    renda_total: 218
+    numero_pessoas: 1
+    cadunico: false
+    idade: 30
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: false
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: provavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-012
+  descricao: 'perfil incompleto: renda desconhecida'
+  perfil:
+    renda_total: prefiro_nao_informar
+    numero_pessoas: 2
+    cadunico: true
+    idade: 35
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: faltam_informacoes
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: faltam_informacoes
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-013
+  descricao: 'perfil incompleto: número de pessoas desconhecido'
+  perfil:
+    renda_total: 400
+    numero_pessoas: null
+    cadunico: true
+    idade: 66
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: faltam_informacoes
+    bpc: faltam_informacoes
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: faltam_informacoes
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-014
+  descricao: Aluguel Social sem necessidade de moradia
+  perfil:
+    renda_total: 500
+    numero_pessoas: 2
+    cadunico: true
+    idade: 28
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: false
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: nao_aplicavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-015
+  descricao: Aluguel Social fora do DF
+  perfil:
+    renda_total: 500
+    numero_pessoas: 2
+    cadunico: true
+    idade: 29
+    deficiencia: false
+    moradia_df: false
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: nao_aplicavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-016
+  descricao: Aluguel Social sem medida nem boletim
+  perfil:
+    renda_total: 500
+    numero_pessoas: 2
+    cadunico: true
+    idade: 29
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: false
+    boletim_ocorrencia: false
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: nao_aplicavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão).
+- id: e-017
+  descricao: Aluguel Social com boletim e requisitos completos
+  perfil:
+    renda_total: 1200
+    numero_pessoas: 2
+    cadunico: true
+    idade: 37
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: false
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-018
+  descricao: Aluguel Social com medida protetiva e acompanhamento
+  perfil:
+    renda_total: 1000
+    numero_pessoas: 2
+    cadunico: true
+    idade: 38
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: false
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão).
+- id: e-019
+  descricao: renda baixa mas pessoa abaixo da idade e sem deficiência
+  perfil:
+    renda_total: 200
+    numero_pessoas: 1
+    cadunico: true
+    idade: 30
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: provavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: provavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
+- id: e-020
+  descricao: renda acima de todos os limites
+  perfil:
+    renda_total: 5000
+    numero_pessoas: 2
+    cadunico: true
+    idade: 67
+    deficiencia: false
+    moradia_df: true
+    necessidade_moradia: true
+    acompanhamento_psicossocial: true
+    medida_protetiva: true
+    boletim_ocorrencia: true
+  esperado:
+    bolsa_familia: nao_aplicavel
+    bpc: nao_aplicavel
+    auxilio_aluguel: depende_decisao_judicial
+    aluguel_social_df: nao_aplicavel
+  fonte: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita de até
+    R$ 218). Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência
+    e critério de renda); § 12 quando aplicável CadÚnico. Lei 11.340/2006, art. 23,
+    VI (auxílio-aluguel por decisão judicial, conforme vulnerabilidade social e econômica).
+    Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios de concessão).
+    Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro do boletim de
+    ocorrência).
+  autor: Léo
+  conferencia:
+    revisor: Yan
+    status: pendente
+  fontes_por_beneficio:
+    bolsa_familia: Lei 14.601/2023, art. 5º (inscrição no CadÚnico e renda per capita
+      de até R$ 218).
+    bpc: Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 3º (pessoa idosa/deficiência e critério
+      de renda); § 12 quando aplicável CadÚnico.
+    auxilio_aluguel: Lei 11.340/2006, art. 23, VI (auxílio-aluguel por decisão judicial,
+      conforme vulnerabilidade social e econômica).
+    aluguel_social_df: Portaria SMDF 49/2026, arts. 2º e 5º (limites de renda e critérios
+      de concessão). Lei Distrital 6.623/2020, art. 1º, § 2º (acesso desde o registro
+      do boletim de ocorrência).
