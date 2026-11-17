@@ -1,22 +1,22 @@
 versao: 1
 descricao: >-
   Mensagens fictícias para avaliar o roteamento da conversa na S4. Casos inéditos
-  redigidos a partir do contrato e das regras locais; revisão por Yan.
+  redigidos a partir do contrato e das regras locais; revisão por Túlio.
 casos:
   - id: r-001
-    texto: "Tenho direito ao Bolsa Família se moro sozinha com meus filhos?"
+    texto: "eu tenho direito ao bolsa família se moro só com as criança?"
     agente_esperado: beneficios
     tipo_esperado: direito
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-002
-    texto: "O que é o BPC e quem pode receber?"
+    texto: "o loas é pra quem?"
     agente_esperado: beneficios
     tipo_esperado: explicacao
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-003
-    texto: "Como funciona o cartão gás aqui no DF?"
+    texto: "como pega o cartão gás aqui no df?"
     agente_esperado: beneficios
     tipo_esperado: explicacao
     autor: Léo
@@ -52,7 +52,7 @@ casos:
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-009
-    texto: "Como faço para pedir uma medida protetiva?"
+    texto: "como peço uma protetiva?"
     agente_esperado: juridico
     tipo_esperado: null
     autor: Léo
@@ -76,19 +76,19 @@ casos:
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-013
-    texto: "O que acontece se alguém descumprir uma medida protetiva?"
+    texto: "se ele não cumprir a protetiva, dá em quê?"
     agente_esperado: juridico
     tipo_esperado: null
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-014
-    texto: "Onde fica a Delegacia da Mulher em Ceilândia?"
+    texto: "tem delegacia da mulher na ceilandia?"
     agente_esperado: rede
     tipo_esperado: null
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-015
-    texto: "Tem um CRAS perto de Samambaia?"
+    texto: "tem cras na ceilandia?"
     agente_esperado: rede
     tipo_esperado: null
     autor: Léo
@@ -100,7 +100,7 @@ casos:
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-017
-    texto: "Qual é o endereço da Defensoria Pública?"
+    texto: "onde acho a defensoria?"
     agente_esperado: rede
     tipo_esperado: null
     autor: Léo
@@ -124,7 +124,7 @@ casos:
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-021
-    texto: "Para que serve o Fonar?"
+    texto: "como faço a avaliação de risco pelo fonar?"
     agente_esperado: triagem
     tipo_esperado: null
     autor: Léo
@@ -166,7 +166,7 @@ casos:
     autor: Léo
     conferencia: {revisor: Túlio, status: conferido}
   - id: r-028
-    texto: "Você pode me dizer como fazer um bolo de cenoura?"
+    texto: "me ensina a fazer bolo de cenoura?"
     agente_esperado: fora_do_tema
     tipo_esperado: null
     autor: Léo

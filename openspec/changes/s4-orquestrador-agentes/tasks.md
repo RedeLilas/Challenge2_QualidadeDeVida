@@ -32,13 +32,13 @@
 ## 5. Casos e medição (terça, 17/11, escrita; quinta, 19/11, conferência e medição)
 
 - [x] 5.1 Escrever com o Claude `avaliacao/conjuntos/s4/elegibilidade.yaml`, com 20 a 30 perfis fictícios, a situação esperada por benefício e a fonte (artigo ou portaria) tirada do texto em `dados/leis/`, incluindo renda no corte, um real acima, "prefiro não informar" e perfil incompleto (terça); verificação: o arquivo carrega e cada caso tem fonte
-- [x] 5.2 Escrever com o Claude `avaliacao/conjuntos/s4/triagem.yaml`, com respostas ao Fonar, o nível esperado e o item de `dados/fonar/notas.md` (terça); verificação: o arquivo carrega e tem casos de alto, "não foi possível descartar risco alto", atenção e sem sinais graves
+- [x] 5.2 Escrever com o Codex `avaliacao/conjuntos/s4/triagem.yaml`, com respostas ao Fonar, o nível esperado e o item de `dados/fonar/notas.md` (terça); verificação: o arquivo carrega e tem casos de alto, "não foi possível descartar risco alto", atenção e sem sinais graves
 - [x] 5.3 Escrever com o Codex `avaliacao/conjuntos/s4/roteamento.yaml`, com cerca de 30 mensagens em linguagem leiga e o agente esperado, incluindo "tenho direito?" e "o que é?", o par auxílio-aluguel e Aluguel Social, "como funciona o aluguel da Maria da Penha?", várias perguntas e fora do tema (terça); verificação: o arquivo carrega e cada mensagem passa pela regra de risco
 - [ ] 5.4 Validar os conjuntos da S4 em `scripts/validar_conjuntos.py` (fonte, autor, revisor diferente do autor, os quatro limites, os pares de roteamento), sem mudar a validação da S3 (terça); verificação: testes em `tests/test_validar_conjuntos.py` cobrem caso sem fonte, revisor igual ao autor e limite ausente
 - [ ] 5.5 Conferir os gabaritos por uma pessoa que não escreveu os casos e registrar o nome em `conferencia.revisor` (quinta); verificação: `uv run python scripts/validar_conjuntos.py` passa nos três arquivos
 - [ ] 5.6 Medir a acurácia de elegibilidade (`Beneficios.avaliar` em QuickJS, por par perfil × benefício) e a sensibilidade para risco alto (`Triagem.avaliar` mais `tests/casos_risco.yaml`) (quinta); verificação: um teste falha com qualquer falso negativo de risco alto, e o script imprime a acurácia e os casos divergentes
 - [ ] 5.7 Medir o roteamento: a regra sem LLM e os demais casos com o modelo de produção, registrando nome, data e versão (quinta); verificação: o resultado fica salvo em `avaliacao/rodadas/s4/` com a taxa de acerto e os erros
-- [ ] 5.8 Escrever `docs/Relatório S4 - Sistema multiagentes.md` com as três medidas, o número de casos, a data, a declaração de que os casos foram escritos com o Claude e conferidos por uma pessoa da equipe e a ausência de corretor externo (quinta); verificação: a revisão do relatório confere cada item da spec `avaliacao`
+- [ ] 5.8 Escrever `docs/Relatório S4 - Sistema multiagentes.md` com as três medidas, o número de casos, a data, a ferramenta usada para redigir cada conjunto, a conferência por uma pessoa da equipe e a ausência de corretor externo (quinta); verificação: a revisão do relatório confere cada item da spec `avaliacao`
 
 ## 6. Integração (quinta, 19/11)
 
