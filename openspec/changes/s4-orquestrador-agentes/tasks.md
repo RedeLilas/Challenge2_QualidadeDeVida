@@ -3,7 +3,7 @@
 ## 1. Base comum (terça, 17/11, manhã)
 
 - [x] 1.1 Parametrizar `responder()` em `app/rag/resposta.py` com `eixos`, `instrucoes` e `limite`, com os valores da S3 como padrão (primeira tarefa da terça, pela frente do RAG de benefícios, antes das outras mudanças no arquivo); verificação: `tests/test_juridico.py` passa sem alteração, e um teste novo confere que `/juridico` usa `{"juridico"}`, `INSTRUCOES` e 0,81
-- [ ] 1.2 Revisar o contrato do `/orquestrar` do design com as frentes do servidor e do navegador e criar um arquivo de respostas de exemplo (uma por agente, mais alerta sem e com `alerta_visto`, várias perguntas e excesso); verificação: um teste valida cada exemplo contra o modelo Pydantic da resposta
+- [x] 1.2 Revisar o contrato do `/orquestrar` do design com as frentes do servidor e do navegador e criar um arquivo de respostas de exemplo (uma por agente, mais alerta sem e com `alerta_visto`, várias perguntas e excesso); verificação: um teste valida cada exemplo contra o modelo Pydantic da resposta
 
 ## 2. Servidor: regra e classificação (terça, 17/11)
 
