@@ -65,7 +65,7 @@ A recusa de benefícios tem texto próprio, que indica o CRAS e o Ligue 180, sem
 ### Perguntas de desenvolvimento de benefícios
 Arquivo `avaliacao/conjuntos/s4/desenvolvimento_beneficios.yaml`, escrito com o Claude na terça e conferido por uma pessoa que não o escreveu:
 
-- `perguntas`: cerca de 20, cobrindo os seis programas (Bolsa Família, BPC e benefícios eventuais da LOAS, Cartão Prato Cheio, Cartão Gás, Aluguel Social do DF e benefícios eventuais do DF). Cada uma tem `id`, `pergunta`, `autor`, `beneficio`, `sem_nome_oficial` (verdadeiro ou falso), `resposta_esperada`, `normas_aceitas` (norma e artigo), `fonte` e `conferencia.revisor`.
+- `perguntas`: cerca de 20, cobrindo os seis programas (Bolsa Família, BPC e benefícios eventuais da LOAS, Cartão Prato Cheio, Cartão Gás, Aluguel Social do DF e benefícios eventuais do DF). Cada uma tem `id`, `pergunta`, `autor`, `programa` (um dos seis), `sem_nome_oficial` (verdadeiro ou falso), `resposta_esperada`, `pontos_obrigatorios`, `normas_aceitas` ("Norma, art. N", com a norma e o artigo existentes em `dados/leis/`), `fonte` e `conferencia` (`revisor`, `fonte_conferida`, `status`). O campo se chama `programa`, e não `beneficio`, para não se confundir com os ids de `regras/beneficios.json` do contrato do orquestrador. A validação roda com `uv run python -m scripts.validar_conjuntos beneficios` e só passa depois da conferência.
 - `extras`: cerca de 8 quase do tema (imposto de renda, FGTS, seguro-desemprego, aposentadoria), com a categoria `quase_do_tema`.
 - `juridico`: "como funciona o aluguel da Maria da Penha?", para conferir se o limite de 0,81 a recusa, sem mexer no jurídico.
 

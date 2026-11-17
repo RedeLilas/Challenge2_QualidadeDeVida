@@ -1,0 +1,494 @@
+versao: 1
+descricao: >-
+  Perguntas de desenvolvimento do RAG de benefícios (s4-rag-beneficios, tarefa 1.1), usadas só para
+  calibrar o limite de similaridade dos eixos beneficios e df. Perguntas fictícias, em linguagem
+  leiga, escritas com o Claude; gabarito e normas tirados do texto em dados/leis/ (coleta de
+  03/11/2026). Conferido por Léo Alec, que não escreveu as perguntas. Arquivo separado de
+  avaliacao/conjuntos/desenvolvimento.yaml (base da S3). Se o RAG de benefícios for medido depois,
+  o conjunto da medição tem de ser outro, congelado antes, sem repetir estas perguntas.
+programas:
+  - bolsa_familia
+  - bpc
+  - prato_cheio
+  - cartao_gas
+  - aluguel_social_df
+  - beneficios_eventuais
+
+perguntas:
+  - id: bd-001
+    programa: bolsa_familia
+    sem_nome_oficial: false
+    pergunta: "quanto a pessoa pode ganhar por mes pra entrar no bolsa familia?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "São elegíveis ao Bolsa Família as famílias inscritas no CadÚnico cuja renda familiar per capita mensal seja igual ou inferior a R$ 218,00."
+    pontos_obrigatorios:
+      - "A renda considerada é a renda familiar por pessoa (per capita) por mês."
+      - "O limite é de R$ 218,00 por pessoa, inclusive."
+      - "A família precisa estar inscrita no CadÚnico."
+    normas_aceitas:
+      - "Lei 14.601/2023, art. 5º"
+    fonte: "Lei 14.601/2023, art. 5º, I e II"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 14.601/2023, art. 5º, I e II"
+      status: conferida
+
+  - id: bd-002
+    programa: bolsa_familia
+    sem_nome_oficial: true
+    pergunta: "o bolsa paga quanto por pessoa da familia?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O Bolsa Família paga o Benefício de Renda de Cidadania de R$ 142,00 por integrante da família. Se a soma desses valores ficar abaixo de R$ 600,00, há um Benefício Complementar até chegar a R$ 600,00. Há ainda R$ 150,00 por criança de 0 a 7 anos incompletos (Benefício Primeira Infância) e R$ 50,00 do Benefício Variável Familiar para famílias com gestantes, nutrizes ou crianças e adolescentes nas idades previstas."
+    pontos_obrigatorios:
+      - "O Benefício de Renda de Cidadania é de R$ 142,00 por integrante."
+      - "O Benefício Complementar completa o valor da família até R$ 600,00."
+      - "Há R$ 150,00 por criança de 0 a 7 anos incompletos."
+    normas_aceitas:
+      - "Lei 14.601/2023, art. 7º"
+    fonte: "Lei 14.601/2023, art. 7º, § 1º, I a IV"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 14.601/2023, art. 7º, § 1º, I a IV"
+      status: conferida
+
+  - id: bd-003
+    programa: bolsa_familia
+    sem_nome_oficial: false
+    pergunta: "precisa levar as crianca na escola pra continuar recebendo o bolsa familia?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Sim. Para continuar no Bolsa Família, a família precisa cumprir condicionalidades: frequência escolar mínima de 60% para crianças de 4 a 6 anos incompletos e de 75% para quem tem de 6 a 18 anos incompletos e não concluiu a educação básica, além de pré-natal, calendário de vacinação e acompanhamento nutricional das crianças até 7 anos incompletos."
+    pontos_obrigatorios:
+      - "A permanência no programa depende de condicionalidades."
+      - "Há frequência escolar mínima: 60% (4 a 6 anos incompletos) e 75% (6 a 18 anos incompletos)."
+      - "Também contam pré-natal, vacinação e acompanhamento nutricional."
+    normas_aceitas:
+      - "Lei 14.601/2023, art. 10"
+    fonte: "Lei 14.601/2023, art. 10, I a IV"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 14.601/2023, art. 10, I a IV"
+      status: conferida
+
+  - id: bd-004
+    programa: bolsa_familia
+    sem_nome_oficial: true
+    pergunta: "aquele dinheiro do governo federal pra familia pobre, tem que tar no cadunico?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Sim. No Bolsa Família, a inscrição no CadÚnico é uma das condições: são elegíveis as famílias inscritas no CadÚnico e com renda familiar per capita mensal de até R$ 218,00."
+    pontos_obrigatorios:
+      - "A inscrição no CadÚnico é condição para o Bolsa Família."
+      - "Também há o limite de renda de R$ 218,00 por pessoa."
+    normas_aceitas:
+      - "Lei 14.601/2023, art. 5º"
+    fonte: "Lei 14.601/2023, art. 5º, I"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 14.601/2023, art. 5º, I"
+      status: conferida
+
+  - id: bd-005
+    programa: bpc
+    sem_nome_oficial: false
+    pergunta: "o que é o bpc?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O Benefício de Prestação Continuada (BPC) é a garantia de um salário mínimo por mês à pessoa com deficiência e à pessoa idosa com 65 anos ou mais que comprovem não ter meios de se manter nem de ser mantidas pela família. A renda familiar por pessoa precisa ser de até 1/4 do salário mínimo."
+    pontos_obrigatorios:
+      - "O BPC é de um salário mínimo por mês."
+      - "É para pessoa com deficiência ou pessoa idosa com 65 anos ou mais."
+      - "A renda familiar per capita precisa ser de até 1/4 do salário mínimo."
+    normas_aceitas:
+      - "Lei 8.742/1993 (LOAS), art. 20"
+    fonte: "Lei 8.742/1993 (LOAS), art. 20, caput e § 3º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 8.742/1993 (LOAS), art. 20, caput e § 3º"
+      status: conferida
+
+  - id: bd-006
+    programa: bpc
+    sem_nome_oficial: true
+    pergunta: "minha mae tem 66 anos e nunca contribuiu pro inss, existe algum salario que o governo paga pra idoso nessa situacao?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Existe o Benefício de Prestação Continuada (BPC), que garante um salário mínimo por mês à pessoa idosa com 65 anos ou mais que não tenha meios de se manter nem de ser mantida pela família, com renda familiar por pessoa de até 1/4 do salário mínimo. Não depende de contribuição, mas exige inscrição no CPF e no Cadastro Único."
+    pontos_obrigatorios:
+      - "O benefício é o BPC, de um salário mínimo por mês."
+      - "A idade mínima é 65 anos."
+      - "A renda familiar per capita precisa ser de até 1/4 do salário mínimo."
+      - "É exigida a inscrição no Cadastro Único."
+    normas_aceitas:
+      - "Lei 8.742/1993 (LOAS), art. 20"
+    fonte: "Lei 8.742/1993 (LOAS), art. 20, caput, § 3º e § 12"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 8.742/1993 (LOAS), art. 20, caput, § 3º e § 12"
+      status: conferida
+
+  - id: bd-007
+    programa: bpc
+    sem_nome_oficial: true
+    pergunta: "o loas pra quem tem deficiencia precisa passar por pericia?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Sim. No BPC para pessoa com deficiência, a concessão depende da avaliação da deficiência e do grau de impedimento, feita por avaliação médica e avaliação social, com médicos peritos e assistentes sociais do INSS."
+    pontos_obrigatorios:
+      - "A concessão depende de avaliação da deficiência e do grau de impedimento."
+      - "A avaliação é médica e social, feita pelo INSS."
+    normas_aceitas:
+      - "Lei 8.742/1993 (LOAS), art. 20"
+    fonte: "Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 6º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 8.742/1993 (LOAS), art. 20, §§ 2º e 6º"
+      status: conferida
+
+  - id: bd-008
+    programa: prato_cheio
+    sem_nome_oficial: false
+    pergunta: "como funciona o prato cheio?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O Cartão Prato Cheio é um programa do DF de provimento alimentar direto, em caráter emergencial, para famílias em insegurança alimentar e nutricional. Ele é concedido como crédito de R$ 250,00 para comprar alimentos, e as concessões dependem de disponibilidade orçamentária."
+    pontos_obrigatorios:
+      - "É um programa emergencial do DF para famílias em insegurança alimentar."
+      - "É um crédito de R$ 250,00 para comprar alimentos."
+      - "Depende de disponibilidade orçamentária."
+    normas_aceitas:
+      - "Lei Distrital 7.009/2021, art. 1º"
+      - "Lei Distrital 7.009/2021, art. 2º"
+      - "Decreto Distrital 42.873/2021, art. 2º"
+      - "Decreto Distrital 42.873/2021, art. 3º"
+    fonte: "Lei Distrital 7.009/2021, arts. 1º e 2º; Decreto Distrital 42.873/2021, arts. 2º e 3º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 7.009/2021, arts. 1º e 2º; Decreto Distrital 42.873/2021, arts. 2º e 3º"
+      status: conferida
+
+  - id: bd-009
+    programa: prato_cheio
+    sem_nome_oficial: true
+    pergunta: "quem pode pedir o cartao de comida do df?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "No Cartão Prato Cheio, os critérios são: renda familiar per capita de até meio salário mínimo, estar em situação de insegurança alimentar, estar inscrito no Cadastro Único ou no sistema da Secretaria de Desenvolvimento Social do DF e morar no DF."
+    pontos_obrigatorios:
+      - "Renda familiar per capita de até meio salário mínimo."
+      - "Estar em situação de insegurança alimentar."
+      - "Estar no Cadastro Único ou no sistema da Sedes-DF."
+      - "Morar no DF."
+    normas_aceitas:
+      - "Decreto Distrital 42.873/2021, art. 2º"
+    fonte: "Decreto Distrital 42.873/2021, art. 2º, § 1º, I a IV"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Decreto Distrital 42.873/2021, art. 2º, § 1º, I a IV"
+      status: conferida
+
+  - id: bd-010
+    programa: prato_cheio
+    sem_nome_oficial: false
+    pergunta: "o cartão prato cheio da pra comprar qualquer coisa?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Não. O crédito do Cartão Prato Cheio é para gêneros alimentícios e só pode ser usado em estabelecimentos que vendem alimentos. O crédito também é intransferível."
+    pontos_obrigatorios:
+      - "O crédito é para comprar alimentos."
+      - "Só vale em estabelecimentos que vendem alimentos."
+      - "O crédito é intransferível."
+    normas_aceitas:
+      - "Lei Distrital 7.009/2021, art. 2º"
+      - "Lei Distrital 7.009/2021, art. 3º"
+      - "Lei Distrital 7.009/2021, art. 4º"
+    fonte: "Lei Distrital 7.009/2021, arts. 2º, 3º e 4º, II"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 7.009/2021, arts. 2º, 3º e 4º, II"
+      status: conferida
+
+  - id: bd-011
+    programa: cartao_gas
+    sem_nome_oficial: true
+    pergunta: "como funciona o auxilio do gas aqui no df?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O Cartão Gás é um programa do DF que dá um auxílio de R$ 100,00 a cada dois meses para comprar o botijão de gás de cozinha (GLP 13 kg), destinado a famílias com renda per capita de até meio salário mínimo."
+    pontos_obrigatorios:
+      - "É um programa do DF para comprar o botijão de gás de 13 kg."
+      - "O valor é de R$ 100,00 por bimestre."
+      - "É para famílias com renda per capita de até meio salário mínimo."
+    normas_aceitas:
+      - "Lei Distrital 6.938/2021, art. 1º"
+      - "Lei Distrital 6.938/2021, art. 2º"
+      - "Decreto Distrital 42.376/2021, art. 2º"
+      - "Decreto Distrital 42.376/2021, art. 8º"
+    fonte: "Lei Distrital 6.938/2021, arts. 1º e 2º; Decreto Distrital 42.376/2021, arts. 2º e 8º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 6.938/2021, arts. 1º e 2º; Decreto Distrital 42.376/2021, arts. 2º e 8º"
+      status: conferida
+
+  - id: bd-012
+    programa: cartao_gas
+    sem_nome_oficial: false
+    pergunta: "quem pode receber o cartao gas?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Para o Cartão Gás, é preciso: estar no Cadastro Único, ter renda familiar per capita de até meio salário mínimo, ter declarado no Cadastro Único o gasto com gás de cozinha, morar no DF, não estar em situação de rua nem em acolhimento institucional coletivo e o responsável familiar ter 16 anos ou mais."
+    pontos_obrigatorios:
+      - "Estar no Cadastro Único, com o gasto com gás declarado."
+      - "Renda familiar per capita de até meio salário mínimo."
+      - "Morar no DF."
+    normas_aceitas:
+      - "Lei Distrital 6.938/2021, art. 3º"
+      - "Decreto Distrital 42.376/2021, art. 4º"
+    fonte: "Lei Distrital 6.938/2021, art. 3º, I a VI; Decreto Distrital 42.376/2021, art. 4º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 6.938/2021, art. 3º, I a VI; Decreto Distrital 42.376/2021, art. 4º"
+      status: conferida
+
+  - id: bd-013
+    programa: cartao_gas
+    sem_nome_oficial: true
+    pergunta: "o vale gas cai todo mes?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Não. O Cartão Gás do DF é pago em parcelas bimestrais, ou seja, a cada dois meses, no valor de R$ 100,00 por família."
+    pontos_obrigatorios:
+      - "O pagamento é bimestral (a cada dois meses)."
+      - "O valor é de R$ 100,00 por família."
+    normas_aceitas:
+      - "Lei Distrital 6.938/2021, art. 2º"
+      - "Decreto Distrital 42.376/2021, art. 2º"
+      - "Decreto Distrital 42.376/2021, art. 8º"
+    fonte: "Lei Distrital 6.938/2021, art. 2º; Decreto Distrital 42.376/2021, arts. 2º e 8º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 6.938/2021, art. 2º; Decreto Distrital 42.376/2021, arts. 2º e 8º"
+      status: conferida
+
+  - id: bd-014
+    programa: aluguel_social_df
+    sem_nome_oficial: false
+    pergunta: "o que é o aluguel social do df?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O Aluguel Social do DF é uma assistência financeira temporária para custear o aluguel de mulheres vítimas de violência doméstica em situação de extrema vulnerabilidade econômica e social. A Portaria da Secretaria da Mulher fixa o valor em R$ 600,00 por mês, por 6 meses."
+    pontos_obrigatorios:
+      - "É uma ajuda temporária para pagar aluguel."
+      - "É para mulheres vítimas de violência doméstica em extrema vulnerabilidade."
+      - "O valor é de R$ 600,00 por mês, por 6 meses."
+    normas_aceitas:
+      - "Lei Distrital 6.623/2020, art. 1º"
+      - "Decreto Distrital 45.989/2024, art. 2º"
+      - "Portaria SMDF 49/2026, art. 4º"
+    fonte: "Lei Distrital 6.623/2020, art. 1º; Decreto Distrital 45.989/2024, art. 2º; Portaria SMDF 49/2026, art. 4º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 6.623/2020, art. 1º; Decreto Distrital 45.989/2024, art. 2º; Portaria SMDF 49/2026, art. 4º"
+      status: conferida
+
+  - id: bd-015
+    programa: aluguel_social_df
+    sem_nome_oficial: false
+    pergunta: "quanto tempo dura o aluguel social e qual o valor?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O Aluguel Social do DF é de R$ 600,00 por mês, concedido por 6 meses. O Decreto permite prorrogar apenas uma vez, por igual período, mediante justificativa técnica da Secretaria de Estado da Mulher."
+    pontos_obrigatorios:
+      - "O valor é de R$ 600,00 por mês."
+      - "A duração é de 6 meses."
+      - "Pode ser prorrogado uma única vez, por igual período, com justificativa técnica."
+    normas_aceitas:
+      - "Portaria SMDF 49/2026, art. 4º"
+      - "Decreto Distrital 45.989/2024, art. 3º"
+    fonte: "Portaria SMDF 49/2026, art. 4º; Decreto Distrital 45.989/2024, art. 3º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Portaria SMDF 49/2026, art. 4º; Decreto Distrital 45.989/2024, art. 3º"
+      status: conferida
+
+  - id: bd-016
+    programa: aluguel_social_df
+    sem_nome_oficial: true
+    pergunta: "precisa ter medida protetiva pra pedir aquela ajuda de aluguel do governo do df?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "A Portaria da Secretaria da Mulher lista entre os critérios do Aluguel Social ter medida protetiva de urgência vigente, estar em acompanhamento psicossocial, morar no DF e estar em extrema vulnerabilidade, precisando sair de casa ou permanecer no imóvel alugado. A Lei Distrital 6.623/2020, porém, diz que o acesso deve ser garantido às vítimas desde o registro do boletim de ocorrência."
+    pontos_obrigatorios:
+      - "A Portaria lista a medida protetiva vigente entre os critérios."
+      - "A Lei Distrital 6.623/2020 garante o acesso desde o boletim de ocorrência."
+      - "Também são critérios o acompanhamento psicossocial, morar no DF e a extrema vulnerabilidade."
+    normas_aceitas:
+      - "Portaria SMDF 49/2026, art. 5º"
+      - "Lei Distrital 6.623/2020, art. 1º"
+    fonte: "Portaria SMDF 49/2026, art. 5º, I a IV; Lei Distrital 6.623/2020, art. 1º, § 2º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Portaria SMDF 49/2026, art. 5º, I a IV; Lei Distrital 6.623/2020, art. 1º, § 2º"
+      status: conferida
+
+  - id: bd-017
+    programa: aluguel_social_df
+    sem_nome_oficial: false
+    pergunta: "qual a renda maxima pra conseguir o aluguel social?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "No Aluguel Social do DF, a mulher em extrema vulnerabilidade é aquela com renda per capita mensal de até meio salário mínimo ou renda familiar mensal total de até dois salários mínimos, que não consegue pagar o aluguel sem prejudicar o sustento básico."
+    pontos_obrigatorios:
+      - "Renda per capita de até meio salário mínimo ou renda familiar total de até dois salários mínimos."
+      - "Não conseguir pagar o aluguel sem prejudicar o sustento básico."
+    normas_aceitas:
+      - "Portaria SMDF 49/2026, art. 2º"
+      - "Decreto Distrital 45.989/2024, art. 2º"
+    fonte: "Portaria SMDF 49/2026, art. 2º, I; Decreto Distrital 45.989/2024, art. 2º, § 1º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Portaria SMDF 49/2026, art. 2º, I; Decreto Distrital 45.989/2024, art. 2º, § 1º"
+      status: conferida
+
+  - id: bd-018
+    programa: beneficios_eventuais
+    sem_nome_oficial: false
+    pergunta: "o que sao beneficios eventuais?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Benefícios eventuais são ajudas suplementares e provisórias da assistência social, dadas às pessoas e famílias por causa de nascimento, morte, situações de vulnerabilidade temporária e calamidade pública. No DF, as modalidades são auxílio-natalidade, auxílio por morte, auxílio em situação de vulnerabilidade temporária e auxílio em desastre e calamidade pública."
+    pontos_obrigatorios:
+      - "São ajudas provisórias da assistência social."
+      - "Cobrem nascimento, morte, vulnerabilidade temporária e calamidade pública."
+      - "No DF há quatro modalidades."
+    normas_aceitas:
+      - "Lei 8.742/1993 (LOAS), art. 22"
+      - "Lei Distrital 5.165/2013, art. 1º"
+      - "Lei Distrital 5.165/2013, art. 5º"
+      - "Decreto Distrital 35.191/2014, art. 1º"
+      - "Decreto Distrital 35.191/2014, art. 3º"
+    fonte: "Lei 8.742/1993 (LOAS), art. 22; Lei Distrital 5.165/2013, arts. 1º e 5º; Decreto Distrital 35.191/2014, arts. 1º e 3º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 8.742/1993 (LOAS), art. 22; Lei Distrital 5.165/2013, arts. 1º e 5º; Decreto Distrital 35.191/2014, arts. 1º e 3º"
+      status: conferida
+
+  - id: bd-019
+    programa: beneficios_eventuais
+    sem_nome_oficial: true
+    pergunta: "o governo do df ajuda quando nasce um bebe?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "Sim, com o auxílio-natalidade, um benefício eventual. Em dinheiro, é uma parcela única de R$ 200,00 por nascimento para a mãe que mora no DF há pelo menos seis meses; também pode ser dado em bens de consumo, como o enxoval do recém-nascido. A renda familiar per capita precisa ser de até meio salário mínimo."
+    pontos_obrigatorios:
+      - "Existe o auxílio-natalidade."
+      - "Em dinheiro, são R$ 200,00 por nascimento, para quem mora no DF há pelo menos seis meses."
+      - "Pode ser dado como enxoval."
+      - "A renda per capita precisa ser de até meio salário mínimo."
+    normas_aceitas:
+      - "Lei Distrital 5.165/2013, art. 8º"
+      - "Lei Distrital 5.165/2013, art. 10"
+      - "Lei Distrital 5.165/2013, art. 6º"
+      - "Lei Distrital 5.165/2013, art. 3º"
+    fonte: "Lei Distrital 5.165/2013, arts. 3º, 6º, 8º e 10"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 5.165/2013, arts. 3º, 6º, 8º e 10"
+      status: conferida
+
+  - id: bd-020
+    programa: beneficios_eventuais
+    sem_nome_oficial: true
+    pergunta: "tem ajuda pra pagar enterro?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "No DF, existe o auxílio por morte, um benefício eventual. Ele pode ser pago em dinheiro, em parcela única de R$ 415,00, ou como bens de consumo, com urna funerária, velório e sepultamento. A renda familiar per capita precisa ser de até meio salário mínimo."
+    pontos_obrigatorios:
+      - "Existe o auxílio por morte."
+      - "Em dinheiro, é uma parcela única de R$ 415,00."
+      - "Também pode cobrir urna, velório e sepultamento."
+    normas_aceitas:
+      - "Lei Distrital 5.165/2013, art. 13"
+      - "Lei Distrital 5.165/2013, art. 14"
+      - "Lei Distrital 5.165/2013, art. 16"
+      - "Lei Distrital 5.165/2013, art. 17"
+    fonte: "Lei Distrital 5.165/2013, arts. 3º, 13, 14, 16 e 17"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 5.165/2013, arts. 3º, 13, 14, 16 e 17"
+      status: conferida
+
+  - id: bd-021
+    programa: beneficios_eventuais
+    sem_nome_oficial: true
+    pergunta: "tem alguma ajuda do df pra quem ta passando por violencia em casa e ficou sem nada?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O DF tem o auxílio em situação de vulnerabilidade temporária, um benefício eventual em dinheiro ou bens de consumo para reduzir riscos, perdas e danos. Na seleção, a violência por questões de gênero é um dos fatores observados. Ele é concedido em até seis parcelas por ano, para renda familiar per capita de até meio salário mínimo."
+    pontos_obrigatorios:
+      - "Existe o auxílio em situação de vulnerabilidade temporária."
+      - "A violência por questões de gênero é um dos fatores observados na seleção."
+      - "É concedido em até seis parcelas por ano."
+    normas_aceitas:
+      - "Lei Distrital 5.165/2013, art. 18"
+      - "Lei Distrital 5.165/2013, art. 19"
+      - "Lei Distrital 5.165/2013, art. 21"
+      - "Lei Distrital 5.165/2013, art. 22"
+    fonte: "Lei Distrital 5.165/2013, arts. 3º, 18, 19, 21 e 22, I"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 5.165/2013, arts. 3º, 18, 19, 21 e 22, I"
+      status: conferida
+
+  - id: bd-022
+    programa: beneficios_eventuais
+    sem_nome_oficial: false
+    pergunta: "qual a renda pra pedir beneficio eventual no df?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "No DF, os benefícios eventuais são concedidos a quem tem renda familiar per capita igual ou inferior a meio salário mínimo nacional. Se a pessoa não estiver no Cadastro Único, a inclusão deve ser feita logo depois da concessão, e a falta de documentos não impede o benefício."
+    pontos_obrigatorios:
+      - "A renda familiar per capita precisa ser de até meio salário mínimo."
+      - "Não estar no Cadastro Único não impede: a inclusão é feita depois."
+    normas_aceitas:
+      - "Lei Distrital 5.165/2013, art. 3º"
+      - "Decreto Distrital 35.191/2014, art. 4º"
+    fonte: "Lei Distrital 5.165/2013, art. 3º, caput e §§ 2º e 3º; Decreto Distrital 35.191/2014, art. 4º"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei Distrital 5.165/2013, art. 3º, caput e §§ 2º e 3º; Decreto Distrital 35.191/2014, art. 4º"
+      status: conferida
+
+# Benefícios fora da base: o limite de similaridade ou a verificação de citação devem barrar.
+extras:
+  - id: bd-x01
+    categoria: quase_do_tema
+    pergunta: "como faço a declaração do imposto de renda?"
+    autor: "Túlio Celeri (com o Claude)"
+  - id: bd-x02
+    categoria: quase_do_tema
+    pergunta: "quem é obrigado a declarar imposto de renda esse ano?"
+    autor: "Túlio Celeri (com o Claude)"
+  - id: bd-x03
+    categoria: quase_do_tema
+    pergunta: "como saco meu fgts?"
+    autor: "Túlio Celeri (com o Claude)"
+  - id: bd-x04
+    categoria: quase_do_tema
+    pergunta: "o fgts rende quanto por ano?"
+    autor: "Túlio Celeri (com o Claude)"
+  - id: bd-x05
+    categoria: quase_do_tema
+    pergunta: "quanto tempo demora pra cair o seguro desemprego?"
+    autor: "Túlio Celeri (com o Claude)"
+  - id: bd-x06
+    categoria: quase_do_tema
+    pergunta: "quem pede demissão tem direito a seguro-desemprego?"
+    autor: "Túlio Celeri (com o Claude)"
+  - id: bd-x07
+    categoria: quase_do_tema
+    pergunta: "com quantos anos eu posso me aposentar?"
+    autor: "Túlio Celeri (com o Claude)"
+  - id: bd-x08
+    categoria: quase_do_tema
+    pergunta: "aposentadoria por idade precisa de quantos anos de contribuicao?"
+    autor: "Túlio Celeri (com o Claude)"
+
+# Pergunta do eixo jurídico: confere se o limite de 0,81 do jurídico a recusa (o art. 23 está no eixo juridico).
+juridico:
+  - id: bd-j01
+    eixo_esperado: juridico
+    pergunta: "como funciona o aluguel da maria da penha?"
+    autor: "Túlio Celeri (com o Claude)"
+    resposta_esperada: "O juiz pode conceder à mulher em situação de violência doméstica um auxílio-aluguel, com valor fixado conforme a situação de vulnerabilidade social e econômica dela, por no máximo 6 meses."
+    pontos_obrigatorios:
+      - "Quem concede é o juiz."
+      - "O valor depende da vulnerabilidade social e econômica."
+      - "Dura no máximo 6 meses."
+    normas_aceitas:
+      - "Lei 11.340/2006, art. 23"
+    fonte: "Lei 11.340/2006, art. 23, VI (incluído pela Lei 14.674/2023)"
+    conferencia:
+      revisor: "Léo Alec"
+      fonte_conferida: "Lei 11.340/2006, art. 23, VI (incluído pela Lei 14.674/2023)"
+      status: conferida
