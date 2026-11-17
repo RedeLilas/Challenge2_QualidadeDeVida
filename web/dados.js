@@ -339,6 +339,183 @@ var DadosRedeLilas = (function () {
     };
   }
 
+  // Resposta local no formato do contrato POST /orquestrar para demonstração e uso sem chave de LLM
+  function respostaLocalOrquestrar(pergunta) {
+    var t = String(pergunta || "").toLowerCase();
+    var temDireito =
+      t.indexOf("tenho direito") !== -1 ||
+      t.indexOf("posso receber") !== -1 ||
+      t.indexOf("consigo receber") !== -1 ||
+      t.indexOf("me encaixo") !== -1;
+
+    if (
+      t.indexOf("prato cheio") !== -1 ||
+      t.indexOf("cartão gás") !== -1 ||
+      t.indexOf("cartao gas") !== -1 ||
+      t.indexOf("auxílio do gás") !== -1 ||
+      t.indexOf("auxilio do gas") !== -1
+    ) {
+      if (temDireito) {
+        return {
+          risco_imediato: false,
+          categoria_risco: null,
+          alerta: null,
+          agente: "beneficios",
+          tipo: "direito",
+          campos: { beneficio: "outro", ra: null, violencia_sexual_recente: null },
+          resposta: null,
+          outras_perguntas: [],
+          excedeu: false,
+          decidido_por: "regra",
+        };
+      }
+      return {
+        risco_imediato: false,
+        categoria_risco: null,
+        alerta: null,
+        agente: "beneficios",
+        tipo: "explicacao",
+        campos: { beneficio: "outro", ra: null, violencia_sexual_recente: null },
+        resposta: {
+          resposta:
+            "O Cartão Gás e o Cartão Prato Cheio são programas do Distrito Federal voltados a famílias de baixa renda inscritas no CadÚnico (Lei Distrital 6.938/2021, art. 1º; Lei Distrital 7.009/2021, art. 1º). Para verificar sua inscrição e solicitar, procure o CRAS da sua Região Administrativa.",
+          citacoes: [
+            {
+              lei: "Lei Distrital 6.938/2021",
+              artigo: "1",
+              citacao: "Lei Distrital 6.938/2021, art. 1º",
+              url: "",
+              data_acesso: "2026-11-03",
+            },
+          ],
+          recusada: false,
+          aviso: "Valores e regras podem mudar por decreto. Norma consultada em 03/11/2026.",
+        },
+        outras_perguntas: [],
+        excedeu: false,
+        decidido_por: "llm",
+      };
+    }
+
+    if (
+      temDireito ||
+      t.indexOf("bolsa família") !== -1 ||
+      t.indexOf("bolsa familia") !== -1 ||
+      t.indexOf("bpc") !== -1 ||
+      t.indexOf("loas") !== -1 ||
+      t.indexOf("aluguel social") !== -1 ||
+      (t.indexOf("auxílio-aluguel") !== -1 && temDireito) ||
+      (t.indexOf("auxilio-aluguel") !== -1 && temDireito)
+    ) {
+      var benId = null;
+      if (t.indexOf("bolsa") !== -1) benId = "bolsa_familia";
+      else if (t.indexOf("bpc") !== -1 || t.indexOf("loas") !== -1) benId = "bpc";
+      else if (t.indexOf("aluguel social") !== -1) benId = "aluguel_social_df";
+      else if (t.indexOf("auxílio-aluguel") !== -1 || t.indexOf("auxilio-aluguel") !== -1 || t.indexOf("aluguel da maria") !== -1) {
+        benId = "auxilio_aluguel";
+      }
+      return {
+        risco_imediato: false,
+        categoria_risco: null,
+        alerta: null,
+        agente: "beneficios",
+        tipo: "direito",
+        campos: { beneficio: benId, ra: null, violencia_sexual_recente: null },
+        resposta: null,
+        outras_perguntas: [],
+        excedeu: false,
+        decidido_por: "regra",
+      };
+    }
+
+    if (t.indexOf("corro perigo") !== -1 || t.indexOf("avaliação de risco") !== -1 || t.indexOf("avaliacao de risco") !== -1 || t.indexOf("fonar") !== -1) {
+      return {
+        risco_imediato: false,
+        categoria_risco: null,
+        alerta: null,
+        agente: "triagem",
+        tipo: null,
+        campos: { beneficio: null, ra: null, violencia_sexual_recente: null },
+        resposta: null,
+        outras_perguntas: [],
+        excedeu: false,
+        decidido_por: "regra",
+      };
+    }
+
+    if (t.indexOf("previsão do tempo") !== -1 || t.indexOf("previsao do tempo") !== -1 || t.indexOf("futebol") !== -1 || t.indexOf("receita de bolo") !== -1) {
+      return {
+        risco_imediato: false,
+        categoria_risco: null,
+        alerta: null,
+        agente: "fora_do_tema",
+        tipo: null,
+        campos: { beneficio: null, ra: null, violencia_sexual_recente: null },
+        resposta: {
+          resposta:
+            "Esse assunto está fora do que consigo responder aqui. Posso ajudar com direitos e leis sobre violência contra a mulher, benefícios, avaliação de risco e serviços de atendimento no DF. Para conversar com alguém, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.",
+          citacoes: [],
+          recusada: true,
+          aviso: null,
+        },
+        outras_perguntas: [],
+        excedeu: false,
+        decidido_por: "llm",
+      };
+    }
+
+    if (t.indexOf("atendimento") !== -1 || t.indexOf("delegacia") !== -1 || t.indexOf("deam") !== -1 || t.indexOf("onde") !== -1) {
+      var raEncontrada = null;
+      for (var i = 0; i < RAS_DF.length; i++) {
+        var r = RAS_DF[i];
+        if (r !== "Outra RA do DF" && r !== "Prefiro não informar" && t.indexOf(r.toLowerCase()) !== -1) {
+          raEncontrada = r;
+          break;
+        }
+      }
+      if (!raEncontrada && t.indexOf("ceilandia") !== -1) raEncontrada = "Ceilândia";
+      return {
+        risco_imediato: false,
+        categoria_risco: null,
+        alerta: null,
+        agente: "rede",
+        tipo: null,
+        campos: { beneficio: null, ra: raEncontrada, violencia_sexual_recente: null },
+        resposta: null,
+        outras_perguntas: [],
+        excedeu: false,
+        decidido_por: "regra",
+      };
+    }
+
+    var localJur = respostaLocalChat(pergunta);
+    return {
+      risco_imediato: false,
+      categoria_risco: null,
+      alerta: null,
+      agente: "juridico",
+      tipo: null,
+      campos: { beneficio: null, ra: null, violencia_sexual_recente: null },
+      resposta: {
+        resposta: localJur.resposta,
+        citacoes: (localJur.citacoes || []).map(function (c) {
+          return {
+            lei: "Lei 11.340/2006",
+            artigo: "19",
+            citacao: c.citacao,
+            url: "",
+            data_acesso: c.data_acesso,
+          };
+        }),
+        recusada: false,
+        aviso: null,
+      },
+      outras_perguntas: [],
+      excedeu: false,
+      decidido_por: "regra",
+    };
+  }
+
   return {
     RAS_DF: RAS_DF,
     ETAPAS_PERFIL: ETAPAS_PERFIL,
@@ -346,5 +523,6 @@ var DadosRedeLilas = (function () {
     DETALHES_BENEFICIOS: DETALHES_BENEFICIOS,
     DIREITOS_LEIS: DIREITOS_LEIS,
     respostaLocalChat: respostaLocalChat,
+    respostaLocalOrquestrar: respostaLocalOrquestrar,
   };
 })();
