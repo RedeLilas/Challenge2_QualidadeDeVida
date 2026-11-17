@@ -12,7 +12,7 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from app import llm, risco
+from app import llm, orquestrador, risco
 from app.config import ConfigIncompleta
 from app.logs import registrar_requisicao
 from app.rag import resposta as resposta_juridica
@@ -124,6 +124,31 @@ def juridico(corpo: PerguntaJuridica, response: Response):
         return alerta
     try:
         return resposta_juridica.responder(corpo.pergunta, indice_juridico(), cliente_llm())
+    except llm.LLMIndisponivel:
+        return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
+
+
+class _ClienteSobDemanda:
+    """Cria o cliente de LLM só quando uma etapa precisa dele.
+
+    A regra e os agentes do aparelho (benefícios "tenho direito?", triagem e rede) respondem
+    mesmo sem LLM configurado.
+    """
+
+    def responder(self, mensagens, **opcoes):
+        return cliente_llm().responder(mensagens, **opcoes)
+
+
+@app.post("/orquestrar")
+def orquestrar(corpo: orquestrador.PedidoOrquestrar, response: Response):
+    """Alerta de 190, agente escolhido (regra, LLM ou reserva) e, quando é do servidor, a resposta.
+
+    O pedido leva só texto, alerta_visto e ajudando: campos a mais (perfil, histórico) dão 422.
+    O /juridico continua igual, para a rodada da S3 seguir reproduzível.
+    """
+    response.headers["Cache-Control"] = "no-store"
+    try:
+        return orquestrador.orquestrar(corpo, indice=indice_juridico, cliente=_ClienteSobDemanda())
     except llm.LLMIndisponivel:
         return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
 

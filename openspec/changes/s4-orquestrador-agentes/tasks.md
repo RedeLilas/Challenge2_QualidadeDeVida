@@ -14,9 +14,9 @@
 
 ## 3. Servidor: rota `/orquestrar` (terça, 17/11, e quinta, 19/11)
 
-- [ ] 3.1 Criar `POST /orquestrar` com pedido `{texto, alerta_visto, ajudando}`, que recusa campos a mais, e com `risco.avaliar` antes de tudo (terça); verificação: testes conferem 422 com `perfil` ou `historico`, só o alerta sem `alerta_visto` (com um LLM falso que falha se for chamado) e `risco_imediato: true` junto com a resposta quando há `alerta_visto`
-- [ ] 3.2 Responder no mesmo pedido: jurídico por `responder()`, fora do tema com o texto fixo (Ligue 180 e Defensoria, sem índice e sem LLM de resposta), explicação de benefícios por um ponto de troca que usa o jurídico enquanto `s4-rag-beneficios` não existir, e 503 com o LLM fora do ar (terça); verificação: testes com índice e LLM falsos cobrem cada caminho, e `/juridico` continua com os mesmos testes
-- [ ] 3.3 Registrar o roteamento no logger `rede_lilas.orquestrador` só com `decidido_por` e `agente` (terça); verificação: teste com `caplog` envia um texto marcado e confere que ele, as perguntas reescritas e os campos não aparecem no log
+- [x] 3.1 Criar `POST /orquestrar` com pedido `{texto, alerta_visto, ajudando}`, que recusa campos a mais, e com `risco.avaliar` antes de tudo (terça); verificação: testes conferem 422 com `perfil` ou `historico`, só o alerta sem `alerta_visto` (com um LLM falso que falha se for chamado) e `risco_imediato: true` junto com a resposta quando há `alerta_visto`
+- [x] 3.2 Responder no mesmo pedido: jurídico por `responder()`, fora do tema com o texto fixo (Ligue 180 e Defensoria, sem índice e sem LLM de resposta), explicação de benefícios por um ponto de troca que usa o jurídico enquanto `s4-rag-beneficios` não existir, e 503 com o LLM fora do ar (terça); verificação: testes com índice e LLM falsos cobrem cada caminho, e `/juridico` continua com os mesmos testes
+- [x] 3.3 Registrar o roteamento no logger `rede_lilas.orquestrador` só com `decidido_por` e `agente` (terça); verificação: teste com `caplog` envia um texto marcado e confere que ele, as perguntas reescritas e os campos não aparecem no log
 - [ ] 3.4 Criar `INSTRUCOES_AJUDANDO` (terceira pessoa, como apoiar sem expor a vítima, respeito à decisão dela) e usá-las no jurídico com `ajudando: true` (quinta); verificação: testes conferem a instrução enviada ao LLM com e sem a flag e que `INSTRUCOES` não mudou (`tests/test_instrucoes_sem_rag.py` passa)
 
 ## 4. Navegador: chat (terça, 17/11, com a resposta falsa; quinta, 19/11, ligado ao servidor)

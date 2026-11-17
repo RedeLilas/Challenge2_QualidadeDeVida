@@ -8,15 +8,18 @@ A primeira etapa (por_regra) usa as palavras de regras/roteamento.json e só dec
 exatamente um agente numa mensagem sem marca de várias perguntas; nos demais casos, quem escolhe é o LLM.
 """
 import json
+import logging
 import re
 import typing
+from collections.abc import Callable
 from functools import cache
 from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from app import llm
+from app import llm, risco
+from app.rag import resposta as rag
 from app.risco import normalizar
 
 ARQUIVO_ROTEAMENTO = Path(__file__).resolve().parents[1] / "regras" / "roteamento.json"
@@ -361,3 +364,63 @@ def classificar(texto: str, cliente) -> Classificacao:
         outras_perguntas=[p for _, p in ordenadas[1:MAXIMO_PERGUNTAS]],
         excedeu=len(perguntas) > MAXIMO_PERGUNTAS,
     )
+
+
+# --- Rota: risco, classificação e resposta no mesmo pedido (tarefas 3.1 a 3.3) ------------------
+
+logger = logging.getLogger("rede_lilas.orquestrador")
+
+# Ponto de troca da explicação de benefícios. s4-rag-beneficios registra aqui uma função
+# (pergunta, indice, cliente) -> dict no formato de app.rag.resposta.responder(). Enquanto for None,
+# a explicação vai ao jurídico, como antes da S4: cortar o RAG de benefícios não quebra o orquestrador.
+explicar_beneficio: Callable[..., dict] | None = None
+
+
+def _resposta_do_agente(classificacao: Classificacao, indice: Callable, cliente) -> dict | None:
+    """Resposta gerada no servidor, ou None para os agentes que rodam no aparelho (com o perfil)."""
+    agente, tipo = classificacao.decisao.agente, classificacao.decisao.tipo
+    if agente == "fora_do_tema":
+        # Recusa padrão: sem índice e sem LLM de resposta.
+        return {"resposta": FORA_DO_TEMA, "citacoes": [], "recusada": True}
+    if agente == "beneficios" and tipo == "explicacao" and explicar_beneficio is not None:
+        return explicar_beneficio(classificacao.pergunta, indice(), cliente)
+    if agente == "juridico" or (agente == "beneficios" and tipo == "explicacao"):
+        return rag.responder(classificacao.pergunta, indice(), cliente)
+    return None  # benefícios ("tenho direito?"), triagem e rede
+
+
+def orquestrar(pedido: PedidoOrquestrar, *, indice: Callable, cliente) -> dict:
+    """Corpo da resposta do POST /orquestrar. `indice` é chamado só se algum agente precisar dele.
+
+    Pode lançar llm.LLMIndisponivel ao gerar a resposta: a rota devolve 503.
+    """
+    # Risco imediato antes de tudo, por regra, sem LLM (spec triagem-risco).
+    sinal = risco.avaliar(pedido.texto)
+    comum = {
+        "risco_imediato": sinal is not None,
+        "categoria_risco": sinal["categoria"] if sinal else None,
+        "alerta": risco.ALERTA if sinal else None,
+    }
+    if sinal and not pedido.alerta_visto:
+        # Sem o toque em "Continuar com minha pergunta" (ou página antiga): só o alerta, e o texto
+        # nunca chega ao LLM. alerta_visto não é controle de segurança: a proteção principal é o
+        # alerta no aparelho, antes do envio (design, "Alerta e Continuar com minha pergunta").
+        corpo = RespostaOrquestrar(
+            **comum, agente=None, tipo=None, campos=Campos(), resposta=None,
+            outras_perguntas=[], excedeu=False, decidido_por=None,
+        )  # fmt: skip
+        return corpo.model_dump()
+    classificacao = classificar(pedido.texto, cliente)
+    # Só o rótulo de quem decidiu e o agente: nunca o texto, as perguntas reescritas ou os campos.
+    logger.info("roteamento decidido_por=%s agente=%s", classificacao.decidido_por, classificacao.decisao.agente)
+    corpo = RespostaOrquestrar(
+        **comum,
+        agente=classificacao.decisao.agente,
+        tipo=classificacao.decisao.tipo,
+        campos=classificacao.decisao.campos,
+        resposta=_resposta_do_agente(classificacao, indice, cliente),
+        outras_perguntas=classificacao.outras_perguntas,
+        excedeu=classificacao.excedeu,
+        decidido_por=classificacao.decidido_por,
+    )
+    return corpo.model_dump()

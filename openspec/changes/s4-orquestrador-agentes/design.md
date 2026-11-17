@@ -84,7 +84,7 @@ Na regra: um apelido do auxílio-aluguel ("auxílio-aluguel", "aluguel da Maria 
 - `fora_do_tema`: texto fixo com o Ligue 180 e a Defensoria Pública do DF, sem índice e sem LLM de resposta.
 - `beneficios`/`direito`, `triagem` e `rede`: o servidor devolve só o agente e os campos; o navegador decide.
 
-Com uma única pergunta, o RAG recebe o texto original. Com várias, recebe a pergunta reescrita. Assim a reescrita não altera a pergunta comum, que é o caso mais frequente.
+Com uma única pergunta, o RAG recebe o texto original. Com várias, recebe a pergunta reescrita. Assim a reescrita não altera a pergunta comum, que é o caso mais frequente. O cliente de LLM é criado só quando uma etapa precisa dele, então a regra e os agentes do aparelho respondem mesmo sem LLM configurado. O ponto de troca é `orquestrador.explicar_beneficio` (`app/orquestrador.py`).
 
 ### Parametrizar `responder()` sem mudar o `/juridico`
 `responder(pergunta, indice, cliente, *, eixos=EIXOS, instrucoes=INSTRUCOES, limite=LIMITE_SIMILARIDADE)`. Os valores padrão são os da S3, então a chamada do `/juridico` não muda. Pela decisão 18, essa tarefa é a primeira de terça e fica com a frente do RAG de benefícios, porque as duas mudanças mexem no mesmo arquivo. **Padrão do planejamento:** a tarefa fica registrada nesta mudança, e não em `s4-rag-beneficios`, porque o modo de ajuda depende dela e esta mudança não pode depender de outra que é a primeira a ser cortada. Um teste confere que `/juridico` chama `responder` com os mesmos eixos, instruções e limite da S3.
