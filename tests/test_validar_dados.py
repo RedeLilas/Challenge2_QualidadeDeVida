@@ -96,7 +96,7 @@ def test_cras_aceito_e_saude_exige_competencia(tmp_path: Path):
         "CEPAV Fictício 2,Saúde,Gama,Rua 3,72405-000,(61) 0000-0002,7h às 19h,https://cnes.datasus.gov.br/,2026-11-17,2026-13",
     )
     assert not any("CRAS" in e and "tipo" in e for e in erros)
-    assert any(":3: serviço de saúde sem competencia_cnes" in e for e in erros)
+    assert any(":3: serviço de saúde com fonte no CNES sem competencia_cnes" in e for e in erros)
     assert any(":4: competencia_cnes '2026-13'" in e for e in erros)
 
 
@@ -155,3 +155,9 @@ def test_cep_vazio_so_vale_para_cras(tmp_path: Path):
 def test_competencia_cnes_so_em_saude(tmp_path: Path):
     erros = _rede(tmp_path, "CRAS Fictício,CRAS,Gama,Rua 1,,(61) 0000-0000,8h às 17h,https://www.sedes.df.gov.br/unidades/,2026-11-17,2026-10")
     assert any(":2: competencia_cnes só vale para serviços de saúde" in e for e in erros)
+
+
+def test_saude_da_carta_de_servicos_sem_cep_e_sem_competencia(tmp_path: Path):
+    # Fonte na SES-DF (não no CNES): competência e CEP não são publicados e não são exigidos.
+    erros = _rede(tmp_path, "CEPAV Fictício,Saúde,Gama,Rua 1,,(61) 0000-0000,8h às 18h,https://saude.df.gov.br/carta-servicos-violencia,2026-11-17,")
+    assert not any(":2:" in e for e in erros)

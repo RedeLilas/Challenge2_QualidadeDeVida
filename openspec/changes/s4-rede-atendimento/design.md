@@ -161,11 +161,27 @@ Fonte: página **Unidades** da Sedes-DF (`https://www.sedes.df.gov.br/unidades/`
 
 Alternativa descartada: importar o CNES do DF inteiro, que traria milhares de estabelecimentos sem dizer quais atendem violência sexual.
 
+**Cadastro (tarefa 4.1, 17/11/2026, Rafaella Borges):**
+- **Fonte:** a "Carta de Serviços de Violência" da SES-DF (`https://saude.df.gov.br/carta-servicos-violencia`, atualizada em 01/11/2025, segundo a própria página), que é o link "Endereços e mais informações sobre cada um dos dezenove CEPAVs" da página "Centros de Referência". O texto foi copiado da página ao vivo e confere com a leitura automática da mesma URL.
+- **Mudança em relação ao plano:** a fonte do endereço, do telefone e do horário passa a ser essa página da SES-DF, e não a ficha do CNES (decisão de 17/11). Ela é oficial, mais atual que as listas antigas e traz sala e WhatsApp. Ela não publica CEP nem competência, então `cep` e `competencia_cnes` ficam vazios nesses serviços. A validação aceita o CEP vazio em `Saúde` e só exige `competencia_cnes` quando a fonte é o CNES.
+- **Quais entram (15):** os 14 CEPAV que atendem mulheres adultas (Margarida, Primavera, Alfazema, Flor de Lótus, Flor do Cerrado, Gardênia, Girassol, Tulipa, Flor de Lis, Sempre Viva, Orquídea, Azaleia, Amarílis e Violeta) e o **PIGL** (Programa de Interrupção Gestacional prevista em Lei, HMIB), que atende gestação decorrente de estupro (decisão de 17/11).
+- **Quais ficam de fora (4), com o motivo:**
+  - **Alecrim:** atende adultos **autores** de violência sexual contra crianças e adolescentes; não é serviço para a vítima.
+  - **Jardim:** só recebe pessoas encaminhadas por outro CEPAV.
+  - **Jasmim:** crianças e seus familiares e adolescentes ofensores sexuais.
+  - **Caliandra:** só adolescentes de 12 a 17 anos.
+- **Telefones como a página publica:** três números parecem incompletos na própria página e foram mantidos sem correção (decisão de 17/11): no Alfazema, "(61) 9451-2245" (celular com 8 dígitos) e "344-5017" (7 dígitos); no Flor do Cerrado, "40427770". O cartão já recomenda confirmar por telefone; vale reconferir esses números na próxima atualização.
+- **Horário:** como a página publica. Na maioria, "acolhimento por livre demanda, em horário comercial". O Amarílis avisa que está com equipe reduzida e recomenda ligar antes.
+- **RA:** a do hospital ou da unidade de cada serviço (ex.: HRAN e HMIB → Plano Piloto; HRL → Paranoá).
+- **Conferência pela segunda pessoa:** 3 linhas sorteadas entre as 15 (semente 20261117): CEPAV Alfazema, CEPAV Margarida, CEPAV Violeta, conferidas na página ao vivo.
+
 ### Texto sobre as 72 horas
 A Lei 12.845/2013 garante o atendimento imediato e as profilaxias, mas **não fala em 72 horas**. O prazo vem dos protocolos do Ministério da Saúde. O texto cita a lei para o direito e uma fonte oficial do Ministério da Saúde para o prazo, com URL e data. Se essa fonte não for achada até quinta, o texto diz "procure atendimento o quanto antes: algumas profilaxias só funcionam nos primeiros dias" e cita só a lei, sem o número. Isso muda só o texto, não a spec.
 
+**Fonte encontrada (tarefa 4.2, 17/11/2026):** página "Profilaxia Pós-Exposição (PEP)" do Ministério da Saúde (`https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/aids-hiv/pep`, consultada em 17/11/2026): a PEP "deve ser iniciada em até 72 horas após a exposição", e a página lista a violência sexual entre as situações de uso. A página não mostra data de atualização. O texto atual de `textoSaude` (ajustado na revisão do PR #100) diz "Se foi nas últimas 72 horas … porque esses remédios dependem do tempo", sem citação para o prazo; ele fica como está, e a fonte fica registrada aqui. Citar a página no próprio texto exigiria mudar também o fallback de `web/conversa.js`, que precisa ser igual (teste em `tests/test_conversa.py`).
+
 ### Dados e validação
-`scripts/validar_dados.py` passa a aceitar os tipos `CRAS` e `Saúde`, a exigir `competencia_cnes` nas linhas de `Saúde` e a validar `dados/cep_ra_df.csv`: formato, faixa dentro do DF, `cep_inicio` ≤ `cep_fim`, sem sobreposição e fonte dos Correios com data. A faixa do DF do validador (`CEP_DF_MAX` e a mensagem de erro) passa a ser as duas faixas dos Correios, sem 72800-000 a 72999-999.
+`scripts/validar_dados.py` passa a aceitar os tipos `CRAS` e `Saúde`, a exigir `competencia_cnes` nas linhas de `Saúde` cuja fonte é o CNES e a validar `dados/cep_ra_df.csv`: formato, faixa dentro do DF, `cep_inicio` ≤ `cep_fim`, sem sobreposição e fonte dos Correios com data. A faixa do DF do validador (`CEP_DF_MAX` e a mensagem de erro) passa a ser as duas faixas dos Correios, sem 72800-000 a 72999-999.
 
 ## Risks / Trade-offs
 
