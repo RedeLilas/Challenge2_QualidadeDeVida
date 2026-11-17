@@ -375,17 +375,30 @@ logger = logging.getLogger("rede_lilas.orquestrador")
 # a explicação vai ao jurídico, como antes da S4: cortar o RAG de benefícios não quebra o orquestrador.
 explicar_beneficio: Callable[..., dict] | None = None
 
+# Modo "ajudando outra pessoa" (tarefa 3.4): as instruções do jurídico, sem tirar nenhuma regra, mais
+# estas linhas. O /juridico nunca usa esta versão, e INSTRUCOES continua igual (tests/test_instrucoes_sem_rag.py).
+INSTRUCOES_AJUDANDO = rag.INSTRUCOES + (
+    "\n- Quem pergunta está ajudando outra mulher, que é a vítima. Fale da vítima em terceira pessoa "
+    "(\"ela\") e fale com quem pergunta em segunda pessoa (\"você\").\n"
+    "- Além do que os trechos de lei preveem, inclua em uma ou duas frases, sem citar artigo, como apoiar "
+    "sem expor a vítima ao agressor: ouvir sem julgar, não confrontar o agressor, não deixar mensagens "
+    "sobre o assunto no celular dela e combinar com ela uma forma segura de contato.\n"
+    "- Respeite as decisões da vítima: não oriente quem pergunta a agir no lugar dela sem o consentimento "
+    "dela. Se ela estiver em perigo agora, diga para ligar 190 e informar o endereço dela."
+)
 
-def _resposta_do_agente(classificacao: Classificacao, indice: Callable, cliente) -> dict | None:
+
+def _resposta_do_agente(classificacao: Classificacao, indice: Callable, cliente, *, ajudando: bool) -> dict | None:
     """Resposta gerada no servidor, ou None para os agentes que rodam no aparelho (com o perfil)."""
     agente, tipo = classificacao.decisao.agente, classificacao.decisao.tipo
+    instrucoes = INSTRUCOES_AJUDANDO if ajudando else rag.INSTRUCOES
     if agente == "fora_do_tema":
         # Recusa padrão: sem índice e sem LLM de resposta.
         return {"resposta": FORA_DO_TEMA, "citacoes": [], "recusada": True}
     if agente == "beneficios" and tipo == "explicacao" and explicar_beneficio is not None:
         return explicar_beneficio(classificacao.pergunta, indice(), cliente)
     if agente == "juridico" or (agente == "beneficios" and tipo == "explicacao"):
-        return rag.responder(classificacao.pergunta, indice(), cliente)
+        return rag.responder(classificacao.pergunta, indice(), cliente, instrucoes=instrucoes)
     return None  # benefícios ("tenho direito?"), triagem e rede
 
 
@@ -418,7 +431,7 @@ def orquestrar(pedido: PedidoOrquestrar, *, indice: Callable, cliente) -> dict:
         agente=classificacao.decisao.agente,
         tipo=classificacao.decisao.tipo,
         campos=classificacao.decisao.campos,
-        resposta=_resposta_do_agente(classificacao, indice, cliente),
+        resposta=_resposta_do_agente(classificacao, indice, cliente, ajudando=pedido.ajudando),
         outras_perguntas=classificacao.outras_perguntas,
         excedeu=classificacao.excedeu,
         decidido_por=classificacao.decidido_por,
