@@ -83,6 +83,17 @@ def rede_protecao() -> list[dict]:
         return list(csv.DictReader(arquivo))
 
 
+@app.get("/cep-ra")
+def cep_ra() -> list[dict]:
+    """Faixas de CEP do DF (Busca Faixa de CEP dos Correios), sem receber dados da usuária.
+
+    O CEP da usuária nunca chega ao servidor: o navegador confere se ele é do DF (web/rede.js).
+    """
+    caminho = WEB.parent / "dados" / "cep_ra_df.csv"
+    with caminho.open(encoding="utf-8") as arquivo:
+        return list(csv.DictReader(arquivo))
+
+
 def alerta_de_risco(texto: str) -> dict | None:
     """Resposta de alerta de 190 se o texto tiver sinal de risco imediato (regra, sem LLM)."""
     resultado = risco.avaliar(texto)

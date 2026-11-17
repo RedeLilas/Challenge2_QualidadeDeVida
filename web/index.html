@@ -18,6 +18,7 @@
   <script src="/beneficios.js" defer></script>
   <script src="/triagem.js" defer></script>
   <script src="/dados.js" defer></script>
+  <script src="/rede.js" defer></script>
   <script src="/conversa.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
@@ -511,14 +512,19 @@
             <div class="filter-field">
               <label for="filtro-tipo">Tipo de serviço:</label>
               <select id="filtro-tipo">
-                <option value="todos">Todos os serviços (20 unidades)</option>
+                <option value="todos">Todos os serviços</option>
                 <option value="CMB">Casa da Mulher Brasileira (24h)</option>
                 <option value="DEAM">Delegacias da Mulher — DEAM (24h)</option>
                 <option value="CEAM">Centros Especializados — CEAM</option>
                 <option value="Defensoria">Defensoria Pública do DF (NUDEM / NAJ)</option>
                 <option value="Juizado">Juizados de Violência Doméstica (TJDFT)</option>
                 <option value="outro">Promotoria / Espaço Acolher / NJM</option>
+                <option value="CRAS">CRAS — Assistência Social (benefícios e Cadastro Único)</option>
               </select>
+            </div>
+            <div class="filter-field">
+              <label for="filtro-cep">Ou digite um CEP (fica só neste aparelho):</label>
+              <input id="filtro-cep" type="text" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="Ex.: 72215-110">
             </div>
           </div>
         </div>

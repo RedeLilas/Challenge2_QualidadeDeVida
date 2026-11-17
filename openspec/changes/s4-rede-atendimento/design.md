@@ -131,7 +131,7 @@ Funções puras, testadas em QuickJS, usadas pela tela e pelo chat:
 Alternativa descartada: conferir o CEP no servidor, que exigiria mandar o CEP e contrariaria a decisão de que o servidor nunca recebe nem devolve CEP.
 
 ### CEP do DF e a RA
-O CEP não indica a RA. Com um CEP do DF, a ordenação usa a RA do perfil. Sem RA no perfil, a tela e o chat pedem a RA e mostram os plantões 24 horas primeiro. Hoje o perfil aceita guardar só o CEP (`web/app.js`, etapa da RA). Nesse caso, a RA também é pedida, e o texto de ajuda da etapa ("usamos somente para ordenar os locais mais próximos") deixa de valer para o CEP; o ajuste do texto entra na tarefa 3.2.
+O CEP não indica a RA. Com um CEP do DF, a ordenação usa a RA do perfil. Sem RA no perfil, a tela e o chat pedem a RA e mostram os plantões 24 horas primeiro. Hoje o perfil aceita guardar só o CEP (`web/app.js`, etapa da RA). Nesse caso, a RA também é pedida, e o texto de ajuda da etapa ("usamos somente para ordenar os locais mais próximos") deixa de valer para o CEP. O ajuste desse texto fica em `web/dados.js` e está pendente (tarefa 3.2).
 
 ### CEP no chat
 O CEP é tirado do texto antes da checagem de risco no servidor e antes do LLM. A checagem de risco no aparelho roda sobre o texto original, para não perder nada. O CEP fica só na memória da página, como o resto da conversa. Se for de fora do DF, o chat responde no aparelho com a cobertura só do DF e o Ligue 180, e a pergunta continua indo ao orquestrador sem o CEP. Se for do DF, a lista curta usa a RA do perfil ou de `campos.ra`.
@@ -140,7 +140,7 @@ O CEP é tirado do texto antes da checagem de risco no servidor e antes do LLM. 
 Fonte: página **Unidades** da Sedes-DF (`https://www.sedes.df.gov.br/unidades/`), publicada em 08/10/2026 e atualizada em 16/11/2026, segundo a própria página. Ela lista 32 CRAS: 31 unidades fixas e o CRAS Móvel. A leitura automática de 17/11 só trouxe um resumo, então **cada linha é digitada e conferida por uma pessoa na página ao vivo**, com a data da conferência. O CRAS Móvel não entra como endereço, porque o atendimento é itinerante: ele aparece como nota. Tipo novo no CSV: `CRAS`.
 
 **Transcrição (tarefa 1.4, 17/11/2026, Rafaella Borges):** as 31 unidades fixas foram transcritas das capturas de tela da página ao vivo, com nome, endereço, horário e telefones como a página publica.
-- **CEP:** a página não publica o CEP dos CRAS. Sem fonte, a coluna `cep` fica vazia nesses serviços, e a validação aceita o vazio só no tipo `CRAS`. A tela Onde buscar ajuda (`web/app.js`) ainda mostra "CEP" mesmo vazio; o ajuste entra com a tela, na tarefa 3.2.
+- **CEP:** a página não publica o CEP dos CRAS. Sem fonte, a coluna `cep` fica vazia nesses serviços, e a validação aceita o vazio só no tipo `CRAS`. A tela Onde buscar ajuda só mostra "CEP" quando o serviço tem CEP (tarefa 3.2).
 - **RA:** a coluna `ra` traz a RA oficial onde a unidade fica. Em quatro casos, o nome ou o endereço da página não dizem a RA oficial diretamente:
   - **CRAS Ceilândia Sol Nascente:** o endereço diz "QNR 02 – Ceilândia", então ficou Ceilândia.
   - **CRAS Fercal:** o endereço diz "Engenho Velho – Sobradinho", mas o Engenho Velho fica na RA Fercal, então ficou Fercal.
@@ -150,7 +150,7 @@ Fonte: página **Unidades** da Sedes-DF (`https://www.sedes.df.gov.br/unidades/`
   Nos quatro casos, as duas RAs possíveis ordenam igual (`RA_ORDENACAO`), então a escolha não muda a ordem da lista.
 - **Correção de digitação:** no CRAS Recanto das Emas I, a página escreve "Recanto da Emas"; no CSV ficou "Recanto das Emas".
 - **CRAS Móvel (nota):** base administrativa na SEPN Quadra 515, Bloco B, Ed. Espaço 515, Subsolo (-1), Asa Norte; segunda a sexta-feira, exceto feriados, com horário conforme a ação e o local; telefones (61) 3773-7551, 3773-7549, 3773-7547 e 3773-7545. Atende populações rurais, indígenas, quilombolas e de difícil acesso, por isso não entra na lista ordenada por RA.
-- **Conferência pela segunda pessoa:** 5 linhas sorteadas (semente 20261117): CRAS Brasília, CRAS Ceilândia P Sul, CRAS Ceilândia Sol Nascente, CRAS Estrutural e CRAS Sobradinho II. _Pendente:_ nome de quem conferiu e data.
+- **Conferência pela segunda pessoa:** 5 linhas sorteadas (semente 20261117): CRAS Brasília, CRAS Ceilândia P Sul, CRAS Ceilândia Sol Nascente, CRAS Estrutural e CRAS Sobradinho II. Conferidas por **Túlio Celeri em 17/11/2026** na página ao vivo (atualizada em 16/11/2026, 13h58): as 5 linhas conferem em nome, endereço, telefones, horário e RA, e a página não publica CEP. Diferenças só de redação: o CSV tira o ponto final de alguns endereços e resume a frase sobre o horário da recepção (registro no PR #101).
 
 ### Saúde de referência para violência sexual
 - **Quais unidades:** os Centros de Especialidades para Atenção às Pessoas em Situação de Violência Sexual, Familiar e Doméstica (CEPAV) listados na página "Centros de Referência" da SES-DF (`https://saude.df.gov.br/centros-de-referencia`, atualizada em 15/08/2026, segundo a própria página). A descrição do serviço está em `https://info.saude.df.gov.br/busca-saude-cepav/`. A leitura automática só trouxe os nomes, então a lista é conferida por uma pessoa na página.

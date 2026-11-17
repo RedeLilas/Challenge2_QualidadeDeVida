@@ -214,3 +214,22 @@ def test_texto_saude_cita_a_lei_e_e_condicional(js, ajudando):
     assert "pronto-socorro de um hospital público" in texto
     # A Lei 12.845/2013 não fala em boletim de ocorrência: o texto não promete isso.
     assert "boletim" not in texto.lower()
+
+
+def test_sem_lookbehind_para_safari_antigo():
+    # O Safari antes do iOS 16.4 não lê (?<! ou (?<=: o arquivo inteiro falharia e o CEP iria para o servidor.
+    codigo = (RAIZ / "web" / "rede.js").read_text(encoding="utf-8")
+    assert "(?<!" not in codigo and "(?<=" not in codigo
+
+
+@pytest.mark.parametrize(
+    "texto, limpo",
+    [
+        ("72215-110", "[CEP]"),  # no início do texto
+        ("(72215-110)", "([CEP])"),
+        ("cep:72215110", "cep:[CEP]"),
+        ("a 72215-110 e b 73000-000", "a [CEP] e b [CEP]"),
+    ],
+)
+def test_caractere_antes_do_cep_fica(js, texto, limpo):
+    assert chamar(js, f"Rede.tirarCep({json.dumps(texto)}, FAIXAS)")["texto"] == limpo

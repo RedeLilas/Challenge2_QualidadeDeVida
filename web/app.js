@@ -10,6 +10,8 @@ const SITE_NEUTRO = "https://www.climatempo.com.br/previsao-do-tempo/cidade/61/b
 // Rota do orquestrador de agentes (s4-orquestrador-agentes): classifica e responde no mesmo pedido.
 const ROTA = "/orquestrar";
 const ROTA_REDE = "/rede-protecao";
+// Faixas de CEP do DF (s4-rede-atendimento). O CEP da usuária é conferido só no aparelho, com web/rede.js.
+const ROTA_CEP = "/cep-ra";
 const REGRAS_DE_RISCO = "/regras/risco_imediato.json";
 const REGRAS_DE_BENEFICIOS = "/regras/beneficios.json";
 const REGRAS_DE_TRIAGEM = "/regras/triagem_fonar.json";
@@ -22,6 +24,8 @@ const TEXTOS = {
   falha: "Não consegui responder agora. Tente de novo em alguns instantes. Se precisar falar com alguém, ligue 180 (gratuito, 24 horas).",
   demorou: "A resposta está demorando. Tente de novo em alguns instantes.",
   pensando: "Escrevendo resposta…",
+  cepForaDoDF:
+    "Esse CEP não é do Distrito Federal. Os serviços que eu mostro são só do DF. Para orientação em qualquer lugar do Brasil, ligue 180 (gratuito, 24 horas).",
 };
 
 // Ícones SVG limpos usados nos botões, menu lateral e cartões
@@ -63,6 +67,7 @@ let etapaAtualWizard = 0;
 let direcaoWizard = "slide-in";
 let perfilUsuario = typeof Perfil !== "undefined" ? Perfil.ler() : {};
 let servicosRedeDF = [];
+let faixasCepDF = [];
 let respostasFonar = {};
 let ordemRespostasFonar = [];
 // Respostas específicas de benefícios (mantidas exclusivamente em memória, nunca salvas nem enviadas)
@@ -128,6 +133,17 @@ fetch(ROTA_REDE)
   .then((listaServicos) => {
     if (Array.isArray(listaServicos) && listaServicos.length) {
       servicosRedeDF = listaServicos;
+      if (secaoAtual === "places") renderizarLocais();
+    }
+  })
+  .catch(() => {});
+
+// GET sem parâmetros: só as faixas do DF. O CEP digitado nunca vai ao servidor.
+fetch(ROTA_CEP)
+  .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+  .then((faixas) => {
+    if (Array.isArray(faixas)) {
+      faixasCepDF = faixas;
       if (secaoAtual === "places") renderizarLocais();
     }
   })
@@ -791,16 +807,6 @@ function renderizarDireitos() {
   });
 }
 
-const RA_PROXIMAS = {
-  Samambaia: ["Recanto das Emas", "Ceilândia"],
-  Taguatinga: ["Ceilândia", "Recanto das Emas"],
-  "Águas Claras": ["Núcleo Bandeirante", "Ceilândia"],
-  Guará: ["Núcleo Bandeirante", "Plano Piloto"],
-  "São Sebastião": ["Paranoá", "Plano Piloto"],
-  Itapoã: ["Paranoá", "Sobradinho"],
-  "Estrutural (SCIA)": ["Plano Piloto", "Ceilândia"],
-};
-
 function formatarFonteUrl(url) {
   if (!url) return "GDF";
   return String(url)
@@ -808,9 +814,28 @@ function formatarFonteUrl(url) {
     .split("/")[0];
 }
 
+// O perfil pode guardar um CEP no lugar da RA. O CEP não indica a RA: os Correios não separam o DF
+// por RA (s4-rede-atendimento, opção (a)). Ele só diz se a pessoa está no DF.
+const PADRAO_CEP_SOLTO = /^\d{2}\.?\d{3}-?\d{3}$/;
+const RAS_SEM_LOCAL = ["Prefiro não informar", "prefiro_nao_informar", "Outra RA do DF", "Moro fora do Distrito Federal"];
+
+function ordenarLocaisSemRede(servicos, raAlvo, tipo) {
+  // Só se web/rede.js não carregar: mesma RA primeiro, depois os plantões 24 horas.
+  return servicos
+    .filter((s) => !tipo || s.tipo === tipo)
+    .slice()
+    .sort((a, b) => {
+      const aRa = raAlvo && a.ra === raAlvo ? 0 : 1;
+      const bRa = raAlvo && b.ra === raAlvo ? 0 : 1;
+      if (aRa !== bRa) return aRa - bRa;
+      return (String(a.horario).includes("24 horas") ? 0 : 1) - (String(b.horario).includes("24 horas") ? 0 : 1);
+    });
+}
+
 function renderizarLocais() {
   const selectRa = document.getElementById("filtro-ra");
   const selectTipo = document.getElementById("filtro-tipo");
+  const campoCep = document.getElementById("filtro-cep");
   const avisoRa = document.getElementById("places-ra-notice");
   const container = document.getElementById("places-list");
   if (!container || !selectRa || !selectTipo) return;
@@ -822,7 +847,7 @@ function renderizarLocais() {
     opTodas.textContent = "Todas as Regiões Administrativas (mostrar todas as unidades)";
     selectRa.append(opTodas);
     DadosRedeLilas.RAS_DF.forEach((ra) => {
-      if (ra === "Prefiro não informar" || ra === "Outra RA do DF" || ra === "Moro fora do Distrito Federal") return;
+      if (RAS_SEM_LOCAL.includes(ra)) return;
       const op = document.createElement("option");
       op.value = ra;
       op.textContent = ra;
@@ -830,63 +855,56 @@ function renderizarLocais() {
     });
   }
 
+  const opTodos = selectTipo.querySelector('option[value="todos"]');
+  if (opTodos && servicosRedeDF.length) opTodos.textContent = `Todos os serviços (${servicosRedeDF.length} unidades)`;
+
+  const valorPerfil = String(perfilUsuario.ra || "").trim();
+  const perfilTemCep = PADRAO_CEP_SOLTO.test(valorPerfil);
+  const raPerfil = valorPerfil && !perfilTemCep && !RAS_SEM_LOCAL.includes(valorPerfil) ? valorPerfil : "";
+
   // Se a usuária ainda não mexeu manualmente no select, seleciona a RA do perfil dela (se existir no select)
   if (!selectRa.dataset.escolhidoManual) {
-    const raPerfil = perfilUsuario.ra;
     const existeNoSelect = Array.from(selectRa.options).some((op) => op.value === raPerfil);
     selectRa.value = existeNoSelect ? raPerfil : "todas";
   }
 
   const tipoFiltro = selectTipo.value || "todos";
-  const raAlvo =
-    selectRa.value !== "todas"
-      ? selectRa.value
-      : perfilUsuario.ra && perfilUsuario.ra !== "Prefiro não informar"
-      ? perfilUsuario.ra
-      : "";
+  const raAlvo = selectRa.value !== "todas" ? selectRa.value : raPerfil;
 
-  const rasVizinhas = (raAlvo && RA_PROXIMAS[raAlvo]) || [];
-  const temUnidadeDiretaNaRa = Boolean(raAlvo && servicosRedeDF.some((s) => s.ra === raAlvo));
+  // CEP digitado nesta tela ou guardado no perfil: conferido só no aparelho e nunca mostrado de volta.
+  const cep = (campoCep && campoCep.value.trim()) || (perfilTemCep ? valorPerfil : "");
+  const temRede = typeof Rede !== "undefined" && typeof Rede.ordenar === "function";
+  const dentroDF = cep && temRede ? Rede.cepParaRa(cep, faixasCepDF).dentroDF : null;
 
-  // Quando a usuária escolhe uma RA específica no filtro, mostramos:
-  // 1) As unidades daquela RA (ou das RAs vizinhas de referência, se a RA escolhida não tiver sede própria)
-  // 2) As unidades de plantão 24 horas do DF (para que emergência 24h esteja sempre visível)
-  const filtrados = servicosRedeDF
-    .filter((s) => (tipoFiltro === "todos" ? true : s.tipo === tipoFiltro))
-    .filter((s) => {
-      if (selectRa.value === "todas" || !raAlvo) return true;
-      const eh24h = String(s.horario).includes("24 horas");
-      if (temUnidadeDiretaNaRa) {
-        return s.ra === raAlvo || eh24h;
-      }
-      return rasVizinhas.includes(s.ra) || eh24h;
-    })
-    .slice()
-    .sort((a, b) => {
-      const aMatch = raAlvo && a.ra === raAlvo ? 0 : 1;
-      const bMatch = raAlvo && b.ra === raAlvo ? 0 : 1;
-      if (aMatch !== bMatch) return aMatch - bMatch;
+  const tipo = tipoFiltro === "todos" ? null : tipoFiltro;
+  const filtrados = temRede
+    ? Rede.ordenar(servicosRedeDF, { ra: raAlvo || null, tipo: tipo })
+    : ordenarLocaisSemRede(servicosRedeDF, raAlvo, tipo);
+  const vizinhas = temRede && raAlvo ? Rede.VIZINHAS[raAlvo] || [] : [];
 
-      const idxVizinhaA = rasVizinhas.indexOf(a.ra);
-      const idxVizinhaB = rasVizinhas.indexOf(b.ra);
-      const aVizinha = idxVizinhaA !== -1 ? idxVizinhaA : 99;
-      const bVizinha = idxVizinhaB !== -1 ? idxVizinhaB : 99;
-      if (aVizinha !== bVizinha) return aVizinha - bVizinha;
-
-      const a24 = String(a.horario).includes("24 horas") ? 0 : 1;
-      const b24 = String(b.horario).includes("24 horas") ? 0 : 1;
-      return a24 - b24;
-    });
+  function grupo(s) {
+    if (!raAlvo) return "";
+    const raDoSite = temRede && Rede.RA_ORDENACAO[s.ra] ? Rede.RA_ORDENACAO[s.ra] : s.ra;
+    if (s.ra === raAlvo || raDoSite === raAlvo) return "mesma";
+    if (vizinhas.includes(raDoSite)) return "vizinha";
+    return "";
+  }
 
   if (avisoRa) {
-    if (selectRa.value !== "todas" && raAlvo) {
-      avisoRa.hidden = false;
-      if (temUnidadeDiretaNaRa) {
-        const qtdNaRa = servicosRedeDF.filter((s) => s.ra === raAlvo).length;
-        avisoRa.innerHTML = `<strong>Região selecionada: ${raAlvo}</strong> — Exibindo no topo as <strong>${qtdNaRa} unidade(s) localizadas em ${raAlvo}</strong>, seguidas pelos plantões 24 horas do DF. Para ver todas as 21 unidades do DF, selecione <em>"Todas as Regiões Administrativas"</em> acima.`;
-      } else {
-        avisoRa.innerHTML = `<strong>Região selecionada: ${raAlvo}</strong> — Não há sede física própria em ${raAlvo} nesta lista. Exibindo abaixo as <strong>unidades mais próximas que atendem moradoras de ${raAlvo} (${rasVizinhas.join(" e ")})</strong> e os plantões 24 horas do DF.`;
-      }
+    avisoRa.hidden = false;
+    if (dentroDF === false) {
+      avisoRa.innerHTML =
+        "<strong>Esse CEP não é do Distrito Federal.</strong> Esta lista mostra só serviços do DF. " +
+        "Para orientação em qualquer lugar do Brasil, ligue 180 (gratuito, 24 horas).";
+    } else if (dentroDF === true && !raAlvo) {
+      avisoRa.innerHTML =
+        "<strong>O CEP não indica a Região Administrativa.</strong> Escolha sua RA acima para ver primeiro os locais mais próximos. " +
+        "Enquanto isso, os plantões 24 horas aparecem primeiro.";
+    } else if (raAlvo) {
+      const naRegiao = filtrados.filter((s) => grupo(s) === "mesma").length;
+      avisoRa.innerHTML = naRegiao
+        ? `<strong>Região selecionada: ${raAlvo}</strong> — No topo, ${naRegiao} unidade(s) em ${raAlvo} ou na mesma região. Depois, as das RAs vizinhas e as demais do DF.`
+        : `<strong>Região selecionada: ${raAlvo}</strong> — Não há unidade desta lista em ${raAlvo}. No topo, as das RAs vizinhas${vizinhas.length ? ` (${vizinhas.slice(0, 3).join(", ")})` : ""}; depois, as demais do DF.`;
     } else {
       avisoRa.hidden = true;
     }
@@ -894,17 +912,16 @@ function renderizarLocais() {
 
   container.replaceChildren();
   filtrados.forEach((s) => {
-    const ehMinhaRa = raAlvo && s.ra === raAlvo;
-    const ehVizinhaReferencia = !temUnidadeDiretaNaRa && raAlvo && rasVizinhas.includes(s.ra);
+    const g = grupo(s);
     const eh24h = String(s.horario).includes("24 horas");
     const card = document.createElement("article");
-    card.className = `place-card ${ehMinhaRa || ehVizinhaReferencia ? "match-ra" : ""}`;
+    card.className = `place-card ${g ? "match-ra" : ""}`;
 
     let badgeRa = `<span class="status neutral">${s.ra}</span>`;
-    if (ehMinhaRa) {
+    if (g === "mesma") {
       badgeRa = `<span class="status good">Na sua Região Administrativa (${s.ra})</span>`;
-    } else if (ehVizinhaReferencia) {
-      badgeRa = `<span class="status good">Mais próxima de ${raAlvo} (${s.ra})</span>`;
+    } else if (g === "vizinha") {
+      badgeRa = `<span class="status good">Perto de ${raAlvo} (${s.ra})</span>`;
     }
 
     card.innerHTML = `
@@ -914,7 +931,7 @@ function renderizarLocais() {
       </div>
       <h2>${s.nome}</h2>
       <p class="place-meta">
-        <strong>Endereço:</strong> ${s.endereco} · CEP ${s.cep}<br>
+        <strong>Endereço:</strong> ${s.endereco}${s.cep ? ` · CEP ${s.cep}` : ""}<br>
         <strong>Horário:</strong> ${s.horario}<br>
         <strong>Telefones:</strong> ${s.telefone}
       </p>
@@ -932,6 +949,7 @@ document.getElementById("filtro-ra")?.addEventListener("change", (e) => {
   renderizarLocais();
 });
 document.getElementById("filtro-tipo")?.addEventListener("change", renderizarLocais);
+document.getElementById("filtro-cep")?.addEventListener("input", renderizarLocais);
 
 // =========================================================================
 // AUTOAVALIAÇÃO DE RISCO (FONAR — web/triagem.js + regras/triagem_fonar.json)
@@ -1396,6 +1414,13 @@ function mostrarAlerta(opcoes = {}) {
   ligar190.focus({ preventScroll: true });
 }
 
+// O CEP nunca sai do aparelho (s4-rede-atendimento, tarefa 3.3): ele é trocado por [CEP] antes do pedido.
+function tirarCepDoTexto(texto) {
+  if (typeof Rede !== "undefined" && typeof Rede.tirarCep === "function") return Rede.tirarCep(texto, faixasCepDF);
+  // Sem web/rede.js, falha do lado seguro: toda sequência com formato de CEP sai do texto.
+  return { texto: String(texto).replace(/\d{2}\.?\d{3}-?\d{3}/g, "[CEP]"), dentroDF: null };
+}
+
 async function enviar(texto, opcoes = {}) {
   const alertaVisto = Boolean(opcoes.alertaVisto);
   // Risco imediato primeiro, no próprio aparelho: funciona sem internet e não espera o servidor.
@@ -1405,13 +1430,16 @@ async function enviar(texto, opcoes = {}) {
     mostrarAlerta({ comContinuar: true });
     return true;
   }
+  // Depois da checagem de risco, que usa o texto original: daqui em diante só vale o texto sem CEP.
+  const semCep = tirarCepDoTexto(texto);
+  if (semCep.dentroDF === false) adicionar("msg--assistente", TEXTOS.cepForaDoDF);
   if (!navigator.onLine) {
     adicionar("msg--erro", TEXTOS.semInternet);
     responderLocalComConversa(texto, { alertaVisto });
     return false;
   }
 
-  const corpoPedido = Conversa.montarPedido(texto, {
+  const corpoPedido = Conversa.montarPedido(semCep.texto, {
     alerta_visto: alertaVisto,
     ajudando: modoAjudando,
   });
