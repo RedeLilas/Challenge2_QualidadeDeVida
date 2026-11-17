@@ -445,11 +445,14 @@ var Beneficios = (function () {
     var usaBoletim = medida !== true && boletim === true;
     var fontes = montarFontes(regra, regrasDados, true);
 
-    var rendaCalculavel = infoRenda.rendaPerCapita !== null && infoRenda.rendaTotal !== null;
-    var rendaAtendida =
-      rendaCalculavel &&
-      (infoRenda.rendaPerCapita <= limitePerCapita || infoRenda.rendaTotal <= limiteFamiliar);
-    var rendaAcima = rendaCalculavel && !rendaAtendida;
+    var rendaPerCapitaOk = infoRenda.rendaPerCapita !== null && infoRenda.rendaPerCapita <= limitePerCapita;
+    var rendaFamiliarOk = infoRenda.rendaTotal !== null && infoRenda.rendaTotal <= limiteFamiliar;
+    var rendaAtendida = rendaPerCapitaOk || rendaFamiliarOk;
+    // Os critérios da Portaria SMDF 49/2026, art. 2º, I são alternativos: renda total <= 2 SM já basta
+    // sem o número de pessoas. Com renda total > 2 SM e pessoas desconhecidas, a per capita ainda pode
+    // atender, então falta informar o número de pessoas.
+    var rendaAvaliavel = infoRenda.rendaPerCapita !== null || rendaFamiliarOk;
+    var rendaAcima = infoRenda.rendaPerCapita !== null && !rendaAtendida;
 
     // 1. Requisitos estruturais não atendidos -> "Não aplicável"
     if (moradiaDf === false || necessidadeMoradia === false || rendaAcima) {
@@ -497,7 +500,7 @@ var Beneficios = (function () {
     var faltaMedidaOuBoletimInfo = medida !== true && boletim !== true;
     if (
       moradiaDf === null ||
-      !rendaCalculavel ||
+      !rendaAvaliavel ||
       necessidadeMoradia === null ||
       acompanhamento === null ||
       faltaMedidaOuBoletimInfo
@@ -507,14 +510,16 @@ var Beneficios = (function () {
       if (moradiaDf === null) {
         faltaInfo.push(t.falta_localizacao);
       }
-      if (!infoRenda.rendaValida) {
-        faltaInfo.push(t.falta_renda);
-      }
-      if (!infoRenda.pessoasValidas) {
-        faltaInfo.push(t.falta_pessoas);
-      }
-      if (infoRenda.motivoInvalido) {
-        motivosInfo.push(infoRenda.motivoInvalido);
+      if (!rendaAvaliavel) {
+        if (!infoRenda.rendaValida) {
+          faltaInfo.push(t.falta_renda);
+        }
+        if (!infoRenda.pessoasValidas) {
+          faltaInfo.push(t.falta_pessoas);
+        }
+        if (infoRenda.motivoInvalido) {
+          motivosInfo.push(infoRenda.motivoInvalido);
+        }
       }
       if (necessidadeMoradia === null) {
         faltaInfo.push(t.falta_necessidade_moradia);

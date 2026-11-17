@@ -5,12 +5,10 @@ from scripts import medir_s4
 
 def test_medicao_real_atinge_metas():
     resultado = medir_s4.medir()
-    assert resultado["elegibilidade"]["acuracia"] >= 0.9
+    assert resultado["elegibilidade"]["acuracia"] == 1.0
     assert resultado["elegibilidade"]["pares"] == 80
-    assert resultado["elegibilidade"]["acertos"] == 79
-    assert resultado["elegibilidade"]["divergencias"] == [
-        {"caso": "e-013", "beneficio": "aluguel_social_df", "esperado": "provavel", "obtido": "faltam_informacoes"}
-    ]
+    assert resultado["elegibilidade"]["acertos"] == 80
+    assert resultado["elegibilidade"]["divergencias"] == []
     assert resultado["risco_alto"]["sensibilidade"] == 1
     assert not resultado["risco_alto"]["falsos_negativos"]
 
