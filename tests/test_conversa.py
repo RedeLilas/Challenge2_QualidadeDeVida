@@ -254,14 +254,18 @@ def test_cartao_beneficio_filtrado_e_todos_os_beneficios_seguem_contrato_comum(j
         assert isinstance(c["artigo"], str) and c["artigo"].strip()
         assert DATA_ISO.fullmatch(c["data_verificacao"])
         assert DATA_BR.fullmatch(c["data"])
-        assert isinstance(c["aviso"], str) and "órgão" in c["aviso"].lower() or "juiz" in c["aviso"].lower()
+        assert (
+            isinstance(c["aviso"], str)
+            and "a concessão depende" in c["aviso"].lower()
+            and any(termo in c["aviso"].lower() for termo in ("órgão", "inss", "juiz", "secretaria"))
+        )
 
     # Auxílio-aluguel da Lei Maria da Penha é sempre "depende de decisão judicial"
     aux = por_id["auxilio_aluguel"]
     assert aux["status"] == "depende_decisao_judicial"
     assert aux["situacao"] == "Depende de decisão judicial"
-    assert aux["norma"] == "Lei 11.340/2006 (redação dada pela Lei 14.674/2023)"
-    assert aux["artigo"] == "art. 23, VI"
+    assert aux["norma"] == "Lei 11.340/2006"
+    assert aux["artigo"] == "art. 23, VI (incluído pela Lei 14.674/2023)"
 
     # Como as perguntas específicas (BO, acompanhamento psicossocial, necessidade de moradia) não foram
     # respondidas no chat, o Aluguel Social DF fica em "faltam_informacoes" e ativa o botão para a tela Benefícios
@@ -275,3 +279,58 @@ def test_cartao_beneficio_filtrado_e_todos_os_beneficios_seguem_contrato_comum(j
     assert "direito garantido" not in codigo_conversa.lower()
     for texto in _coletar_textos(blocos_todos):
         assert "direito garantido" not in texto.lower()
+
+
+# --- Tarefa 4.6: modo "ajudando outra pessoa" em terceira pessoa nos agentes do navegador --
+
+
+def test_modo_ajudando_envia_flag_no_pedido_e_usa_terceira_pessoa_nos_agentes_locais(js):
+    pedido_ajudando = montar_pedido(js, "como posso ajudar minha amiga?", {"ajudando": True})
+    assert pedido_ajudando == {"texto": "como posso ajudar minha amiga?", "alerta_visto": False, "ajudando": True}
+
+    pedido_normal = montar_pedido(js, "como posso ajudar minha amiga?", {"ajudando": False})
+    assert pedido_normal["ajudando"] is False
+
+    # 1. Benefícios sem perfil: convite em 3ª pessoa vs 2ª pessoa
+    sem_perfil_ajudando = para_blocos(
+        js, POR_NOME["beneficios_direito"]["resposta"], {"perfil": {}, "ajudando": True}
+    )[0]
+    sem_perfil_normal = para_blocos(
+        js, POR_NOME["beneficios_direito"]["resposta"], {"perfil": {}, "ajudando": False}
+    )[0]
+    assert sem_perfil_ajudando["ajudando"] is True
+    assert "pessoa que você está ajudando" in sem_perfil_ajudando["texto"]
+    assert "se ela estiver em perigo" in sem_perfil_ajudando["texto"].lower()
+    assert "pessoa que você está ajudando" not in sem_perfil_normal["texto"]
+
+    # 2. Benefícios com "outro": orientação ao CRAS em 3ª pessoa
+    outro_ajudando = para_blocos(
+        js, POR_NOME["beneficios_direito_outro"]["resposta"], {"perfil": PERFIL_FICTICIO_COMPLETO, "ajudando": True}
+    )[0]
+    assert "pessoa que você está ajudando" in outro_ajudando["texto"]
+    assert "oriente-a" in outro_ajudando["texto"].lower()
+
+    # 3. Benefícios com perfil preenchido: introdução em 3ª pessoa
+    cartao_ajudando = para_blocos(
+        js, POR_NOME["beneficios_direito"]["resposta"], {"perfil": PERFIL_FICTICIO_COMPLETO, "ajudando": True}
+    )[0]
+    assert "pessoa que você está ajudando" in cartao_ajudando["texto"]
+
+    # 4. Triagem: oferta da avaliação de risco em 3ª pessoa
+    triagem_ajudando = para_blocos(
+        js, POR_NOME["triagem"]["resposta"], {"ajudando": True}
+    )[0]
+    triagem_normal = para_blocos(
+        js, POR_NOME["triagem"]["resposta"], {"ajudando": False}
+    )[0]
+    assert "pessoa que está ajudando" in triagem_ajudando["texto"]
+    assert "informe o endereço dela" in triagem_ajudando["texto"]
+    assert "pessoa que está ajudando" not in triagem_normal["texto"]
+
+    # 5. Rede (com violência sexual recente): texto de introdução e de saúde em 3ª pessoa
+    rede_ajudando = para_blocos(
+        js, POR_NOME["rede_violencia_sexual"]["resposta"], {"ajudando": True}
+    )[0]
+    assert "pessoa que você está ajudando" in rede_ajudando["texto"]
+    assert "apoie-a" in rede_ajudando["texto_saude"].lower()
+
