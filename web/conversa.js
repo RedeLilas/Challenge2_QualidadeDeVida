@@ -39,9 +39,15 @@ var Conversa = (function () {
     introRedeAjudando:
       "Confira os serviços de atendimento no Distrito Federal que podem acolher a pessoa que você está ajudando (confirme o horário por telefone antes de ir, exceto nos plantões 24 horas):",
     saudeViolenciaSexual:
-      "Em caso de violência sexual, qualquer hospital público do SUS deve prestar atendimento médico emergencial, integral e multidisciplinar imediato, sem exigir Boletim de Ocorrência (Lei 12.845/2013, arts. 1º e 3º, IV e V). Se ocorreu nas últimas 72 horas, procure imediatamente o pronto-socorro de um hospital público para a medicação preventiva (profilaxia).",
+      "Depois de uma violência sexual, você tem direito a atendimento imediato, de graça, em qualquer hospital público do SUS " +
+      "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Esse atendimento inclui remédios para evitar gravidez e infecções sexualmente " +
+      "transmissíveis (Lei 12.845/2013, art. 3º, IV e V). Se foi nas últimas 72 horas, vá o quanto antes ao pronto-socorro " +
+      "de um hospital público, porque esses remédios dependem do tempo.",
     saudeViolenciaSexualAjudando:
-      "Em caso de violência sexual, qualquer hospital público do SUS deve prestar à vítima atendimento médico emergencial, integral e multidisciplinar imediato, sem exigir Boletim de Ocorrência (Lei 12.845/2013, arts. 1º e 3º, IV e V). Se ocorreu nas últimas 72 horas, apoie-a para ir imediatamente ao pronto-socorro de um hospital público para receber a medicação preventiva (profilaxia), respeitando a vontade dela.",
+      "Depois de uma violência sexual, a pessoa que você está ajudando tem direito a atendimento imediato, de graça, em qualquer hospital público do SUS " +
+      "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Esse atendimento inclui remédios para evitar gravidez e infecções sexualmente " +
+      "transmissíveis (Lei 12.845/2013, art. 3º, IV e V). Se foi nas últimas 72 horas, apoie-a para ir o quanto antes " +
+      "ao pronto-socorro de um hospital público, se ela quiser, porque esses remédios dependem do tempo.",
   };
 
   function dataBrasileira(iso) {
@@ -346,33 +352,143 @@ var Conversa = (function () {
     };
   }
 
-  function ordenarServicosCurta(servicos, raAlvo, violenciaSexualRecente) {
+  function formatarDominioFonte(url) {
+    if (!url || typeof url !== "string") return "GDF";
+    return url.replace(/^https?:\/\/(www\.)?/, "").split("/")[0] || "GDF";
+  }
+
+  function raValida(ra) {
+    if (!ra || typeof ra !== "string") return null;
+    var limpa = ra.trim();
+    if (
+      !limpa ||
+      limpa === "Prefiro não informar" ||
+      limpa === "prefiro_nao_informar" ||
+      limpa === "Outra RA do DF" ||
+      limpa === "Moro fora do Distrito Federal"
+    ) {
+      return null;
+    }
+    return limpa;
+  }
+
+  function normalizarParaBuscaTipo(texto) {
+    if (!texto || typeof texto !== "string") return "";
+    return texto
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  // Identifica o tipo de serviço pedido na pergunta ou nos campos, sem consultar rede
+  function extrairTipoServico(texto) {
+    if (!texto || typeof texto !== "string") return null;
+    var t = normalizarParaBuscaTipo(texto);
+    if (/\bcasa da mulher\b/.test(t) || /\bcmb\b/.test(t)) {
+      return "CMB";
+    }
+    if (/\bcras\b/.test(t)) {
+      return "CRAS";
+    }
+    if (/\b(delegacia|delegacias|deam)\b/.test(t)) {
+      return "DEAM";
+    }
+    if (/\bdefensoria\b/.test(t)) {
+      return "Defensoria";
+    }
+    if (/\b(hospital|hospitais|saude|pronto.?socorro)\b/.test(t)) {
+      return "Saúde";
+    }
+    if (/\bceam\b/.test(t)) {
+      return "CEAM";
+    }
+    if (/\b(juizado|juizados|vara de violencia)\b/.test(t)) {
+      return "Juizado";
+    }
+    return null;
+  }
+
+  function normalizarTipoServico(tipo) {
+    if (!tipo || typeof tipo !== "string") return null;
+    var t = tipo.trim();
+    var mapa = {
+      cras: "CRAS",
+      CRAS: "CRAS",
+      deam: "DEAM",
+      DEAM: "DEAM",
+      delegacia: "DEAM",
+      defensoria: "Defensoria",
+      Defensoria: "Defensoria",
+      saude: "Saúde",
+      Saúde: "Saúde",
+      Saude: "Saúde",
+      hospital: "Saúde",
+      Hospital: "Saúde",
+      cmb: "CMB",
+      CMB: "CMB",
+      ceam: "CEAM",
+      CEAM: "CEAM",
+      juizado: "Juizado",
+      Juizado: "Juizado",
+    };
+    return mapa[t] || t;
+  }
+
+  function ordenarServicosCurta(servicos, raAlvo, violenciaSexualRecente, tipoAlvo) {
     var lista = Array.isArray(servicos) ? servicos.slice() : [];
     if (!lista.length) return [];
 
     if (typeof Rede !== "undefined" && typeof Rede.ordenar === "function") {
+      if (tipoAlvo) {
+        var filtrados = Rede.ordenar(lista, {
+          ra: raAlvo || null,
+          tipo: tipoAlvo,
+          violencia_sexual_recente: Boolean(violenciaSexualRecente),
+        });
+        if (filtrados.length > 0) {
+          return filtrados.slice(0, 3);
+        }
+      }
       return Rede.ordenar(lista, {
         ra: raAlvo || null,
         violencia_sexual_recente: Boolean(violenciaSexualRecente),
       }).slice(0, 3);
     }
 
-    lista.sort(function (a, b) {
-      if (violenciaSexualRecente) {
-        var aSaude = a.tipo === "Saúde" || a.tipo === "Hospital" ? 0 : 1;
-        var bSaude = b.tipo === "Saúde" || b.tipo === "Hospital" ? 0 : 1;
-        if (aSaude !== bSaude) return aSaude - bSaude;
+    // Fallback puro caso web/rede.js não esteja disponível
+    var candidata = lista;
+    if (tipoAlvo) {
+      var filtradosFallback = lista.filter(function (s) {
+        return s && s.tipo === tipoAlvo;
+      });
+      if (filtradosFallback.length > 0) {
+        candidata = filtradosFallback;
       }
-      var aMesmaRa = raAlvo && a.ra === raAlvo ? 0 : 1;
-      var bMesmaRa = raAlvo && b.ra === raAlvo ? 0 : 1;
-      if (aMesmaRa !== bMesmaRa) return aMesmaRa - bMesmaRa;
+    }
 
-      var a24h = String(a.horario || "").indexOf("24 horas") !== -1 ? 0 : 1;
-      var b24h = String(b.horario || "").indexOf("24 horas") !== -1 ? 0 : 1;
-      return a24h - b24h;
-    });
-
-    return lista.slice(0, 3);
+    return candidata
+      .map(function (servico, indice) {
+        var ehSaude =
+          violenciaSexualRecente && servico.tipo === "Saúde"
+            ? 0
+            : 1;
+        var ehMesmaRa = raAlvo && servico.ra === raAlvo ? 0 : 1;
+        var eh24h = String(servico.horario || "").indexOf("24 horas") !== -1 ? 0 : 1;
+        return {
+          servico: servico,
+          chave: [ehSaude, ehMesmaRa, eh24h, indice],
+        };
+      })
+      .sort(function (a, b) {
+        for (var i = 0; i < a.chave.length; i++) {
+          if (a.chave[i] !== b.chave[i]) return a.chave[i] - b.chave[i];
+        }
+        return 0;
+      })
+      .slice(0, 3)
+      .map(function (item) {
+        return item.servico;
+      });
   }
 
   function montarBlocoRede(campos, opcoes) {
@@ -382,16 +498,19 @@ var Conversa = (function () {
     var servicos = Array.isArray(config.servicos) ? config.servicos : [];
     var c = campos && typeof campos === "object" ? campos : {};
 
-    var raPerfil =
-      perfil.ra &&
-      perfil.ra !== "Prefiro não informar" &&
-      perfil.ra !== "prefiro_nao_informar" &&
-      perfil.ra !== "Outra RA do DF" &&
-      perfil.ra !== "Moro fora do Distrito Federal"
-        ? perfil.ra
-        : null;
-    var raEscolhida = c.ra || raPerfil || null;
+    var raCitada = raValida(c.ra);
+    var raPerfil = raValida(perfil.ra);
+    var raEscolhida = raCitada || raPerfil || null;
     var violenciaSexualRecente = Boolean(c.violencia_sexual_recente);
+
+    var tipoPedido =
+      normalizarTipoServico(c.tipo) ||
+      extrairTipoServico(c.pergunta) ||
+      normalizarTipoServico(config.tipo) ||
+      extrairTipoServico(config.pergunta) ||
+      extrairTipoServico(config.textoPergunta) ||
+      extrairTipoServico(config.texto) ||
+      null;
 
     var textoSaude = null;
     if (violenciaSexualRecente) {
@@ -404,30 +523,36 @@ var Conversa = (function () {
       }
     }
 
-    var selecionados = ordenarServicosCurta(servicos, raEscolhida, violenciaSexualRecente).map(
-      function (s) {
-        var dataIso = s.data_verificacao || "";
-        return {
-          nome: s.nome || "",
-          tipo: s.tipo || "",
-          ra: s.ra || "",
-          endereco: s.endereco || "",
-          cep: s.cep || "",
-          telefone: s.telefone || "",
-          horario: s.horario || "",
-          fonte_url: s.fonte_url || "",
-          data_verificacao: dataIso,
-          data_formatada: dataBrasileira(dataIso),
-          recomendacao: "Confirme por telefone antes de ir",
-        };
-      }
-    );
+    var selecionados = ordenarServicosCurta(
+      servicos,
+      raEscolhida,
+      violenciaSexualRecente,
+      tipoPedido
+    ).map(function (s) {
+      var dataIso = s.data_verificacao || "";
+      var fonteUrl = s.fonte_url || "";
+      return {
+        nome: s.nome || "",
+        tipo: s.tipo || "",
+        ra: s.ra || "",
+        endereco: s.endereco || "",
+        cep: s.cep || "",
+        telefone: s.telefone || "",
+        horario: s.horario || "",
+        fonte: formatarDominioFonte(fonteUrl),
+        fonte_url: fonteUrl,
+        data_verificacao: dataIso,
+        data_formatada: dataBrasileira(dataIso),
+        recomendacao: "Confirme por telefone antes de ir",
+      };
+    });
 
     return {
       tipo: "rede_atendimento",
       agente: "rede",
       ajudando: ajudando,
       ra: raEscolhida,
+      tipo_servico: tipoPedido,
       violencia_sexual_recente: violenciaSexualRecente,
       texto: ajudando ? TEXTOS_FIXOS.introRedeAjudando : TEXTOS_FIXOS.introRede,
       texto_saude: textoSaude,
@@ -548,6 +673,8 @@ var Conversa = (function () {
           ajudando: ajudando,
           perfil: config.perfil,
           servicos: config.servicos,
+          pergunta: config.pergunta || config.textoPergunta || config.texto,
+          tipo: config.tipo || campos.tipo,
         })
       );
     }
@@ -585,6 +712,8 @@ var Conversa = (function () {
     cartaoBeneficio: montarCartaoBeneficio,
     avaliarCartaoBeneficio: montarCartaoBeneficio,
     montarBlocoRede: montarBlocoRede,
+    extrairTipoServico: extrairTipoServico,
+    ordenarServicosCurta: ordenarServicosCurta,
     paraBlocos: paraBlocos,
     transformarResposta: paraBlocos,
   };

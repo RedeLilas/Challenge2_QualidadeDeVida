@@ -58,14 +58,14 @@ var Rede = (function () {
   // Ministério da Saúde (tarefa 4.2); sem ela, a frase com o número sai, como diz o design.
   var TEXTO_SAUDE =
     "Depois de uma violência sexual, você tem direito a atendimento imediato, de graça, em qualquer hospital público do SUS " +
-    "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Se foi nas últimas 72 horas, vá o quanto antes ao pronto-socorro de um hospital público. " +
-    "Quanto antes o atendimento, mais os remédios que evitam gravidez e infecções sexualmente transmissíveis ajudam " +
-    "(Lei 12.845/2013, art. 3º, IV e V).";
+    "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Esse atendimento inclui remédios para evitar gravidez e infecções sexualmente " +
+    "transmissíveis (Lei 12.845/2013, art. 3º, IV e V). Se foi nas últimas 72 horas, vá o quanto antes ao pronto-socorro " +
+    "de um hospital público, porque esses remédios dependem do tempo.";
   var TEXTO_SAUDE_AJUDANDO =
     "Depois de uma violência sexual, a pessoa que você está ajudando tem direito a atendimento imediato, de graça, em qualquer hospital público do SUS " +
-    "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Se foi nas últimas 72 horas, ajude-a a ir o quanto antes ao pronto-socorro de um hospital público, se ela quiser. " +
-    "Quanto antes o atendimento, mais os remédios que evitam gravidez e infecções sexualmente transmissíveis ajudam " +
-    "(Lei 12.845/2013, art. 3º, IV e V).";
+    "(Lei 12.845/2013, arts. 1º e 3º, § 1º). Esse atendimento inclui remédios para evitar gravidez e infecções sexualmente " +
+    "transmissíveis (Lei 12.845/2013, art. 3º, IV e V). Se foi nas últimas 72 horas, apoie-a para ir o quanto antes " +
+    "ao pronto-socorro de um hospital público, se ela quiser, porque esses remédios dependem do tempo.";
 
   // 00000-000, 00.000-000 ou 8 dígitos seguidos, sem fazer parte de um número maior.
   var PADRAO_CEP = /(?<![\d.])\d{2}\.?\d{3}-?\d{3}(?![\d-])/g;

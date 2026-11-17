@@ -1241,7 +1241,7 @@ function adicionarBlocosConversa(blocos) {
           cardSrv.innerHTML = `
             <strong>${s.nome} (${s.ra})</strong><br>
             <span>${s.endereco} · Tel.: ${s.telefone}</span><br>
-            <small>${s.horario} · ${s.recomendacao} · verificado em ${s.data_formatada}</small>
+            <small>${s.horario} · Fonte: ${s.fonte || formatarFonteUrl(s.fonte_url)} · verificado em ${s.data_formatada} · ${s.recomendacao}</small>
           `;
           item.append(cardSrv);
         });
@@ -1305,6 +1305,7 @@ function responderLocalComConversa(texto, opcoes = {}) {
       especificas: obterEspecificasBeneficios(),
       servicos: servicosRedeDF,
       ajudando: modoAjudando,
+      pergunta: texto,
     });
     adicionarBlocosConversa(blocos);
     return;
@@ -1462,6 +1463,7 @@ async function enviar(texto, opcoes = {}) {
       especificas: obterEspecificasBeneficios(),
       servicos: servicosRedeDF,
       ajudando: modoAjudando,
+      pergunta: texto,
     });
     adicionarBlocosConversa(blocos);
     return true;
