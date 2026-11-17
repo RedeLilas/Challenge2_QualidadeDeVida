@@ -82,10 +82,10 @@ def rotulo(lei: str, artigo: str) -> str:
     return f"{lei}, art. {artigo}{ordinal}"
 
 
-def montar_mensagens(pergunta: str, trechos: list[dict]) -> list[dict]:
+def montar_mensagens(pergunta: str, trechos: list[dict], *, instrucoes: str = INSTRUCOES) -> list[dict]:
     blocos = "\n\n".join(f"[{rotulo(t['lei'], t['artigo'])}]\n{t['texto']}" for t in trechos)
     return [
-        {"role": "system", "content": INSTRUCOES},
+        {"role": "system", "content": instrucoes},
         {"role": "user", "content": f"Trechos de lei:\n\n{blocos}\n\n{_pergunta(pergunta)}"},
     ]
 
@@ -206,14 +206,22 @@ def em_portugues(texto: str) -> bool:
     return outras < 3 or portugues > outras
 
 
-def responder(pergunta: str, indice, cliente) -> dict:
+def responder(
+    pergunta: str,
+    indice,
+    cliente,
+    *,
+    eixos: set[str] = EIXOS,
+    instrucoes: str = INSTRUCOES,
+    limite: float = LIMITE_SIMILARIDADE,
+) -> dict:
     """Recupera os trechos, pergunta ao LLM e só devolve a resposta em português e com as citações conferidas."""
-    resultados = indice.buscar(pergunta, k=K, eixos=EIXOS)
-    if not resultados or resultados[0][1] < LIMITE_SIMILARIDADE:
+    resultados = indice.buscar(pergunta, k=K, eixos=eixos)
+    if not resultados or resultados[0][1] < limite:
         # A base não sustenta a resposta: recusa sem gastar uma chamada ao LLM.
         return {"resposta": RECUSA, "citacoes": [], "recusada": True}
     recuperados = [t for t, _ in resultados]
-    texto = cliente.responder(montar_mensagens(pergunta, recuperados))
+    texto = cliente.responder(montar_mensagens(pergunta, recuperados, instrucoes=instrucoes))
     citacoes = verificar_citacoes(texto, recuperados) if em_portugues(texto) else None
     if citacoes is None:
         return {"resposta": RECUSA, "citacoes": [], "recusada": True}
