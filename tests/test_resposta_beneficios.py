@@ -13,9 +13,11 @@ from app.rag.resposta import (
     AVISO_BENEFICIOS,
     EIXOS_BENEFICIOS,
     INSTRUCOES_BENEFICIOS,
+    LIMITE_BENEFICIOS,
     RECUSA,
     RECUSA_BENEFICIOS,
     aviso_beneficios,
+    expandir_siglas_beneficios,
     explicar_beneficio,
 )
 from tests.test_juridico import IndiceFalso, LLMFalso, trecho
@@ -143,3 +145,26 @@ def test_nenhum_texto_fixo_usa_direito_garantido():
         baixo = texto.lower()
         assert "direito garantido" not in baixo
         assert "você tem direito" not in baixo
+
+
+def test_explicar_beneficio_expande_bpc_so_na_busca_e_mantem_pergunta_original_no_llm():
+    recuperados = [
+        trecho_beneficio("Lei 8.742/1993 (LOAS)", "20", data_acesso="2026-11-03", eixo="beneficios"),
+    ]
+    indice = IndiceFalso(recuperados)
+    llm_falso = LLMFalso("O BPC é um salário mínimo mensal (Lei 8.742/1993, art. 20).")
+
+    resultado = explicar_beneficio("o que é o bpc?", indice, llm_falso)
+
+    assert expandir_siglas_beneficios("o que é o bpc?") == "o que é o benefício de prestação continuada (bpc)?"
+    assert indice.chamadas == [
+        {
+            "pergunta": "o que é o benefício de prestação continuada (bpc)?",
+            "k": 5,
+            "eixos": EIXOS_BENEFICIOS,
+        }
+    ]
+    assert llm_falso.recebido[1]["content"].endswith("Pergunta: o que é o bpc?")
+    assert "benefício de prestação continuada (bpc)" not in llm_falso.recebido[1]["content"]
+    assert resultado["recusada"] is False
+    assert LIMITE_BENEFICIOS == 0.815

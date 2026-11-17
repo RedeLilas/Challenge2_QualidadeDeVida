@@ -370,10 +370,10 @@ def classificar(texto: str, cliente) -> Classificacao:
 
 logger = logging.getLogger("rede_lilas.orquestrador")
 
-# Ponto de troca da explicação de benefícios. s4-rag-beneficios registra aqui uma função
-# (pergunta, indice, cliente) -> dict no formato de app.rag.resposta.responder(). Enquanto for None,
-# a explicação vai ao jurídico, como antes da S4: cortar o RAG de benefícios não quebra o orquestrador.
-explicar_beneficio: Callable[..., dict] | None = None
+# Ponto de troca da explicação de benefícios (s4-rag-beneficios, tarefa 3.4): recebe
+# (pergunta, indice, cliente) -> dict no formato de app.rag.resposta.responder(). Se for None,
+# a explicação volta ao jurídico, como antes da S4: cortar o RAG de benefícios não quebra o orquestrador.
+explicar_beneficio: Callable[..., dict] | None = rag.explicar_beneficio
 
 # Modo "ajudando outra pessoa" (tarefa 3.4): as instruções do jurídico, sem tirar nenhuma regra, mais
 # estas linhas. O /juridico nunca usa esta versão, e INSTRUCOES continua igual (tests/test_instrucoes_sem_rag.py).

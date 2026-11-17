@@ -18,8 +18,17 @@ EIXOS_BENEFICIOS = {"beneficios", "df"}
 # abaixo do tema, e as extras que passam dependem da recusa por falta de citação
 # (openspec/changes/s3-base-legal-ampliada/design.md).
 LIMITE_SIMILARIDADE = 0.81
-# Valor provisório até a calibração com o conjunto de desenvolvimento de benefícios (tarefa 3.3).
-LIMITE_BENEFICIOS = 0.81
+# Calibrado em 17/11 só com avaliacao/conjuntos/s4/desenvolvimento_beneficios.yaml (após expansão de "bpc"):
+# 22 perguntas do tema de 0,8175 (bd-013) a 0,8959 (bd-018); 8 extras quase do tema de 0,8123 (bd-x04)
+# a 0,8629 (bd-x08). Em 0,815 nenhuma pergunta do tema é recusada, bd-x04 é barrada pelo limite e as
+# outras 7 extras dependem da recusa por verificação de citação (openspec/changes/s4-rag-beneficios/design.md).
+LIMITE_BENEFICIOS = 0.815
+# Siglas leigas ausentes do texto das normas de benefícios (s4-rag-beneficios, tarefa 3.3).
+# A Lei 8.742/1993 escreve "benefício de prestação continuada" por extenso e nunca traz a sigla "BPC".
+# Aplicadas só ao texto da busca no índice; a pergunta enviada ao LLM continua a original.
+SIGLAS_BENEFICIOS = {
+    r"\bbpc\b": "benefício de prestação continuada (bpc)",
+}
 # Normas do eixo jurídico. Uma referência a outra norma nunca é aceita.
 LEIS_JURIDICAS = ("Lei 11.340/2006", "Lei 14.149/2021", "Código Penal", "Código Civil", "Código de Processo Civil")
 # A Lei 14.713/2023 alterou o art. 1.584 do Código Civil e incluiu o art. 699-A no CPC: é apelido dos dois.
@@ -344,6 +353,14 @@ def aviso_beneficios(citacoes: list[dict]) -> str | None:
     return AVISO_BENEFICIOS.format(data=mais_antiga)
 
 
+def expandir_siglas_beneficios(pergunta: str) -> str:
+    """Expande siglas ausentes do texto das normas de benefícios só para a busca no índice."""
+    texto = pergunta
+    for padrao, expansao in SIGLAS_BENEFICIOS.items():
+        texto = re.sub(padrao, expansao, texto, flags=re.IGNORECASE)
+    return texto
+
+
 def responder(
     pergunta: str,
     indice,
@@ -355,10 +372,12 @@ def responder(
     verificacao: ConfigVerificacao = JURIDICO,
     recusa: str = RECUSA,
     incluir_aviso: bool = False,
+    pergunta_busca: str | None = None,
 ) -> dict:
     """Recupera os trechos, pergunta ao LLM e só devolve a resposta em português e com as citações conferidas."""
     extra_recusa = {"aviso": None} if incluir_aviso else {}
-    resultados = indice.buscar(pergunta, k=K, eixos=eixos)
+    consulta = pergunta if pergunta_busca is None else pergunta_busca
+    resultados = indice.buscar(consulta, k=K, eixos=eixos)
     if not resultados or resultados[0][1] < limite:
         # A base não sustenta a resposta: recusa sem gastar uma chamada ao LLM.
         return {"resposta": recusa, "citacoes": [], "recusada": True, **extra_recusa}
@@ -389,6 +408,7 @@ def explicar_beneficio(
         verificacao=BENEFICIOS,
         recusa=RECUSA_BENEFICIOS,
         incluir_aviso=True,
+        pergunta_busca=expandir_siglas_beneficios(pergunta),
     )
 
 
