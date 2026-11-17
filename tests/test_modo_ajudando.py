@@ -5,7 +5,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app import main
+from app import main, orquestrador as mod_orquestrador
 from app.main import app
 from app.orquestrador import INSTRUCOES_AJUDANDO
 from app.rag.resposta import INSTRUCOES
@@ -65,7 +65,8 @@ def test_sem_a_flag_o_padrao_e_a_instrucao_do_juridico(llm):
     assert llm.sistemas == [INSTRUCOES]
 
 
-def test_explicacao_de_beneficio_pelo_juridico_tambem_usa_o_modo(llm):
+def test_explicacao_de_beneficio_pelo_juridico_tambem_usa_o_modo(llm, monkeypatch):
+    monkeypatch.setattr(mod_orquestrador, "explicar_beneficio", None)
     corpo = orquestrar("como funciona o cartão gás?", ajudando=True)
     assert (corpo["agente"], corpo["tipo"]) == ("beneficios", "explicacao")
     assert llm.sistemas == [INSTRUCOES_AJUDANDO]
