@@ -1,0 +1,380 @@
+{
+  "versao": 1,
+  "descricao": "Respostas de exemplo do POST /orquestrar (s4-orquestrador-agentes, tarefa 1.2). Textos fictícios. O navegador usa estes exemplos como resposta falsa enquanto o servidor fica pronto; tests/test_orquestrar_contrato.py valida cada um contra app/orquestrador.py. Os campos de 'campos' e 'tipo' referem-se à pergunta respondida.",
+  "exemplos": [
+    {
+      "nome": "juridico_por_regra",
+      "descricao": "Pergunta jurídica decidida pela regra e respondida no mesmo pedido.",
+      "pedido": { "texto": "como peço medida protetiva?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "juridico",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "A medida protetiva de urgência é uma ordem do juiz para proteger você do agressor. Ela pode ser pedida por você mesma ou pelo Ministério Público, e o juiz pode concedê-la sem ouvir o agressor antes (Lei 11.340/2006, art. 19).",
+          "citacoes": [
+            { "lei": "Lei 11.340/2006", "artigo": "19", "citacao": "Lei 11.340/2006, art. 19", "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art19§1", "data_acesso": "2026-11-03" }
+          ],
+          "recusada": false,
+          "aviso": null
+        },
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "juridico_ajudando",
+      "descricao": "Modo 'ajudando outra pessoa': o pedido leva só ajudando: true, e o jurídico responde em terceira pessoa.",
+      "pedido": { "texto": "minha amiga quer pedir medida protetiva, como ela faz?", "alerta_visto": false, "ajudando": true },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "juridico",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "Ela pode pedir a medida protetiva diretamente, na delegacia ou na Defensoria, e o juiz pode concedê-la sem ouvir o agressor antes (Lei 11.340/2006, art. 19). Você pode apoiar indo junto, se ela quiser, e sem falar do assunto em lugares onde o agressor possa ouvir.",
+          "citacoes": [
+            { "lei": "Lei 11.340/2006", "artigo": "19", "citacao": "Lei 11.340/2006, art. 19", "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art19§1", "data_acesso": "2026-11-03" }
+          ],
+          "recusada": false,
+          "aviso": null
+        },
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "beneficios_direito",
+      "descricao": "'Tenho direito?' com benefício citado: o servidor só devolve o agente, o tipo e o benefício; a regra roda no aparelho, com o perfil.",
+      "pedido": { "texto": "tenho direito ao bolsa família?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "beneficios",
+        "tipo": "direito",
+        "campos": { "beneficio": "bolsa_familia", "ra": null, "violencia_sexual_recente": null },
+        "resposta": null,
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "beneficios_direito_sem_beneficio",
+      "descricao": "'Tenho direito a algum auxílio?': sem benefício citado, o aparelho mostra os cartões de todos os benefícios avaliados.",
+      "pedido": { "texto": "tenho direito a algum auxílio?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "beneficios",
+        "tipo": "direito",
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": null,
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "llm"
+      }
+    },
+    {
+      "nome": "beneficios_direito_outro",
+      "descricao": "'Tenho direito?' com benefício sem regra no site: o aparelho diz que avalia só quatro benefícios e orienta o CRAS.",
+      "pedido": { "texto": "tenho direito ao cartão prato cheio?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "beneficios",
+        "tipo": "direito",
+        "campos": { "beneficio": "outro", "ra": null, "violencia_sexual_recente": null },
+        "resposta": null,
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "beneficios_explicacao",
+      "descricao": "'Como funciona?': explicação com citação e aviso de data (formato do RAG de benefícios; sem s4-rag-beneficios, esta pergunta vai ao jurídico, no mesmo formato).",
+      "pedido": { "texto": "como funciona o auxilio do gas?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "beneficios",
+        "tipo": "explicacao",
+        "campos": { "beneficio": "outro", "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "O Cartão Gás é um programa do DF que ajuda famílias de baixa renda a comprar o botijão de gás de cozinha (Lei Distrital 6.938/2021, art. 1º). Para saber se o seu caso se encaixa, use a tela Benefícios ou procure o CRAS.",
+          "citacoes": [
+            { "lei": "Lei Distrital 6.938/2021", "artigo": "1", "citacao": "Lei Distrital 6.938/2021, art. 1º", "url": "https://www.sinj.df.gov.br/sinj/Norma/73a4d82907db4ab98fbce2982adcf5a8/Lei_6938_2021.html#art1", "data_acesso": "2026-11-03" }
+          ],
+          "recusada": false,
+          "aviso": "Valores e regras podem mudar por decreto. Norma consultada em 03/11/2026."
+        },
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "llm"
+      }
+    },
+    {
+      "nome": "auxilio_aluguel_explicacao",
+      "descricao": "Explicação do auxílio-aluguel da Lei Maria da Penha: vai sempre ao jurídico, onde está o art. 23, VI.",
+      "pedido": { "texto": "como funciona o aluguel da maria da penha?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "juridico",
+        "tipo": null,
+        "campos": { "beneficio": "auxilio_aluguel", "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "O juiz pode conceder auxílio-aluguel à mulher em situação de vulnerabilidade social e econômica que precisa sair de casa, por até 6 meses (Lei 11.340/2006, art. 23). Quem decide é o juiz, junto com as medidas protetivas.",
+          "citacoes": [
+            { "lei": "Lei 11.340/2006", "artigo": "23", "citacao": "Lei 11.340/2006, art. 23", "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art23", "data_acesso": "2026-11-03" }
+          ],
+          "recusada": false,
+          "aviso": null
+        },
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "triagem",
+      "descricao": "Pergunta de risco: o aparelho oferece a avaliação de risco, que roda só no navegador.",
+      "pedido": { "texto": "será que eu corro perigo?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "triagem",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": null,
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "rede_com_ra",
+      "descricao": "Pergunta de serviço com RA citada: o aparelho ordena os serviços por Ceilândia.",
+      "pedido": { "texto": "moro em ceilandia, onde tem delegacia da mulher?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "rede",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": "Ceilândia", "violencia_sexual_recente": null },
+        "resposta": null,
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "rede_violencia_sexual",
+      "descricao": "Violência sexual recente: o aparelho mostra a saúde primeiro, com a explicação da Lei 12.845/2013.",
+      "pedido": { "texto": "fui abusada ontem a noite, onde posso ser atendida?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "rede",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": true },
+        "resposta": null,
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "llm"
+      }
+    },
+    {
+      "nome": "fora_do_tema",
+      "descricao": "Fora do tema: recusa padrão com Ligue 180 e Defensoria, sem buscar trechos e sem LLM de resposta.",
+      "pedido": { "texto": "qual a previsão do tempo amanhã?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "fora_do_tema",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "Esse assunto está fora do que consigo responder aqui. Posso ajudar com direitos e leis sobre violência contra a mulher, benefícios, avaliação de risco e serviços de atendimento no DF. Para conversar com alguém, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.",
+          "citacoes": [],
+          "recusada": true,
+          "aviso": null
+        },
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "llm"
+      }
+    },
+    {
+      "nome": "reserva",
+      "descricao": "O LLM devolveu um JSON inválido: a mensagem segue para o jurídico, que aqui recusa por falta de fundamentação.",
+      "pedido": { "texto": "ele fica olhando meu celular escondido, pode isso?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "juridico",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "Não consigo responder a essa pergunta com segurança a partir da lei. Para orientação, ligue 180 (gratuito, 24 horas) ou procure a Defensoria Pública do DF, que atende de graça.",
+          "citacoes": [],
+          "recusada": true,
+          "aviso": null
+        },
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "reserva"
+      }
+    },
+    {
+      "nome": "alerta_sem_alerta_visto",
+      "descricao": "Texto com sinal de risco sem alerta_visto (página antiga): só o alerta de 190, e o texto nunca chega ao LLM.",
+      "pedido": { "texto": "ele está aqui em casa com uma faca, como peço medida protetiva?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": true,
+        "categoria_risco": "arma",
+        "alerta": "Você pode estar em perigo agora. Ligue 190 (Polícia Militar). Se a pessoa em perigo for outra, ligue 190 e informe o endereço dela. Para conversar com alguém, ligue 180 (gratuito, 24 horas).",
+        "agente": null,
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": null,
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": null
+      }
+    },
+    {
+      "nome": "alerta_com_alerta_visto",
+      "descricao": "A usuária tocou em 'Continuar com minha pergunta': resposta do agente com risco_imediato: true, e o 190 continua visível acima.",
+      "pedido": { "texto": "ele está aqui em casa com uma faca, como peço medida protetiva?", "alerta_visto": true, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": true,
+        "categoria_risco": "arma",
+        "alerta": "Você pode estar em perigo agora. Ligue 190 (Polícia Militar). Se a pessoa em perigo for outra, ligue 190 e informe o endereço dela. Para conversar com alguém, ligue 180 (gratuito, 24 horas).",
+        "agente": "juridico",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "Se você estiver em perigo agora, ligue 190. A medida protetiva pode ser pedida na delegacia, e o juiz pode concedê-la sem ouvir o agressor antes (Lei 11.340/2006, art. 19).",
+          "citacoes": [
+            { "lei": "Lei 11.340/2006", "artigo": "19", "citacao": "Lei 11.340/2006, art. 19", "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art19§1", "data_acesso": "2026-11-03" }
+          ],
+          "recusada": false,
+          "aviso": null
+        },
+        "outras_perguntas": [],
+        "excedeu": false,
+        "decidido_por": "regra"
+      }
+    },
+    {
+      "nome": "varias_perguntas",
+      "descricao": "Duas perguntas: responde a primeira e devolve a outra reescrita, sem pronome solto, como pergunta sugerida.",
+      "pedido": { "texto": "o que é medida protetiva e onde eu peço ela?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "juridico",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "A medida protetiva de urgência é uma ordem do juiz para proteger a mulher do agressor, por exemplo afastando-o do lar ou proibindo que ele se aproxime (Lei 11.340/2006, art. 22).",
+          "citacoes": [
+            { "lei": "Lei 11.340/2006", "artigo": "22", "citacao": "Lei 11.340/2006, art. 22", "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art22i", "data_acesso": "2026-11-03" }
+          ],
+          "recusada": false,
+          "aviso": null
+        },
+        "outras_perguntas": ["Onde posso pedir medida protetiva no DF?"],
+        "excedeu": false,
+        "decidido_por": "llm"
+      }
+    },
+    {
+      "nome": "triagem_antes_da_ordem_escrita",
+      "descricao": "Benefício escrito antes da pergunta de risco: a triagem vem primeiro, e a de benefício fica como sugestão.",
+      "pedido": { "texto": "tenho direito ao bolsa família? e também queria saber se corro perigo", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "triagem",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": null,
+        "outras_perguntas": ["Tenho direito ao Bolsa Família?"],
+        "excedeu": false,
+        "decidido_por": "llm"
+      }
+    },
+    {
+      "nome": "excesso_de_perguntas",
+      "descricao": "Mais de três perguntas: responde uma, mostra duas sugestões e pede para enviar o resto separadamente.",
+      "pedido": { "texto": "como peço medida protetiva? tenho direito ao bpc? onde fica o cras? e o que é violência psicológica?", "alerta_visto": false, "ajudando": false },
+      "status": 200,
+      "resposta": {
+        "risco_imediato": false,
+        "categoria_risco": null,
+        "alerta": null,
+        "agente": "juridico",
+        "tipo": null,
+        "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
+        "resposta": {
+          "resposta": "A medida protetiva pode ser pedida pela própria mulher, e o juiz pode concedê-la sem ouvir o agressor antes (Lei 11.340/2006, art. 19).",
+          "citacoes": [
+            { "lei": "Lei 11.340/2006", "artigo": "19", "citacao": "Lei 11.340/2006, art. 19", "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm#art19§1", "data_acesso": "2026-11-03" }
+          ],
+          "recusada": false,
+          "aviso": null
+        },
+        "outras_perguntas": ["Tenho direito ao BPC?", "Onde fica o CRAS?"],
+        "excedeu": true,
+        "decidido_por": "llm"
+      }
+    },
+    {
+      "nome": "llm_indisponivel",
+      "descricao": "O LLM não respondeu ao gerar a resposta jurídica: 503 com a mesma mensagem do /juridico.",
+      "pedido": { "texto": "o que é violência patrimonial?", "alerta_visto": false, "ajudando": false },
+      "status": 503,
+      "resposta": {
+        "erro": "Não consegui responder agora. Tente de novo em alguns instantes. Se precisar falar com alguém, ligue 180 (gratuito, 24 horas)."
+      }
+    }
+  ]
+}

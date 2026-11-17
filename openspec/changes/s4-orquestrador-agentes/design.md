@@ -47,7 +47,7 @@ Resposta 200:
   "agente": "juridico | beneficios | triagem | rede | fora_do_tema | null",
   "tipo": "direito | explicacao | null",
   "campos": { "beneficio": null, "ra": null, "violencia_sexual_recente": null },
-  "resposta": { "resposta": "texto", "citacoes": [], "recusada": false },
+  "resposta": { "resposta": "texto", "citacoes": [], "recusada": false, "aviso": null },
   "outras_perguntas": [],
   "excedeu": false,
   "decidido_por": "regra | llm | reserva | null"
@@ -61,7 +61,9 @@ Resposta 200:
 - `campos.ra`: um valor de `RAS_DF` (sem "Outra RA do DF" e "Prefiro não informar") ou `null`.
 - `campos.violencia_sexual_recente`: `true` quando o texto fala de violência sexual recente **ou sem dizer quando** (na dúvida, a saúde vem primeiro, como na triagem conservadora); `false` só quando o texto diz que foi há mais tempo; `null` quando não há menção a violência sexual.
 - `resposta`: preenchida para `juridico`, `beneficios` com `tipo: explicacao` e `fora_do_tema`; nula para os agentes do aparelho (`beneficios` com `tipo: direito`, `triagem` e `rede`).
+- `resposta.aviso`: só na explicação de benefícios (`s4-rag-beneficios`), com a data da coleta da norma; nulo nos demais.
 - `outras_perguntas`: até 2 perguntas reescritas. `excedeu: true` quando havia mais de 3.
+- Modelos Pydantic em `app/orquestrador.py`; respostas de exemplo em `tests/orquestrar_exemplos.json`, validadas por `tests/test_orquestrar_contrato.py`.
 - Erro do LLM ao gerar a resposta jurídica: 503 com `{"erro": ...}`, como no `/juridico`.
 
 Na terça de manhã, o navegador começa com uma resposta falsa fixa neste formato (um arquivo de exemplos usado só nos testes), sem esperar o servidor. Alternativa descartada: o navegador chamar `/juridico` em um segundo pedido depois da classificação, o que custaria duas viagens e duas checagens de risco.
