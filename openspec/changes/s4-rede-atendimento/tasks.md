@@ -22,8 +22,8 @@
 
 ## 4. Saúde curada (quinta, 19/11; item 3 da ordem de corte da S4)
 
-- [ ] 4.1 Conferir na página "Centros de Referência" da SES-DF a lista de CEPAV e, para cada um, buscar a ficha no CNES; digitar em `dados/rede_protecao_df.csv` com o tipo `Saúde`, a URL da ficha, a data e a competência; verificação: a validação passa, e uma segunda pessoa confere 3 linhas no CNES
-- [ ] 4.2 Buscar a fonte oficial do Ministério da Saúde para o prazo de 72 horas e registrar a URL e a data no design; sem fonte, deixar o texto sem o número, como diz o design; verificação: o design registra a fonte ou a ausência dela, e o teste da tarefa 2.2 confere o texto final
+- [x] 4.1 Conferir na página "Centros de Referência" da SES-DF a lista de CEPAV e, para cada um, buscar a ficha no CNES; digitar em `dados/rede_protecao_df.csv` com o tipo `Saúde`, a URL da ficha, a data e a competência; verificação: a validação passa, e uma segunda pessoa confere 3 linhas no CNES
+- [x] 4.2 Buscar a fonte oficial do Ministério da Saúde para o prazo de 72 horas e registrar a URL e a data no design; sem fonte, deixar o texto sem o número, como diz o design; verificação: o design registra a fonte ou a ausência dela, e o teste da tarefa 2.2 confere o texto final
 
 ## 5. Fechamento (quinta, 19/11)
 

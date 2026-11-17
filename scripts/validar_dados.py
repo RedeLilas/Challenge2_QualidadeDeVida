@@ -41,10 +41,12 @@ COLUNAS_REDE = [
     "data_verificacao",
     "competencia_cnes",
 ]
-# competencia_cnes (AAAA-MM) só é preenchida, e é obrigatória, nos serviços de saúde (fonte: ficha do CNES).
+# competencia_cnes (AAAA-MM) só vale para serviços de saúde, e é obrigatória quando a fonte é a ficha do CNES.
 COLUNAS_REDE_OPCIONAIS = {"competencia_cnes"}
-# A página Unidades da Sedes-DF não publica o CEP dos CRAS; sem fonte, o CEP fica vazio.
-TIPOS_SEM_CEP = {"CRAS"}
+# A página Unidades da Sedes-DF (CRAS) e a Carta de Serviços de Violência da SES-DF (saúde) não publicam
+# o CEP; sem fonte, o CEP fica vazio.
+TIPOS_SEM_CEP = {"CRAS", "Saúde"}
+DOMINIO_CNES = "cnes.datasus.gov.br"
 TIPOS_REDE_VALIDOS = {"CMB", "CEAM", "DEAM", "Defensoria", "Juizado", "CRAS", "Saúde", "outro"}
 PADRAO_COMPETENCIA = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
 
@@ -256,8 +258,8 @@ def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
             tipos_encontrados.add(tipo)
 
             competencia = (linha.get("competencia_cnes") or "").strip()
-            if tipo == "Saúde" and not competencia:
-                erros.append(f"{caminho.name}:{idx}: serviço de saúde sem competencia_cnes")
+            if tipo == "Saúde" and not competencia and _host(linha.get("fonte_url") or "").endswith(DOMINIO_CNES):
+                erros.append(f"{caminho.name}:{idx}: serviço de saúde com fonte no CNES sem competencia_cnes")
             if competencia and tipo != "Saúde":
                 erros.append(f"{caminho.name}:{idx}: competencia_cnes só vale para serviços de saúde")
             if competencia and not PADRAO_COMPETENCIA.match(competencia):
