@@ -5,6 +5,7 @@ import re
 from pathlib import Path
 
 import pytest
+import quickjs
 from fastapi.testclient import TestClient
 
 from app import llm, main
@@ -71,6 +72,7 @@ def test_raiz_serve_a_tela_de_conversa(cliente):
         "/triagem.js",
         "/dados.js",
         "/conversa.js",
+        "/rede.js",
         "/risco.js",
         "/styles.css",
         "/sw.js",
@@ -113,6 +115,8 @@ def test_service_worker_nao_guarda_a_conversa_e_inclui_novos_arquivos(cliente):
         '"/regras/triagem_fonar.json"',
         '"/regras/risco_imediato.json"',
         '"/rede-protecao"',
+        '"/rede.js"',
+        '"/cep-ra"',
     ):
         assert item in sw.text
 
@@ -313,7 +317,7 @@ def test_tela_usa_a_rota_juridica_e_mostra_fontes_sem_link(cliente):
     codigo = cliente.get("/app.js").text
     html = cliente.get("/").text
     assert 'const ROTA = "/orquestrar";' in codigo
-    assert "Conversa.montarPedido(texto, {" in codigo
+    assert "Conversa.montarPedido(semCep.texto, {" in codigo
     assert "body: JSON.stringify(corpoPedido)" in codigo
     assert "texto verificado em" in codigo
     # Botão do modo "ajudando outra pessoa" com aria-pressed e estado apenas em memória
@@ -353,6 +357,7 @@ def test_alerta_de_190_na_tela_antes_do_envio_e_offline(cliente):
         "/triagem.js",
         "/dados.js",
         "/conversa.js",
+        "/rede.js",
         "/risco.js",
         "/styles.css",
         "/regras/beneficios.json",
@@ -369,3 +374,80 @@ def test_service_worker_ignora_o_cache_http_ao_atualizar(cliente):
     sw = cliente.get("/sw.js").text
     assert 'new Request(url, { cache: "reload" })' in sw
     assert 'fetch(pedido, { cache: "no-cache" })' in sw
+
+
+def test_rota_cep_ra_sem_parametros(cliente):
+    # s4-rede-atendimento, tarefa 3.1: só as faixas do DF; nenhum CEP da usuária entra ou sai.
+    resposta = cliente.get("/cep-ra")
+    assert resposta.status_code == 200
+    assert resposta.headers["cache-control"] == "no-cache"
+    faixas = resposta.json()
+    assert [(f["cep_inicio"], f["cep_fim"]) for f in faixas] == [("70000-000", "72799-999"), ("73000-000", "73699-999")]
+    assert all(f["fonte_url"] and f["data_verificacao"] for f in faixas)
+    # Um parâmetro na URL é ignorado: a resposta é a mesma e não repete o CEP.
+    com_parametro = cliente.get("/cep-ra?cep=72215-110")
+    assert com_parametro.json() == faixas and "72215-110" not in com_parametro.text
+    from app.main import cep_ra
+    import inspect
+    assert not inspect.signature(cep_ra).parameters
+
+
+def test_rede_js_carrega_antes_da_conversa_e_da_tela(cliente):
+    # s4-rede-atendimento, tarefa 3.4
+    html = cliente.get("/").text
+    assert html.index('src="/rede.js"') < html.index('src="/conversa.js"') < html.index('src="/app.js"')
+
+
+# --- s4-rede-atendimento, tarefas 3.2 e 3.3 (CEP só no aparelho) ---
+
+
+def _funcao_js(codigo: str, nome: str) -> str:
+    inicio = codigo.index(f"function {nome}(")
+    return codigo[inicio : codigo.index("\n}\n", inicio) + 3]
+
+
+def test_tela_onde_buscar_ajuda_usa_rede_e_nao_manda_cep(cliente):
+    codigo = cliente.get("/app.js").text
+    assert "RA_PROXIMAS" not in codigo
+    assert "Rede.ordenar(servicosRedeDF" in codigo
+    assert "Rede.cepParaRa(cep, faixasCepDF)" in codigo
+    # Os únicos fetch da tela de serviços são GET sem parâmetros; nenhum leva o CEP.
+    for chamada in re.findall(r"fetch\(([^)]*)\)", codigo):
+        assert "cep" not in chamada.lower() or chamada.strip() == "ROTA_CEP"
+    assert 'const ROTA_CEP = "/cep-ra";' in codigo
+    html = cliente.get("/").text
+    assert 'id="filtro-cep"' in html and 'value="CRAS"' in html
+
+
+def test_cep_sai_do_texto_antes_do_pedido(cliente):
+    codigo = cliente.get("/app.js").text
+    corpo = _funcao_js(codigo, "enviar")
+    # Risco sobre o texto original, depois o CEP sai, e só então o pedido é montado.
+    assert corpo.index("Risco.avaliar(regrasDeRisco, texto)") < corpo.index("tirarCepDoTexto(texto)")
+    assert corpo.index("tirarCepDoTexto(texto)") < corpo.index("Conversa.montarPedido(semCep.texto")
+    assert "Conversa.montarPedido(texto" not in corpo
+
+
+@pytest.mark.parametrize("com_rede", [True, False])
+def test_corpo_do_pedido_sem_cep(cliente, com_rede):
+    contexto = quickjs.Context()
+    if com_rede:
+        contexto.eval((RAIZ / "web" / "rede.js").read_text(encoding="utf-8"))
+    contexto.eval('var faixasCepDF = [{"cep_inicio": "70000-000", "cep_fim": "72799-999"}, {"cep_inicio": "73000-000", "cep_fim": "73699-999"}];')
+    contexto.eval(_funcao_js(cliente.get("/app.js").text, "tirarCepDoTexto"))
+    for texto, dentro in [
+        ("meu cep é 72215-110, onde tem delegacia?", True),
+        ("moro no 74000-000", False),
+        ("cep 72.215-110", True),
+        ("cep 72215110", True),
+    ]:
+        resultado = json.loads(contexto.eval(f"JSON.stringify(tirarCepDoTexto({json.dumps(texto)}))"))
+        assert "[CEP]" in resultado["texto"]
+        assert not re.search(r"\d{2}\.?\d{3}-?\d{3}", resultado["texto"])
+        assert resultado["dentroDF"] == (dentro if com_rede else None)
+
+
+def test_cep_de_fora_do_df_responde_no_aparelho(cliente):
+    codigo = cliente.get("/app.js").text
+    assert "if (semCep.dentroDF === false) adicionar(\"msg--assistente\", TEXTOS.cepForaDoDF);" in codigo
+    assert "ligue 180" in codigo.split("cepForaDoDF:")[1].split("\n")[1]
