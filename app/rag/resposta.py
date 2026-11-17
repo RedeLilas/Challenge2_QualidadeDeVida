@@ -11,12 +11,15 @@ import unicodedata
 
 K = 5
 EIXOS = {"juridico"}
+EIXOS_BENEFICIOS = {"beneficios", "df"}
 # Abaixo desta similaridade (cosseno, e5-base) com o trecho mais parecido, recusa sem chamar o LLM.
 # Recalibrado em 15/11, com a base ampliada e só as perguntas de desenvolvimento: menor pergunta do
 # tema 0,826; extras fora do tema de 0,796 a 0,831. As faixas se sobrepõem, então o limite fica
 # abaixo do tema, e as extras que passam dependem da recusa por falta de citação
 # (openspec/changes/s3-base-legal-ampliada/design.md).
 LIMITE_SIMILARIDADE = 0.81
+# Valor provisório até a calibração com o conjunto de desenvolvimento de benefícios (tarefa 3.3).
+LIMITE_BENEFICIOS = 0.81
 # Normas do eixo jurídico. Uma referência a outra norma nunca é aceita.
 LEIS_JURIDICAS = ("Lei 11.340/2006", "Lei 14.149/2021", "Código Penal", "Código Civil", "Código de Processo Civil")
 # A Lei 14.713/2023 alterou o art. 1.584 do Código Civil e incluiu o art. 699-A no CPC: é apelido dos dois.
@@ -114,6 +117,14 @@ RECUSA = (
     "que atende de graça."
 )
 
+RECUSA_BENEFICIOS = (
+    "Não consigo explicar esse benefício com segurança a partir das normas disponíveis. "
+    "Para orientação sobre benefícios e inscrição, procure o CRAS (Centro de Referência de Assistência Social) "
+    "mais próximo ou ligue 180 (gratuito, 24 horas)."
+)
+
+AVISO_BENEFICIOS = "Valores e regras podem mudar por decreto. Norma consultada em {data}."
+
 INSTRUCOES = (
     "Você orienta mulheres sobre a Lei Maria da Penha e normas relacionadas, com linguagem simples "
     "e frases curtas.\n"
@@ -126,6 +137,22 @@ INSTRUCOES = (
     "- Quando usar um termo jurídico, explique-o em uma frase simples.\n"
     "- Se os trechos não bastarem para responder, diga apenas que não sabe responder com segurança.\n"
     "- Você oferece orientação e não substitui advogada ou defensora; não redija petições.\n"
+    "- Se a pessoa estiver em perigo agora, diga para ligar 190."
+)
+
+INSTRUCOES_BENEFICIOS = (
+    "Você explica benefícios sociais federais e do Distrito Federal para mulheres, com linguagem simples "
+    "e frases curtas.\n"
+    "- Escreva sempre e somente em português do Brasil, nunca em outro idioma.\n"
+    "- Explique apenas o que a norma prevê sobre o benefício (o que é, como funciona e quem pode pedir) "
+    "e nunca diga se a pessoa atende aos requisitos ou se vai receber; a concessão depende da análise do órgão responsável.\n"
+    "- Indique a tela Benefícios para avaliar o perfil e o CRAS para fazer o pedido.\n"
+    "- Responda usando apenas os trechos de norma enviados junto com a pergunta. Não use conhecimento de fora deles.\n"
+    "- Cite a norma e o artigo de cada informação, entre parênteses, no formato do rótulo do trecho, "
+    "por exemplo: (Lei 8.742/1993 (LOAS), art. 20) ou (Lei Distrital 6.938/2021, art. 1º). "
+    "Cite somente artigos que aparecem nos trechos.\n"
+    "- Quando usar um termo técnico ou da norma, explique-o em uma frase simples.\n"
+    "- Se os trechos não bastarem para explicar, diga apenas que não sabe explicar com segurança.\n"
     "- Se a pessoa estiver em perigo agora, diga para ligar 190."
 )
 
@@ -297,6 +324,26 @@ def em_portugues(texto: str) -> bool:
     return outras < 3 or portugues > outras
 
 
+def _normalizar_data(data: str) -> tuple[str, str]:
+    """Devolve (AAAA-MM-DD, DD/MM/AAAA) para ordenar datas e exibir no aviso."""
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", data):
+        ano, mes, dia = data.split("-")
+        return data, f"{dia}/{mes}/{ano}"
+    if re.fullmatch(r"\d{2}/\d{2}/\d{4}", data):
+        dia, mes, ano = data.split("/")
+        return f"{ano}-{mes}-{dia}", data
+    return data, data
+
+
+def aviso_beneficios(citacoes: list[dict]) -> str | None:
+    """Aviso fixo com a data da coleta mais antiga entre as normas citadas (DD/MM/AAAA)."""
+    datas = [_normalizar_data(c["data_acesso"]) for c in citacoes if c.get("data_acesso")]
+    if not datas:
+        return None
+    _, mais_antiga = min(datas, key=lambda par: par[0])
+    return AVISO_BENEFICIOS.format(data=mais_antiga)
+
+
 def responder(
     pergunta: str,
     indice,
@@ -306,15 +353,43 @@ def responder(
     instrucoes: str = INSTRUCOES,
     limite: float = LIMITE_SIMILARIDADE,
     verificacao: ConfigVerificacao = JURIDICO,
+    recusa: str = RECUSA,
+    incluir_aviso: bool = False,
 ) -> dict:
     """Recupera os trechos, pergunta ao LLM e só devolve a resposta em português e com as citações conferidas."""
+    extra_recusa = {"aviso": None} if incluir_aviso else {}
     resultados = indice.buscar(pergunta, k=K, eixos=eixos)
     if not resultados or resultados[0][1] < limite:
         # A base não sustenta a resposta: recusa sem gastar uma chamada ao LLM.
-        return {"resposta": RECUSA, "citacoes": [], "recusada": True}
+        return {"resposta": recusa, "citacoes": [], "recusada": True, **extra_recusa}
     recuperados = [t for t, _ in resultados]
     texto = cliente.responder(montar_mensagens(pergunta, recuperados, instrucoes=instrucoes))
     citacoes = verificar_citacoes(texto, recuperados, verificacao=verificacao) if em_portugues(texto) else None
     if citacoes is None:
-        return {"resposta": RECUSA, "citacoes": [], "recusada": True}
-    return {"resposta": texto, "citacoes": citacoes, "recusada": False}
+        return {"resposta": recusa, "citacoes": [], "recusada": True, **extra_recusa}
+    extra_ok = {"aviso": aviso_beneficios(citacoes)} if incluir_aviso else {}
+    return {"resposta": texto, "citacoes": citacoes, "recusada": False, **extra_ok}
+
+
+def explicar_beneficio(
+    pergunta: str,
+    indice,
+    cliente,
+    *,
+    limite: float = LIMITE_BENEFICIOS,
+) -> dict:
+    """Explica um benefício usando os eixos beneficios e df, instruções próprias, recusa e aviso de data."""
+    return responder(
+        pergunta,
+        indice,
+        cliente,
+        eixos=EIXOS_BENEFICIOS,
+        instrucoes=INSTRUCOES_BENEFICIOS,
+        limite=limite,
+        verificacao=BENEFICIOS,
+        recusa=RECUSA_BENEFICIOS,
+        incluir_aviso=True,
+    )
+
+
+responder_beneficios = explicar_beneficio
