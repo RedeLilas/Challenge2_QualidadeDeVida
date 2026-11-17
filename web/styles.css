@@ -1714,6 +1714,15 @@ a {
   border-radius: 15px;
   font-size: 12.5px;
   line-height: 1.5;
+  transform-origin: bottom left;
+}
+
+.msg--usuaria {
+  transform-origin: bottom right;
+}
+
+.msg--nova {
+  animation: msg-enter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .msg--assistente {
@@ -1721,6 +1730,7 @@ a {
   border-top-left-radius: 4px;
   background: #f2edf9;
   color: #322944;
+  box-shadow: 0 4px 14px rgba(58, 36, 97, 0.06);
 }
 
 .msg--usuaria {
@@ -1732,9 +1742,33 @@ a {
 
 .msg--pensando {
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: #f5f2fa;
-  color: #776c8a;
-  font-style: italic;
+  border: 1px solid #e6ddf5;
+  color: #6b5d82;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.msg--pensando::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7c56c4;
+  animation: typing-pulse 1s infinite ease-in-out;
+}
+
+.chat-subcard {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f8f5fc;
+  border: 1px solid #e3d8f4;
+  font-size: 12.8px;
+  animation: subcard-enter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .msg--erro {
@@ -1923,6 +1957,37 @@ footer {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+@keyframes msg-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes subcard-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes typing-pulse {
+  0%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
   }
 }
 @keyframes toast-in {
