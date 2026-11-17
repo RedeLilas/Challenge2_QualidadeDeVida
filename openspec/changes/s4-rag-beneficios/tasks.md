@@ -16,7 +16,7 @@ Primeira mudança a cortar se a S4 apertar (vai para a S6). Depende da tarefa 1.
 ## 3. Resposta de benefícios (terça, 17/11, e quinta, 19/11)
 
 - [x] 3.1 Escrever `INSTRUCOES_BENEFICIOS`, a recusa de benefícios (CRAS e Ligue 180) e o aviso fixo com a data da coleta mais antiga das normas citadas (terça); verificação: testes com LLM falso conferem a instrução enviada, o aviso com a data e a recusa, e um teste confere que nenhum texto fixo usa "direito garantido"
-- [ ] 3.2 Criar o teste de recuperação por benefício nos eixos `beneficios` e `df`, com a norma certa no top 5 (terça); verificação: o teste passa para os seis programas ou registra no design o benefício que falha e o motivo
+- [x] 3.2 Criar o teste de recuperação por benefício nos eixos `beneficios` e `df`, com a norma certa no top 5 (terça); verificação: o teste passa para os seis programas ou registra no design o benefício que falha e o motivo
 - [ ] 3.3 Calibrar `LIMITE_BENEFICIOS` só com o conjunto de desenvolvimento de benefícios, conferir a pergunta do aluguel da Maria da Penha contra o 0,81 do jurídico e registrar o valor, as faixas e a data no design (quinta); verificação: um teste com o índice real confere que as extras quase do tema são recusadas pelo limite ou pela citação, e o design traz os números
 - [ ] 3.4 Registrar a explicação de benefícios no ponto de troca do `/orquestrar` (quinta); verificação: testes com índice e LLM falsos conferem que a explicação busca só nos eixos `beneficios` e `df`, com o limite próprio, e que, sem o registro, ela volta ao jurídico
 
