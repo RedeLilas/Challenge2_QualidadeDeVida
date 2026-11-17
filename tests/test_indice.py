@@ -28,10 +28,6 @@ NORMAS_POR_PROGRAMA = {
         "Decreto Distrital 35.191/2014",
     },
 }
-# bd-005 ("o que é o bpc?") está registrada no design: o texto da Lei 8.742/1993 na base escreve
-# "benefício de prestação continuada" por extenso e nunca traz a sigla "BPC", então a pergunta curta
-# recupera outras normas no top 5 (a LOAS aparece em 9º lugar). As demais perguntas de BPC passam.
-FALHAS_CONHECIDAS_RECUPERACAO = {"bd-005"}
 
 
 @pytest.fixture(scope="module")
@@ -116,7 +112,8 @@ def _conferir_recuperacao_beneficio(
     esperadas = NORMAS_POR_PROGRAMA[programa] if normas_esperadas is None else normas_esperadas
     erros = []
     for pergunta in perguntas:
-        resultados = indice.buscar(pergunta, k=5, eixos=resposta.EIXOS_BENEFICIOS)
+        consulta = resposta.expandir_siglas_beneficios(pergunta)
+        resultados = indice.buscar(consulta, k=5, eixos=resposta.EIXOS_BENEFICIOS)
         leis_recuperadas = {t["lei"] for t, _ in resultados}
         if not leis_recuperadas & esperadas:
             trechos_recuperados = [t["citacao"] for t, _ in resultados]
@@ -131,11 +128,7 @@ def _conferir_recuperacao_beneficio(
 def test_recuperacao_por_beneficio_top5(indice, programa):
     dados = yaml.safe_load(DESENVOLVIMENTO_BENEFICIOS.read_text(encoding="utf-8"))
     assert set(dados["programas"]) == set(NORMAS_POR_PROGRAMA)
-    itens = [
-        p
-        for p in dados["perguntas"]
-        if p["programa"] == programa and p["id"] not in FALHAS_CONHECIDAS_RECUPERACAO
-    ]
+    itens = [p for p in dados["perguntas"] if p["programa"] == programa]
     assert itens, f"Nenhuma pergunta ativa para o programa {programa!r}"
     for item in itens:
         normas_do_item = {n.split(", art.")[0] for n in item["normas_aceitas"]}
@@ -172,12 +165,88 @@ def test_beneficio_sem_norma_no_top5_falha_apontando_beneficio_e_trechos():
     assert "Decreto Distrital 42.376/2021, art. 2º" in mensagem
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "bd-005 ('o que é o bpc?'): a Lei 8.742/1993 na base escreve 'benefício de prestação continuada' "
-        "por extenso e não contém a sigla 'BPC'; a LOAS só aparece em 9º lugar (registrado no design)."
-    ),
-)
 def test_recuperacao_bpc_sigla_curta_bd_005(indice):
+    # Com a expansão de siglas na busca de benefícios ("bpc" -> "benefício de prestação continuada (bpc)"),
+    # bd-005 recupera a Lei 8.742/1993 (LOAS) no top 5 (s4-rag-beneficios, tarefa 3.3).
     _conferir_recuperacao_beneficio(indice, "bpc", ["o que é o bpc?"])
+
+
+# --- s4-rag-beneficios, tarefa 3.3: calibração de LIMITE_BENEFICIOS e recusa das extras -----------
+
+
+def test_perguntas_de_desenvolvimento_de_beneficios_passam_do_limite(indice):
+    dados = yaml.safe_load(DESENVOLVIMENTO_BENEFICIOS.read_text(encoding="utf-8"))
+    perguntas = dados["perguntas"]
+    assert len(perguntas) == 22
+    recusadas = []
+    for p in perguntas:
+        consulta = resposta.expandir_siglas_beneficios(p["pergunta"])
+        _, similaridade = indice.buscar(consulta, k=1, eixos=resposta.EIXOS_BENEFICIOS)[0]
+        if similaridade < resposta.LIMITE_BENEFICIOS:
+            recusadas.append(f"{p['id']}: {similaridade:.4f}")
+    assert recusadas == []
+
+
+def test_extras_quase_do_tema_sao_recusadas_pelo_limite_ou_pela_citacao(indice):
+    # As 8 extras quase do tema (imposto de renda, FGTS, seguro-desemprego e aposentadoria) têm
+    # vocabulário próximo ao das normas de benefícios (0,8123 a 0,8629): bd-x04 fica abaixo de
+    # LIMITE_BENEFICIOS (0,815) e é barrada antes do LLM; as demais são barradas pela verificação
+    # de citação (sem citação, norma fora da base ou artigo sem norma em múltiplos diplomas).
+    dados = yaml.safe_load(DESENVOLVIMENTO_BENEFICIOS.read_text(encoding="utf-8"))
+    extras = dados["extras"]
+    assert len(extras) == 8
+
+    class LLMExtraForaDaBase:
+        def __init__(self, texto: str):
+            self.texto = texto
+            self.chamado = False
+
+        def responder(self, mensagens):
+            self.chamado = True
+            return self.texto
+
+    respostas_llm = [
+        "Não sei explicar esse benefício com segurança a partir das normas disponíveis.",
+        "Essa regra está na legislação federal específica (Lei 8.036/1990, art. 20).",
+        "O requisito está previsto no art. 3º.",
+    ]
+
+    barradas_pelo_limite = []
+    for extra in extras:
+        pergunta = extra["pergunta"]
+        _, sim = indice.buscar(
+            resposta.expandir_siglas_beneficios(pergunta), k=1, eixos=resposta.EIXOS_BENEFICIOS
+        )[0]
+        if sim < resposta.LIMITE_BENEFICIOS:
+            barradas_pelo_limite.append(extra["id"])
+            r = resposta.explicar_beneficio(pergunta, indice, LLMQueNaoPodeSerChamado())
+            assert r == {
+                "resposta": resposta.RECUSA_BENEFICIOS,
+                "citacoes": [],
+                "recusada": True,
+                "aviso": None,
+            }
+        else:
+            for saida in respostas_llm:
+                llm_falso = LLMExtraForaDaBase(saida)
+                r = resposta.explicar_beneficio(pergunta, indice, llm_falso)
+                assert llm_falso.chamado is True
+                assert r == {
+                    "resposta": resposta.RECUSA_BENEFICIOS,
+                    "citacoes": [],
+                    "recusada": True,
+                    "aviso": None,
+                }
+
+    assert barradas_pelo_limite == ["bd-x04"]
+
+
+def test_pergunta_aluguel_maria_da_penha_contra_limite_juridico(indice):
+    # bd-j01 ("como funciona o aluguel da maria da penha?"): confere no eixo jurídico contra o 0,81,
+    # sem alterar LIMITE_SIMILARIDADE nem o /juridico.
+    dados = yaml.safe_load(DESENVOLVIMENTO_BENEFICIOS.read_text(encoding="utf-8"))
+    item = dados["juridico"][0]
+    assert item["id"] == "bd-j01" and item["eixo_esperado"] == "juridico"
+    resultados = indice.buscar(item["pergunta"], k=5, eixos=resposta.EIXOS)
+    assert resultados[0][1] < resposta.LIMITE_SIMILARIDADE
+    assert ("lei-11340-2006", "23") in [(t["norma_id"], t["artigo"]) for t, _ in resultados]

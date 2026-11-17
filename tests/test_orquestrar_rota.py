@@ -160,11 +160,64 @@ def test_fora_do_tema_usa_o_texto_fixo_sem_indice_nem_llm_de_resposta(cliente):
 
 
 def test_explicacao_de_beneficio_vai_ao_juridico_sem_o_rag_de_beneficios(cliente):
+    orquestrador.explicar_beneficio = None
     _, falso_indice = usar("O juiz pode conceder (Lei 11.340/2006, art. 22).")
     corpo = enviar(cliente, "como funciona o cartão gás?").json()
     assert (corpo["agente"], corpo["tipo"]) == ("beneficios", "explicacao")
     assert falso_indice.chamadas[0]["eixos"] == {"juridico"}
     assert corpo["resposta"] is not None
+
+
+def test_explicacao_de_beneficio_usa_rag_de_beneficios_nos_eixos_e_limite_proprios(cliente):
+    class IndiceBeneficios:
+        def __init__(self, similaridade=0.9):
+            self.similaridade = similaridade
+            self.chamadas = []
+
+        def buscar(self, pergunta, k=5, eixos=None):
+            self.chamadas.append({"pergunta": pergunta, "k": k, "eixos": eixos})
+            return [
+                (
+                    {
+                        "id": "lei-distrital-6938-2021:art1",
+                        "norma_id": "lei-distrital-6938-2021",
+                        "eixo": "df",
+                        "lei": "Lei Distrital 6.938/2021",
+                        "artigo": "1",
+                        "citacao": "Lei Distrital 6.938/2021, art. 1º",
+                        "capitulo": "",
+                        "texto": "Texto fictício.",
+                        "url": "https://www.sinj.df.gov.br/exemplo.html#art1",
+                        "data_acesso": "2026-11-03",
+                    },
+                    self.similaridade,
+                )
+            ]
+
+    falso_llm = LLMRoteiro(
+        "O Cartão Gás auxilia na compra do botijão (Lei Distrital 6.938/2021, art. 1º). "
+        "Consulte a tela Benefícios ou procure o CRAS."
+    )
+    falso_indice = IndiceBeneficios(similaridade=0.9)
+    main.cliente_llm = lambda: falso_llm
+    main.indice_juridico = lambda: falso_indice
+
+    corpo = enviar(cliente, "como funciona o cartão gás?").json()
+    assert (corpo["agente"], corpo["tipo"]) == ("beneficios", "explicacao")
+    assert falso_indice.chamadas == [
+        {"pergunta": "como funciona o cartão gás?", "k": 5, "eixos": {"beneficios", "df"}}
+    ]
+    assert corpo["resposta"]["recusada"] is False
+    assert corpo["resposta"]["citacoes"][0]["citacao"] == "Lei Distrital 6.938/2021, art. 1º"
+    assert corpo["resposta"]["aviso"] == "Valores e regras podem mudar por decreto. Norma consultada em 03/11/2026."
+
+    # Similaridade 0,812 passa no 0,81 do jurídico, mas é barrada pelo LIMITE_BENEFICIOS (0,815) sem chamar o LLM.
+    main.cliente_llm = nao_pode_ser_chamado("o LLM")
+    main.indice_juridico = lambda: IndiceBeneficios(similaridade=0.812)
+    corpo_recusado = enviar(cliente, "como funciona o cartão gás?").json()
+    assert corpo_recusado["resposta"]["recusada"] is True
+    assert "CRAS" in corpo_recusado["resposta"]["resposta"]
+    assert corpo_recusado["resposta"]["aviso"] is None
 
 
 def test_explicacao_de_beneficio_usa_o_ponto_de_troca(cliente):
