@@ -17,6 +17,10 @@ from app.risco import avaliar, normalizar
 
 RAIZ = Path(__file__).resolve().parent.parent
 PASTA_CONJUNTOS = RAIZ / "avaliacao" / "conjuntos"
+PASTA_CONJUNTOS_S4 = PASTA_CONJUNTOS / "s4"
+NIVEIS_TRIAGEM_S4 = {"alto", "alto_nao_descartado", "atencao", "sem_sinais_graves"}
+AGENTES_S4 = {"juridico", "beneficios", "triagem", "rede", "fora_do_tema"}
+TIPOS_BENEFICIO_S4 = {"direito", "explicacao"}
 
 # Chaves estáveis definidas para os conjuntos da S3.
 DISTRIBUICAO_OFICIAL = {
@@ -165,6 +169,228 @@ def validar_conjunto(caminho: Path, tipo: str) -> list[str]:
                     f"{caminho}: categoria '{categoria}' exige {esperado} perguntas; encontradas {contagem[categoria]}"
                 )
 
+    return erros
+
+
+def _ler_yaml(caminho: Path, raiz_esperada: str = "casos") -> tuple[dict | None, list[str]]:
+    """Lê um conjunto S4 e devolve erros de arquivo/estrutura básica."""
+    if not caminho.is_file():
+        return None, [f"Arquivo não encontrado: {caminho}"]
+    try:
+        dados = yaml.safe_load(caminho.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        return None, [f"{caminho}: não foi possível ler YAML: {exc}"]
+    if not isinstance(dados, dict):
+        return None, [f"{caminho}: raiz deve ser um objeto com versao e {raiz_esperada}"]
+    erros = []
+    if type(dados.get("versao")) is not int or dados["versao"] != 1:
+        erros.append(f"{caminho}: 'versao' deve ser 1")
+    if not _texto(dados.get("descricao")):
+        erros.append(f"{caminho}: 'descricao' obrigatória e não vazia")
+    casos = dados.get(raiz_esperada)
+    if not isinstance(casos, list):
+        erros.append(f"{caminho}: '{raiz_esperada}' deve ser uma lista")
+        return dados, erros
+    return dados, erros
+
+
+def _fonte_normativa(valor: object) -> bool:
+    """Confere a forma mínima de uma referência, sem substituir a revisão jurídica."""
+    if not _texto(valor):
+        return False
+    fonte = normalizar(valor)
+    norma = re.search(r"\b(?:lei|portaria|decreto|resolucao)\b[^;\n]{0,100}\d+/\d{4}", fonte)
+    dispositivo = re.search(r"\b(?:arts?\.\s*\d|itens?\s+\d|anexo\b)", fonte)
+    return norma is not None and dispositivo is not None
+
+
+def _validar_identidade_caso(item: dict, referencia: str, ids: set[str]) -> list[str]:
+    erros = []
+    identificador = item.get("id")
+    if not _texto(identificador):
+        erros.append(f"{referencia}: campo 'id' obrigatório e não vazio")
+    elif identificador in ids:
+        erros.append(f"{referencia}: id duplicado '{identificador}'")
+    else:
+        ids.add(identificador)
+    if not _texto(item.get("autor")):
+        erros.append(f"{referencia}: campo 'autor' obrigatório e não vazio")
+    conferencia = item.get("conferencia")
+    revisor = conferencia.get("revisor") if isinstance(conferencia, dict) else None
+    if not _texto(revisor):
+        erros.append(f"{referencia}: conferencia.revisor obrigatório e não vazio")
+    elif _texto(item.get("autor")) and revisor.strip().casefold() == item["autor"].strip().casefold():
+        erros.append(f"{referencia}: revisor deve ser diferente do autor")
+    if not isinstance(conferencia, dict) or conferencia.get("status") != "conferido":
+        erros.append(f"{referencia}: conferencia.status deve ser 'conferido'")
+    return erros
+
+
+def validar_elegibilidade_s4(caminho: Path = PASTA_CONJUNTOS_S4 / "elegibilidade.yaml") -> list[str]:
+    """Valida estrutura, fontes, conferência e cobertura do conjunto de elegibilidade S4."""
+    dados, erros = _ler_yaml(caminho)
+    if dados is None:
+        return erros
+    casos = dados.get("casos") if isinstance(dados.get("casos"), list) else []
+    beneficios = dados.get("beneficios")
+    if not isinstance(beneficios, list) or not beneficios or not all(_texto(b) for b in beneficios):
+        erros.append(f"{caminho}: 'beneficios' deve ser uma lista não vazia de textos")
+        beneficios = []
+    if not 20 <= len(casos) <= 30:
+        erros.append(f"{caminho}: esperados de 20 a 30 perfis; encontrados {len(casos)}")
+
+    try:
+        regra = json.loads((RAIZ / "regras" / "beneficios.json").read_text(encoding="utf-8"))
+        regras = {r["id"]: r for r in regra["regras"]}
+        salario = regra["salario_minimo"]["valor"]
+        bf_corte = regras["bolsa_familia"]["requisitos"]["renda_per_capita_max"]
+        bpc_corte = salario * regras["bpc"]["requisitos"]["renda_per_capita_fracao_sm"]
+        aluguel = regras["aluguel_social_df"]["requisitos"]
+        aluguel_pc = salario * aluguel["renda_per_capita_fracao_sm"]
+        aluguel_total = salario * aluguel["renda_familiar_multiplo_sm"]
+        # Este rótulo aparece na interface, mas não é um status produzido pelo motor.
+        status_validos = set(regra["rotulos_status"]) - {"nao_aplicavel_por_enquanto"}
+    except (OSError, UnicodeError, json.JSONDecodeError, KeyError, TypeError) as exc:
+        return erros + [f"{caminho}: não foi possível ler regras/beneficios.json: {exc}"]
+    if beneficios and (len(beneficios) != len(regras) or set(beneficios) != set(regras)):
+        erros.append(f"{caminho}: 'beneficios' deve conter exatamente os ids de regras/beneficios.json")
+
+    ids: set[str] = set()
+    for indice, item in enumerate(casos, start=1):
+        referencia = f"{caminho}:casos[{indice}]"
+        if not isinstance(item, dict):
+            erros.append(f"{referencia}: registro deve ser um objeto")
+            continue
+        referencia += f" ({item.get('id', 'sem id')})"
+        erros.extend(_validar_identidade_caso(item, referencia, ids))
+        if not _texto(item.get("descricao")):
+            erros.append(f"{referencia}: campo 'descricao' obrigatório e não vazio")
+        perfil = item.get("perfil")
+        if not isinstance(perfil, dict):
+            erros.append(f"{referencia}: campo 'perfil' deve ser um objeto")
+        esperado = item.get("esperado")
+        if not isinstance(esperado, dict) or not esperado:
+            erros.append(f"{referencia}: campo 'esperado' deve ser um objeto não vazio")
+            esperado = {}
+        elif beneficios and set(esperado) != set(beneficios):
+            erros.append(f"{referencia}: 'esperado' deve conter exatamente os benefícios declarados")
+        for beneficio, status in esperado.items():
+            if not isinstance(status, str) or status not in status_validos:
+                erros.append(f"{referencia}: situação inválida para '{beneficio}': {status!r}")
+        if not _fonte_normativa(item.get("fonte")):
+            erros.append(f"{referencia}: campo 'fonte' deve citar norma e artigo ou item")
+        fontes = item.get("fontes_por_beneficio")
+        if not isinstance(fontes, dict) or (beneficios and set(fontes) != set(esperado)):
+            erros.append(f"{referencia}: 'fontes_por_beneficio' deve citar a fonte de cada benefício esperado")
+        else:
+            for beneficio in esperado:
+                if not _fonte_normativa(fontes.get(beneficio)):
+                    erros.append(f"{referencia}: fonte de '{beneficio}' deve citar norma e artigo ou item")
+
+    # A cobertura é aferida pelos dados dos perfis e pelos limites versionados na regra.
+    perfis = [i.get("perfil") for i in casos if isinstance(i, dict) and isinstance(i.get("perfil"), dict)]
+    rendas = [p.get("renda_total") for p in perfis]
+    pessoas = [p.get("numero_pessoas") for p in perfis]
+    validos = [(r, n) for r, n in zip(rendas, pessoas) if isinstance(r, (int, float)) and not isinstance(r, bool) and isinstance(n, int) and not isinstance(n, bool) and n > 0]
+    bate_corte = lambda r, n: (
+        r / n == bf_corte or r / n == bpc_corte or r / n == aluguel_pc or r == aluguel_total
+    )
+    bate_acima = lambda r, n: (
+        r / n == bf_corte + 1 or r / n == bpc_corte + 1 or r / n == aluguel_pc + 1 or r == aluguel_total + 1
+    )
+    if not any(bate_corte(r, n) for r, n in validos):
+        erros.append(f"{caminho}: falta caso com renda per capita ou familiar exatamente no limite")
+    if not any(bate_acima(r, n) for r, n in validos):
+        erros.append(f"{caminho}: falta caso com renda um real acima do limite")
+    campos_necessarios = ("renda_total", "numero_pessoas")
+    if not any(p.get(campo) == "prefiro_nao_informar" for p in perfis for campo in campos_necessarios):
+        erros.append(f"{caminho}: falta caso com 'prefiro não informar' em dado necessário")
+    if not any(any(p.get(campo) is None for campo in campos_necessarios) for p in perfis):
+        erros.append(f"{caminho}: falta perfil incompleto com dado necessário ausente")
+    return erros
+
+
+def validar_triagem_s4(caminho: Path = PASTA_CONJUNTOS_S4 / "triagem.yaml") -> list[str]:
+    """Valida casos de triagem, fonte do gabarito e conferência independente."""
+    dados, erros = _ler_yaml(caminho)
+    if dados is None:
+        return erros
+    casos = dados.get("casos") if isinstance(dados.get("casos"), list) else []
+    ids: set[str] = set()
+    niveis_encontrados: set[str] = set()
+    for indice, item in enumerate(casos, start=1):
+        referencia = f"{caminho}:casos[{indice}]"
+        if not isinstance(item, dict):
+            erros.append(f"{referencia}: registro deve ser um objeto")
+            continue
+        referencia += f" ({item.get('id', 'sem id')})"
+        erros.extend(_validar_identidade_caso(item, referencia, ids))
+        for campo in ("descricao", "itens_fonar"):
+            if not _texto(item.get(campo)):
+                erros.append(f"{referencia}: campo '{campo}' obrigatório e não vazio")
+        nivel = item.get("nivel_esperado")
+        if not isinstance(nivel, str) or nivel not in NIVEIS_TRIAGEM_S4:
+            erros.append(f"{referencia}: nivel_esperado inválido: {nivel!r}")
+        else:
+            niveis_encontrados.add(nivel)
+        if not _fonte_normativa(item.get("fonte")):
+            erros.append(f"{referencia}: campo 'fonte' deve citar norma e artigo ou item")
+        if not isinstance(item.get("respostas"), dict) or not item["respostas"]:
+            erros.append(f"{referencia}: campo 'respostas' deve ser um objeto não vazio")
+    if not casos:
+        erros.append(f"{caminho}: deve conter ao menos um caso de triagem")
+    for nivel in sorted(NIVEIS_TRIAGEM_S4 - niveis_encontrados):
+        erros.append(f"{caminho}: falta caso com nivel_esperado '{nivel}'")
+    return erros
+
+
+def validar_roteamento_s4(caminho: Path = PASTA_CONJUNTOS_S4 / "roteamento.yaml") -> list[str]:
+    """Valida mensagens e cobertura dos pares e tipos essenciais de roteamento S4."""
+    dados, erros = _ler_yaml(caminho)
+    if dados is None:
+        return erros
+    casos = dados.get("casos") if isinstance(dados.get("casos"), list) else []
+    ids: set[str] = set()
+    itens: list[dict] = []
+    for indice, item in enumerate(casos, start=1):
+        referencia = f"{caminho}:casos[{indice}]"
+        if not isinstance(item, dict):
+            erros.append(f"{referencia}: registro deve ser um objeto")
+            continue
+        referencia += f" ({item.get('id', 'sem id')})"
+        itens.append(item)
+        erros.extend(_validar_identidade_caso(item, referencia, ids))
+        if not _texto(item.get("texto")):
+            erros.append(f"{referencia}: campo 'texto' obrigatório e não vazio")
+        agente = item.get("agente_esperado")
+        if not isinstance(agente, str) or agente not in AGENTES_S4:
+            erros.append(f"{referencia}: agente_esperado inválido: {agente!r}")
+        tipo = item.get("tipo_esperado")
+        if agente == "beneficios" and (not isinstance(tipo, str) or tipo not in TIPOS_BENEFICIO_S4):
+            erros.append(f"{referencia}: tipo_esperado deve ser 'direito' ou 'explicacao' para benefícios")
+        elif agente != "beneficios" and tipo is not None:
+            erros.append(f"{referencia}: tipo_esperado deve ser null fora de benefícios")
+        texto = item.get("texto")
+        if _texto(texto) and (regra := avaliar(texto)):
+            erros.append(f"{referencia}: mensagem dispara alerta de risco ({regra['id']})")
+
+    def tem(predicado) -> bool:
+        return any(predicado(i) for i in itens)
+
+    if not tem(lambda i: i.get("agente_esperado") == "beneficios" and i.get("tipo_esperado") == "direito" and "tenho direito" in normalizar(str(i.get("texto", "")))):
+        erros.append(f"{caminho}: falta pergunta de direito roteada para benefícios")
+    if not tem(lambda i: i.get("agente_esperado") == "beneficios" and i.get("tipo_esperado") == "explicacao" and "o que e" in normalizar(str(i.get("texto", "")))):
+        erros.append(f"{caminho}: falta pergunta de explicação roteada para benefícios")
+    if not tem(lambda i: "como funciona o aluguel da maria da penha" in normalizar(str(i.get("texto", ""))) and i.get("agente_esperado") == "juridico"):
+        erros.append(f"{caminho}: falta o par 'aluguel da Maria da Penha' com agente juridico")
+    if not tem(lambda i: "aluguel social" in str(i.get("texto", "")).casefold() and i.get("agente_esperado") == "beneficios"):
+        erros.append(f"{caminho}: falta pergunta sobre Aluguel Social do DF com agente beneficios")
+    if not tem(lambda i: str(i.get("texto", "")).count("?") >= 2 or any(m in str(i.get("texto", "")).casefold() for m in ("e também", "outra coisa", "além disso"))):
+        erros.append(f"{caminho}: falta mensagem com mais de uma pergunta")
+    if not tem(lambda i: i.get("agente_esperado") == "fora_do_tema"):
+        erros.append(f"{caminho}: falta mensagem fora do tema")
+    if not itens:
+        erros.append(f"{caminho}: deve conter ao menos uma mensagem")
     return erros
 
 
@@ -329,8 +555,8 @@ def validar_medicao_beneficios(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "tipo", choices=("desenvolvimento", "oficial", "todos", "beneficios"),
-        help="Conjunto a validar ('beneficios': perguntas de desenvolvimento de benefícios da S4)",
+        "tipo", choices=("desenvolvimento", "oficial", "todos", "beneficios", "s4"),
+        help="Conjunto a validar ('beneficios': perguntas de desenvolvimento; 's4': três conjuntos da avaliação)",
     )
     parser.add_argument(
         "--diretorio", type=Path, default=PASTA_CONJUNTOS,
@@ -345,6 +571,19 @@ def main() -> int:
             print(erro)
         if not erros:
             print("Conjunto válido: perguntas de desenvolvimento de benefícios")
+        return 1 if erros else 0
+    if args.tipo == "s4":
+        diretorio_s4 = args.diretorio / "s4"
+        validadores = (
+            ("elegibilidade", validar_elegibilidade_s4),
+            ("triagem", validar_triagem_s4),
+            ("roteamento", validar_roteamento_s4),
+        )
+        erros = [erro for nome, validar in validadores for erro in validar(diretorio_s4 / f"{nome}.yaml")]
+        for erro in erros:
+            print(erro)
+        if not erros:
+            print("Conjuntos válidos: elegibilidade, triagem, roteamento (S4)")
         return 1 if erros else 0
     tipos = ("desenvolvimento", "oficial") if args.tipo == "todos" else (args.tipo,)
     erros = [
