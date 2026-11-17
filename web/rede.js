@@ -68,7 +68,8 @@ var Rede = (function () {
     "ao pronto-socorro de um hospital público, se ela quiser, porque esses remédios dependem do tempo.";
 
   // 00000-000, 00.000-000 ou 8 dígitos seguidos, sem fazer parte de um número maior.
-  var PADRAO_CEP = /(?<![\d.])\d{2}\.?\d{3}-?\d{3}(?![\d-])/g;
+  // Sem lookbehind: o Safari antes do iOS 16.4 não lê essa sintaxe e o arquivo inteiro falharia.
+  var PADRAO_CEP = /(^|[^\d.])(\d{2}\.?\d{3}-?\d{3})(?![\d-])/g;
 
   function digitosCep(valor) {
     var digitos = String(valor == null ? "" : valor).replace(/[.\-\s]/g, "");
@@ -94,9 +95,9 @@ var Rede = (function () {
   function tirarCep(texto, tabela) {
     var original = String(texto == null ? "" : texto);
     var primeiro = null;
-    var limpo = original.replace(PADRAO_CEP, function (achado) {
-      if (primeiro === null) primeiro = achado;
-      return "[CEP]";
+    var limpo = original.replace(PADRAO_CEP, function (_achado, antes, cep) {
+      if (primeiro === null) primeiro = cep;
+      return antes + "[CEP]";
     });
     return { texto: limpo, dentroDF: primeiro === null ? null : cepParaRa(primeiro, tabela).dentroDF };
   }

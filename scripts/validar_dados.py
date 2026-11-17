@@ -258,6 +258,8 @@ def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
             competencia = (linha.get("competencia_cnes") or "").strip()
             if tipo == "Saúde" and not competencia:
                 erros.append(f"{caminho.name}:{idx}: serviço de saúde sem competencia_cnes")
+            if competencia and tipo != "Saúde":
+                erros.append(f"{caminho.name}:{idx}: competencia_cnes só vale para serviços de saúde")
             if competencia and not PADRAO_COMPETENCIA.match(competencia):
                 erros.append(f"{caminho.name}:{idx}: competencia_cnes '{competencia}' fora do formato AAAA-MM")
 
