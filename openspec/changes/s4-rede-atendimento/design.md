@@ -139,6 +139,19 @@ O CEP é tirado do texto antes da checagem de risco no servidor e antes do LLM. 
 ### CRAS
 Fonte: página **Unidades** da Sedes-DF (`https://www.sedes.df.gov.br/unidades/`), publicada em 08/10/2026 e atualizada em 16/11/2026, segundo a própria página. Ela lista 32 CRAS: 31 unidades fixas e o CRAS Móvel. A leitura automática de 17/11 só trouxe um resumo, então **cada linha é digitada e conferida por uma pessoa na página ao vivo**, com a data da conferência. O CRAS Móvel não entra como endereço, porque o atendimento é itinerante: ele aparece como nota. Tipo novo no CSV: `CRAS`.
 
+**Transcrição (tarefa 1.4, 17/11/2026, Rafaella Borges):** as 31 unidades fixas foram transcritas das capturas de tela da página ao vivo, com nome, endereço, horário e telefones como a página publica.
+- **CEP:** a página não publica o CEP dos CRAS. Sem fonte, a coluna `cep` fica vazia nesses serviços, e a validação aceita o vazio só no tipo `CRAS`. A tela Onde buscar ajuda (`web/app.js`) ainda mostra "CEP" mesmo vazio; o ajuste entra com a tela, na tarefa 3.2.
+- **RA:** a coluna `ra` traz a RA oficial onde a unidade fica. Em quatro casos, o nome ou o endereço da página não dizem a RA oficial diretamente:
+  - **CRAS Ceilândia Sol Nascente:** o endereço diz "QNR 02 – Ceilândia", então ficou Ceilândia.
+  - **CRAS Fercal:** o endereço diz "Engenho Velho – Sobradinho", mas o Engenho Velho fica na RA Fercal, então ficou Fercal.
+  - **CRAS Areal:** o endereço diz "Águas Claras/DF", mas o Areal fica na RA Arniqueira (desde 2019), então ficou Arniqueira.
+  - **CRAS Itapoã Parque:** o endereço não diz a RA, então ficou Itapoã.
+
+  Nos quatro casos, as duas RAs possíveis ordenam igual (`RA_ORDENACAO`), então a escolha não muda a ordem da lista.
+- **Correção de digitação:** no CRAS Recanto das Emas I, a página escreve "Recanto da Emas"; no CSV ficou "Recanto das Emas".
+- **CRAS Móvel (nota):** base administrativa na SEPN Quadra 515, Bloco B, Ed. Espaço 515, Subsolo (-1), Asa Norte; segunda a sexta-feira, exceto feriados, com horário conforme a ação e o local; telefones (61) 3773-7551, 3773-7549, 3773-7547 e 3773-7545. Atende populações rurais, indígenas, quilombolas e de difícil acesso, por isso não entra na lista ordenada por RA.
+- **Conferência pela segunda pessoa:** 5 linhas sorteadas (semente 20261117): CRAS Brasília, CRAS Ceilândia P Sul, CRAS Ceilândia Sol Nascente, CRAS Estrutural e CRAS Sobradinho II. _Pendente:_ nome de quem conferiu e data.
+
 ### Saúde de referência para violência sexual
 - **Quais unidades:** os Centros de Especialidades para Atenção às Pessoas em Situação de Violência Sexual, Familiar e Doméstica (CEPAV) listados na página "Centros de Referência" da SES-DF (`https://saude.df.gov.br/centros-de-referencia`, atualizada em 15/08/2026, segundo a própria página). A descrição do serviço está em `https://info.saude.df.gov.br/busca-saude-cepav/`. A leitura automática só trouxe os nomes, então a lista é conferida por uma pessoa na página.
 - **Endereço, telefone e horário:** ficha de cada estabelecimento no CNES (`https://cnes.datasus.gov.br/`), com a competência registrada na coluna nova `competencia_cnes`.

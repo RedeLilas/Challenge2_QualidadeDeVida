@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Valida os arquivos levantados na mudança s2-fontes-df:
+"""Valida os arquivos levantados nas mudanças s2-fontes-df e s4-rede-atendimento:
 - dados/rede_protecao_df.csv
+- dados/cep_ra_df.csv (faixas de CEP do DF, da Busca Faixa de CEP dos Correios)
 - dados/normas.csv
 - dados/fonar/notas.md
 
@@ -23,6 +24,7 @@ from urllib.parse import urlparse
 RAIZ = Path(__file__).resolve().parent.parent
 
 ARQUIVO_REDE = RAIZ / "dados" / "rede_protecao_df.csv"
+ARQUIVO_CEP = RAIZ / "dados" / "cep_ra_df.csv"
 ARQUIVO_NORMAS = RAIZ / "dados" / "normas.csv"
 ARQUIVO_FONTES_YAML = RAIZ / "dados" / "fontes" / "fontes.yaml"
 ARQUIVO_FONAR = RAIZ / "dados" / "fonar" / "notas.md"
@@ -37,8 +39,18 @@ COLUNAS_REDE = [
     "horario",
     "fonte_url",
     "data_verificacao",
+    "competencia_cnes",
 ]
-TIPOS_REDE_VALIDOS = {"CMB", "CEAM", "DEAM", "Defensoria", "Juizado", "outro"}
+# competencia_cnes (AAAA-MM) só é preenchida, e é obrigatória, nos serviços de saúde (fonte: ficha do CNES).
+COLUNAS_REDE_OPCIONAIS = {"competencia_cnes"}
+# A página Unidades da Sedes-DF não publica o CEP dos CRAS; sem fonte, o CEP fica vazio.
+TIPOS_SEM_CEP = {"CRAS"}
+TIPOS_REDE_VALIDOS = {"CMB", "CEAM", "DEAM", "Defensoria", "Juizado", "CRAS", "Saúde", "outro"}
+PADRAO_COMPETENCIA = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
+
+COLUNAS_CEP = ["cep_inicio", "cep_fim", "fonte_url", "data_verificacao"]
+# O nome ficou do plano anterior (CEP -> RA): os Correios não separam o DF por RA (consulta de 17/11/2026).
+DOMINIO_CORREIOS = "correios.com.br"
 
 # Lista oficial das 35 Regiões Administrativas do Distrito Federal
 RAS_OFICIAIS_DF = {
@@ -102,8 +114,10 @@ SUFIXOS_DOMINIOS_OFICIAIS = (
 )
 
 PADRAO_CEP = re.compile(r"^\d{5}-\d{3}$")
-CEP_DF_MIN = 70000000
-CEP_DF_MAX = 73699999
+# Faixas de Brasília (todo o DF) na Busca Faixa de CEP dos Correios, consultada em 17/11/2026.
+# 72800-000 a 72999-999 não é do DF.
+FAIXAS_CEP_DF = ((70000000, 72799999), (73000000, 73699999))
+DESCRICAO_FAIXAS_DF = "70000-000 a 72799-999 ou 73000-000 a 73699-999"
 
 CLASSIFICACOES_FONAR = {
     "adaptável para autoaplicação",
@@ -137,9 +151,16 @@ def _cep_df_valido(cep: str) -> tuple[bool, str]:
     if not PADRAO_CEP.match(cep):
         return False, f"CEP '{cep}' fora do formato 00000-000"
     numero = int(cep.replace("-", ""))
-    if not (CEP_DF_MIN <= numero <= CEP_DF_MAX):
-        return False, f"CEP '{cep}' fora da faixa do Distrito Federal (70000-000 a 73699-999)"
+    if not any(inicio <= numero <= fim for inicio, fim in FAIXAS_CEP_DF):
+        return False, f"CEP '{cep}' fora da faixa do Distrito Federal ({DESCRICAO_FAIXAS_DF})"
     return True, ""
+
+
+def _host(url: str) -> str:
+    try:
+        return (urlparse(url).netloc or "").lower().split(":")[0]
+    except ValueError:
+        return ""
 
 
 def _url_oficial_valida(url: str) -> bool:
@@ -209,7 +230,10 @@ def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
         for idx, linha in enumerate(linhas, start=2):
             for col in COLUNAS_REDE:
                 valor = (linha.get(col) or "").strip()
-                if not valor:
+                opcional = col in COLUNAS_REDE_OPCIONAIS or (
+                    col == "cep" and (linha.get("tipo") or "").strip() in TIPOS_SEM_CEP
+                )
+                if not valor and not opcional:
                     erros.append(f"{caminho.name}:{idx}: coluna '{col}' vazia")
 
             chave_linha = tuple((linha.get(c) or "").strip() for c in COLUNAS_REDE)
@@ -230,6 +254,12 @@ def validar_rede_protecao(caminho: Path = ARQUIVO_REDE) -> list[str]:
                     f"{caminho.name}:{idx}: tipo '{tipo}' inválido (esperado um de {sorted(TIPOS_REDE_VALIDOS)})"
                 )
             tipos_encontrados.add(tipo)
+
+            competencia = (linha.get("competencia_cnes") or "").strip()
+            if tipo == "Saúde" and not competencia:
+                erros.append(f"{caminho.name}:{idx}: serviço de saúde sem competencia_cnes")
+            if competencia and not PADRAO_COMPETENCIA.match(competencia):
+                erros.append(f"{caminho.name}:{idx}: competencia_cnes '{competencia}' fora do formato AAAA-MM")
 
             ra = (linha.get("ra") or "").strip()
             if ra and ra not in RAS_OFICIAIS_DF:
@@ -399,8 +429,71 @@ def validar_fonar(caminho: Path = ARQUIVO_FONAR) -> list[str]:
     return erros
 
 
+def validar_cep(caminho: Path = ARQUIVO_CEP) -> list[str]:
+    """Faixas de CEP do DF: formato, dentro do DF, início <= fim, sem sobreposição,
+    cobertura das faixas dos Correios e fonte dos Correios com data."""
+    erros: list[str] = []
+    if not caminho.exists():
+        return [f"Arquivo não encontrado: {caminho}"]
+
+    with caminho.open(encoding="utf-8", newline="") as f:
+        leitor = csv.DictReader(f)
+        if leitor.fieldnames != COLUNAS_CEP:
+            return [f"{caminho.name}: cabeçalho inválido {leitor.fieldnames}; esperado {COLUNAS_CEP}"]
+        linhas = list(leitor)
+    if not linhas:
+        return [f"{caminho.name}: arquivo sem registros"]
+
+    faixas: list[tuple[int, int, int]] = []
+    for idx, linha in enumerate(linhas, start=2):
+        for col in COLUNAS_CEP:
+            if not (linha.get(col) or "").strip():
+                erros.append(f"{caminho.name}:{idx}: coluna '{col}' vazia")
+
+        numeros = []
+        for col in ("cep_inicio", "cep_fim"):
+            cep = (linha.get(col) or "").strip()
+            if cep and not PADRAO_CEP.match(cep):
+                erros.append(f"{caminho.name}:{idx}: {col} '{cep}' fora do formato 00000-000")
+            elif cep:
+                numeros.append(int(cep.replace("-", "")))
+        if len(numeros) == 2:
+            inicio, fim = numeros
+            if inicio > fim:
+                erros.append(f"{caminho.name}:{idx}: cep_inicio maior que cep_fim")
+            elif not any(a <= inicio and fim <= b for a, b in FAIXAS_CEP_DF):
+                erros.append(f"{caminho.name}:{idx}: faixa fora do Distrito Federal ({DESCRICAO_FAIXAS_DF})")
+            else:
+                faixas.append((inicio, fim, idx))
+
+        url = (linha.get("fonte_url") or "").strip()
+        host = _host(url)
+        if url and not (host == DOMINIO_CORREIOS or host.endswith("." + DOMINIO_CORREIOS)):
+            erros.append(f"{caminho.name}:{idx}: fonte_url '{url}' não é da Busca Faixa de CEP dos Correios")
+
+        data_ver = (linha.get("data_verificacao") or "").strip()
+        if data_ver and not _data_iso_valida(data_ver):
+            erros.append(f"{caminho.name}:{idx}: data_verificacao '{data_ver}' inválida")
+
+    faixas.sort()
+    for (_, fim_a, linha_a), (inicio_b, _, linha_b) in zip(faixas, faixas[1:]):
+        if inicio_b <= fim_a:
+            erros.append(f"{caminho.name}: faixas sobrepostas nas linhas {linha_a} e {linha_b}")
+
+    if not erros:
+        cobertas: list[list[int]] = []
+        for inicio, fim, _ in faixas:
+            if cobertas and inicio == cobertas[-1][1] + 1:
+                cobertas[-1][1] = fim
+            else:
+                cobertas.append([inicio, fim])
+        if [tuple(c) for c in cobertas] != list(FAIXAS_CEP_DF):
+            erros.append(f"{caminho.name}: as faixas não cobrem exatamente o DF ({DESCRICAO_FAIXAS_DF})")
+    return erros
+
+
 def validar_tudo() -> list[str]:
-    return validar_rede_protecao() + validar_normas() + validar_fonar()
+    return validar_rede_protecao() + validar_cep() + validar_normas() + validar_fonar()
 
 
 def main() -> int:
@@ -411,7 +504,7 @@ def main() -> int:
             print(f"  - {erro}", file=sys.stderr)
         return 1
 
-    print("OK: dados/rede_protecao_df.csv, dados/normas.csv e dados/fonar/notas.md válidos.")
+    print("OK: dados/rede_protecao_df.csv, dados/cep_ra_df.csv, dados/normas.csv e dados/fonar/notas.md válidos.")
     return 0
 
 
