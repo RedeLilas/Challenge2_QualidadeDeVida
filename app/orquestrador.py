@@ -1,12 +1,23 @@
-"""Orquestrador da conversa (s4-orquestrador-agentes): contrato do POST /orquestrar.
+"""Orquestrador da conversa (s4-orquestrador-agentes): contrato do POST /orquestrar e etapa de regra.
 
 O contrato está em openspec/changes/s4-orquestrador-agentes/design.md ("Contrato do POST /orquestrar").
 O navegador (web/conversa.js) trabalha com as respostas de exemplo em tests/orquestrar_exemplos.json,
 validadas contra estes modelos por tests/test_orquestrar_contrato.py.
+
+A primeira etapa (por_regra) usa as palavras de regras/roteamento.json e só decide quando casa
+exatamente um agente numa mensagem sem marca de várias perguntas; nos demais casos, quem escolhe é o LLM.
 """
+import json
+import re
+from functools import cache
+from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+from app.risco import normalizar
+
+ARQUIVO_ROTEAMENTO = Path(__file__).resolve().parents[1] / "regras" / "roteamento.json"
 
 Agente = Literal["juridico", "beneficios", "triagem", "rede", "fora_do_tema"]
 TipoBeneficio = Literal["direito", "explicacao"]
@@ -139,3 +150,90 @@ class ErroOrquestrar(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     erro: str = Field(min_length=1)
+
+
+class Decisao(BaseModel):
+    """Agente escolhido para uma pergunta, com o tipo (só em benefícios) e os campos tirados do texto."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    agente: Agente
+    tipo: TipoBeneficio | None = None
+    campos: Campos = Field(default_factory=Campos)
+
+    @model_validator(mode="after")
+    def _tipo_so_em_beneficios(self):
+        if (self.tipo is not None) != (self.agente == "beneficios"):
+            raise ValueError("tipo só é preenchido, e é obrigatório, quando o agente é beneficios")
+        return self
+
+
+@cache
+def _roteamento() -> dict:
+    dados = json.loads(ARQUIVO_ROTEAMENTO.read_text(encoding="utf-8"))
+
+    def compilar(padroes: list[str]) -> list[re.Pattern]:
+        return [re.compile(p) for p in padroes]
+
+    sexual = dados["violencia_sexual"]
+    return {
+        "minimo_interrogacoes": dados["minimo_interrogacoes_para_varias"],
+        "varias": compilar(dados["marcas_varias_perguntas"]),
+        "direito": compilar(dados["marcas_direito"]),
+        "auxilio_aluguel": compilar(dados["auxilio_aluguel"]),
+        "agentes": {agente: compilar(p) for agente, p in dados["agentes"].items()},
+        "beneficios": {beneficio: compilar(p) for beneficio, p in dados["beneficios"].items()},
+        "ras": {ra: compilar(p) for ra, p in dados["ras"].items()},
+        "sexual": compilar(sexual["menciona"]),
+        "sexual_antiga": compilar(sexual["antiga"]),
+    }
+
+
+def _casa(padroes: list[re.Pattern], texto: str) -> bool:
+    return any(p.search(texto) for p in padroes)
+
+
+def _unico(encontrados: list[str]) -> str | None:
+    # Mais de um valor citado: não dá para saber qual vale, então fica nulo.
+    return encontrados[0] if len(encontrados) == 1 else None
+
+
+def varias_perguntas(texto: str) -> bool:
+    """Marcas de mais de uma pergunta: 2+ "?" separados por texto, "e também", "outra coisa", "além disso" etc."""
+    regras, normalizado = _roteamento(), normalizar(texto)
+    interrogacoes = len(re.findall(r"\?+", normalizado))
+    return interrogacoes >= regras["minimo_interrogacoes"] or _casa(regras["varias"], normalizado)
+
+
+def campos_do_texto(texto: str) -> Campos:
+    """Benefício, RA e violência sexual recente tirados só do texto (nunca do perfil)."""
+    regras, normalizado = _roteamento(), normalizar(texto)
+    beneficios = [b for b, padroes in regras["beneficios"].items() if _casa(padroes, normalizado)]
+    ras = [ra for ra, padroes in regras["ras"].items() if _casa(padroes, normalizado)]
+    violencia_sexual_recente = None
+    if _casa(regras["sexual"], normalizado):
+        # Sem dizer quando, conta como recente: na dúvida, a saúde vem primeiro.
+        violencia_sexual_recente = not _casa(regras["sexual_antiga"], normalizado)
+    return Campos(beneficio=_unico(beneficios), ra=_unico(ras), violencia_sexual_recente=violencia_sexual_recente)
+
+
+def por_regra(texto: str) -> Decisao | None:
+    """Agente pela regra de palavras-chave, ou None quando a regra não decide (o LLM escolhe)."""
+    if varias_perguntas(texto):
+        return None
+    regras, normalizado = _roteamento(), normalizar(texto)
+    direito = _casa(regras["direito"], normalizado)
+    agentes, resto = set(), normalizado
+    if _casa(regras["auxilio_aluguel"], normalizado):
+        # A norma do auxílio-aluguel (Lei 11.340/2006, art. 23, VI) está no eixo jurídico: a explicação vai
+        # para o jurídico, e "tenho direito?" vai para a regra de benefícios. O apelido sai do texto para
+        # "maria da penha", "juiz" e "auxílio" dentro dele não contarem como outros agentes.
+        agentes.add("beneficios" if direito else "juridico")
+        for padrao in regras["auxilio_aluguel"]:
+            resto = padrao.sub(" ", resto)
+    agentes |= {agente for agente, padroes in regras["agentes"].items() if _casa(padroes, resto)}
+    if len(agentes) != 1:
+        return None
+    agente = agentes.pop()
+    tipo = ("direito" if direito else "explicacao") if agente == "beneficios" else None
+    return Decisao(agente=agente, tipo=tipo, campos=campos_do_texto(texto))

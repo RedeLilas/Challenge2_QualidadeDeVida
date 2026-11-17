@@ -1,0 +1,138 @@
+{
+  "versao": 1,
+  "descricao": "Primeira etapa do orquestrador (s4-orquestrador-agentes, tarefa 2.1). Expressões regulares aplicadas ao texto em minúsculas e sem acento (app.risco.normalizar). A regra só decide quando casa exatamente um agente e a mensagem não tem marca de várias perguntas; senão, o LLM escolhe. Lida só pelo servidor (app/orquestrador.py).",
+  "minimo_interrogacoes_para_varias": 2,
+  "marcas_varias_perguntas": [
+    "\\be tambem\\b",
+    "\\boutra coisa\\b",
+    "\\balem disso\\b",
+    "\\be (onde|como|quando|quanto|quem|qual|quais|o que|por que|porque)\\b"
+  ],
+  "marcas_direito": [
+    "\\b(eu )?(tenho|teria|tem) direito\\b",
+    "\\b(posso|consigo|da pra|tenho como) (receber|ganhar)\\b",
+    "\\bsou elegivel\\b",
+    "\\bme encaixo\\b"
+  ],
+  "auxilio_aluguel": [
+    "\\bauxilio[- ]?aluguel\\b(?! social)",
+    "\\baluguel da (lei )?maria da penha\\b",
+    "\\baluguel do juiz\\b"
+  ],
+  "agentes": {
+    "juridico": [
+      "\\bmedidas? protetivas?\\b",
+      "\\bprotetiva\\b",
+      "\\bcrimes?\\b",
+      "\\bmaria da penha\\b",
+      "\\blei\\b",
+      "\\bdivorcio\\b",
+      "\\bseparacao\\b",
+      "\\bguarda (dos|das|do|da|de) (meus |minhas )?(filhos?|filhas?|criancas?)\\b",
+      "\\bpensao alimenticia\\b",
+      "\\bpartilha\\b",
+      "\\babandono de lar\\b",
+      "\\bviolencia (psicologica|patrimonial|moral|fisica)\\b",
+      "\\bprocesso\\b",
+      "\\bjuiz(a)?\\b",
+      "\\bboletim de ocorrencia\\b",
+      "\\bdenunciar\\b"
+    ],
+    "beneficios": [
+      "\\bbeneficios?\\b",
+      "\\bauxilios?\\b",
+      "\\bbolsa[- ]familia\\b",
+      "\\bbpc\\b",
+      "\\bloas\\b",
+      "\\bcad ?unico\\b",
+      "\\b(cartao|vale|auxilio do) gas\\b",
+      "\\bprato cheio\\b",
+      "\\bcartao (de )?comida\\b",
+      "\\baluguel social\\b",
+      "\\bcesta basica\\b"
+    ],
+    "triagem": [
+      "\\bcorro (perigo|risco)\\b",
+      "\\b(estou|to|esta|ta) em (perigo|risco)\\b",
+      "\\bavaliacao de risco\\b",
+      "\\bnivel de risco\\b",
+      "\\brisco de vida\\b",
+      "\\b(ele|isso) e perigoso\\b",
+      "\\bdevo ter medo\\b",
+      "\\bfonar\\b"
+    ],
+    "rede": [
+      "\\bonde (fica|tem|encontro|procuro|posso ser atendida|buscar)\\b",
+      "\\bendereco\\b",
+      "\\bdelegacias?\\b",
+      "\\bdeams?\\b",
+      "\\bceams?\\b",
+      "\\bcras\\b",
+      "\\bcreas\\b",
+      "\\bcasa da mulher brasileira\\b",
+      "\\bdefensoria\\b",
+      "\\bhospita(l|is)\\b",
+      "\\bposto de saude\\b",
+      "\\b(mais )?(perto|proximo) de (mim|casa)\\b"
+    ]
+  },
+  "beneficios": {
+    "aluguel_social_df": ["\\baluguel social\\b"],
+    "auxilio_aluguel": [
+      "\\bauxilio[- ]?aluguel\\b(?! social)",
+      "\\baluguel da (lei )?maria da penha\\b",
+      "\\baluguel do juiz\\b"
+    ],
+    "bolsa_familia": ["\\bbolsa[- ]familia\\b"],
+    "bpc": ["\\bbpc\\b", "\\bloas\\b", "\\bbeneficio de prestacao continuada\\b"],
+    "outro": [
+      "\\b(cartao|vale|auxilio do) gas\\b",
+      "\\bprato cheio\\b",
+      "\\bcartao (de )?comida\\b",
+      "\\bbeneficios? eventua(l|is)\\b",
+      "\\bauxilio (natalidade|funeral)\\b",
+      "\\bcesta basica\\b",
+      "\\bfgts\\b",
+      "\\bseguro[- ]desemprego\\b",
+      "\\baposentadoria\\b"
+    ]
+  },
+  "ras": {
+    "Plano Piloto": ["\\bplano piloto\\b", "\\basa (sul|norte)\\b"],
+    "Ceilândia": ["\\bceilandia\\b"],
+    "Taguatinga": ["\\btaguatinga\\b"],
+    "Samambaia": ["\\bsamambaia\\b"],
+    "Gama": ["\\bgama\\b"],
+    "Planaltina": ["\\bplanaltina\\b"],
+    "Sobradinho": ["\\bsobradinho\\b(?! ?(ii|2)\\b)"],
+    "Brazlândia": ["\\bbrazlandia\\b"],
+    "Paranoá": ["\\bparanoa\\b"],
+    "Núcleo Bandeirante": ["\\bnucleo bandeirante\\b"],
+    "Santa Maria": ["\\bsanta maria\\b"],
+    "Recanto das Emas": ["\\brecanto das emas\\b"],
+    "Águas Claras": ["\\baguas claras\\b"],
+    "Guará": ["\\bguara\\b"],
+    "São Sebastião": ["\\bsao sebastiao\\b"],
+    "Itapoã": ["\\bitapoa\\b"],
+    "Estrutural (SCIA)": ["\\bestrutural\\b", "\\bscia\\b"]
+  },
+  "violencia_sexual": {
+    "menciona": [
+      "\\bestupr",
+      "\\bviolencia sexual\\b",
+      "\\babus(o|ou|ada|aram) sexual",
+      "\\bfui abusada\\b",
+      "\\babusou de mim\\b",
+      "\\bme (forcou|obrigou) a (transar|ter relac)",
+      "\\b(sexo|relacao) (a forca|forcad[ao]|sem (meu )?consentimento)\\b"
+    ],
+    "antiga": [
+      "\\bano passado\\b",
+      "\\b(anos|meses) atras\\b",
+      "\\b(faz|ha) (\\d+|uns|alguns|muitos) (anos|meses)\\b",
+      "\\bfaz (muito )?tempo\\b",
+      "\\bquando eu era (crianca|menina|adolescente)\\b",
+      "\\bna (minha )?infancia\\b"
+    ]
+  }
+}
