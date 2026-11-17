@@ -1,0 +1,344 @@
+versao: 1
+descricao: Casos fictícios para aferição de Triagem.avaliar. Opções seguem os IDs
+  de regras/triagem_fonar.json. O nível esperado é o nível interno determinístico
+  da aplicação, não um nível oficial atribuído pelo Fonar. Conjunto redigido e revisado
+  pelo Codex a partir das regras e fontes locais. A conferência independente da equipe
+  permanece pendente.
+casos:
+- id: t-001
+  descricao: Todas as respostas negativas; nenhum sinal previsto nesta triagem
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: sem_sinais_graves
+  itens_fonar: itens 1, 2, 3, 4, 5, 5.1, 6, 9, 11, 12, 13, 15 e 22
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-002
+  descricao: Ameaça com arma de fogo
+  respostas:
+    '1': sim_arma_fogo
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto
+  itens_fonar: item 1
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-003
+  descricao: Ameaça com faca
+  respostas:
+    '1': sim_faca
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto
+  itens_fonar: item 1
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-004
+  descricao: Agressão física grave por estrangulamento
+  respostas:
+    '1': nao
+    '2': estrangulamento
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto
+  itens_fonar: item 2
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-005
+  descricao: Descumprimento anterior de medida protetiva
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': sim
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto
+  itens_fonar: item 5.1
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-006
+  descricao: Acesso fácil a arma de fogo
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': sim
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto
+  itens_fonar: item 11
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-007
+  descricao: Ameaça de outra forma, sem arma ou faca
+  respostas:
+    '1': sim_outra_forma
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: atencao
+  itens_fonar: item 1
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-008
+  descricao: Perseguição ou vigilância
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': perseguicao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: atencao
+  itens_fonar: item 4
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-009
+  descricao: Escalada da violência nos últimos 12 meses
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': sim
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: atencao
+  itens_fonar: item 6
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-010
+  descricao: O agressor falou em suicídio
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': sim_falou
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: atencao
+  itens_fonar: item 9
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-011
+  descricao: Não foi possível responder a um gatilho de risco grave
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao_sei
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto_nao_descartado
+  itens_fonar: item 11
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-012
+  descricao: Pergunta sobre histórico de medida foi pulada; item 5.1 permanece aplicável
+  respostas:
+    '1': nao
+    '2': nao
+    '5': pular
+    '5.1': pular
+    '11': nao
+    '3': nao
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto_nao_descartado
+  itens_fonar: itens 5 e 5.1
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-013
+  descricao: Pergunta sensível de atenção pulada sem gatilho indeterminado
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': nao
+    '3': pular
+    '4': nao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: atencao
+  itens_fonar: item 3
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
+- id: t-014
+  descricao: Perseguição mais resposta desconhecida em gatilho grave; prevalece não
+    descarte
+  respostas:
+    '1': nao
+    '2': nao
+    '5': sim_apenas_ocorrencia
+    '5.1': nao
+    '11': pular
+    '3': nao
+    '4': perseguicao
+    '6': nao
+    '9': nao
+    '12': nao
+    '13': nao
+    '15': nao
+    '22': nao
+  nivel_esperado: alto_nao_descartado
+  itens_fonar: itens 4 e 11
+  fonte: Lei 14.149/2021, arts. 1º a 4º; Portaria Conjunta CNJ/CNMP 6/2025, Anexo
+    Único
+  autor: Codex
+  conferencia:
+    revisor: Yan
+    status: pendente
