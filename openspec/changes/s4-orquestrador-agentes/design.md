@@ -118,7 +118,7 @@ Pela decisão de 09/11 (opção c), o texto da pergunta já vai ao DeepSeek no j
 
 ### Casos e medição
 - Arquivos em `avaliacao/conjuntos/s4/`: `elegibilidade.yaml` (20 a 30 perfis; `perfil`, `especificas`, `limite`, `esperado` por benefício com `status` e `fonte`), `triagem.yaml` (`respostas`, `nivel_esperado`, `fonte`) e `roteamento.yaml` (`texto`, `agente_esperado`, `tipo_esperado`). Todos têm `id`, `autor` e `conferencia.revisor`, que precisa ser diferente do autor.
-- Os casos são escritos com o Claude, com o gabarito tirado do texto da norma (artigo ou item da portaria). Uma pessoa que não os escreveu confere cada caso. O nome é definido na terça e registrado no campo de revisor.
+- O relatório registra a ferramenta usada para redigir cada conjunto (Claude ou Codex). O gabarito vem do texto da norma (artigo ou item da portaria), e uma pessoa que não escreveu os casos confere cada um. O nome do revisor fica registrado no conjunto.
 - `scripts/validar_conjuntos.py` passa a validar os três arquivos.
 - A medição roda as funções do navegador em QuickJS, como os testes atuais: elegibilidade por par perfil × benefício (meta ≥ 90%); sensibilidade pelos casos com nível esperado alto ou "não foi possível descartar risco alto", mais `tests/casos_risco.yaml` (meta 100%). O roteamento roda a regra sem LLM e, para os casos que vão ao LLM, o modelo de produção, com nome e data registrados.
 - Relatório curto em `docs/Relatório S4 - Sistema multiagentes.md`.
@@ -131,7 +131,7 @@ Pela decisão de 09/11 (opção c), o texto da pergunta já vai ao DeepSeek no j
 - **[`alerta_visto` forjado]** → Não é controle de segurança. O alerta local vem antes do envio, e o 190 continua visível acima da resposta.
 - **[LLM fora do ar]** → A classificação cai no jurídico, e o 190, a triagem, os benefícios e a rede continuam funcionando no aparelho.
 - **[Conflito em `web/app.js` entre as frentes]** → A lógica nova vai para `web/conversa.js`, e a rede vai para um arquivo próprio (`s4-rede-atendimento`).
-- **[Casos escritos com o Claude podem repetir o raciocínio das regras]** → O gabarito vem do texto da norma, com artigo, e é conferido por uma pessoa que não escreveu os casos. O relatório declara isso.
+- **[Casos redigidos com um modelo podem repetir o raciocínio das regras]** → O gabarito vem do texto da norma, com artigo, e é conferido por uma pessoa que não escreveu os casos. O relatório informa a ferramenta e declara a conferência.
 
 ## Migration Plan
 
