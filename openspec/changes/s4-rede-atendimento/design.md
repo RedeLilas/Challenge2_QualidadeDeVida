@@ -23,7 +23,7 @@ Motivação em `proposal.md`. Estado atual:
 
 ## Decisions
 
-Decididas pela equipe (sessão de exploração e respostas de 17/11): tabela local de CEP conferida no navegador (depois da consulta aos Correios, só para dizer se o CEP é do DF: opção (a) da seção de riscos), ligação das RAs que faltam à RA mais próxima da lista (registrada, mas sem uso na S4), CEP do chat tirado no aparelho, Correios consultados à mão, CRAS curados, saúde pela SES-DF com o CNES e Lei 12.845/2013 na violência sexual recente.
+Decididas pela equipe (sessão de exploração e respostas de 17/11): tabela local de CEP conferida no navegador (depois da consulta aos Correios, só para dizer se o CEP é do DF: opção (a) da seção de riscos), ligação das RAs que faltam à RA mais próxima da lista (na S4, usada para a RA dos serviços), CEP do chat tirado no aparelho, Correios consultados à mão, CRAS curados, saúde pela SES-DF com o CNES e Lei 12.845/2013 na violência sexual recente.
 
 ### Tabela de faixas de CEP: `dados/cep_ra_df.csv`
 Colunas: `cep_inicio`, `cep_fim`, `fonte_url`, `data_verificacao`. Duas linhas: 70000-000 a 72799-999 e 73000-000 a 73699-999, as faixas "Total do município" de Brasília na Busca Faixa de CEP. Chega ao navegador por `GET /cep-ra`, sem parâmetros, e o service worker a guarda para funcionar sem internet. O nome do arquivo e da rota ficou do plano anterior (CEP → RA), para bater com as issues #74 a #76.
@@ -35,7 +35,7 @@ O plano anterior previa uma faixa por RA, com `ra` e `ra_ordenacao`. A consulta 
 Alternativas descartadas: API externa de CEP (ViaCEP etc.), que mandaria o CEP da usuária a terceiros; sites não oficiais de CEP, cujas faixas se contradizem; e a distância real por coordenadas, que exigiria geocodificação.
 
 ### RAs que o site não lista
-**Sem uso na S4:** com a opção (a), o CEP não indica a RA, e a RA vem de `RAS_DF` (perfil, lista ou `campos.ra` do orquestrador). Nenhuma RA fora da lista do site chega à ordenação. A tabela abaixo fica registrada e conferida para quando a lista de RAs do site for ampliada.
+**Uso na S4:** com a opção (a), o CEP não indica a RA, e a RA da usuária vem de `RAS_DF` (perfil, lista ou `campos.ra` do orquestrador). A tabela abaixo vale para a **RA dos serviços**: os CRAS (tarefa 1.4) ficam também em RAs fora da lista do site (ex.: Sol Nascente, Riacho Fundo II), e `ordenar` os trata como a RA da lista em que ordenam. Em `web/rede.js`, ela é `RA_ORDENACAO`, com "SCIA/Estrutural" (nome oficial) ligada a "Estrutural (SCIA)" (nome do site).
 
 As 18 RAs que faltam em `RAS_DF` recebem uma `ra_ordenacao`. Proposta, **a conferir num mapa oficial** de RAs do GDF antes de entrar na tabela:
 
@@ -123,8 +123,8 @@ Funções puras, testadas em QuickJS, usadas pela tela e pelo chat:
 
 - `cepParaRa(cep, tabela)` → `{ dentroDF }`. `true` quando o CEP cai numa das faixas da tabela; `false` fora delas, inclusive de 72800-000 a 72999-999. O nome ficou do plano anterior: a função não devolve RA.
 - `tirarCep(texto, tabela)` → `{ texto, dentroDF }`. Encontra `00000-000`, `00.000-000` ou 8 dígitos seguidos e troca por `[CEP]`. `dentroDF` é `null` quando o texto não tem CEP.
-- `ordenar(servicos, { ra, violenciaSexualRecente, tipo })` → primeiro a saúde quando `violenciaSexualRecente` é `true`, depois a mesma RA, depois as vizinhas (`VIZINHAS`, para as 17 RAs, a conferir no mesmo mapa) e depois os plantões 24 horas.
-- `textoSaude(ajudando)` → explicação fixa com a citação da Lei 12.845/2013 e a versão em terceira pessoa.
+- `ordenar(servicos, { ra, violencia_sexual_recente, tipo })` → nova lista, sem mudar a recebida: primeiro a saúde (tipo `Saúde`) quando `violencia_sexual_recente` é `true`; depois os serviços da mesma RA, os de RAs que ordenam como ela (`RA_ORDENACAO`), os das vizinhas (`VIZINHAS`, da maior fronteira para a menor) e o resto. Em cada grupo, os plantões 24 horas vêm primeiro. Sem RA (ou com "Outra RA do DF" e "Prefiro não informar"), os plantões 24 horas vêm primeiro. Com `tipo`, só esse tipo. A opção usa o nome de `campos.violencia_sexual_recente`, como `web/conversa.js` já chama; `violenciaSexualRecente` também é aceito.
+- `textoSaude({ ajudando })` (ou `textoSaude(ajudando)`) → explicação fixa com a citação da Lei 12.845/2013 (arts. 1º e 3º, IV, V e § 1º) e a versão em terceira pessoa. O texto diz só o que a lei diz: não fala em boletim de ocorrência, que a lei não menciona.
 
 `renderizarLocais()` continua em `web/app.js`, mas passa a chamar `Rede.ordenar`, e `RA_PROXIMAS` sai de lá. O chat (`s4-orquestrador-agentes`) chama `Rede.tirarCep` antes de montar o pedido e `Rede.ordenar` para a lista curta. Esse é o contrato entre as duas frentes, fechado na terça de manhã.
 
