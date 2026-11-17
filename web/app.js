@@ -1113,9 +1113,134 @@ function dataBrasileira(iso) {
   return dia && mes && ano ? `${dia}/${mes}/${ano}` : String(iso);
 }
 
+function esperar(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Renderiza na conversa os blocos produzidos por Conversa.paraBlocos() (s4-orquestrador-agentes, tarefas 4.1 e 4.2)
+function adicionarBlocosConversa(blocos) {
+  if (!Array.isArray(blocos) || !lista) return;
+
+  for (const bloco of blocos) {
+    if (bloco.tipo === "alerta_190" || bloco.tipo === "linha_190") {
+      mostrarAlerta();
+      continue;
+    }
+
+    if (bloco.tipo === "erro") {
+      adicionar("msg--erro", bloco.texto);
+      continue;
+    }
+
+    if (
+      bloco.tipo === "resposta_com_fontes" ||
+      bloco.tipo === "explicacao_beneficio" ||
+      bloco.tipo === "fora_do_tema"
+    ) {
+      adicionarResposta({
+        resposta: bloco.aviso ? `${bloco.texto} (${bloco.aviso})` : bloco.texto,
+        citacoes: bloco.citacoes || [],
+      });
+      continue;
+    }
+
+    const item = adicionar("msg--assistente", "");
+    const p = document.createElement("p");
+    p.textContent = bloco.texto || "";
+    item.append(p);
+
+    if (bloco.tipo === "cartao_beneficio" && Array.isArray(bloco.cartoes)) {
+      bloco.cartoes.forEach((c, idx) => {
+        const card = document.createElement("div");
+        card.className = "chat-subcard";
+        card.style.animationDelay = `${(idx + 1) * 90}ms`;
+        const motivosTexto = (c.motivos || []).join(" ");
+        const faltaTexto = (c.falta || []).length ? ` O que falta: ${(c.falta || []).join(" ")}` : "";
+        card.innerHTML = `
+          <strong>${c.titulo} — ${c.situacao}</strong>
+          <p style="margin:4px 0;">${motivosTexto}${faltaTexto}</p>
+          <p style="margin:4px 0;"><strong>Onde solicitar:</strong> ${c.onde_pedir}</p>
+          <small style="display:block; color:#5a4d72;">${c.norma}, ${c.artigo} · texto verificado em ${c.data} · ${c.aviso}</small>
+        `;
+        item.append(card);
+      });
+    }
+
+    if (bloco.tipo === "rede_atendimento" && Array.isArray(bloco.servicos)) {
+      if (bloco.texto_saude) {
+        const pSaude = document.createElement("p");
+        pSaude.style.cssText = "margin-top:6px; font-weight:600; color:#6d28d9;";
+        pSaude.textContent = bloco.texto_saude;
+        item.append(pSaude);
+      }
+      bloco.servicos.forEach((s, idx) => {
+        const cardSrv = document.createElement("div");
+        cardSrv.className = "chat-subcard";
+        cardSrv.style.animationDelay = `${(idx + 1) * 90}ms`;
+        cardSrv.innerHTML = `
+          <strong>${s.nome} (${s.ra})</strong><br>
+          <span>${s.endereco} · Tel.: ${s.telefone}</span><br>
+          <small>${s.horario} · ${s.recomendacao} · verificado em ${s.data_formatada}</small>
+        `;
+        item.append(cardSrv);
+      });
+    }
+
+    if (bloco.acao_destino && bloco.rotulo_acao) {
+      const btnAcao = document.createElement("button");
+      btnAcao.type = "button";
+      btnAcao.className = "secondary-button";
+      btnAcao.style.cssText = "margin-top:10px; font-size:12.5px; padding:7px 12px;";
+      btnAcao.textContent = bloco.rotulo_acao;
+      btnAcao.addEventListener("click", () => {
+        alternarChat(false);
+        irParaSecao(bloco.acao_destino);
+      });
+      item.append(btnAcao);
+    }
+
+    if (bloco.tipo === "sugestoes" && Array.isArray(bloco.perguntas)) {
+      p.textContent = "Outras perguntas identificadas na sua mensagem:";
+      const divSug = document.createElement("div");
+      divSug.style.cssText = "display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;";
+      for (const perg of bloco.perguntas) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "secondary-button";
+        b.style.cssText = "font-size:12px; padding:6px 10px;";
+        b.textContent = perg;
+        b.addEventListener("click", () => {
+          campo.value = perg;
+          formulario.requestSubmit();
+        });
+        divSug.append(b);
+      }
+      item.append(divSug);
+    }
+  }
+  irParaOFim();
+}
+
+function responderLocalComConversa(texto) {
+  if (typeof Conversa !== "undefined" && typeof DadosRedeLilas !== "undefined" && DadosRedeLilas.respostaLocalOrquestrar) {
+    const simulada = DadosRedeLilas.respostaLocalOrquestrar(texto);
+    const blocos = Conversa.paraBlocos(simulada, {
+      regrasBeneficios: regrasDeBeneficios,
+      perfil: perfilUsuario,
+      especificas: obterEspecificasBeneficios(),
+      servicos: servicosRedeDF,
+    });
+    adicionarBlocosConversa(blocos);
+    return;
+  }
+  if (typeof DadosRedeLilas !== "undefined") {
+    adicionarResposta(DadosRedeLilas.respostaLocalChat(texto));
+  }
+}
+
 function irParaOFim() {
   if (lista) {
-    lista.scrollTop = lista.scrollHeight;
+    lista.scrollTo({ top: lista.scrollHeight, behavior: "smooth" });
   }
 }
 
@@ -1157,14 +1282,13 @@ async function enviar(texto) {
   }
   if (!navigator.onLine) {
     adicionar("msg--erro", TEXTOS.semInternet);
-    if (typeof DadosRedeLilas !== "undefined") {
-      adicionarResposta(DadosRedeLilas.respostaLocalChat(texto));
-    }
+    responderLocalComConversa(texto);
     return false;
   }
 
   const controle = new AbortController();
   pedidoAtual = controle;
+  const inicioMs = Date.now();
   const limite = setTimeout(() => controle.abort("tempo"), TEMPO_LIMITE_MS);
   const pensando = adicionar("msg--pensando", TEXTOS.pensando);
 
@@ -1177,17 +1301,24 @@ async function enviar(texto) {
       signal: controle.signal,
     });
     const dados = await resposta.json().catch(() => ({}));
-    pensando.remove();
     // O servidor checa de novo (protege contra uma versão antiga desta tela).
     if (dados.risco_imediato) {
+      pensando.remove();
       mostrarAlerta();
       return true;
     }
+    // Mantém o indicador "Escrevendo resposta…" por pelo menos 520 ms para a resposta não surgir de forma abrupta
+    const decorrido = Date.now() - inicioMs;
+    if (decorrido < 520) {
+      await esperar(520 - decorrido);
+    }
+    pensando.remove();
+    if (pedidoAtual !== controle) return false;
     if (!resposta.ok || !dados.resposta) {
-      // Se o ambiente local estiver sem chave de LLM configurada (503), mostra o aviso + orientação local fundamentada
-      adicionar("msg--erro", dados.erro || TEXTOS.falha);
-      if (resposta.status === 503 && typeof DadosRedeLilas !== "undefined") {
-        adicionarResposta(DadosRedeLilas.respostaLocalChat(texto));
+      if (resposta.status === 503 && typeof Conversa !== "undefined") {
+        responderLocalComConversa(texto);
+      } else {
+        adicionar("msg--erro", dados.erro || TEXTOS.falha);
       }
       return false;
     }
