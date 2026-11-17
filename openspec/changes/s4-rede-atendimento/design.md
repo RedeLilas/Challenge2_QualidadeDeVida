@@ -140,7 +140,7 @@ O CEP é tirado do texto antes da checagem de risco no servidor e antes do LLM. 
 Fonte: página **Unidades** da Sedes-DF (`https://www.sedes.df.gov.br/unidades/`), publicada em 08/10/2026 e atualizada em 16/11/2026, segundo a própria página. Ela lista 32 CRAS: 31 unidades fixas e o CRAS Móvel. A leitura automática de 17/11 só trouxe um resumo, então **cada linha é digitada e conferida por uma pessoa na página ao vivo**, com a data da conferência. O CRAS Móvel não entra como endereço, porque o atendimento é itinerante: ele aparece como nota. Tipo novo no CSV: `CRAS`.
 
 **Transcrição (tarefa 1.4, 17/11/2026, Rafaella Borges):** as 31 unidades fixas foram transcritas das capturas de tela da página ao vivo, com nome, endereço, horário e telefones como a página publica.
-- **CEP:** a página não publica o CEP dos CRAS. Sem fonte, a coluna `cep` fica vazia nesses serviços, e a validação aceita o vazio só no tipo `CRAS`. A tela não mostra "CEP" quando ele está vazio.
+- **CEP:** a página não publica o CEP dos CRAS. Sem fonte, a coluna `cep` fica vazia nesses serviços, e a validação aceita o vazio só no tipo `CRAS`. A tela Onde buscar ajuda (`web/app.js`) ainda mostra "CEP" mesmo vazio; o ajuste entra com a tela, na tarefa 3.2.
 - **RA:** a coluna `ra` traz a RA oficial onde a unidade fica. Em quatro casos, o nome ou o endereço da página não dizem a RA oficial diretamente:
   - **CRAS Ceilândia Sol Nascente:** o endereço diz "QNR 02 – Ceilândia", então ficou Ceilândia.
   - **CRAS Fercal:** o endereço diz "Engenho Velho – Sobradinho", mas o Engenho Velho fica na RA Fercal, então ficou Fercal.
