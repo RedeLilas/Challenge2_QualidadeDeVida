@@ -346,6 +346,26 @@ var Conversa = (function () {
     };
   }
 
+  function formatarDominioFonte(url) {
+    if (!url || typeof url !== "string") return "GDF";
+    return url.replace(/^https?:\/\/(www\.)?/, "").split("/")[0] || "GDF";
+  }
+
+  function raValida(ra) {
+    if (!ra || typeof ra !== "string") return null;
+    var limpa = ra.trim();
+    if (
+      !limpa ||
+      limpa === "Prefiro não informar" ||
+      limpa === "prefiro_nao_informar" ||
+      limpa === "Outra RA do DF" ||
+      limpa === "Moro fora do Distrito Federal"
+    ) {
+      return null;
+    }
+    return limpa;
+  }
+
   function ordenarServicosCurta(servicos, raAlvo, violenciaSexualRecente) {
     var lista = Array.isArray(servicos) ? servicos.slice() : [];
     if (!lista.length) return [];
@@ -357,22 +377,29 @@ var Conversa = (function () {
       }).slice(0, 3);
     }
 
-    lista.sort(function (a, b) {
-      if (violenciaSexualRecente) {
-        var aSaude = a.tipo === "Saúde" || a.tipo === "Hospital" ? 0 : 1;
-        var bSaude = b.tipo === "Saúde" || b.tipo === "Hospital" ? 0 : 1;
-        if (aSaude !== bSaude) return aSaude - bSaude;
-      }
-      var aMesmaRa = raAlvo && a.ra === raAlvo ? 0 : 1;
-      var bMesmaRa = raAlvo && b.ra === raAlvo ? 0 : 1;
-      if (aMesmaRa !== bMesmaRa) return aMesmaRa - bMesmaRa;
-
-      var a24h = String(a.horario || "").indexOf("24 horas") !== -1 ? 0 : 1;
-      var b24h = String(b.horario || "").indexOf("24 horas") !== -1 ? 0 : 1;
-      return a24h - b24h;
-    });
-
-    return lista.slice(0, 3);
+    return lista
+      .map(function (servico, indice) {
+        var ehSaude =
+          violenciaSexualRecente && (servico.tipo === "Saúde" || servico.tipo === "Hospital")
+            ? 0
+            : 1;
+        var ehMesmaRa = raAlvo && servico.ra === raAlvo ? 0 : 1;
+        var eh24h = String(servico.horario || "").indexOf("24 horas") !== -1 ? 0 : 1;
+        return {
+          servico: servico,
+          chave: [ehSaude, ehMesmaRa, eh24h, indice],
+        };
+      })
+      .sort(function (a, b) {
+        for (var i = 0; i < a.chave.length; i++) {
+          if (a.chave[i] !== b.chave[i]) return a.chave[i] - b.chave[i];
+        }
+        return 0;
+      })
+      .slice(0, 3)
+      .map(function (item) {
+        return item.servico;
+      });
   }
 
   function montarBlocoRede(campos, opcoes) {
@@ -382,15 +409,9 @@ var Conversa = (function () {
     var servicos = Array.isArray(config.servicos) ? config.servicos : [];
     var c = campos && typeof campos === "object" ? campos : {};
 
-    var raPerfil =
-      perfil.ra &&
-      perfil.ra !== "Prefiro não informar" &&
-      perfil.ra !== "prefiro_nao_informar" &&
-      perfil.ra !== "Outra RA do DF" &&
-      perfil.ra !== "Moro fora do Distrito Federal"
-        ? perfil.ra
-        : null;
-    var raEscolhida = c.ra || raPerfil || null;
+    var raCitada = raValida(c.ra);
+    var raPerfil = raValida(perfil.ra);
+    var raEscolhida = raCitada || raPerfil || null;
     var violenciaSexualRecente = Boolean(c.violencia_sexual_recente);
 
     var textoSaude = null;
@@ -407,6 +428,7 @@ var Conversa = (function () {
     var selecionados = ordenarServicosCurta(servicos, raEscolhida, violenciaSexualRecente).map(
       function (s) {
         var dataIso = s.data_verificacao || "";
+        var fonteUrl = s.fonte_url || "";
         return {
           nome: s.nome || "",
           tipo: s.tipo || "",
@@ -415,7 +437,8 @@ var Conversa = (function () {
           cep: s.cep || "",
           telefone: s.telefone || "",
           horario: s.horario || "",
-          fonte_url: s.fonte_url || "",
+          fonte: formatarDominioFonte(fonteUrl),
+          fonte_url: fonteUrl,
           data_verificacao: dataIso,
           data_formatada: dataBrasileira(dataIso),
           recomendacao: "Confirme por telefone antes de ir",

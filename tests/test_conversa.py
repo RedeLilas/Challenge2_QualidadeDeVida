@@ -334,3 +334,183 @@ def test_modo_ajudando_envia_flag_no_pedido_e_usa_terceira_pessoa_nos_agentes_lo
     assert "pessoa que você está ajudando" in rede_ajudando["texto"]
     assert "apoie-a" in rede_ajudando["texto_saude"].lower()
 
+
+# --- Tarefa 4.3: lista curta de rede na conversa (com e sem Rede.ordenar e sem RA) --------
+
+SERVICOS_FICTICIOS = [
+    {
+        "nome": "CEAM 102 Sul",
+        "tipo": "CEAM",
+        "ra": "Plano Piloto",
+        "endereco": "Estação 102 Sul",
+        "cep": "70330-000",
+        "telefone": "(61) 3224-0943",
+        "horario": "Segunda a sexta-feira, das 8h às 18h",
+        "fonte_url": "https://www.mulher.df.gov.br/ceam",
+        "data_verificacao": "2026-11-05",
+    },
+    {
+        "nome": "DEAM I",
+        "tipo": "DEAM",
+        "ra": "Plano Piloto",
+        "endereco": "EQS 204/205",
+        "cep": "70234-400",
+        "telefone": "(61) 3207-6172",
+        "horario": "24 horas, todos os dias",
+        "fonte_url": "https://www.pcdf.df.gov.br/deam",
+        "data_verificacao": "2026-11-05",
+    },
+    {
+        "nome": "CEAM Ceilândia",
+        "tipo": "CEAM",
+        "ra": "Ceilândia",
+        "endereco": "QNM 02",
+        "cep": "72210-020",
+        "telefone": "(61) 3371-4923",
+        "horario": "Segunda a sexta-feira, das 8h às 18h",
+        "fonte_url": "https://www.mulher.df.gov.br/ceam",
+        "data_verificacao": "2026-11-05",
+    },
+    {
+        "nome": "Casa da Mulher Brasileira de Ceilândia",
+        "tipo": "CMB",
+        "ra": "Ceilândia",
+        "endereco": "CNM 1, Bloco I, Lote 3",
+        "cep": "72215-110",
+        "telefone": "(61) 3181-1474",
+        "horario": "24 horas, todos os dias",
+        "fonte_url": "https://www.mulher.df.gov.br/cmb",
+        "data_verificacao": "2026-11-05",
+    },
+    {
+        "nome": "CRAS Sol Nascente",
+        "tipo": "CRAS",
+        "ra": "Sol Nascente/Pôr do Sol",
+        "endereco": "Quadra 100",
+        "cep": "72236-800",
+        "telefone": "(61) 3773-7000",
+        "horario": "Segunda a sexta-feira, das 8h às 18h",
+        "fonte_url": "https://www.sedes.df.gov.br/unidades/",
+        "data_verificacao": "2026-11-17",
+    },
+    {
+        "nome": "CEPAV Ceilândia",
+        "tipo": "Saúde",
+        "ra": "Ceilândia",
+        "endereco": "Hospital Regional de Ceilândia",
+        "cep": "72220-901",
+        "telefone": "(61) 2017-2000",
+        "horario": "Segunda a sexta-feira, das 8h às 18h",
+        "fonte_url": "https://cnes.datasus.gov.br/",
+        "data_verificacao": "2026-11-17",
+    },
+]
+
+
+def test_lista_curta_de_rede_sem_rede_js_ordena_por_mesma_ra_e_depois_24h_e_sem_ra(js):
+    # O fixture `js` não carrega web/rede.js: testa o fallback interno de Conversa (mesma RA e depois plantões 24h)
+    assert js.eval("typeof Rede") == "undefined"
+
+    # 1. Com campos.ra = "Ceilândia" (rede_com_ra): prioriza Ceilândia (24h primeiro) e limita a 3 serviços
+    bloco_ceilandia = para_blocos(
+        js,
+        POR_NOME["rede_com_ra"]["resposta"],
+        {"servicos": SERVICOS_FICTICIOS, "perfil": {"ra": "Plano Piloto"}},
+    )[0]
+    assert bloco_ceilandia["tipo"] == "rede_atendimento"
+    assert bloco_ceilandia["ra"] == "Ceilândia"
+    assert bloco_ceilandia["acao_destino"] == "places"
+    assert bloco_ceilandia["rotulo_acao"]
+    assert len(bloco_ceilandia["servicos"]) == 3
+    assert [s["nome"] for s in bloco_ceilandia["servicos"]] == [
+        "Casa da Mulher Brasileira de Ceilândia",
+        "CEAM Ceilândia",
+        "CEPAV Ceilândia",
+    ]
+    for s in bloco_ceilandia["servicos"]:
+        assert s["fonte"] and s["fonte_url"].startswith("https://")
+        assert DATA_ISO.fullmatch(s["data_verificacao"])
+        assert DATA_BR.fullmatch(s["data_formatada"])
+        assert s["recomendacao"] == "Confirme por telefone antes de ir"
+
+    # 2. Sem campos.ra, mas com RA no perfil ("Plano Piloto"): usa a RA do perfil e depois 24h de outra RA
+    resposta_sem_ra = json.loads(json.dumps(POR_NOME["rede_com_ra"]["resposta"]))
+    resposta_sem_ra["campos"]["ra"] = None
+    bloco_perfil = para_blocos(
+        js,
+        resposta_sem_ra,
+        {"servicos": SERVICOS_FICTICIOS, "perfil": {"ra": "Plano Piloto"}},
+    )[0]
+    assert bloco_perfil["ra"] == "Plano Piloto"
+    assert [s["nome"] for s in bloco_perfil["servicos"]] == [
+        "DEAM I",
+        "CEAM 102 Sul",
+        "Casa da Mulher Brasileira de Ceilândia",
+    ]
+
+    # 3. Ausência de RA (nem no texto nem no perfil): não exige perfil e traz os plantões 24h primeiro
+    bloco_sem_ra = para_blocos(
+        js,
+        resposta_sem_ra,
+        {"servicos": SERVICOS_FICTICIOS, "perfil": {}},
+    )[0]
+    assert bloco_sem_ra["ra"] is None
+    assert len(bloco_sem_ra["servicos"]) == 3
+    assert [s["nome"] for s in bloco_sem_ra["servicos"][:2]] == [
+        "DEAM I",
+        "Casa da Mulher Brasileira de Ceilândia",
+    ]
+
+
+def test_lista_curta_de_rede_usa_rede_ordenar_quando_web_rede_js_esta_presente():
+    # Carrega web/rede.js junto com web/conversa.js para testar a delegação a Rede.ordenar e Rede.textoSaude
+    contexto = quickjs.Context()
+    contexto.eval((RAIZ / "web" / "perfil.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "beneficios.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "rede.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "conversa.js").read_text(encoding="utf-8"))
+    contexto.eval(f"var REGRAS_BENEFICIOS = {TEXTO_REGRAS_BENEFICIOS};")
+
+    # 1. RA "Samambaia" (sem unidade direta em SERVICOS_FICTICIOS): Rede.ordenar traz a vizinha Ceilândia
+    # (incluindo Sol Nascente/Pôr do Sol, que ordena como Ceilândia) antes de Plano Piloto
+    resposta_samambaia = json.loads(json.dumps(POR_NOME["rede_com_ra"]["resposta"]))
+    resposta_samambaia["campos"]["ra"] = "Samambaia"
+    bloco_vizinha = para_blocos(
+        contexto,
+        resposta_samambaia,
+        {"servicos": SERVICOS_FICTICIOS, "perfil": {}},
+    )[0]
+    assert bloco_vizinha["ra"] == "Samambaia"
+    assert [s["nome"] for s in bloco_vizinha["servicos"]] == [
+        "Casa da Mulher Brasileira de Ceilândia",
+        "CEAM Ceilândia",
+        "CRAS Sol Nascente",
+    ]
+
+    # 2. Com violencia_sexual_recente = true: Rede.ordenar coloca Saúde no topo e Rede.textoSaude cita a Lei 12.845/2013
+    bloco_sexual = para_blocos(
+        contexto,
+        POR_NOME["rede_violencia_sexual"]["resposta"],
+        {"servicos": SERVICOS_FICTICIOS, "perfil": {"ra": "Plano Piloto"}},
+    )[0]
+    assert bloco_sexual["violencia_sexual_recente"] is True
+    assert "Lei 12.845/2013" in bloco_sexual["texto_saude"]
+    assert bloco_sexual["servicos"][0]["nome"] == "CEPAV Ceilândia"
+    assert bloco_sexual["servicos"][0]["tipo"] == "Saúde"
+
+    # 3. Sem RA com Rede.ordenar presente: plantões 24h primeiro e botão para a lista completa
+    resposta_sem_ra = json.loads(json.dumps(POR_NOME["rede_com_ra"]["resposta"]))
+    resposta_sem_ra["campos"]["ra"] = None
+    bloco_sem_ra = para_blocos(
+        contexto,
+        resposta_sem_ra,
+        {"servicos": SERVICOS_FICTICIOS, "perfil": {"ra": "Prefiro não informar"}},
+    )[0]
+    assert bloco_sem_ra["ra"] is None
+    assert bloco_sem_ra["acao_destino"] == "places"
+    assert [s["nome"] for s in bloco_sem_ra["servicos"][:2]] == [
+        "DEAM I",
+        "Casa da Mulher Brasileira de Ceilândia",
+    ]
+
+
