@@ -22,7 +22,7 @@ RAG integrado ao `/orquestrar` e testes funcionais concluídos; a validação ma
 
 ## 4. Fechamento (quinta, 19/11)
 
-- [ ] 4.1 Rodar a suíte de risco/190 e a suíte completa e testar no navegador três perguntas de explicação (uma sem o nome oficial) e uma de FGTS; verificação: `uv run pytest` passa sem falso negativo, e o teste manual fica registrado no design
+- [x] 4.1 Rodar a suíte de risco/190 e a suíte completa e testar no navegador três perguntas de explicação (uma sem o nome oficial) e uma de FGTS; verificação: `uv run pytest` passa sem falso negativo, e o teste manual fica registrado no design
 - [x] 4.2 Declarar no relatório da S4 que o RAG de benefícios foi testado e não medido, sem corretor externo, e atualizar o status no `ROADMAP.md`; verificação: o relatório e a tabela da S4 trazem a declaração e o status
 
 ## Workflow follow-up

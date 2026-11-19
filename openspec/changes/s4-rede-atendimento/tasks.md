@@ -27,8 +27,8 @@
 
 ## 5. Fechamento (quinta, 19/11)
 
-- [ ] 5.1 Rodar a suíte de risco/190 e a suíte completa e testar no navegador a busca por RA, por CEP do DF com e sem RA no perfil, por CEP de Goiânia, por 72800-000 e o chat com CEP; verificação: `uv run pytest` passa sem falso negativo, e o teste manual fica registrado no design
-- [ ] 5.2 Atualizar o status da mudança no `ROADMAP.md`; verificação: a tabela da S4 mostra o status
+- [x] 5.1 Rodar a suíte de risco/190 e a suíte completa e testar no navegador a busca por RA, por CEP do DF com e sem RA no perfil, por CEP de Goiânia, por 72800-000 e o chat com CEP; verificação: `uv run pytest` passa sem falso negativo, e o teste manual fica registrado no design
+- [x] 5.2 Atualizar o status da mudança no `ROADMAP.md`; verificação: a tabela da S4 mostra o status
 
 ## Workflow follow-up
 
