@@ -43,7 +43,7 @@
 ## 6. Integração (quinta, 19/11)
 
 - [ ] 6.1 Rodar a suíte de risco/190 e a suíte completa e fazer no navegador o fluxo alerta → "Continuar" → resposta com 190 visível, uma pergunta de benefício com e sem perfil e uma com duas perguntas; verificação: `uv run pytest` passa sem falso negativo, e o fluxo manual fica registrado no design
-- [x] 6.2 Atualizar o status da mudança e o resultado das metas da S4 no `ROADMAP.md`; verificação: a tabela da S4 mostra a transferência do RAG e os valores medidos
+- [ ] 6.2 Atualizar o status da mudança e o resultado das metas da S4 no `ROADMAP.md`; verificação: a tabela da S4 mostra os valores medidos e as pendências enquanto a S4 estiver em andamento
 
 ## Workflow follow-up
 

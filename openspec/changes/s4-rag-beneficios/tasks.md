@@ -1,6 +1,6 @@
 # Tasks
 
-Cortada da S4 em 19/11 e transferida para a S6, conforme a ordem de corte do ROADMAP. As tarefas restantes seguem pendentes para a integração.
+Mudança em andamento na S4. A validação final e a integração seguem pendentes.
 
 ## 1. Perguntas de desenvolvimento (terça, 17/11)
 
@@ -23,8 +23,8 @@ Cortada da S4 em 19/11 e transferida para a S6, conforme a ordem de corte do ROA
 ## 4. Fechamento (quinta, 19/11)
 
 - [ ] 4.1 Rodar a suíte de risco/190 e a suíte completa e testar no navegador três perguntas de explicação (uma sem o nome oficial) e uma de FGTS; verificação: `uv run pytest` passa sem falso negativo, e o teste manual fica registrado no design
-- [x] 4.2 Registrar no relatório e no `ROADMAP.md` que a mudança foi cortada da S4 e transferida para a S6; não declarar teste do RAG na S4, pois a validação final não foi feita
+- [ ] 4.2 Concluir a validação do RAG, registrar o resultado no relatório da S4 e atualizar o status no `ROADMAP.md`; não declarar teste antes da validação final
 
 ## Workflow follow-up
 
-- Arquivar a mudança depois de `openspec validate s4-rag-beneficios` passar; a linha já foi transferida no `ROADMAP.md` para a S6.
+- Arquivar a mudança depois de `openspec validate s4-rag-beneficios` passar e de concluir a validação final na S4.

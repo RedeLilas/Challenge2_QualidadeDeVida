@@ -1,6 +1,6 @@
 # Relatório S4: sistema multiagentes
 
-Rodada de avaliação concluída em 19/11/2026. Os conjuntos de elegibilidade, triagem e roteamento foram escritos por Léo e conferidos por outra pessoa da equipe, conforme os revisores registrados nos próprios arquivos. Não houve corretor externo nesta avaliação.
+Avaliação parcial registrada em 19/11/2026; a S4 continua em andamento. Os conjuntos de elegibilidade, triagem e roteamento foram escritos por Léo e conferidos por outra pessoa da equipe, conforme os revisores registrados nos próprios arquivos. Não houve corretor externo nesta avaliação.
 
 ## Resultados
 
@@ -22,6 +22,6 @@ A elegibilidade compara cada situação esperada nos 20 perfis com os quatro ben
 
 ## Escopo e limitações
 
-O RAG de explicação de benefícios foi cortado da S4, conforme a ordem de corte do planejamento, e transferido para a S6. Ele **não foi considerado testado nem medido nesta rodada**; as tarefas pendentes permanecem registradas para a S6.
+O RAG de explicação de benefícios continua no escopo da S4. Sua validação final e integração ainda estão pendentes; por isso, este relatório não afirma que foi testado ou medido. A S4 permanece aberta até a conclusão das tarefas restantes.
 
-O roteamento é uma evidência de 30 mensagens fictícias e não possui meta de aprovação. O resultado representa uma única rodada com o modelo e a configuração identificados acima; não mede latência nem estabilidade entre rodadas. Risco verifica regras determinísticas locais contra gabaritos revisados, sem corretor LLM externo. A acurácia de elegibilidade segue pendente de nova execução após a revisão do gabarito `e-013`.
+O roteamento é uma evidência de 30 mensagens fictícias e não possui meta de aprovação. O resultado representa uma única rodada com o modelo e a configuração identificados acima; não mede latência nem estabilidade entre rodadas. Risco verifica regras determinísticas locais contra gabaritos revisados, sem corretor LLM externo. A acurácia de elegibilidade segue pendente de nova execução após a revisão do gabarito `e-013`. Essas pendências mantêm a avaliação parcial; não representam atraso nem decisão de transferência para outra sprint.
