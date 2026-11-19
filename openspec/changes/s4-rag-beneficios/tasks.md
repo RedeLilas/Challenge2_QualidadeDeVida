@@ -1,6 +1,6 @@
 # Tasks
 
-Primeira mudança a cortar se a S4 apertar (vai para a S6). Depende da tarefa 1.1 de `s4-orquestrador-agentes` (parametrizar `responder()`, terça cedo).
+Cortada da S4 em 19/11 e transferida para a S6, conforme a ordem de corte do ROADMAP. As tarefas restantes seguem pendentes para a integração.
 
 ## 1. Perguntas de desenvolvimento (terça, 17/11)
 
@@ -16,15 +16,15 @@ Primeira mudança a cortar se a S4 apertar (vai para a S6). Depende da tarefa 1.
 ## 3. Resposta de benefícios (terça, 17/11, e quinta, 19/11)
 
 - [x] 3.1 Escrever `INSTRUCOES_BENEFICIOS`, a recusa de benefícios (CRAS e Ligue 180) e o aviso fixo com a data da coleta mais antiga das normas citadas (terça); verificação: testes com LLM falso conferem a instrução enviada, o aviso com a data e a recusa, e um teste confere que nenhum texto fixo usa "direito garantido"
-- [x] 3.2 Criar o teste de recuperação por benefício nos eixos `beneficios` e `df`, com a norma certa no top 5 (terça); verificação: o teste passa para os seis programas ou registra no design o benefício que falha e o motivo
-- [x] 3.3 Calibrar `LIMITE_BENEFICIOS` só com o conjunto de desenvolvimento de benefícios, conferir a pergunta do aluguel da Maria da Penha contra o 0,81 do jurídico e registrar o valor, as faixas e a data no design (quinta); verificação: um teste com o índice real confere que as extras quase do tema são recusadas pelo limite ou pela citação, e o design traz os números
-- [x] 3.4 Registrar a explicação de benefícios no ponto de troca do `/orquestrar` (quinta); verificação: testes com índice e LLM falsos conferem que a explicação busca só nos eixos `beneficios` e `df`, com o limite próprio, e que, sem o registro, ela volta ao jurídico
+- [ ] 3.2 Criar o teste de recuperação por benefício nos eixos `beneficios` e `df`, com a norma certa no top 5 (terça); verificação: o teste passa para os seis programas ou registra no design o benefício que falha e o motivo
+- [ ] 3.3 Calibrar `LIMITE_BENEFICIOS` só com o conjunto de desenvolvimento de benefícios, conferir a pergunta do aluguel da Maria da Penha contra o 0,81 do jurídico e registrar o valor, as faixas e a data no design (quinta); verificação: um teste com o índice real confere que as extras quase do tema são recusadas pelo limite ou pela citação, e o design traz os números
+- [ ] 3.4 Registrar a explicação de benefícios no ponto de troca do `/orquestrar` (quinta); verificação: testes com índice e LLM falsos conferem que a explicação busca só nos eixos `beneficios` e `df`, com o limite próprio, e que, sem o registro, ela volta ao jurídico
 
 ## 4. Fechamento (quinta, 19/11)
 
 - [ ] 4.1 Rodar a suíte de risco/190 e a suíte completa e testar no navegador três perguntas de explicação (uma sem o nome oficial) e uma de FGTS; verificação: `uv run pytest` passa sem falso negativo, e o teste manual fica registrado no design
-- [ ] 4.2 Declarar no relatório da S4 que o RAG de benefícios foi testado e não medido, sem corretor externo, e atualizar o status no `ROADMAP.md`; verificação: o relatório e a tabela da S4 trazem a declaração e o status
+- [x] 4.2 Registrar no relatório e no `ROADMAP.md` que a mudança foi cortada da S4 e transferida para a S6; não declarar teste do RAG na S4, pois a validação final não foi feita
 
 ## Workflow follow-up
 
-- Arquivar a mudança depois de `openspec validate s4-rag-beneficios` passar e de atualizar o `ROADMAP.md`. Se for cortada, mover a linha do ROADMAP para a S6.
+- Arquivar a mudança depois de `openspec validate s4-rag-beneficios` passar; a linha já foi transferida no `ROADMAP.md` para a S6.

@@ -98,7 +98,7 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | :--- | :--- |
 | `s4-orquestrador-agentes`: rota `/orquestrar` (regra + LLM), agentes jurídico, benefícios, triagem e rede, várias perguntas, "Continuar" depois do alerta de 190, modo "ajudando outra pessoa"; casos fictícios e medição das duas metas | Proposta em 17/11 |
 | `s4-rede-atendimento`: CEP → RA por tabela local no navegador, CRAS da Sedes-DF, saúde de referência (SES-DF + CNES); Ligue 180 fora do DF | Proposta em 17/11 |
-| `s4-rag-beneficios`: RAG só para explicar benefícios (eixos `beneficios` e `df`), apelidos das normas na verificação de citação, limite próprio; testado, não medido | Proposta em 17/11 (primeira a cortar; vai para a S6) |
+| `s4-rag-beneficios`: RAG só para explicar benefícios (eixos `beneficios` e `df`), apelidos das normas na verificação de citação, limite próprio | Cortada da S4 em 19/11; tarefas pendentes transferidas para a S6 |
 
 **Ordem de corte da S4:** 1) `s4-rag-beneficios` inteira (vai para a S6); 2) refinamento das perguntas sugeridas; 3) serviços de saúde do CNES. **Nunca cortar:** alerta de 190, saída rápida, ausência de histórico, citação de fontes e a medição das duas metas da S4.
 
@@ -124,6 +124,7 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | Mudança (propor na terça, 01/12) | Status |
 | :--- | :--- |
 | `s6-producao`: LLM de produção conforme a decisão de LGPD, deploy final, PWA instalável com nome e ícone discretos, auditoria WCAG 2.1 AA, medição de latência | Planejada |
+| `s4-rag-beneficios`: concluir recuperação, calibração do limite, integração ao `/orquestrar` e testes para explicações de benefícios | Transferida da S4; pendente para a S6 |
 
 ### S7: Testes e refinamento (ter 08, qui 10, sex 11/12)
 
@@ -191,4 +192,5 @@ Na S4, a primeira a cortar é a mudança `s4-rag-beneficios`, que vai para a S6 
 | 17/11 | Alerta de 190 com "Continuar com minha pergunta": texto com sinal de risco só vai ao servidor depois do toque, e o 190 continua visível acima da resposta |
 | 17/11 | CEP convertido em RA só no navegador, por tabela montada à mão com a Busca Faixa de CEP dos Correios; CEP digitado no chat é retirado antes do envio |
 | 17/11 | CRAS pela página de unidades da Sedes-DF; saúde de referência pelos nomes da SES-DF, com endereço do CNES; urgência de violência sexual no pronto-socorro de hospital público (Lei 12.845/2013) |
-| 17/11 | Medição da S4 por regra, com casos escritos com o Claude e conferidos por uma pessoa que não os escreveu; RAG de benefícios testado, não medido, sem corretor externo |
+| 17/11 | Medição da S4 por regra, com casos escritos por Léo e conferidos por uma pessoa que não os escreveu; RAG de benefícios sem medição e sem corretor externo |
+| 19/11 | Sensibilidade para risco alto 38/38 (100%) e roteamento 29/30 (96,7%) com `deepseek-flash`; a acurácia de elegibilidade será reexecutada após a revisão do gabarito e-013; RAG de benefícios cortado e transferido para a S6 |
