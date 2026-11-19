@@ -162,6 +162,10 @@ INSTRUCOES_BENEFICIOS = (
     "Cite somente artigos que aparecem nos trechos.\n"
     "- Quando usar um termo técnico ou da norma, explique-o em uma frase simples.\n"
     "- Se os trechos não bastarem para explicar, diga apenas que não sabe explicar com segurança.\n"
+    "- Responda em no máximo 5 frases curtas. Se o assunto for maior, diga o essencial e indique a tela "
+    "Benefícios ou o CRAS para o resto.\n"
+    "- Não mencione artigos que aparecem só dentro do texto de outro artigo (por exemplo, \"os critérios "
+    "do art. 3º\"): cite apenas os artigos dos rótulos dos trechos.\n"
     "- Se a pessoa estiver em perigo agora, diga para ligar 190."
 )
 

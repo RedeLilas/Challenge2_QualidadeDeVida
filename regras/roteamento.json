@@ -12,7 +12,8 @@
     "\\b(eu )?(tenho|teria|tem) direito\\b",
     "\\b(posso|consigo|da pra|tenho como) (receber|ganhar)\\b",
     "\\bsou elegivel\\b",
-    "\\bme encaixo\\b"
+    "\\bme encaixo\\b",
+    "\\b(recebo|receberia|ganharia) (algum|alguma|algo)\\b"
   ],
   "auxilio_aluguel": [
     "\\bauxilio[- ]?aluguel\\b(?! social)",
