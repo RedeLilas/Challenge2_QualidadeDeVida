@@ -16,7 +16,7 @@
 ## 3. Tela e chat (quinta, 19/11)
 
 - [x] 3.1 Criar `GET /cep-ra` sem parâmetros e incluir a tabela no service worker; verificação: teste confere que a rota não aceita parâmetros, devolve as duas faixas do DF e que o service worker guarda a rota
-- [ ] 3.2 Ligar a tela Onde buscar ajuda a `web/rede.js`, com campo de CEP que só confere se é do DF: CEP do DF ordena pela RA do perfil ou pede a RA (com os plantões 24 horas primeiro), e CEP de fora mostra o Ligue 180; ajustar o texto de ajuda da etapa de RA do perfil, que hoje diz que o CEP ordena os locais; e tirar `RA_PROXIMAS` de `web/app.js`; verificação: `tests/test_pwa.py` confere que nenhum `fetch` leva CEP e que a tela usa `Rede.ordenar`
+- [x] 3.2 Ligar a tela Onde buscar ajuda a `web/rede.js`, com campo de CEP que só confere se é do DF: CEP do DF ordena pela RA do perfil ou pede a RA (com os plantões 24 horas primeiro), e CEP de fora mostra o Ligue 180; ajustar o texto de ajuda da etapa de RA do perfil, que hoje diz que o CEP ordena os locais; e tirar `RA_PROXIMAS` de `web/app.js`; verificação: `tests/test_pwa.py` confere que nenhum `fetch` leva CEP e que a tela usa `Rede.ordenar`
 - [x] 3.3 Chamar `Rede.tirarCep` em `enviar()` antes de montar o pedido, depois da checagem de risco local sobre o texto original, e responder no aparelho quando o CEP for de fora do DF (coordenado com a tarefa 4.4 de `s4-orquestrador-agentes`); verificação: teste em QuickJS ou em `tests/test_pwa.py` confere que o corpo do pedido não contém o CEP
 - [x] 3.4 Incluir `web/rede.js` no service worker e na lista de scripts verificados e subir a versão do cache; verificação: `tests/test_pwa.py` confere a lista e que `web/rede.js` não usa armazenamento
 

@@ -184,8 +184,13 @@ def test_numero_de_pessoas_invalido_gera_faltam_informacoes_nas_regras_de_renda(
     por_id = avaliar_todos(js, dados)
     assert por_id["bolsa_familia"]["status"] == "faltam_informacoes"
     assert por_id["bpc"]["status"] == "faltam_informacoes"
-    assert por_id["aluguel_social_df"]["status"] == "faltam_informacoes"
+    # Renda total de R$ 300 (<= 2 SM) já atende ao critério alternativo do Aluguel Social sem o nº de pessoas.
+    assert por_id["aluguel_social_df"]["status"] == "provavel"
     assert por_id["auxilio_aluguel"]["status"] == "depende_decisao_judicial"
+
+    # Com renda total > 2 SM e nº de pessoas inválido, a per capita ainda pode atender -> faltam informações.
+    acima_2sm = {**dados, "renda_total": ARQUIVO["salario_minimo"]["valor"] * 2 + 100}
+    assert avaliar_um(js, "aluguel_social_df", acima_2sm)["status"] == "faltam_informacoes"
 
 
 @pytest.mark.parametrize("renda_ausente", [None, "", "prefiro_nao_informar"])
@@ -375,3 +380,34 @@ def test_aluguel_social_df_com_medida_so_com_boletim_sem_nenhum_fora_df_e_sem_mo
     assert renda_acima["status"] == "nao_aplicavel"
     assert renda_acima["rotulo"] == "Não aplicável"
     assert any("1/2 salário mínimo" in m for m in renda_acima["motivos"])
+
+
+def test_aluguel_social_df_usa_renda_total_quando_falta_numero_de_pessoas(js):
+    sm = ARQUIVO["salario_minimo"]["valor"]
+    # Perfil equivalente ao e-013 (avaliacao/conjuntos/s4/elegibilidade.yaml): renda total de R$ 400 (<= 2 SM),
+    # número de pessoas desconhecido e todos os demais requisitos atendidos -> "Provável".
+    perfil_e013 = {
+        "renda_total": 400,
+        "numero_pessoas": None,
+        "cadunico": True,
+        "idade": 66,
+        "deficiencia": False,
+        "moradia_df": True,
+        "necessidade_moradia": True,
+        "acompanhamento_psicossocial": True,
+        "medida_protetiva": True,
+        "boletim_ocorrencia": True,
+    }
+    e013 = avaliar_um(js, "aluguel_social_df", perfil_e013)
+    assert e013["status"] == "provavel"
+    assert e013["rotulo"] == "Provável"
+
+    # Renda total exatamente em 2 SM sem número de pessoas -> também atende pelo critério alternativo.
+    no_limite_2sm = avaliar_um(js, "aluguel_social_df", {**perfil_e013, "renda_total": sm * 2})
+    assert no_limite_2sm["status"] == "provavel"
+
+    # Renda total acima de 2 SM e pessoas desconhecidas -> "Faltam informações" (a per capita ainda pode atender).
+    acima_2sm_sem_pessoas = avaliar_um(js, "aluguel_social_df", {**perfil_e013, "renda_total": sm * 2 + 1})
+    assert acima_2sm_sem_pessoas["status"] == "faltam_informacoes"
+    assert acima_2sm_sem_pessoas["rotulo"] == "Faltam informações"
+    assert any("pessoas" in item.lower() for item in acima_2sm_sem_pessoas["falta"])

@@ -80,7 +80,7 @@ Na regra: um apelido do auxílio-aluguel ("auxílio-aluguel", "aluguel da Maria 
 
 ### Respostas no servidor e no aparelho
 - `juridico`: `resposta.responder(...)` com os parâmetros do jurídico e, no modo de ajuda, com `INSTRUCOES_AJUDANDO`.
-- `beneficios`/`explicacao`: chama a função de explicação de benefícios, se `s4-rag-beneficios` a registrar; enquanto não existir, chama o jurídico. O orquestrador só conhece um ponto de troca, então cortar o RAG de benefícios não quebra nada.
+- `beneficios`/`explicacao`: chama a função de explicação de benefícios registrada por `s4-rag-beneficios`; se o RAG não estiver disponível, chama o jurídico. O orquestrador só conhece um ponto de troca, mantendo a reserva.
 - `fora_do_tema`: texto fixo com o Ligue 180 e a Defensoria Pública do DF, sem índice e sem LLM de resposta.
 - `beneficios`/`direito`, `triagem` e `rede`: o servidor devolve só o agente e os campos; o navegador decide.
 
@@ -118,9 +118,10 @@ Pela decisão de 09/11 (opção c), o texto da pergunta já vai ao DeepSeek no j
 
 ### Casos e medição
 - Arquivos em `avaliacao/conjuntos/s4/`: `elegibilidade.yaml` (20 a 30 perfis; `perfil`, `especificas`, `limite`, `esperado` por benefício com `status` e `fonte`), `triagem.yaml` (`respostas`, `nivel_esperado`, `fonte`) e `roteamento.yaml` (`texto`, `agente_esperado`, `tipo_esperado`). Todos têm `id`, `autor` e `conferencia.revisor`, que precisa ser diferente do autor.
-- O relatório registra a autoria informada pela equipe para cada conjunto. Nesta rodada, Léo é o autor dos três conjuntos; os revisores independentes estão registrados nos próprios casos. O gabarito vem do texto da norma (artigo ou item da portaria). Não houve corretor externo na S4.
+- O relatório registra a ferramenta usada para redigir cada conjunto (Claude na elegibilidade; Codex na triagem e no roteamento) e a autoria registrada pela equipe (Léo nos três arquivos). Os revisores independentes estão registrados nos próprios casos. O gabarito vem do texto da norma (artigo ou item da portaria). Não houve corretor externo na S4.
 - `scripts/validar_conjuntos.py` passa a validar os três arquivos.
-- **Revisão final do gabarito:** o caso `e-013` (renda total de R$ 400 e número de pessoas desconhecido) foi re-derivado da Portaria SMDF 49/2026, art. 2º, I. Como a renda familiar total é critério alternativo à renda per capita para o Aluguel Social, o esperado foi corrigido para `provavel`. A rodada inicial de elegibilidade antecede essa correção e deve ser reexecutada; não reportar seus 80/80 como resultado válido para o conjunto final.
+- **Conferência de 17/11 (tarefa 5.5):** os três conjuntos foram conferidos por Túlio, que não escreveu os casos. O gabarito de elegibilidade foi inicialmente redigido a partir da regra medida; por isso, os 80 pares coincidiam. Para evitar acurácia 100% por construção, Claude re-derivou os 80 pares a partir das normas sem consultar o gabarito nem rodar a regra (`avaliacao/conjuntos/s4/elegibilidade_rederivacao.yaml`). Houve uma divergência em e-013: o Aluguel Social é provável pela Portaria SMDF 49/2026, art. 2º, I, porque a renda familiar total é critério alternativo à renda per capita. Ressalva: Claude já conhecia a regra, então essa re-derivação não equivale a uma conferência às cegas feita por uma pessoa.
+- **Medição e correção de elegibilidade:** antes da correção da regra (#110), a rodada oficial foi 79/80 (98,75%), com divergência apenas em e-013 / `aluguel_social_df` (`faltam_informacoes` × `provavel`). Após a correção em `web/beneficios.js`, nova execução de `scripts/medir_s4.py` mediu 80/80 (100%). As duas rodadas passam a meta de 90%; relatar os resultados separadamente.
 - A medição roda as funções do navegador em QuickJS, como os testes atuais: elegibilidade por par perfil × benefício (meta ≥ 90%); sensibilidade pelos casos com nível esperado alto ou "não foi possível descartar risco alto", mais `tests/casos_risco.yaml` (meta 100%). O roteamento roda a regra sem LLM e, para os casos que vão ao LLM, o modelo de produção, com nome e data registrados.
 - Relatório curto em `docs/Relatório S4 - Sistema multiagentes.md`.
 

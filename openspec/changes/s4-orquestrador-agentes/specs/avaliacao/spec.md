@@ -50,8 +50,8 @@ A acurácia de elegibilidade SHALL ser medida rodando a regra de benefícios do 
 - **THEN** a medição falha, e a S4 não é dada como pronta
 
 ### Requirement: Relatório da S4
-O relatório da S4 SHALL trazer a acurácia de elegibilidade, a sensibilidade para risco alto e, como evidência sem meta, a taxa de acerto do roteamento. Ele MUST identificar a autoria informada para cada conjunto, declarar que os casos foram conferidos por uma pessoa da equipe e que não houve corretor externo na S4.
+O relatório da S4 SHALL trazer a acurácia de elegibilidade, a sensibilidade para risco alto e, como evidência sem meta, a taxa de acerto do roteamento. Ele MUST identificar a ferramenta usada para redigir cada conjunto, declarar que os casos foram conferidos por uma pessoa da equipe e que não houve corretor externo na S4.
 
-#### Scenario: Relatório com medição pendente
+#### Scenario: Relatório entregue
 - **WHEN** o relatório da S4 é entregue
-- **THEN** ele traz as medidas concluídas, identifica qualquer medição pendente e sua causa, o número de casos, a data, a autoria de Léo nos três conjuntos, a conferência por revisores registrados e a ausência de corretor externo
+- **THEN** ele traz as três medidas, o número de casos, a data, a declaração sobre a autoria e a conferência dos casos, e a ausência de corretor externo

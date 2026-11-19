@@ -33,7 +33,7 @@ var DadosRedeLilas = (function () {
       aba: "Localização",
       icone: "pin",
       pergunta: "Em qual Região Administrativa (RA) ou CEP você está?",
-      ajuda: "Você pode escolher sua Região Administrativa abaixo ou digitar apenas o CEP. Usamos somente para ordenar os locais mais próximos.",
+      ajuda: "Escolha sua Região Administrativa para ordenar os locais mais próximos. O CEP é opcional e serve apenas para conferir neste aparelho se o endereço está no DF (nunca é enviado ao servidor).",
       motivo: "Permite mostrar primeiro as delegacias (DEAM), CEAMs, Defensoria e Juizados da sua região.",
       tipo: "select_E_opcoes",
       opcoes: [
