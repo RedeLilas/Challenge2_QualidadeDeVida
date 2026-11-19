@@ -191,5 +191,5 @@ Na S4, a primeira a cortar é a mudança `s4-rag-beneficios`, que vai para a S6 
 | 17/11 | Alerta de 190 com "Continuar com minha pergunta": texto com sinal de risco só vai ao servidor depois do toque, e o 190 continua visível acima da resposta |
 | 17/11 | CEP convertido em RA só no navegador, por tabela montada à mão com a Busca Faixa de CEP dos Correios; CEP digitado no chat é retirado antes do envio |
 | 17/11 | CRAS pela página de unidades da Sedes-DF; saúde de referência pelos nomes da SES-DF, com endereço do CNES; urgência de violência sexual no pronto-socorro de hospital público (Lei 12.845/2013) |
-| 17/11 | Medição da S4 por regra, com casos escritos por Léo e conferidos por uma pessoa que não os escreveu; RAG de benefícios sem medição e sem corretor externo |
+| 17/11 | Medição da S4 por regra, com casos escritos com o Claude e conferidos por uma pessoa que não os escreveu; RAG de benefícios testado, não medido, sem corretor externo |
 | 19/11 | Elegibilidade 79/80 (98,75%) antes da correção #110 e 80/80 (100%) depois; risco alto 38/38 (100%); roteamento: 28/30 em 17/11 e 29/30 e 28/30 em duas rodadas de 19/11; RAG testado, não medido |
