@@ -1,6 +1,6 @@
 # Tasks
 
-Primeira mudança a cortar se a S4 apertar (vai para a S6). Depende da tarefa 1.1 de `s4-orquestrador-agentes` (parametrizar `responder()`, terça cedo).
+RAG integrado ao `/orquestrar` e testes funcionais concluídos; a validação manual de fechamento continua pendente na S4.
 
 ## 1. Perguntas de desenvolvimento (terça, 17/11)
 
@@ -23,8 +23,8 @@ Primeira mudança a cortar se a S4 apertar (vai para a S6). Depende da tarefa 1.
 ## 4. Fechamento (quinta, 19/11)
 
 - [ ] 4.1 Rodar a suíte de risco/190 e a suíte completa e testar no navegador três perguntas de explicação (uma sem o nome oficial) e uma de FGTS; verificação: `uv run pytest` passa sem falso negativo, e o teste manual fica registrado no design
-- [ ] 4.2 Declarar no relatório da S4 que o RAG de benefícios foi testado e não medido, sem corretor externo, e atualizar o status no `ROADMAP.md`; verificação: o relatório e a tabela da S4 trazem a declaração e o status
+- [x] 4.2 Declarar no relatório da S4 que o RAG de benefícios foi testado e não medido, sem corretor externo, e atualizar o status no `ROADMAP.md`; verificação: o relatório e a tabela da S4 trazem a declaração e o status
 
 ## Workflow follow-up
 
-- Arquivar a mudança depois de `openspec validate s4-rag-beneficios` passar e de atualizar o `ROADMAP.md`. Se for cortada, mover a linha do ROADMAP para a S6.
+- Arquivar a mudança depois de `openspec validate s4-rag-beneficios` passar e de concluir a validação final na S4.

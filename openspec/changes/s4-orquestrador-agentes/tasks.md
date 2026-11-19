@@ -36,14 +36,14 @@
 - [x] 5.3 Escrever com o Codex `avaliacao/conjuntos/s4/roteamento.yaml`, com cerca de 30 mensagens em linguagem leiga e o agente esperado, incluindo "tenho direito?" e "o que é?", o par auxílio-aluguel e Aluguel Social, "como funciona o aluguel da Maria da Penha?", várias perguntas e fora do tema (terça); verificação: o arquivo carrega e cada mensagem passa pela regra de risco
 - [x] 5.4 Validar os conjuntos da S4 em `scripts/validar_conjuntos.py` (fonte, autor, revisor diferente do autor, os quatro limites, os pares de roteamento), sem mudar a validação da S3 (terça); verificação: testes em `tests/test_validar_conjuntos.py` cobrem caso sem fonte, revisor igual ao autor e limite ausente
 - [x] 5.5 Conferir os gabaritos por uma pessoa que não escreveu os casos e registrar o nome em `conferencia.revisor`, mudando `conferencia.status` para `conferido` após a revisão (quinta); verificação: `uv run python -m scripts.validar_conjuntos s4` passa nos três arquivos
-- [x] 5.6 Medir a acurácia de elegibilidade (`Beneficios.avaliar` em QuickJS, por par perfil × benefício) e a sensibilidade para risco alto (`Triagem.avaliar` mais `tests/casos_risco.yaml`) (quinta); verificação: um teste falha com qualquer falso negativo de risco alto, e o script imprime a acurácia e os casos divergentes
-- [x] 5.7 Medir o roteamento: a regra sem LLM e os demais casos com o modelo de produção, registrando nome, data e versão (quinta); verificação: o resultado fica salvo em `avaliacao/rodadas/s4/` com a taxa de acerto e os erros
-- [ ] 5.8 Escrever `docs/Relatório S4 - Sistema multiagentes.md` com as três medidas, o número de casos, a data, a ferramenta usada para redigir cada conjunto, a conferência por uma pessoa da equipe e a ausência de corretor externo (quinta); verificação: a revisão do relatório confere cada item da spec `avaliacao`
+- [x] 5.6 Medir a acurácia de elegibilidade (`Beneficios.avaliar` em QuickJS, por par perfil × benefício) e a sensibilidade para risco alto (`Triagem.avaliar` mais `tests/casos_risco.yaml`) (quinta); verificação: `scripts/medir_s4.py` mede 79/80 (98,75%) antes da correção #110 e 80/80 (100%) depois, e não há falso negativo de risco alto
+- [x] 5.7 Medir o roteamento: a regra sem LLM e os demais casos com o modelo de produção, registrando nome, data e versão (quinta); verificação: resultados de 17/11 e 19/11 em `avaliacao/rodadas/s4/`, com taxas e erros
+- [x] 5.8 Escrever `docs/Relatório S4 - Sistema multiagentes.md` com as três medidas, número de casos, datas, ferramenta usada para redigir cada conjunto, conferência por pessoa da equipe e ausência de corretor externo (quinta); verificação: relatório confere os requisitos da spec `avaliacao`
 
 ## 6. Integração (quinta, 19/11)
 
 - [ ] 6.1 Rodar a suíte de risco/190 e a suíte completa e fazer no navegador o fluxo alerta → "Continuar" → resposta com 190 visível, uma pergunta de benefício com e sem perfil e uma com duas perguntas; verificação: `uv run pytest` passa sem falso negativo, e o fluxo manual fica registrado no design
-- [ ] 6.2 Atualizar o status da mudança e o resultado das metas da S4 no `ROADMAP.md`; verificação: a tabela da S4 mostra o status e os valores medidos
+- [x] 6.2 Atualizar o status da mudança e o resultado das metas da S4 no `ROADMAP.md`; verificação: a tabela da S4 mostra os resultados medidos
 
 ## Workflow follow-up
 
