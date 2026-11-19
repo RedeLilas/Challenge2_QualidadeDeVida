@@ -142,3 +142,16 @@ Pela decisão de 09/11 (opção c), o texto da pergunta já vai ao DeepSeek no j
 ## Open Questions
 
 - Quem confere os gabaritos: decidido na terça, 17/11, e registrado no campo `conferencia.revisor` dos conjuntos. Não muda specs nem tarefas.
+
+## Verificação manual registrada (19/11/2026, tarefa 6.1)
+
+Servidor local com `deepseek-flash` (sem raciocínio). Itens 2 a 4 feitos por Túlio no navegador; itens 1 e 9 (com a aba de rede) refeitos com Chromium sem tela (Playwright), que registrou cada POST `/orquestrar`.
+- **Alerta com pergunta:** "ele está aqui em casa com uma faca, como peço medida protetiva?" mostra o alerta de 190 com "Continuar com minha pergunta" e **nenhum** POST. Depois do toque, um POST com `alerta_visto: true`, e a resposta jurídica aparece com o alerta de 190 acima.
+- **Benefício sem perfil:** "tenho direito ao bolsa família?" convida ao formulário, com 190 e 180. **Com perfil:** só o cartão do Bolsa Família, com norma, artigo, data e aviso.
+- **Duas perguntas:** "o que é medida protetiva e onde eu peço ela?" responde a primeira e mostra "Onde peço medida protetiva?" como sugestão. A resposta jurídica à primeira foi uma recusa: é a recuperação do RAG jurídico, pendência da S7, não o orquestrador.
+- **CEP no chat:** "meu cep é 72215-110, onde tem delegacia?" vai ao servidor como "meu cep é [CEP], onde tem delegacia?".
+
+**Corrigido no teste:**
+- **"O governo do df ajuda quando nasce um bebe?"** e "tem ajuda pra pagar enterro?" eram classificadas pelo LLM como benefícios/**direito**, e o chat mostrava cartões que não respondiam. A instrução de classificação ganhou exemplos dos dois tipos, e `_ajustar_tipo` passou a só manter "direito" para um dos 4 benefícios com regra ou com marca de "tenho direito?"; nos demais casos, a pergunta vira explicação. As marcas de "tenho direito?" ganharam "recebo/receberia/ganharia alguma coisa".
+- **Respostas longas:** o jurídico na conversa passou a usar `INSTRUCOES_JURIDICO_CONVERSA` (as instruções da S3 mais "no máximo 5 frases curtas"); o modo ajudando é construído sobre ela. O `/juridico` continua com `INSTRUCOES`.
+- Esses ajustes vieram depois das medições: a de roteamento (17 e 19/11) mediu a classificação anterior.

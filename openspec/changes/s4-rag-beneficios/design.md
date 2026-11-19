@@ -112,3 +112,15 @@ A mudança registra a função de explicação no ponto de troca do orquestrador
 ## Migration Plan
 
 O `/juridico` passa a usar a configuração `JURIDICO`, com os mesmos valores, e `tests/test_juridico.py` continua passando sem mudança. Para voltar atrás, basta tirar o registro no ponto de troca do orquestrador, e a explicação de benefícios volta ao jurídico.
+
+## Verificação manual registrada (19/11/2026, tarefa 4.1)
+
+Servidor local com `deepseek-flash` (sem raciocínio); "como funciona o cartão gás?" feito por Túlio no navegador; as demais pelo `/orquestrar`.
+- **"como funciona o cartão gás?":** explicação com a Lei Distrital 6.938/2021 e o Decreto Distrital 42.376/2021 e o aviso da data da norma.
+- **"o que é o bpc?":** explicação com a Lei 8.742/1993 (LOAS), art. 20 (a expansão da sigla BPC funciona).
+- **Sem o nome oficial, "o governo do df ajuda quando nasce um bebe?":** primeiro falhou (ver abaixo); depois das correções, explica o auxílio-natalidade com a Lei Distrital 5.165/2013, arts. 7º, 8º, 10 e 11.
+- **"como saco meu fgts?":** recusa. O LLM classificou como fora do tema, então a recusa é a padrão (Ligue 180 e Defensoria), e não a do RAG de benefícios (CRAS).
+
+**Corrigido no teste:**
+- A pergunta do bebê era classificada como "direito" (corrigido no orquestrador; ver o design de `s4-orquestrador-agentes`).
+- Depois disso, a resposta correta do DeepSeek foi recusada porque repetia "os critérios do art. 3º", remissão que está dentro do texto do art. 11, e o art. 3º não estava entre os trechos recuperados. `INSTRUCOES_BENEFICIOS` ganhou a regra de não mencionar artigos que só aparecem dentro de outros e o limite de 5 frases curtas (as respostas tinham cerca de 10 frases).

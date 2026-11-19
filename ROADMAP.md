@@ -96,9 +96,9 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 
 | Mudança (propor na terça, 17/11) | Status |
 | :--- | :--- |
-| `s4-orquestrador-agentes`: rota `/orquestrar` (regra + LLM), agentes jurídico, benefícios, triagem e rede, várias perguntas, "Continuar" depois do alerta de 190, modo "ajudando outra pessoa"; casos fictícios e medição das duas metas | Implementada; relatório e verificação final da S4 em andamento |
-| `s4-rede-atendimento`: CEP → RA por tabela local no navegador, CRAS da Sedes-DF, saúde de referência (SES-DF + CNES); Ligue 180 fora do DF | Proposta em 17/11 |
-| `s4-rag-beneficios`: RAG só para explicar benefícios (eixos `beneficios` e `df`), apelidos das normas na verificação de citação, limite próprio | Integrado e testado; sem medição de qualidade das respostas, conforme escopo da S4 |
+| `s4-orquestrador-agentes`: rota `/orquestrar` (regra + LLM), agentes jurídico, benefícios, triagem e rede, várias perguntas, "Continuar" depois do alerta de 190, modo "ajudando outra pessoa"; casos fictícios e medição das duas metas | Concluída em 19/11 (27/27); aguardando arquivamento |
+| `s4-rede-atendimento`: CEP → RA por tabela local no navegador, CRAS da Sedes-DF, saúde de referência (SES-DF + CNES); Ligue 180 fora do DF | Concluída em 19/11 (15/15); aguardando arquivamento |
+| `s4-rag-beneficios`: RAG só para explicar benefícios (eixos `beneficios` e `df`), apelidos das normas na verificação de citação, limite próprio | Concluída em 19/11 (11/11): testada, não medida; aguardando arquivamento |
 
 **Ordem de corte da S4:** 1) `s4-rag-beneficios` inteira (vai para a S6); 2) refinamento das perguntas sugeridas; 3) serviços de saúde do CNES. **Nunca cortar:** alerta de 190, saída rápida, ausência de histórico, citação de fontes e a medição das duas metas da S4.
 
@@ -193,3 +193,4 @@ Na S4, a primeira a cortar é a mudança `s4-rag-beneficios`, que vai para a S6 
 | 17/11 | CRAS pela página de unidades da Sedes-DF; saúde de referência pelos nomes da SES-DF, com endereço do CNES; urgência de violência sexual no pronto-socorro de hospital público (Lei 12.845/2013) |
 | 17/11 | Medição da S4 por regra, com casos escritos com o Claude e conferidos por uma pessoa que não os escreveu; RAG de benefícios testado, não medido, sem corretor externo |
 | 19/11 | Elegibilidade 79/80 (98,75%) antes da correção #110 e 80/80 (100%) depois; risco alto 38/38 (100%); roteamento: 28/30 em 17/11 e 29/30 e 28/30 em duas rodadas de 19/11; RAG testado, não medido |
+| 19/11 | Teste manual da S4: "direito" só para os 4 benefícios com regra ou com marca de "tenho direito?"; respostas da conversa (jurídico e benefícios) com até 5 frases curtas; o `/juridico` da S3 não muda |

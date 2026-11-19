@@ -35,6 +35,12 @@ A diferença de r-007 entre rodadas e a falha que levou r-005 à reserva mostram
 
 O RAG de explicação de benefícios permanece na S4, integrado ao `/orquestrar`. Foi testado, mas não medido com um conjunto oficial e corretor externo. Os testes de recuperação cobrem os seis programas; 22/22 perguntas de desenvolvimento recuperam a norma esperada no top 5 dos eixos `beneficios` e `df`. A calibração do limite próprio e a verificação de citação estão registradas no design de `s4-rag-beneficios`. Portanto, o relatório declara teste funcional, sem apresentar uma taxa de qualidade de respostas do RAG. A suíte completa e os cenários manuais finais da S4 continuam pendentes.
 
+## Ajustes depois do teste manual (19/11)
+
+O teste manual de fechamento encontrou dois problemas, corrigidos no mesmo dia, depois das medições acima:
+- **Classificação do tipo de benefício:** perguntas como "o governo do df ajuda quando nasce um bebe?" eram classificadas pelo LLM como "tenho direito?", e o chat mostrava cartões de elegibilidade que não respondiam. Agora "direito" vale só para os 4 benefícios com regra ou quando a mensagem pergunta se a pessoa tem direito; nos demais casos, a pergunta vai à explicação (RAG de benefícios). As rodadas de roteamento mediram a classificação anterior.
+- **Tamanho das respostas:** as respostas da conversa passaram a ter no máximo 5 frases curtas (jurídico na conversa e RAG de benefícios). O RAG de benefícios também deixou de citar artigos que só aparecem dentro de outros, o que recusava respostas corretas. O `/juridico` avaliado na S3 não mudou.
+
 ## Método e limitações
 
 A elegibilidade e a sensibilidade para risco foram medidas contra gabaritos de casos fictícios em regras locais/QuickJS, sem LLM como corretor. A classificação de roteamento usou a API de produção em mensagens fictícias. Nenhum dado pessoal foi enviado. A re-derivação dos 80 pares de elegibilidade foi feita por Claude a partir das normas, sem consultar o gabarito nem executar a regra; como Claude já conhecia a regra, isso não equivale a uma conferência cega por uma pessoa. A revisão humana e as ferramentas de redação estão identificadas nos metadados e no design.

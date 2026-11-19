@@ -210,3 +210,11 @@ Os 21 serviços atuais continuam com as mesmas colunas, e `competencia_cnes` fic
 ## Open Questions
 
 - Fonte oficial do Ministério da Saúde para o prazo de 72 horas: buscada na quinta. Sem ela, o texto fica sem o número, como descrito acima.
+
+## Verificação manual registrada (19/11/2026, tarefa 5.1)
+
+Servidor local, Chromium sem tela (Playwright), com um perfil fictício salvo só no navegador do teste.
+- **Busca por RA (Ceilândia):** os 8 serviços de Ceilândia ou da mesma região vêm primeiro (Casa da Mulher Brasileira, DEAM II, CEAM, CRAS…), com o aviso da região.
+- **CEP do DF sem RA (72215-110) e CEP de RA fora da lista do site (72236-800, Sol Nascente):** "O CEP não indica a Região Administrativa. Escolha sua RA acima…", com os plantões 24 horas primeiro. Com RA no perfil, a tela continua ordenando pela RA.
+- **CEP de Goiânia (74000-000):** "Esse CEP não é do Distrito Federal… ligue 180".
+- **CEP no chat:** o texto vai como "[CEP]", e nenhuma requisição levou um CEP no corpo ou na URL.

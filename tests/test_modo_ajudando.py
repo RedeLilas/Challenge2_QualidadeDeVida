@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from app import main, orquestrador as mod_orquestrador
 from app.main import app
-from app.orquestrador import INSTRUCOES_AJUDANDO
+from app.orquestrador import INSTRUCOES_AJUDANDO, INSTRUCOES_JURIDICO_CONVERSA
 from app.rag.resposta import INSTRUCOES
 
 RESPOSTA = "Ela pode pedir a medida protetiva (Lei 11.340/2006, art. 19)."
@@ -52,7 +52,7 @@ def orquestrar(texto, **flags):
     return resposta.json()
 
 
-@pytest.mark.parametrize("ajudando, instrucoes", [(True, INSTRUCOES_AJUDANDO), (False, INSTRUCOES)])
+@pytest.mark.parametrize("ajudando, instrucoes", [(True, INSTRUCOES_AJUDANDO), (False, INSTRUCOES_JURIDICO_CONVERSA)])
 def test_instrucao_enviada_ao_llm_com_e_sem_a_flag(llm, ajudando, instrucoes):
     # "medida protetiva": a regra escolhe o jurídico, e o LLM só é chamado para a resposta.
     corpo = orquestrar("minha amiga quer pedir medida protetiva, como ela faz?", ajudando=ajudando)
@@ -60,9 +60,9 @@ def test_instrucao_enviada_ao_llm_com_e_sem_a_flag(llm, ajudando, instrucoes):
     assert llm.sistemas == [instrucoes]
 
 
-def test_sem_a_flag_o_padrao_e_a_instrucao_do_juridico(llm):
+def test_sem_a_flag_o_padrao_e_a_instrucao_do_juridico_na_conversa(llm):
     orquestrar("como peço medida protetiva?")
-    assert llm.sistemas == [INSTRUCOES]
+    assert llm.sistemas == [INSTRUCOES_JURIDICO_CONVERSA]
 
 
 def test_explicacao_de_beneficio_pelo_juridico_tambem_usa_o_modo(llm, monkeypatch):

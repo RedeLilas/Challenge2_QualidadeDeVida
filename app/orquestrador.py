@@ -260,8 +260,11 @@ INSTRUCOES_CLASSIFICACAO = (
     "Inclui explicar o auxílio-aluguel da Lei Maria da Penha (\"aluguel da Maria da Penha\", "
     "\"aluguel do juiz\").\n"
     "- beneficios: benefícios sociais (Bolsa Família, BPC, Aluguel Social do DF, Cartão Gás, Prato Cheio "
-    "e outros). Use tipo \"direito\" quando a pessoa quer saber se tem direito ou pode receber, e tipo "
-    "\"explicacao\" quando quer saber o que é, como funciona ou quem pode receber.\n"
+    "e outros). Use tipo \"direito\" só quando a pessoa pergunta se ela (ou a família dela) tem direito, "
+    "pode receber ou se encaixa num benefício. Use tipo \"explicacao\" quando quer saber o que é, como "
+    "funciona, quem pode receber ou se existe ajuda ou benefício para uma situação. Exemplos: \"tenho direito "
+    "ao bolsa família?\" é direito; \"o governo ajuda quando nasce um bebê?\" e \"tem ajuda pra pagar "
+    "enterro?\" são explicacao.\n"
     "- triagem: a pessoa quer saber se corre perigo ou qual o nível de risco.\n"
     "- rede: onde buscar atendimento (delegacia, CRAS, Defensoria, hospital, Casa da Mulher Brasileira).\n"
     "- fora_do_tema: qualquer outro assunto.\n"
@@ -343,6 +346,27 @@ def por_llm(texto: str, cliente) -> list[tuple[Decisao, str]] | None:
     return _ler_saida(saida)
 
 
+# Os benefícios que têm regra de elegibilidade no aparelho (regras/beneficios.json).
+BENEFICIOS_COM_REGRA = {"bolsa_familia", "bpc", "auxilio_aluguel", "aluguel_social_df"}
+
+
+def _ajustar_tipo(decisao: Decisao, pergunta: str) -> Decisao:
+    """Trava sobre a saída do LLM: "direito" só vale para um benefício com regra ou com marca de "tenho direito?".
+
+    Os cartões de elegibilidade só existem para os 4 benefícios com regra. Uma pergunta como "o governo ajuda
+    quando nasce um bebê?", sem benefício com regra e sem marca de "tenho direito?", vira explicação (RAG de
+    benefícios), em vez de mostrar cartões que não respondem a ela.
+    """
+    if (
+        decisao.agente == "beneficios"
+        and decisao.tipo == "direito"
+        and decisao.campos.beneficio not in BENEFICIOS_COM_REGRA
+        and not _casa(_roteamento()["direito"], normalizar(pergunta))
+    ):
+        return decisao.model_copy(update={"tipo": "explicacao"})
+    return decisao
+
+
 def classificar(texto: str, cliente) -> Classificacao:
     """Regra, depois LLM, depois reserva no jurídico. A checagem de risco é feita antes, pela rota."""
     if decisao := por_regra(texto):
@@ -356,6 +380,7 @@ def classificar(texto: str, cliente) -> Classificacao:
     # Ordenação estável: triagem primeiro, depois a ordem em que a usuária escreveu.
     ordenadas = sorted(perguntas, key=lambda item: item[0].agente != "triagem")
     decisao, reescrita = ordenadas[0]
+    decisao = _ajustar_tipo(decisao, texto if len(perguntas) == 1 else reescrita)
     return Classificacao(
         decidido_por="llm",
         decisao=decisao,
@@ -375,9 +400,18 @@ logger = logging.getLogger("rede_lilas.orquestrador")
 # a explicação volta ao jurídico, como antes da S4: cortar o RAG de benefícios não quebra o orquestrador.
 explicar_beneficio: Callable[..., dict] | None = rag.explicar_beneficio
 
-# Modo "ajudando outra pessoa" (tarefa 3.4): as instruções do jurídico, sem tirar nenhuma regra, mais
-# estas linhas. O /juridico nunca usa esta versão, e INSTRUCOES continua igual (tests/test_instrucoes_sem_rag.py).
-INSTRUCOES_AJUDANDO = rag.INSTRUCOES + (
+# Jurídico na conversa (fechamento da S4, #84): as instruções do jurídico, sem tirar nenhuma regra, mais o
+# limite de tamanho pedido no teste manual. O /juridico continua com INSTRUCOES, como foi avaliado na S3
+# (tests/test_instrucoes_sem_rag.py).
+LIMITE_TAMANHO = (
+    "\n- Responda em no máximo 5 frases curtas. Se o assunto for maior, diga o essencial e indique "
+    "a Defensoria Pública do DF ou o Ligue 180 para o resto."
+)
+INSTRUCOES_JURIDICO_CONVERSA = rag.INSTRUCOES + LIMITE_TAMANHO
+
+# Modo "ajudando outra pessoa" (tarefa 3.4): as instruções do jurídico na conversa mais estas linhas.
+# O /juridico nunca usa esta versão.
+INSTRUCOES_AJUDANDO = INSTRUCOES_JURIDICO_CONVERSA + (
     "\n- Quem pergunta está ajudando outra mulher, que é a vítima. Fale da vítima em terceira pessoa "
     "(\"ela\") e fale com quem pergunta em segunda pessoa (\"você\").\n"
     "- Além do que os trechos de lei preveem, inclua em uma ou duas frases, sem citar artigo, como apoiar "
@@ -391,7 +425,7 @@ INSTRUCOES_AJUDANDO = rag.INSTRUCOES + (
 def _resposta_do_agente(classificacao: Classificacao, indice: Callable, cliente, *, ajudando: bool) -> dict | None:
     """Resposta gerada no servidor, ou None para os agentes que rodam no aparelho (com o perfil)."""
     agente, tipo = classificacao.decisao.agente, classificacao.decisao.tipo
-    instrucoes = INSTRUCOES_AJUDANDO if ajudando else rag.INSTRUCOES
+    instrucoes = INSTRUCOES_AJUDANDO if ajudando else INSTRUCOES_JURIDICO_CONVERSA
     if agente == "fora_do_tema":
         # Recusa padrão: sem índice e sem LLM de resposta.
         return {"resposta": FORA_DO_TEMA, "citacoes": [], "recusada": True}

@@ -198,3 +198,43 @@ def test_triagem_no_fim_de_quatro_perguntas_vem_primeiro():
     assert resultado.decisao.agente == "triagem"
     assert resultado.outras_perguntas == ["Como peço medida protetiva?", "Onde fica o CRAS?"]
     assert resultado.excedeu
+
+
+# --- Fechamento da S4 (#84): "direito" só para benefício com regra ou com marca de "tenho direito?" -----
+
+
+@pytest.mark.parametrize(
+    "texto, beneficio",
+    [
+        ("o governo do df ajuda quando nasce um bebe?", None),
+        ("tem ajuda pra pagar enterro?", "outro"),
+    ],
+)
+def test_existe_ajuda_vira_explicacao(texto, beneficio):
+    # O DeepSeek classificou estas perguntas como "direito" no teste manual de 19/11.
+    llm = LLMFalso(saida({"agente": "beneficios", "tipo": "direito", "pergunta": texto, "beneficio": beneficio}))
+    resultado = classificar(texto, llm)
+    assert resultado.decidido_por == "llm"
+    assert (resultado.decisao.agente, resultado.decisao.tipo) == ("beneficios", "explicacao")
+
+
+@pytest.mark.parametrize(
+    "texto, beneficio",
+    [
+        # Benefício com regra: os cartões respondem à pergunta, mesmo sem marca de "tenho direito?".
+        ("minha mae tem 70 anos? como fica o bpc dela?", "bpc"),
+        # Marca de "tenho direito?": os cartões de todos os benefícios respondem.
+        ("moro com 2 filhos e a renda é baixa, recebo alguma coisa?", None),
+        ("ganho pouco, sera que tenho direito a alguma ajuda?", None),
+    ],
+)
+def test_direito_continua_quando_ha_regra_ou_marca(texto, beneficio):
+    llm = LLMFalso(saida({"agente": "beneficios", "tipo": "direito", "pergunta": texto, "beneficio": beneficio}))
+    resultado = classificar(texto, llm)
+    assert resultado.decidido_por == "llm"
+    assert (resultado.decisao.agente, resultado.decisao.tipo) == ("beneficios", "direito")
+
+
+def test_instrucao_traz_exemplos_dos_dois_tipos():
+    assert "\"tenho direito ao bolsa família?\" é direito" in INSTRUCOES_CLASSIFICACAO
+    assert "\"o governo ajuda quando nasce um bebê?\"" in INSTRUCOES_CLASSIFICACAO
