@@ -74,6 +74,7 @@ def test_raiz_serve_a_tela_de_conversa(cliente):
         "/conversa.js",
         "/rede.js",
         "/risco.js",
+        "/audio.js",
         "/styles.css",
         "/sw.js",
         "/regras/beneficios.json",
@@ -117,6 +118,7 @@ def test_service_worker_nao_guarda_a_conversa_e_inclui_novos_arquivos(cliente):
         '"/rede-protecao"',
         '"/rede.js"',
         '"/cep-ra"',
+        '"/audio.js"',
     ):
         assert item in sw.text
 
@@ -139,6 +141,16 @@ def test_interface_permite_armazenamento_apenas_em_perfil_js():
     # Confirma que a verificação falha caso app.js ou outro script passe a usar armazenamento
     scripts_Simulados = dict(scripts, **{"app.js": scripts["app.js"] + "\nlocalStorage.setItem('x', '1');"})
     assert _scripts_usam_armazenamento(scripts_Simulados) == [("app.js", "localStorage")]
+
+
+def test_audio_js_nao_guarda_o_audio_no_aparelho():
+    # s5-entrada-audio, tarefa 3.1: o áudio fica só na memória da aba.
+    codigo = re.sub(r"//[^\n]*", "", (RAIZ / "web" / "audio.js").read_text(encoding="utf-8"))
+    for proibido in ("localStorage", "sessionStorage", "indexedDB", "caches", "document.cookie", "createObjectURL", "download"):
+        assert proibido not in codigo, proibido
+    # Só fala com o servidor da própria aplicação, sem cache.
+    assert re.findall(r'"(/[a-z]+)"', codigo) == ["/transcrever"]
+    assert 'cache: "no-store"' in codigo
 
 
 def test_navegacao_secoes_saida_rapida_e_conversa_inicial(cliente):
@@ -359,6 +371,7 @@ def test_alerta_de_190_na_tela_antes_do_envio_e_offline(cliente):
         "/conversa.js",
         "/rede.js",
         "/risco.js",
+        "/audio.js",
         "/styles.css",
         "/regras/beneficios.json",
         "/regras/triagem_fonar.json",
