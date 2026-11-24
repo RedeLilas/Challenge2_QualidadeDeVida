@@ -52,6 +52,15 @@ Os casos fictícios de áudio (A1 a A7, voz sintética) estão em `tests/audios/
 uv run pytest -m whisper
 ```
 
+## Layout no celular
+
+Os testes que medem o layout num navegador de verdade (saída rápida inteira no cabeçalho e chat dentro da tela, de 320 a 430 px de largura) também ficam fora do `uv run pytest`. Eles precisam do Chromium do Playwright, instalado uma vez por máquina:
+
+```bash
+uv run playwright install chromium
+uv run pytest -m navegador
+```
+
 ## Base jurídica (RAG)
 
 18 normas federais e distritais, listadas em `dados/fontes/fontes.yaml`, cada uma com um eixo: `juridico`, `beneficios`, `saude` ou `df`.
