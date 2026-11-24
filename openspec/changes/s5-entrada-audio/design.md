@@ -122,6 +122,11 @@ As frases de A5 e A6 disparam a regra atual (conferido em 24/11). Pelo menos um 
   - A1 (webm): transcrição em 0,9 s, "Ele pode tirar meus filhos de mim?", sem risco. O `/orquestrar` (LLM escolheu o jurídico) respondeu em 24,4 s, citando a Lei 11.340/2006, art. 22. Esse tempo inclui a espera pela montagem do índice, porque a pergunta chegou 2 s depois de o servidor subir.
   - A6 (mp4): transcrição em 1,0 s, com risco. Sem o toque, o `/orquestrar` devolveu só o alerta, sem LLM. Com `alerta_visto`, a regra escolheu o jurídico, que respondeu em 8,4 s citando o art. 19, com o risco junto.
   - O log trouxe só rotas, status, tempos e o roteamento (`decidido_por` e `agente`), sem texto.
+- **Com o modelo de produção** (`deepseek-flash`, sem raciocínio, só casos fictícios pela opção (c) de 09/11; mesma máquina, índice já montado):
+  - A1: transcrição em 0,9 s, sem risco. O LLM escolheu o jurídico, que respondeu em 4,7 s citando o Código Civil, art. 1.584, e a Lei 11.340/2006, art. 22.
+  - A6: transcrição em 0,9 s, com risco. Sem o toque, só o alerta, em 1 ms e sem LLM. Com `alerta_visto`, a regra escolheu o jurídico, que respondeu em 2,4 s citando o art. 19.
+  - A2 (extra, mp4): a regra escolheu benefícios ("tenho direito?"), e o servidor devolveu só os campos para a regra rodar no aparelho, sem LLM.
+  - Observação, fora desta mudança: a resposta do A6 parece ter 6 frases, acima do limite de 5 da decisão de 19/11.
 - A latência (p95 ≤ 10 s) é medida na S6, com o modelo de produção.
 
 ## Risks / Trade-offs
