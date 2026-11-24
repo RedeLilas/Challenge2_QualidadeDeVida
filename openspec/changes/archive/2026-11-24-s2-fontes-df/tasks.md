@@ -10,4 +10,4 @@
 
 - [x] 2.1 Escolher o benefício distrital para a S3 e registrar o motivo neste `design.md` (ou registrar que nenhum atende e seguir só com federais)
 - [x] 2.2 Criar `scripts/validar_dados.py`; verificação: o script passa sem erros nos três arquivos
-- [ ] 2.3 Atualizar o status no `ROADMAP.md` e arquivar a mudança
+- [x] 2.3 Atualizar o status no `ROADMAP.md` e arquivar a mudança

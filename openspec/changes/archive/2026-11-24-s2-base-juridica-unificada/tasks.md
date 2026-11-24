@@ -16,4 +16,4 @@
 
 - [x] 3.1 Remover o restante de `backend/` (índice Chroma, `indexar.py`, `requirements.txt`, `README.md`, `.gitignore`); verificação: `git ls-files backend` vazio e `uv run pytest` passa
 - [x] 3.2 Criar o `README.md` da raiz com o fluxo coleta → ingestão → busca → testes; verificação: os comandos do README rodam do zero num clone limpo
-- [ ] 3.3 Rodar a suíte de risco/190 (se `s2-alerta-risco-190` já tiver entregado `tests/test_risco.py`), atualizar o status no `ROADMAP.md` e arquivar a mudança
+- [x] 3.3 Rodar a suíte de risco/190 (se `s2-alerta-risco-190` já tiver entregado `tests/test_risco.py`), atualizar o status no `ROADMAP.md` e arquivar a mudança **(revisão da equipe feita; suíte de risco/190 com 221 testes passando em 24/11)**

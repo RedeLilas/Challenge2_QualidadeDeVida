@@ -21,7 +21,7 @@ LIMITE_SIMILARIDADE = 0.81
 # Calibrado em 17/11 só com avaliacao/conjuntos/s4/desenvolvimento_beneficios.yaml (após expansão de "bpc"):
 # 22 perguntas do tema de 0,8175 (bd-013) a 0,8959 (bd-018); 8 extras quase do tema de 0,8123 (bd-x04)
 # a 0,8629 (bd-x08). Em 0,815 nenhuma pergunta do tema é recusada, bd-x04 é barrada pelo limite e as
-# outras 7 extras dependem da recusa por verificação de citação (openspec/changes/s4-rag-beneficios/design.md).
+# outras 7 extras dependem da recusa por verificação de citação (openspec/changes/archive/2026-11-24-s4-rag-beneficios/design.md).
 LIMITE_BENEFICIOS = 0.815
 # Siglas leigas ausentes do texto das normas de benefícios (s4-rag-beneficios, tarefa 3.3).
 # A Lei 8.742/1993 escreve "benefício de prestação continuada" por extenso e nunca traz a sigla "BPC".

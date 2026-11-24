@@ -55,21 +55,21 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | Definições do projeto (`docs/Challenge 2 - Definições do Projeto Semana 1.md`) | Entregue |
 | `s1-definicoes-base`: definições convertidas em 9 specs | Arquivada em 10/11 (a tarefa 2.1, leitura das specs pela equipe, não foi feita) |
 
-### S2: Base de conhecimento e recuperação (ter 03, qui 05, sex 06/11)
+### S2: Base de conhecimento e recuperação (ter 03, qui 05, sex 06/11) ✅
 
 **Entregável do curso:** primeiro mecanismo de RAG.
 **Pronto quando:** uma pergunta jurídica é respondida com o artigo citado, e o alerta de 190 dispara por regra. A verificação na URL publicada fica para a S5, junto com o deploy.
 
 | Mudança | Status |
 | :--- | :--- |
-| `s2-plataforma-base`: backend, PWA mínima com saída rápida, cliente de LLM, CI e primeiro deploy | Em andamento (8/13: backend, PWA e decisão de LGPD concluídos; deploy adiado para a S5) |
-| `s2-alerta-risco-190`: regras compartilhadas PWA + backend, suíte sem falso negativo | Em andamento (6/8: faltam a medição no celular e o arquivamento) |
-| `s2-rag-juridico`: Lei Maria da Penha por artigo, embeddings locais, resposta com citação e recusa | Em andamento (7/9: faltam a verificação na URL publicada, adiada para a S5, e o arquivamento) |
-| `s2-fontes-df`: rede de proteção do DF, normas federais e distritais, notas do Fonar | Em andamento (5/6: falta o arquivamento) |
-| `s2-base-juridica-unificada`: 16 normas na raiz com o `e5-base` em memória, filtro por eixo, remove `backend/` (Chroma) | Implementada, aguardando revisão da equipe (8/9) |
+| `s2-plataforma-base`: backend, PWA mínima com saída rápida, cliente de LLM, CI e primeiro deploy | Arquivada em 24/11 (backend, PWA e decisão de LGPD concluídos; Dockerfile, CI, publicação e decisão da plataforma (3.1, 3.2, 3.3 e 4.1) movidos para a `s5-deploy`) |
+| `s2-alerta-risco-190`: regras compartilhadas PWA + backend, suíte sem falso negativo | Arquivada em 24/11 (medição no celular do tempo até o alerta (2.3) movida para a `s6-producao`) |
+| `s2-rag-juridico`: Lei Maria da Penha por artigo, embeddings locais, resposta com citação e recusa | Arquivada em 24/11 (verificação na URL publicada (2.4) movida para a `s5-deploy`) |
+| `s2-fontes-df`: rede de proteção do DF, normas federais e distritais, notas do Fonar | Arquivada em 24/11 (6/6) |
+| `s2-base-juridica-unificada`: 16 normas na raiz com o `e5-base` em memória, filtro por eixo, remove `backend/` (Chroma) | Arquivada em 24/11 (9/9; revisão da equipe feita, suíte de risco/190 passando) |
 
-**Decisões da S2** (registradas em `s2-plataforma-base/design.md`):
-- [ ] Plataforma de deploy: adiada para a S5, ainda em aberto (decisão de 09/11)
+**Decisões da S2** (registradas em `archive/2026-11-24-s2-plataforma-base/design.md`):
+- [ ] Plataforma de deploy: adiada para a S5, ainda em aberto (decisão de 09/11); passa para a `s5-deploy`
 - [x] Tratamento LGPD do DeepSeek: opção (c), risco declarado com uso só de casos fictícios (decisão de 09/11)
 
 ### S3: Comparação LLM x RAG (ter 10, qui 12, sex 13/11)
@@ -89,16 +89,16 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 
 **Adiantar para a S4** (que perde a sexta por feriado): definir o contrato comum dos agentes (entrada, saída, citações) no design de `s3-beneficios`.
 
-### S4: Sistema multiagentes (ter 17, qui 19/11; sexta 20/11 é feriado)
+### S4: Sistema multiagentes (ter 17, qui 19/11; sexta 20/11 é feriado) ✅
 
 **Entregável do curso:** primeiro sistema multiagentes.
 **Pronto quando:** **acurácia de elegibilidade ≥ 90%** e **sensibilidade para risco alto = 100%** nos casos fictícios.
 
 | Mudança (propor na terça, 17/11) | Status |
 | :--- | :--- |
-| `s4-orquestrador-agentes`: rota `/orquestrar` (regra + LLM), agentes jurídico, benefícios, triagem e rede, várias perguntas, "Continuar" depois do alerta de 190, modo "ajudando outra pessoa"; casos fictícios e medição das duas metas | Concluída em 19/11 (27/27); aguardando arquivamento |
-| `s4-rede-atendimento`: CEP → RA por tabela local no navegador, CRAS da Sedes-DF, saúde de referência (SES-DF + CNES); Ligue 180 fora do DF | Concluída em 19/11 (15/15); aguardando arquivamento |
-| `s4-rag-beneficios`: RAG só para explicar benefícios (eixos `beneficios` e `df`), apelidos das normas na verificação de citação, limite próprio | Concluída em 19/11 (11/11): testada, não medida; aguardando arquivamento |
+| `s4-orquestrador-agentes`: rota `/orquestrar` (regra + LLM), agentes jurídico, benefícios, triagem e rede, várias perguntas, "Continuar" depois do alerta de 190, modo "ajudando outra pessoa"; casos fictícios e medição das duas metas | Concluída em 19/11 (27/27); arquivada em 24/11 |
+| `s4-rede-atendimento`: CEP → RA por tabela local no navegador, CRAS da Sedes-DF, saúde de referência (SES-DF + CNES); Ligue 180 fora do DF | Concluída em 19/11 (15/15); arquivada em 24/11 |
+| `s4-rag-beneficios`: RAG só para explicar benefícios (eixos `beneficios` e `df`), apelidos das normas na verificação de citação, limite próprio | Concluída em 19/11 (11/11): testada, não medida; arquivada em 24/11 |
 
 **Ordem de corte da S4:** 1) `s4-rag-beneficios` inteira (vai para a S6); 2) refinamento das perguntas sugeridas; 3) serviços de saúde do CNES. **Nunca cortar:** alerta de 190, saída rápida, ausência de histórico, citação de fontes e a medição das duas metas da S4.
 

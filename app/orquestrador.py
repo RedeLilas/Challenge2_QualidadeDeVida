@@ -1,6 +1,6 @@
 """Orquestrador da conversa (s4-orquestrador-agentes): contrato do POST /orquestrar e etapa de regra.
 
-O contrato está em openspec/changes/s4-orquestrador-agentes/design.md ("Contrato do POST /orquestrar").
+O contrato está em openspec/changes/archive/2026-11-24-s4-orquestrador-agentes/design.md ("Contrato do POST /orquestrar").
 O navegador (web/conversa.js) trabalha com as respostas de exemplo em tests/orquestrar_exemplos.json,
 validadas contra estes modelos por tests/test_orquestrar_contrato.py.
 

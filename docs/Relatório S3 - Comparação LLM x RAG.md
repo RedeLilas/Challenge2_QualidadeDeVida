@@ -140,7 +140,7 @@ As 10 extras não foram ao corretor e não entram na precisão nem na fidelidade
 
 ## Risco da opção (c): DeepSeek e LGPD
 
-- **Decisão:** a equipe escolheu a opção (c) em 09/11 (`openspec/changes/s2-plataforma-base/design.md`): usar a API oficial do DeepSeek só com casos fictícios durante o projeto, declarando o risco neste relatório.
+- **Decisão:** a equipe escolheu a opção (c) em 09/11 (`openspec/changes/archive/2026-11-24-s2-plataforma-base/design.md`): usar a API oficial do DeepSeek só com casos fictícios durante o projeto, declarando o risco neste relatório.
 - **O risco:** a API do DeepSeek processa os dados fora do Brasil, o que é uma transferência internacional (LGPD, art. 33). Em uso real, as mensagens podem conter relatos de violência, que são dados sensíveis.
 - **Neste projeto:** todas as perguntas da avaliação são fictícias e nenhuma traz dado de pessoa real. O corretor (Gemini) também recebeu só respostas a casos fictícios.
 - **Pendente para uso real:** antes de qualquer uso com pessoas reais, é preciso trocar para uma opção que trate essa transferência:
