@@ -14,6 +14,7 @@
   <link rel="apple-touch-icon" href="/icones/icone-192.png">
   <link rel="stylesheet" href="/styles.css">
   <script src="/risco.js" defer></script>
+  <script src="/audio.js" defer></script>
   <script src="/perfil.js" defer></script>
   <script src="/beneficios.js" defer></script>
   <script src="/triagem.js" defer></script>
@@ -625,6 +626,11 @@
       <form class="chat-input" id="envio" autocomplete="off">
         <label class="oculto" for="texto">Sua mensagem</label>
         <textarea id="texto" name="texto" rows="1" maxlength="2000" placeholder="Digite sua dúvida aqui…" enterkeyhint="send" autocomplete="off"></textarea>
+        <!-- Pergunta por áudio: o microfone só é pedido no toque, e o áudio não fica no aparelho. -->
+        <button type="button" class="microfone" id="microfone" aria-label="Gravar pergunta por áudio (até 30 segundos)" aria-pressed="false" hidden>
+          <span data-icon="mic" id="microfone-icone"></span>
+          <span class="microfone__contagem" id="microfone-contagem" aria-live="polite" hidden></span>
+        </button>
         <button type="submit" class="enviar" id="enviar" aria-label="Enviar mensagem">
           <span data-icon="arrow"></span>
         </button>

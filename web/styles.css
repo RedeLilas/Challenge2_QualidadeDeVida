@@ -1920,6 +1920,39 @@ a {
   flex-shrink: 0;
 }
 
+/* Pergunta por áudio (s5-entrada-audio) */
+.chat-input .microfone {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 6px;
+  border-radius: 10px;
+  border: 1px solid #d9cdeb;
+  background: #fff;
+  color: var(--lilac-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.chat-input .microfone[aria-pressed="true"] {
+  background: var(--rose-600);
+  border-color: var(--rose-600);
+  color: #fff;
+}
+
+.chat-input .microfone:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.microfone__contagem {
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 .chat-privacy-note {
   padding: 8px 14px 12px;
   text-align: center;

@@ -186,6 +186,15 @@ def test_disponivel_so_com_microfone_gravador_e_internet(js, opcoes, esperado):
     assert chamar(js, f"Gravacao.disponivel(criarAmbiente({opcoes}))") is esperado
 
 
+@pytest.mark.parametrize(
+    "opcoes, esperado",
+    [("{}", True), ("{offline: true}", True), ("{semMicrofone: true}", False), ("{semGravador: true}", False)],
+)
+def test_suportado_nao_depende_da_internet(js, opcoes, esperado):
+    # Sem internet o botão aparece desabilitado; sem microfone ou gravador, ele nem aparece.
+    assert chamar(js, f"Gravacao.suportado(criarAmbiente({opcoes}))") is esperado
+
+
 # --- Gravação ---
 
 
