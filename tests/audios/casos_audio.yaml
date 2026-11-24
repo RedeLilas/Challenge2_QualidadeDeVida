@@ -1,0 +1,62 @@
+# Casos fictícios de áudio da s5-entrada-audio (tarefa 1.2). Textos escritos pela equipe (design, 24/11).
+# Nenhuma voz ou relato real: os arquivos são de voz sintética offline (ver LEIAME.md).
+# palavras_chave: comparadas com a transcrição normalizada por app.risco.normalizar (minúsculas, sem acento).
+# agente_esperado: null quando o design não define o agente do caso.
+versao: 1
+casos:
+  - id: A1
+    arquivo: a1.webm
+    formato: webm
+    texto: "Ele pode tirar meus filhos de mim?"
+    palavras_chave: ["tirar", "filhos"]
+    risco_esperado: false
+    agente_esperado: juridico
+
+  - id: A2
+    arquivo: a2.mp4
+    formato: mp4
+    texto: "Tenho direito ao Bolsa Família?"
+    palavras_chave: ["bolsa familia"]
+    risco_esperado: false
+    agente_esperado: beneficios
+
+  - id: A3
+    arquivo: a3.webm
+    formato: webm
+    texto: "Como funciona a medida protetiva?"
+    palavras_chave: ["medida protetiva"]
+    risco_esperado: false
+    agente_esperado: null
+
+  - id: A4
+    arquivo: a4.mp4
+    formato: mp4
+    texto: "Minha amiga apanha do marido, como eu posso ajudar?"
+    palavras_chave: ["amiga", "ajudar"]
+    risco_esperado: false
+    agente_esperado: null
+
+  - id: A5
+    arquivo: a5.webm
+    formato: webm
+    texto: "Ele está aqui na porta com uma faca e disse que vai me matar"
+    palavras_chave: ["faca", "matar"]
+    risco_esperado: true
+    agente_esperado: null
+
+  - id: A6
+    arquivo: a6.mp4
+    formato: mp4
+    texto: "Ele disse que vai me matar hoje, posso pedir medida protetiva?"
+    palavras_chave: ["matar", "medida protetiva"]
+    risco_esperado: true
+    agente_esperado: juridico
+
+  - id: A7
+    arquivo: a7.webm
+    formato: webm
+    texto: ""
+    duracao_silencio_s: 5
+    palavras_chave: []
+    risco_esperado: false
+    agente_esperado: null
