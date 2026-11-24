@@ -17,7 +17,7 @@ As tarefas de empacotar e publicar ficam genéricas até a decisão da tarefa 1.
 
 - [ ] 3.1 Publicar na plataforma escolhida com a chave do DeepSeek só como variável secreta e o uvicorn com `--no-access-log` (vem de `s2-plataforma-base` 3.3); verificação: a URL de teste abre a PWA no celular, a chave não aparece no pacote nem nos logs de build, e uma requisição com query string fictícia não deixa a query string, o IP nem o texto nos logs da aplicação
 - [ ] 3.2 Medir na plataforma a partida a frio (do início do processo até `/saude` e até o índice e o Whisper ficarem prontos) e a memória em uso, e registrar no design; verificação: o design tem data, plano e os tempos medidos
-- [ ] 3.3 Verificar na URL publicada, com roteiro registrado no design: a pergunta da persona Camila respondida com o art. 7º citado (vem de `s2-rag-juridico` 2.4), uma pergunta por áudio (caso A1) respondida de ponta a ponta no celular, o caso A5 falado mostrando o 190 e a saída rápida; verificação: roteiro preenchido no design, com data e aparelho
+- [ ] 3.3 Verificar na URL publicada, com roteiro registrado no design: a pergunta da persona Camila respondida com o art. 7º citado (vem de `s2-rag-juridico` 2.4), uma pergunta por áudio (caso A1) respondida de ponta a ponta num Android de verdade (a `s5-entrada-audio` testou só o iPhone de verdade; decisão de 24/11) e no iPhone, o caso A5 falado mostrando o 190 e a saída rápida; verificação: roteiro preenchido no design, com data e aparelho
 - [ ] 3.4 Rodar a suíte inteira, incluindo a de risco/190, e `openspec validate --all`; verificação: os dois passam
 
 ## Workflow follow-up
