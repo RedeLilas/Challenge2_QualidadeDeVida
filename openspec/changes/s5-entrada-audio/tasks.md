@@ -20,8 +20,8 @@
 
 ## 4. Ponta a ponta (terça, 24/11)
 
-- [ ] 4.1 Testar o caminho completo: áudio A1 → `/transcrever` → regra sem risco → `/orquestrar` → resposta do jurídico com citação, e áudio A6 → 190 → `/orquestrar` só com `alerta_visto`; verificação: teste com a marca `whisper` e LLM falso passa, e uma pergunta por áudio é respondida de ponta a ponta na máquina local com o LLM local (critério de pronto da S5), registrado no design
-- [ ] 4.2 Documentar `WHISPER_MODELO` no `.env.example` e no `README.md` (como gravar os casos e rodar `uv run pytest -m whisper`) e rodar a suíte inteira, incluindo a de risco/190; verificação: `uv run pytest` passa, e os comandos do README rodam como escritos
+- [x] 4.1 Testar o caminho completo: áudio A1 → `/transcrever` → regra sem risco → `/orquestrar` → resposta do jurídico com citação, e áudio A6 → 190 → `/orquestrar` só com `alerta_visto`; verificação: teste com a marca `whisper` e LLM falso passa, e uma pergunta por áudio é respondida de ponta a ponta na máquina local com o LLM local (critério de pronto da S5), registrado no design
+- [x] 4.2 Documentar `WHISPER_MODELO` no `.env.example` e no `README.md` (como gravar os casos e rodar `uv run pytest -m whisper`) e rodar a suíte inteira, incluindo a de risco/190; verificação: `uv run pytest` passa, e os comandos do README rodam como escritos
 
 ## 5. Medição para o deploy (terça, 24/11; no máximo quinta de manhã, antes da tarefa 1.1 da `s5-deploy`)
 

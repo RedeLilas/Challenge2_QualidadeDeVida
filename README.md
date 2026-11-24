@@ -38,6 +38,20 @@ uv run --env-file .env python -m app.llm "O que é violência patrimonial?"
 
 Para usar o DeepSeek, troque as variáveis no `.env` (veja o bloco comentado em `.env.example`): modelo `deepseek-flash` com `LLM_THINKING=disabled`. Nenhum código muda. A chave fica só no `.env` de cada máquina e nunca é versionada. Pela decisão de LGPD (opção (c), em `openspec/changes/archive/2026-11-24-s2-plataforma-base/design.md`), só casos fictícios vão ao DeepSeek.
 
+## Pergunta por áudio
+
+O botão de microfone da conversa grava até 30 s, só na memória da aba, e envia o áudio a `POST /transcrever`, no próprio servidor. O servidor transcreve com o Whisper ([faster-whisper](https://github.com/SYSTRAN/faster-whisper), modelo `small` em int8 na CPU, português fixo) e devolve só o texto. O áudio nunca vai a serviço externo, não é gravado em disco e não aparece nos logs. A regra de risco roda no navegador sobre o texto: com sinal de risco, o 190 aparece na hora; sem risco, o texto vai para a caixa, para conferir e enviar.
+
+- O servidor carrega o Whisper ao subir, em segundo plano. Na primeira vez em cada máquina, ele baixa o modelo, cerca de 0,5 GB. Até a carga terminar, a rota responde que a transcrição está iniciando.
+- `WHISPER_MODELO` (opcional, padrão `small`) troca o modelo; `base` é a reserva, mais rápida e menos precisa. `WHISPER_THREADS` (opcional) limita as threads, por exemplo `2` para medir como numa máquina de 2 vCPUs.
+- A telemetria do onnxruntime (usado pelo filtro de silêncio) fica desligada pelo próprio código (`ORT_DISABLE_TELEMETRY=1`).
+
+Os casos fictícios de áudio (A1 a A7, voz sintética) estão em `tests/audios/`. O `LEIAME.md` dessa pasta explica como gerá-los de novo ou trocar por uma gravação da equipe. Os testes que usam o Whisper de verdade ficam fora do `uv run pytest` e rodam com:
+
+```bash
+uv run pytest -m whisper
+```
+
 ## Base jurídica (RAG)
 
 18 normas federais e distritais, listadas em `dados/fontes/fontes.yaml`, cada uma com um eixo: `juridico`, `beneficios`, `saude` ou `df`.
