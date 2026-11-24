@@ -43,7 +43,7 @@ Fontes (consultadas em 24/11; as páginas do HF, do Render, do Railway e do Koye
 
 ### O que precisa estar pronto antes da decisão de quinta
 
-- [ ] Memória e tempos medidos (tarefa 5.1 da `s5-entrada-audio`), na tabela abaixo.
+- [x] Memória e tempos medidos (tarefa 5.1 da `s5-entrada-audio`), na tabela abaixo: pico de ~2,9 GB (24/11).
 - [ ] Aprovação de gasto: quanto por mês e até quando (a S7 termina em 11/12), e quem aprova.
 - [ ] Dono da conta e do cartão: conta pessoal (HF PRO, Fly.io) ou da organização `RedeLilas` (HF Team, Railway com time).
 - [ ] Acessos: quem da equipe entra na plataforma e quem vê os segredos.
@@ -52,15 +52,27 @@ Fontes (consultadas em 24/11; as páginas do HF, do Render, do Railway e do Koye
 - [ ] Créditos de estudante (ex.: GitHub Student Developer Pack, Azure for Students), se alguém da equipe tiver: não conferidos em 24/11.
 - [ ] Docker Desktop em ao menos uma máquina (ajuda a testar a imagem, mas não é obrigatório).
 
-### Memória e tempos medidos (preenchido pela tarefa 5.1 da `s5-entrada-audio`)
+### Memória e tempos medidos (tarefa 5.1 da `s5-entrada-audio`, 24/11)
 
-| Medida | Valor | Máquina, data e comando |
+**Máquina:** MacBook Air, Apple M4 (4 núcleos de desempenho e 6 de eficiência), 24 GB, macOS 27.0. **Comando:** `uv run python scripts/medir_audio_rag.py`, com cada configuração num processo próprio, embeddings na CPU (como no deploy, sem a GPU do Mac), Whisper `small` em int8 e `HF_HUB_OFFLINE=1`. O script fica no repositório para repetir a medição na plataforma escolhida.
+
+| Medida | Todas as threads (10) | 2 threads |
 | :--- | :--- | :--- |
-| Pico de memória com o RAG e o Whisper carregados juntos | a medir | |
-| Carga do índice (montagem dos vetores) | a medir | |
-| Carga do Whisper `small` | a medir | |
-| Transcrição de A1 a A6, todas as threads (média e máximo) | a medir | |
-| Transcrição de A1 a A6, 2 threads (média e máximo) | a medir | |
+| **Pico de memória com o RAG e o Whisper carregados juntos** | **2.906 MB** | **2.896 MB** |
+| Memória ao iniciar o Python com torch (antes dos modelos) | ~905 MB | ~905 MB |
+| Carga do Whisper `small` (modelo já no cache) | 0,4 s | 0,4 s |
+| Carga do índice (montagem dos vetores de 578 trechos) | 13,6 s | 14,9 s |
+| Transcrição de A1 a A6 (média / máximo) | 0,81 / 0,86 s | 1,65 / 1,68 s |
+| Pergunta longa, A1 a A6 em sequência (~21 s de fala) | 1,6 s | 2,4 s |
+| **A mesma pergunta com ruído forte (SNR -5 dB)** | **10,4 s** | **17,4 s** |
+| Busca no RAG | 0,01 s | 0,01 s |
+
+**Leitura para a decisão de quinta:**
+- **Memória:** o pico fica em ~2,9 GB, abaixo da estimativa de 3,1 GB. Uma instância de **4 GB cabe**, com cerca de 1 GB de folga para o servidor e os pedidos. Os planos de 0,5 a 2 GB não cabem (Render `free`/`standard`, Railway Free/Trial). O HF Spaces CPU Basic (16 GB) sobra.
+- **Tempo:** 2 threads de um M4 são mais rápidas que 2 vCPUs típicas de nuvem. Os tempos acima são um piso e precisam ser medidos de novo na plataforma escolhida, com o mesmo script. A pergunta longa sem ruído (2,4 s em 2 threads) deixa margem para a meta de p95 ≤ 10 s.
+- **Áudio com ruído forte:** o faster-whisper refaz a transcrição com outras "temperaturas" quando o resultado parece ruim. Isso multiplica o tempo (17,4 s em 2 threads, e pode passar de 30 s numa nuvem de 2 vCPUs) e não salva o texto. Nesse áudio, com ou sem as novas tentativas, a transcrição sai errada, e a usuária a vê na caixa antes de enviar. Com `temperature=0`, sem novas tentativas, o mesmo áudio levou 1,6 s (10 threads) e 2,4 s (2 threads). Isso provavelmente explica a transcrição de 18 s vista no iPhone em 24/11. A mudança ainda não foi feita: é uma decisão de design da `s5-entrada-audio`.
+- **Pergunta repetida:** um áudio com a mesma frase repetida várias vezes sai com a frase uma vez só (o Whisper descarta texto repetitivo). Uma pergunta longa com frases diferentes sai inteira (50 palavras em 21 s).
+- **Partida a frio:** carga do índice ~15 s mais Whisper ~0,4 s nesta máquina. Numa nuvem de 2 vCPUs, deve ser bem maior, o que reforça gerar os vetores no build (tarefa 2.3).
 
 ### Requisitos com ou sem Docker
 

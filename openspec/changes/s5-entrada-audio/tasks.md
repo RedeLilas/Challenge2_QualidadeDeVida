@@ -25,7 +25,7 @@
 
 ## 5. Medição para o deploy (terça, 24/11; no máximo quinta de manhã, antes da tarefa 1.1 da `s5-deploy`)
 
-- [ ] 5.1 Medir o pico de memória com o RAG e o Whisper carregados juntos, os tempos de carga (índice e modelo) e o tempo de transcrição de A1 a A6 com todas as threads e com 2 threads (simulando 2 vCPU), e registrar no `design.md` da `s5-deploy` (máquina, data, comando e números); verificação: a tabela "Memória e tempos medidos" do design da `s5-deploy` está preenchida e indica se o `small` cabe no orçamento ou se a reserva `base` é necessária
+- [x] 5.1 Medir o pico de memória com o RAG e o Whisper carregados juntos, os tempos de carga (índice e modelo) e o tempo de transcrição de A1 a A6 com todas as threads e com 2 threads (simulando 2 vCPU), e registrar no `design.md` da `s5-deploy` (máquina, data, comando e números); verificação: a tabela "Memória e tempos medidos" do design da `s5-deploy` está preenchida e indica se o `small` cabe no orçamento ou se a reserva `base` é necessária
 
 ## Workflow follow-up
 
