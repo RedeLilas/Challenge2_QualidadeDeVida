@@ -115,6 +115,20 @@ Ficam em `tests/audios/`, com `casos_audio.yaml` (arquivo, texto lido, palavras-
 
 As frases de A5 e A6 disparam a regra atual (conferido em 24/11). Pelo menos um áudio gravado no Android (webm/opus) e um no iPhone (mp4/aac). Os testes que usam o Whisper de verdade levam a marca `whisper` e rodam na máquina local (`uv run pytest -m whisper`), porque baixam ~0,5 GB; a suíte padrão usa um transcritor falso.
 
+### Ponta a ponta (tarefa 4.1, 24/11): critério de pronto da S5 cumprido na máquina local
+
+- **Teste automático** (`tests/test_audio_ponta_a_ponta.py`, marca `whisper`): Whisper de verdade, `tratarTranscricao` de `web/app.js` no QuickJS e `/orquestrar` de verdade, com índice e LLM falsos. A1 vai para a caixa e, enviado, volta do jurídico com a citação; A6 mostra o 190 sem nenhum pedido, recebe só o alerta sem `alerta_visto` e vai ao jurídico depois do "Continuar".
+- **Verificação com tudo de verdade** (servidor com o índice do RAG, Whisper `small` e o LLM local `qwen2.5:7b-instruct` no Ollama, Mac do laboratório):
+  - A1 (webm): transcrição em 0,9 s, "Ele pode tirar meus filhos de mim?", sem risco. O `/orquestrar` (LLM escolheu o jurídico) respondeu em 24,4 s, citando a Lei 11.340/2006, art. 22. Esse tempo inclui a espera pela montagem do índice, porque a pergunta chegou 2 s depois de o servidor subir.
+  - A6 (mp4): transcrição em 1,0 s, com risco. Sem o toque, o `/orquestrar` devolveu só o alerta, sem LLM. Com `alerta_visto`, a regra escolheu o jurídico, que respondeu em 8,4 s citando o art. 19, com o risco junto.
+  - O log trouxe só rotas, status, tempos e o roteamento (`decidido_por` e `agente`), sem texto.
+- **Com o modelo de produção** (`deepseek-flash`, sem raciocínio, só casos fictícios pela opção (c) de 09/11; mesma máquina, índice já montado):
+  - A1: transcrição em 0,9 s, sem risco. O LLM escolheu o jurídico, que respondeu em 4,7 s citando o Código Civil, art. 1.584, e a Lei 11.340/2006, art. 22.
+  - A6: transcrição em 0,9 s, com risco. Sem o toque, só o alerta, em 1 ms e sem LLM. Com `alerta_visto`, a regra escolheu o jurídico, que respondeu em 2,4 s citando o art. 19.
+  - A2 (extra, mp4): a regra escolheu benefícios ("tenho direito?"), e o servidor devolveu só os campos para a regra rodar no aparelho, sem LLM.
+  - Observação, fora desta mudança: a resposta do A6 parece ter 6 frases, acima do limite de 5 da decisão de 19/11.
+- A latência (p95 ≤ 10 s) é medida na S6, com o modelo de produção.
+
 ## Risks / Trade-offs
 
 - [Latência do `small` em 2 vCPU perto de 10 s para 30 s de áudio] → medir na tarefa 5.1 e na plataforma escolhida; trocar para `base` por variável de ambiente.
