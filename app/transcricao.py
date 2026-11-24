@@ -84,7 +84,11 @@ class Whisper:
             raise AudioLongo
         # Português fixo (sem detectar o idioma, que custa tempo e erra em falas curtas), filtro de
         # silêncio antes de transcrever e busca gulosa (beam_size=1), a mais rápida em CPU.
-        segmentos, _info = self._modelo.transcribe(amostras, language="pt", vad_filter=True, beam_size=1)
+        # temperature=0: sem as novas tentativas com outras temperaturas. Em áudio com ruído forte elas
+        # levavam a transcrição de ~2 s para 10 a 20 s, sem acertar o texto (medição de 24/11).
+        segmentos, _info = self._modelo.transcribe(
+            amostras, language="pt", vad_filter=True, beam_size=1, temperature=0.0
+        )
         return " ".join(segmento.text.strip() for segmento in segmentos).strip()
 
 

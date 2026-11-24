@@ -46,7 +46,13 @@ Comparação feita antes da decisão (ordens de grandeza dos benchmarks publicad
 
 Motivo: menor memória e menor latência em CPU, sem torch, com rodas para Windows, macOS e Linux, e leitura de webm/opus (Chrome/Android) e mp4/aac (Safari/iPhone) pelo PyAV, sem ffmpeg no sistema. O `small` é o menor modelo com qualidade boa em português para termos como "medida protetiva" e "Maria da Penha".
 
-Configuração: `WHISPER_MODELO` (padrão `small`), `language="pt"` fixo (sem detecção de idioma, que custa tempo e erra em falas curtas), `vad_filter=True` (corta o silêncio antes de transcrever), `beam_size=1` e `cpu_threads` igual ao número de vCPUs (`WHISPER_THREADS`, opcional, limita as threads, por exemplo para a medição com 2 threads da tarefa 5.1). **Reserva:** se a medição na plataforma escolhida passar de ~5 s para 30 s de áudio, `WHISPER_MODELO=base` troca o modelo sem mudar código. A meta da S6 é p95 ≤ 10 s para a resposta inteira, e o LLM e o RAG levam de 2 a 4 s.
+Configuração: `WHISPER_MODELO` (padrão `small`), `language="pt"` fixo (sem detecção de idioma, que custa tempo e erra em falas curtas), `vad_filter=True` (corta o silêncio antes de transcrever), `beam_size=1`, `temperature=0` (sem as novas tentativas com outras temperaturas; decisão de 24/11, abaixo) e `cpu_threads` igual ao número de vCPUs (`WHISPER_THREADS`, opcional, limita as threads, por exemplo para a medição com 2 threads da tarefa 5.1). **Reserva:** se a medição na plataforma escolhida passar de ~5 s para 30 s de áudio, `WHISPER_MODELO=base` troca o modelo sem mudar código. A meta da S6 é p95 ≤ 10 s para a resposta inteira, e o LLM e o RAG levam de 2 a 4 s.
+
+### Sem novas tentativas na transcrição (decisão de 24/11)
+
+Por padrão, quando o resultado parece ruim (texto repetitivo ou de baixa confiança), o faster-whisper refaz a transcrição com "temperaturas" maiores, até 6 vezes. A medição da tarefa 5.1 (design da `s5-deploy`) mostrou o custo: uma pergunta de ~21 s com ruído forte (SNR -5 dB) levou 10,4 s com 10 threads e 17,4 s com 2 threads, e o texto saiu errado do mesmo jeito, com trechos em outras línguas. Com `temperature=0`, o mesmo áudio levou 1,6 s e 2,4 s. O texto também saiu errado, mas próximo do português. Em áudio limpo ou com ruído moderado (SNR 0 dB), os dois modos deram o mesmo texto no mesmo tempo. Isso provavelmente explica a transcrição de 18 s vista no iPhone.
+
+**Decisão:** `temperature=0`. O tempo fica previsível para a meta de p95 ≤ 10 s, e a usuária confere a transcrição na caixa antes de enviar. Um texto ruim continua ruim, mas chega rápido e pode ser corrigido ou regravado. Alternativa descartada: manter as novas tentativas, que estouram o tempo sem melhorar o texto em áudio difícil. Para depois (S6/S7): usar a confiança da transcrição para responder "Não entendi o áudio" em vez de mostrar um texto sem sentido.
 
 ### Rota `POST /transcrever`
 
