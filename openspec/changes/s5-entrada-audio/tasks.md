@@ -2,7 +2,7 @@
 
 ## 1. Dependência, casos e transcrição (terça, 24/11)
 
-- [ ] 1.1 Adicionar `faster-whisper` ao `pyproject.toml` com `uv add` e atualizar o `uv.lock`; verificação: `uv sync` e `uv run pytest` passam no macOS e numa máquina Windows da equipe, e `uv run python -c "import faster_whisper"` funciona nas duas
+- [x] 1.1 Adicionar `faster-whisper` ao `pyproject.toml` com `uv add` e atualizar o `uv.lock`; verificação: `uv sync` e `uv run pytest` passam no macOS e numa máquina Windows da equipe, e `uv run python -c "import faster_whisper"` funciona nas duas **(verificado no macOS e no Windows em 24/11)**
 - [ ] 1.2 Criar `tests/audios/` com `casos_audio.yaml` (arquivo, texto lido, palavras-chave, risco esperado, agente esperado) e `LEIAME.md` (textos fictícios; leitura por membros da equipe que concordaram ou voz sintética offline), e gravar os casos A1 a A7 do design pela PWA ou por voz sintética, com ao menos um arquivo webm/opus (Android) e um mp4/aac (iPhone); verificação: teste de estrutura confere que todo caso tem arquivo existente, texto e palavras-chave, e que os textos de A5 e A6 disparam `risco.avaliar`
 - [ ] 1.3 Criar `app/transcricao.py`: carga do modelo por `WHISPER_MODELO` (padrão `small`, int8), decodificação em memória, conferência da duração, transcrição com `language="pt"`, `vad_filter=True` e `beam_size=1`, e o logger `faster_whisper` em `WARNING`; verificação: `uv run pytest -m whisper` confere as palavras-chave de A1 a A6 e a transcrição vazia de A7
 
