@@ -139,6 +139,23 @@ Roteiro automatizado com Playwright no Chromium 159 (headless shell, motor do Ch
 - O log do servidor de teste teve 135 linhas, só com rota, status e tempo, sem nenhuma palavra dos casos.
 - **Falta (tarefa 3.3):** Android e iPhone de verdade, com o aviso de permissão e o indicador de microfone do aparelho, o Safari do iPhone (mp4 gravado de verdade) e o toque real na tela.
 
+### Verificação no iPhone (24/11, tarefa 3.3)
+
+- **Aparelho:** iPhone 13, iOS 26.6.2, Safari. Feita por Túlio em 24/11, falando os textos fictícios de A1 e A5.
+- **Como foi acessado:** o túnel HTTPS da Cloudflare não conectou, porque a rede do laboratório bloqueia a saída na porta 7844. O servidor rodou no Mac com HTTPS na rede local (certificado gerado na hora, válido por 2 dias, aceito no Safari) e com o LLM local (`qwen2.5:7b-instruct` no Ollama). Nada foi exposto na internet, e nenhum texto foi ao DeepSeek.
+- **Resultado (relatado por quem testou):** passaram todos os itens do roteiro:
+  - nenhum pedido de microfone ao abrir a página e o chat;
+  - permissão do iOS só no toque, com indicador e contagem durante a gravação, e o indicador some ao parar;
+  - A1 falado vai para a caixa sem ser enviado;
+  - A5 falado mostra o 190 com "Continuar com minha pergunta", e a caixa fica vazia;
+  - depois do toque vem a resposta, com o 190 visível;
+  - a saída rápida no meio da gravação para tudo, abre o site neutro, e voltar não reabre a conversa.
+  - O mp4 gravado pelo Safari foi transcrito pelo servidor.
+- **Primeira rodada sem LLM:** na primeira rodada, o servidor estava sem LLM (de propósito, para ninguém usar o DeepSeek pela rede), e todo pedido ao `/orquestrar` voltou 503. A tela mostrou a resposta local de reserva, como deve.
+- **A investigar:** uma das transcrições do iPhone levou 18 s no log do servidor, contra menos de 1 s das outras. O log não guarda o conteúdo, então não se sabe se foi uma gravação longa. Reavaliar na medição da tarefa 5.1 e na S6.
+- **Android de verdade não foi testado.** Decisão de 24/11: a tarefa 3.3 fecha com o iPhone de verdade e o Chromium (motor do Chrome do Android, 26/26 itens com microfone falso), e um Android de verdade entra na verificação na URL publicada (`s5-deploy`, tarefa 3.3).
+- **Layout no celular (fora desta mudança):** o cabeçalho tem largura fixa de ~403 px, e o botão de saída rápida fica cortado na borda direita em telas mais estreitas (13 px fora em 390 px, 28 px em 375 px, 83 px em 320 px). O chat e o botão flutuante também ficam apertados. Vem do layout da S3, não do áudio, mas afeta o requisito de saída rápida em todas as telas.
+
 ## Risks / Trade-offs
 
 - [Latência do `small` em 2 vCPU perto de 10 s para 30 s de áudio] → medir na tarefa 5.1 e na plataforma escolhida; trocar para `base` por variável de ambiente.
