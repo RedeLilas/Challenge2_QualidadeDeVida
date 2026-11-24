@@ -84,8 +84,9 @@ Erros do Whisper em nomes e termos jurídicos ("medida protetiva", "Maria da Pen
 
 - `getUserMedia({audio: true})` só no toque do botão. `MediaRecorder` com o primeiro formato aceito entre `audio/webm;codecs=opus`, `audio/ogg;codecs=opus` e `audio/mp4`. Os pedaços ficam num array em memória.
 - Ao parar, por toque ou pelo limite: junta o `Blob`, desliga todas as trilhas do microfone (o indicador se apaga), envia com `fetch(..., {cache: "no-store"})` e limpa as referências. Nada vai a `localStorage`, IndexedDB, Cache API ou download; o service worker já ignora pedidos que não são GET.
-- `Audio.cancelar()` é chamado por `sair()` e `apagarConversa()`: para o gravador, desliga o microfone, descarta os pedaços e aborta o pedido em andamento. Uma transcrição que chegue depois disso é ignorada.
+- `Gravacao.cancelar()` é chamado por `sair()` e `apagarConversa()`: para o gravador, desliga o microfone, descarta os pedaços e aborta o pedido em andamento. Uma transcrição que chegue depois disso é ignorada.
 - Sem internet (`navigator.onLine` falso), o botão fica desabilitado com "Para usar o áudio, é preciso internet. Digite sua pergunta."
+- O módulo se chama `Gravacao`, não `Audio`, para não esconder o construtor `Audio` do navegador (ajuste de 24/11, na tarefa 3.1). Microfone, gravador, temporizadores e `fetch` entram como parâmetro (`ambiente`), para os testes usarem falsos.
 - O arquivo segue o padrão de `web/risco.js` e `web/rede.js` (sem armazenamento, testável em QuickJS no que não depende do navegador: escolha do formato, contagem do limite e decisão "alerta ou caixa" ao receber o texto).
 
 ### Logs
