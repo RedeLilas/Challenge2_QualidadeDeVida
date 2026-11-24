@@ -290,3 +290,54 @@ def test_cancelar_durante_a_transcricao_ignora_o_texto(js):
     rodar_promessas(js)
     assert chamar(js, "registro.abortados") == 1
     assert chamar(js, "resultados.transcricao") is None
+
+
+# --- Ambiente do navegador de verdade (achado na verificação no Chromium, 24/11) ---
+
+NAVEGADOR_ESTRITO = r"""
+// Como no navegador: setTimeout e companhia falham ("Illegal invocation") se chamados como método
+// de outro objeto, e MediaRecorder.isTypeSupported também, se chamado solto.
+var chamadasEstritas = [];
+function exigirGlobal(nome, self) {
+  if (self !== undefined && self !== globalThis) throw new TypeError("Illegal invocation: " + nome);
+  chamadasEstritas.push(nome);
+}
+var setTimeout = function (fn, ms) { "use strict"; exigirGlobal("setTimeout", this); return 1; };
+var clearTimeout = function () { "use strict"; exigirGlobal("clearTimeout", this); };
+var setInterval = function (fn, ms) { "use strict"; exigirGlobal("setInterval", this); return 2; };
+var clearInterval = function () { "use strict"; exigirGlobal("clearInterval", this); };
+function MediaRecorder(fluxo, opcoes) { this.mimeType = opcoes ? opcoes.mimeType : ""; this.state = "inactive"; }
+MediaRecorder.isTypeSupported = function (tipo) {
+  "use strict";
+  if (this !== MediaRecorder) throw new TypeError("Illegal invocation: isTypeSupported");
+  return tipo === "audio/webm;codecs=opus";
+};
+MediaRecorder.prototype.start = function () { this.state = "recording"; };
+MediaRecorder.prototype.stop = function () { this.state = "inactive"; if (this.onstop) this.onstop(); };
+var navigator = { onLine: true, mediaDevices: { getUserMedia: function () { return Promise.resolve({ getTracks: function () { return [{ stop: function () {} }]; } }); } } };
+function Blob() {}
+function AbortController() { this.signal = {}; this.abort = function () {}; }
+function fetch() { return new Promise(function () {}); }
+var erros = [];
+"""
+
+
+def test_ambiente_do_navegador_respeita_as_regras_de_chamada():
+    # Sem ambiente explícito, o módulo usa as funções do navegador: a gravação precisa começar e parar.
+    contexto = quickjs.Context()
+    contexto.eval(NAVEGADOR_ESTRITO)
+    contexto.eval((RAIZ / "web" / "risco.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "audio.js").read_text(encoding="utf-8"))
+    contexto.eval(
+        "var contagem = []; Gravacao.iniciar({ aoContar: function (s) { contagem.push(s); },"
+        " aoParar: function () {}, aoErro: function (m) { erros.push(m); } })"
+        ".catch(function (e) { erros.push(String(e)); });"
+    )
+    while contexto.execute_pending_job():
+        pass
+    assert json.loads(contexto.eval("JSON.stringify(erros)")) == []
+    assert contexto.eval("Gravacao.gravando()") is True
+    assert json.loads(contexto.eval("JSON.stringify(contagem)")) == [30]
+    contexto.eval("Gravacao.parar();")
+    assert contexto.eval("Gravacao.gravando()") is False
+    assert {"setTimeout", "setInterval", "clearTimeout", "clearInterval"} <= set(json.loads(contexto.eval("JSON.stringify(chamadasEstritas)")))

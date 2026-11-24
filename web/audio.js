@@ -78,10 +78,12 @@ var Gravacao = (function () {
       fetch: function (url, opcoes) { return fetch(url, opcoes); },
       AbortController: AbortController,
       Blob: Blob,
-      setTimeout: setTimeout,
-      clearTimeout: clearTimeout,
-      setInterval: setInterval,
-      clearInterval: clearInterval,
+      // Embrulhadas: o navegador recusa ("Illegal invocation") setTimeout e companhia chamados como
+      // método de outro objeto (ambiente.setTimeout). Achado na verificação no Chromium, em 24/11.
+      setTimeout: function (fn, ms) { return setTimeout(fn, ms); },
+      clearTimeout: function (id) { clearTimeout(id); },
+      setInterval: function (fn, ms) { return setInterval(fn, ms); },
+      clearInterval: function (id) { clearInterval(id); },
       agora: function () { return Date.now(); },
     };
   }
@@ -122,7 +124,9 @@ var Gravacao = (function () {
           return false;
         }
         var Gravador = ambiente.MediaRecorder;
-        var aceita = typeof Gravador.isTypeSupported === "function" ? Gravador.isTypeSupported : function () { return false; };
+        var aceita = function (tipo) {
+          return typeof Gravador.isTypeSupported === "function" && Gravador.isTypeSupported(tipo);
+        };
         var tipo = escolherFormato(aceita);
         var gravador = tipo ? new Gravador(fluxo, { mimeType: tipo }) : new Gravador(fluxo);
         var inicio = ambiente.agora();

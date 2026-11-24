@@ -129,6 +129,16 @@ As frases de A5 e A6 disparam a regra atual (conferido em 24/11). Pelo menos um 
   - Observação, fora desta mudança: a resposta do A6 parece ter 6 frases, acima do limite de 5 da decisão de 19/11.
 - A latência (p95 ≤ 10 s) é medida na S6, com o modelo de produção.
 
+### Verificação no Chromium (24/11, parte da tarefa 3.3)
+
+Roteiro automatizado com Playwright no Chromium 159 (headless shell, motor do Chrome do Android), servidor local com o Whisper `small` e sem LLM configurado, e microfone falso tocando os casos fictícios A1 e A5 (WAV convertido dos arquivos de `tests/audios/`). O script ficou fora do repositório.
+
+- **Achado:** a gravação não começava. O `web/audio.js` guardava `setTimeout` e companhia num objeto e os chamava como `ambiente.setTimeout(...)`, o que o navegador recusa ("Illegal invocation"): o microfone abria, mas o gravador não iniciava nem parava sozinho. Os testes no QuickJS usavam temporizadores falsos e não pegavam isso. Correção: as funções passaram a ser embrulhadas, e `MediaRecorder.isTypeSupported` passou a ser chamado pelo próprio `MediaRecorder`. Teste novo em `tests/test_audio_js.py` imita a regra do navegador e falha com o código antigo.
+- **Resultado depois da correção (26/26 itens):** microfone pedido só no toque (nenhum pedido ao abrir a página ou o chat); botão pressionado e contagem regressiva durante a gravação; microfone desligado ao parar; A1 falado vai para a caixa ("Ele pode tirar meus filhos de mim?"); o único POST é para `/transcrever`; nada em `localStorage`, `sessionStorage`, Cache API ou IndexedDB; A5 falado mostra o 190 com "Continuar com minha pergunta" e o link `tel:190`, a caixa fica vazia e nenhum pedido vai ao `/orquestrar` antes do toque, e depois do toque o pedido acontece com o 190 ainda visível; a saída rápida no meio da gravação desliga o microfone, não envia nada e abre o site neutro, e voltar não reabre a conversa; sem internet o botão fica desabilitado e volta com a internet.
+- **Limite de 30 s:** a gravação parou sozinha em 30,0 s, e o áudio de 30 s passou pelos limites do servidor e foi transcrito.
+- O log do servidor de teste teve 135 linhas, só com rota, status e tempo, sem nenhuma palavra dos casos.
+- **Falta (tarefa 3.3):** Android e iPhone de verdade, com o aviso de permissão e o indicador de microfone do aparelho, o Safari do iPhone (mp4 gravado de verdade) e o toque real na tela.
+
 ## Risks / Trade-offs
 
 - [Latência do `small` em 2 vCPU perto de 10 s para 30 s de áudio] → medir na tarefa 5.1 e na plataforma escolhida; trocar para `base` por variável de ambiente.
