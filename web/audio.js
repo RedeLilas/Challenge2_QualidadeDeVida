@@ -54,12 +54,15 @@ var Gravacao = (function () {
     return TEXTOS.falha;
   }
 
-  // O áudio só funciona com microfone, gravador e internet. Sem isso, o botão fica desabilitado.
-  function disponivel(ambiente) {
+  // O navegador tem microfone e gravador? Sem isso, o botão nem aparece.
+  function suportado(ambiente) {
     var nav = ambiente.navigator;
-    return Boolean(
-      nav && nav.onLine && nav.mediaDevices && typeof nav.mediaDevices.getUserMedia === "function" && ambiente.MediaRecorder
-    );
+    return Boolean(nav && nav.mediaDevices && typeof nav.mediaDevices.getUserMedia === "function" && ambiente.MediaRecorder);
+  }
+
+  // O áudio só funciona com microfone, gravador e internet. Sem internet, o botão fica desabilitado.
+  function disponivel(ambiente) {
+    return Boolean(ambiente.navigator && ambiente.navigator.onLine && suportado(ambiente));
   }
 
   // --- Gravação (precisa do navegador; o ambiente é passado para os testes usarem falsos) ---
@@ -215,6 +218,7 @@ var Gravacao = (function () {
     segundosRestantes: segundosRestantes,
     decidir: decidir,
     mensagemDeErro: mensagemDeErro,
+    suportado: suportado,
     disponivel: disponivel,
     gravando: gravando,
     iniciar: iniciar,

@@ -24,6 +24,7 @@ const TEXTOS = {
   falha: "Não consegui responder agora. Tente de novo em alguns instantes. Se precisar falar com alguém, ligue 180 (gratuito, 24 horas).",
   demorou: "A resposta está demorando. Tente de novo em alguns instantes.",
   pensando: "Escrevendo resposta…",
+  transcrevendo: "Transcrevendo o áudio…",
   cepForaDoDF:
     "Esse CEP não é do Distrito Federal. Os serviços que eu mostro são só do DF. Para orientação em qualquer lugar do Brasil, ligue 180 (gratuito, 24 horas).",
 };
@@ -48,6 +49,8 @@ const ICONES = {
   close: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
   menu: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
   chevron: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
+  mic: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+  stop: '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
   info: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>',
 };
 
@@ -85,6 +88,9 @@ const chatWindow = document.getElementById("chat-window");
 const chatTrigger = document.getElementById("chat-trigger");
 const chatTriggerIcon = document.getElementById("chat-trigger-icon");
 const botaoModoAjudando = document.getElementById("modo-ajudando");
+const botaoMicrofone = document.getElementById("microfone");
+const iconeMicrofone = document.getElementById("microfone-icone");
+const contagemMicrofone = document.getElementById("microfone-contagem");
 
 let pedidoAtual = null;
 let regrasDeRisco = null;
@@ -153,6 +159,8 @@ fetch(ROTA_CEP)
 // SAÍDA RÁPIDA E APAGAR DADOS SALVOS
 // =========================================================================
 function sair() {
+  // Primeiro a gravação: o microfone desliga antes de qualquer outra coisa.
+  if (typeof Gravacao !== "undefined") Gravacao.cancelar();
   apagarConversa();
   respostasEspecificasBeneficios = {};
   respostasFonar = {};
@@ -162,6 +170,9 @@ function sair() {
 }
 
 function apagarConversa() {
+  // Para a gravação sem enviar, desliga o microfone e ignora uma transcrição que ainda chegue.
+  if (typeof Gravacao !== "undefined") Gravacao.cancelar();
+  atualizarBotaoMicrofone();
   if (pedidoAtual) pedidoAtual.abort();
   pedidoAtual = null;
   textoAguardandoAlerta = "";
@@ -1536,10 +1547,105 @@ campo.addEventListener("input", ajustarAltura);
 
 function atualizarConexao() {
   aviso.hidden = navigator.onLine;
+  atualizarBotaoMicrofone();
 }
 window.addEventListener("online", atualizarConexao);
 window.addEventListener("offline", atualizarConexao);
 atualizarConexao();
+
+// =========================================================================
+// PERGUNTA POR ÁUDIO (s5-entrada-audio, tarefa 3.2)
+// O áudio vai só ao servidor da aplicação (POST /transcrever), que devolve o texto e não guarda nada.
+// A regra de risco roda sobre o texto assim que ele chega: com risco, o 190 aparece na hora e nada vai
+// ao /orquestrar sem o toque em "Continuar com minha pergunta"; sem risco, o texto vai para a caixa.
+// =========================================================================
+function tratarTranscricao(texto) {
+  const decisao = Gravacao.decidir(regrasDeRisco, texto);
+  if (decisao.acao === "vazio") {
+    adicionar("msg--erro", Gravacao.TEXTOS.vazio);
+    return decisao.acao;
+  }
+  if (decisao.acao === "alerta") {
+    // Mesmo fluxo do texto digitado com risco: nenhuma requisição com o texto sem o toque.
+    adicionar("msg--usuaria", decisao.texto);
+    textoAguardandoAlerta = decisao.texto;
+    mostrarAlerta({ comContinuar: true });
+    return decisao.acao;
+  }
+  // Sem risco: a usuária confere e corrige antes de enviar; enviar() roda a regra de novo.
+  campo.value = decisao.texto;
+  ajustarAltura();
+  campo.focus();
+  return decisao.acao;
+}
+
+async function receberAudio(blob, tipo) {
+  alternarChat(true);
+  botaoEnviar.disabled = true;
+  const transcrevendo = adicionar("msg--pensando", TEXTOS.transcrevendo);
+  let resultado = null;
+  try {
+    resultado = await Gravacao.transcrever(blob, tipo);
+  } finally {
+    transcrevendo.remove();
+    botaoEnviar.disabled = false;
+    atualizarBotaoMicrofone();
+  }
+  // null: a saída rápida ou "apagar conversa" cancelou a transcrição; nada é exibido.
+  if (!resultado) return;
+  if (!resultado.ok) {
+    adicionar("msg--erro", resultado.mensagem);
+    return;
+  }
+  tratarTranscricao(resultado.texto);
+}
+
+function atualizarBotaoMicrofone() {
+  if (!botaoMicrofone) return;
+  if (typeof Gravacao === "undefined" || !Gravacao.suportado({ navigator, MediaRecorder: window.MediaRecorder || null })) {
+    // Navegador sem microfone ou sem gravador: o botão nem aparece.
+    botaoMicrofone.hidden = true;
+    return;
+  }
+  const gravando = Gravacao.gravando();
+  botaoMicrofone.hidden = false;
+  botaoMicrofone.disabled = !gravando && !navigator.onLine;
+  botaoMicrofone.title = navigator.onLine ? "" : Gravacao.TEXTOS.semInternet;
+  botaoMicrofone.setAttribute("aria-pressed", String(gravando));
+  botaoMicrofone.setAttribute(
+    "aria-label",
+    gravando ? "Parar e enviar o áudio" : navigator.onLine ? "Gravar pergunta por áudio (até 30 segundos)" : Gravacao.TEXTOS.semInternet
+  );
+  if (iconeMicrofone) iconeMicrofone.innerHTML = gravando ? ICONES.stop : ICONES.mic;
+  if (contagemMicrofone && !gravando) {
+    contagemMicrofone.hidden = true;
+    contagemMicrofone.textContent = "";
+  }
+}
+
+botaoMicrofone?.addEventListener("click", () => {
+  if (Gravacao.gravando()) {
+    Gravacao.parar();
+    return;
+  }
+  if (pedidoAtual) return;
+  // Único lugar que pede o microfone: dentro do toque no botão.
+  Gravacao.iniciar({
+    aoContar: (segundos) => {
+      contagemMicrofone.hidden = false;
+      contagemMicrofone.textContent = `${segundos} s`;
+    },
+    aoParar: (blob, tipo) => {
+      atualizarBotaoMicrofone();
+      receberAudio(blob, tipo);
+    },
+    aoErro: (mensagem) => {
+      atualizarBotaoMicrofone();
+      alternarChat(true);
+      adicionar("msg--erro", mensagem);
+    },
+  }).then(atualizarBotaoMicrofone);
+});
 
 // =========================================================================
 // MENU MOBILE E EVENTOS GERAIS DA INTERFACE

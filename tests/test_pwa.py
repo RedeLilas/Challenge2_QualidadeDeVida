@@ -464,3 +464,184 @@ def test_cep_de_fora_do_df_responde_no_aparelho(cliente):
     codigo = cliente.get("/app.js").text
     assert "if (semCep.dentroDF === false) adicionar(\"msg--assistente\", TEXTOS.cepForaDoDF);" in codigo
     assert "ligue 180" in codigo.split("cepForaDoDF:")[1].split("\n")[1]
+
+
+# --- s5-entrada-audio, tarefa 3.2 (botão de microfone na conversa) ---
+
+# Casos fictícios do design da s5-entrada-audio.
+AUDIO_A1 = "Ele pode tirar meus filhos de mim?"
+AUDIO_A5 = "Ele está aqui na porta com uma faca e disse que vai me matar"
+
+
+def test_audio_js_carrega_depois_do_risco_e_antes_da_tela(cliente):
+    html = cliente.get("/").text
+    assert html.index('src="/risco.js"') < html.index('src="/audio.js"') < html.index('src="/app.js"')
+    botao = re.search(r'<button[^>]*id="microfone"[^>]*>', html).group(0)
+    # Não envia o formulário e começa escondido até o app.js conferir o suporte do navegador.
+    assert 'type="button"' in botao and "hidden" in botao and 'aria-pressed="false"' in botao
+
+
+def test_microfone_so_e_pedido_no_toque(cliente):
+    codigo = cliente.get("/app.js").text
+    # O app.js nunca chama o microfone direto: só pelo Gravacao.iniciar, uma vez, dentro do toque.
+    assert "getUserMedia" not in codigo
+    assert codigo.count("Gravacao.iniciar(") == 1
+    tratador = codigo[codigo.index('botaoMicrofone?.addEventListener("click"') :]
+    tratador = tratador[: tratador.index("\n});\n")]
+    assert "Gravacao.iniciar(" in tratador
+
+
+def test_saida_rapida_e_apagar_conversa_cancelam_a_gravacao(cliente):
+    codigo = cliente.get("/app.js").text
+    sair = _funcao_js(codigo, "sair")
+    assert "Gravacao.cancelar()" in sair
+    assert sair.index("Gravacao.cancelar()") < sair.index("location.replace")
+    assert "Gravacao.cancelar()" in _funcao_js(codigo, "apagarConversa")
+
+
+def _tela_falsa(cliente):
+    """QuickJS com risco.js, audio.js e as funções da tela que recebem a transcrição, com espiões."""
+    contexto = quickjs.Context()
+    contexto.eval((RAIZ / "web" / "risco.js").read_text(encoding="utf-8"))
+    contexto.eval((RAIZ / "web" / "audio.js").read_text(encoding="utf-8"))
+    regras = (RAIZ / "regras" / "risco_imediato.json").read_text(encoding="utf-8")
+    contexto.eval(
+        f"var regrasDeRisco = Risco.compilar({regras});"
+        """
+        var chamadas = { fetch: 0, enviar: 0, alertas: [], mensagens: [], removidas: 0 };
+        function fetch() { chamadas.fetch += 1; return Promise.resolve({}); }
+        function enviar() { chamadas.enviar += 1; return Promise.resolve(true); }
+        function mostrarAlerta(opcoes) { chamadas.alertas.push({ comContinuar: !!opcoes.comContinuar, pendente: textoAguardandoAlerta }); }
+        function adicionar(classe, texto) {
+          chamadas.mensagens.push([classe, texto]);
+          return { remove: function () { chamadas.removidas += 1; } };
+        }
+        function ajustarAltura() {}
+        function alternarChat() {}
+        function atualizarBotaoMicrofone() {}
+        var textoAguardandoAlerta = "";
+        var campo = { value: "", focus: function () {} };
+        var botaoEnviar = { disabled: false };
+        var TEXTOS = { transcrevendo: "Transcrevendo o áudio…" };
+        """
+    )
+    codigo = cliente.get("/app.js").text
+    contexto.eval(_funcao_js(codigo, "tratarTranscricao"))
+    # _funcao_js corta a partir de "function": o "async" da declaração volta aqui.
+    assert "async function receberAudio(" in codigo
+    contexto.eval("async " + _funcao_js(codigo, "receberAudio"))
+    return contexto
+
+
+def _estado(contexto):
+    return json.loads(contexto.eval("JSON.stringify({c: chamadas, campo: campo.value, pendente: textoAguardandoAlerta})"))
+
+
+def test_transcricao_com_risco_mostra_o_190_sem_enviar(cliente):
+    tela = _tela_falsa(cliente)
+    assert tela.eval(f"tratarTranscricao({json.dumps(AUDIO_A5)})") == "alerta"
+    estado = _estado(tela)
+    assert estado["c"]["alertas"] == [{"comContinuar": True, "pendente": AUDIO_A5}]
+    # Nenhuma requisição com o texto antes do toque em "Continuar com minha pergunta".
+    assert estado["c"]["fetch"] == 0 and estado["c"]["enviar"] == 0
+    assert estado["campo"] == ""
+
+
+def test_transcricao_sem_risco_vai_para_a_caixa(cliente):
+    tela = _tela_falsa(cliente)
+    assert tela.eval(f"tratarTranscricao({json.dumps(AUDIO_A1)})") == "caixa"
+    estado = _estado(tela)
+    assert estado["campo"] == AUDIO_A1
+    assert estado["c"]["alertas"] == [] and estado["c"]["fetch"] == 0 and estado["c"]["enviar"] == 0
+
+
+def test_transcricao_vazia_mostra_nao_entendi(cliente):
+    tela = _tela_falsa(cliente)
+    assert tela.eval('tratarTranscricao("  ")') == "vazio"
+    mensagens = _estado(tela)["c"]["mensagens"]
+    assert mensagens == [["msg--erro", "Não entendi o áudio. Tente de novo ou digite sua pergunta."]]
+
+
+def _receber(tela, resultado_js):
+    tela.eval(f"Gravacao.transcrever = function () {{ return Promise.resolve({resultado_js}); }};")
+    tela.eval("receberAudio({}, 'audio/webm');")
+    while tela.execute_pending_job():
+        pass
+    return _estado(tela)
+
+
+def test_audio_com_risco_de_ponta_a_ponta_na_tela(cliente):
+    estado = _receber(_tela_falsa(cliente), json.dumps({"ok": True, "texto": AUDIO_A5}))
+    assert estado["c"]["alertas"] == [{"comContinuar": True, "pendente": AUDIO_A5}]
+    assert estado["c"]["removidas"] == 1  # o "Transcrevendo o áudio…" some
+    assert estado["c"]["fetch"] == 0 and estado["c"]["enviar"] == 0
+
+
+def test_transcricao_cancelada_nao_mostra_nada(cliente):
+    # Saída rápida ou "apagar conversa" durante a transcrição: Gravacao.transcrever devolve null.
+    estado = _receber(_tela_falsa(cliente), "null")
+    assert estado["c"]["mensagens"] == [["msg--pensando", "Transcrevendo o áudio…"]]
+    assert estado["c"]["removidas"] == 1
+    assert estado["c"]["alertas"] == [] and estado["campo"] == ""
+
+
+def test_erro_da_transcricao_mostra_a_mensagem_do_servidor(cliente):
+    estado = _receber(_tela_falsa(cliente), json.dumps({"ok": False, "mensagem": "O áudio pode ter até 30 segundos."}))
+    assert estado["c"]["mensagens"][-1] == ["msg--erro", "O áudio pode ter até 30 segundos."]
+    assert estado["campo"] == ""
+
+
+def test_botao_do_microfone_sem_internet(cliente):
+    codigo = cliente.get("/app.js").text
+    atualizar = _funcao_js(codigo, "atualizarBotaoMicrofone")
+    assert "Gravacao.suportado(" in atualizar and "botaoMicrofone.hidden = true" in atualizar
+    assert "botaoMicrofone.disabled = !gravando && !navigator.onLine" in atualizar
+    assert "atualizarBotaoMicrofone()" in _funcao_js(codigo, "atualizarConexao")
+
+
+_DOM_FALSO = r"""
+var pedidosDeMicrofone = 0;
+function qualquer() {
+  return new Proxy(function () {}, {
+    get: function (_alvo, chave) {
+      if (chave === Symbol.toPrimitive) return function () { return ""; };
+      if (chave === Symbol.iterator) return function* () {};
+      if (chave === "length") return 0;
+      if (chave === "then") return undefined;
+      return qualquer();
+    },
+    set: function () { return true; },
+    apply: function () { return qualquer(); },
+    construct: function () { return qualquer(); },
+    has: function () { return true; },
+  });
+}
+var document = qualquer();
+var window = qualquer();
+var location = qualquer();
+var navigator = {
+  onLine: true,
+  serviceWorker: qualquer(),
+  mediaDevices: { getUserMedia: function () { pedidosDeMicrofone += 1; return new Promise(function () {}); } },
+};
+var localStorage = { getItem: function () { return null; }, setItem: function () {}, removeItem: function () {} };
+function fetch() { return new Promise(function () {}); }
+function setTimeout() { return 0; }
+function clearTimeout() {}
+function setInterval() { return 0; }
+function clearInterval() {}
+"""
+
+
+def test_scripts_da_pagina_carregam_sem_erro_e_sem_pedir_o_microfone(cliente):
+    # Roda todos os scripts na ordem do index.html, com um DOM falso que aceita qualquer chamada.
+    # Pega erros que só aparecem na carga (ex.: usar um const antes da declaração), que quebrariam a tela.
+    html = cliente.get("/").text
+    scripts = re.findall(r'<script src="/([a-z]+\.js)"', html)
+    assert scripts[-1] == "app.js" and "audio.js" in scripts
+    contexto = quickjs.Context()
+    contexto.eval(_DOM_FALSO)
+    for nome in scripts:
+        contexto.eval((RAIZ / "web" / nome).read_text(encoding="utf-8"))
+    assert contexto.eval("pedidosDeMicrofone") == 0
+    assert contexto.eval("Gravacao.gravando()") is False
