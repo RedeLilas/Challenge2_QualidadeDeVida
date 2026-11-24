@@ -2,18 +2,19 @@
 
 Não usa o Whisper: confere os arquivos, os textos e a regra de risco sobre os textos lidos.
 """
+import re
 from pathlib import Path
 
 import pytest
 import yaml
 
 from app import risco
+from app.transcricao import LIMITE_BYTES, LIMITE_SEGUNDOS
 
 PASTA = Path(__file__).parent / "audios"
 DADOS = yaml.safe_load((PASTA / "casos_audio.yaml").read_text(encoding="utf-8"))
 CASOS = DADOS["casos"]
 POR_ID = {c["id"]: c for c in CASOS}
-LIMITE_BYTES = 1024 * 1024  # limite da rota /transcrever (design)
 ASSINATURA = {"webm": lambda b: b[:4] == b"\x1a\x45\xdf\xa3", "mp4": lambda b: b[4:8] == b"ftyp"}
 
 
@@ -29,7 +30,7 @@ def test_arquivo_existe_no_formato_e_no_limite(caso):
     conteudo = arquivo.read_bytes()
     assert caso["formato"] in ASSINATURA and arquivo.suffix == f".{caso['formato']}"
     assert ASSINATURA[caso["formato"]](conteudo), "o arquivo não é do formato declarado"
-    assert 0 < len(conteudo) < LIMITE_BYTES
+    assert 0 < len(conteudo) <= LIMITE_BYTES  # o mesmo limite da rota /transcrever
 
 
 @pytest.mark.parametrize("caso", CASOS, ids=lambda c: c["id"])
@@ -43,7 +44,8 @@ def test_texto_e_palavras_chave(caso):
     normalizado = risco.normalizar(caso["texto"])
     for palavra in caso["palavras_chave"]:
         assert palavra == risco.normalizar(palavra), "palavra-chave deve estar normalizada"
-        assert palavra in normalizado
+        # Palavra inteira: "tirar" não pode casar com "retirar", nem "matar" com "matara".
+        assert re.search(rf"\b{re.escape(palavra)}\b", normalizado)
 
 
 @pytest.mark.parametrize("caso", CASOS, ids=lambda c: c["id"])
@@ -61,10 +63,11 @@ def test_ha_casos_nos_dois_formatos_dos_navegadores():
 
 
 @pytest.mark.parametrize("caso", CASOS, ids=lambda c: c["id"])
-def test_duracao_ate_30_segundos(caso):
+def test_duracao_dentro_do_limite(caso):
     av = pytest.importorskip("av")
     with av.open(str(PASTA / caso["arquivo"])) as container:
         segundos = sum(q.samples / q.sample_rate for q in container.decode(audio=0))
-    assert 0 < segundos <= 30
+    # 30 s na gravação (web/audio.js); a rota aceita até LIMITE_SEGUNDOS, com folga.
+    assert 0 < segundos <= 30 <= LIMITE_SEGUNDOS
     if caso["id"] == "A7":
         assert 4.5 <= segundos <= 5.5

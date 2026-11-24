@@ -22,4 +22,4 @@ uv run pytest tests/test_casos_audio.py
 
 ## Conferência com o Whisper (24/11/2026)
 
-Com o `small` em int8, `language="pt"`, `vad_filter=True` e `beam_size=1`, num Mac do laboratório, os 7 casos deram a transcrição esperada: as palavras-chave aparecem, A5 e A6 disparam a regra de risco, e A7 sai vazio. A transcrição foi feita com o áudio decodificado à parte, porque o `faster-whisper` 1.2.1 chama o PyAV com `metadata_errors`, que o `av` 19.0.2 travado no `uv.lock` não aceita (ver a tarefa 1.3).
+Com o `small` em int8, `language="pt"`, `vad_filter=True` e `beam_size=1`, num Mac do laboratório, os 7 casos deram a transcrição esperada: as palavras-chave aparecem, A5 e A6 disparam a regra de risco, e A7 sai vazio. Nessa conferência, o áudio foi decodificado à parte, porque o `av` 19 travado no `uv.lock` na época não aceitava o `metadata_errors` que o `faster-whisper` 1.2.1 usa. O `av` foi fixado abaixo da 19 no PR #144; depois disso, a leitura direta pelo `faster-whisper` foi conferida de novo e deu o mesmo resultado.
