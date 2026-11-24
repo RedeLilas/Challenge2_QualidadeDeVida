@@ -13,6 +13,8 @@ dependencies = [
     "pyyaml>=6.0.3",
     "requests>=2.34.2",
     "sentence-transformers>=6.2.0",
+    # Direta só para o [tool.uv.sources] valer (ele não se aplica a dependências indiretas).
+    "torch>=2.15.0",
     "uvicorn>=0.54.0",
 ]
 
@@ -22,6 +24,17 @@ dev = [
     "pytest>=9.2.0",
     "quickjs>=1.19.4",
 ]
+
+# Torch só para CPU no Linux (s5-deploy, tarefa 2.1): o servidor não tem placa de vídeo, e o torch
+# padrão do PyPI no Linux traz o CUDA (pacotes nvidia-* e triton, vários GB). O torch entra pelo
+# sentence-transformers. macOS e Windows continuam com o torch do PyPI.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
