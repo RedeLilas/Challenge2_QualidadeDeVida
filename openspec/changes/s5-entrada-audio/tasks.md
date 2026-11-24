@@ -9,8 +9,8 @@
 ## 2. Rota `/transcrever` sem guarda e sem log (terça, 24/11)
 
 - [x] 2.1 Criar `POST /transcrever` em `app/main.py` com corpo cru, limites de 1 MB e 35 s, erros 413/422/503 com a mensagem para a tela, `Cache-Control: no-store`, carga do modelo em segundo plano ao subir e trava de uma transcrição por vez; verificação: testes com transcritor falso cobrem 413, 422 (duração, arquivo ilegível, sem fala), 503 durante a carga e o `no-store`, e um LLM falso que falha se for chamado confirma que a rota não chama o LLM nem monta o índice
-- [ ] 2.2 Garantir que nenhum arquivo fica no disco; verificação: teste lista o diretório temporário e o de trabalho antes e depois de uma transcrição com sucesso, de um arquivo corrompido, de um acima do limite e de uma exceção do modelo, e não encontra arquivo novo
-- [ ] 2.3 Garantir que nada do áudio nem da transcrição vai aos logs; verificação: teste com `caplog` em `DEBUG` para todos os loggers transcreve A1 (marca `whisper`) e um arquivo corrompido, e confere que nenhuma palavra da transcrição nem bytes do áudio aparecem; outro teste, com o transcritor falso, faz a mesma conferência na suíte padrão
+- [x] 2.2 Garantir que nenhum arquivo fica no disco; verificação: teste lista o diretório temporário e o de trabalho antes e depois de uma transcrição com sucesso, de um arquivo corrompido, de um acima do limite e de uma exceção do modelo, e não encontra arquivo novo
+- [x] 2.3 Garantir que nada do áudio nem da transcrição vai aos logs; verificação: teste com `caplog` em `DEBUG` para todos os loggers transcreve A1 (marca `whisper`) e um arquivo corrompido, e confere que nenhuma palavra da transcrição nem bytes do áudio aparecem; outro teste, com o transcritor falso, faz a mesma conferência na suíte padrão
 
 ## 3. Gravação no navegador (terça, 24/11)
 

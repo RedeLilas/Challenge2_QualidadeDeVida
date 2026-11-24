@@ -14,6 +14,12 @@ import os
 import threading
 from typing import Protocol
 
+# O onnxruntime (filtro de silêncio do faster-whisper) traz a telemetria da Microsoft (1DS): com ela
+# ligada, a primeira transcrição do processo grava um arquivo de sessão (.ses) no diretório temporário,
+# e o pacote inclui um cliente HTTP para enviar eventos. Desligada antes de o onnxruntime ser importado
+# (os imports do faster-whisper são tardios), nenhum arquivo é criado. Achado de 24/11, tarefa 2.2.
+os.environ.setdefault("ORT_DISABLE_TELEMETRY", "1")
+
 logger = logging.getLogger("rede_lilas.transcricao")
 
 # 1 MB e 30 s de gravação, com 5 s de tolerância para o cabeçalho e o fim da gravação.

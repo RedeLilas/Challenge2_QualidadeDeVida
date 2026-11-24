@@ -94,6 +94,10 @@ Erros do Whisper em nomes e termos jurídicos ("medida protetiva", "Maria da Pen
 
 O middleware de `app/logs.py` já não registra corpo. O que muda: o logger `faster_whisper` fica em `WARNING` (no `INFO` ele registra a duração e o idioma, e versões futuras podem registrar mais), e a rota não registra nada além do middleware. O teste usa `caplog` no nível `DEBUG` para todos os loggers e confere que nenhuma palavra da transcrição fictícia nem bytes do áudio aparecem, com sucesso e com falha. O uvicorn com `--no-access-log` continua obrigatório (design da `s2-plataforma-base`); a publicação é da `s5-deploy`.
 
+### Nada no disco e nada nos logs: telemetria do onnxruntime (achado de 24/11, tarefa 2.2)
+
+O teste que confere o disco com o Whisper de verdade achou um arquivo `.ses` (51 bytes: carimbo de tempo e um identificador aleatório) criado no diretório temporário na primeira transcrição do processo. Quem cria é o onnxruntime 1.32, usado pelo filtro de silêncio do faster-whisper: o binário traz a telemetria da Microsoft (1DS), com cliente HTTP para enviar eventos, e o `.ses` é o arquivo de sessão dela. O arquivo não tinha nada do áudio nem do texto, e numa amostragem de 20 s com `lsof` nenhuma conexão foi vista, mas o envio pode ocorrer em lote ou ao encerrar. Decisão: `app/transcricao.py` define `ORT_DISABLE_TELEMETRY=1` antes de o onnxruntime ser importado; com isso, nenhum arquivo é criado. Os testes `tests/test_audio_sem_rastro.py` cobrem o disco (pasta temporária e de trabalho vazias, repositório sem arquivo novo) e os logs (todos os loggers em `DEBUG`, inclusive os das bibliotecas, e a saída do processo), com sucesso e com falha. Mesmo em `DEBUG`, o faster-whisper só registra durações e tempos, sem o texto.
+
 ### Casos fictícios de áudio (decisão de 24/11)
 
 Ficam em `tests/audios/`, com `casos_audio.yaml` (arquivo, texto lido, palavras-chave obrigatórias, risco esperado e agente esperado) e um `LEIAME.md` dizendo que os textos são fictícios, escritos pela equipe, e lidos por membros da equipe que concordaram, ou gerados por voz sintética offline. Nenhuma voz ou relato real.
