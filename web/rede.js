@@ -8,7 +8,7 @@ var Rede = (function () {
   // Vizinhas das 17 RAs do site, da maior fronteira para a menor. Conferidas na camada oficial
   // "Limite das Regiões Administrativas do DF em 2019" do IPEDF (LC 958/2019) em 17/11/2026,
   // no mapa agrupado em que cada RA fora do site entra na sua RA_ORDENACAO.
-  // Tabela e método em openspec/changes/s4-rede-atendimento/design.md.
+  // Tabela e método em openspec/changes/archive/2026-11-24-s4-rede-atendimento/design.md.
   var VIZINHAS = {
     "Plano Piloto": ["Sobradinho", "São Sebastião", "Guará", "Brazlândia", "Núcleo Bandeirante", "Paranoá", "Taguatinga", "Itapoã", "Estrutural (SCIA)"],
     "Ceilândia": ["Samambaia", "Brazlândia", "Taguatinga"],
