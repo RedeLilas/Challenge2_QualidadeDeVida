@@ -83,7 +83,13 @@ Fontes (consultadas em 24/11; as páginas do HF, do Render, do Railway e do Koye
 - **Chave do DeepSeek:** só como variável secreta da plataforma (`LLM_API_KEY`), nunca em `ARG`/`ENV` do build nem em arquivo copiado. O `.env` fica fora do pacote.
 - **Servidor:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT --no-access-log`, um único processo (os modelos ficam em memória uma vez só).
 - **Só com Docker:** `.dockerignore` com `.env`, `.env.*`, `.venv`, `.git`, `__pycache__` e `.pytest_cache`; imagem base `python:3.12-slim` com `uv` e `uv sync --frozen --no-dev`.
-- **CI:** workflow do GitHub Actions com `uv sync` e `uv run pytest -m "not whisper"`, com cache do `uv` e dos modelos do Hugging Face. Os testes do Whisper rodam só na máquina local.
+- **CI:** workflow do GitHub Actions (`.github/workflows/testes.yml`) com `uv sync --locked` e `uv run pytest`, em todo PR para a `develop` ou a `main` e em todo push na `develop`. Python 3.12, a versão mínima do `pyproject.toml` e a da imagem base. Os testes do Whisper e os de navegador ficam de fora pelo `addopts` do `pyproject.toml` e rodam só na máquina local. Decisões de 24/11:
+  - **`uv run pytest`, não `-m "not whisper"`:** o `-m` da linha de comando substitui o do `addopts`, e os testes de navegador voltariam para a CI (sem o Chromium, seriam pulados).
+  - **Cache:** o do `uv` (chave pelo `uv.lock`) e o do Hugging Face com só o `multilingual-e5-base`. Rodando a suíte com o cache de modelos vazio e o download bloqueado, só os testes de `test_indice.py` falharam, então nenhum outro modelo é baixado. O push na `develop` existe para o cache: o cache criado num PR só vale para aquele PR.
+  - **Para não gastar execuções:** um push novo no mesmo PR cancela a execução anterior, e PR em rascunho não roda. Rodar também em PRs só de documentação foi mantido: pular esses PRs deixaria o check pendente se ele virar obrigatório para o merge.
+  - **Tempo:** a suíte padrão (1.121 testes) leva 29 s no MacBook Air M4 com Python 3.13 e 61 s com Python 3.12 num ambiente separado. Na CI, a primeira execução também baixa as dependências e o modelo (~1 GB).
+  - **Custo:** o repositório é público, e o GitHub Actions não cobra minutos de repositório público.
+  - **Segredos:** o workflow não usa nenhum. Os testes trocam o LLM por um falso, e a permissão do token é só de leitura.
 
 ### Se a escolha for sem Docker
 

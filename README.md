@@ -13,6 +13,8 @@ uv run pytest
 
 Na primeira execução, o modelo de embeddings `intfloat/multilingual-e5-base` (cerca de 1,1 GB) é baixado do Hugging Face para o cache local. Os embeddings rodam no próprio processo, sem serviço externo.
 
+O GitHub Actions roda a mesma suíte (`uv run pytest`, com Python 3.12) em todo PR para a `develop` ou a `main` (`.github/workflows/testes.yml`). PR em rascunho não roda.
+
 ## Rodar o servidor
 
 O LLM é configurado por `LLM_BASE_URL`, `LLM_MODEL` e `LLM_API_KEY`. Nos testes locais usamos o [Ollama](https://ollama.com):
