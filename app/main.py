@@ -7,12 +7,13 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+from starlette.concurrency import run_in_threadpool
 
-from app import llm, orquestrador, risco
+from app import llm, orquestrador, risco, transcricao
 from app.config import ConfigIncompleta
 from app.logs import registrar_requisicao
 from app.rag import resposta as resposta_juridica
@@ -47,6 +48,8 @@ async def _ciclo_de_vida(_app):
     # Monta o índice em segundo plano (cerca de 20 s em CPU) para a primeira pergunta não esperar.
     # O servidor já responde enquanto isso; uma pergunta que chegue antes aguarda o índice ficar pronto.
     threading.Thread(target=indice_juridico, name="indice-juridico", daemon=True).start()
+    # O Whisper também carrega em segundo plano; até ficar pronto, /transcrever responde 503.
+    threading.Thread(target=transcricao.carregar_em_segundo_plano, name="whisper", daemon=True).start()
     yield
 
 
@@ -164,6 +167,63 @@ def orquestrar(corpo: orquestrador.PedidoOrquestrar, response: Response):
         return orquestrador.orquestrar(corpo, indice=indice_juridico, cliente=_ClienteSobDemanda())
     except llm.LLMIndisponivel:
         return JSONResponse({"erro": INDISPONIVEL}, status_code=503, headers={"Cache-Control": "no-store"})
+
+
+def transcritor() -> transcricao.Transcritor:
+    # Os testes trocam esta função por um transcritor falso.
+    return transcricao.transcritor_pronto()
+
+
+def _erro_transcricao(chave: str, status: int) -> JSONResponse:
+    return JSONResponse({"erro": transcricao.MENSAGENS[chave]}, status_code=status, headers={"Cache-Control": "no-store"})
+
+
+async def _ler_audio(request: Request) -> bytes | None:
+    """O corpo até LIMITE_BYTES, ou None se passar disso. Nunca grava em disco."""
+    declarado = request.headers.get("content-length")
+    if declarado and declarado.isdigit() and int(declarado) > transcricao.LIMITE_BYTES:
+        return None
+    pedacos, total = [], 0
+    async for pedaco in request.stream():
+        total += len(pedaco)
+        if total > transcricao.LIMITE_BYTES:
+            return None
+        pedacos.append(pedaco)
+    return b"".join(pedacos)
+
+
+@app.post("/transcrever")
+async def transcrever(request: Request):
+    """Só transcreve o áudio do corpo e devolve {"texto"}: sem regra de risco, sem índice e sem LLM.
+
+    A regra de risco roda no navegador sobre o texto devolvido (exceção à decisão de 17/11, no design
+    da s5-entrada-audio). O áudio fica só em memória, e nada dele nem do texto vai para os logs.
+    """
+    try:
+        modelo = transcritor()
+    except transcricao.TranscricaoIniciando:
+        return _erro_transcricao("iniciando", 503)
+    except transcricao.TranscricaoIndisponivel:
+        return _erro_transcricao("indisponivel", 503)
+    audio = await _ler_audio(request)
+    if audio is None:
+        return _erro_transcricao("limite", 413)
+    if not audio:
+        return _erro_transcricao("ilegivel", 422)
+    tipo = request.headers.get("content-type", "")
+    try:
+        # Em outra thread: a transcrição leva segundos e não pode travar as outras rotas.
+        texto = await run_in_threadpool(transcricao.transcrever, modelo, audio, tipo)
+    except transcricao.AudioLongo:
+        return _erro_transcricao("limite", 422)
+    except transcricao.AudioIlegivel:
+        return _erro_transcricao("ilegivel", 422)
+    except Exception as erro:  # erro do modelo: só o tipo vai para o log
+        logging.getLogger("rede_lilas.transcricao").error("transcrição falhou: %s", type(erro).__name__)
+        return _erro_transcricao("indisponivel", 503)
+    if not texto:
+        return _erro_transcricao("sem_fala", 422)
+    return JSONResponse({"texto": texto}, headers={"Cache-Control": "no-store"})
 
 
 @app.exception_handler(ConfigIncompleta)
