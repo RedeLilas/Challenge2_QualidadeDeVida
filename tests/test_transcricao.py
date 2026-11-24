@@ -276,7 +276,8 @@ def test_whisper_junta_os_trechos_com_portugues_e_filtro_de_silencio():
     assert texto == TEXTO
     [(amostras, opcoes)] = modelo.chamadas
     assert abs(amostras - 2 * transcricao.TAXA) < 0.1 * transcricao.TAXA  # 2 s a 16 kHz
-    assert opcoes == {"language": "pt", "vad_filter": True, "beam_size": 1}
+    # temperature=0: sem novas tentativas, que multiplicavam o tempo em áudio com ruído (24/11).
+    assert opcoes == {"language": "pt", "vad_filter": True, "beam_size": 1, "temperature": 0.0}
 
 
 def test_whisper_le_o_mp4_do_iphone():
