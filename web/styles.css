@@ -2216,6 +2216,96 @@ footer {
   .main-content {
     padding: 82px 16px 88px;
   }
+  /* Cabeçalho sem largura mínima fixa: a saída rápida fica sempre inteira na tela (#152). */
+  .safety-header {
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .safety-actions {
+    gap: 6px;
+    min-width: 0;
+  }
+  .emergency-call,
+  .ghost-button,
+  .quick-exit {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .emergency-call {
+    padding: 8px 10px;
+  }
+  .emergency-call > [data-icon="phone"] {
+    display: none;
+  }
+  /* "Apagar meus dados" vira só o ícone; o texto continua para o leitor de tela. */
+  .ghost-button {
+    padding: 8px 9px;
+  }
+  .ghost-button__texto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+  .quick-exit {
+    padding: 9px 12px;
+  }
+
+  /* Chat no celular: janela na largura da tela, acima do botão flutuante, sem sobrepor. */
+  .chat-root {
+    right: 12px;
+    bottom: 12px;
+  }
+  .chat-window {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 76px;
+    width: auto;
+    max-height: calc(100dvh - 66px - 86px);
+    display: flex;
+    flex-direction: column;
+  }
+  .chat-window[hidden] {
+    display: none;
+  }
+  .chat-messages {
+    flex: 1 1 auto;
+    min-height: 120px;
+    max-height: none;
+  }
+  .chat-head {
+    gap: 8px;
+    padding: 12px 12px;
+  }
+  .assistant-avatar {
+    display: none;
+  }
+  .chat-head-info {
+    min-width: 0;
+  }
+  .chat-head-info strong,
+  .chat-head-info span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .chat-head-info span {
+    display: block;
+  }
+  .helping-toggle {
+    flex-shrink: 0;
+    max-width: 128px;
+  }
+  /* Com o chat aberto, o botão flutuante vira só o círculo de fechar. */
+  .chat-trigger[aria-expanded="true"] {
+    padding: 6px;
+  }
+  .chat-trigger[aria-expanded="true"] .chat-trigger-text {
+    display: none;
+  }
   .privacy-pill {
     display: none;
   }
@@ -2233,5 +2323,24 @@ footer {
   }
   .step-tab {
     min-width: 140px;
+  }
+}
+
+/* Telas bem estreitas (ex.: 320 a 380 px): "Ligue" some só visualmente, e o 180 e o 190 ficam lado a lado. */
+@media (max-width: 380px) {
+  .emergency-ligue {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+  .emergency-call {
+    padding: 8px 9px;
+  }
+  .quick-exit {
+    padding: 9px 10px;
+    gap: 5px;
   }
 }

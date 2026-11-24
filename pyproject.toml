@@ -21,6 +21,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "httpx>=0.28.1",
+    "playwright>=1.65.2",
     "pytest>=9.2.0",
     "quickjs>=1.19.4",
 ]
@@ -39,6 +40,10 @@ explicit = true
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
-# Os testes com o Whisper de verdade baixam o modelo (~0,5 GB): rodar com `uv run pytest -m whisper`.
-addopts = "-m 'not whisper'"
-markers = ["whisper: usa o modelo Whisper de verdade (fora da suíte padrão)"]
+# Fora da suíte padrão: os testes com o Whisper de verdade baixam o modelo (~0,5 GB), e os de layout
+# precisam do Chromium do Playwright. Rodar com `uv run pytest -m whisper` ou `uv run pytest -m navegador`.
+addopts = "-m 'not whisper and not navegador'"
+markers = [
+    "whisper: usa o modelo Whisper de verdade (fora da suíte padrão)",
+    "navegador: mede o layout num Chromium de verdade (fora da suíte padrão; `uv run playwright install chromium`)",
+]
