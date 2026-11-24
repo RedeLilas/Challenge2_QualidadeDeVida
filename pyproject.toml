@@ -26,3 +26,6 @@ dev = [
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+# Os testes com o Whisper de verdade baixam o modelo (~0,5 GB): rodar com `uv run pytest -m whisper`.
+addopts = "-m 'not whisper'"
+markers = ["whisper: usa o modelo Whisper de verdade (fora da suíte padrão)"]

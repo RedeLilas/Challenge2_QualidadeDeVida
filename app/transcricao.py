@@ -3,12 +3,14 @@
 O áudio nunca vai a serviço externo e nunca é guardado: chega no corpo da requisição, é
 transcrito em memória e descartado. Nada do áudio nem da transcrição vai para os logs.
 
-Este módulo guarda o contrato usado pela rota POST /transcrever (limites, mensagens, erros,
-carga em segundo plano e uma transcrição por vez). A carga do Whisper (faster-whisper,
-`WHISPER_MODELO`, padrão `small` em int8) é a tarefa 1.3: até lá, `carregar()` não existe
-e a rota responde que a transcrição está indisponível.
+Contrato da rota POST /transcrever (limites, mensagens, erros, carga em segundo plano e uma
+transcrição por vez) e o Whisper local: faster-whisper, modelo de `WHISPER_MODELO` (padrão
+`small`) em int8 na CPU, português fixo e filtro de silêncio. `WHISPER_THREADS` (opcional)
+limita as threads, por exemplo para medir como numa máquina de 2 vCPUs.
 """
+import io
 import logging
+import os
 import threading
 from typing import Protocol
 
@@ -17,6 +19,9 @@ logger = logging.getLogger("rede_lilas.transcricao")
 # 1 MB e 30 s de gravação, com 5 s de tolerância para o cabeçalho e o fim da gravação.
 LIMITE_BYTES = 1_000_000
 LIMITE_SEGUNDOS = 35
+
+MODELO_PADRAO = "small"
+TAXA = 16_000  # o Whisper trabalha com áudio mono de 16 kHz
 
 MENSAGENS = {
     "limite": "O áudio pode ter até 30 segundos. Grave de novo, em partes, ou digite sua pergunta.",
@@ -51,9 +56,49 @@ class Transcritor(Protocol):
         """Texto falado no áudio ("" se não houver fala). Levanta AudioLongo ou AudioIlegivel."""
 
 
-def carregar() -> Transcritor:
-    """Carrega o Whisper. Implementada na tarefa 1.3 (#123)."""
-    raise NotImplementedError("a carga do Whisper é a tarefa 1.3 da s5-entrada-audio (#123)")
+class Whisper:
+    """Transcritor com o faster-whisper. O áudio é decodificado em memória, sem arquivo no disco."""
+
+    def __init__(self, modelo):
+        self._modelo = modelo
+
+    def transcrever(self, audio: bytes, tipo: str) -> str:
+        # Import tardio: os testes rápidos usam um transcritor falso e não carregam o faster-whisper.
+        from faster_whisper.audio import decode_audio
+
+        try:
+            # PyAV lê webm/opus (Chrome/Android) e mp4/aac (Safari/iPhone) de um BytesIO.
+            amostras = decode_audio(io.BytesIO(audio), sampling_rate=TAXA)
+        except Exception:
+            # A mensagem do PyAV pode citar o conteúdo; o erro sai sem ela.
+            raise AudioIlegivel from None
+        if len(amostras) == 0:
+            raise AudioIlegivel
+        if len(amostras) / TAXA > LIMITE_SEGUNDOS:
+            raise AudioLongo
+        # Português fixo (sem detectar o idioma, que custa tempo e erra em falas curtas), filtro de
+        # silêncio antes de transcrever e busca gulosa (beam_size=1), a mais rápida em CPU.
+        segmentos, _info = self._modelo.transcribe(amostras, language="pt", vad_filter=True, beam_size=1)
+        return " ".join(segmento.text.strip() for segmento in segmentos).strip()
+
+
+def _threads(env) -> int:
+    valor = (env.get("WHISPER_THREADS") or "").strip()
+    if valor.isdigit() and int(valor) > 0:
+        return int(valor)
+    return os.cpu_count() or 1
+
+
+def carregar(env=None) -> Transcritor:
+    """Carrega o Whisper (na primeira vez, baixa o modelo do Hugging Face; no deploy, vem do build)."""
+    from faster_whisper import WhisperModel
+
+    env = os.environ if env is None else env
+    # No INFO, o faster-whisper registra a duração do áudio e o trecho cortado pelo filtro de silêncio.
+    logging.getLogger("faster_whisper").setLevel(logging.WARNING)
+    nome = (env.get("WHISPER_MODELO") or "").strip() or MODELO_PADRAO
+    modelo = WhisperModel(nome, device="cpu", compute_type="int8", cpu_threads=_threads(env))
+    return Whisper(modelo)
 
 
 _trava_carga = threading.Lock()
