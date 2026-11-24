@@ -1,0 +1,51 @@
+# Suíte padrão em todo PR para a develop ou a main (s5-deploy, tarefa 2.4; vem de s2-plataforma-base 3.2).
+# Os testes com o Whisper de verdade e os de navegador ficam de fora pelo `addopts` do pyproject.toml
+# e rodam só na máquina local. Nenhum segredo é usado: os testes trocam o LLM por um falso.
+name: Testes
+
+on:
+  pull_request:
+    branches: [develop, main]
+    types: [opened, synchronize, reopened, ready_for_review]
+  # Rodar também na develop deixa o cache dela pronto para os PRs (o cache feito num PR só vale para ele).
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Um push novo no mesmo PR cancela a execução anterior.
+concurrency:
+  group: testes-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    # PR em rascunho não roda; roda quando ficar pronto para revisão.
+    if: github.event.pull_request.draft != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Instalar o uv e o Python
+        uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.12"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      # Só o modelo de embeddings é baixado na suíte padrão (test_indice.py, ~1 GB).
+      # O nome do modelo está na chave: trocar o modelo em app/rag/indice.py pede trocar a chave.
+      - name: Cache do modelo de embeddings
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/huggingface
+          key: hf-multilingual-e5-base-v1
+
+      - name: Instalar as dependências
+        run: uv sync --locked
+
+      - name: Rodar a suíte padrão
+        run: uv run pytest
