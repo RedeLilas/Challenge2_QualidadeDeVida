@@ -69,7 +69,7 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 | `s2-base-juridica-unificada`: 16 normas na raiz com o `e5-base` em memória, filtro por eixo, remove `backend/` (Chroma) | Arquivada em 24/11 (9/9; revisão da equipe feita, suíte de risco/190 passando) |
 
 **Decisões da S2** (registradas em `archive/2026-11-24-s2-plataforma-base/design.md`):
-- [ ] Plataforma de deploy: adiada para a S5, ainda em aberto (decisão de 09/11); passa para a `s5-deploy`
+- [x] Plataforma de deploy: adiada para a S5 (decisão de 09/11) e decidida em 24/11 na `s5-deploy`: Azure App Service Linux B3 em brazilsouth, com Docker
 - [x] Tratamento LGPD do DeepSeek: opção (c), risco declarado com uso só de casos fictícios (decisão de 09/11)
 
 ### S3: Comparação LLM x RAG (ter 10, qui 12, sex 13/11)
@@ -110,8 +110,8 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 
 | Mudança (proposta na terça, 24/11) | Status |
 | :--- | :--- |
-| `s5-entrada-audio` (terça): botão de microfone, transcrição com Whisper (faster-whisper `small`, int8) no servidor da aplicação, sem serviço externo e sem guardar o áudio; regra de risco sobre o texto transcrito no navegador; transcrição na caixa para conferir; limites de 30 s e 1 MB; medição da memória com o RAG | Proposta em 24/11 (0/12). Só é arquivada depois de publicada (spec `plataforma`) |
-| `s5-deploy` (quinta): decisão da plataforma e do Docker (primeira tarefa), torch só para CPU, modelos no build, vetores no build se couber, CI, publicação e verificação na URL; recebe as pendências de deploy da S2 | Proposta em 24/11 (0/9). Plataforma: decisão na quinta |
+| `s5-entrada-audio` (terça): botão de microfone, transcrição com Whisper (faster-whisper `small`, int8) no servidor da aplicação, sem serviço externo e sem guardar o áudio; regra de risco sobre o texto transcrito no navegador; transcrição na caixa para conferir; limites de 30 s e 1 MB; medição da memória com o RAG | Concluída em 24/11 (12/12) e publicada na URL de teste com a `s5-deploy`. Arquivar depois da `s5-deploy` (spec `plataforma`) |
+| `s5-deploy` (quinta): decisão da plataforma e do Docker (primeira tarefa), torch só para CPU, modelos no build, vetores no build se couber, CI, publicação e verificação na URL; recebe as pendências de deploy da S2 | Em andamento (8/9). Plataforma decidida em 24/11: Azure App Service Linux B3 em brazilsouth, com Docker. Publicada em 24/11 em https://rede-lilas.azurewebsites.net; partida a frio e memória medidas em 25/11; suíte inteira e `openspec validate --all` passando em 25/11. Falta a verificação na URL num Android e num iPhone de verdade (3.3, #138) |
 
 **Antes da quinta:** memória medida (`s5-entrada-audio` 5.1), aprovação de gasto, dono da conta e do cartão e acessos (lista no design da `s5-deploy`). Em 24/11, nenhuma plataforma que caiba na memória (~3,1 GB estimados) é gratuita sem cartão; o HF Spaces exige o PRO (US$ 9/mês) para Spaces Docker.
 **Atenção:** a API do DeepSeek só aceita texto. O áudio precisa do Whisper no servidor, o que aumenta a memória exigida no deploy.
@@ -134,7 +134,7 @@ Comandos úteis no terminal: `openspec list`, `openspec view`, `openspec validat
 
 | Mudança (propor na terça, 01/12) | Status |
 | :--- | :--- |
-| `s6-producao`: LLM de produção conforme a decisão de LGPD, deploy final, PWA instalável com nome e ícone discretos, auditoria WCAG 2.1 AA, medição de latência; medição no celular do tempo até o alerta de 190 (≤ 2 s; vem de `s2-alerta-risco-190` 2.3, e no áudio conta a partir da chegada da transcrição); vetores no build e `Dockerfile`, se ficarem fora da `s5-deploy` | Planejada |
+| `s6-producao`: LLM de produção conforme a decisão de LGPD, deploy final, PWA instalável com nome e ícone discretos, auditoria WCAG 2.1 AA, medição de latência; medição no celular do tempo até o alerta de 190 (≤ 2 s; vem de `s2-alerta-risco-190` 2.3, e no áudio conta a partir da chegada da transcrição) | Planejada |
 
 ### S7: Testes e refinamento (ter 08, qui 10, sex 11/12)
 
@@ -214,3 +214,5 @@ A leitura de documento por foto saiu do projeto em 24/11.
 | 24/11 | Transcrição colocada na caixa de texto para a usuária conferir antes de enviar; limites de 30 s e 1 MB |
 | 24/11 | Casos de áudio fictícios em `tests/audios/`, lidos por membros da equipe que concordaram ou gerados por voz sintética; nenhuma voz ou relato real |
 | 24/11 | Plataforma de deploy e uso de Docker: decisão na quinta (26/11), como primeira tarefa da `s5-deploy`. Achado de 09/11 conferido: Spaces Docker no HF exigem o PRO (US$ 9/mês) |
+| 24/11 | Plataforma decidida antes de quinta (#120, #131): Azure App Service Linux B3 em brazilsouth, com Docker, pago pelo crédito do Azure for Students; plano B: HF Spaces com PRO, com a mesma imagem. Revisável. Imagem no Azure Container Registry Basic, puxada por identidade gerenciada; sem logs HTTP nem da aplicação |
+| 25/11 | Partida a frio no Azure: do container iniciado, `/saude` em 6,1 s, Whisper em ~14 s e índice (vetores do build) em ~38 s; 1,4 a 1,6 GB em uso de 7 GB. Publicar com uma mudança de configuração por vez |
