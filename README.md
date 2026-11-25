@@ -74,7 +74,13 @@ uv run pytest -m navegador
 | `dados/fontes/relatorios/` | relatório de alterações de cada coleta |
 | `dados/leis/` | trechos que alimentam o índice, um arquivo por norma |
 
-Tudo é versionado. O índice não é gravado em disco: é montado em memória a partir de `dados/leis/` quando a aplicação inicia.
+Tudo é versionado. O índice é montado em memória a partir de `dados/leis/` quando a aplicação inicia, o que leva cerca de 30 s na CPU. Para subir mais rápido (no deploy, por exemplo), gere antes os vetores dos trechos:
+
+```bash
+uv run python -m app.rag.indice   # grava dados/indice/vetores.npz (fora do git)
+```
+
+Com o arquivo presente, o índice carrega em menos de 1 s. Os vetores só são usados se os trechos de `dados/leis/` e o modelo forem os mesmos de quando o arquivo foi gerado; senão, o índice é montado na hora, como sem o arquivo. A aplicação nunca grava esse arquivo: ele é gerado só pelo comando acima.
 
 ### Consultar
 

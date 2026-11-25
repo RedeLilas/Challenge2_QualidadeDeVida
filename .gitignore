@@ -9,6 +9,9 @@ __pycache__/
 .venv/
 .pytest_cache/
 
+# Vetores do índice: gerados no build (uv run python -m app.rag.indice)
+dados/indice/
+
 # Sistema
 .DS_Store
 
