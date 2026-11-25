@@ -50,6 +50,23 @@ Fontes (consultadas em 24/11; as páginas do HF, do Render, do Railway e do Koye
 - **Empacotar com Docker:** o HF só aceita Docker, e o App Service roda container. Com o mesmo `Dockerfile` para os dois, trocar de plano vira só publicar em outro lugar.
 - **Quando trocar:** se até o meio da quinta o Azure não estiver respondendo em `/saude`, a equipe passa para o plano B.
 
+### Decisão (24/11, tarefa 1.1)
+
+Registrada em 24/11, antes de quinta, depois do teste no Azure e do container verificado na tarefa 2.2. Pode ser revista se aparecer alternativa melhor: um novo `/opsx:update` registra a troca e o motivo.
+
+- **Plataforma:** Azure App Service Linux, plano **B3** (4 núcleos, 7 GB), região **brazilsouth** (São Paulo), na assinatura Azure for Students do Túlio.
+- **Empacotamento:** Docker, com o `Dockerfile` da tarefa 2.2. A mesma imagem serve ao plano B. A spec `plataforma` não muda: ela já pede um único container.
+- **Motivo:**
+  - cabe com folga: pico medido de ~2,9 GB (tabela abaixo) e 1,4 GB em uso no container local em 24/11, contra 7 GB do B3;
+  - não dorme, com o Always On ligado;
+  - nenhum gasto da equipe e nenhum cartão, porque o crédito do Azure for Students cobre até o fim da S7;
+  - servidor no Brasil;
+  - testado em 24/11: um plano B3 Linux foi criado e apagado com sucesso em brazilsouth.
+- **Regiões permitidas pela assinatura de estudante:** brazilsouth, northcentralus, spaincentral, southafricanorth e belgiumcentral. A reserva é a northcentralus; a eastus não é permitida.
+- **Onde guardar a imagem:** escolhido na tarefa 3.1, entre o Azure Container Registry Basic (pago pelo crédito) e o GitHub Container Registry. O repositório já é público, e a imagem não tem segredos.
+- **Logs de borda:** não ligar coleta de logs HTTP nem o Application Insights. O log do container só tem o que a aplicação escreve (método, rota, status e duração). A tarefa 3.1 confere o que o App Service guarda por padrão. Registros internos da Microsoft, fora do controle da equipe, entram no relatório como limitação.
+- **Plano B mantido:** Hugging Face Spaces com PRO, com a mesma imagem e `PORT=7860`, se até o meio da quinta o Azure não estiver respondendo em `/saude`.
+
 ### O que precisa estar pronto antes da decisão de quinta
 
 Respondido em 24/11 na #120.
@@ -108,7 +125,7 @@ O `/opsx:update` altera o requisito "Implantação contínua" da spec `plataform
 
 ## Risks / Trade-offs
 
-- [Nenhuma opção que caiba é gratuita sem cartão] → aprovação de gasto e dono da conta resolvidos antes de quinta (lista acima); sem isso, a publicação vai para a S6 e a semana fecha pelo critério de pronto.
+- [Nenhuma opção que caiba é gratuita sem cartão] → aprovação de gasto e dono da conta resolvidos antes de quinta (lista acima); sem isso, a publicação vai para a S6 e a semana fecha pelo critério de pronto. **Resolvido em 24/11:** o crédito do Azure for Students cobre o plano A sem cartão.
 - [Memória real acima de 4 GB] → vetores no build e a reserva `WHISPER_MODELO=base`; ou um plano maior.
 - [Partida a frio longa em 2 vCPU] → vetores no build; a medição de latência da S6 é feita com a aplicação acordada, e o tempo de acordar é registrado à parte.
 - [Mudança do torch no lock quebrar o Windows] → o marcador limita a troca ao Linux, e a tarefa só termina com `uv sync` e `uv run pytest` numa máquina Windows.
@@ -121,4 +138,4 @@ Primeira publicação: não há versão anterior. Para voltar atrás, a platafor
 
 ## Open Questions
 
-- Região do servidor na plataforma escolhida (Brasil ou EUA/Europa): afeta a latência, não o desenho; registrar na decisão de quinta.
+- ~~Região do servidor na plataforma escolhida (Brasil ou EUA/Europa): afeta a latência, não o desenho; registrar na decisão de quinta.~~ Resolvida em 24/11: brazilsouth (seção "Decisão (24/11, tarefa 1.1)").
