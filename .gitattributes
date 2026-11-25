@@ -7,3 +7,11 @@ dados/fontes/raw/** -text
 # modificados depois de cada ingestão, mesmo sem mudança de conteúdo.
 dados/**/*.jsonl text eol=lf
 dados/fontes/relatorios/*.md text eol=lf
+
+# Arquivos da PWA: sempre LF, como estão guardados no repositório. Os testes procuram trechos
+# do código com "\n" (por exemplo, o fim de um tratador de clique em tests/test_pwa.py), e o
+# checkout no Windows com core.autocrlf=true os trocava por CRLF, quebrando esses testes.
+web/**/*.js text eol=lf
+web/**/*.html text eol=lf
+web/**/*.css text eol=lf
+web/**/*.webmanifest text eol=lf

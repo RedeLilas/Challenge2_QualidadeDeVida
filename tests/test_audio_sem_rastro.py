@@ -6,6 +6,7 @@ Os áudios são tons gerados aqui ou voz sintética offline (tests/audios/LEIAME
 """
 import io
 import logging
+import os
 import tempfile
 from pathlib import Path
 
@@ -58,11 +59,14 @@ class ModeloFalso:
 
 
 def arquivos_do_repositorio() -> set[str]:
-    return {
-        str(p.relative_to(RAIZ))
-        for p in RAIZ.rglob("*")
-        if p.is_file() and not IGNORAR.intersection(p.relative_to(RAIZ).parts)
-    }
+    # Poda as pastas ignoradas antes de entrar nelas: o rglob percorria o .venv e o .git inteiros
+    # (dezenas de milhares de arquivos) só para descartá-los, cerca de 3 s por listagem.
+    arquivos = set()
+    for pasta, subpastas, nomes in os.walk(RAIZ):
+        subpastas[:] = [nome for nome in subpastas if nome not in IGNORAR]
+        relativa = Path(pasta).relative_to(RAIZ)
+        arquivos.update(str(relativa / nome) for nome in nomes)
+    return arquivos
 
 
 @pytest.fixture
