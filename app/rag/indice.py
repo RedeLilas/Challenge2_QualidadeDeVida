@@ -10,7 +10,9 @@ senão, o índice é montado na hora, como antes.
 """
 import hashlib
 import json
+import logging
 import threading
+import time
 from functools import cache
 from pathlib import Path
 
@@ -24,6 +26,8 @@ PASTA_LEIS = RAIZ / "dados" / "leis"
 ARQUIVO_VETORES = RAIZ / "dados" / "indice" / "vetores.npz"
 # Frase fixa codificada ao gerar e ao carregar: se o modelo mudar, o vetor dela muda junto.
 SENTINELA = "query: o que é violência patrimonial?"
+
+logger = logging.getLogger("rede_lilas.indice")
 
 
 @cache
@@ -100,7 +104,10 @@ def indice_padrao() -> Indice:
     # A trava garante uma só montagem quando o aquecimento e a primeira pergunta chegam juntos.
     with _trava:
         if _indice is None:
+            inicio = time.monotonic()
             _indice = Indice(carregar_trechos(), vetores=ARQUIVO_VETORES)
+            # Mede a partida a frio na plataforma (s5-deploy, tarefa 3.2): só a origem e o tempo.
+            logger.info("índice pronto: origem=%s em %.1f s", _indice.origem, time.monotonic() - inicio)
         return _indice
 
 
