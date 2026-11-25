@@ -34,23 +34,34 @@ Orçamento de memória: ~3,1 GB estimados → é preciso uma instância de **4 G
 | Google Cloud Run | Configurável por instância (até 32 GiB) | Imagem Docker, ou código-fonte com buildpacks | Cota grátis mensal de 360 mil GiB-s (uma instância de 4 GiB ligada sem parar gasta a cota em ~25 h); escala a zero. Cartão: sim (conta de faturamento) | Sim, escala a zero; cada acordar paga a carga do índice e do Whisper | Médio: `gcloud`, registro de imagens |
 | VPS (ex.: Oracle Cloud Always Free, Hetzner) | Depende do plano | Qualquer um | Não verificado em 24/11. Cartão: sim | Não | Alto: servidor, HTTPS, atualizações e segurança por conta da equipe |
 | Koyeb | Não conferido: a página oficial (24/11) não mostrou instância gratuita de CPU nem preço de CPU com 4 GB | Docker ou nativo | Não conferido | — | — |
+| **Azure App Service Linux, plano B3** (acrescentado em 24/11, #120) | 7 GB, 4 núcleos (B2: 3,5 GB, apertado para o pico de ~2,9 GB) | Docker (container próprio) ou Python nativo | ~US$ 50/mês, estimativa a conferir na calculadora logada na conta de estudante. Pago pelo **Azure for Students**: US$ 100 de crédito, sem cartão, válido por 12 meses; quando o crédito acaba, os serviços param, sem cobrança. Cartão: não | Não, com o Always On ligado | Médio: `az` CLI ou portal; HTTPS incluído |
+| Azure Container Apps (acrescentado em 24/11) | Configurável por réplica | Docker | Cobrança por segundo, com cota grátis mensal de 180 mil vCPU-s e 360 mil GiB-s; também pago pelo crédito de estudante | Sim, escala a zero; cada acordar paga a carga do índice e do Whisper, como no Cloud Run | Médio |
 
-Fontes (consultadas em 24/11; as páginas do HF, do Render, do Railway e do Koyeb foram lidas, e as da Fly.io e do Cloud Run, por busca): [HF Spaces overview](https://huggingface.co/docs/hub/spaces-overview), [HF Docker Spaces](https://huggingface.co/docs/hub/spaces-sdks-docker), [HF hardware](https://huggingface.co/docs/hub/en/spaces-gpus), [HF pricing](https://huggingface.co/pricing), [Render compute plans](https://render.com/docs/compute-plans), [Render free](https://render.com/docs/free), [Railway plans](https://docs.railway.com/reference/pricing/plans), [Fly.io pricing](https://docs.fly.io/about/pricing), [Cloud Run pricing](https://cloud.google.com/run/pricing), [Koyeb pricing](https://www.koyeb.com/pricing).
+Fontes (consultadas em 24/11; as páginas do HF, do Render, do Railway e do Koyeb foram lidas, e as da Fly.io e do Cloud Run, por busca): [HF Spaces overview](https://huggingface.co/docs/hub/spaces-overview), [HF Docker Spaces](https://huggingface.co/docs/hub/spaces-sdks-docker), [HF hardware](https://huggingface.co/docs/hub/en/spaces-gpus), [HF pricing](https://huggingface.co/pricing), [Render compute plans](https://render.com/docs/compute-plans), [Render free](https://render.com/docs/free), [Railway plans](https://docs.railway.com/reference/pricing/plans), [Fly.io pricing](https://docs.fly.io/about/pricing), [Cloud Run pricing](https://cloud.google.com/run/pricing), [Koyeb pricing](https://www.koyeb.com/pricing). Azure, por busca em 24/11 (as páginas de preço só mostram valores com login, então os preços do Azure acima são estimativas): [Azure for Students](https://azure.microsoft.com/en-us/free/students/), [oferta MS-AZR-0170P](https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0170p/), [App Service no Linux](https://azure.microsoft.com/en-us/pricing/details/app-service/linux/), [cobrança do Container Apps](https://learn.microsoft.com/azure/container-apps/billing).
 
 **Achado de 09/11 conferido em 24/11:** confirmado. A documentação oficial diz que "Gradio and Docker Spaces run on compute and require a paid plan to create: PRO for personal accounts, Team or Enterprise for organizations". O CPU Basic continua com 2 vCPU, 16 GB e "Free!" por hora, e dorme depois de 48 h sem uso. A recomendação da S2 (HF Spaces grátis) não vale mais sem o PRO.
 
 **Leitura para quinta (recomendação preliminar, não é a decisão):** o HF Spaces com PRO é a opção mais barata que cabe com folga (US$ 9/mês, 16 GB) e tem o menor esforço, mas exige Docker e a conta PRO de uma pessoa da equipe (ou Team na organização). A Fly.io (~US$ 25/mês) e o Railway (~US$ 35 a 45/mês) são as reservas com Docker ou nativo. O Cloud Run sai quase de graça com pouco uso, mas cada acordar paga a carga do índice e do Whisper, o que atrapalha a medição da S6. O Render só cabe no plano de 4 GB, o mais caro da tabela.
 
+**Orientação da equipe (24/11, #120; não é a decisão, que fica para a tarefa 1.1 e pode mudar se aparecer alternativa melhor):**
+
+- **Plano A: Azure App Service Linux B3**, pago pelo crédito do Azure for Students do Túlio. Cabe com folga, não dorme, não exige cartão e não custa nada à equipe até o fim da S7. A região Brazil South pode ajudar na questão de LGPD.
+- **Plano B: Hugging Face Spaces com PRO** (US$ 9/mês). Se for preciso, a equipe decide na hora quem assina e como divide o custo.
+- **Empacotar com Docker:** o HF só aceita Docker, e o App Service roda container. Com o mesmo `Dockerfile` para os dois, trocar de plano vira só publicar em outro lugar.
+- **Quando trocar:** se até o meio da quinta o Azure não estiver respondendo em `/saude`, a equipe passa para o plano B.
+
 ### O que precisa estar pronto antes da decisão de quinta
 
+Respondido em 24/11 na #120.
+
 - [x] Memória e tempos medidos (tarefa 5.1 da `s5-entrada-audio`), na tabela abaixo: pico de ~2,9 GB (24/11).
-- [ ] Aprovação de gasto: quanto por mês e até quando (a S7 termina em 11/12), e quem aprova.
-- [ ] Dono da conta e do cartão: conta pessoal (HF PRO, Fly.io) ou da organização `RedeLilas` (HF Team, Railway com time).
-- [ ] Acessos: quem da equipe entra na plataforma e quem vê os segredos.
-- [ ] Chave do DeepSeek para o ambiente publicado: de quem é, com limite de gasto, e só casos fictícios (opção (c) de 09/11).
-- [ ] Permissões no GitHub da organização para o workflow de CI e, se a plataforma pedir, para a integração de deploy.
-- [ ] Créditos de estudante (ex.: GitHub Student Developer Pack, Azure for Students), se alguém da equipe tiver: não conferidos em 24/11.
-- [ ] Docker Desktop em ao menos uma máquina (ajuda a testar a imagem, mas não é obrigatório).
+- [x] Aprovação de gasto: quanto por mês e até quando (a S7 termina em 11/12), e quem aprova. **No plano A, nenhum gasto da equipe: o crédito do Azure for Students cobre até o fim da S7.**
+- [x] Dono da conta e do cartão: conta pessoal (HF PRO, Fly.io) ou da organização `RedeLilas` (HF Team, Railway com time). **A equipe. A assinatura do Azure for Students é pessoal e fica no nome do Túlio, para uso da equipe; no plano B, a equipe decide na hora quem assina.**
+- [x] Acessos: quem da equipe entra na plataforma e quem vê os segredos. **O Túlio tem o acesso à plataforma e aos segredos e faz a publicação; com a URL no ar, as outras pessoas fazem os testes.**
+- [x] Chave do DeepSeek para o ambiente publicado: de quem é, com limite de gasto, e só casos fictícios (opção (c) de 09/11). **Chave do Túlio, com limite de US$ 2 por enquanto (saldo pré-pago).**
+- [x] Permissões no GitHub da organização para o workflow de CI e, se a plataforma pedir, para a integração de deploy.
+- [x] Créditos de estudante (ex.: GitHub Student Developer Pack, Azure for Students), se alguém da equipe tiver. **O Túlio tem o Azure for Students (US$ 100, sem cartão, 12 meses).**
+- [x] Docker Desktop em ao menos uma máquina (ajuda a testar a imagem, mas não é obrigatório).
 
 ### Memória e tempos medidos (tarefa 5.1 da `s5-entrada-audio`, 24/11)
 
