@@ -88,6 +88,24 @@ Registrada em 24/11, antes de quinta, depois do teste no Azure e do container ve
 | Requisição com query string fictícia | Nada dela nos logs |
 | Celular | A URL abriu a PWA no celular do Túlio |
 
+### Partida a frio e memória no Azure (25/11, tarefa 3.2)
+
+**Ambiente:** Azure App Service Linux B3 (4 núcleos, 7 GB), brazilsouth, imagem `4b7b513`. **Como:** site parado até sair do ar e ligado de novo (`az webapp stop` e `start`), com um script consultando a URL a cada segundo: `/saude`, um `POST /transcrever` vazio (503 enquanto o Whisper carrega, 422 quando está pronto, sem enviar áudio) e uma pergunta jurídica fictícia disparada assim que `/saude` respondeu. Os tempos da plataforma vêm do log `..._docker.log`, e a memória, da métrica `MemoryWorkingSet` do Azure Monitor (média por minuto).
+
+| Etapa | Tempo |
+| :--- | :--- |
+| Plataforma começa a subir → container iniciado | ~10 s (imagem já no servidor; o primeiro download, na publicação, levou 59 s) |
+| Container iniciado → `/saude` respondendo | 6,1 s (igual nas 3 partidas medidas) |
+| `/saude` → Whisper pronto | 7,7 s |
+| `/saude` → primeira pergunta jurídica respondida | 35,0 s, dos quais ~3 s são do DeepSeek: o índice fica pronto ~32 s depois de `/saude` |
+| Pergunta jurídica com tudo carregado | 2,7 a 3,6 s |
+| Transcrição do caso A1 com tudo carregado | 8,0 s |
+
+- **Total da partida a frio**, da plataforma começando a subir até tudo pronto: ~16 s até `/saude`, ~24 s até o Whisper e ~48 s até o índice. Com o Always On, isso só acontece numa nova publicação ou num reinício.
+- **Reinício (`az webapp restart`) não derruba o site:** o container antigo segue respondendo até o novo passar no teste de saúde da plataforma.
+- **Índice:** a mesma imagem, no Windows com o Docker limitado a 4 núcleos, carrega o índice do arquivo de vetores em 6,3 s (1,5 s de import do torch e 4,8 s do modelo e dos vetores). No Azure, levou ~32 s. O uso de CPU no minuto da partida (40 s de CPU) é menor do que o recálculo dos vetores pediria, o que indica carga do arquivo com leitura lenta do disco na primeira vez e o Whisper carregando ao mesmo tempo. A aplicação não registra a origem do índice, então isso não está confirmado.
+- **Memória em uso:** 1.377 MB com o RAG e o Whisper carregados, depois de uma transcrição, e 1.591 MB depois da rodada de testes da tarefa 3.1. Menos de um quarto dos 7 GB do B3, dentro do pico de ~2,9 GB medido no Mac.
+
 ### O que precisa estar pronto antes da decisão de quinta
 
 Respondido em 24/11 na #120.
