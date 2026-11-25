@@ -63,9 +63,30 @@ Registrada em 24/11, antes de quinta, depois do teste no Azure e do container ve
   - servidor no Brasil;
   - testado em 24/11: um plano B3 Linux foi criado e apagado com sucesso em brazilsouth.
 - **Regiões permitidas pela assinatura de estudante:** brazilsouth, northcentralus, spaincentral, southafricanorth e belgiumcentral. A reserva é a northcentralus; a eastus não é permitida.
-- **Onde guardar a imagem:** escolhido na tarefa 3.1, entre o Azure Container Registry Basic (pago pelo crédito) e o GitHub Container Registry. O repositório já é público, e a imagem não tem segredos.
+- **Onde guardar a imagem:** escolhido na tarefa 3.1, entre o Azure Container Registry Basic (pago pelo crédito) e o GitHub Container Registry. O repositório já é público, e a imagem não tem segredos. **Escolhido o Azure Container Registry Basic (seção "Publicação (24/11, tarefa 3.1)").**
 - **Logs de borda:** não ligar coleta de logs HTTP nem o Application Insights. O log do container só tem o que a aplicação escreve (método, rota, status e duração). A tarefa 3.1 confere o que o App Service guarda por padrão. Registros internos da Microsoft, fora do controle da equipe, entram no relatório como limitação.
 - **Plano B mantido:** Hugging Face Spaces com PRO, com a mesma imagem e `PORT=7860`, se até o meio da quinta o Azure não estiver respondendo em `/saude`.
+
+### Publicação (24/11, tarefa 3.1)
+
+**URL de teste:** https://rede-lilas.azurewebsites.net, publicada pelo Túlio em 24/11 com a imagem do commit `4b7b513`.
+
+- **Recursos** (grupo `rede-lilas`, região brazilsouth, assinatura Azure for Students do Túlio):
+  - **Registro:** Azure Container Registry Basic `redelilas.azurecr.io`, privado e sem usuário administrador. Escolhido no lugar do GitHub Container Registry para o site puxar a imagem por identidade gerenciada, sem senha nem token guardado, e para a imagem ficar na mesma região.
+  - **Plano:** `rede-lilas-plano`, App Service Linux B3.
+  - **Site:** `rede-lilas`, com identidade gerenciada do sistema e papel AcrPull no registro; Always On ligado; só HTTPS (o `http://` redireciona com 301), TLS mínimo 1.2, HTTP/2 e FTP desligado.
+  - **Configurações do site:** `WEBSITES_PORT=8000`, `WEBSITES_ENABLE_APP_SERVICE_STORAGE=false`, `LLM_BASE_URL`, `LLM_MODEL`, `LLM_THINKING` e `LLM_API_KEY`. A chave do DeepSeek existe só nessa configuração e no `.env` local; não está na imagem nem no repositório, e o `.dockerignore` deixa o `.env` fora do build.
+- **Como publicar uma nova versão:** a assinatura de estudante bloqueia o build na nuvem do registro (`az acr build` devolve `TasksOperationsNotAllowed`). O caminho é `docker build` local com a tag do commit, `az acr login --name redelilas`, `docker push` e `az webapp config container set` com a nova tag. O envio da imagem de ~3,6 GB levou 2 min 26 s. No Git Bash do Windows, exportar `MSYS_NO_PATHCONV=1` antes de comandos `az` que recebem IDs `/subscriptions/...`.
+- **O que o App Service guarda de log por padrão** (conferido em 24/11 na pasta `LogFiles` do site, pela API do Kudu): a coleta de logs HTTP, de erros detalhados, de requisições com falha e da aplicação ficou desligada, e o Application Insights não foi criado. O único arquivo é o log da plataforma (`..._docker.log`, 92 linhas), com o download da imagem, a partida do container e os testes de saúde da própria plataforma. Ele não tem query string, chave, texto de pergunta ou de áudio, nem IP. Os registros internos da Microsoft na borda (balanceador e front-end do App Service) ficam fora do controle da equipe e entram no relatório como limitação.
+- **Verificação (24/11):**
+
+| Verificação | Resultado |
+| :--- | :--- |
+| `/saude` e página inicial | Respondem; a PWA carrega (32 KB) |
+| Transcrição do caso A1 | "Ele pode tirar meus filhos de mim?", em 7,3 s |
+| Pergunta jurídica fictícia | Respondida com a Lei 11.340/2006, art. 7º, citada, em 3,8 s |
+| Requisição com query string fictícia | Nada dela nos logs |
+| Celular | A URL abriu a PWA no celular do Túlio |
 
 ### O que precisa estar pronto antes da decisão de quinta
 
