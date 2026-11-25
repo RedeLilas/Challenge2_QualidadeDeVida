@@ -29,7 +29,8 @@ def test_transcricao_dos_casos(whisper, caso):
     if not caso["palavras_chave"]:  # A7: só silêncio
         assert texto == ""
         return
-    normalizado = risco.normalizar(texto)
+    # O Whisper escreve "bolsa-família" com hífen no Windows e no Azure (Linux), e "Bolsa Família" no Mac.
+    normalizado = risco.normalizar(texto.replace("-", " "))
     for palavra in caso["palavras_chave"]:
         assert re.search(rf"\b{re.escape(palavra)}\b", normalizado), (palavra, texto)
     # A regra de risco sobre o texto transcrito dá o mesmo resultado que sobre o texto lido.
