@@ -40,6 +40,21 @@ uv run --env-file .env python -m app.llm "O que é violência patrimonial?"
 
 Para usar o DeepSeek, troque as variáveis no `.env` (veja o bloco comentado em `.env.example`): modelo `deepseek-flash` com `LLM_THINKING=disabled`. Nenhum código muda. A chave fica só no `.env` de cada máquina e nunca é versionada. Pela decisão de LGPD (opção (c), em `openspec/changes/archive/2026-11-24-s2-plataforma-base/design.md`), só casos fictícios vão ao DeepSeek.
 
+## Rodar com Docker
+
+O `Dockerfile` monta a aplicação num único container, o mesmo usado no deploy. A imagem já traz o Whisper, o modelo de embeddings e os vetores do índice, e o container sobe com `HF_HUB_OFFLINE=1`, sem baixar modelos. A imagem tem cerca de 3,6 GB, e o primeiro build leva alguns minutos.
+
+```bash
+docker build -t rede-lilas .
+docker run --rm -p 8000:8000 --env-file .env rede-lilas
+curl localhost:8000/saude            # {"status":"ok"}
+```
+
+- A chave do LLM entra só em execução (`--env-file .env` ou variável secreta da plataforma), nunca na imagem. O `.dockerignore` deixa `.env` e `.env.*` fora do build.
+- `PORT` (padrão 8000) troca a porta, por exemplo `-e PORT=7860` no Hugging Face Spaces.
+- Para usar outro modelo do Whisper, passe o mesmo valor no build: `docker build --build-arg WHISPER_MODELO=base -t rede-lilas .`.
+- Antivírus que inspecionam HTTPS, como o Kaspersky, podem fazer o build falhar de vez em quando com `CERTIFICATE_VERIFY_FAILED` ao baixar os modelos. Rodar o build de novo costuma resolver; as camadas já prontas ficam em cache.
+
 ## Pergunta por áudio
 
 O botão de microfone da conversa grava até 30 s, só na memória da aba, e envia o áudio a `POST /transcrever`, no próprio servidor. O servidor transcreve com o Whisper ([faster-whisper](https://github.com/SYSTRAN/faster-whisper), modelo `small` em int8 na CPU, português fixo) e devolve só o texto. O áudio nunca vai a serviço externo, não é gravado em disco e não aparece nos logs. A regra de risco roda no navegador sobre o texto: com sinal de risco, o 190 aparece na hora; sem risco, o texto vai para a caixa, para conferir e enviar.
@@ -74,7 +89,13 @@ uv run pytest -m navegador
 | `dados/fontes/relatorios/` | relatório de alterações de cada coleta |
 | `dados/leis/` | trechos que alimentam o índice, um arquivo por norma |
 
-Tudo é versionado. O índice não é gravado em disco: é montado em memória a partir de `dados/leis/` quando a aplicação inicia.
+Tudo é versionado. O índice é montado em memória a partir de `dados/leis/` quando a aplicação inicia, o que leva cerca de 30 s na CPU. Para subir mais rápido (no deploy, por exemplo), gere antes os vetores dos trechos:
+
+```bash
+uv run python -m app.rag.indice   # grava dados/indice/vetores.npz (fora do git)
+```
+
+Com o arquivo presente, o índice carrega em menos de 1 s. Os vetores só são usados se os trechos de `dados/leis/` e o modelo forem os mesmos de quando o arquivo foi gerado; senão, o índice é montado na hora, como sem o arquivo. A aplicação nunca grava esse arquivo: ele é gerado só pelo comando acima.
 
 ### Consultar
 

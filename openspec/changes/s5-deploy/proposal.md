@@ -27,9 +27,9 @@ Nenhuma.
 
 ## Impact
 
-- **Arquivos novos (conforme a decisão de quinta):** `Dockerfile` e `.dockerignore`, ou a configuração de build nativo da plataforma; `.github/workflows/testes.yml`; um script de build que baixa os modelos e, se couber, gera os vetores.
+- **Arquivos novos:** `Dockerfile` e `.dockerignore` (decisão de 24/11: Azure App Service com Docker); `.github/workflows/testes.yml`; um script de build que baixa os modelos e, se couber, gera os vetores.
 - **Arquivos alterados:** `pyproject.toml` e `uv.lock` (índice de torch para CPU no Linux), `app/rag/indice.py` (vetores prontos, se couber), `README.md` (como publicar), `ROADMAP.md`.
-- **Custo e contas:** nenhuma opção que caiba na memória é gratuita sem cartão (tabela no design). A decisão depende de aprovação de gasto e de quem é dono da conta.
+- **Custo e contas:** nenhuma opção que caiba na memória é gratuita sem cartão (tabela no design). A decisão depende de aprovação de gasto e de quem é dono da conta. Resolvido em 24/11: o crédito do Azure for Students cobre o plano A.
 - **Privacidade (LGPD):** a plataforma passa a processar as requisições, inclusive o áudio e o texto da usuária, no servidor dela; a escolha registra a região e se a plataforma guarda logs de borda (IP, URL). Nenhum dado é guardado pela aplicação. O DeepSeek segue a opção (c) de 09/11: só casos fictícios. A chave nunca vai para a imagem, o repositório ou os logs de build.
 - **Segurança da usuária:** a URL de teste é pública e a aplicação pode "dormir"; o alerta de 190 e a saída rápida funcionam no aparelho, sem esperar o servidor acordar. A partida a frio só atrasa as respostas.
 - **Fora desta mudança:** o domínio próprio, o nome e o ícone definitivos e o deploy final (`s6-producao`); a medição no celular do tempo até o 190 e do p95 (`s6-producao`); os vetores no build, se não couberem na quinta (S6); o `Dockerfile`, se a plataforma escolhida for sem Docker (S6); fotos (decisão de 24/11).

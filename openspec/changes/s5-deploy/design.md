@@ -50,6 +50,80 @@ Fontes (consultadas em 24/11; as páginas do HF, do Render, do Railway e do Koye
 - **Empacotar com Docker:** o HF só aceita Docker, e o App Service roda container. Com o mesmo `Dockerfile` para os dois, trocar de plano vira só publicar em outro lugar.
 - **Quando trocar:** se até o meio da quinta o Azure não estiver respondendo em `/saude`, a equipe passa para o plano B.
 
+### Decisão (24/11, tarefa 1.1)
+
+Registrada em 24/11, antes de quinta, depois do teste no Azure e do container verificado na tarefa 2.2. Pode ser revista se aparecer alternativa melhor: um novo `/opsx:update` registra a troca e o motivo.
+
+- **Plataforma:** Azure App Service Linux, plano **B3** (4 núcleos, 7 GB), região **brazilsouth** (São Paulo), na assinatura Azure for Students do Túlio.
+- **Empacotamento:** Docker, com o `Dockerfile` da tarefa 2.2. A mesma imagem serve ao plano B. A spec `plataforma` não muda: ela já pede um único container.
+- **Motivo:**
+  - cabe com folga: pico medido de ~2,9 GB (tabela abaixo) e 1,4 GB em uso no container local em 24/11, contra 7 GB do B3;
+  - não dorme, com o Always On ligado;
+  - nenhum gasto da equipe e nenhum cartão, porque o crédito do Azure for Students cobre até o fim da S7;
+  - servidor no Brasil;
+  - testado em 24/11: um plano B3 Linux foi criado e apagado com sucesso em brazilsouth.
+- **Regiões permitidas pela assinatura de estudante:** brazilsouth, northcentralus, spaincentral, southafricanorth e belgiumcentral. A reserva é a northcentralus; a eastus não é permitida.
+- **Onde guardar a imagem:** escolhido na tarefa 3.1, entre o Azure Container Registry Basic (pago pelo crédito) e o GitHub Container Registry. O repositório já é público, e a imagem não tem segredos. **Escolhido o Azure Container Registry Basic (seção "Publicação (24/11, tarefa 3.1)").**
+- **Logs de borda:** não ligar coleta de logs HTTP nem o Application Insights. O log do container só tem o que a aplicação escreve (método, rota, status e duração). A tarefa 3.1 confere o que o App Service guarda por padrão. Registros internos da Microsoft, fora do controle da equipe, entram no relatório como limitação.
+- **Plano B mantido:** Hugging Face Spaces com PRO, com a mesma imagem e `PORT=7860`, se até o meio da quinta o Azure não estiver respondendo em `/saude`.
+
+### Publicação (24/11, tarefa 3.1)
+
+**URL de teste:** https://rede-lilas.azurewebsites.net, publicada pelo Túlio em 24/11 com a imagem do commit `4b7b513`.
+
+- **Recursos** (grupo `rede-lilas`, região brazilsouth, assinatura Azure for Students do Túlio):
+  - **Registro:** Azure Container Registry Basic `redelilas.azurecr.io`, privado e sem usuário administrador. Escolhido no lugar do GitHub Container Registry para o site puxar a imagem por identidade gerenciada, sem senha nem token guardado, e para a imagem ficar na mesma região.
+  - **Plano:** `rede-lilas-plano`, App Service Linux B3.
+  - **Site:** `rede-lilas`, com identidade gerenciada do sistema e papel AcrPull no registro; Always On ligado; só HTTPS (o `http://` redireciona com 301), TLS mínimo 1.2, HTTP/2 e FTP desligado.
+  - **Configurações do site:** `WEBSITES_PORT=8000`, `WEBSITES_ENABLE_APP_SERVICE_STORAGE=false`, `LLM_BASE_URL`, `LLM_MODEL`, `LLM_THINKING` e `LLM_API_KEY`. A chave do DeepSeek existe só nessa configuração e no `.env` local; não está na imagem nem no repositório, e o `.dockerignore` deixa o `.env` fora do build.
+- **Como publicar uma nova versão:** a assinatura de estudante bloqueia o build na nuvem do registro (`az acr build` devolve `TasksOperationsNotAllowed`). O caminho é `docker build` local com a tag do commit, `az acr login --name redelilas`, `docker push` e `az webapp config container set` com a nova tag. O envio da imagem de ~3,6 GB levou 2 min 26 s. Uma mudança de configuração por vez, esperando "Site started" no log da plataforma (seção "Partida a frio e memória no Azure"). No Git Bash do Windows, exportar `MSYS_NO_PATHCONV=1` antes de comandos `az` que recebem IDs `/subscriptions/...`.
+- **O que o App Service guarda de log por padrão** (conferido em 24/11 na pasta `LogFiles` do site, pela API do Kudu): a coleta de logs HTTP, de erros detalhados, de requisições com falha e da aplicação ficou desligada, e o Application Insights não foi criado. O único arquivo é o log da plataforma (`..._docker.log`, 92 linhas), com o download da imagem, a partida do container e os testes de saúde da própria plataforma. Ele não tem query string, chave, texto de pergunta ou de áudio, nem IP. Os registros internos da Microsoft na borda (balanceador e front-end do App Service) ficam fora do controle da equipe e entram no relatório como limitação.
+- **Verificação (24/11):**
+
+| Verificação | Resultado |
+| :--- | :--- |
+| `/saude` e página inicial | Respondem; a PWA carrega (32 KB) |
+| Transcrição do caso A1 | "Ele pode tirar meus filhos de mim?", em 7,3 s |
+| Pergunta jurídica fictícia | Respondida com a Lei 11.340/2006, art. 7º, citada, em 3,8 s |
+| Requisição com query string fictícia | Nada dela nos logs |
+| Celular | A URL abriu a PWA no celular do Túlio |
+
+### Partida a frio e memória no Azure (25/11, tarefa 3.2)
+
+**Ambiente:** Azure App Service Linux B3 (4 núcleos, 7 GB), brazilsouth, imagem `4b7b513`. **Como:** site parado até sair do ar e ligado de novo (`az webapp stop` e `start`), com um script consultando a URL a cada segundo: `/saude`, um `POST /transcrever` vazio (503 enquanto o Whisper carrega, 422 quando está pronto, sem enviar áudio) e uma pergunta jurídica fictícia disparada assim que `/saude` respondeu. Os tempos da plataforma vêm do log `..._docker.log`, e a memória, da métrica `MemoryWorkingSet` do Azure Monitor (média por minuto).
+
+| Etapa | Tempo |
+| :--- | :--- |
+| Plataforma começa a subir → container iniciado | ~10 s (imagem já no servidor; o primeiro download, na publicação, levou 59 s) |
+| Container iniciado → `/saude` respondendo | 6,1 s (igual nas 3 partidas medidas) |
+| `/saude` → Whisper pronto | 7,7 s |
+| `/saude` → primeira pergunta jurídica respondida | 35,0 s, dos quais ~3 s são do DeepSeek: o índice fica pronto ~32 s depois de `/saude` |
+| Pergunta jurídica com tudo carregado | 2,7 a 3,6 s |
+| Transcrição do caso A1 com tudo carregado | 8,0 s |
+
+- **Total da partida a frio**, da plataforma começando a subir até tudo pronto: ~16 s até `/saude`, ~24 s até o Whisper e ~48 s até o índice. Com o Always On, isso só acontece numa nova publicação ou num reinício.
+- **Reinício (`az webapp restart`) não derruba o site:** o container antigo segue respondendo até o novo passar no teste de saúde da plataforma.
+- **Índice:** a mesma imagem, no Windows com o Docker limitado a 4 núcleos, carrega o índice do arquivo de vetores em 6,3 s (1,5 s de import do torch e 4,8 s do modelo e dos vetores). No Azure, levou ~32 s. Para separar as etapas, a imagem `d7107d6` passou a registrar uma linha ao montar o índice, só com a origem e o tempo. Na publicação dela (25/11), o Azure registrou `índice pronto: origem=arquivo em 10.2 s`: os vetores vieram do arquivo do build. Os ~23 s antes disso são o import do torch e do sentence-transformers, lidos do disco frio do container junto com o Whisper. Sem o arquivo, o índice ainda teria de calcular os vetores de todos os trechos (29,7 s no Windows).
+- **Como o log foi lido:** o log do container ficou ligado no sistema de arquivos só durante essa publicação, das 07:24 às 07:37 UTC. As linhas da aplicação tinham só método, rota, status e duração, sem IP nem query string. Os dois arquivos foram apagados depois, e o log voltou a ficar desligado.
+- **Cuidado ao publicar:** duas mudanças de configuração seguidas (ligar o log e trocar a imagem, com 12 s de intervalo) fizeram a primeira partida falhar no teste de saúde da plataforma. O Azure então parou o site e só tentou de novo 5 minutos depois: ficou fora do ar das 07:25:38 às 07:31:13 UTC. Fazer uma mudança por vez e esperar "Site started" no log da plataforma antes da próxima.
+
+### Roteiro na URL publicada (tarefa 3.3)
+
+URL: https://rede-lilas.azurewebsites.net, imagem `d7107d6`. Os textos são casos fictícios, lidos em voz alta pela pessoa que testa.
+
+| # | Passo | Esperado |
+| :--- | :--- | :--- |
+| 1 | Abrir a URL | A página carrega, com a saída rápida e os telefones 180 e 190 no topo |
+| 2 | No chat, digitar a pergunta da persona Camila: "ele nunca me bateu, só quebrou minhas coisas e me humilhou, isso conta?" | Resposta com a Lei 11.340/2006, art. 7º, citada, indicando violência patrimonial e psicológica |
+| 3 | Gravar pelo microfone o caso A1, "Ele pode tirar meus filhos de mim?", conferir o texto na caixa e enviar | O texto transcrito vai para a caixa sem ser enviado; depois do envio, resposta jurídica com a lei citada |
+| 4 | Gravar o caso A5, "Ele está aqui na porta com uma faca e disse que vai me matar"; tocar em "Ligar 190" e cancelar; tocar em "Saída rápida" e voltar à URL | O alerta de 190 aparece assim que a transcrição chega, sem toque em enviar e sem resposta do chatbot; "Ligar 190" abre a confirmação de chamada; a saída rápida abre um site neutro, e a conversa some |
+
+| Aparelho | Data | Resultado |
+| :--- | :--- | :--- |
+| iPhone 13, Safari (Túlio) | 25/11 | Os 4 passos passaram; cada resposta, por texto ou por áudio, chegou em menos de 10 s |
+| Android, Chrome (modelo não registrado) | 25/11 | Os 4 passos passaram |
+- **Memória em uso:** 1.377 MB com o RAG e o Whisper carregados, depois de uma transcrição, e 1.591 MB depois da rodada de testes da tarefa 3.1. Menos de um quarto dos 7 GB do B3, dentro do pico de ~2,9 GB medido no Mac.
+
 ### O que precisa estar pronto antes da decisão de quinta
 
 Respondido em 24/11 na #120.
@@ -108,7 +182,7 @@ O `/opsx:update` altera o requisito "Implantação contínua" da spec `plataform
 
 ## Risks / Trade-offs
 
-- [Nenhuma opção que caiba é gratuita sem cartão] → aprovação de gasto e dono da conta resolvidos antes de quinta (lista acima); sem isso, a publicação vai para a S6 e a semana fecha pelo critério de pronto.
+- [Nenhuma opção que caiba é gratuita sem cartão] → aprovação de gasto e dono da conta resolvidos antes de quinta (lista acima); sem isso, a publicação vai para a S6 e a semana fecha pelo critério de pronto. **Resolvido em 24/11:** o crédito do Azure for Students cobre o plano A sem cartão.
 - [Memória real acima de 4 GB] → vetores no build e a reserva `WHISPER_MODELO=base`; ou um plano maior.
 - [Partida a frio longa em 2 vCPU] → vetores no build; a medição de latência da S6 é feita com a aplicação acordada, e o tempo de acordar é registrado à parte.
 - [Mudança do torch no lock quebrar o Windows] → o marcador limita a troca ao Linux, e a tarefa só termina com `uv sync` e `uv run pytest` numa máquina Windows.
@@ -121,4 +195,4 @@ Primeira publicação: não há versão anterior. Para voltar atrás, a platafor
 
 ## Open Questions
 
-- Região do servidor na plataforma escolhida (Brasil ou EUA/Europa): afeta a latência, não o desenho; registrar na decisão de quinta.
+- ~~Região do servidor na plataforma escolhida (Brasil ou EUA/Europa): afeta a latência, não o desenho; registrar na decisão de quinta.~~ Resolvida em 24/11: brazilsouth (seção "Decisão (24/11, tarefa 1.1)").

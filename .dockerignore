@@ -1,0 +1,22 @@
+# Segredos: nunca entram no contexto do build.
+.env
+.env.*
+
+# Ambiente e caches locais.
+.venv
+.git
+__pycache__
+*.py[cod]
+.pytest_cache
+
+# Fora da execução: o Dockerfile copia só app/, web/, regras/ e parte de dados/.
+dados/fontes
+dados/indice
+tests
+avaliacao
+docs
+openspec
+scripts
+.github
+.claude
+.impeccable

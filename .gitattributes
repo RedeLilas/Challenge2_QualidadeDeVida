@@ -15,3 +15,7 @@ web/**/*.js text eol=lf
 web/**/*.html text eol=lf
 web/**/*.css text eol=lf
 web/**/*.webmanifest text eol=lf
+
+# Arquivos do container: sempre LF. Com CRLF, as linhas do Dockerfile que continuam com "\" quebram.
+Dockerfile text eol=lf
+.dockerignore text eol=lf

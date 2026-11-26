@@ -4,7 +4,6 @@ import pytest
 import yaml
 
 from app.rag import resposta
-from app.rag.indice import Indice, carregar_trechos
 
 PERGUNTAS = Path(__file__).parent / "perguntas_juridicas.yaml"
 DESENVOLVIMENTO = Path(__file__).parents[1] / "avaliacao" / "conjuntos" / "desenvolvimento.yaml"
@@ -31,8 +30,8 @@ NORMAS_POR_PROGRAMA = {
 
 
 @pytest.fixture(scope="module")
-def indice():
-    return Indice(carregar_trechos())
+def indice(indice_real):
+    return indice_real
 
 
 def test_violencia_patrimonial_recupera_art_7(indice):
