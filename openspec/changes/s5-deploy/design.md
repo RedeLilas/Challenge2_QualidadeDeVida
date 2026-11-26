@@ -106,6 +106,22 @@ Registrada em 24/11, antes de quinta, depois do teste no Azure e do container ve
 - **Índice:** a mesma imagem, no Windows com o Docker limitado a 4 núcleos, carrega o índice do arquivo de vetores em 6,3 s (1,5 s de import do torch e 4,8 s do modelo e dos vetores). No Azure, levou ~32 s. Para separar as etapas, a imagem `d7107d6` passou a registrar uma linha ao montar o índice, só com a origem e o tempo. Na publicação dela (25/11), o Azure registrou `índice pronto: origem=arquivo em 10.2 s`: os vetores vieram do arquivo do build. Os ~23 s antes disso são o import do torch e do sentence-transformers, lidos do disco frio do container junto com o Whisper. Sem o arquivo, o índice ainda teria de calcular os vetores de todos os trechos (29,7 s no Windows).
 - **Como o log foi lido:** o log do container ficou ligado no sistema de arquivos só durante essa publicação, das 07:24 às 07:37 UTC. As linhas da aplicação tinham só método, rota, status e duração, sem IP nem query string. Os dois arquivos foram apagados depois, e o log voltou a ficar desligado.
 - **Cuidado ao publicar:** duas mudanças de configuração seguidas (ligar o log e trocar a imagem, com 12 s de intervalo) fizeram a primeira partida falhar no teste de saúde da plataforma. O Azure então parou o site e só tentou de novo 5 minutos depois: ficou fora do ar das 07:25:38 às 07:31:13 UTC. Fazer uma mudança por vez e esperar "Site started" no log da plataforma antes da próxima.
+
+### Roteiro na URL publicada (tarefa 3.3)
+
+URL: https://rede-lilas.azurewebsites.net, imagem `d7107d6`. Os textos são casos fictícios, lidos em voz alta pela pessoa que testa.
+
+| # | Passo | Esperado |
+| :--- | :--- | :--- |
+| 1 | Abrir a URL | A página carrega, com a saída rápida e os telefones 180 e 190 no topo |
+| 2 | No chat, digitar a pergunta da persona Camila: "ele nunca me bateu, só quebrou minhas coisas e me humilhou, isso conta?" | Resposta com a Lei 11.340/2006, art. 7º, citada, indicando violência patrimonial e psicológica |
+| 3 | Gravar pelo microfone o caso A1, "Ele pode tirar meus filhos de mim?", conferir o texto na caixa e enviar | O texto transcrito vai para a caixa sem ser enviado; depois do envio, resposta jurídica com a lei citada |
+| 4 | Gravar o caso A5, "Ele está aqui na porta com uma faca e disse que vai me matar"; tocar em "Ligar 190" e cancelar; tocar em "Saída rápida" e voltar à URL | O alerta de 190 aparece assim que a transcrição chega, sem toque em enviar e sem resposta do chatbot; "Ligar 190" abre a confirmação de chamada; a saída rápida abre um site neutro, e a conversa some |
+
+| Aparelho | Data | Resultado |
+| :--- | :--- | :--- |
+| iPhone 13, Safari (Túlio) | 25/11 | Os 4 passos passaram; cada resposta, por texto ou por áudio, chegou em menos de 10 s |
+| Android | — | Pendente (#138) |
 - **Memória em uso:** 1.377 MB com o RAG e o Whisper carregados, depois de uma transcrição, e 1.591 MB depois da rodada de testes da tarefa 3.1. Menos de um quarto dos 7 GB do B3, dentro do pico de ~2,9 GB medido no Mac.
 
 ### O que precisa estar pronto antes da decisão de quinta
