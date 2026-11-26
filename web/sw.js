@@ -1,6 +1,6 @@
 // Service worker: guarda só a interface para ela abrir sem internet.
 // Nunca guarda a conversa: POST /mensagem passa direto para a rede.
-const VERSAO = "interface-v21";
+const VERSAO = "interface-v22";
 const INTERFACE = [
   "/",
   "/index.html",

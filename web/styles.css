@@ -2344,3 +2344,14 @@ footer {
     gap: 5px;
   }
 }
+
+/* Telas de toque: campos com 16 px ou mais. Abaixo disso o Safari do iPhone dá zoom ao tocar
+   no campo e não volta sozinho, e o chat fica cortado (#160). O !important cobre os estilos
+   inline (ex.: CEP da triagem). O zoom do usuário continua livre: sem maximum-scale. */
+@media (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}

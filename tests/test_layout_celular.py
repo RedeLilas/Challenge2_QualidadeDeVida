@@ -108,3 +108,21 @@ def test_chat_aberto_dentro_da_tela_sem_o_botao_por_cima(navegador, endereco, la
     assert m["titulo"]["altura"] <= 24, "o título do chat quebra em várias linhas"
     assert janela["topo"] <= m["digitar"]["topo"] and m["digitar"]["base"] <= janela["base"]
     assert dentro_da_tela(m["digitar"], largura)
+
+
+@pytest.mark.parametrize("largura, altura", TELAS, ids=[f"{l}px" for l, _ in TELAS])
+def test_campos_com_16px_para_o_iphone_nao_dar_zoom(navegador, endereco, largura, altura):
+    # Abaixo de 16 px, o Safari do iPhone dá zoom ao tocar no campo e o chat fica cortado (#160).
+    contexto, pagina = abrir(navegador, endereco, largura, altura)
+    pagina.click("#chat-trigger")
+    tamanhos = pagina.evaluate(
+        """() => ["#texto", "#filtro-ra", "#filtro-tipo", "#filtro-cep"].map((seletor) => [
+          seletor, parseFloat(getComputedStyle(document.querySelector(seletor)).fontSize),
+        ])"""
+    )
+    viewport = pagina.get_attribute('meta[name="viewport"]', "content")
+    contexto.close()
+    for seletor, tamanho in tamanhos:
+        assert tamanho >= 16, f"{seletor} com {tamanho}px em {largura}px"
+    # Zoom continua livre para quem precisa ampliar (WCAG 1.4.4).
+    assert "maximum-scale" not in viewport and "user-scalable" not in viewport
