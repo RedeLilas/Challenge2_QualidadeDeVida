@@ -121,7 +121,7 @@ URL: https://rede-lilas.azurewebsites.net, imagem `d7107d6`. Os textos são caso
 | Aparelho | Data | Resultado |
 | :--- | :--- | :--- |
 | iPhone 13, Safari (Túlio) | 25/11 | Os 4 passos passaram; cada resposta, por texto ou por áudio, chegou em menos de 10 s |
-| Android | — | Pendente (#138) |
+| Android, Chrome (modelo não registrado) | 25/11 | Os 4 passos passaram |
 - **Memória em uso:** 1.377 MB com o RAG e o Whisper carregados, depois de uma transcrição, e 1.591 MB depois da rodada de testes da tarefa 3.1. Menos de um quarto dos 7 GB do B3, dentro do pico de ~2,9 GB medido no Mac.
 
 ### O que precisa estar pronto antes da decisão de quinta
