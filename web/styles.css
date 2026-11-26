@@ -356,6 +356,12 @@ a {
   backdrop-filter: blur(16px);
 }
 
+/* Teclado aberto no iPhone (#160): o cabeçalho acompanha a parte visível da tela,
+   e a saída rápida continua à vista enquanto ela digita (ver acompanharTeclado em app.js). */
+.teclado-aberto .safety-header {
+  transform: translateY(var(--vv-topo));
+}
+
 .safety-left {
   display: flex;
   align-items: center;
@@ -2275,6 +2281,20 @@ footer {
     flex: 1 1 auto;
     min-height: 120px;
     max-height: none;
+  }
+  /* Teclado aberto no iPhone (#160): o chat ocupa a parte visível, entre o cabeçalho e o
+     teclado, com a caixa de texto logo acima do teclado. Os atalhos somem enquanto ela digita. */
+  .teclado-aberto .chat-window {
+    top: calc(var(--vv-topo) + 66px + 6px);
+    bottom: auto;
+    height: calc(var(--vv-altura) - 66px - 12px);
+    max-height: none;
+  }
+  .teclado-aberto .chat-messages {
+    min-height: 0;
+  }
+  .teclado-aberto .quick-replies {
+    display: none;
   }
   .chat-head {
     gap: 8px;

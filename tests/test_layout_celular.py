@@ -126,3 +126,45 @@ def test_campos_com_16px_para_o_iphone_nao_dar_zoom(navegador, endereco, largura
         assert tamanho >= 16, f"{seletor} com {tamanho}px em {largura}px"
     # Zoom continua livre para quem precisa ampliar (WCAG 1.4.4).
     assert "maximum-scale" not in viewport and "user-scalable" not in viewport
+
+
+# O Chromium não abre teclado: um visualViewport falso faz o papel do Safari do iPhone, que
+# deixa a tela do mesmo tamanho e só encolhe e desloca a parte visível (#160).
+TECLADO_FALSO = """(() => {
+  const ouvintes = [];
+  const vv = { height: innerHeight, offsetTop: 0, scale: 1, width: innerWidth, offsetLeft: 0,
+    addEventListener: (_tipo, f) => ouvintes.push(f), removeEventListener: () => {} };
+  Object.defineProperty(window, "visualViewport", { get: () => vv });
+  window.__abrirTeclado = (altura, topo) => {
+    vv.height = innerHeight - altura;
+    vv.offsetTop = topo;
+    ouvintes.forEach((f) => f());
+  };
+})()"""
+
+
+@pytest.mark.parametrize("largura, altura", TELAS, ids=[f"{l}px" for l, _ in TELAS])
+def test_chat_e_saida_rapida_visiveis_com_o_teclado_do_iphone(navegador, endereco, largura, altura):
+    contexto = navegador.new_context(
+        viewport={"width": largura, "height": altura}, is_mobile=True, has_touch=True, service_workers="block"
+    )
+    contexto.add_init_script(TECLADO_FALSO)
+    pagina = contexto.new_page()
+    pagina.goto(endereco)
+    pagina.wait_for_load_state("networkidle")
+    pagina.click("#chat-trigger")
+    pagina.wait_for_timeout(400)
+    # Teclado de ~45% da tela, e o Safari desloca a parte visível 200 px para baixo.
+    teclado, topo = int(altura * 0.45), 200
+    pagina.evaluate(f"window.__abrirTeclado({teclado}, {topo})")
+    pagina.wait_for_timeout(100)
+    m = pagina.evaluate(MEDIR)
+    contexto.close()
+    base_visivel = topo + altura - teclado
+    assert topo <= m["sair"]["topo"] and m["sair"]["base"] <= topo + ALTURA_DO_CABECALHO, "a saída rápida sai da parte visível"
+    janela, digitar = m["janela"], m["digitar"]
+    assert janela["topo"] >= topo + ALTURA_DO_CABECALHO, "o chat cobre o cabeçalho"
+    assert janela["base"] <= base_visivel, "o chat fica atrás do teclado"
+    assert m["titulo"]["topo"] >= janela["topo"], "o topo do chat sai da tela"
+    assert janela["topo"] <= digitar["topo"] and digitar["base"] <= janela["base"], "a caixa de texto fica cortada"
+    assert janela["altura"] >= 150, "o chat fica pequeno demais para ler"
