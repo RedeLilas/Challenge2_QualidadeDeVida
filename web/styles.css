@@ -486,7 +486,9 @@ a {
    CONTEÚDO PRINCIPAL E BOTÕES COM MICRO-ANIMAÇÕES
    ========================================================================== */
 .main-content {
-  margin-left: 268px;
+  /* Em tela larga (#160), a coluna de até 1220 px fica centralizada no espaço à direita do menu
+     (268 px): 268 + (100vw - 268 - 1220) / 2 = 50vw - 476 px. Até ~1490 px, nada muda. */
+  margin-left: max(268px, calc(50vw - 476px));
   padding: 92px 34px 48px;
   max-width: 1220px;
 }
