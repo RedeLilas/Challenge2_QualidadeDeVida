@@ -1111,6 +1111,22 @@ function alternarChat(forcarEstado) {
   }
 }
 
+// Teclado do iPhone (#160): o Safari não encolhe a tela quando o teclado abre (ignora
+// interactive-widget) e só desloca a parte visível, levando o cabeçalho e o topo do chat
+// para fora. Aqui a parte visível vira --vv-topo e --vv-altura, e o CSS põe o cabeçalho e o
+// chat dentro dela. Zoom do usuário (scale > 1) não conta como teclado.
+function acompanharTeclado() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  const raiz = document.documentElement;
+  const teclado = vv.scale < 1.05 && window.innerHeight - vv.height > 150;
+  raiz.classList.toggle("teclado-aberto", teclado);
+  raiz.style.setProperty("--vv-topo", `${teclado ? vv.offsetTop : 0}px`);
+  raiz.style.setProperty("--vv-altura", `${vv.height}px`);
+}
+window.visualViewport?.addEventListener("resize", acompanharTeclado);
+window.visualViewport?.addEventListener("scroll", acompanharTeclado);
+
 chatTrigger?.addEventListener("click", () => alternarChat());
 document.getElementById("chat-close")?.addEventListener("click", () => alternarChat(false));
 
