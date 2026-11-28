@@ -168,3 +168,27 @@ def test_chat_e_saida_rapida_visiveis_com_o_teclado_do_iphone(navegador, enderec
     assert m["titulo"]["topo"] >= janela["topo"], "o topo do chat sai da tela"
     assert janela["topo"] <= digitar["topo"] and digitar["base"] <= janela["base"], "a caixa de texto fica cortada"
     assert janela["altura"] >= 150, "o chat fica pequeno demais para ler"
+
+
+# Computador (#160): em tela larga, a coluna de conteúdo (até 1220 px) fica centralizada no espaço
+# à direita do menu, em vez de presa ao menu com um vazio enorme à direita.
+@pytest.mark.parametrize("largura", [1440, 1920, 2400], ids=lambda l: f"{l}px")
+def test_conteudo_centralizado_ao_lado_do_menu_no_computador(navegador, endereco, largura):
+    contexto = navegador.new_context(viewport={"width": largura, "height": 900}, service_workers="block")
+    pagina = contexto.new_page()
+    pagina.goto(endereco)
+    pagina.wait_for_load_state("networkidle")
+    m = pagina.evaluate(
+        """() => {
+          const b = document.querySelector(".main-content").getBoundingClientRect();
+          return { esquerda: b.left, direita: b.right, largura: document.documentElement.clientWidth };
+        }"""
+    )
+    contexto.close()
+    sobra_esquerda = m["esquerda"] - 268
+    sobra_direita = m["largura"] - m["direita"]
+    assert sobra_esquerda >= 0, f"o conteúdo entra embaixo do menu em {largura}px: {m}"
+    if largura <= 268 + 1220:
+        assert sobra_esquerda == 0, f"o conteúdo saiu do lugar em {largura}px: {m}"
+    else:
+        assert abs(sobra_esquerda - sobra_direita) <= 12, f"sobra só de um lado em {largura}px: {m}"
