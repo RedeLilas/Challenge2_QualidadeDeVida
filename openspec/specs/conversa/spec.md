@@ -1,7 +1,7 @@
 # conversa Specification
 
 ## Purpose
-Permitir que a usuária converse em linguagem natural (texto e, opcionalmente, áudio e foto) e que cada pergunta seja encaminhada ao agente certo: jurídico, benefícios, triagem ou rede de atendimento. Origem: RF08, RF09.
+Permitir que a usuária converse em linguagem natural (texto e, opcionalmente, áudio) e que cada pergunta seja encaminhada ao agente certo: jurídico, benefícios, triagem ou rede de atendimento. Origem: RF08, RF09.
 
 ## Requirements
 
