@@ -55,6 +55,83 @@ curl localhost:8000/saude            # {"status":"ok"}
 - Para usar outro modelo do Whisper, passe o mesmo valor no build: `docker build --build-arg WHISPER_MODELO=base -t rede-lilas .`.
 - Antivírus que inspecionam HTTPS, como o Kaspersky, podem fazer o build falhar de vez em quando com `CERTIFICATE_VERIFY_FAILED` ao baixar os modelos. Rodar o build de novo costuma resolver; as camadas já prontas ficam em cache.
 
+## Publicar no Azure
+
+A plataforma é o Azure App Service Linux, plano B3, na região brazilsouth, pago pelo crédito do Azure for Students do Túlio (decisão e medições em `openspec/changes/archive/2026-11-27-s5-deploy/design.md`). Só quem tem acesso a essa assinatura consegue rodar os comandos abaixo.
+
+**Situação em 27/11:** o site e o plano foram apagados para não gastar crédito até a hora de testar de novo (S6 e apresentação). Ficou só o grupo `rede-lilas` com o registro de imagens `redelilas.azurecr.io` (Basic, ~US$ 5/mês), que guarda as versões já publicadas. A URL https://rede-lilas.azurewebsites.net está fora do ar.
+
+**Regras que valem sempre:**
+
+- Uma mudança de configuração por vez. Depois de cada uma, espere "Site started" no log da plataforma (`LogFiles/..._docker.log`, pela API do Kudu) antes da próxima. Em 25/11, duas mudanças seguidas derrubaram o site por ~5 minutos.
+- A chave do DeepSeek vem do `.env` local e entra só como configuração do site. Nunca na imagem, no repositório ou num comando salvo.
+- Não ligar os logs HTTP, os logs da aplicação nem o Application Insights.
+- A assinatura de estudante bloqueia o build na nuvem (`az acr build`): a imagem é montada no Docker local e enviada ao registro.
+- No Git Bash do Windows, rode `export MSYS_NO_PATHCONV=1` antes dos comandos que recebem IDs `/subscriptions/...`. No `curl` do Windows com o Kaspersky, use `--ssl-no-revoke`.
+
+### Recriar o site
+
+São ~10 a 15 minutos. Use a tag do commit da `develop` como versão da imagem.
+
+```bash
+TAG=$(git rev-parse --short HEAD)
+
+# 1. Imagem: build local e envio ao registro (~2 min cada)
+docker build -t redelilas.azurecr.io/rede-lilas:$TAG .
+az acr login --name redelilas
+docker push redelilas.azurecr.io/rede-lilas:$TAG
+
+# 2. Plano B3 (4 núcleos, 7 GB)
+az appservice plan create -g rede-lilas -n rede-lilas-plano --is-linux --sku B3 -l brazilsouth
+
+# 3. Site com a imagem
+az webapp create -g rede-lilas -p rede-lilas-plano -n rede-lilas \
+  --deployment-container-image-name redelilas.azurecr.io/rede-lilas:$TAG
+
+# 4. O site puxa a imagem com identidade gerenciada, sem senha do registro
+PRINCIPAL=$(az webapp identity assign -g rede-lilas -n rede-lilas --query principalId -o tsv)
+ACR=$(az acr show -n redelilas --query id -o tsv)
+az role assignment create --assignee "$PRINCIPAL" --role AcrPull --scope "$ACR"
+az webapp config set -g rede-lilas -n rede-lilas --generic-configurations '{"acrUseManagedIdentityCreds": true}'
+
+# 5. Configurações (a chave vem do .env e não aparece no terminal)
+LLM_API_KEY=$(grep '^LLM_API_KEY=' .env | cut -d= -f2-)
+az webapp config appsettings set -g rede-lilas -n rede-lilas -o none --settings \
+  WEBSITES_PORT=8000 WEBSITES_ENABLE_APP_SERVICE_STORAGE=false \
+  LLM_BASE_URL=https://api.deepseek.com LLM_MODEL=deepseek-flash LLM_THINKING=disabled \
+  LLM_API_KEY="$LLM_API_KEY"
+
+# 6. Sempre ligado, só HTTPS, sem FTP
+az webapp config set -g rede-lilas -n rede-lilas --always-on true --ftps-state Disabled \
+  --http20-enabled true --min-tls-version 1.2
+az webapp update -g rede-lilas -n rede-lilas --https-only true
+```
+
+Se o nome `rede-lilas` tiver sido tomado por outra pessoa enquanto o site estava apagado, use outro nome e avise a equipe, porque a URL muda.
+
+**Conferir:** `/saude` responde, a página abre no celular, a transcrição do caso A1 (`tests/audios/a1.webm`) volta certa e uma pergunta jurídica fictícia volta com o art. 7º citado. Depois de cada publicação, a primeira transcrição leva ~25 s; as seguintes, ~8 s.
+
+### Publicar uma nova versão
+
+Com o site no ar: monte e envie a imagem como no passo 1 e troque a imagem do site.
+
+```bash
+az webapp config container set -g rede-lilas -n rede-lilas \
+  --container-image-name redelilas.azurecr.io/rede-lilas:$TAG
+```
+
+O container antigo continua respondendo até o novo passar no teste de saúde, então o site não sai do ar. Os navegadores recebem a interface nova quando a versão do cache em `web/sw.js` muda.
+
+### Apagar o site para não gastar crédito
+
+O B3 custa ~US$ 1,60 por dia, com o site ligado ou parado. A cobrança só para quando o plano é apagado (ou rebaixado para o F1, que não roda a aplicação).
+
+```bash
+az webapp delete -g rede-lilas -n rede-lilas   # apaga também o plano, se for o último site nele
+```
+
+A atribuição AcrPull da identidade apagada fica sobrando no registro; remova-a com `az role assignment list --scope "$ACR"` e `az role assignment delete --ids <id>`. O registro e as imagens continuam.
+
 ## Pergunta por áudio
 
 O botão de microfone da conversa grava até 30 s, só na memória da aba, e envia o áudio a `POST /transcrever`, no próprio servidor. O servidor transcreve com o Whisper ([faster-whisper](https://github.com/SYSTRAN/faster-whisper), modelo `small` em int8 na CPU, português fixo) e devolve só o texto. O áudio nunca vai a serviço externo, não é gravado em disco e não aparece nos logs. A regra de risco roda no navegador sobre o texto: com sinal de risco, o 190 aparece na hora; sem risco, o texto vai para a caixa, para conferir e enviar.
